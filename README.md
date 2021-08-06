@@ -28,3 +28,14 @@ Collect all paths to generate:
 fd -e proto -x echo '"{}",' | sort
 # Copy the output to `build.rs`
 ```
+
+## Patch
+
+Removing `k8s.io.`:
+
+```bash
+fd -e proto -x sd 'k8s\.io\.(.+);' '$1;' {}
+fd -e proto -x sd 'import "k8s\.io/(.+)";' 'import "$1";' {}
+mv protos/k8s.io/* protos/
+rmdir protos/k8s.io/
+```
