@@ -176,6 +176,8 @@ type ResourcePath = {
   path: string;
   // `x-kubernetes-action` or `method`.
   verb: string;
+  // Group and version of API. Can be different from `group` and `version` for subresources.
+  groupVersion: string;
   // GVK
   group: string;
   version: string;
