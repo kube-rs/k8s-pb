@@ -5,10 +5,11 @@
   # Only process path infos with GVK (methods) and ignore deprecated.
   .value["x-kubernetes-group-version-kind"]? as $gvk |
   select($gvk != null and (.value.description | test("deprecated: "; "i") | not)) |
+  # Fall back to method name.
+  (.value["x-kubernetes-action"] // .key) as $verb |
   {
     path: $path,
-    # Fall back to method name.
-    verb: (.value["x-kubernetes-action"] // .key),
+    verb: (if $verb == "post" then "create" elif $verb == "put" then "update" else $verb end),
     group: $gvk.group,
     version: $gvk.version,
     kind: $gvk.kind,
@@ -16,12 +17,13 @@
     subresource: ($path | test("\\{name\\}/")),
     consumes: (.value.consumes? // ["*/*"] | join(", ")),
     produces: (.value.produces? // ["*/*"] | join(", ")),
-    # Path segments for plural names. Includes subresource as well.
-    segments: (
+    # Plural name. Includes a subresource name like in `APIResourceList`.
+    name: (
       $path |
       sub("^/apis?/(?:\($gvk.group)/)?\($gvk.version)/(?:namespaces/\\{namespace\\}/)?"; "") |
       split("/") |
-      map(select(. | (startswith("{") | not)))
+      map(select(. | (startswith("{") | not))) |
+      join("/")
     ),
   }
 ]

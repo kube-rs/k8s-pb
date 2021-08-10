@@ -87,8 +87,10 @@ Use `x-kubernetes-group-version-kind` to join `.definitions` and `.paths`.
 We should be able to find the following:
 
 - GVK
-- Plural name (path segment)
+- Plural name (path segments)
+  - `singularName` in `APIResourceList` seems to be always empty for builtins. It's used by `kubectl` for CRDs? ([kubernetes/kubernetes#18622](https://github.com/kubernetes/kubernetes/issues/18622#issuecomment-434481731))
 - Supported verbs
+  - `x-kubernetes-action` can be one of `get`, `list`, `put`, `patch`, `post`, `delete`, `deletecollection`, `watch`, `watchlist`, `proxy`, or `connect`. `verbs` in `APIResourceList` uses `create` instead of `post` and `update` instead of `put`? No `connect`?
 - Supported content types
 - Scope
   - Namespaced if path contains `/namespaces/{namespace}/`
@@ -118,7 +120,55 @@ mv swagger-patched.json swagger.json
 
 ### Transforming
 
-Transform `swagger.json` to something easier to explore:
+Transform `swagger.json` to something easier to explore.
+
+#### Like APIResourceList
+
+```bash
+cat swagger.json | jq -f list-resources.jq | jq '.[0]'
+```
+
+```json
+{
+  "groupVersion": "admissionregistration.k8s.io/v1",
+  "resources": [
+    {
+      "name": "mutatingwebhookconfigurations",
+      "namespaced": false,
+      "group": "admissionregistration.k8s.io",
+      "version": "v1",
+      "kind": "MutatingWebhookConfiguration",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    {
+      "name": "validatingwebhookconfigurations",
+      "namespaced": false,
+      "group": "admissionregistration.k8s.io",
+      "version": "v1",
+      "kind": "ValidatingWebhookConfiguration",
+      "verbs": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    }
+  ]
+}
+```
+
+#### Paths
 
 ```typescript
 type ResourcePath = {
@@ -138,8 +188,8 @@ type ResourcePath = {
   consumes: string;
   // MIME types of supported responses. Comma separated.
   produces: string;
-  // Path segments containing plural names. Includes subresources.
-  segments: string[];
+  // Plural name. Includes subresources like APIResourceList.
+  name: string;
 };
 ```
 
@@ -165,17 +215,15 @@ cat swagger.json \
     "subresource": false,
     "consumes": "*/*",
     "produces": "application/json, application/yaml, application/vnd.kubernetes.protobuf",
-    "segments": [
-      "pods"
-    ]
+    "name": "pods"
   }
 ]
 ```
 
-Group by GVK:
+Group by `name`:
 
 ```bash
 cat swagger.json \
 | jq -f list-paths.jq \
-| jq 'group_by([.group, .version, .kind] | join("/"))'
+| jq 'group_by(.name)'
 ```
