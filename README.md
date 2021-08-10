@@ -177,7 +177,7 @@ type ResourcePath = {
   // `x-kubernetes-action` or `method`.
   verb: string;
   // Group and version of API. Can be different from `group` and `version` for subresources.
-  groupVersion: string;
+  apiGroupVersion: string;
   // GVK
   group: string;
   version: string;
@@ -210,6 +210,7 @@ cat swagger.json \
   {
     "path": "/api/v1/namespaces/{namespace}/pods/{name}",
     "verb": "get",
+    "apiGroupVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Pod",
