@@ -20,6 +20,9 @@
     namespaced: ($path | test("/namespaces/\\{namespace\\}/")),
     kind: $gvk.kind,
     verb: (if $verb == "post" then "create" elif $verb == "put" then "update" else $verb end),
+    # TODO Subresource's group verion can be different. e.g., `apps/v1` can contain subresource `autoscaling/v1` `Scale`.
+    #      `APIResourceList` adds `group` and `version` field in that case.
+    #      Use `path` to find API group version, then use GVK for each resource.
     groupVersion: ([$gvk.group, $gvk.version] | map(select(. != "")) | join("/")),
     group: $gvk.group,
     version: $gvk.version,
