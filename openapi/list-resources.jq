@@ -43,6 +43,14 @@
       version: .[0].version,
       kind: .[0].kind,
       verbs: (map(.verb) | unique),
+      scopedVerbs: (
+        group_by(.namespaced)
+        | map({
+          key: (if .[0].namespaced then "namespaced" else "all" end),
+          value: (map(.verb) | unique)
+        })
+        | from_entries
+      ),
       paths: (map(.path) | unique | sort_by(length)),
     })
   )

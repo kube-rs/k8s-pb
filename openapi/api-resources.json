@@ -18,6 +18,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations",
           "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations/{name}"
@@ -39,6 +50,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations",
           "/apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations/{name}"
@@ -65,6 +87,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apiextensions.k8s.io/v1/customresourcedefinitions",
           "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}"
@@ -82,6 +115,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}/status"
         ]
@@ -107,6 +147,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apiregistration.k8s.io/v1/apiservices",
           "/apis/apiregistration.k8s.io/v1/apiservices/{name}"
@@ -124,6 +175,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apiregistration.k8s.io/v1/apiservices/{name}/status"
         ]
@@ -149,6 +207,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/controllerrevisions",
           "/apis/apps/v1/namespaces/{namespace}/controllerrevisions",
@@ -171,6 +243,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/daemonsets",
           "/apis/apps/v1/namespaces/{namespace}/daemonsets",
@@ -189,6 +275,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status"
         ]
@@ -209,6 +302,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/deployments",
           "/apis/apps/v1/namespaces/{namespace}/deployments",
@@ -227,6 +334,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale"
         ]
@@ -243,6 +357,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/status"
         ]
@@ -263,6 +384,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/replicasets",
           "/apis/apps/v1/namespaces/{namespace}/replicasets",
@@ -281,6 +416,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/scale"
         ]
@@ -297,6 +439,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/status"
         ]
@@ -317,6 +466,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/statefulsets",
           "/apis/apps/v1/namespaces/{namespace}/statefulsets",
@@ -335,6 +498,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/scale"
         ]
@@ -351,6 +521,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/status"
         ]
@@ -370,6 +547,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create"
+          ]
+        },
         "paths": [
           "/apis/authentication.k8s.io/v1/tokenreviews"
         ]
@@ -389,6 +571,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "create"
+          ]
+        },
         "paths": [
           "/apis/authorization.k8s.io/v1/namespaces/{namespace}/localsubjectaccessreviews"
         ]
@@ -403,6 +590,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create"
+          ]
+        },
         "paths": [
           "/apis/authorization.k8s.io/v1/selfsubjectaccessreviews"
         ]
@@ -417,6 +609,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create"
+          ]
+        },
         "paths": [
           "/apis/authorization.k8s.io/v1/selfsubjectrulesreviews"
         ]
@@ -431,6 +628,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create"
+          ]
+        },
         "paths": [
           "/apis/authorization.k8s.io/v1/subjectaccessreviews"
         ]
@@ -456,6 +658,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/autoscaling/v1/horizontalpodautoscalers",
           "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
@@ -474,6 +690,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
         ]
@@ -499,6 +722,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/autoscaling/v2beta1/horizontalpodautoscalers",
           "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers",
@@ -517,6 +754,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
         ]
@@ -542,6 +786,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/autoscaling/v2beta2/horizontalpodautoscalers",
           "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers",
@@ -560,6 +818,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
         ]
@@ -585,6 +850,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/batch/v1/cronjobs",
           "/apis/batch/v1/namespaces/{namespace}/cronjobs",
@@ -603,6 +882,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}/status"
         ]
@@ -623,6 +909,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/batch/v1/jobs",
           "/apis/batch/v1/namespaces/{namespace}/jobs",
@@ -641,6 +941,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/batch/v1/namespaces/{namespace}/jobs/{name}/status"
         ]
@@ -666,6 +973,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/batch/v1beta1/cronjobs",
           "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs",
@@ -684,6 +1005,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}/status"
         ]
@@ -709,6 +1037,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/certificates.k8s.io/v1/certificatesigningrequests",
           "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}"
@@ -726,6 +1065,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval"
         ]
@@ -742,6 +1088,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status"
         ]
@@ -767,6 +1120,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/coordination.k8s.io/v1/leases",
           "/apis/coordination.k8s.io/v1/namespaces/{namespace}/leases",
@@ -794,6 +1161,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/discovery.k8s.io/v1/endpointslices",
           "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices",
@@ -821,6 +1202,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/discovery.k8s.io/v1beta1/endpointslices",
           "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices",
@@ -848,6 +1243,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/events.k8s.io/v1/events",
           "/apis/events.k8s.io/v1/namespaces/{namespace}/events",
@@ -875,6 +1284,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/events.k8s.io/v1beta1/events",
           "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events",
@@ -902,6 +1325,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas",
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}"
@@ -919,6 +1353,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}/status"
         ]
@@ -939,6 +1380,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations",
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}"
@@ -956,6 +1408,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}/status"
         ]
@@ -981,6 +1440,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions",
           "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}"
@@ -998,6 +1468,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}/status"
         ]
@@ -1023,6 +1500,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/networking.k8s.io/v1/ingressclasses",
           "/apis/networking.k8s.io/v1/ingressclasses/{name}"
@@ -1044,6 +1532,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/networking.k8s.io/v1/ingresses",
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses",
@@ -1062,6 +1564,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status"
         ]
@@ -1082,6 +1591,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/networking.k8s.io/v1/networkpolicies",
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies",
@@ -1109,6 +1632,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/node.k8s.io/v1/runtimeclasses",
           "/apis/node.k8s.io/v1/runtimeclasses/{name}"
@@ -1135,6 +1669,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/node.k8s.io/v1alpha1/runtimeclasses",
           "/apis/node.k8s.io/v1alpha1/runtimeclasses/{name}"
@@ -1161,6 +1706,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/node.k8s.io/v1beta1/runtimeclasses",
           "/apis/node.k8s.io/v1beta1/runtimeclasses/{name}"
@@ -1187,6 +1743,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/policy/v1/poddisruptionbudgets",
           "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets",
@@ -1205,6 +1775,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
         ]
@@ -1230,6 +1807,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/policy/v1beta1/poddisruptionbudgets",
           "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets",
@@ -1248,6 +1839,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
         ]
@@ -1268,6 +1866,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/policy/v1beta1/podsecuritypolicies",
           "/apis/policy/v1beta1/podsecuritypolicies/{name}"
@@ -1294,6 +1903,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings",
           "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings/{name}"
@@ -1315,6 +1935,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1/clusterroles",
           "/apis/rbac.authorization.k8s.io/v1/clusterroles/{name}"
@@ -1336,6 +1967,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1/rolebindings",
           "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings",
@@ -1358,6 +2003,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1/roles",
           "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles",
@@ -1385,6 +2044,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings",
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings/{name}"
@@ -1406,6 +2076,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles",
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles/{name}"
@@ -1427,6 +2108,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1alpha1/rolebindings",
           "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings",
@@ -1449,6 +2144,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1alpha1/roles",
           "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles",
@@ -1476,6 +2185,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/scheduling.k8s.io/v1/priorityclasses",
           "/apis/scheduling.k8s.io/v1/priorityclasses/{name}"
@@ -1502,6 +2222,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/scheduling.k8s.io/v1alpha1/priorityclasses",
           "/apis/scheduling.k8s.io/v1alpha1/priorityclasses/{name}"
@@ -1528,6 +2259,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1/csidrivers",
           "/apis/storage.k8s.io/v1/csidrivers/{name}"
@@ -1549,6 +2291,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1/csinodes",
           "/apis/storage.k8s.io/v1/csinodes/{name}"
@@ -1570,6 +2323,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1/storageclasses",
           "/apis/storage.k8s.io/v1/storageclasses/{name}"
@@ -1591,6 +2355,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1/volumeattachments",
           "/apis/storage.k8s.io/v1/volumeattachments/{name}"
@@ -1608,6 +2383,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1/volumeattachments/{name}/status"
         ]
@@ -1633,6 +2415,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1alpha1/csistoragecapacities",
           "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities",
@@ -1655,6 +2451,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1alpha1/volumeattachments",
           "/apis/storage.k8s.io/v1alpha1/volumeattachments/{name}"
@@ -1681,6 +2488,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/apis/storage.k8s.io/v1beta1/csistoragecapacities",
           "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities",
@@ -1702,6 +2523,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "create"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/bindings"
         ]
@@ -1717,6 +2543,12 @@
           "get",
           "list"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "list"
+          ]
+        },
         "paths": [
           "/api/v1/componentstatuses",
           "/api/v1/componentstatuses/{name}"
@@ -1738,6 +2570,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/configmaps",
           "/api/v1/namespaces/{namespace}/configmaps",
@@ -1760,6 +2606,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/endpoints",
           "/api/v1/namespaces/{namespace}/endpoints",
@@ -1782,6 +2642,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/events",
           "/api/v1/namespaces/{namespace}/events",
@@ -1804,6 +2678,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/limitranges",
           "/api/v1/namespaces/{namespace}/limitranges",
@@ -1825,6 +2713,16 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces",
           "/api/v1/namespaces/{name}"
@@ -1840,6 +2738,11 @@
         "verbs": [
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{name}/finalize"
         ]
@@ -1856,6 +2759,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{name}/status"
         ]
@@ -1876,6 +2786,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/nodes",
           "/api/v1/nodes/{name}"
@@ -1891,6 +2812,11 @@
         "verbs": [
           "connect"
         ],
+        "scopedVerbs": {
+          "all": [
+            "connect"
+          ]
+        },
         "paths": [
           "/api/v1/nodes/{name}/proxy",
           "/api/v1/nodes/{name}/proxy/{path}"
@@ -1908,6 +2834,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/nodes/{name}/status"
         ]
@@ -1928,6 +2861,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/persistentvolumeclaims",
           "/api/v1/namespaces/{namespace}/persistentvolumeclaims",
@@ -1946,6 +2893,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status"
         ]
@@ -1966,6 +2920,17 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/persistentvolumes",
           "/api/v1/persistentvolumes/{name}"
@@ -1983,6 +2948,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/persistentvolumes/{name}/status"
         ]
@@ -2003,6 +2975,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/pods",
           "/api/v1/namespaces/{namespace}/pods",
@@ -2019,6 +3005,11 @@
         "verbs": [
           "connect"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "connect"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/attach"
         ]
@@ -2033,6 +3024,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "create"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/binding"
         ]
@@ -2049,6 +3045,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers"
         ]
@@ -2063,6 +3066,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "create"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/eviction"
         ]
@@ -2077,6 +3085,11 @@
         "verbs": [
           "connect"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "connect"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/exec"
         ]
@@ -2091,6 +3104,11 @@
         "verbs": [
           "get"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/log"
         ]
@@ -2105,6 +3123,11 @@
         "verbs": [
           "connect"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "connect"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/portforward"
         ]
@@ -2119,6 +3142,11 @@
         "verbs": [
           "connect"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "connect"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/proxy",
           "/api/v1/namespaces/{namespace}/pods/{name}/proxy/{path}"
@@ -2136,6 +3164,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/pods/{name}/status"
         ]
@@ -2156,6 +3191,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/podtemplates",
           "/api/v1/namespaces/{namespace}/podtemplates",
@@ -2178,6 +3227,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/replicationcontrollers",
           "/api/v1/namespaces/{namespace}/replicationcontrollers",
@@ -2196,6 +3259,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale"
         ]
@@ -2212,6 +3282,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status"
         ]
@@ -2232,6 +3309,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/resourcequotas",
           "/api/v1/namespaces/{namespace}/resourcequotas",
@@ -2250,6 +3341,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/resourcequotas/{name}/status"
         ]
@@ -2270,6 +3368,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/secrets",
           "/api/v1/namespaces/{namespace}/secrets",
@@ -2292,6 +3404,20 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "deletecollection",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/serviceaccounts",
           "/api/v1/namespaces/{namespace}/serviceaccounts",
@@ -2308,6 +3434,11 @@
         "verbs": [
           "create"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "create"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token"
         ]
@@ -2327,6 +3458,19 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "all": [
+            "list"
+          ],
+          "namespaced": [
+            "create",
+            "delete",
+            "get",
+            "list",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/services",
           "/api/v1/namespaces/{namespace}/services",
@@ -2343,6 +3487,11 @@
         "verbs": [
           "connect"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "connect"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/services/{name}/proxy",
           "/api/v1/namespaces/{namespace}/services/{name}/proxy/{path}"
@@ -2360,6 +3509,13 @@
           "patch",
           "update"
         ],
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
         "paths": [
           "/api/v1/namespaces/{namespace}/services/{name}/status"
         ]
