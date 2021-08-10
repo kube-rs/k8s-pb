@@ -35,7 +35,8 @@
     group_by(.name)
     | map({
       name: .[0].name,
-      namespaced: .[0].namespaced,
+      # Some resources can be both namespaced and cluster scoped.
+      namespaced: ([.[] | .namespaced] | any),
       apiGroupVersion: .[0].apiGroupVersion,
       group: .[0].group,
       version: .[0].version,

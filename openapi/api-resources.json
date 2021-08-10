@@ -113,7 +113,7 @@
     "resources": [
       {
         "name": "controllerrevisions",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
@@ -130,7 +130,7 @@
       },
       {
         "name": "daemonsets",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
@@ -160,7 +160,7 @@
       },
       {
         "name": "deployments",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
@@ -359,7 +359,7 @@
     "resources": [
       {
         "name": "horizontalpodautoscalers",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "autoscaling/v1",
         "group": "autoscaling",
         "version": "v1",
@@ -394,7 +394,7 @@
     "resources": [
       {
         "name": "horizontalpodautoscalers",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "autoscaling/v2beta1",
         "group": "autoscaling",
         "version": "v2beta1",
@@ -429,7 +429,7 @@
     "resources": [
       {
         "name": "horizontalpodautoscalers",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "autoscaling/v2beta2",
         "group": "autoscaling",
         "version": "v2beta2",
@@ -464,7 +464,7 @@
     "resources": [
       {
         "name": "cronjobs",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
@@ -494,7 +494,7 @@
       },
       {
         "name": "jobs",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
@@ -529,7 +529,7 @@
     "resources": [
       {
         "name": "cronjobs",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "batch/v1beta1",
         "group": "batch",
         "version": "v1beta1",
@@ -612,7 +612,7 @@
     "resources": [
       {
         "name": "leases",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "coordination.k8s.io/v1",
         "group": "coordination.k8s.io",
         "version": "v1",
@@ -634,7 +634,7 @@
     "resources": [
       {
         "name": "endpointslices",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "discovery.k8s.io/v1",
         "group": "discovery.k8s.io",
         "version": "v1",
@@ -656,7 +656,7 @@
     "resources": [
       {
         "name": "endpointslices",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "discovery.k8s.io/v1beta1",
         "group": "discovery.k8s.io",
         "version": "v1beta1",
@@ -678,7 +678,7 @@
     "resources": [
       {
         "name": "events",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "events.k8s.io/v1",
         "group": "events.k8s.io",
         "version": "v1",
@@ -700,7 +700,7 @@
     "resources": [
       {
         "name": "events",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "events.k8s.io/v1beta1",
         "group": "events.k8s.io",
         "version": "v1beta1",
@@ -839,7 +839,7 @@
       },
       {
         "name": "ingresses",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
@@ -1320,7 +1320,7 @@
     "resources": [
       {
         "name": "csistoragecapacities",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "storage.k8s.io/v1alpha1",
         "group": "storage.k8s.io",
         "version": "v1alpha1",
@@ -1359,7 +1359,7 @@
     "resources": [
       {
         "name": "csistoragecapacities",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "storage.k8s.io/v1beta1",
         "group": "storage.k8s.io",
         "version": "v1beta1",
@@ -1404,7 +1404,7 @@
       },
       {
         "name": "configmaps",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
@@ -1421,7 +1421,7 @@
       },
       {
         "name": "endpoints",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
@@ -1438,7 +1438,7 @@
       },
       {
         "name": "events",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
@@ -1455,7 +1455,7 @@
       },
       {
         "name": "limitranges",
-        "namespaced": false,
+        "namespaced": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
