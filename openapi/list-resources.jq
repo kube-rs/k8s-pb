@@ -26,6 +26,7 @@
     apiGroupVersion: $apiGroupVersion,
     group: $gvk.group,
     version: $gvk.version,
+    path: $path,
   }
 ]
 | group_by(.apiGroupVersion)
@@ -36,12 +37,13 @@
     | map({
       name: .[0].name,
       # Some resources can be both namespaced and cluster scoped.
-      namespaced: ([.[] | .namespaced] | any),
+      namespaced: (map(.namespaced) | any),
       apiGroupVersion: .[0].apiGroupVersion,
       group: .[0].group,
       version: .[0].version,
       kind: .[0].kind,
-      verbs: ([.[] | .verb] | unique),
+      verbs: (map(.verb) | unique),
+      paths: (map(.path) | unique | sort_by(length)),
     })
   )
 })

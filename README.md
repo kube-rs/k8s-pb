@@ -93,8 +93,9 @@ We should be able to find the following:
   - `x-kubernetes-action` can be one of `get`, `list`, `put`, `patch`, `post`, `delete`, `deletecollection`, `watch`, `watchlist`, `proxy`, or `connect`. `verbs` in `APIResourceList` uses `create` instead of `post` and `update` instead of `put`? No `connect`?
 - Supported content types
 - Scope
-  - Namespaced if path contains `/namespaces/{namespace}/`
-  - Subresource if path contains `/{name}/`
+  - Namespaced if any possible path contains `/namespaces/{namespace}/`
+    - May also have paths for all namespaces for some verbs (e.g., `list` all pods)
+  - Subresource if path contains `/{name}/` (`/` after `{name}`)
 
 ### Download
 

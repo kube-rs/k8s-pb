@@ -17,6 +17,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations",
+          "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations/{name}"
         ]
       },
       {
@@ -34,6 +38,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations",
+          "/apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations/{name}"
         ]
       }
     ]
@@ -56,6 +64,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apiextensions.k8s.io/v1/customresourcedefinitions",
+          "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}"
         ]
       },
       {
@@ -69,6 +81,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}/status"
         ]
       }
     ]
@@ -91,6 +106,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apiregistration.k8s.io/v1/apiservices",
+          "/apis/apiregistration.k8s.io/v1/apiservices/{name}"
         ]
       },
       {
@@ -104,6 +123,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apiregistration.k8s.io/v1/apiservices/{name}/status"
         ]
       }
     ]
@@ -126,6 +148,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/controllerrevisions",
+          "/apis/apps/v1/namespaces/{namespace}/controllerrevisions",
+          "/apis/apps/v1/namespaces/{namespace}/controllerrevisions/{name}"
         ]
       },
       {
@@ -143,6 +170,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/daemonsets",
+          "/apis/apps/v1/namespaces/{namespace}/daemonsets",
+          "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}"
         ]
       },
       {
@@ -156,6 +188,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status"
         ]
       },
       {
@@ -173,6 +208,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/deployments",
+          "/apis/apps/v1/namespaces/{namespace}/deployments",
+          "/apis/apps/v1/namespaces/{namespace}/deployments/{name}"
         ]
       },
       {
@@ -186,6 +226,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale"
         ]
       },
       {
@@ -199,6 +242,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/status"
         ]
       },
       {
@@ -216,6 +262,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/replicasets",
+          "/apis/apps/v1/namespaces/{namespace}/replicasets",
+          "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}"
         ]
       },
       {
@@ -229,6 +280,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/scale"
         ]
       },
       {
@@ -242,6 +296,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/status"
         ]
       },
       {
@@ -259,6 +316,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/statefulsets",
+          "/apis/apps/v1/namespaces/{namespace}/statefulsets",
+          "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}"
         ]
       },
       {
@@ -272,6 +334,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/scale"
         ]
       },
       {
@@ -285,6 +350,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/status"
         ]
       }
     ]
@@ -301,6 +369,9 @@
         "kind": "TokenReview",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/apis/authentication.k8s.io/v1/tokenreviews"
         ]
       }
     ]
@@ -317,6 +388,9 @@
         "kind": "LocalSubjectAccessReview",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/apis/authorization.k8s.io/v1/namespaces/{namespace}/localsubjectaccessreviews"
         ]
       },
       {
@@ -328,6 +402,9 @@
         "kind": "SelfSubjectAccessReview",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/apis/authorization.k8s.io/v1/selfsubjectaccessreviews"
         ]
       },
       {
@@ -339,6 +416,9 @@
         "kind": "SelfSubjectRulesReview",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/apis/authorization.k8s.io/v1/selfsubjectrulesreviews"
         ]
       },
       {
@@ -350,6 +430,9 @@
         "kind": "SubjectAccessReview",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/apis/authorization.k8s.io/v1/subjectaccessreviews"
         ]
       }
     ]
@@ -372,6 +455,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/autoscaling/v1/horizontalpodautoscalers",
+          "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
+          "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
         ]
       },
       {
@@ -385,6 +473,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
         ]
       }
     ]
@@ -407,6 +498,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/autoscaling/v2beta1/horizontalpodautoscalers",
+          "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers",
+          "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
         ]
       },
       {
@@ -420,6 +516,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
         ]
       }
     ]
@@ -442,6 +541,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/autoscaling/v2beta2/horizontalpodautoscalers",
+          "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers",
+          "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}"
         ]
       },
       {
@@ -455,6 +559,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
         ]
       }
     ]
@@ -477,6 +584,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/batch/v1/cronjobs",
+          "/apis/batch/v1/namespaces/{namespace}/cronjobs",
+          "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}"
         ]
       },
       {
@@ -490,6 +602,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}/status"
         ]
       },
       {
@@ -507,6 +622,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/batch/v1/jobs",
+          "/apis/batch/v1/namespaces/{namespace}/jobs",
+          "/apis/batch/v1/namespaces/{namespace}/jobs/{name}"
         ]
       },
       {
@@ -520,6 +640,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/batch/v1/namespaces/{namespace}/jobs/{name}/status"
         ]
       }
     ]
@@ -542,6 +665,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/batch/v1beta1/cronjobs",
+          "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs",
+          "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}"
         ]
       },
       {
@@ -555,6 +683,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}/status"
         ]
       }
     ]
@@ -577,6 +708,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/certificates.k8s.io/v1/certificatesigningrequests",
+          "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}"
         ]
       },
       {
@@ -590,6 +725,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval"
         ]
       },
       {
@@ -603,6 +741,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status"
         ]
       }
     ]
@@ -625,6 +766,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/coordination.k8s.io/v1/leases",
+          "/apis/coordination.k8s.io/v1/namespaces/{namespace}/leases",
+          "/apis/coordination.k8s.io/v1/namespaces/{namespace}/leases/{name}"
         ]
       }
     ]
@@ -647,6 +793,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/discovery.k8s.io/v1/endpointslices",
+          "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices",
+          "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices/{name}"
         ]
       }
     ]
@@ -669,6 +820,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/discovery.k8s.io/v1beta1/endpointslices",
+          "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices",
+          "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices/{name}"
         ]
       }
     ]
@@ -691,6 +847,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/events.k8s.io/v1/events",
+          "/apis/events.k8s.io/v1/namespaces/{namespace}/events",
+          "/apis/events.k8s.io/v1/namespaces/{namespace}/events/{name}"
         ]
       }
     ]
@@ -713,6 +874,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/events.k8s.io/v1beta1/events",
+          "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events",
+          "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events/{name}"
         ]
       }
     ]
@@ -735,6 +901,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas",
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}"
         ]
       },
       {
@@ -748,6 +918,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}/status"
         ]
       },
       {
@@ -765,6 +938,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations",
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}"
         ]
       },
       {
@@ -778,6 +955,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}/status"
         ]
       }
     ]
@@ -800,6 +980,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions",
+          "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}"
         ]
       },
       {
@@ -813,6 +997,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}/status"
         ]
       }
     ]
@@ -835,6 +1022,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/networking.k8s.io/v1/ingressclasses",
+          "/apis/networking.k8s.io/v1/ingressclasses/{name}"
         ]
       },
       {
@@ -852,6 +1043,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/networking.k8s.io/v1/ingresses",
+          "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses",
+          "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}"
         ]
       },
       {
@@ -865,6 +1061,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status"
         ]
       },
       {
@@ -882,6 +1081,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/networking.k8s.io/v1/networkpolicies",
+          "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies",
+          "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}"
         ]
       }
     ]
@@ -904,6 +1108,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/node.k8s.io/v1/runtimeclasses",
+          "/apis/node.k8s.io/v1/runtimeclasses/{name}"
         ]
       }
     ]
@@ -926,6 +1134,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/node.k8s.io/v1alpha1/runtimeclasses",
+          "/apis/node.k8s.io/v1alpha1/runtimeclasses/{name}"
         ]
       }
     ]
@@ -948,6 +1160,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/node.k8s.io/v1beta1/runtimeclasses",
+          "/apis/node.k8s.io/v1beta1/runtimeclasses/{name}"
         ]
       }
     ]
@@ -970,6 +1186,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/policy/v1/poddisruptionbudgets",
+          "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets",
+          "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}"
         ]
       },
       {
@@ -983,6 +1204,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
         ]
       }
     ]
@@ -1005,6 +1229,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/policy/v1beta1/poddisruptionbudgets",
+          "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets",
+          "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}"
         ]
       },
       {
@@ -1018,6 +1247,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
         ]
       },
       {
@@ -1035,6 +1267,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/policy/v1beta1/podsecuritypolicies",
+          "/apis/policy/v1beta1/podsecuritypolicies/{name}"
         ]
       }
     ]
@@ -1057,6 +1293,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings",
+          "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings/{name}"
         ]
       },
       {
@@ -1074,6 +1314,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1/clusterroles",
+          "/apis/rbac.authorization.k8s.io/v1/clusterroles/{name}"
         ]
       },
       {
@@ -1091,6 +1335,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1/rolebindings",
+          "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings",
+          "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
         ]
       },
       {
@@ -1108,6 +1357,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1/roles",
+          "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles",
+          "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         ]
       }
     ]
@@ -1130,6 +1384,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings",
+          "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings/{name}"
         ]
       },
       {
@@ -1147,6 +1405,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles",
+          "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles/{name}"
         ]
       },
       {
@@ -1164,6 +1426,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1alpha1/rolebindings",
+          "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings",
+          "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings/{name}"
         ]
       },
       {
@@ -1181,6 +1448,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/rbac.authorization.k8s.io/v1alpha1/roles",
+          "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles",
+          "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles/{name}"
         ]
       }
     ]
@@ -1203,6 +1475,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/scheduling.k8s.io/v1/priorityclasses",
+          "/apis/scheduling.k8s.io/v1/priorityclasses/{name}"
         ]
       }
     ]
@@ -1225,6 +1501,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/scheduling.k8s.io/v1alpha1/priorityclasses",
+          "/apis/scheduling.k8s.io/v1alpha1/priorityclasses/{name}"
         ]
       }
     ]
@@ -1247,6 +1527,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1/csidrivers",
+          "/apis/storage.k8s.io/v1/csidrivers/{name}"
         ]
       },
       {
@@ -1264,6 +1548,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1/csinodes",
+          "/apis/storage.k8s.io/v1/csinodes/{name}"
         ]
       },
       {
@@ -1281,6 +1569,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1/storageclasses",
+          "/apis/storage.k8s.io/v1/storageclasses/{name}"
         ]
       },
       {
@@ -1298,6 +1590,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1/volumeattachments",
+          "/apis/storage.k8s.io/v1/volumeattachments/{name}"
         ]
       },
       {
@@ -1311,6 +1607,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1/volumeattachments/{name}/status"
         ]
       }
     ]
@@ -1333,6 +1632,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1alpha1/csistoragecapacities",
+          "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities",
+          "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities/{name}"
         ]
       },
       {
@@ -1350,6 +1654,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1alpha1/volumeattachments",
+          "/apis/storage.k8s.io/v1alpha1/volumeattachments/{name}"
         ]
       }
     ]
@@ -1372,6 +1680,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/apis/storage.k8s.io/v1beta1/csistoragecapacities",
+          "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities",
+          "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities/{name}"
         ]
       }
     ]
@@ -1388,6 +1701,9 @@
         "kind": "Binding",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/bindings"
         ]
       },
       {
@@ -1400,6 +1716,10 @@
         "verbs": [
           "get",
           "list"
+        ],
+        "paths": [
+          "/api/v1/componentstatuses",
+          "/api/v1/componentstatuses/{name}"
         ]
       },
       {
@@ -1417,6 +1737,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/configmaps",
+          "/api/v1/namespaces/{namespace}/configmaps",
+          "/api/v1/namespaces/{namespace}/configmaps/{name}"
         ]
       },
       {
@@ -1434,6 +1759,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/endpoints",
+          "/api/v1/namespaces/{namespace}/endpoints",
+          "/api/v1/namespaces/{namespace}/endpoints/{name}"
         ]
       },
       {
@@ -1451,6 +1781,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/events",
+          "/api/v1/namespaces/{namespace}/events",
+          "/api/v1/namespaces/{namespace}/events/{name}"
         ]
       },
       {
@@ -1468,6 +1803,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/limitranges",
+          "/api/v1/namespaces/{namespace}/limitranges",
+          "/api/v1/namespaces/{namespace}/limitranges/{name}"
         ]
       },
       {
@@ -1484,6 +1824,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces",
+          "/api/v1/namespaces/{name}"
         ]
       },
       {
@@ -1495,6 +1839,9 @@
         "kind": "Namespace",
         "verbs": [
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{name}/finalize"
         ]
       },
       {
@@ -1508,6 +1855,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{name}/status"
         ]
       },
       {
@@ -1525,6 +1875,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/nodes",
+          "/api/v1/nodes/{name}"
         ]
       },
       {
@@ -1536,6 +1890,10 @@
         "kind": "Node",
         "verbs": [
           "connect"
+        ],
+        "paths": [
+          "/api/v1/nodes/{name}/proxy",
+          "/api/v1/nodes/{name}/proxy/{path}"
         ]
       },
       {
@@ -1549,6 +1907,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/nodes/{name}/status"
         ]
       },
       {
@@ -1566,6 +1927,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/persistentvolumeclaims",
+          "/api/v1/namespaces/{namespace}/persistentvolumeclaims",
+          "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}"
         ]
       },
       {
@@ -1579,6 +1945,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status"
         ]
       },
       {
@@ -1596,6 +1965,10 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/persistentvolumes",
+          "/api/v1/persistentvolumes/{name}"
         ]
       },
       {
@@ -1609,6 +1982,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/persistentvolumes/{name}/status"
         ]
       },
       {
@@ -1626,6 +2002,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/pods",
+          "/api/v1/namespaces/{namespace}/pods",
+          "/api/v1/namespaces/{namespace}/pods/{name}"
         ]
       },
       {
@@ -1637,6 +2018,9 @@
         "kind": "Pod",
         "verbs": [
           "connect"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/attach"
         ]
       },
       {
@@ -1648,6 +2032,9 @@
         "kind": "Binding",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/binding"
         ]
       },
       {
@@ -1661,6 +2048,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers"
         ]
       },
       {
@@ -1672,6 +2062,9 @@
         "kind": "Eviction",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/eviction"
         ]
       },
       {
@@ -1683,6 +2076,9 @@
         "kind": "Pod",
         "verbs": [
           "connect"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/exec"
         ]
       },
       {
@@ -1694,6 +2090,9 @@
         "kind": "Pod",
         "verbs": [
           "get"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/log"
         ]
       },
       {
@@ -1705,6 +2104,9 @@
         "kind": "Pod",
         "verbs": [
           "connect"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/portforward"
         ]
       },
       {
@@ -1716,6 +2118,10 @@
         "kind": "Pod",
         "verbs": [
           "connect"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/proxy",
+          "/api/v1/namespaces/{namespace}/pods/{name}/proxy/{path}"
         ]
       },
       {
@@ -1729,6 +2135,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/pods/{name}/status"
         ]
       },
       {
@@ -1746,6 +2155,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/podtemplates",
+          "/api/v1/namespaces/{namespace}/podtemplates",
+          "/api/v1/namespaces/{namespace}/podtemplates/{name}"
         ]
       },
       {
@@ -1763,6 +2177,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/replicationcontrollers",
+          "/api/v1/namespaces/{namespace}/replicationcontrollers",
+          "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}"
         ]
       },
       {
@@ -1776,6 +2195,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale"
         ]
       },
       {
@@ -1789,6 +2211,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status"
         ]
       },
       {
@@ -1806,6 +2231,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/resourcequotas",
+          "/api/v1/namespaces/{namespace}/resourcequotas",
+          "/api/v1/namespaces/{namespace}/resourcequotas/{name}"
         ]
       },
       {
@@ -1819,6 +2249,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/resourcequotas/{name}/status"
         ]
       },
       {
@@ -1836,6 +2269,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/secrets",
+          "/api/v1/namespaces/{namespace}/secrets",
+          "/api/v1/namespaces/{namespace}/secrets/{name}"
         ]
       },
       {
@@ -1853,6 +2291,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/serviceaccounts",
+          "/api/v1/namespaces/{namespace}/serviceaccounts",
+          "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
         ]
       },
       {
@@ -1864,6 +2307,9 @@
         "kind": "TokenRequest",
         "verbs": [
           "create"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token"
         ]
       },
       {
@@ -1880,6 +2326,11 @@
           "list",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/services",
+          "/api/v1/namespaces/{namespace}/services",
+          "/api/v1/namespaces/{namespace}/services/{name}"
         ]
       },
       {
@@ -1891,6 +2342,10 @@
         "kind": "Service",
         "verbs": [
           "connect"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/services/{name}/proxy",
+          "/api/v1/namespaces/{namespace}/services/{name}/proxy/{path}"
         ]
       },
       {
@@ -1904,6 +2359,9 @@
           "get",
           "patch",
           "update"
+        ],
+        "paths": [
+          "/api/v1/namespaces/{namespace}/services/{name}/status"
         ]
       }
     ]
