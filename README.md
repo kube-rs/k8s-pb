@@ -125,16 +125,23 @@ Transform `swagger.json` to something easier to explore.
 #### Like APIResourceList
 
 ```bash
+cat swagger.json \
+| jq -f list-resources.jq \
+> api-resources.json
+```
+
+```bash
 cat swagger.json | jq -f list-resources.jq | jq '.[0]'
 ```
 
 ```json
 {
-  "groupVersion": "admissionregistration.k8s.io/v1",
+  "apiGroupVersion": "admissionregistration.k8s.io/v1",
   "resources": [
     {
       "name": "mutatingwebhookconfigurations",
       "namespaced": false,
+      "apiGroupVersion": "admissionregistration.k8s.io/v1",
       "group": "admissionregistration.k8s.io",
       "version": "v1",
       "kind": "MutatingWebhookConfiguration",
@@ -151,6 +158,7 @@ cat swagger.json | jq -f list-resources.jq | jq '.[0]'
     {
       "name": "validatingwebhookconfigurations",
       "namespaced": false,
+      "apiGroupVersion": "admissionregistration.k8s.io/v1",
       "group": "admissionregistration.k8s.io",
       "version": "v1",
       "kind": "ValidatingWebhookConfiguration",

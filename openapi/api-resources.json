@@ -1,0 +1,1911 @@
+[
+  {
+    "apiGroupVersion": "admissionregistration.k8s.io/v1",
+    "resources": [
+      {
+        "name": "mutatingwebhookconfigurations",
+        "namespaced": false,
+        "apiGroupVersion": "admissionregistration.k8s.io/v1",
+        "group": "admissionregistration.k8s.io",
+        "version": "v1",
+        "kind": "MutatingWebhookConfiguration",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "validatingwebhookconfigurations",
+        "namespaced": false,
+        "apiGroupVersion": "admissionregistration.k8s.io/v1",
+        "group": "admissionregistration.k8s.io",
+        "version": "v1",
+        "kind": "ValidatingWebhookConfiguration",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "apiextensions.k8s.io/v1",
+    "resources": [
+      {
+        "name": "customresourcedefinitions",
+        "namespaced": false,
+        "apiGroupVersion": "apiextensions.k8s.io/v1",
+        "group": "apiextensions.k8s.io",
+        "version": "v1",
+        "kind": "CustomResourceDefinition",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "customresourcedefinitions/status",
+        "namespaced": false,
+        "apiGroupVersion": "apiextensions.k8s.io/v1",
+        "group": "apiextensions.k8s.io",
+        "version": "v1",
+        "kind": "CustomResourceDefinition",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "apiregistration.k8s.io/v1",
+    "resources": [
+      {
+        "name": "apiservices",
+        "namespaced": false,
+        "apiGroupVersion": "apiregistration.k8s.io/v1",
+        "group": "apiregistration.k8s.io",
+        "version": "v1",
+        "kind": "APIService",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "apiservices/status",
+        "namespaced": false,
+        "apiGroupVersion": "apiregistration.k8s.io/v1",
+        "group": "apiregistration.k8s.io",
+        "version": "v1",
+        "kind": "APIService",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "apps/v1",
+    "resources": [
+      {
+        "name": "controllerrevisions",
+        "namespaced": false,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "ControllerRevision",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "daemonsets",
+        "namespaced": false,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "DaemonSet",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "daemonsets/status",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "DaemonSet",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "deployments",
+        "namespaced": false,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "Deployment",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "deployments/scale",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "autoscaling",
+        "version": "v1",
+        "kind": "Scale",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "deployments/status",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "Deployment",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "replicasets",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "ReplicaSet",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "replicasets/scale",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "autoscaling",
+        "version": "v1",
+        "kind": "Scale",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "replicasets/status",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "ReplicaSet",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "statefulsets",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "StatefulSet",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "statefulsets/scale",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "autoscaling",
+        "version": "v1",
+        "kind": "Scale",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "statefulsets/status",
+        "namespaced": true,
+        "apiGroupVersion": "apps/v1",
+        "group": "apps",
+        "version": "v1",
+        "kind": "StatefulSet",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "authentication.k8s.io/v1",
+    "resources": [
+      {
+        "name": "tokenreviews",
+        "namespaced": false,
+        "apiGroupVersion": "authentication.k8s.io/v1",
+        "group": "authentication.k8s.io",
+        "version": "v1",
+        "kind": "TokenReview",
+        "verbs": [
+          "create"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "authorization.k8s.io/v1",
+    "resources": [
+      {
+        "name": "localsubjectaccessreviews",
+        "namespaced": true,
+        "apiGroupVersion": "authorization.k8s.io/v1",
+        "group": "authorization.k8s.io",
+        "version": "v1",
+        "kind": "LocalSubjectAccessReview",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "selfsubjectaccessreviews",
+        "namespaced": false,
+        "apiGroupVersion": "authorization.k8s.io/v1",
+        "group": "authorization.k8s.io",
+        "version": "v1",
+        "kind": "SelfSubjectAccessReview",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "selfsubjectrulesreviews",
+        "namespaced": false,
+        "apiGroupVersion": "authorization.k8s.io/v1",
+        "group": "authorization.k8s.io",
+        "version": "v1",
+        "kind": "SelfSubjectRulesReview",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "subjectaccessreviews",
+        "namespaced": false,
+        "apiGroupVersion": "authorization.k8s.io/v1",
+        "group": "authorization.k8s.io",
+        "version": "v1",
+        "kind": "SubjectAccessReview",
+        "verbs": [
+          "create"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "autoscaling/v1",
+    "resources": [
+      {
+        "name": "horizontalpodautoscalers",
+        "namespaced": false,
+        "apiGroupVersion": "autoscaling/v1",
+        "group": "autoscaling",
+        "version": "v1",
+        "kind": "HorizontalPodAutoscaler",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "horizontalpodautoscalers/status",
+        "namespaced": true,
+        "apiGroupVersion": "autoscaling/v1",
+        "group": "autoscaling",
+        "version": "v1",
+        "kind": "HorizontalPodAutoscaler",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "autoscaling/v2beta1",
+    "resources": [
+      {
+        "name": "horizontalpodautoscalers",
+        "namespaced": false,
+        "apiGroupVersion": "autoscaling/v2beta1",
+        "group": "autoscaling",
+        "version": "v2beta1",
+        "kind": "HorizontalPodAutoscaler",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "horizontalpodautoscalers/status",
+        "namespaced": true,
+        "apiGroupVersion": "autoscaling/v2beta1",
+        "group": "autoscaling",
+        "version": "v2beta1",
+        "kind": "HorizontalPodAutoscaler",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "autoscaling/v2beta2",
+    "resources": [
+      {
+        "name": "horizontalpodautoscalers",
+        "namespaced": false,
+        "apiGroupVersion": "autoscaling/v2beta2",
+        "group": "autoscaling",
+        "version": "v2beta2",
+        "kind": "HorizontalPodAutoscaler",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "horizontalpodautoscalers/status",
+        "namespaced": true,
+        "apiGroupVersion": "autoscaling/v2beta2",
+        "group": "autoscaling",
+        "version": "v2beta2",
+        "kind": "HorizontalPodAutoscaler",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "batch/v1",
+    "resources": [
+      {
+        "name": "cronjobs",
+        "namespaced": false,
+        "apiGroupVersion": "batch/v1",
+        "group": "batch",
+        "version": "v1",
+        "kind": "CronJob",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "cronjobs/status",
+        "namespaced": true,
+        "apiGroupVersion": "batch/v1",
+        "group": "batch",
+        "version": "v1",
+        "kind": "CronJob",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "jobs",
+        "namespaced": false,
+        "apiGroupVersion": "batch/v1",
+        "group": "batch",
+        "version": "v1",
+        "kind": "Job",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "jobs/status",
+        "namespaced": true,
+        "apiGroupVersion": "batch/v1",
+        "group": "batch",
+        "version": "v1",
+        "kind": "Job",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "batch/v1beta1",
+    "resources": [
+      {
+        "name": "cronjobs",
+        "namespaced": false,
+        "apiGroupVersion": "batch/v1beta1",
+        "group": "batch",
+        "version": "v1beta1",
+        "kind": "CronJob",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "cronjobs/status",
+        "namespaced": true,
+        "apiGroupVersion": "batch/v1beta1",
+        "group": "batch",
+        "version": "v1beta1",
+        "kind": "CronJob",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "certificates.k8s.io/v1",
+    "resources": [
+      {
+        "name": "certificatesigningrequests",
+        "namespaced": false,
+        "apiGroupVersion": "certificates.k8s.io/v1",
+        "group": "certificates.k8s.io",
+        "version": "v1",
+        "kind": "CertificateSigningRequest",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "certificatesigningrequests/approval",
+        "namespaced": false,
+        "apiGroupVersion": "certificates.k8s.io/v1",
+        "group": "certificates.k8s.io",
+        "version": "v1",
+        "kind": "CertificateSigningRequest",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "certificatesigningrequests/status",
+        "namespaced": false,
+        "apiGroupVersion": "certificates.k8s.io/v1",
+        "group": "certificates.k8s.io",
+        "version": "v1",
+        "kind": "CertificateSigningRequest",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "coordination.k8s.io/v1",
+    "resources": [
+      {
+        "name": "leases",
+        "namespaced": false,
+        "apiGroupVersion": "coordination.k8s.io/v1",
+        "group": "coordination.k8s.io",
+        "version": "v1",
+        "kind": "Lease",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "discovery.k8s.io/v1",
+    "resources": [
+      {
+        "name": "endpointslices",
+        "namespaced": false,
+        "apiGroupVersion": "discovery.k8s.io/v1",
+        "group": "discovery.k8s.io",
+        "version": "v1",
+        "kind": "EndpointSlice",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "discovery.k8s.io/v1beta1",
+    "resources": [
+      {
+        "name": "endpointslices",
+        "namespaced": false,
+        "apiGroupVersion": "discovery.k8s.io/v1beta1",
+        "group": "discovery.k8s.io",
+        "version": "v1beta1",
+        "kind": "EndpointSlice",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "events.k8s.io/v1",
+    "resources": [
+      {
+        "name": "events",
+        "namespaced": false,
+        "apiGroupVersion": "events.k8s.io/v1",
+        "group": "events.k8s.io",
+        "version": "v1",
+        "kind": "Event",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "events.k8s.io/v1beta1",
+    "resources": [
+      {
+        "name": "events",
+        "namespaced": false,
+        "apiGroupVersion": "events.k8s.io/v1beta1",
+        "group": "events.k8s.io",
+        "version": "v1beta1",
+        "kind": "Event",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+    "resources": [
+      {
+        "name": "flowschemas",
+        "namespaced": false,
+        "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+        "group": "flowcontrol.apiserver.k8s.io",
+        "version": "v1beta1",
+        "kind": "FlowSchema",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "flowschemas/status",
+        "namespaced": false,
+        "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+        "group": "flowcontrol.apiserver.k8s.io",
+        "version": "v1beta1",
+        "kind": "FlowSchema",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "prioritylevelconfigurations",
+        "namespaced": false,
+        "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+        "group": "flowcontrol.apiserver.k8s.io",
+        "version": "v1beta1",
+        "kind": "PriorityLevelConfiguration",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "prioritylevelconfigurations/status",
+        "namespaced": false,
+        "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+        "group": "flowcontrol.apiserver.k8s.io",
+        "version": "v1beta1",
+        "kind": "PriorityLevelConfiguration",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
+    "resources": [
+      {
+        "name": "storageversions",
+        "namespaced": false,
+        "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
+        "group": "internal.apiserver.k8s.io",
+        "version": "v1alpha1",
+        "kind": "StorageVersion",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "storageversions/status",
+        "namespaced": false,
+        "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
+        "group": "internal.apiserver.k8s.io",
+        "version": "v1alpha1",
+        "kind": "StorageVersion",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "networking.k8s.io/v1",
+    "resources": [
+      {
+        "name": "ingressclasses",
+        "namespaced": false,
+        "apiGroupVersion": "networking.k8s.io/v1",
+        "group": "networking.k8s.io",
+        "version": "v1",
+        "kind": "IngressClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "ingresses",
+        "namespaced": false,
+        "apiGroupVersion": "networking.k8s.io/v1",
+        "group": "networking.k8s.io",
+        "version": "v1",
+        "kind": "Ingress",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "ingresses/status",
+        "namespaced": true,
+        "apiGroupVersion": "networking.k8s.io/v1",
+        "group": "networking.k8s.io",
+        "version": "v1",
+        "kind": "Ingress",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "networkpolicies",
+        "namespaced": true,
+        "apiGroupVersion": "networking.k8s.io/v1",
+        "group": "networking.k8s.io",
+        "version": "v1",
+        "kind": "NetworkPolicy",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "node.k8s.io/v1",
+    "resources": [
+      {
+        "name": "runtimeclasses",
+        "namespaced": false,
+        "apiGroupVersion": "node.k8s.io/v1",
+        "group": "node.k8s.io",
+        "version": "v1",
+        "kind": "RuntimeClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "node.k8s.io/v1alpha1",
+    "resources": [
+      {
+        "name": "runtimeclasses",
+        "namespaced": false,
+        "apiGroupVersion": "node.k8s.io/v1alpha1",
+        "group": "node.k8s.io",
+        "version": "v1alpha1",
+        "kind": "RuntimeClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "node.k8s.io/v1beta1",
+    "resources": [
+      {
+        "name": "runtimeclasses",
+        "namespaced": false,
+        "apiGroupVersion": "node.k8s.io/v1beta1",
+        "group": "node.k8s.io",
+        "version": "v1beta1",
+        "kind": "RuntimeClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "policy/v1",
+    "resources": [
+      {
+        "name": "poddisruptionbudgets",
+        "namespaced": true,
+        "apiGroupVersion": "policy/v1",
+        "group": "policy",
+        "version": "v1",
+        "kind": "PodDisruptionBudget",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "poddisruptionbudgets/status",
+        "namespaced": true,
+        "apiGroupVersion": "policy/v1",
+        "group": "policy",
+        "version": "v1",
+        "kind": "PodDisruptionBudget",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "policy/v1beta1",
+    "resources": [
+      {
+        "name": "poddisruptionbudgets",
+        "namespaced": true,
+        "apiGroupVersion": "policy/v1beta1",
+        "group": "policy",
+        "version": "v1beta1",
+        "kind": "PodDisruptionBudget",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "poddisruptionbudgets/status",
+        "namespaced": true,
+        "apiGroupVersion": "policy/v1beta1",
+        "group": "policy",
+        "version": "v1beta1",
+        "kind": "PodDisruptionBudget",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "podsecuritypolicies",
+        "namespaced": false,
+        "apiGroupVersion": "policy/v1beta1",
+        "group": "policy",
+        "version": "v1beta1",
+        "kind": "PodSecurityPolicy",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "resources": [
+      {
+        "name": "clusterrolebindings",
+        "namespaced": false,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1",
+        "kind": "ClusterRoleBinding",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "clusterroles",
+        "namespaced": false,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1",
+        "kind": "ClusterRole",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "rolebindings",
+        "namespaced": true,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1",
+        "kind": "RoleBinding",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "roles",
+        "namespaced": true,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1",
+        "kind": "Role",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "resources": [
+      {
+        "name": "clusterrolebindings",
+        "namespaced": false,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1alpha1",
+        "kind": "ClusterRoleBinding",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "clusterroles",
+        "namespaced": false,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1alpha1",
+        "kind": "ClusterRole",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "rolebindings",
+        "namespaced": true,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1alpha1",
+        "kind": "RoleBinding",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "roles",
+        "namespaced": true,
+        "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+        "group": "rbac.authorization.k8s.io",
+        "version": "v1alpha1",
+        "kind": "Role",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "scheduling.k8s.io/v1",
+    "resources": [
+      {
+        "name": "priorityclasses",
+        "namespaced": false,
+        "apiGroupVersion": "scheduling.k8s.io/v1",
+        "group": "scheduling.k8s.io",
+        "version": "v1",
+        "kind": "PriorityClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
+    "resources": [
+      {
+        "name": "priorityclasses",
+        "namespaced": false,
+        "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
+        "group": "scheduling.k8s.io",
+        "version": "v1alpha1",
+        "kind": "PriorityClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "storage.k8s.io/v1",
+    "resources": [
+      {
+        "name": "csidrivers",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1",
+        "group": "storage.k8s.io",
+        "version": "v1",
+        "kind": "CSIDriver",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "csinodes",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1",
+        "group": "storage.k8s.io",
+        "version": "v1",
+        "kind": "CSINode",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "storageclasses",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1",
+        "group": "storage.k8s.io",
+        "version": "v1",
+        "kind": "StorageClass",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "volumeattachments",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1",
+        "group": "storage.k8s.io",
+        "version": "v1",
+        "kind": "VolumeAttachment",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "volumeattachments/status",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1",
+        "group": "storage.k8s.io",
+        "version": "v1",
+        "kind": "VolumeAttachment",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "storage.k8s.io/v1alpha1",
+    "resources": [
+      {
+        "name": "csistoragecapacities",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1alpha1",
+        "group": "storage.k8s.io",
+        "version": "v1alpha1",
+        "kind": "CSIStorageCapacity",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "volumeattachments",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1alpha1",
+        "group": "storage.k8s.io",
+        "version": "v1alpha1",
+        "kind": "VolumeAttachment",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "storage.k8s.io/v1beta1",
+    "resources": [
+      {
+        "name": "csistoragecapacities",
+        "namespaced": false,
+        "apiGroupVersion": "storage.k8s.io/v1beta1",
+        "group": "storage.k8s.io",
+        "version": "v1beta1",
+        "kind": "CSIStorageCapacity",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  },
+  {
+    "apiGroupVersion": "v1",
+    "resources": [
+      {
+        "name": "bindings",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Binding",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "componentstatuses",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ComponentStatus",
+        "verbs": [
+          "get",
+          "list"
+        ]
+      },
+      {
+        "name": "configmaps",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ConfigMap",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "endpoints",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Endpoints",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "events",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Event",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "limitranges",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "LimitRange",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "namespaces",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Namespace",
+        "verbs": [
+          "create",
+          "delete",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "namespaces/finalize",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Namespace",
+        "verbs": [
+          "update"
+        ]
+      },
+      {
+        "name": "namespaces/status",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Namespace",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "nodes",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Node",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "nodes/proxy",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Node",
+        "verbs": [
+          "connect"
+        ]
+      },
+      {
+        "name": "nodes/status",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Node",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "persistentvolumeclaims",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "PersistentVolumeClaim",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "persistentvolumeclaims/status",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "PersistentVolumeClaim",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "persistentvolumes",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "PersistentVolume",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "persistentvolumes/status",
+        "namespaced": false,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "PersistentVolume",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "pods",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "pods/attach",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "connect"
+        ]
+      },
+      {
+        "name": "pods/binding",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Binding",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "pods/ephemeralcontainers",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "pods/eviction",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "policy",
+        "version": "v1",
+        "kind": "Eviction",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "pods/exec",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "connect"
+        ]
+      },
+      {
+        "name": "pods/log",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "get"
+        ]
+      },
+      {
+        "name": "pods/portforward",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "connect"
+        ]
+      },
+      {
+        "name": "pods/proxy",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "connect"
+        ]
+      },
+      {
+        "name": "pods/status",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Pod",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "podtemplates",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "PodTemplate",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "replicationcontrollers",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ReplicationController",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "replicationcontrollers/scale",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "autoscaling",
+        "version": "v1",
+        "kind": "Scale",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "replicationcontrollers/status",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ReplicationController",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "resourcequotas",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ResourceQuota",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "resourcequotas/status",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ResourceQuota",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "secrets",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Secret",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "serviceaccounts",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "ServiceAccount",
+        "verbs": [
+          "create",
+          "delete",
+          "deletecollection",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "serviceaccounts/token",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "authentication.k8s.io",
+        "version": "v1",
+        "kind": "TokenRequest",
+        "verbs": [
+          "create"
+        ]
+      },
+      {
+        "name": "services",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Service",
+        "verbs": [
+          "create",
+          "delete",
+          "get",
+          "list",
+          "patch",
+          "update"
+        ]
+      },
+      {
+        "name": "services/proxy",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Service",
+        "verbs": [
+          "connect"
+        ]
+      },
+      {
+        "name": "services/status",
+        "namespaced": true,
+        "apiGroupVersion": "v1",
+        "group": "",
+        "version": "v1",
+        "kind": "Service",
+        "verbs": [
+          "get",
+          "patch",
+          "update"
+        ]
+      }
+    ]
+  }
+]
