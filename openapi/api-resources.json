@@ -5,10 +5,12 @@
       {
         "name": "mutatingwebhookconfigurations",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "admissionregistration.k8s.io/v1",
         "group": "admissionregistration.k8s.io",
         "version": "v1",
         "kind": "MutatingWebhookConfiguration",
+        "rust": "api::admissionregistration::v1::MutatingWebhookConfiguration",
         "verbs": [
           "create",
           "delete",
@@ -37,10 +39,12 @@
       {
         "name": "validatingwebhookconfigurations",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "admissionregistration.k8s.io/v1",
         "group": "admissionregistration.k8s.io",
         "version": "v1",
         "kind": "ValidatingWebhookConfiguration",
+        "rust": "api::admissionregistration::v1::ValidatingWebhookConfiguration",
         "verbs": [
           "create",
           "delete",
@@ -74,10 +78,12 @@
       {
         "name": "customresourcedefinitions",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "apiextensions.k8s.io/v1",
         "group": "apiextensions.k8s.io",
         "version": "v1",
         "kind": "CustomResourceDefinition",
+        "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
         "verbs": [
           "create",
           "delete",
@@ -106,10 +112,12 @@
       {
         "name": "customresourcedefinitions/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "apiextensions.k8s.io/v1",
         "group": "apiextensions.k8s.io",
         "version": "v1",
         "kind": "CustomResourceDefinition",
+        "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
         "verbs": [
           "get",
           "patch",
@@ -134,10 +142,12 @@
       {
         "name": "apiservices",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "apiregistration.k8s.io/v1",
         "group": "apiregistration.k8s.io",
         "version": "v1",
         "kind": "APIService",
+        "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
         "verbs": [
           "create",
           "delete",
@@ -166,10 +176,12 @@
       {
         "name": "apiservices/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "apiregistration.k8s.io/v1",
         "group": "apiregistration.k8s.io",
         "version": "v1",
         "kind": "APIService",
+        "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
         "verbs": [
           "get",
           "patch",
@@ -194,10 +206,12 @@
       {
         "name": "controllerrevisions",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "ControllerRevision",
+        "rust": "api::apps::v1::ControllerRevision",
         "verbs": [
           "create",
           "delete",
@@ -230,10 +244,12 @@
       {
         "name": "daemonsets",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "DaemonSet",
+        "rust": "api::apps::v1::DaemonSet",
         "verbs": [
           "create",
           "delete",
@@ -266,10 +282,12 @@
       {
         "name": "daemonsets/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "DaemonSet",
+        "rust": "api::apps::v1::DaemonSet",
         "verbs": [
           "get",
           "patch",
@@ -289,10 +307,12 @@
       {
         "name": "deployments",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "Deployment",
+        "rust": "api::apps::v1::Deployment",
         "verbs": [
           "create",
           "delete",
@@ -325,10 +345,12 @@
       {
         "name": "deployments/scale",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "Scale",
+        "rust": "api::autoscaling::v1::Scale",
         "verbs": [
           "get",
           "patch",
@@ -348,10 +370,12 @@
       {
         "name": "deployments/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "Deployment",
+        "rust": "api::apps::v1::Deployment",
         "verbs": [
           "get",
           "patch",
@@ -371,10 +395,12 @@
       {
         "name": "replicasets",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "ReplicaSet",
+        "rust": "api::apps::v1::ReplicaSet",
         "verbs": [
           "create",
           "delete",
@@ -407,10 +433,12 @@
       {
         "name": "replicasets/scale",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "Scale",
+        "rust": "api::autoscaling::v1::Scale",
         "verbs": [
           "get",
           "patch",
@@ -430,10 +458,12 @@
       {
         "name": "replicasets/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "ReplicaSet",
+        "rust": "api::apps::v1::ReplicaSet",
         "verbs": [
           "get",
           "patch",
@@ -453,10 +483,12 @@
       {
         "name": "statefulsets",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "StatefulSet",
+        "rust": "api::apps::v1::StatefulSet",
         "verbs": [
           "create",
           "delete",
@@ -489,10 +521,12 @@
       {
         "name": "statefulsets/scale",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "Scale",
+        "rust": "api::autoscaling::v1::Scale",
         "verbs": [
           "get",
           "patch",
@@ -512,10 +546,12 @@
       {
         "name": "statefulsets/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "StatefulSet",
+        "rust": "api::apps::v1::StatefulSet",
         "verbs": [
           "get",
           "patch",
@@ -540,10 +576,12 @@
       {
         "name": "tokenreviews",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "authentication.k8s.io/v1",
         "group": "authentication.k8s.io",
         "version": "v1",
         "kind": "TokenReview",
+        "rust": "api::authentication::v1::TokenReview",
         "verbs": [
           "create"
         ],
@@ -564,10 +602,12 @@
       {
         "name": "localsubjectaccessreviews",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "LocalSubjectAccessReview",
+        "rust": "api::authorization::v1::LocalSubjectAccessReview",
         "verbs": [
           "create"
         ],
@@ -583,10 +623,12 @@
       {
         "name": "selfsubjectaccessreviews",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "SelfSubjectAccessReview",
+        "rust": "api::authorization::v1::SelfSubjectAccessReview",
         "verbs": [
           "create"
         ],
@@ -602,10 +644,12 @@
       {
         "name": "selfsubjectrulesreviews",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "SelfSubjectRulesReview",
+        "rust": "api::authorization::v1::SelfSubjectRulesReview",
         "verbs": [
           "create"
         ],
@@ -621,10 +665,12 @@
       {
         "name": "subjectaccessreviews",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "SubjectAccessReview",
+        "rust": "api::authorization::v1::SubjectAccessReview",
         "verbs": [
           "create"
         ],
@@ -645,10 +691,12 @@
       {
         "name": "horizontalpodautoscalers",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "autoscaling/v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "HorizontalPodAutoscaler",
+        "rust": "api::autoscaling::v1::HorizontalPodAutoscaler",
         "verbs": [
           "create",
           "delete",
@@ -681,10 +729,12 @@
       {
         "name": "horizontalpodautoscalers/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "autoscaling/v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "HorizontalPodAutoscaler",
+        "rust": "api::autoscaling::v1::HorizontalPodAutoscaler",
         "verbs": [
           "get",
           "patch",
@@ -709,10 +759,12 @@
       {
         "name": "horizontalpodautoscalers",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "autoscaling/v2beta1",
         "group": "autoscaling",
         "version": "v2beta1",
         "kind": "HorizontalPodAutoscaler",
+        "rust": "api::autoscaling::v2beta1::HorizontalPodAutoscaler",
         "verbs": [
           "create",
           "delete",
@@ -745,10 +797,12 @@
       {
         "name": "horizontalpodautoscalers/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "autoscaling/v2beta1",
         "group": "autoscaling",
         "version": "v2beta1",
         "kind": "HorizontalPodAutoscaler",
+        "rust": "api::autoscaling::v2beta1::HorizontalPodAutoscaler",
         "verbs": [
           "get",
           "patch",
@@ -773,10 +827,12 @@
       {
         "name": "horizontalpodautoscalers",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "autoscaling/v2beta2",
         "group": "autoscaling",
         "version": "v2beta2",
         "kind": "HorizontalPodAutoscaler",
+        "rust": "api::autoscaling::v2beta2::HorizontalPodAutoscaler",
         "verbs": [
           "create",
           "delete",
@@ -809,10 +865,12 @@
       {
         "name": "horizontalpodautoscalers/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "autoscaling/v2beta2",
         "group": "autoscaling",
         "version": "v2beta2",
         "kind": "HorizontalPodAutoscaler",
+        "rust": "api::autoscaling::v2beta2::HorizontalPodAutoscaler",
         "verbs": [
           "get",
           "patch",
@@ -837,10 +895,12 @@
       {
         "name": "cronjobs",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
         "kind": "CronJob",
+        "rust": "api::batch::v1::CronJob",
         "verbs": [
           "create",
           "delete",
@@ -873,10 +933,12 @@
       {
         "name": "cronjobs/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
         "kind": "CronJob",
+        "rust": "api::batch::v1::CronJob",
         "verbs": [
           "get",
           "patch",
@@ -896,10 +958,12 @@
       {
         "name": "jobs",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
         "kind": "Job",
+        "rust": "api::batch::v1::Job",
         "verbs": [
           "create",
           "delete",
@@ -932,10 +996,12 @@
       {
         "name": "jobs/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
         "kind": "Job",
+        "rust": "api::batch::v1::Job",
         "verbs": [
           "get",
           "patch",
@@ -960,10 +1026,12 @@
       {
         "name": "cronjobs",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "batch/v1beta1",
         "group": "batch",
         "version": "v1beta1",
         "kind": "CronJob",
+        "rust": "api::batch::v1beta1::CronJob",
         "verbs": [
           "create",
           "delete",
@@ -996,10 +1064,12 @@
       {
         "name": "cronjobs/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "batch/v1beta1",
         "group": "batch",
         "version": "v1beta1",
         "kind": "CronJob",
+        "rust": "api::batch::v1beta1::CronJob",
         "verbs": [
           "get",
           "patch",
@@ -1024,10 +1094,12 @@
       {
         "name": "certificatesigningrequests",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "certificates.k8s.io/v1",
         "group": "certificates.k8s.io",
         "version": "v1",
         "kind": "CertificateSigningRequest",
+        "rust": "api::certificates::v1::CertificateSigningRequest",
         "verbs": [
           "create",
           "delete",
@@ -1056,10 +1128,12 @@
       {
         "name": "certificatesigningrequests/approval",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "certificates.k8s.io/v1",
         "group": "certificates.k8s.io",
         "version": "v1",
         "kind": "CertificateSigningRequest",
+        "rust": "api::certificates::v1::CertificateSigningRequest",
         "verbs": [
           "get",
           "patch",
@@ -1079,10 +1153,12 @@
       {
         "name": "certificatesigningrequests/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "certificates.k8s.io/v1",
         "group": "certificates.k8s.io",
         "version": "v1",
         "kind": "CertificateSigningRequest",
+        "rust": "api::certificates::v1::CertificateSigningRequest",
         "verbs": [
           "get",
           "patch",
@@ -1107,10 +1183,12 @@
       {
         "name": "leases",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "coordination.k8s.io/v1",
         "group": "coordination.k8s.io",
         "version": "v1",
         "kind": "Lease",
+        "rust": "api::coordination::v1::Lease",
         "verbs": [
           "create",
           "delete",
@@ -1148,10 +1226,12 @@
       {
         "name": "endpointslices",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "discovery.k8s.io/v1",
         "group": "discovery.k8s.io",
         "version": "v1",
         "kind": "EndpointSlice",
+        "rust": "api::discovery::v1::EndpointSlice",
         "verbs": [
           "create",
           "delete",
@@ -1189,10 +1269,12 @@
       {
         "name": "endpointslices",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "discovery.k8s.io/v1beta1",
         "group": "discovery.k8s.io",
         "version": "v1beta1",
         "kind": "EndpointSlice",
+        "rust": "api::discovery::v1beta1::EndpointSlice",
         "verbs": [
           "create",
           "delete",
@@ -1230,10 +1312,12 @@
       {
         "name": "events",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "events.k8s.io/v1",
         "group": "events.k8s.io",
         "version": "v1",
         "kind": "Event",
+        "rust": "api::events::v1::Event",
         "verbs": [
           "create",
           "delete",
@@ -1271,10 +1355,12 @@
       {
         "name": "events",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "events.k8s.io/v1beta1",
         "group": "events.k8s.io",
         "version": "v1beta1",
         "kind": "Event",
+        "rust": "api::events::v1beta1::Event",
         "verbs": [
           "create",
           "delete",
@@ -1312,10 +1398,12 @@
       {
         "name": "flowschemas",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
         "group": "flowcontrol.apiserver.k8s.io",
         "version": "v1beta1",
         "kind": "FlowSchema",
+        "rust": "api::flowcontrol::v1beta1::FlowSchema",
         "verbs": [
           "create",
           "delete",
@@ -1344,10 +1432,12 @@
       {
         "name": "flowschemas/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
         "group": "flowcontrol.apiserver.k8s.io",
         "version": "v1beta1",
         "kind": "FlowSchema",
+        "rust": "api::flowcontrol::v1beta1::FlowSchema",
         "verbs": [
           "get",
           "patch",
@@ -1367,10 +1457,12 @@
       {
         "name": "prioritylevelconfigurations",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
         "group": "flowcontrol.apiserver.k8s.io",
         "version": "v1beta1",
         "kind": "PriorityLevelConfiguration",
+        "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
         "verbs": [
           "create",
           "delete",
@@ -1399,10 +1491,12 @@
       {
         "name": "prioritylevelconfigurations/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
         "group": "flowcontrol.apiserver.k8s.io",
         "version": "v1beta1",
         "kind": "PriorityLevelConfiguration",
+        "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
         "verbs": [
           "get",
           "patch",
@@ -1427,10 +1521,12 @@
       {
         "name": "storageversions",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
         "group": "internal.apiserver.k8s.io",
         "version": "v1alpha1",
         "kind": "StorageVersion",
+        "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
         "verbs": [
           "create",
           "delete",
@@ -1459,10 +1555,12 @@
       {
         "name": "storageversions/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
         "group": "internal.apiserver.k8s.io",
         "version": "v1alpha1",
         "kind": "StorageVersion",
+        "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
         "verbs": [
           "get",
           "patch",
@@ -1487,10 +1585,12 @@
       {
         "name": "ingressclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "IngressClass",
+        "rust": "api::networking::v1::IngressClass",
         "verbs": [
           "create",
           "delete",
@@ -1519,10 +1619,12 @@
       {
         "name": "ingresses",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "Ingress",
+        "rust": "api::networking::v1::Ingress",
         "verbs": [
           "create",
           "delete",
@@ -1555,10 +1657,12 @@
       {
         "name": "ingresses/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "Ingress",
+        "rust": "api::networking::v1::Ingress",
         "verbs": [
           "get",
           "patch",
@@ -1578,10 +1682,12 @@
       {
         "name": "networkpolicies",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "NetworkPolicy",
+        "rust": "api::networking::v1::NetworkPolicy",
         "verbs": [
           "create",
           "delete",
@@ -1619,10 +1725,12 @@
       {
         "name": "runtimeclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "node.k8s.io/v1",
         "group": "node.k8s.io",
         "version": "v1",
         "kind": "RuntimeClass",
+        "rust": "api::node::v1::RuntimeClass",
         "verbs": [
           "create",
           "delete",
@@ -1656,10 +1764,12 @@
       {
         "name": "runtimeclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "node.k8s.io/v1alpha1",
         "group": "node.k8s.io",
         "version": "v1alpha1",
         "kind": "RuntimeClass",
+        "rust": "api::node::v1alpha1::RuntimeClass",
         "verbs": [
           "create",
           "delete",
@@ -1693,10 +1803,12 @@
       {
         "name": "runtimeclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "node.k8s.io/v1beta1",
         "group": "node.k8s.io",
         "version": "v1beta1",
         "kind": "RuntimeClass",
+        "rust": "api::node::v1beta1::RuntimeClass",
         "verbs": [
           "create",
           "delete",
@@ -1730,10 +1842,12 @@
       {
         "name": "poddisruptionbudgets",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "policy/v1",
         "group": "policy",
         "version": "v1",
         "kind": "PodDisruptionBudget",
+        "rust": "api::policy::v1::PodDisruptionBudget",
         "verbs": [
           "create",
           "delete",
@@ -1766,10 +1880,12 @@
       {
         "name": "poddisruptionbudgets/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "policy/v1",
         "group": "policy",
         "version": "v1",
         "kind": "PodDisruptionBudget",
+        "rust": "api::policy::v1::PodDisruptionBudget",
         "verbs": [
           "get",
           "patch",
@@ -1794,10 +1910,12 @@
       {
         "name": "poddisruptionbudgets",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "policy/v1beta1",
         "group": "policy",
         "version": "v1beta1",
         "kind": "PodDisruptionBudget",
+        "rust": "api::policy::v1beta1::PodDisruptionBudget",
         "verbs": [
           "create",
           "delete",
@@ -1830,10 +1948,12 @@
       {
         "name": "poddisruptionbudgets/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "policy/v1beta1",
         "group": "policy",
         "version": "v1beta1",
         "kind": "PodDisruptionBudget",
+        "rust": "api::policy::v1beta1::PodDisruptionBudget",
         "verbs": [
           "get",
           "patch",
@@ -1853,10 +1973,12 @@
       {
         "name": "podsecuritypolicies",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "policy/v1beta1",
         "group": "policy",
         "version": "v1beta1",
         "kind": "PodSecurityPolicy",
+        "rust": "api::policy::v1beta1::PodSecurityPolicy",
         "verbs": [
           "create",
           "delete",
@@ -1890,10 +2012,12 @@
       {
         "name": "clusterrolebindings",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "ClusterRoleBinding",
+        "rust": "api::rbac::v1::ClusterRoleBinding",
         "verbs": [
           "create",
           "delete",
@@ -1922,10 +2046,12 @@
       {
         "name": "clusterroles",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "ClusterRole",
+        "rust": "api::rbac::v1::ClusterRole",
         "verbs": [
           "create",
           "delete",
@@ -1954,10 +2080,12 @@
       {
         "name": "rolebindings",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "RoleBinding",
+        "rust": "api::rbac::v1::RoleBinding",
         "verbs": [
           "create",
           "delete",
@@ -1990,10 +2118,12 @@
       {
         "name": "roles",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "Role",
+        "rust": "api::rbac::v1::Role",
         "verbs": [
           "create",
           "delete",
@@ -2031,10 +2161,12 @@
       {
         "name": "clusterrolebindings",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "ClusterRoleBinding",
+        "rust": "api::rbac::v1alpha1::ClusterRoleBinding",
         "verbs": [
           "create",
           "delete",
@@ -2063,10 +2195,12 @@
       {
         "name": "clusterroles",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "ClusterRole",
+        "rust": "api::rbac::v1alpha1::ClusterRole",
         "verbs": [
           "create",
           "delete",
@@ -2095,10 +2229,12 @@
       {
         "name": "rolebindings",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "RoleBinding",
+        "rust": "api::rbac::v1alpha1::RoleBinding",
         "verbs": [
           "create",
           "delete",
@@ -2131,10 +2267,12 @@
       {
         "name": "roles",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "Role",
+        "rust": "api::rbac::v1alpha1::Role",
         "verbs": [
           "create",
           "delete",
@@ -2172,10 +2310,12 @@
       {
         "name": "priorityclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "scheduling.k8s.io/v1",
         "group": "scheduling.k8s.io",
         "version": "v1",
         "kind": "PriorityClass",
+        "rust": "api::scheduling::v1::PriorityClass",
         "verbs": [
           "create",
           "delete",
@@ -2209,10 +2349,12 @@
       {
         "name": "priorityclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
         "group": "scheduling.k8s.io",
         "version": "v1alpha1",
         "kind": "PriorityClass",
+        "rust": "api::scheduling::v1alpha1::PriorityClass",
         "verbs": [
           "create",
           "delete",
@@ -2246,10 +2388,12 @@
       {
         "name": "csidrivers",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "CSIDriver",
+        "rust": "api::storage::v1::CSIDriver",
         "verbs": [
           "create",
           "delete",
@@ -2278,10 +2422,12 @@
       {
         "name": "csinodes",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "CSINode",
+        "rust": "api::storage::v1::CSINode",
         "verbs": [
           "create",
           "delete",
@@ -2310,10 +2456,12 @@
       {
         "name": "storageclasses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "StorageClass",
+        "rust": "api::storage::v1::StorageClass",
         "verbs": [
           "create",
           "delete",
@@ -2342,10 +2490,12 @@
       {
         "name": "volumeattachments",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "VolumeAttachment",
+        "rust": "api::storage::v1::VolumeAttachment",
         "verbs": [
           "create",
           "delete",
@@ -2374,10 +2524,12 @@
       {
         "name": "volumeattachments/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "VolumeAttachment",
+        "rust": "api::storage::v1::VolumeAttachment",
         "verbs": [
           "get",
           "patch",
@@ -2402,10 +2554,12 @@
       {
         "name": "csistoragecapacities",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1alpha1",
         "group": "storage.k8s.io",
         "version": "v1alpha1",
         "kind": "CSIStorageCapacity",
+        "rust": "api::storage::v1alpha1::CSIStorageCapacity",
         "verbs": [
           "create",
           "delete",
@@ -2438,10 +2592,12 @@
       {
         "name": "volumeattachments",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1alpha1",
         "group": "storage.k8s.io",
         "version": "v1alpha1",
         "kind": "VolumeAttachment",
+        "rust": "api::storage::v1alpha1::VolumeAttachment",
         "verbs": [
           "create",
           "delete",
@@ -2475,10 +2631,12 @@
       {
         "name": "csistoragecapacities",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1beta1",
         "group": "storage.k8s.io",
         "version": "v1beta1",
         "kind": "CSIStorageCapacity",
+        "rust": "api::storage::v1beta1::CSIStorageCapacity",
         "verbs": [
           "create",
           "delete",
@@ -2516,10 +2674,12 @@
       {
         "name": "bindings",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Binding",
+        "rust": "api::core::v1::Binding",
         "verbs": [
           "create"
         ],
@@ -2535,10 +2695,12 @@
       {
         "name": "componentstatuses",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ComponentStatus",
+        "rust": "api::core::v1::ComponentStatus",
         "verbs": [
           "get",
           "list"
@@ -2557,10 +2719,12 @@
       {
         "name": "configmaps",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ConfigMap",
+        "rust": "api::core::v1::ConfigMap",
         "verbs": [
           "create",
           "delete",
@@ -2593,10 +2757,12 @@
       {
         "name": "endpoints",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Endpoints",
+        "rust": "api::core::v1::Endpoints",
         "verbs": [
           "create",
           "delete",
@@ -2629,10 +2795,12 @@
       {
         "name": "events",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Event",
+        "rust": "api::core::v1::Event",
         "verbs": [
           "create",
           "delete",
@@ -2665,10 +2833,12 @@
       {
         "name": "limitranges",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "LimitRange",
+        "rust": "api::core::v1::LimitRange",
         "verbs": [
           "create",
           "delete",
@@ -2701,10 +2871,12 @@
       {
         "name": "namespaces",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Namespace",
+        "rust": "api::core::v1::Namespace",
         "verbs": [
           "create",
           "delete",
@@ -2731,10 +2903,12 @@
       {
         "name": "namespaces/finalize",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Namespace",
+        "rust": "api::core::v1::Namespace",
         "verbs": [
           "update"
         ],
@@ -2750,10 +2924,12 @@
       {
         "name": "namespaces/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Namespace",
+        "rust": "api::core::v1::Namespace",
         "verbs": [
           "get",
           "patch",
@@ -2773,10 +2949,12 @@
       {
         "name": "nodes",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Node",
+        "rust": "api::core::v1::Node",
         "verbs": [
           "create",
           "delete",
@@ -2805,10 +2983,12 @@
       {
         "name": "nodes/proxy",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Node",
+        "rust": "api::core::v1::Node",
         "verbs": [
           "connect"
         ],
@@ -2825,10 +3005,12 @@
       {
         "name": "nodes/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Node",
+        "rust": "api::core::v1::Node",
         "verbs": [
           "get",
           "patch",
@@ -2848,10 +3030,12 @@
       {
         "name": "persistentvolumeclaims",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PersistentVolumeClaim",
+        "rust": "api::core::v1::PersistentVolumeClaim",
         "verbs": [
           "create",
           "delete",
@@ -2884,10 +3068,12 @@
       {
         "name": "persistentvolumeclaims/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PersistentVolumeClaim",
+        "rust": "api::core::v1::PersistentVolumeClaim",
         "verbs": [
           "get",
           "patch",
@@ -2907,10 +3093,12 @@
       {
         "name": "persistentvolumes",
         "namespaced": false,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PersistentVolume",
+        "rust": "api::core::v1::PersistentVolume",
         "verbs": [
           "create",
           "delete",
@@ -2939,10 +3127,12 @@
       {
         "name": "persistentvolumes/status",
         "namespaced": false,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PersistentVolume",
+        "rust": "api::core::v1::PersistentVolume",
         "verbs": [
           "get",
           "patch",
@@ -2962,10 +3152,12 @@
       {
         "name": "pods",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "create",
           "delete",
@@ -2998,10 +3190,12 @@
       {
         "name": "pods/attach",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "connect"
         ],
@@ -3017,10 +3211,12 @@
       {
         "name": "pods/binding",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Binding",
+        "rust": "api::core::v1::Binding",
         "verbs": [
           "create"
         ],
@@ -3036,10 +3232,12 @@
       {
         "name": "pods/ephemeralcontainers",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "get",
           "patch",
@@ -3059,10 +3257,12 @@
       {
         "name": "pods/eviction",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "policy",
         "version": "v1",
         "kind": "Eviction",
+        "rust": "api::policy::v1::Eviction",
         "verbs": [
           "create"
         ],
@@ -3078,10 +3278,12 @@
       {
         "name": "pods/exec",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "connect"
         ],
@@ -3097,10 +3299,12 @@
       {
         "name": "pods/log",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "get"
         ],
@@ -3116,10 +3320,12 @@
       {
         "name": "pods/portforward",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "connect"
         ],
@@ -3135,10 +3341,12 @@
       {
         "name": "pods/proxy",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "connect"
         ],
@@ -3155,10 +3363,12 @@
       {
         "name": "pods/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "rust": "api::core::v1::Pod",
         "verbs": [
           "get",
           "patch",
@@ -3178,10 +3388,12 @@
       {
         "name": "podtemplates",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PodTemplate",
+        "rust": "api::core::v1::PodTemplate",
         "verbs": [
           "create",
           "delete",
@@ -3214,10 +3426,12 @@
       {
         "name": "replicationcontrollers",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ReplicationController",
+        "rust": "api::core::v1::ReplicationController",
         "verbs": [
           "create",
           "delete",
@@ -3250,10 +3464,12 @@
       {
         "name": "replicationcontrollers/scale",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "Scale",
+        "rust": "api::autoscaling::v1::Scale",
         "verbs": [
           "get",
           "patch",
@@ -3273,10 +3489,12 @@
       {
         "name": "replicationcontrollers/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ReplicationController",
+        "rust": "api::core::v1::ReplicationController",
         "verbs": [
           "get",
           "patch",
@@ -3296,10 +3514,12 @@
       {
         "name": "resourcequotas",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ResourceQuota",
+        "rust": "api::core::v1::ResourceQuota",
         "verbs": [
           "create",
           "delete",
@@ -3332,10 +3552,12 @@
       {
         "name": "resourcequotas/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ResourceQuota",
+        "rust": "api::core::v1::ResourceQuota",
         "verbs": [
           "get",
           "patch",
@@ -3355,10 +3577,12 @@
       {
         "name": "secrets",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Secret",
+        "rust": "api::core::v1::Secret",
         "verbs": [
           "create",
           "delete",
@@ -3391,10 +3615,12 @@
       {
         "name": "serviceaccounts",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ServiceAccount",
+        "rust": "api::core::v1::ServiceAccount",
         "verbs": [
           "create",
           "delete",
@@ -3427,10 +3653,12 @@
       {
         "name": "serviceaccounts/token",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "authentication.k8s.io",
         "version": "v1",
         "kind": "TokenRequest",
+        "rust": "api::authentication::v1::TokenRequest",
         "verbs": [
           "create"
         ],
@@ -3446,10 +3674,12 @@
       {
         "name": "services",
         "namespaced": true,
+        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Service",
+        "rust": "api::core::v1::Service",
         "verbs": [
           "create",
           "delete",
@@ -3480,10 +3710,12 @@
       {
         "name": "services/proxy",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Service",
+        "rust": "api::core::v1::Service",
         "verbs": [
           "connect"
         ],
@@ -3500,10 +3732,12 @@
       {
         "name": "services/status",
         "namespaced": true,
+        "subresource": true,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Service",
+        "rust": "api::core::v1::Service",
         "verbs": [
           "get",
           "patch",

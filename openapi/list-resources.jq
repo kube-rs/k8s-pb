@@ -1,4 +1,19 @@
-[
+(
+  [
+    .definitions | to_entries[]
+    | (.key | sub("^io\\.k8s\\."; "") | gsub("-"; "_") | gsub("\\."; "::")) as $path
+    # Only process definitions with GVK array.
+    # Exclude List. .properties.metadata.$ref "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+    | .value["x-kubernetes-group-version-kind"]? as $gvks
+    | select($gvks != null and ($gvks | length == 1) and (.value.properties?.metadata?["$ref"]? != "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"))
+    | ($gvks[0] as $x | [$x.group, $x.version, $x.kind] | map(select(. != "")) | join("/")) as $gvk
+    | { key: $gvk, value: $path }
+  ]
+  | sort_by(.key)
+  | from_entries
+) as $rustPaths
+
+| [
   .paths | to_entries[]
   | .key as $path
   | .value | to_entries[]
@@ -26,6 +41,8 @@
     apiGroupVersion: $apiGroupVersion,
     group: $gvk.group,
     version: $gvk.version,
+    subresource: ($path | test("\\{name\\}/")),
+    rust: $rustPaths[([$gvk.group, $gvk.version, $gvk.kind] | map(select(. != "")) | join("/"))],
     path: $path,
   }
 ]
@@ -38,10 +55,12 @@
       name: .[0].name,
       # Some resources can be both namespaced and cluster scoped.
       namespaced: (map(.namespaced) | any),
+      subresource: .[0].subresource,
       apiGroupVersion: .[0].apiGroupVersion,
       group: .[0].group,
       version: .[0].version,
       kind: .[0].kind,
+      rust: .[0].rust,
       verbs: (map(.verb) | unique),
       scopedVerbs: (
         group_by(.namespaced)
