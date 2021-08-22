@@ -97,3 +97,4 @@ pub struct StorageVersionStatus {
     #[prost(message, repeated, tag="3")]
     pub conditions: ::prost::alloc::vec::Vec<StorageVersionCondition>,
 }
+// TODO genericsfor api.apiserverinternal.v1alpha1

@@ -100,3 +100,4 @@ pub struct EventSeries {
     #[prost(message, optional, tag="2")]
     pub last_observed_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
 }
+// TODO genericsfor api.events.v1beta1

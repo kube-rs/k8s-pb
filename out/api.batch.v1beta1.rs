@@ -114,3 +114,4 @@ pub struct JobTemplateSpec {
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<super::v1::JobSpec>,
 }
+// TODO genericsfor api.batch.v1beta1

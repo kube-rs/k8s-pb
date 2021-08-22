@@ -484,3 +484,4 @@ pub struct StatefulSetUpdateStrategy {
     #[prost(message, optional, tag="2")]
     pub rolling_update: ::core::option::Option<RollingUpdateStatefulSetStrategy>,
 }
+// TODO genericsfor api.apps.v1beta1

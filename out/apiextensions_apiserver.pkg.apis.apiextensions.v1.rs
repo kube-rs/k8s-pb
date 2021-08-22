@@ -649,3 +649,4 @@ pub struct WebhookConversion {
     #[prost(string, repeated, tag="3")]
     pub conversion_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+// TODO genericsfor apiextensions_apiserver.pkg.apis.apiextensions.v1

@@ -285,3 +285,4 @@ pub struct IngressTls {
     #[prost(string, optional, tag="2")]
     pub secret_name: ::core::option::Option<::prost::alloc::string::String>,
 }
+// TODO genericsfor api.networking.v1beta1

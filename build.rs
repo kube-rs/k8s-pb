@@ -1,58 +1,33 @@
-use std::cell::RefCell;
-use std::rc::Rc;
-
-#[derive(Default)]
-struct GeneratorState {
-    service_names: Vec<String>,
-    finalized: usize,
-    generated: usize
-}
-
-struct KubeGenerator {
-    data: String,
-    state: Rc<RefCell<GeneratorState>>,
-}
-impl KubeGenerator {
-    fn new(state: Rc<RefCell<GeneratorState>>) -> Self {
-        let data = std::fs::read_to_string("./openapi/api-resources.json").unwrap();
-        Self { data, state }
-    }
-}
-
-impl prost_build::ServiceGenerator for KubeGenerator {
-    fn generate(&mut self, service: prost_build::Service, buf: &mut String) {
-        let mut state = self.state.borrow_mut();
-        state.service_names.push(service.name);
-        state.generated += 1;
-        // TODO: THIS doesn't work? never called by prost_build, bug?
-        let generics = format!("// TODO: generate\n");
-        buf.push_str(&generics);
-    }
-
-    fn finalize(&mut self, buf: &mut String) {
-        let mut state = self.state.borrow_mut();
-        state.finalized += 1;
-        // NB: THIS works, but we need a name here before it's useful
-        //let generics = format!("// TODO: finalize\n");
-        //buf.push_str(&generics);
-    }
-}
+use prost_types::{FileDescriptorProto, FileDescriptorSet};
+use prost::Message;
 
 fn main() -> std::io::Result<()> {
-    let protos: Vec<&str> = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/protos.list"))
+    let protos = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/protos.list"))
         .lines()
-        .collect();
+        .collect::<Vec<&str>>();
 
-    let state = Rc::new(RefCell::new(GeneratorState::default()));
     prost_build::Config::new()
-        .service_generator(Box::new(KubeGenerator::new(Rc::clone(&state))))
+        // should probably switch to this
+        //.btree_map(&["."])
         .out_dir("./out")
         .compile_protos(protos.as_slice(), &["protos/"])?;
 
-    // sanity
-    let state = state.borrow();
-    assert_eq!(state.finalized, protos.len());
-    assert_eq!(state.generated, protos.len()); // TODO: why does generate not trigger
+    let apis = std::fs::read_to_string("./openapi/api-resources.json")?;
+
+    let buf = std::fs::read("./protos.fds").unwrap();
+    let fds = FileDescriptorSet::decode(&*buf).unwrap(); // pulls in proto::Message
+
+    // NB: FDS fields: https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-types/src/protobuf.rs#L1-L7
+    // FDS usage: https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-build/src/lib.rs#L765-L825
+    for f in fds.file {
+        use std::io::Write;
+        if let Some(pkg) = f.package {
+            let pkgpath = std::path::Path::new("./out").join(format!("{}.rs", pkg));
+            let generics = format!("// TODO genericsfor {}\n", pkg);
+            let mut file = std::fs::OpenOptions::new().write(true).append(true).open(&pkgpath)?;
+            file.write(generics.as_bytes())?;
+        }
+    }
 
     // Generate code in `src/` by reading files in `OUT_DIR`?
     // Need to create `mod.rs` file for each level based on the filename, and write generated code in correct file.

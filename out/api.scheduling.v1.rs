@@ -44,3 +44,4 @@ pub struct PriorityClassList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<PriorityClass>,
 }
+// TODO genericsfor api.scheduling.v1

@@ -465,3 +465,4 @@ pub struct WebhookClientConfig {
     #[prost(bytes="vec", optional, tag="2")]
     pub ca_bundle: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
+// TODO genericsfor api.admissionregistration.v1beta1

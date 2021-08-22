@@ -61,3 +61,4 @@ pub struct Quantity {
     #[prost(string, optional, tag="1")]
     pub string: ::core::option::Option<::prost::alloc::string::String>,
 }
+// TODO genericsfor apimachinery.pkg.api.resource

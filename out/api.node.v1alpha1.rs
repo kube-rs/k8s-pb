@@ -90,3 +90,4 @@ pub struct Scheduling {
     #[prost(message, repeated, tag="2")]
     pub tolerations: ::prost::alloc::vec::Vec<super::super::core::v1::Toleration>,
 }
+// TODO genericsfor api.node.v1alpha1

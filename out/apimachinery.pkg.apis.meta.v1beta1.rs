@@ -11,3 +11,4 @@ pub struct PartialObjectMetadataList {
     #[prost(message, repeated, tag="1")]
     pub items: ::prost::alloc::vec::Vec<super::v1::PartialObjectMetadata>,
 }
+// TODO genericsfor apimachinery.pkg.apis.meta.v1beta1

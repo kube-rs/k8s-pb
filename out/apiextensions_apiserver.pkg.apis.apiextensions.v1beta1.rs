@@ -685,3 +685,4 @@ pub struct WebhookClientConfig {
     #[prost(bytes="vec", optional, tag="2")]
     pub ca_bundle: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
+// TODO genericsfor apiextensions_apiserver.pkg.apis.apiextensions.v1beta1

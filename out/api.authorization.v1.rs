@@ -263,3 +263,4 @@ pub struct SubjectRulesReviewStatus {
     #[prost(string, optional, tag="4")]
     pub evaluation_error: ::core::option::Option<::prost::alloc::string::String>,
 }
+// TODO genericsfor api.authorization.v1

@@ -181,3 +181,4 @@ pub struct Subject {
     #[prost(string, optional, tag="4")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
+// TODO genericsfor api.rbac.v1

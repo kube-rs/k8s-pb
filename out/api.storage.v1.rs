@@ -446,3 +446,4 @@ pub struct VolumeNodeResources {
     #[prost(int32, optional, tag="1")]
     pub count: ::core::option::Option<i32>,
 }
+// TODO genericsfor api.storage.v1

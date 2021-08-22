@@ -459,3 +459,4 @@ pub struct ResourceMetricStatus {
     #[prost(message, optional, tag="3")]
     pub current_average_value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
+// TODO genericsfor api.autoscaling.v2beta1

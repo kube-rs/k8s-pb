@@ -49,3 +49,4 @@ pub struct MetricValueList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<MetricValue>,
 }
+// TODO genericsfor metrics.pkg.apis.custom_metrics.v1beta1
