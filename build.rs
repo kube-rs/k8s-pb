@@ -1,73 +1,59 @@
-use std::io::Result;
+use std::cell::RefCell;
+use std::rc::Rc;
 
-fn main() -> Result<()> {
-    prost_build::Config::new().compile_protos(
-        &[
-            "protos/api/admissionregistration/v1beta1/generated.proto",
-            "protos/api/admissionregistration/v1/generated.proto",
-            "protos/api/admission/v1beta1/generated.proto",
-            "protos/api/admission/v1/generated.proto",
-            "protos/api/apiserverinternal/v1alpha1/generated.proto",
-            "protos/api/apps/v1beta1/generated.proto",
-            "protos/api/apps/v1beta2/generated.proto",
-            "protos/api/apps/v1/generated.proto",
-            "protos/api/authentication/v1beta1/generated.proto",
-            "protos/api/authentication/v1/generated.proto",
-            "protos/api/authorization/v1beta1/generated.proto",
-            "protos/api/authorization/v1/generated.proto",
-            "protos/api/autoscaling/v1/generated.proto",
-            "protos/api/autoscaling/v2beta1/generated.proto",
-            "protos/api/autoscaling/v2beta2/generated.proto",
-            "protos/api/batch/v1beta1/generated.proto",
-            "protos/api/batch/v1/generated.proto",
-            "protos/api/certificates/v1beta1/generated.proto",
-            "protos/api/certificates/v1/generated.proto",
-            "protos/api/coordination/v1beta1/generated.proto",
-            "protos/api/coordination/v1/generated.proto",
-            "protos/api/core/v1/generated.proto",
-            "protos/api/discovery/v1beta1/generated.proto",
-            "protos/api/discovery/v1/generated.proto",
-            "protos/api/events/v1beta1/generated.proto",
-            "protos/api/events/v1/generated.proto",
-            "protos/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/generated.proto",
-            "protos/apiextensions-apiserver/pkg/apis/apiextensions/v1/generated.proto",
-            "protos/api/extensions/v1beta1/generated.proto",
-            "protos/api/flowcontrol/v1alpha1/generated.proto",
-            "protos/api/flowcontrol/v1beta1/generated.proto",
-            "protos/api/imagepolicy/v1alpha1/generated.proto",
-            "protos/apimachinery/pkg/api/resource/generated.proto",
-            "protos/apimachinery/pkg/apis/meta/v1beta1/generated.proto",
-            "protos/apimachinery/pkg/apis/meta/v1/generated.proto",
-            "protos/apimachinery/pkg/apis/testapigroup/v1/generated.proto",
-            "protos/apimachinery/pkg/runtime/generated.proto",
-            "protos/apimachinery/pkg/runtime/schema/generated.proto",
-            "protos/apimachinery/pkg/util/intstr/generated.proto",
-            "protos/api/networking/v1beta1/generated.proto",
-            "protos/api/networking/v1/generated.proto",
-            "protos/api/node/v1alpha1/generated.proto",
-            "protos/api/node/v1beta1/generated.proto",
-            "protos/api/node/v1/generated.proto",
-            "protos/api/policy/v1beta1/generated.proto",
-            "protos/api/policy/v1/generated.proto",
-            "protos/api/rbac/v1alpha1/generated.proto",
-            "protos/api/rbac/v1beta1/generated.proto",
-            "protos/api/rbac/v1/generated.proto",
-            "protos/api/scheduling/v1alpha1/generated.proto",
-            "protos/api/scheduling/v1beta1/generated.proto",
-            "protos/api/scheduling/v1/generated.proto",
-            "protos/api/storage/v1alpha1/generated.proto",
-            "protos/api/storage/v1beta1/generated.proto",
-            "protos/api/storage/v1/generated.proto",
-            "protos/kube-aggregator/pkg/apis/apiregistration/v1beta1/generated.proto",
-            "protos/kube-aggregator/pkg/apis/apiregistration/v1/generated.proto",
-            "protos/metrics/pkg/apis/custom_metrics/v1beta1/generated.proto",
-            "protos/metrics/pkg/apis/custom_metrics/v1beta2/generated.proto",
-            "protos/metrics/pkg/apis/external_metrics/v1beta1/generated.proto",
-            "protos/metrics/pkg/apis/metrics/v1alpha1/generated.proto",
-            "protos/metrics/pkg/apis/metrics/v1beta1/generated.proto",
-        ],
-        &["protos/"],
-    )?;
+#[derive(Default)]
+struct GeneratorState {
+    service_names: Vec<String>,
+    package_names: Vec<String>,
+    finalized: usize,
+}
+
+struct KubeGenerator {
+    data: String,
+    state: Rc<RefCell<GeneratorState>>,
+}
+impl KubeGenerator {
+    fn new(state: Rc<RefCell<GeneratorState>>) -> Self {
+        let data = std::fs::read_to_string("./openapi/api-resources.json").unwrap();
+        Self { data, state }
+    }
+}
+
+impl prost_build::ServiceGenerator for KubeGenerator {
+    fn generate(&mut self, service: prost_build::Service, _buf: &mut String) {
+        let mut state = self.state.borrow_mut();
+        state.service_names.push(service.name);
+    }
+
+    fn finalize(&mut self, _buf: &mut String) {
+        let mut state = self.state.borrow_mut();
+        state.finalized += 1;
+    }
+
+    fn finalize_package(&mut self, package: &str, buf: &mut String) {
+        let mut state = self.state.borrow_mut();
+        state.package_names.push(package.to_string());
+        // TODO: generate generics for pkg here using self.data
+        let pkg_generics = format!("// blahtest");
+        buf.push_str(&pkg_generics);
+    }
+}
+
+fn main() -> std::io::Result<()> {
+    let protos: Vec<&str> = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/protos.list"))
+        .lines()
+        .collect();
+
+    let state = Rc::new(RefCell::new(GeneratorState::default()));
+    prost_build::Config::new()
+        .service_generator(Box::new(KubeGenerator::new(Rc::clone(&state))))
+        .compile_protos(protos.as_slice(), &["protos/"])?;
+
+    // sanity
+    let state = state.borrow();
+    //assert_eq!(state.service_names.len(), protos.len()); zero atm..
+    assert_eq!(state.finalized, protos.len());
+
     // Generate code in `src/` by reading files in `OUT_DIR`?
     // Need to create `mod.rs` file for each level based on the filename, and write generated code in correct file.
     Ok(())

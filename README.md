@@ -16,7 +16,7 @@ Get protos by extracting them from Kubernetes releases:
 # In `protos/`
 VERSION=1.22.0
 for x in api apimachinery apiextensions-apiserver kube-aggregator metrics; do
-  mkdir ./$x;
+  mkdir ./$x -p;
   curl -sSL https://github.com/kubernetes/$x/archive/refs/tags/kubernetes-$VERSION.tar.gz | tar xzf - -C ./$x/ --strip-components=1;
   fd -e proto -x sh -c "mkdir -p k8s.io/'{//}'; mv '{}' k8s.io/'{}'" ';' . ./$x;
   rm -rf ./$x;
@@ -35,16 +35,10 @@ rmdir protos/k8s.io/
 ```
 
 ### Generate
-
-Collect all paths to generate:
-
-```bash
-# In project root.
-fd -e proto -x echo '"{}",' | sort
-```
-Copy the output to `build.rs`, then:
+Refresh input paths to generate, then build:
 
 ```bash
+fd -e proto | sort > protos.list
 cargo build
 ```
 
@@ -115,7 +109,7 @@ Fix path operation annotated with a `x-kubernetes-group-version-kind` that refer
 gron swagger.json \
 | perl -pe 's/(?<=kind = ")(Pod|Node|Service)(?:Attach|Exec|PortForward|Proxy)Options(?=")/$1/' \
 | gron -u \
-> swagger-patched.json 
+> swagger-patched.json
 mv swagger-patched.json swagger.json
 ```
 
