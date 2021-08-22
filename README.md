@@ -1,10 +1,14 @@
 Experimenting with Kubernetes protobufs.
 
+## Build Dependencies
+
+- [fd](https://github.com/sharkdp/fd)
+- [jq](https://stedolan.github.io/jq/)
+- [just](https://github.com/casey/just)
+- [sd](https://github.com/chmln/sd)
+
 ## Protobufs
-
-### Download
-
-Get protos by extracting them from Kubernetes releases:
+We get protos by extracting them from pinned Kubernetes releases:
 
 - https://github.com/kubernetes/api/releases
 - https://github.com/kubernetes/apimachinery/releases
@@ -12,69 +16,26 @@ Get protos by extracting them from Kubernetes releases:
 - https://github.com/kubernetes/kube-aggregator/releases
 - https://github.com/kubernetes/metrics/releases
 
-```bash
-# In `protos/`
-VERSION=1.22.0
-for x in api apimachinery apiextensions-apiserver kube-aggregator metrics; do
-  mkdir ./$x;
-  curl -sSL https://github.com/kubernetes/$x/archive/refs/tags/kubernetes-$VERSION.tar.gz | tar xzf - -C ./$x/ --strip-components=1;
-  fd -e proto -x sh -c "mkdir -p k8s.io/'{//}'; mv '{}' k8s.io/'{}'" ';' . ./$x;
-  rm -rf ./$x;
-done
-```
+We then do minor transforms on top of that to prepare for building.
+Results of this step is committed already. But to run, invoke `just protos`
 
-### Patch
+## Openapi
+To complement the protos with generic information, we also download the swagger schema, patch it, and transform it as described below.
 
-Removing `k8s.io.`:
+Results of this step is committed already. But to run, invoke `just swagger`.
 
-```bash
-fd -e proto -x sd 'k8s\.io\.(.+);' '$1;' {}
-fd -e proto -x sd 'import "k8s\.io/(.+)";' 'import "$1";' {}
-mv protos/k8s.io/* protos/
-rmdir protos/k8s.io/
-```
 
-### Generate
+## Building
+To build the [out](./out) directory from [build.rs](./build.rs) we will use the outputs from the `swagger`, `protobuf`, and `protobuf-fds` targets.
 
-Collect all paths to generate:
-
-```bash
-# In project root.
-fd -e proto -x echo '"{}",' | sort
-```
-Copy the output to `build.rs`, then:
-
-```bash
-cargo build
-```
+Results of this step is committed already. But to run, invoke `just codegen`
 
 ### Hack
 
-Generate a [`FileDescriptorSet`] containing all of the input files:
-
-```bash
-protoc \
-    --include_imports \
-    --include_source_info \
-    --descriptor_set_out=k8s.pb \
-    --proto_path=./protos \
-    ./protos/**/*.proto
-```
-
-Working with `FileDescriptorSet`:
-```rust
-use prost_types::{FileDescriptorProto, FileDescriptorSet};
-let buf = fs::read(fds_path).unwrap();
-let fds = FileDescriptorSet::decode(&*buf).unwrap();
-let files = fds.files;
-```
-
-See [`prost_build`](https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-build/src/lib.rs#L765-L825).
-
-[`FileDescriptorSet`]: https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-types/src/protobuf.rs#L1-L7
+Generate a [`FileDescriptorSet`] containing all of the input files wih `just codegen-fds`
 
 
-## OpenAPI
+## OpenAPI Strategy
 
 We need to use `swagger.json` to fill in some information.
 
@@ -96,28 +57,6 @@ We should be able to find the following:
   - Namespaced if any possible path contains `/namespaces/{namespace}/`
     - May also have paths for all namespaces for some verbs (e.g., `list` all pods)
   - Subresource if path contains `/{name}/` (`/` after `{name}`)
-
-### Download
-
-In `openapi/`
-
-```bash
-VERSION=1.22.0
-curl -sSL -o swagger.json \
-    https://raw.githubusercontent.com/kubernetes/kubernetes/v$VERSION/api/openapi-spec/swagger.json
-```
-
-### Bug Fix
-
-Fix path operation annotated with a `x-kubernetes-group-version-kind` that references a type that doesn't exist in the schema. (See [`k8s-openapi`](https://github.com/Arnavion/k8s-openapi/blob/445e89ec444ebb1c68e61361e64eec4c4a3f4785/k8s-openapi-codegen/src/fixups/upstream_bugs.rs#L9)).
-
-```bash
-gron swagger.json \
-| perl -pe 's/(?<=kind = ")(Pod|Node|Service)(?:Attach|Exec|PortForward|Proxy)Options(?=")/$1/' \
-| gron -u \
-> swagger-patched.json 
-mv swagger-patched.json swagger.json
-```
 
 ### Transforming
 
