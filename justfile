@@ -60,3 +60,10 @@ swagger-transform:
 
 # Download and generate all swagger dependent files
 swagger: swagger-dl swagger-patch swagger-transform
+
+# Generate the library code from completed swagger and protos
+build:
+    #!/usr/bin/env bash
+    set -exuo pipefail
+    rm -rf out/ && mkdir out
+    cargo build

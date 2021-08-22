@@ -26,11 +26,9 @@ Results of this step is committed already. But to run, invoke `just swagger`.
 
 
 ## Building
-With all dependent `swagger` and `protos` files built, run:
+To build the [out](./out) directory from [build.rs](./build.rs) using swagger and protobuf results run `just build`.
 
-```bash
-cargo build
-```
+Results of this step is committed already.
 
 ### Hack
 
