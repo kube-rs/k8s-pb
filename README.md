@@ -2,9 +2,10 @@ Experimenting with Kubernetes protobufs.
 
 ## Build Dependencies
 
+- [fd](https://github.com/sharkdp/fd)
+- [jq](https://stedolan.github.io/jq/)
 - [just](https://github.com/casey/just)
 - [sd](https://github.com/chmln/sd)
-- [jq](https://stedolan.github.io/jq/)
 
 ## Protobufs
 We get protos by extracting them from pinned Kubernetes releases:
