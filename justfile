@@ -43,12 +43,7 @@ swagger-patch:
     #!/usr/bin/env bash
     set -exuo pipefail
     cd openapi
-    # Fix path operation annotated with a `x-kubernetes-group-version-kind` that references a type that doesn't exist in the schema.
-    # See https://github.com/Arnavion/k8s-openapi/blob/445e89ec444ebb1c68e61361e64eec4c4a3f4785/k8s-openapi-codegen/src/fixups/upstream_bugs.rs#L9
-    gron swagger.json \
-        | perl -pe 's/(?<=kind = ")(Pod|Node|Service)(?:Attach|Exec|PortForward|Proxy)Options(?=")/$1/' \
-        | gron -u \
-        > swagger-patched.json
+    jq -f patches/patch-nonexistent-gvk.jq < swagger.json > swagger-patched.json
     mv swagger-patched.json swagger.json
 
 # Transform swagger schema into api-resources.json

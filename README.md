@@ -2,7 +2,6 @@ Experimenting with Kubernetes protobufs.
 
 ## Build Dependencies
 
-- [gron](https://github.com/tomnomnom/gron)
 - [just](https://github.com/casey/just)
 - [sd](https://github.com/chmln/sd)
 - [jq](https://stedolan.github.io/jq/)
