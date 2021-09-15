@@ -415,4 +415,20 @@ pub struct SupplementalGroupsStrategyOptions {
     #[prost(message, repeated, tag="2")]
     pub ranges: ::prost::alloc::vec::Vec<IdRange>,
 }
-// TODO genericsfor api.policy.v1beta1
+// NB: no-generics for api.policy.v1beta1/AllowedCSIDriver (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/AllowedFlexVolume (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/AllowedHostPath (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/Eviction (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/FSGroupStrategyOptions (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/HostPortRange (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/IDRange (not in policy/v1beta1)
+// TODO generics for poddisruptionbudgets policy/v1beta1
+// NB: no-generics for api.policy.v1beta1/PodDisruptionBudgetSpec (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/PodDisruptionBudgetStatus (not in policy/v1beta1)
+// TODO generics for podsecuritypolicies policy/v1beta1
+// NB: no-generics for api.policy.v1beta1/PodSecurityPolicySpec (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/RunAsGroupStrategyOptions (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/RunAsUserStrategyOptions (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/RuntimeClassStrategyOptions (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/SELinuxStrategyOptions (not in policy/v1beta1)
+// NB: no-generics for api.policy.v1beta1/SupplementalGroupsStrategyOptions (not in policy/v1beta1)

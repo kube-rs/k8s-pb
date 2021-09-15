@@ -102,4 +102,3 @@ pub struct Unknown {
     #[prost(string, optional, tag="4")]
     pub content_type: ::core::option::Option<::prost::alloc::string::String>,
 }
-// TODO genericsfor apimachinery.pkg.runtime

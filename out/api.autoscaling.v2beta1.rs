@@ -459,4 +459,20 @@ pub struct ResourceMetricStatus {
     #[prost(message, optional, tag="3")]
     pub current_average_value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
-// TODO genericsfor api.autoscaling.v2beta1
+// NB: no-generics for api.autoscaling.v2beta1/ContainerResourceMetricSource (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ContainerResourceMetricStatus (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/CrossVersionObjectReference (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ExternalMetricSource (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ExternalMetricStatus (not in autoscaling/v2beta1)
+// TODO generics for horizontalpodautoscalers autoscaling/v2beta1
+// NB: no-generics for api.autoscaling.v2beta1/HorizontalPodAutoscalerCondition (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/HorizontalPodAutoscalerSpec (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/HorizontalPodAutoscalerStatus (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/MetricSpec (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/MetricStatus (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ObjectMetricSource (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ObjectMetricStatus (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/PodsMetricSource (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/PodsMetricStatus (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ResourceMetricSource (not in autoscaling/v2beta1)
+// NB: no-generics for api.autoscaling.v2beta1/ResourceMetricStatus (not in autoscaling/v2beta1)

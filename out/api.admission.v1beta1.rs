@@ -137,4 +137,4 @@ pub struct AdmissionReview {
     #[prost(message, optional, tag="2")]
     pub response: ::core::option::Option<AdmissionResponse>,
 }
-// TODO genericsfor api.admission.v1beta1
+// didn't find admission/v1beta1

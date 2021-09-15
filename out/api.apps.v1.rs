@@ -737,4 +737,26 @@ pub struct StatefulSetUpdateStrategy {
     #[prost(message, optional, tag="2")]
     pub rolling_update: ::core::option::Option<RollingUpdateStatefulSetStrategy>,
 }
-// TODO genericsfor api.apps.v1
+// TODO generics for controllerrevisions apps/v1
+// TODO generics for daemonsets apps/v1
+// NB: no-generics for api.apps.v1/DaemonSetCondition (not in apps/v1)
+// NB: no-generics for api.apps.v1/DaemonSetSpec (not in apps/v1)
+// NB: no-generics for api.apps.v1/DaemonSetStatus (not in apps/v1)
+// NB: no-generics for api.apps.v1/DaemonSetUpdateStrategy (not in apps/v1)
+// TODO generics for deployments apps/v1
+// NB: no-generics for api.apps.v1/DeploymentCondition (not in apps/v1)
+// NB: no-generics for api.apps.v1/DeploymentSpec (not in apps/v1)
+// NB: no-generics for api.apps.v1/DeploymentStatus (not in apps/v1)
+// NB: no-generics for api.apps.v1/DeploymentStrategy (not in apps/v1)
+// TODO generics for replicasets apps/v1
+// NB: no-generics for api.apps.v1/ReplicaSetCondition (not in apps/v1)
+// NB: no-generics for api.apps.v1/ReplicaSetSpec (not in apps/v1)
+// NB: no-generics for api.apps.v1/ReplicaSetStatus (not in apps/v1)
+// NB: no-generics for api.apps.v1/RollingUpdateDaemonSet (not in apps/v1)
+// NB: no-generics for api.apps.v1/RollingUpdateDeployment (not in apps/v1)
+// NB: no-generics for api.apps.v1/RollingUpdateStatefulSetStrategy (not in apps/v1)
+// TODO generics for statefulsets apps/v1
+// NB: no-generics for api.apps.v1/StatefulSetCondition (not in apps/v1)
+// NB: no-generics for api.apps.v1/StatefulSetSpec (not in apps/v1)
+// NB: no-generics for api.apps.v1/StatefulSetStatus (not in apps/v1)
+// NB: no-generics for api.apps.v1/StatefulSetUpdateStrategy (not in apps/v1)

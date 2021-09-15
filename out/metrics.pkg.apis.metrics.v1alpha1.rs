@@ -60,4 +60,3 @@ pub struct PodMetricsList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<PodMetrics>,
 }
-// TODO genericsfor metrics.pkg.apis.metrics.v1alpha1

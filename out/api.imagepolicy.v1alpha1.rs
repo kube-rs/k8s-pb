@@ -60,4 +60,4 @@ pub struct ImageReviewStatus {
     #[prost(map="string, string", tag="3")]
     pub audit_annotations: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
-// TODO genericsfor api.imagepolicy.v1alpha1
+// didn't find imagepolicy/v1alpha1

@@ -1137,4 +1137,3 @@ pub struct WatchEvent {
     #[prost(message, optional, tag="2")]
     pub object: ::core::option::Option<super::super::super::runtime::RawExtension>,
 }
-// TODO genericsfor apimachinery.pkg.apis.meta.v1

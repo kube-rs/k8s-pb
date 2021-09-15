@@ -171,4 +171,4 @@ pub struct ForZone {
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
-// TODO genericsfor api.discovery.v1
+// didn't find discovery/v1

@@ -114,4 +114,8 @@ pub struct JobTemplateSpec {
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<super::v1::JobSpec>,
 }
-// TODO genericsfor api.batch.v1beta1
+// TODO generics for cronjobs batch/v1beta1
+// NB: no-generics for api.batch.v1beta1/CronJobSpec (not in batch/v1beta1)
+// NB: no-generics for api.batch.v1beta1/CronJobStatus (not in batch/v1beta1)
+// NB: no-generics for api.batch.v1beta1/JobTemplate (not in batch/v1beta1)
+// NB: no-generics for api.batch.v1beta1/JobTemplateSpec (not in batch/v1beta1)

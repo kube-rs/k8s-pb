@@ -31,4 +31,3 @@ pub struct ExternalMetricValueList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<ExternalMetricValue>,
 }
-// TODO genericsfor metrics.pkg.apis.external_metrics.v1beta1

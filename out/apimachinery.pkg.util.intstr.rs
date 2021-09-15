@@ -16,4 +16,3 @@ pub struct IntOrString {
     #[prost(string, optional, tag="3")]
     pub str_val: ::core::option::Option<::prost::alloc::string::String>,
 }
-// TODO genericsfor apimachinery.pkg.util.intstr

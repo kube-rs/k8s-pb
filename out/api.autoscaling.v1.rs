@@ -482,4 +482,23 @@ pub struct ScaleStatus {
     #[prost(string, optional, tag="2")]
     pub selector: ::core::option::Option<::prost::alloc::string::String>,
 }
-// TODO genericsfor api.autoscaling.v1
+// NB: no-generics for api.autoscaling.v1/ContainerResourceMetricSource (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ContainerResourceMetricStatus (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/CrossVersionObjectReference (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ExternalMetricSource (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ExternalMetricStatus (not in autoscaling/v1)
+// TODO generics for horizontalpodautoscalers autoscaling/v1
+// NB: no-generics for api.autoscaling.v1/HorizontalPodAutoscalerCondition (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/HorizontalPodAutoscalerSpec (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/HorizontalPodAutoscalerStatus (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/MetricSpec (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/MetricStatus (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ObjectMetricSource (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ObjectMetricStatus (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/PodsMetricSource (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/PodsMetricStatus (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ResourceMetricSource (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ResourceMetricStatus (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/Scale (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ScaleSpec (not in autoscaling/v1)
+// NB: no-generics for api.autoscaling.v1/ScaleStatus (not in autoscaling/v1)

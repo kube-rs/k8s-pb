@@ -51,4 +51,4 @@ pub struct LeaseSpec {
     #[prost(int32, optional, tag="5")]
     pub lease_transitions: ::core::option::Option<i32>,
 }
-// TODO genericsfor api.coordination.v1
+// didn't find coordination/v1

@@ -123,4 +123,7 @@ pub struct PodDisruptionBudgetStatus {
     #[prost(message, repeated, tag="7")]
     pub conditions: ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
-// TODO genericsfor api.policy.v1
+// NB: no-generics for api.policy.v1/Eviction (not in policy/v1)
+// TODO generics for poddisruptionbudgets policy/v1
+// NB: no-generics for api.policy.v1/PodDisruptionBudgetSpec (not in policy/v1)
+// NB: no-generics for api.policy.v1/PodDisruptionBudgetStatus (not in policy/v1)

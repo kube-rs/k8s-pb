@@ -483,4 +483,26 @@ pub struct ResourceMetricStatus {
     #[prost(message, optional, tag="2")]
     pub current: ::core::option::Option<MetricValueStatus>,
 }
-// TODO genericsfor api.autoscaling.v2beta2
+// NB: no-generics for api.autoscaling.v2beta2/ContainerResourceMetricSource (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ContainerResourceMetricStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/CrossVersionObjectReference (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ExternalMetricSource (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ExternalMetricStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/HPAScalingPolicy (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/HPAScalingRules (not in autoscaling/v2beta2)
+// TODO generics for horizontalpodautoscalers autoscaling/v2beta2
+// NB: no-generics for api.autoscaling.v2beta2/HorizontalPodAutoscalerBehavior (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/HorizontalPodAutoscalerCondition (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/HorizontalPodAutoscalerSpec (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/HorizontalPodAutoscalerStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/MetricIdentifier (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/MetricSpec (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/MetricStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/MetricTarget (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/MetricValueStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ObjectMetricSource (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ObjectMetricStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/PodsMetricSource (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/PodsMetricStatus (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ResourceMetricSource (not in autoscaling/v2beta2)
+// NB: no-generics for api.autoscaling.v2beta2/ResourceMetricStatus (not in autoscaling/v2beta2)

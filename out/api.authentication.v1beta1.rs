@@ -93,4 +93,4 @@ pub struct UserInfo {
     #[prost(map="string, message", tag="4")]
     pub extra: ::std::collections::HashMap<::prost::alloc::string::String, ExtraValue>,
 }
-// TODO genericsfor api.authentication.v1beta1
+// didn't find authentication/v1beta1

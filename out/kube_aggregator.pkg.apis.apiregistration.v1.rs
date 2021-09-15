@@ -125,4 +125,3 @@ pub struct ServiceReference {
     #[prost(int32, optional, tag="3")]
     pub port: ::core::option::Option<i32>,
 }
-// TODO genericsfor kube_aggregator.pkg.apis.apiregistration.v1
