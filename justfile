@@ -73,4 +73,5 @@ build: build-fds
     #!/usr/bin/env bash
     set -exuo pipefail
     rm -rf out/ && mkdir out
+    touch justfile
     cargo build
