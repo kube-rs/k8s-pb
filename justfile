@@ -35,14 +35,14 @@ protos: protos-dl protos-patch protos-list
 swagger-dl:
     #!/usr/bin/env bash
     set -exuo pipefail
-    curl -sSL -o openapi/swagger.json \
+    curl -sSL -o k8s-pb-codegen/openapi/swagger.json \
         https://raw.githubusercontent.com/kubernetes/kubernetes/v{{VERSION}}/api/openapi-spec/swagger.json
 
 # Patch swagger schema for upstream bugs
 swagger-patch:
     #!/usr/bin/env bash
     set -exuo pipefail
-    cd openapi
+    cd k8s-pb-codegen/openapi
     jq -f patches/patch-nonexistent-gvk.jq < swagger.json > swagger-patched.json
     mv swagger-patched.json swagger.json
 
@@ -50,17 +50,18 @@ swagger-patch:
 swagger-transform:
     #!/usr/bin/env bash
     set -exuo pipefail
-    cd openapi
+    cd k8s-pb-codegen/openapi
     jq -f list-resources.jq < swagger.json > api-resources.json
 
 # Download and generate all swagger dependent files
 swagger: swagger-dl swagger-patch swagger-transform
 
 # Build a FileDescriptorSet for custom code generation
-build-fds:
+codegen-fds:
     #!/usr/bin/env bash
     set -exuo pipefail
     shopt -s globstar
+    cd k8s-pb-codegen
     protoc \
         --include_imports \
         --include_source_info \
@@ -69,9 +70,8 @@ build-fds:
         ./protos/**/*.proto
 
 # Generate the library code from completed swagger and protos
-build: build-fds
+codegen: codegen-fds
     #!/usr/bin/env bash
     set -exuo pipefail
     rm -rf out/ && mkdir out
-    touch justfile
-    cargo build
+    cd k8s-pb-codegen && cargo run

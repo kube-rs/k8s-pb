@@ -28,11 +28,11 @@ Results of this step is committed already. But to run, invoke `just swagger`.
 ## Building
 To build the [out](./out) directory from [build.rs](./build.rs) we will use the outputs from the `swagger`, `protobuf`, and `protobuf-fds` targets.
 
-Results of this step is committed already. But to run, invoke `just build`
+Results of this step is committed already. But to run, invoke `just codegen`
 
 ### Hack
 
-Generate a [`FileDescriptorSet`] containing all of the input files wih `just build-fds`
+Generate a [`FileDescriptorSet`] containing all of the input files wih `just codegen-fds`
 
 
 ## OpenAPI Strategy
