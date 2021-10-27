@@ -38,7 +38,8 @@
         "paths": [
           "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations",
           "/apis/admissionregistration.k8s.io/v1/mutatingwebhookconfigurations/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "validatingwebhookconfigurations",
@@ -76,7 +77,8 @@
         "paths": [
           "/apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations",
           "/apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -119,6 +121,9 @@
         "paths": [
           "/apis/apiextensions.k8s.io/v1/customresourcedefinitions",
           "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -191,6 +196,9 @@
         "paths": [
           "/apis/apiregistration.k8s.io/v1/apiservices",
           "/apis/apiregistration.k8s.io/v1/apiservices/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -267,7 +275,8 @@
           "/apis/apps/v1/controllerrevisions",
           "/apis/apps/v1/namespaces/{namespace}/controllerrevisions",
           "/apis/apps/v1/namespaces/{namespace}/controllerrevisions/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "daemonsets",
@@ -309,6 +318,9 @@
           "/apis/apps/v1/daemonsets",
           "/apis/apps/v1/namespaces/{namespace}/daemonsets",
           "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -380,6 +392,10 @@
           "/apis/apps/v1/deployments",
           "/apis/apps/v1/namespaces/{namespace}/deployments",
           "/apis/apps/v1/namespaces/{namespace}/deployments/{name}"
+        ],
+        "subresources": [
+          "scale",
+          "status"
         ]
       },
       {
@@ -480,6 +496,10 @@
           "/apis/apps/v1/replicasets",
           "/apis/apps/v1/namespaces/{namespace}/replicasets",
           "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}"
+        ],
+        "subresources": [
+          "scale",
+          "status"
         ]
       },
       {
@@ -580,6 +600,10 @@
           "/apis/apps/v1/statefulsets",
           "/apis/apps/v1/namespaces/{namespace}/statefulsets",
           "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}"
+        ],
+        "subresources": [
+          "scale",
+          "status"
         ]
       },
       {
@@ -668,7 +692,8 @@
         },
         "paths": [
           "/apis/authentication.k8s.io/v1/tokenreviews"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -698,7 +723,8 @@
         },
         "paths": [
           "/apis/authorization.k8s.io/v1/namespaces/{namespace}/localsubjectaccessreviews"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "selfsubjectaccessreviews",
@@ -723,7 +749,8 @@
         },
         "paths": [
           "/apis/authorization.k8s.io/v1/selfsubjectaccessreviews"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "selfsubjectrulesreviews",
@@ -748,7 +775,8 @@
         },
         "paths": [
           "/apis/authorization.k8s.io/v1/selfsubjectrulesreviews"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "subjectaccessreviews",
@@ -773,7 +801,8 @@
         },
         "paths": [
           "/apis/authorization.k8s.io/v1/subjectaccessreviews"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -820,6 +849,9 @@
           "/apis/autoscaling/v1/horizontalpodautoscalers",
           "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
           "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -896,6 +928,9 @@
           "/apis/autoscaling/v2beta1/horizontalpodautoscalers",
           "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers",
           "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -972,6 +1007,9 @@
           "/apis/autoscaling/v2beta2/horizontalpodautoscalers",
           "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers",
           "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1048,6 +1086,9 @@
           "/apis/batch/v1/cronjobs",
           "/apis/batch/v1/namespaces/{namespace}/cronjobs",
           "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1119,6 +1160,9 @@
           "/apis/batch/v1/jobs",
           "/apis/batch/v1/namespaces/{namespace}/jobs",
           "/apis/batch/v1/namespaces/{namespace}/jobs/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1195,6 +1239,9 @@
           "/apis/batch/v1beta1/cronjobs",
           "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs",
           "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1267,6 +1314,10 @@
         "paths": [
           "/apis/certificates.k8s.io/v1/certificatesigningrequests",
           "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}"
+        ],
+        "subresources": [
+          "approval",
+          "status"
         ]
       },
       {
@@ -1372,7 +1423,8 @@
           "/apis/coordination.k8s.io/v1/leases",
           "/apis/coordination.k8s.io/v1/namespaces/{namespace}/leases",
           "/apis/coordination.k8s.io/v1/namespaces/{namespace}/leases/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -1419,7 +1471,8 @@
           "/apis/discovery.k8s.io/v1/endpointslices",
           "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices",
           "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -1466,7 +1519,8 @@
           "/apis/discovery.k8s.io/v1beta1/endpointslices",
           "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices",
           "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -1513,7 +1567,8 @@
           "/apis/events.k8s.io/v1/events",
           "/apis/events.k8s.io/v1/namespaces/{namespace}/events",
           "/apis/events.k8s.io/v1/namespaces/{namespace}/events/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -1560,7 +1615,8 @@
           "/apis/events.k8s.io/v1beta1/events",
           "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events",
           "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -1603,6 +1659,9 @@
         "paths": [
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas",
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1670,6 +1729,9 @@
         "paths": [
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations",
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1742,6 +1804,9 @@
         "paths": [
           "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions",
           "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1814,7 +1879,8 @@
         "paths": [
           "/apis/networking.k8s.io/v1/ingressclasses",
           "/apis/networking.k8s.io/v1/ingressclasses/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "ingresses",
@@ -1856,6 +1922,9 @@
           "/apis/networking.k8s.io/v1/ingresses",
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses",
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -1927,7 +1996,8 @@
           "/apis/networking.k8s.io/v1/networkpolicies",
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies",
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -1970,7 +2040,8 @@
         "paths": [
           "/apis/node.k8s.io/v1/runtimeclasses",
           "/apis/node.k8s.io/v1/runtimeclasses/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2013,7 +2084,8 @@
         "paths": [
           "/apis/node.k8s.io/v1alpha1/runtimeclasses",
           "/apis/node.k8s.io/v1alpha1/runtimeclasses/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2056,7 +2128,8 @@
         "paths": [
           "/apis/node.k8s.io/v1beta1/runtimeclasses",
           "/apis/node.k8s.io/v1beta1/runtimeclasses/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2103,6 +2176,9 @@
           "/apis/policy/v1/poddisruptionbudgets",
           "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets",
           "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -2179,6 +2255,9 @@
           "/apis/policy/v1beta1/poddisruptionbudgets",
           "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets",
           "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -2246,7 +2325,8 @@
         "paths": [
           "/apis/policy/v1beta1/podsecuritypolicies",
           "/apis/policy/v1beta1/podsecuritypolicies/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2289,7 +2369,8 @@
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings",
           "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "clusterroles",
@@ -2327,7 +2408,8 @@
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1/clusterroles",
           "/apis/rbac.authorization.k8s.io/v1/clusterroles/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "rolebindings",
@@ -2369,7 +2451,8 @@
           "/apis/rbac.authorization.k8s.io/v1/rolebindings",
           "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings",
           "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "roles",
@@ -2411,7 +2494,8 @@
           "/apis/rbac.authorization.k8s.io/v1/roles",
           "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles",
           "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2454,7 +2538,8 @@
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings",
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "clusterroles",
@@ -2492,7 +2577,8 @@
         "paths": [
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles",
           "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "rolebindings",
@@ -2534,7 +2620,8 @@
           "/apis/rbac.authorization.k8s.io/v1alpha1/rolebindings",
           "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings",
           "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "roles",
@@ -2576,7 +2663,8 @@
           "/apis/rbac.authorization.k8s.io/v1alpha1/roles",
           "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles",
           "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2619,7 +2707,8 @@
         "paths": [
           "/apis/scheduling.k8s.io/v1/priorityclasses",
           "/apis/scheduling.k8s.io/v1/priorityclasses/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2662,7 +2751,8 @@
         "paths": [
           "/apis/scheduling.k8s.io/v1alpha1/priorityclasses",
           "/apis/scheduling.k8s.io/v1alpha1/priorityclasses/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2705,7 +2795,8 @@
         "paths": [
           "/apis/storage.k8s.io/v1/csidrivers",
           "/apis/storage.k8s.io/v1/csidrivers/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "csinodes",
@@ -2743,7 +2834,8 @@
         "paths": [
           "/apis/storage.k8s.io/v1/csinodes",
           "/apis/storage.k8s.io/v1/csinodes/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "storageclasses",
@@ -2781,7 +2873,8 @@
         "paths": [
           "/apis/storage.k8s.io/v1/storageclasses",
           "/apis/storage.k8s.io/v1/storageclasses/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "volumeattachments",
@@ -2819,6 +2912,9 @@
         "paths": [
           "/apis/storage.k8s.io/v1/volumeattachments",
           "/apis/storage.k8s.io/v1/volumeattachments/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -2895,7 +2991,8 @@
           "/apis/storage.k8s.io/v1alpha1/csistoragecapacities",
           "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities",
           "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "volumeattachments",
@@ -2933,7 +3030,8 @@
         "paths": [
           "/apis/storage.k8s.io/v1alpha1/volumeattachments",
           "/apis/storage.k8s.io/v1alpha1/volumeattachments/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -2980,7 +3078,8 @@
           "/apis/storage.k8s.io/v1beta1/csistoragecapacities",
           "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities",
           "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities/{name}"
-        ]
+        ],
+        "subresources": []
       }
     ]
   },
@@ -3010,7 +3109,8 @@
         },
         "paths": [
           "/api/v1/namespaces/{namespace}/bindings"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "componentstatuses",
@@ -3038,7 +3138,8 @@
         "paths": [
           "/api/v1/componentstatuses",
           "/api/v1/componentstatuses/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "configmaps",
@@ -3080,7 +3181,8 @@
           "/api/v1/configmaps",
           "/api/v1/namespaces/{namespace}/configmaps",
           "/api/v1/namespaces/{namespace}/configmaps/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "endpoints",
@@ -3122,7 +3224,8 @@
           "/api/v1/endpoints",
           "/api/v1/namespaces/{namespace}/endpoints",
           "/api/v1/namespaces/{namespace}/endpoints/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "events",
@@ -3164,7 +3267,8 @@
           "/api/v1/events",
           "/api/v1/namespaces/{namespace}/events",
           "/api/v1/namespaces/{namespace}/events/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "limitranges",
@@ -3206,7 +3310,8 @@
           "/api/v1/limitranges",
           "/api/v1/namespaces/{namespace}/limitranges",
           "/api/v1/namespaces/{namespace}/limitranges/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "namespaces",
@@ -3242,6 +3347,10 @@
         "paths": [
           "/api/v1/namespaces",
           "/api/v1/namespaces/{name}"
+        ],
+        "subresources": [
+          "finalize",
+          "status"
         ]
       },
       {
@@ -3334,6 +3443,10 @@
         "paths": [
           "/api/v1/nodes",
           "/api/v1/nodes/{name}"
+        ],
+        "subresources": [
+          "proxy",
+          "status"
         ]
       },
       {
@@ -3431,6 +3544,9 @@
           "/api/v1/persistentvolumeclaims",
           "/api/v1/namespaces/{namespace}/persistentvolumeclaims",
           "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -3498,6 +3614,9 @@
         "paths": [
           "/api/v1/persistentvolumes",
           "/api/v1/persistentvolumes/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -3569,6 +3688,17 @@
           "/api/v1/pods",
           "/api/v1/namespaces/{namespace}/pods",
           "/api/v1/namespaces/{namespace}/pods/{name}"
+        ],
+        "subresources": [
+          "attach",
+          "binding",
+          "ephemeralcontainers",
+          "eviction",
+          "exec",
+          "log",
+          "portforward",
+          "proxy",
+          "status"
         ]
       },
       {
@@ -3845,7 +3975,8 @@
           "/api/v1/podtemplates",
           "/api/v1/namespaces/{namespace}/podtemplates",
           "/api/v1/namespaces/{namespace}/podtemplates/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "replicationcontrollers",
@@ -3887,6 +4018,10 @@
           "/api/v1/replicationcontrollers",
           "/api/v1/namespaces/{namespace}/replicationcontrollers",
           "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}"
+        ],
+        "subresources": [
+          "scale",
+          "status"
         ]
       },
       {
@@ -3987,6 +4122,9 @@
           "/api/v1/resourcequotas",
           "/api/v1/namespaces/{namespace}/resourcequotas",
           "/api/v1/namespaces/{namespace}/resourcequotas/{name}"
+        ],
+        "subresources": [
+          "status"
         ]
       },
       {
@@ -4058,7 +4196,8 @@
           "/api/v1/secrets",
           "/api/v1/namespaces/{namespace}/secrets",
           "/api/v1/namespaces/{namespace}/secrets/{name}"
-        ]
+        ],
+        "subresources": []
       },
       {
         "name": "serviceaccounts",
@@ -4100,6 +4239,9 @@
           "/api/v1/serviceaccounts",
           "/api/v1/namespaces/{namespace}/serviceaccounts",
           "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
+        ],
+        "subresources": [
+          "token"
         ]
       },
       {
@@ -4165,6 +4307,10 @@
           "/api/v1/services",
           "/api/v1/namespaces/{namespace}/services",
           "/api/v1/namespaces/{namespace}/services/{name}"
+        ],
+        "subresources": [
+          "proxy",
+          "status"
         ]
       },
       {

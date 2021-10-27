@@ -99,5 +99,16 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
       ),
       paths: (map(.path) | unique | sort_by(length)),
     })
+    # Add names of subresources without the resource prefix
+    | [
+      ([.[] | select(.subresource) | .name]) as $subresources
+      | .[]
+      | if .subresource then
+          .
+        else
+          (.name + "/") as $parent
+          | . + {subresources: [$subresources | .[] | select(. | startswith($parent)) | sub($parent; "")]}
+        end
+    ]
   )
 })
