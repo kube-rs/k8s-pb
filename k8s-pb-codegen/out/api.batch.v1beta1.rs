@@ -114,4 +114,3 @@ pub struct JobTemplateSpec {
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<super::v1::JobSpec>,
 }
-// TODO generics for cronjobs batch/v1beta1

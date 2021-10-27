@@ -737,8 +737,3 @@ pub struct StatefulSetUpdateStrategy {
     #[prost(message, optional, tag="2")]
     pub rolling_update: ::core::option::Option<RollingUpdateStatefulSetStrategy>,
 }
-// TODO generics for controllerrevisions apps/v1
-// TODO generics for daemonsets apps/v1
-// TODO generics for deployments apps/v1
-// TODO generics for replicasets apps/v1
-// TODO generics for statefulsets apps/v1

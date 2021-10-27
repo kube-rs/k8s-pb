@@ -483,4 +483,3 @@ pub struct ResourceMetricStatus {
     #[prost(message, optional, tag="2")]
     pub current: ::core::option::Option<MetricValueStatus>,
 }
-// TODO generics for horizontalpodautoscalers autoscaling/v2beta2

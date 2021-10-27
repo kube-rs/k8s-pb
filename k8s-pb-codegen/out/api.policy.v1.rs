@@ -123,4 +123,3 @@ pub struct PodDisruptionBudgetStatus {
     #[prost(message, repeated, tag="7")]
     pub conditions: ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
-// TODO generics for poddisruptionbudgets policy/v1

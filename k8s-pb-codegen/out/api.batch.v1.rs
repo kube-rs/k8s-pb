@@ -348,5 +348,3 @@ pub struct UncountedTerminatedPods {
     #[prost(string, repeated, tag="2")]
     pub failed: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-// TODO generics for cronjobs batch/v1
-// TODO generics for jobs batch/v1

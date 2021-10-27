@@ -415,5 +415,3 @@ pub struct SupplementalGroupsStrategyOptions {
     #[prost(message, repeated, tag="2")]
     pub ranges: ::prost::alloc::vec::Vec<IdRange>,
 }
-// TODO generics for poddisruptionbudgets policy/v1beta1
-// TODO generics for podsecuritypolicies policy/v1beta1

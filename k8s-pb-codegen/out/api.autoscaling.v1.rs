@@ -482,4 +482,3 @@ pub struct ScaleStatus {
     #[prost(string, optional, tag="2")]
     pub selector: ::core::option::Option<::prost::alloc::string::String>,
 }
-// TODO generics for horizontalpodautoscalers autoscaling/v1
