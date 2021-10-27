@@ -5,11 +5,11 @@
       {
         "name": "mutatingwebhookconfigurations",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "admissionregistration.k8s.io/v1",
         "group": "admissionregistration.k8s.io",
         "version": "v1",
         "kind": "MutatingWebhookConfiguration",
+        "proto": "api.admissionregistration.v1.MutatingWebhookConfiguration",
         "rust": "api::admissionregistration::v1::MutatingWebhookConfiguration",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -44,11 +44,11 @@
       {
         "name": "validatingwebhookconfigurations",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "admissionregistration.k8s.io/v1",
         "group": "admissionregistration.k8s.io",
         "version": "v1",
         "kind": "ValidatingWebhookConfiguration",
+        "proto": "api.admissionregistration.v1.ValidatingWebhookConfiguration",
         "rust": "api::admissionregistration::v1::ValidatingWebhookConfiguration",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -88,11 +88,11 @@
       {
         "name": "customresourcedefinitions",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "apiextensions.k8s.io/v1",
         "group": "apiextensions.k8s.io",
         "version": "v1",
         "kind": "CustomResourceDefinition",
+        "proto": "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition",
         "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec",
@@ -123,36 +123,19 @@
           "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "customresourcedefinitions/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "apiextensions.k8s.io/v1",
-        "group": "apiextensions.k8s.io",
-        "version": "v1",
-        "kind": "CustomResourceDefinition",
-        "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec",
-        "status": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionStatus",
-        "condition": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -163,11 +146,11 @@
       {
         "name": "apiservices",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "apiregistration.k8s.io/v1",
         "group": "apiregistration.k8s.io",
         "version": "v1",
         "kind": "APIService",
+        "proto": "kube_aggregator.pkg.apis.apiregistration.v1.APIService",
         "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec",
@@ -198,36 +181,19 @@
           "/apis/apiregistration.k8s.io/v1/apiservices/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "apiservices/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "apiregistration.k8s.io/v1",
-        "group": "apiregistration.k8s.io",
-        "version": "v1",
-        "kind": "APIService",
-        "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec",
-        "status": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceStatus",
-        "condition": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apiregistration.k8s.io/v1/apiservices/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apiregistration.k8s.io/v1/apiservices/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -238,11 +204,11 @@
       {
         "name": "controllerrevisions",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "ControllerRevision",
+        "proto": "api.apps.v1.ControllerRevision",
         "rust": "api::apps::v1::ControllerRevision",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -281,11 +247,11 @@
       {
         "name": "daemonsets",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "DaemonSet",
+        "proto": "api.apps.v1.DaemonSet",
         "rust": "api::apps::v1::DaemonSet",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::apps::v1::DaemonSetSpec",
@@ -320,46 +286,29 @@
           "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "daemonsets/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "apps",
-        "version": "v1",
-        "kind": "DaemonSet",
-        "rust": "api::apps::v1::DaemonSet",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::apps::v1::DaemonSetSpec",
-        "status": "api::apps::v1::DaemonSetStatus",
-        "condition": "api::apps::v1::DaemonSetCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/daemonsets/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "deployments",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "Deployment",
+        "proto": "api.apps.v1.Deployment",
         "rust": "api::apps::v1::Deployment",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::apps::v1::DeploymentSpec",
@@ -394,76 +343,42 @@
           "/apis/apps/v1/namespaces/{namespace}/deployments/{name}"
         ],
         "subresources": [
-          "scale",
-          "status"
-        ]
-      },
-      {
-        "name": "deployments/scale",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "autoscaling",
-        "version": "v1",
-        "kind": "Scale",
-        "rust": "api::autoscaling::v1::Scale",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v1::ScaleSpec",
-        "status": "api::autoscaling::v1::ScaleStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale"
-        ]
-      },
-      {
-        "name": "deployments/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "apps",
-        "version": "v1",
-        "kind": "Deployment",
-        "rust": "api::apps::v1::Deployment",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::apps::v1::DeploymentSpec",
-        "status": "api::apps::v1::DeploymentStatus",
-        "condition": "api::apps::v1::DeploymentCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/status"
+          {
+            "name": "scale",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/deployments/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "replicasets",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "ReplicaSet",
+        "proto": "api.apps.v1.ReplicaSet",
         "rust": "api::apps::v1::ReplicaSet",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::apps::v1::ReplicaSetSpec",
@@ -498,76 +413,42 @@
           "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}"
         ],
         "subresources": [
-          "scale",
-          "status"
-        ]
-      },
-      {
-        "name": "replicasets/scale",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "autoscaling",
-        "version": "v1",
-        "kind": "Scale",
-        "rust": "api::autoscaling::v1::Scale",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v1::ScaleSpec",
-        "status": "api::autoscaling::v1::ScaleStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/scale"
-        ]
-      },
-      {
-        "name": "replicasets/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "apps",
-        "version": "v1",
-        "kind": "ReplicaSet",
-        "rust": "api::apps::v1::ReplicaSet",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::apps::v1::ReplicaSetSpec",
-        "status": "api::apps::v1::ReplicaSetStatus",
-        "condition": "api::apps::v1::ReplicaSetCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/status"
+          {
+            "name": "scale",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/scale"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "statefulsets",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "apps/v1",
         "group": "apps",
         "version": "v1",
         "kind": "StatefulSet",
+        "proto": "api.apps.v1.StatefulSet",
         "rust": "api::apps::v1::StatefulSet",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::apps::v1::StatefulSetSpec",
@@ -602,66 +483,32 @@
           "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}"
         ],
         "subresources": [
-          "scale",
-          "status"
-        ]
-      },
-      {
-        "name": "statefulsets/scale",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "autoscaling",
-        "version": "v1",
-        "kind": "Scale",
-        "rust": "api::autoscaling::v1::Scale",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v1::ScaleSpec",
-        "status": "api::autoscaling::v1::ScaleStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/scale"
-        ]
-      },
-      {
-        "name": "statefulsets/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "apps/v1",
-        "group": "apps",
-        "version": "v1",
-        "kind": "StatefulSet",
-        "rust": "api::apps::v1::StatefulSet",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::apps::v1::StatefulSetSpec",
-        "status": "api::apps::v1::StatefulSetStatus",
-        "condition": "api::apps::v1::StatefulSetCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/status"
+          {
+            "name": "scale",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/scale"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/apps/v1/namespaces/{namespace}/statefulsets/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -672,11 +519,11 @@
       {
         "name": "tokenreviews",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "authentication.k8s.io/v1",
         "group": "authentication.k8s.io",
         "version": "v1",
         "kind": "TokenReview",
+        "proto": "api.authentication.v1.TokenReview",
         "rust": "api::authentication::v1::TokenReview",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::authentication::v1::TokenReviewSpec",
@@ -703,11 +550,11 @@
       {
         "name": "localsubjectaccessreviews",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "LocalSubjectAccessReview",
+        "proto": "api.authorization.v1.LocalSubjectAccessReview",
         "rust": "api::authorization::v1::LocalSubjectAccessReview",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::authorization::v1::SubjectAccessReviewSpec",
@@ -729,11 +576,11 @@
       {
         "name": "selfsubjectaccessreviews",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "SelfSubjectAccessReview",
+        "proto": "api.authorization.v1.SelfSubjectAccessReview",
         "rust": "api::authorization::v1::SelfSubjectAccessReview",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::authorization::v1::SelfSubjectAccessReviewSpec",
@@ -755,11 +602,11 @@
       {
         "name": "selfsubjectrulesreviews",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "SelfSubjectRulesReview",
+        "proto": "api.authorization.v1.SelfSubjectRulesReview",
         "rust": "api::authorization::v1::SelfSubjectRulesReview",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::authorization::v1::SelfSubjectRulesReviewSpec",
@@ -781,11 +628,11 @@
       {
         "name": "subjectaccessreviews",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "authorization.k8s.io/v1",
         "group": "authorization.k8s.io",
         "version": "v1",
         "kind": "SubjectAccessReview",
+        "proto": "api.authorization.v1.SubjectAccessReview",
         "rust": "api::authorization::v1::SubjectAccessReview",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::authorization::v1::SubjectAccessReviewSpec",
@@ -812,11 +659,11 @@
       {
         "name": "horizontalpodautoscalers",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "autoscaling/v1",
         "group": "autoscaling",
         "version": "v1",
         "kind": "HorizontalPodAutoscaler",
+        "proto": "api.autoscaling.v1.HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v1::HorizontalPodAutoscaler",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::autoscaling::v1::HorizontalPodAutoscalerSpec",
@@ -851,36 +698,19 @@
           "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "horizontalpodautoscalers/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "autoscaling/v1",
-        "group": "autoscaling",
-        "version": "v1",
-        "kind": "HorizontalPodAutoscaler",
-        "rust": "api::autoscaling::v1::HorizontalPodAutoscaler",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v1::HorizontalPodAutoscalerSpec",
-        "status": "api::autoscaling::v1::HorizontalPodAutoscalerStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -891,11 +721,11 @@
       {
         "name": "horizontalpodautoscalers",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "autoscaling/v2beta1",
         "group": "autoscaling",
         "version": "v2beta1",
         "kind": "HorizontalPodAutoscaler",
+        "proto": "api.autoscaling.v2beta1.HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v2beta1::HorizontalPodAutoscaler",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::autoscaling::v2beta1::HorizontalPodAutoscalerSpec",
@@ -930,36 +760,19 @@
           "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "horizontalpodautoscalers/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "autoscaling/v2beta1",
-        "group": "autoscaling",
-        "version": "v2beta1",
-        "kind": "HorizontalPodAutoscaler",
-        "rust": "api::autoscaling::v2beta1::HorizontalPodAutoscaler",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v2beta1::HorizontalPodAutoscalerSpec",
-        "status": "api::autoscaling::v2beta1::HorizontalPodAutoscalerStatus",
-        "condition": "api::autoscaling::v2beta1::HorizontalPodAutoscalerCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/autoscaling/v2beta1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -970,11 +783,11 @@
       {
         "name": "horizontalpodautoscalers",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "autoscaling/v2beta2",
         "group": "autoscaling",
         "version": "v2beta2",
         "kind": "HorizontalPodAutoscaler",
+        "proto": "api.autoscaling.v2beta2.HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v2beta2::HorizontalPodAutoscaler",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::autoscaling::v2beta2::HorizontalPodAutoscalerSpec",
@@ -1009,36 +822,19 @@
           "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "horizontalpodautoscalers/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "autoscaling/v2beta2",
-        "group": "autoscaling",
-        "version": "v2beta2",
-        "kind": "HorizontalPodAutoscaler",
-        "rust": "api::autoscaling::v2beta2::HorizontalPodAutoscaler",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v2beta2::HorizontalPodAutoscalerSpec",
-        "status": "api::autoscaling::v2beta2::HorizontalPodAutoscalerStatus",
-        "condition": "api::autoscaling::v2beta2::HorizontalPodAutoscalerCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/autoscaling/v2beta2/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -1049,11 +845,11 @@
       {
         "name": "cronjobs",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
         "kind": "CronJob",
+        "proto": "api.batch.v1.CronJob",
         "rust": "api::batch::v1::CronJob",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::batch::v1::CronJobSpec",
@@ -1088,46 +884,29 @@
           "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "cronjobs/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "batch/v1",
-        "group": "batch",
-        "version": "v1",
-        "kind": "CronJob",
-        "rust": "api::batch::v1::CronJob",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::batch::v1::CronJobSpec",
-        "status": "api::batch::v1::CronJobStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/batch/v1/namespaces/{namespace}/cronjobs/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "jobs",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "batch/v1",
         "group": "batch",
         "version": "v1",
         "kind": "Job",
+        "proto": "api.batch.v1.Job",
         "rust": "api::batch::v1::Job",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::batch::v1::JobSpec",
@@ -1162,36 +941,19 @@
           "/apis/batch/v1/namespaces/{namespace}/jobs/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "jobs/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "batch/v1",
-        "group": "batch",
-        "version": "v1",
-        "kind": "Job",
-        "rust": "api::batch::v1::Job",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::batch::v1::JobSpec",
-        "status": "api::batch::v1::JobStatus",
-        "condition": "api::batch::v1::JobCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/batch/v1/namespaces/{namespace}/jobs/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/batch/v1/namespaces/{namespace}/jobs/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -1202,11 +964,11 @@
       {
         "name": "cronjobs",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "batch/v1beta1",
         "group": "batch",
         "version": "v1beta1",
         "kind": "CronJob",
+        "proto": "api.batch.v1beta1.CronJob",
         "rust": "api::batch::v1beta1::CronJob",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::batch::v1beta1::CronJobSpec",
@@ -1241,36 +1003,19 @@
           "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "cronjobs/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "batch/v1beta1",
-        "group": "batch",
-        "version": "v1beta1",
-        "kind": "CronJob",
-        "rust": "api::batch::v1beta1::CronJob",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::batch::v1beta1::CronJobSpec",
-        "status": "api::batch::v1beta1::CronJobStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/batch/v1beta1/namespaces/{namespace}/cronjobs/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -1281,11 +1026,11 @@
       {
         "name": "certificatesigningrequests",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "certificates.k8s.io/v1",
         "group": "certificates.k8s.io",
         "version": "v1",
         "kind": "CertificateSigningRequest",
+        "proto": "api.certificates.v1.CertificateSigningRequest",
         "rust": "api::certificates::v1::CertificateSigningRequest",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::certificates::v1::CertificateSigningRequestSpec",
@@ -1316,66 +1061,32 @@
           "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}"
         ],
         "subresources": [
-          "approval",
-          "status"
-        ]
-      },
-      {
-        "name": "certificatesigningrequests/approval",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "certificates.k8s.io/v1",
-        "group": "certificates.k8s.io",
-        "version": "v1",
-        "kind": "CertificateSigningRequest",
-        "rust": "api::certificates::v1::CertificateSigningRequest",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::certificates::v1::CertificateSigningRequestSpec",
-        "status": "api::certificates::v1::CertificateSigningRequestStatus",
-        "condition": "api::certificates::v1::CertificateSigningRequestCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval"
-        ]
-      },
-      {
-        "name": "certificatesigningrequests/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "certificates.k8s.io/v1",
-        "group": "certificates.k8s.io",
-        "version": "v1",
-        "kind": "CertificateSigningRequest",
-        "rust": "api::certificates::v1::CertificateSigningRequest",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::certificates::v1::CertificateSigningRequestSpec",
-        "status": "api::certificates::v1::CertificateSigningRequestStatus",
-        "condition": "api::certificates::v1::CertificateSigningRequestCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status"
+          {
+            "name": "approval",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/approval"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/certificates.k8s.io/v1/certificatesigningrequests/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -1386,11 +1097,11 @@
       {
         "name": "leases",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "coordination.k8s.io/v1",
         "group": "coordination.k8s.io",
         "version": "v1",
         "kind": "Lease",
+        "proto": "api.coordination.v1.Lease",
         "rust": "api::coordination::v1::Lease",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::coordination::v1::LeaseSpec",
@@ -1434,11 +1145,11 @@
       {
         "name": "endpointslices",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "discovery.k8s.io/v1",
         "group": "discovery.k8s.io",
         "version": "v1",
         "kind": "EndpointSlice",
+        "proto": "api.discovery.v1.EndpointSlice",
         "rust": "api::discovery::v1::EndpointSlice",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -1482,11 +1193,11 @@
       {
         "name": "endpointslices",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "discovery.k8s.io/v1beta1",
         "group": "discovery.k8s.io",
         "version": "v1beta1",
         "kind": "EndpointSlice",
+        "proto": "api.discovery.v1beta1.EndpointSlice",
         "rust": "api::discovery::v1beta1::EndpointSlice",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -1530,11 +1241,11 @@
       {
         "name": "events",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "events.k8s.io/v1",
         "group": "events.k8s.io",
         "version": "v1",
         "kind": "Event",
+        "proto": "api.events.v1.Event",
         "rust": "api::events::v1::Event",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -1578,11 +1289,11 @@
       {
         "name": "events",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "events.k8s.io/v1beta1",
         "group": "events.k8s.io",
         "version": "v1beta1",
         "kind": "Event",
+        "proto": "api.events.v1beta1.Event",
         "rust": "api::events::v1beta1::Event",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -1626,11 +1337,11 @@
       {
         "name": "flowschemas",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
         "group": "flowcontrol.apiserver.k8s.io",
         "version": "v1beta1",
         "kind": "FlowSchema",
+        "proto": "api.flowcontrol.v1beta1.FlowSchema",
         "rust": "api::flowcontrol::v1beta1::FlowSchema",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::flowcontrol::v1beta1::FlowSchemaSpec",
@@ -1661,46 +1372,29 @@
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "flowschemas/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
-        "group": "flowcontrol.apiserver.k8s.io",
-        "version": "v1beta1",
-        "kind": "FlowSchema",
-        "rust": "api::flowcontrol::v1beta1::FlowSchema",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::flowcontrol::v1beta1::FlowSchemaSpec",
-        "status": "api::flowcontrol::v1beta1::FlowSchemaStatus",
-        "condition": "api::flowcontrol::v1beta1::FlowSchemaCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "prioritylevelconfigurations",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
         "group": "flowcontrol.apiserver.k8s.io",
         "version": "v1beta1",
         "kind": "PriorityLevelConfiguration",
+        "proto": "api.flowcontrol.v1beta1.PriorityLevelConfiguration",
         "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::flowcontrol::v1beta1::PriorityLevelConfigurationSpec",
@@ -1731,36 +1425,19 @@
           "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "prioritylevelconfigurations/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
-        "group": "flowcontrol.apiserver.k8s.io",
-        "version": "v1beta1",
-        "kind": "PriorityLevelConfiguration",
-        "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::flowcontrol::v1beta1::PriorityLevelConfigurationSpec",
-        "status": "api::flowcontrol::v1beta1::PriorityLevelConfigurationStatus",
-        "condition": "api::flowcontrol::v1beta1::PriorityLevelConfigurationCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -1771,11 +1448,11 @@
       {
         "name": "storageversions",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
         "group": "internal.apiserver.k8s.io",
         "version": "v1alpha1",
         "kind": "StorageVersion",
+        "proto": "api.apiserverinternal.v1alpha1.StorageVersion",
         "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::apiserverinternal::v1alpha1::StorageVersionSpec",
@@ -1806,36 +1483,19 @@
           "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "storageversions/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
-        "group": "internal.apiserver.k8s.io",
-        "version": "v1alpha1",
-        "kind": "StorageVersion",
-        "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::apiserverinternal::v1alpha1::StorageVersionSpec",
-        "status": "api::apiserverinternal::v1alpha1::StorageVersionStatus",
-        "condition": "api::apiserverinternal::v1alpha1::StorageVersionCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -1846,11 +1506,11 @@
       {
         "name": "ingressclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "IngressClass",
+        "proto": "api.networking.v1.IngressClass",
         "rust": "api::networking::v1::IngressClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::networking::v1::IngressClassSpec",
@@ -1885,11 +1545,11 @@
       {
         "name": "ingresses",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "Ingress",
+        "proto": "api.networking.v1.Ingress",
         "rust": "api::networking::v1::Ingress",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::networking::v1::IngressSpec",
@@ -1924,46 +1584,29 @@
           "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "ingresses/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "networking.k8s.io/v1",
-        "group": "networking.k8s.io",
-        "version": "v1",
-        "kind": "Ingress",
-        "rust": "api::networking::v1::Ingress",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::networking::v1::IngressSpec",
-        "status": "api::networking::v1::IngressStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "networkpolicies",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "networking.k8s.io/v1",
         "group": "networking.k8s.io",
         "version": "v1",
         "kind": "NetworkPolicy",
+        "proto": "api.networking.v1.NetworkPolicy",
         "rust": "api::networking::v1::NetworkPolicy",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::networking::v1::NetworkPolicySpec",
@@ -2007,11 +1650,11 @@
       {
         "name": "runtimeclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "node.k8s.io/v1",
         "group": "node.k8s.io",
         "version": "v1",
         "kind": "RuntimeClass",
+        "proto": "api.node.v1.RuntimeClass",
         "rust": "api::node::v1::RuntimeClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2051,11 +1694,11 @@
       {
         "name": "runtimeclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "node.k8s.io/v1alpha1",
         "group": "node.k8s.io",
         "version": "v1alpha1",
         "kind": "RuntimeClass",
+        "proto": "api.node.v1alpha1.RuntimeClass",
         "rust": "api::node::v1alpha1::RuntimeClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::node::v1alpha1::RuntimeClassSpec",
@@ -2095,11 +1738,11 @@
       {
         "name": "runtimeclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "node.k8s.io/v1beta1",
         "group": "node.k8s.io",
         "version": "v1beta1",
         "kind": "RuntimeClass",
+        "proto": "api.node.v1beta1.RuntimeClass",
         "rust": "api::node::v1beta1::RuntimeClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2139,11 +1782,11 @@
       {
         "name": "poddisruptionbudgets",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "policy/v1",
         "group": "policy",
         "version": "v1",
         "kind": "PodDisruptionBudget",
+        "proto": "api.policy.v1.PodDisruptionBudget",
         "rust": "api::policy::v1::PodDisruptionBudget",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::policy::v1::PodDisruptionBudgetSpec",
@@ -2178,36 +1821,19 @@
           "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "poddisruptionbudgets/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "policy/v1",
-        "group": "policy",
-        "version": "v1",
-        "kind": "PodDisruptionBudget",
-        "rust": "api::policy::v1::PodDisruptionBudget",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::policy::v1::PodDisruptionBudgetSpec",
-        "status": "api::policy::v1::PodDisruptionBudgetStatus",
-        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -2218,11 +1844,11 @@
       {
         "name": "poddisruptionbudgets",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "policy/v1beta1",
         "group": "policy",
         "version": "v1beta1",
         "kind": "PodDisruptionBudget",
+        "proto": "api.policy.v1beta1.PodDisruptionBudget",
         "rust": "api::policy::v1beta1::PodDisruptionBudget",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::policy::v1beta1::PodDisruptionBudgetSpec",
@@ -2257,46 +1883,29 @@
           "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "poddisruptionbudgets/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "policy/v1beta1",
-        "group": "policy",
-        "version": "v1beta1",
-        "kind": "PodDisruptionBudget",
-        "rust": "api::policy::v1beta1::PodDisruptionBudget",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::policy::v1beta1::PodDisruptionBudgetSpec",
-        "status": "api::policy::v1beta1::PodDisruptionBudgetStatus",
-        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "podsecuritypolicies",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "policy/v1beta1",
         "group": "policy",
         "version": "v1beta1",
         "kind": "PodSecurityPolicy",
+        "proto": "api.policy.v1beta1.PodSecurityPolicy",
         "rust": "api::policy::v1beta1::PodSecurityPolicy",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::policy::v1beta1::PodSecurityPolicySpec",
@@ -2336,11 +1945,11 @@
       {
         "name": "clusterrolebindings",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "ClusterRoleBinding",
+        "proto": "api.rbac.v1.ClusterRoleBinding",
         "rust": "api::rbac::v1::ClusterRoleBinding",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2375,11 +1984,11 @@
       {
         "name": "clusterroles",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "ClusterRole",
+        "proto": "api.rbac.v1.ClusterRole",
         "rust": "api::rbac::v1::ClusterRole",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2414,11 +2023,11 @@
       {
         "name": "rolebindings",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "RoleBinding",
+        "proto": "api.rbac.v1.RoleBinding",
         "rust": "api::rbac::v1::RoleBinding",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2457,11 +2066,11 @@
       {
         "name": "roles",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1",
         "kind": "Role",
+        "proto": "api.rbac.v1.Role",
         "rust": "api::rbac::v1::Role",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2505,11 +2114,11 @@
       {
         "name": "clusterrolebindings",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "ClusterRoleBinding",
+        "proto": "api.rbac.v1alpha1.ClusterRoleBinding",
         "rust": "api::rbac::v1alpha1::ClusterRoleBinding",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2544,11 +2153,11 @@
       {
         "name": "clusterroles",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "ClusterRole",
+        "proto": "api.rbac.v1alpha1.ClusterRole",
         "rust": "api::rbac::v1alpha1::ClusterRole",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2583,11 +2192,11 @@
       {
         "name": "rolebindings",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "RoleBinding",
+        "proto": "api.rbac.v1alpha1.RoleBinding",
         "rust": "api::rbac::v1alpha1::RoleBinding",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2626,11 +2235,11 @@
       {
         "name": "roles",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
         "group": "rbac.authorization.k8s.io",
         "version": "v1alpha1",
         "kind": "Role",
+        "proto": "api.rbac.v1alpha1.Role",
         "rust": "api::rbac::v1alpha1::Role",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2674,11 +2283,11 @@
       {
         "name": "priorityclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "scheduling.k8s.io/v1",
         "group": "scheduling.k8s.io",
         "version": "v1",
         "kind": "PriorityClass",
+        "proto": "api.scheduling.v1.PriorityClass",
         "rust": "api::scheduling::v1::PriorityClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2718,11 +2327,11 @@
       {
         "name": "priorityclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
         "group": "scheduling.k8s.io",
         "version": "v1alpha1",
         "kind": "PriorityClass",
+        "proto": "api.scheduling.v1alpha1.PriorityClass",
         "rust": "api::scheduling::v1alpha1::PriorityClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2762,11 +2371,11 @@
       {
         "name": "csidrivers",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "CSIDriver",
+        "proto": "api.storage.v1.CSIDriver",
         "rust": "api::storage::v1::CSIDriver",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::storage::v1::CSIDriverSpec",
@@ -2801,11 +2410,11 @@
       {
         "name": "csinodes",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "CSINode",
+        "proto": "api.storage.v1.CSINode",
         "rust": "api::storage::v1::CSINode",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::storage::v1::CSINodeSpec",
@@ -2840,11 +2449,11 @@
       {
         "name": "storageclasses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "StorageClass",
+        "proto": "api.storage.v1.StorageClass",
         "rust": "api::storage::v1::StorageClass",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2879,11 +2488,11 @@
       {
         "name": "volumeattachments",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1",
         "group": "storage.k8s.io",
         "version": "v1",
         "kind": "VolumeAttachment",
+        "proto": "api.storage.v1.VolumeAttachment",
         "rust": "api::storage::v1::VolumeAttachment",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::storage::v1::VolumeAttachmentSpec",
@@ -2914,36 +2523,19 @@
           "/apis/storage.k8s.io/v1/volumeattachments/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "volumeattachments/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "storage.k8s.io/v1",
-        "group": "storage.k8s.io",
-        "version": "v1",
-        "kind": "VolumeAttachment",
-        "rust": "api::storage::v1::VolumeAttachment",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::storage::v1::VolumeAttachmentSpec",
-        "status": "api::storage::v1::VolumeAttachmentStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/storage.k8s.io/v1/volumeattachments/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/apis/storage.k8s.io/v1/volumeattachments/{name}/status"
+            ]
+          }
         ]
       }
     ]
@@ -2954,11 +2546,11 @@
       {
         "name": "csistoragecapacities",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1alpha1",
         "group": "storage.k8s.io",
         "version": "v1alpha1",
         "kind": "CSIStorageCapacity",
+        "proto": "api.storage.v1alpha1.CSIStorageCapacity",
         "rust": "api::storage::v1alpha1::CSIStorageCapacity",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -2997,11 +2589,11 @@
       {
         "name": "volumeattachments",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1alpha1",
         "group": "storage.k8s.io",
         "version": "v1alpha1",
         "kind": "VolumeAttachment",
+        "proto": "api.storage.v1alpha1.VolumeAttachment",
         "rust": "api::storage::v1alpha1::VolumeAttachment",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::storage::v1alpha1::VolumeAttachmentSpec",
@@ -3041,11 +2633,11 @@
       {
         "name": "csistoragecapacities",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "storage.k8s.io/v1beta1",
         "group": "storage.k8s.io",
         "version": "v1beta1",
         "kind": "CSIStorageCapacity",
+        "proto": "api.storage.v1beta1.CSIStorageCapacity",
         "rust": "api::storage::v1beta1::CSIStorageCapacity",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3089,11 +2681,11 @@
       {
         "name": "bindings",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Binding",
+        "proto": "api.core.v1.Binding",
         "rust": "api::core::v1::Binding",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3115,11 +2707,11 @@
       {
         "name": "componentstatuses",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ComponentStatus",
+        "proto": "api.core.v1.ComponentStatus",
         "rust": "api::core::v1::ComponentStatus",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3144,11 +2736,11 @@
       {
         "name": "configmaps",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ConfigMap",
+        "proto": "api.core.v1.ConfigMap",
         "rust": "api::core::v1::ConfigMap",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3187,11 +2779,11 @@
       {
         "name": "endpoints",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Endpoints",
+        "proto": "api.core.v1.Endpoints",
         "rust": "api::core::v1::Endpoints",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3230,11 +2822,11 @@
       {
         "name": "events",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Event",
+        "proto": "api.core.v1.Event",
         "rust": "api::core::v1::Event",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3273,11 +2865,11 @@
       {
         "name": "limitranges",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "LimitRange",
+        "proto": "api.core.v1.LimitRange",
         "rust": "api::core::v1::LimitRange",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::LimitRangeSpec",
@@ -3316,11 +2908,11 @@
       {
         "name": "namespaces",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Namespace",
+        "proto": "api.core.v1.Namespace",
         "rust": "api::core::v1::Namespace",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::NamespaceSpec",
@@ -3349,72 +2941,40 @@
           "/api/v1/namespaces/{name}"
         ],
         "subresources": [
-          "finalize",
-          "status"
-        ]
-      },
-      {
-        "name": "namespaces/finalize",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Namespace",
-        "rust": "api::core::v1::Namespace",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::NamespaceSpec",
-        "status": "api::core::v1::NamespaceStatus",
-        "condition": "api::core::v1::NamespaceCondition",
-        "verbs": [
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{name}/finalize"
-        ]
-      },
-      {
-        "name": "namespaces/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Namespace",
-        "rust": "api::core::v1::Namespace",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::NamespaceSpec",
-        "status": "api::core::v1::NamespaceStatus",
-        "condition": "api::core::v1::NamespaceCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{name}/status"
+          {
+            "name": "finalize",
+            "scopedVerbs": {
+              "all": [
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{name}/finalize"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "nodes",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Node",
+        "proto": "api.core.v1.Node",
         "rust": "api::core::v1::Node",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::NodeSpec",
@@ -3445,73 +3005,41 @@
           "/api/v1/nodes/{name}"
         ],
         "subresources": [
-          "proxy",
-          "status"
-        ]
-      },
-      {
-        "name": "nodes/proxy",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Node",
-        "rust": "api::core::v1::Node",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::NodeSpec",
-        "status": "api::core::v1::NodeStatus",
-        "condition": "api::core::v1::NodeCondition",
-        "verbs": [
-          "connect"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "connect"
-          ]
-        },
-        "paths": [
-          "/api/v1/nodes/{name}/proxy",
-          "/api/v1/nodes/{name}/proxy/{path}"
-        ]
-      },
-      {
-        "name": "nodes/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Node",
-        "rust": "api::core::v1::Node",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::NodeSpec",
-        "status": "api::core::v1::NodeStatus",
-        "condition": "api::core::v1::NodeCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/nodes/{name}/status"
+          {
+            "name": "proxy",
+            "scopedVerbs": {
+              "all": [
+                "connect"
+              ]
+            },
+            "paths": [
+              "/api/v1/nodes/{name}/proxy",
+              "/api/v1/nodes/{name}/proxy/{path}"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/nodes/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "persistentvolumeclaims",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PersistentVolumeClaim",
+        "proto": "api.core.v1.PersistentVolumeClaim",
         "rust": "api::core::v1::PersistentVolumeClaim",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::PersistentVolumeClaimSpec",
@@ -3546,46 +3074,29 @@
           "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "persistentvolumeclaims/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "PersistentVolumeClaim",
-        "rust": "api::core::v1::PersistentVolumeClaim",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PersistentVolumeClaimSpec",
-        "status": "api::core::v1::PersistentVolumeClaimStatus",
-        "condition": "api::core::v1::PersistentVolumeClaimCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "persistentvolumes",
         "namespaced": false,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PersistentVolume",
+        "proto": "api.core.v1.PersistentVolume",
         "rust": "api::core::v1::PersistentVolume",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::PersistentVolumeSpec",
@@ -3616,46 +3127,29 @@
           "/api/v1/persistentvolumes/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "persistentvolumes/status",
-        "namespaced": false,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "PersistentVolume",
-        "rust": "api::core::v1::PersistentVolume",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PersistentVolumeSpec",
-        "status": "api::core::v1::PersistentVolumeStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/persistentvolumes/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "all": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/persistentvolumes/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "pods",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Pod",
+        "proto": "api.core.v1.Pod",
         "rust": "api::core::v1::Pod",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::PodSpec",
@@ -3690,259 +3184,120 @@
           "/api/v1/namespaces/{namespace}/pods/{name}"
         ],
         "subresources": [
-          "attach",
-          "binding",
-          "ephemeralcontainers",
-          "eviction",
-          "exec",
-          "log",
-          "portforward",
-          "proxy",
-          "status"
-        ]
-      },
-      {
-        "name": "pods/attach",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "connect"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "connect"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/attach"
-        ]
-      },
-      {
-        "name": "pods/binding",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Binding",
-        "rust": "api::core::v1::Binding",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": null,
-        "status": null,
-        "condition": null,
-        "verbs": [
-          "create"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "create"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/binding"
-        ]
-      },
-      {
-        "name": "pods/ephemeralcontainers",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers"
-        ]
-      },
-      {
-        "name": "pods/eviction",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "policy",
-        "version": "v1",
-        "kind": "Eviction",
-        "rust": "api::policy::v1::Eviction",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": null,
-        "status": null,
-        "condition": null,
-        "verbs": [
-          "create"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "create"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/eviction"
-        ]
-      },
-      {
-        "name": "pods/exec",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "connect"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "connect"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/exec"
-        ]
-      },
-      {
-        "name": "pods/log",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "get"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/log"
-        ]
-      },
-      {
-        "name": "pods/portforward",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "connect"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "connect"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/portforward"
-        ]
-      },
-      {
-        "name": "pods/proxy",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "connect"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "connect"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/proxy",
-          "/api/v1/namespaces/{namespace}/pods/{name}/proxy/{path}"
-        ]
-      },
-      {
-        "name": "pods/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Pod",
-        "rust": "api::core::v1::Pod",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::PodSpec",
-        "status": "api::core::v1::PodStatus",
-        "condition": "api::core::v1::PodCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/pods/{name}/status"
+          {
+            "name": "attach",
+            "scopedVerbs": {
+              "namespaced": [
+                "connect"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/attach"
+            ]
+          },
+          {
+            "name": "binding",
+            "scopedVerbs": {
+              "namespaced": [
+                "create"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/binding"
+            ]
+          },
+          {
+            "name": "ephemeralcontainers",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers"
+            ]
+          },
+          {
+            "name": "eviction",
+            "scopedVerbs": {
+              "namespaced": [
+                "create"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/eviction"
+            ]
+          },
+          {
+            "name": "exec",
+            "scopedVerbs": {
+              "namespaced": [
+                "connect"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/exec"
+            ]
+          },
+          {
+            "name": "log",
+            "scopedVerbs": {
+              "namespaced": [
+                "get"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/log"
+            ]
+          },
+          {
+            "name": "portforward",
+            "scopedVerbs": {
+              "namespaced": [
+                "connect"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/portforward"
+            ]
+          },
+          {
+            "name": "proxy",
+            "scopedVerbs": {
+              "namespaced": [
+                "connect"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/proxy",
+              "/api/v1/namespaces/{namespace}/pods/{name}/proxy/{path}"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/pods/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "podtemplates",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "PodTemplate",
+        "proto": "api.core.v1.PodTemplate",
         "rust": "api::core::v1::PodTemplate",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -3981,11 +3336,11 @@
       {
         "name": "replicationcontrollers",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ReplicationController",
+        "proto": "api.core.v1.ReplicationController",
         "rust": "api::core::v1::ReplicationController",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::ReplicationControllerSpec",
@@ -4020,76 +3375,42 @@
           "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}"
         ],
         "subresources": [
-          "scale",
-          "status"
-        ]
-      },
-      {
-        "name": "replicationcontrollers/scale",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "autoscaling",
-        "version": "v1",
-        "kind": "Scale",
-        "rust": "api::autoscaling::v1::Scale",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::autoscaling::v1::ScaleSpec",
-        "status": "api::autoscaling::v1::ScaleStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale"
-        ]
-      },
-      {
-        "name": "replicationcontrollers/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "ReplicationController",
-        "rust": "api::core::v1::ReplicationController",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::ReplicationControllerSpec",
-        "status": "api::core::v1::ReplicationControllerStatus",
-        "condition": "api::core::v1::ReplicationControllerCondition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status"
+          {
+            "name": "scale",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/scale"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/replicationcontrollers/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "resourcequotas",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ResourceQuota",
+        "proto": "api.core.v1.ResourceQuota",
         "rust": "api::core::v1::ResourceQuota",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::ResourceQuotaSpec",
@@ -4124,46 +3445,29 @@
           "/api/v1/namespaces/{namespace}/resourcequotas/{name}"
         ],
         "subresources": [
-          "status"
-        ]
-      },
-      {
-        "name": "resourcequotas/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "ResourceQuota",
-        "rust": "api::core::v1::ResourceQuota",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::ResourceQuotaSpec",
-        "status": "api::core::v1::ResourceQuotaStatus",
-        "condition": null,
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/resourcequotas/{name}/status"
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/resourcequotas/{name}/status"
+            ]
+          }
         ]
       },
       {
         "name": "secrets",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Secret",
+        "proto": "api.core.v1.Secret",
         "rust": "api::core::v1::Secret",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -4202,11 +3506,11 @@
       {
         "name": "serviceaccounts",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "ServiceAccount",
+        "proto": "api.core.v1.ServiceAccount",
         "rust": "api::core::v1::ServiceAccount",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": null,
@@ -4241,42 +3545,27 @@
           "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
         ],
         "subresources": [
-          "token"
-        ]
-      },
-      {
-        "name": "serviceaccounts/token",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "authentication.k8s.io",
-        "version": "v1",
-        "kind": "TokenRequest",
-        "rust": "api::authentication::v1::TokenRequest",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::authentication::v1::TokenRequestSpec",
-        "status": "api::authentication::v1::TokenRequestStatus",
-        "condition": null,
-        "verbs": [
-          "create"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "create"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token"
+          {
+            "name": "token",
+            "scopedVerbs": {
+              "namespaced": [
+                "create"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token"
+            ]
+          }
         ]
       },
       {
         "name": "services",
         "namespaced": true,
-        "subresource": false,
         "apiGroupVersion": "v1",
         "group": "",
         "version": "v1",
         "kind": "Service",
+        "proto": "api.core.v1.Service",
         "rust": "api::core::v1::Service",
         "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
         "spec": "api::core::v1::ServiceSpec",
@@ -4309,63 +3598,31 @@
           "/api/v1/namespaces/{namespace}/services/{name}"
         ],
         "subresources": [
-          "proxy",
-          "status"
-        ]
-      },
-      {
-        "name": "services/proxy",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Service",
-        "rust": "api::core::v1::Service",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::ServiceSpec",
-        "status": "api::core::v1::ServiceStatus",
-        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-        "verbs": [
-          "connect"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "connect"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/services/{name}/proxy",
-          "/api/v1/namespaces/{namespace}/services/{name}/proxy/{path}"
-        ]
-      },
-      {
-        "name": "services/status",
-        "namespaced": true,
-        "subresource": true,
-        "apiGroupVersion": "v1",
-        "group": "",
-        "version": "v1",
-        "kind": "Service",
-        "rust": "api::core::v1::Service",
-        "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-        "spec": "api::core::v1::ServiceSpec",
-        "status": "api::core::v1::ServiceStatus",
-        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-        "verbs": [
-          "get",
-          "patch",
-          "update"
-        ],
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/services/{name}/status"
+          {
+            "name": "proxy",
+            "scopedVerbs": {
+              "namespaced": [
+                "connect"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/services/{name}/proxy",
+              "/api/v1/namespaces/{namespace}/services/{name}/proxy/{path}"
+            ]
+          },
+          {
+            "name": "status",
+            "scopedVerbs": {
+              "namespaced": [
+                "get",
+                "patch",
+                "update"
+              ]
+            },
+            "paths": [
+              "/api/v1/namespaces/{namespace}/services/{name}/status"
+            ]
+          }
         ]
       }
     ]

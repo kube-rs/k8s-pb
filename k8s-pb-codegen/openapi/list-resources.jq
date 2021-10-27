@@ -19,6 +19,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
     | {
       key: $gvks[0] | gvk_string,
       value: {
+        proto: .key | sub("^io\\.k8s\\."; "") | gsub("-"; "_"),
         rust: .key | to_rust,
         metadata: $metadata,
         spec: $spec,
@@ -61,6 +62,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
     group: $gvk.group,
     version: $gvk.version,
     subresource: ($path | test("\\{name\\}/")),
+    proto: $definition.proto,
     rust: $definition.rust,
     metadata: $definition.metadata,
     spec: $definition.spec,
@@ -83,6 +85,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
       group: .[0].group,
       version: .[0].version,
       kind: .[0].kind,
+      proto: .[0].proto,
       rust: .[0].rust,
       metadata: .[0].metadata,
       spec: .[0].spec,
@@ -99,16 +102,19 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
       ),
       paths: (map(.path) | unique | sort_by(length)),
     })
-    # Add names of subresources without the resource prefix
+    # Add subresource infos to parent and remove them
     | [
-      ([.[] | select(.subresource) | .name]) as $subresources
+      ([.[] | select(.subresource) | {name, scopedVerbs, paths}]) as $subresources
       | .[]
       | if .subresource then
           .
         else
           (.name + "/") as $parent
-          | . + {subresources: [$subresources | .[] | select(. | startswith($parent)) | sub($parent; "")]}
+          | ([$subresources | .[] | select(.name | startswith($parent)) | {name: (.name | sub($parent; "")), scopedVerbs, paths}]) as $subs
+          | . + {subresources: $subs}
         end
+      | select(.subresource | not)
+      | del(.subresource)
     ]
   )
 })
