@@ -1,17 +1,33 @@
+def fmap(f): if . != null then . | f else . end;
+def to_rust: . | sub("^io\\.k8s\\."; "") | gsub("-"; "_") | gsub("\\."; "::");
+def strip_ref_prefix: . | sub("^#/definitions/"; "");
+# GVK object to slash separated string.
+def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
+
 (
   [
-    .definitions | to_entries[]
-    | (.key | sub("^io\\.k8s\\."; "") | gsub("-"; "_") | gsub("\\."; "::")) as $path
+    .definitions as $defs
+    | .definitions | to_entries[]
     # Only process definitions with GVK array.
     # Exclude List. .properties.metadata.$ref "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
     | .value["x-kubernetes-group-version-kind"]? as $gvks
     | select($gvks != null and ($gvks | length == 1) and (.value.properties?.metadata?["$ref"]? != "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"))
-    | ($gvks[0] as $x | [$x.group, $x.version, $x.kind] | map(select(. != "")) | join("/")) as $gvk
-    | { key: $gvk, value: $path }
+    | (.value.properties?.spec?["$ref"] | fmap(strip_ref_prefix | to_rust)) as $spec
+    | (.value.properties?.status?["$ref"] | fmap(strip_ref_prefix)) as $statusName
+    | ($statusName | fmap($defs[.].properties?.conditions?.items?["$ref"]) | fmap(strip_ref_prefix | to_rust)) as $condition
+    | {
+      key: $gvks[0] | gvk_string,
+      value: {
+        rust: .key | to_rust,
+        spec: $spec,
+        status: $statusName | fmap(to_rust),
+        condition: $condition,
+      },
+    }
   ]
   | sort_by(.key)
   | from_entries
-) as $rustPaths
+) as $definitions
 
 | [
   .paths | to_entries[]
@@ -26,6 +42,7 @@
   # Fall back to method name.
   | .key as $method
   | (.value["x-kubernetes-action"] // $method) as $verb
+  | $definitions[$gvk | gvk_string] as $definition
   | {
     # Plural name. Includes a subresource name like in `APIResourceList`.
     name: (
@@ -42,7 +59,10 @@
     group: $gvk.group,
     version: $gvk.version,
     subresource: ($path | test("\\{name\\}/")),
-    rust: $rustPaths[([$gvk.group, $gvk.version, $gvk.kind] | map(select(. != "")) | join("/"))],
+    rust: $definition.rust,
+    spec: $definition.spec,
+    status: $definition.status,
+    condition: $definition.condition,
     path: $path,
   }
 ]
@@ -61,6 +81,9 @@
       version: .[0].version,
       kind: .[0].kind,
       rust: .[0].rust,
+      spec: .[0].spec,
+      status: .[0].status,
+      condition: .[0].condition,
       verbs: (map(.verb) | unique),
       scopedVerbs: (
         group_by(.namespaced)
