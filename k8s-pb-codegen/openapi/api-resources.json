@@ -11,6 +11,9 @@
         "version": "v1",
         "kind": "MutatingWebhookConfiguration",
         "rust": "api::admissionregistration::v1::MutatingWebhookConfiguration",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -45,6 +48,9 @@
         "version": "v1",
         "kind": "ValidatingWebhookConfiguration",
         "rust": "api::admissionregistration::v1::ValidatingWebhookConfiguration",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -84,6 +90,9 @@
         "version": "v1",
         "kind": "CustomResourceDefinition",
         "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
+        "spec": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec",
+        "status": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionStatus",
+        "condition": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionCondition",
         "verbs": [
           "create",
           "delete",
@@ -118,6 +127,9 @@
         "version": "v1",
         "kind": "CustomResourceDefinition",
         "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
+        "spec": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec",
+        "status": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionStatus",
+        "condition": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionCondition",
         "verbs": [
           "get",
           "patch",
@@ -148,6 +160,9 @@
         "version": "v1",
         "kind": "APIService",
         "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
+        "spec": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec",
+        "status": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceStatus",
+        "condition": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceCondition",
         "verbs": [
           "create",
           "delete",
@@ -182,6 +197,9 @@
         "version": "v1",
         "kind": "APIService",
         "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
+        "spec": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec",
+        "status": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceStatus",
+        "condition": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceCondition",
         "verbs": [
           "get",
           "patch",
@@ -212,6 +230,9 @@
         "version": "v1",
         "kind": "ControllerRevision",
         "rust": "api::apps::v1::ControllerRevision",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -250,6 +271,9 @@
         "version": "v1",
         "kind": "DaemonSet",
         "rust": "api::apps::v1::DaemonSet",
+        "spec": "api::apps::v1::DaemonSetSpec",
+        "status": "api::apps::v1::DaemonSetStatus",
+        "condition": "api::apps::v1::DaemonSetCondition",
         "verbs": [
           "create",
           "delete",
@@ -288,6 +312,9 @@
         "version": "v1",
         "kind": "DaemonSet",
         "rust": "api::apps::v1::DaemonSet",
+        "spec": "api::apps::v1::DaemonSetSpec",
+        "status": "api::apps::v1::DaemonSetStatus",
+        "condition": "api::apps::v1::DaemonSetCondition",
         "verbs": [
           "get",
           "patch",
@@ -313,6 +340,9 @@
         "version": "v1",
         "kind": "Deployment",
         "rust": "api::apps::v1::Deployment",
+        "spec": "api::apps::v1::DeploymentSpec",
+        "status": "api::apps::v1::DeploymentStatus",
+        "condition": "api::apps::v1::DeploymentCondition",
         "verbs": [
           "create",
           "delete",
@@ -351,6 +381,9 @@
         "version": "v1",
         "kind": "Scale",
         "rust": "api::autoscaling::v1::Scale",
+        "spec": "api::autoscaling::v1::ScaleSpec",
+        "status": "api::autoscaling::v1::ScaleStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -376,6 +409,9 @@
         "version": "v1",
         "kind": "Deployment",
         "rust": "api::apps::v1::Deployment",
+        "spec": "api::apps::v1::DeploymentSpec",
+        "status": "api::apps::v1::DeploymentStatus",
+        "condition": "api::apps::v1::DeploymentCondition",
         "verbs": [
           "get",
           "patch",
@@ -401,6 +437,9 @@
         "version": "v1",
         "kind": "ReplicaSet",
         "rust": "api::apps::v1::ReplicaSet",
+        "spec": "api::apps::v1::ReplicaSetSpec",
+        "status": "api::apps::v1::ReplicaSetStatus",
+        "condition": "api::apps::v1::ReplicaSetCondition",
         "verbs": [
           "create",
           "delete",
@@ -439,6 +478,9 @@
         "version": "v1",
         "kind": "Scale",
         "rust": "api::autoscaling::v1::Scale",
+        "spec": "api::autoscaling::v1::ScaleSpec",
+        "status": "api::autoscaling::v1::ScaleStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -464,6 +506,9 @@
         "version": "v1",
         "kind": "ReplicaSet",
         "rust": "api::apps::v1::ReplicaSet",
+        "spec": "api::apps::v1::ReplicaSetSpec",
+        "status": "api::apps::v1::ReplicaSetStatus",
+        "condition": "api::apps::v1::ReplicaSetCondition",
         "verbs": [
           "get",
           "patch",
@@ -489,6 +534,9 @@
         "version": "v1",
         "kind": "StatefulSet",
         "rust": "api::apps::v1::StatefulSet",
+        "spec": "api::apps::v1::StatefulSetSpec",
+        "status": "api::apps::v1::StatefulSetStatus",
+        "condition": "api::apps::v1::StatefulSetCondition",
         "verbs": [
           "create",
           "delete",
@@ -527,6 +575,9 @@
         "version": "v1",
         "kind": "Scale",
         "rust": "api::autoscaling::v1::Scale",
+        "spec": "api::autoscaling::v1::ScaleSpec",
+        "status": "api::autoscaling::v1::ScaleStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -552,6 +603,9 @@
         "version": "v1",
         "kind": "StatefulSet",
         "rust": "api::apps::v1::StatefulSet",
+        "spec": "api::apps::v1::StatefulSetSpec",
+        "status": "api::apps::v1::StatefulSetStatus",
+        "condition": "api::apps::v1::StatefulSetCondition",
         "verbs": [
           "get",
           "patch",
@@ -582,6 +636,9 @@
         "version": "v1",
         "kind": "TokenReview",
         "rust": "api::authentication::v1::TokenReview",
+        "spec": "api::authentication::v1::TokenReviewSpec",
+        "status": "api::authentication::v1::TokenReviewStatus",
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -608,6 +665,9 @@
         "version": "v1",
         "kind": "LocalSubjectAccessReview",
         "rust": "api::authorization::v1::LocalSubjectAccessReview",
+        "spec": "api::authorization::v1::SubjectAccessReviewSpec",
+        "status": "api::authorization::v1::SubjectAccessReviewStatus",
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -629,6 +689,9 @@
         "version": "v1",
         "kind": "SelfSubjectAccessReview",
         "rust": "api::authorization::v1::SelfSubjectAccessReview",
+        "spec": "api::authorization::v1::SelfSubjectAccessReviewSpec",
+        "status": "api::authorization::v1::SubjectAccessReviewStatus",
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -650,6 +713,9 @@
         "version": "v1",
         "kind": "SelfSubjectRulesReview",
         "rust": "api::authorization::v1::SelfSubjectRulesReview",
+        "spec": "api::authorization::v1::SelfSubjectRulesReviewSpec",
+        "status": "api::authorization::v1::SubjectRulesReviewStatus",
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -671,6 +737,9 @@
         "version": "v1",
         "kind": "SubjectAccessReview",
         "rust": "api::authorization::v1::SubjectAccessReview",
+        "spec": "api::authorization::v1::SubjectAccessReviewSpec",
+        "status": "api::authorization::v1::SubjectAccessReviewStatus",
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -697,6 +766,9 @@
         "version": "v1",
         "kind": "HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v1::HorizontalPodAutoscaler",
+        "spec": "api::autoscaling::v1::HorizontalPodAutoscalerSpec",
+        "status": "api::autoscaling::v1::HorizontalPodAutoscalerStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -735,6 +807,9 @@
         "version": "v1",
         "kind": "HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v1::HorizontalPodAutoscaler",
+        "spec": "api::autoscaling::v1::HorizontalPodAutoscalerSpec",
+        "status": "api::autoscaling::v1::HorizontalPodAutoscalerStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -765,6 +840,9 @@
         "version": "v2beta1",
         "kind": "HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v2beta1::HorizontalPodAutoscaler",
+        "spec": "api::autoscaling::v2beta1::HorizontalPodAutoscalerSpec",
+        "status": "api::autoscaling::v2beta1::HorizontalPodAutoscalerStatus",
+        "condition": "api::autoscaling::v2beta1::HorizontalPodAutoscalerCondition",
         "verbs": [
           "create",
           "delete",
@@ -803,6 +881,9 @@
         "version": "v2beta1",
         "kind": "HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v2beta1::HorizontalPodAutoscaler",
+        "spec": "api::autoscaling::v2beta1::HorizontalPodAutoscalerSpec",
+        "status": "api::autoscaling::v2beta1::HorizontalPodAutoscalerStatus",
+        "condition": "api::autoscaling::v2beta1::HorizontalPodAutoscalerCondition",
         "verbs": [
           "get",
           "patch",
@@ -833,6 +914,9 @@
         "version": "v2beta2",
         "kind": "HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v2beta2::HorizontalPodAutoscaler",
+        "spec": "api::autoscaling::v2beta2::HorizontalPodAutoscalerSpec",
+        "status": "api::autoscaling::v2beta2::HorizontalPodAutoscalerStatus",
+        "condition": "api::autoscaling::v2beta2::HorizontalPodAutoscalerCondition",
         "verbs": [
           "create",
           "delete",
@@ -871,6 +955,9 @@
         "version": "v2beta2",
         "kind": "HorizontalPodAutoscaler",
         "rust": "api::autoscaling::v2beta2::HorizontalPodAutoscaler",
+        "spec": "api::autoscaling::v2beta2::HorizontalPodAutoscalerSpec",
+        "status": "api::autoscaling::v2beta2::HorizontalPodAutoscalerStatus",
+        "condition": "api::autoscaling::v2beta2::HorizontalPodAutoscalerCondition",
         "verbs": [
           "get",
           "patch",
@@ -901,6 +988,9 @@
         "version": "v1",
         "kind": "CronJob",
         "rust": "api::batch::v1::CronJob",
+        "spec": "api::batch::v1::CronJobSpec",
+        "status": "api::batch::v1::CronJobStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -939,6 +1029,9 @@
         "version": "v1",
         "kind": "CronJob",
         "rust": "api::batch::v1::CronJob",
+        "spec": "api::batch::v1::CronJobSpec",
+        "status": "api::batch::v1::CronJobStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -964,6 +1057,9 @@
         "version": "v1",
         "kind": "Job",
         "rust": "api::batch::v1::Job",
+        "spec": "api::batch::v1::JobSpec",
+        "status": "api::batch::v1::JobStatus",
+        "condition": "api::batch::v1::JobCondition",
         "verbs": [
           "create",
           "delete",
@@ -1002,6 +1098,9 @@
         "version": "v1",
         "kind": "Job",
         "rust": "api::batch::v1::Job",
+        "spec": "api::batch::v1::JobSpec",
+        "status": "api::batch::v1::JobStatus",
+        "condition": "api::batch::v1::JobCondition",
         "verbs": [
           "get",
           "patch",
@@ -1032,6 +1131,9 @@
         "version": "v1beta1",
         "kind": "CronJob",
         "rust": "api::batch::v1beta1::CronJob",
+        "spec": "api::batch::v1beta1::CronJobSpec",
+        "status": "api::batch::v1beta1::CronJobStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1070,6 +1172,9 @@
         "version": "v1beta1",
         "kind": "CronJob",
         "rust": "api::batch::v1beta1::CronJob",
+        "spec": "api::batch::v1beta1::CronJobSpec",
+        "status": "api::batch::v1beta1::CronJobStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -1100,6 +1205,9 @@
         "version": "v1",
         "kind": "CertificateSigningRequest",
         "rust": "api::certificates::v1::CertificateSigningRequest",
+        "spec": "api::certificates::v1::CertificateSigningRequestSpec",
+        "status": "api::certificates::v1::CertificateSigningRequestStatus",
+        "condition": "api::certificates::v1::CertificateSigningRequestCondition",
         "verbs": [
           "create",
           "delete",
@@ -1134,6 +1242,9 @@
         "version": "v1",
         "kind": "CertificateSigningRequest",
         "rust": "api::certificates::v1::CertificateSigningRequest",
+        "spec": "api::certificates::v1::CertificateSigningRequestSpec",
+        "status": "api::certificates::v1::CertificateSigningRequestStatus",
+        "condition": "api::certificates::v1::CertificateSigningRequestCondition",
         "verbs": [
           "get",
           "patch",
@@ -1159,6 +1270,9 @@
         "version": "v1",
         "kind": "CertificateSigningRequest",
         "rust": "api::certificates::v1::CertificateSigningRequest",
+        "spec": "api::certificates::v1::CertificateSigningRequestSpec",
+        "status": "api::certificates::v1::CertificateSigningRequestStatus",
+        "condition": "api::certificates::v1::CertificateSigningRequestCondition",
         "verbs": [
           "get",
           "patch",
@@ -1189,6 +1303,9 @@
         "version": "v1",
         "kind": "Lease",
         "rust": "api::coordination::v1::Lease",
+        "spec": "api::coordination::v1::LeaseSpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1232,6 +1349,9 @@
         "version": "v1",
         "kind": "EndpointSlice",
         "rust": "api::discovery::v1::EndpointSlice",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1275,6 +1395,9 @@
         "version": "v1beta1",
         "kind": "EndpointSlice",
         "rust": "api::discovery::v1beta1::EndpointSlice",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1318,6 +1441,9 @@
         "version": "v1",
         "kind": "Event",
         "rust": "api::events::v1::Event",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1361,6 +1487,9 @@
         "version": "v1beta1",
         "kind": "Event",
         "rust": "api::events::v1beta1::Event",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1404,6 +1533,9 @@
         "version": "v1beta1",
         "kind": "FlowSchema",
         "rust": "api::flowcontrol::v1beta1::FlowSchema",
+        "spec": "api::flowcontrol::v1beta1::FlowSchemaSpec",
+        "status": "api::flowcontrol::v1beta1::FlowSchemaStatus",
+        "condition": "api::flowcontrol::v1beta1::FlowSchemaCondition",
         "verbs": [
           "create",
           "delete",
@@ -1438,6 +1570,9 @@
         "version": "v1beta1",
         "kind": "FlowSchema",
         "rust": "api::flowcontrol::v1beta1::FlowSchema",
+        "spec": "api::flowcontrol::v1beta1::FlowSchemaSpec",
+        "status": "api::flowcontrol::v1beta1::FlowSchemaStatus",
+        "condition": "api::flowcontrol::v1beta1::FlowSchemaCondition",
         "verbs": [
           "get",
           "patch",
@@ -1463,6 +1598,9 @@
         "version": "v1beta1",
         "kind": "PriorityLevelConfiguration",
         "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
+        "spec": "api::flowcontrol::v1beta1::PriorityLevelConfigurationSpec",
+        "status": "api::flowcontrol::v1beta1::PriorityLevelConfigurationStatus",
+        "condition": "api::flowcontrol::v1beta1::PriorityLevelConfigurationCondition",
         "verbs": [
           "create",
           "delete",
@@ -1497,6 +1635,9 @@
         "version": "v1beta1",
         "kind": "PriorityLevelConfiguration",
         "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
+        "spec": "api::flowcontrol::v1beta1::PriorityLevelConfigurationSpec",
+        "status": "api::flowcontrol::v1beta1::PriorityLevelConfigurationStatus",
+        "condition": "api::flowcontrol::v1beta1::PriorityLevelConfigurationCondition",
         "verbs": [
           "get",
           "patch",
@@ -1527,6 +1668,9 @@
         "version": "v1alpha1",
         "kind": "StorageVersion",
         "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
+        "spec": "api::apiserverinternal::v1alpha1::StorageVersionSpec",
+        "status": "api::apiserverinternal::v1alpha1::StorageVersionStatus",
+        "condition": "api::apiserverinternal::v1alpha1::StorageVersionCondition",
         "verbs": [
           "create",
           "delete",
@@ -1561,6 +1705,9 @@
         "version": "v1alpha1",
         "kind": "StorageVersion",
         "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
+        "spec": "api::apiserverinternal::v1alpha1::StorageVersionSpec",
+        "status": "api::apiserverinternal::v1alpha1::StorageVersionStatus",
+        "condition": "api::apiserverinternal::v1alpha1::StorageVersionCondition",
         "verbs": [
           "get",
           "patch",
@@ -1591,6 +1738,9 @@
         "version": "v1",
         "kind": "IngressClass",
         "rust": "api::networking::v1::IngressClass",
+        "spec": "api::networking::v1::IngressClassSpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1625,6 +1775,9 @@
         "version": "v1",
         "kind": "Ingress",
         "rust": "api::networking::v1::Ingress",
+        "spec": "api::networking::v1::IngressSpec",
+        "status": "api::networking::v1::IngressStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1663,6 +1816,9 @@
         "version": "v1",
         "kind": "Ingress",
         "rust": "api::networking::v1::Ingress",
+        "spec": "api::networking::v1::IngressSpec",
+        "status": "api::networking::v1::IngressStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -1688,6 +1844,9 @@
         "version": "v1",
         "kind": "NetworkPolicy",
         "rust": "api::networking::v1::NetworkPolicy",
+        "spec": "api::networking::v1::NetworkPolicySpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1731,6 +1890,9 @@
         "version": "v1",
         "kind": "RuntimeClass",
         "rust": "api::node::v1::RuntimeClass",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1770,6 +1932,9 @@
         "version": "v1alpha1",
         "kind": "RuntimeClass",
         "rust": "api::node::v1alpha1::RuntimeClass",
+        "spec": "api::node::v1alpha1::RuntimeClassSpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1809,6 +1974,9 @@
         "version": "v1beta1",
         "kind": "RuntimeClass",
         "rust": "api::node::v1beta1::RuntimeClass",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -1848,6 +2016,9 @@
         "version": "v1",
         "kind": "PodDisruptionBudget",
         "rust": "api::policy::v1::PodDisruptionBudget",
+        "spec": "api::policy::v1::PodDisruptionBudgetSpec",
+        "status": "api::policy::v1::PodDisruptionBudgetStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "create",
           "delete",
@@ -1886,6 +2057,9 @@
         "version": "v1",
         "kind": "PodDisruptionBudget",
         "rust": "api::policy::v1::PodDisruptionBudget",
+        "spec": "api::policy::v1::PodDisruptionBudgetSpec",
+        "status": "api::policy::v1::PodDisruptionBudgetStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "get",
           "patch",
@@ -1916,6 +2090,9 @@
         "version": "v1beta1",
         "kind": "PodDisruptionBudget",
         "rust": "api::policy::v1beta1::PodDisruptionBudget",
+        "spec": "api::policy::v1beta1::PodDisruptionBudgetSpec",
+        "status": "api::policy::v1beta1::PodDisruptionBudgetStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "create",
           "delete",
@@ -1954,6 +2131,9 @@
         "version": "v1beta1",
         "kind": "PodDisruptionBudget",
         "rust": "api::policy::v1beta1::PodDisruptionBudget",
+        "spec": "api::policy::v1beta1::PodDisruptionBudgetSpec",
+        "status": "api::policy::v1beta1::PodDisruptionBudgetStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "get",
           "patch",
@@ -1979,6 +2159,9 @@
         "version": "v1beta1",
         "kind": "PodSecurityPolicy",
         "rust": "api::policy::v1beta1::PodSecurityPolicy",
+        "spec": "api::policy::v1beta1::PodSecurityPolicySpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2018,6 +2201,9 @@
         "version": "v1",
         "kind": "ClusterRoleBinding",
         "rust": "api::rbac::v1::ClusterRoleBinding",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2052,6 +2238,9 @@
         "version": "v1",
         "kind": "ClusterRole",
         "rust": "api::rbac::v1::ClusterRole",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2086,6 +2275,9 @@
         "version": "v1",
         "kind": "RoleBinding",
         "rust": "api::rbac::v1::RoleBinding",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2124,6 +2316,9 @@
         "version": "v1",
         "kind": "Role",
         "rust": "api::rbac::v1::Role",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2167,6 +2362,9 @@
         "version": "v1alpha1",
         "kind": "ClusterRoleBinding",
         "rust": "api::rbac::v1alpha1::ClusterRoleBinding",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2201,6 +2399,9 @@
         "version": "v1alpha1",
         "kind": "ClusterRole",
         "rust": "api::rbac::v1alpha1::ClusterRole",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2235,6 +2436,9 @@
         "version": "v1alpha1",
         "kind": "RoleBinding",
         "rust": "api::rbac::v1alpha1::RoleBinding",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2273,6 +2477,9 @@
         "version": "v1alpha1",
         "kind": "Role",
         "rust": "api::rbac::v1alpha1::Role",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2316,6 +2523,9 @@
         "version": "v1",
         "kind": "PriorityClass",
         "rust": "api::scheduling::v1::PriorityClass",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2355,6 +2565,9 @@
         "version": "v1alpha1",
         "kind": "PriorityClass",
         "rust": "api::scheduling::v1alpha1::PriorityClass",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2394,6 +2607,9 @@
         "version": "v1",
         "kind": "CSIDriver",
         "rust": "api::storage::v1::CSIDriver",
+        "spec": "api::storage::v1::CSIDriverSpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2428,6 +2644,9 @@
         "version": "v1",
         "kind": "CSINode",
         "rust": "api::storage::v1::CSINode",
+        "spec": "api::storage::v1::CSINodeSpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2462,6 +2681,9 @@
         "version": "v1",
         "kind": "StorageClass",
         "rust": "api::storage::v1::StorageClass",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2496,6 +2718,9 @@
         "version": "v1",
         "kind": "VolumeAttachment",
         "rust": "api::storage::v1::VolumeAttachment",
+        "spec": "api::storage::v1::VolumeAttachmentSpec",
+        "status": "api::storage::v1::VolumeAttachmentStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2530,6 +2755,9 @@
         "version": "v1",
         "kind": "VolumeAttachment",
         "rust": "api::storage::v1::VolumeAttachment",
+        "spec": "api::storage::v1::VolumeAttachmentSpec",
+        "status": "api::storage::v1::VolumeAttachmentStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -2560,6 +2788,9 @@
         "version": "v1alpha1",
         "kind": "CSIStorageCapacity",
         "rust": "api::storage::v1alpha1::CSIStorageCapacity",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2598,6 +2829,9 @@
         "version": "v1alpha1",
         "kind": "VolumeAttachment",
         "rust": "api::storage::v1alpha1::VolumeAttachment",
+        "spec": "api::storage::v1alpha1::VolumeAttachmentSpec",
+        "status": "api::storage::v1alpha1::VolumeAttachmentStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2637,6 +2871,9 @@
         "version": "v1beta1",
         "kind": "CSIStorageCapacity",
         "rust": "api::storage::v1beta1::CSIStorageCapacity",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2680,6 +2917,9 @@
         "version": "v1",
         "kind": "Binding",
         "rust": "api::core::v1::Binding",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -2701,6 +2941,9 @@
         "version": "v1",
         "kind": "ComponentStatus",
         "rust": "api::core::v1::ComponentStatus",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "get",
           "list"
@@ -2725,6 +2968,9 @@
         "version": "v1",
         "kind": "ConfigMap",
         "rust": "api::core::v1::ConfigMap",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2763,6 +3009,9 @@
         "version": "v1",
         "kind": "Endpoints",
         "rust": "api::core::v1::Endpoints",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2801,6 +3050,9 @@
         "version": "v1",
         "kind": "Event",
         "rust": "api::core::v1::Event",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2839,6 +3091,9 @@
         "version": "v1",
         "kind": "LimitRange",
         "rust": "api::core::v1::LimitRange",
+        "spec": "api::core::v1::LimitRangeSpec",
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -2877,6 +3132,9 @@
         "version": "v1",
         "kind": "Namespace",
         "rust": "api::core::v1::Namespace",
+        "spec": "api::core::v1::NamespaceSpec",
+        "status": "api::core::v1::NamespaceStatus",
+        "condition": "api::core::v1::NamespaceCondition",
         "verbs": [
           "create",
           "delete",
@@ -2909,6 +3167,9 @@
         "version": "v1",
         "kind": "Namespace",
         "rust": "api::core::v1::Namespace",
+        "spec": "api::core::v1::NamespaceSpec",
+        "status": "api::core::v1::NamespaceStatus",
+        "condition": "api::core::v1::NamespaceCondition",
         "verbs": [
           "update"
         ],
@@ -2930,6 +3191,9 @@
         "version": "v1",
         "kind": "Namespace",
         "rust": "api::core::v1::Namespace",
+        "spec": "api::core::v1::NamespaceSpec",
+        "status": "api::core::v1::NamespaceStatus",
+        "condition": "api::core::v1::NamespaceCondition",
         "verbs": [
           "get",
           "patch",
@@ -2955,6 +3219,9 @@
         "version": "v1",
         "kind": "Node",
         "rust": "api::core::v1::Node",
+        "spec": "api::core::v1::NodeSpec",
+        "status": "api::core::v1::NodeStatus",
+        "condition": "api::core::v1::NodeCondition",
         "verbs": [
           "create",
           "delete",
@@ -2989,6 +3256,9 @@
         "version": "v1",
         "kind": "Node",
         "rust": "api::core::v1::Node",
+        "spec": "api::core::v1::NodeSpec",
+        "status": "api::core::v1::NodeStatus",
+        "condition": "api::core::v1::NodeCondition",
         "verbs": [
           "connect"
         ],
@@ -3011,6 +3281,9 @@
         "version": "v1",
         "kind": "Node",
         "rust": "api::core::v1::Node",
+        "spec": "api::core::v1::NodeSpec",
+        "status": "api::core::v1::NodeStatus",
+        "condition": "api::core::v1::NodeCondition",
         "verbs": [
           "get",
           "patch",
@@ -3036,6 +3309,9 @@
         "version": "v1",
         "kind": "PersistentVolumeClaim",
         "rust": "api::core::v1::PersistentVolumeClaim",
+        "spec": "api::core::v1::PersistentVolumeClaimSpec",
+        "status": "api::core::v1::PersistentVolumeClaimStatus",
+        "condition": "api::core::v1::PersistentVolumeClaimCondition",
         "verbs": [
           "create",
           "delete",
@@ -3074,6 +3350,9 @@
         "version": "v1",
         "kind": "PersistentVolumeClaim",
         "rust": "api::core::v1::PersistentVolumeClaim",
+        "spec": "api::core::v1::PersistentVolumeClaimSpec",
+        "status": "api::core::v1::PersistentVolumeClaimStatus",
+        "condition": "api::core::v1::PersistentVolumeClaimCondition",
         "verbs": [
           "get",
           "patch",
@@ -3099,6 +3378,9 @@
         "version": "v1",
         "kind": "PersistentVolume",
         "rust": "api::core::v1::PersistentVolume",
+        "spec": "api::core::v1::PersistentVolumeSpec",
+        "status": "api::core::v1::PersistentVolumeStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -3133,6 +3415,9 @@
         "version": "v1",
         "kind": "PersistentVolume",
         "rust": "api::core::v1::PersistentVolume",
+        "spec": "api::core::v1::PersistentVolumeSpec",
+        "status": "api::core::v1::PersistentVolumeStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -3158,6 +3443,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "create",
           "delete",
@@ -3196,6 +3484,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "connect"
         ],
@@ -3217,6 +3508,9 @@
         "version": "v1",
         "kind": "Binding",
         "rust": "api::core::v1::Binding",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -3238,6 +3532,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "get",
           "patch",
@@ -3263,6 +3560,9 @@
         "version": "v1",
         "kind": "Eviction",
         "rust": "api::policy::v1::Eviction",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -3284,6 +3584,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "connect"
         ],
@@ -3305,6 +3608,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "get"
         ],
@@ -3326,6 +3632,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "connect"
         ],
@@ -3347,6 +3656,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "connect"
         ],
@@ -3369,6 +3681,9 @@
         "version": "v1",
         "kind": "Pod",
         "rust": "api::core::v1::Pod",
+        "spec": "api::core::v1::PodSpec",
+        "status": "api::core::v1::PodStatus",
+        "condition": "api::core::v1::PodCondition",
         "verbs": [
           "get",
           "patch",
@@ -3394,6 +3709,9 @@
         "version": "v1",
         "kind": "PodTemplate",
         "rust": "api::core::v1::PodTemplate",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -3432,6 +3750,9 @@
         "version": "v1",
         "kind": "ReplicationController",
         "rust": "api::core::v1::ReplicationController",
+        "spec": "api::core::v1::ReplicationControllerSpec",
+        "status": "api::core::v1::ReplicationControllerStatus",
+        "condition": "api::core::v1::ReplicationControllerCondition",
         "verbs": [
           "create",
           "delete",
@@ -3470,6 +3791,9 @@
         "version": "v1",
         "kind": "Scale",
         "rust": "api::autoscaling::v1::Scale",
+        "spec": "api::autoscaling::v1::ScaleSpec",
+        "status": "api::autoscaling::v1::ScaleStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -3495,6 +3819,9 @@
         "version": "v1",
         "kind": "ReplicationController",
         "rust": "api::core::v1::ReplicationController",
+        "spec": "api::core::v1::ReplicationControllerSpec",
+        "status": "api::core::v1::ReplicationControllerStatus",
+        "condition": "api::core::v1::ReplicationControllerCondition",
         "verbs": [
           "get",
           "patch",
@@ -3520,6 +3847,9 @@
         "version": "v1",
         "kind": "ResourceQuota",
         "rust": "api::core::v1::ResourceQuota",
+        "spec": "api::core::v1::ResourceQuotaSpec",
+        "status": "api::core::v1::ResourceQuotaStatus",
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -3558,6 +3888,9 @@
         "version": "v1",
         "kind": "ResourceQuota",
         "rust": "api::core::v1::ResourceQuota",
+        "spec": "api::core::v1::ResourceQuotaSpec",
+        "status": "api::core::v1::ResourceQuotaStatus",
+        "condition": null,
         "verbs": [
           "get",
           "patch",
@@ -3583,6 +3916,9 @@
         "version": "v1",
         "kind": "Secret",
         "rust": "api::core::v1::Secret",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -3621,6 +3957,9 @@
         "version": "v1",
         "kind": "ServiceAccount",
         "rust": "api::core::v1::ServiceAccount",
+        "spec": null,
+        "status": null,
+        "condition": null,
         "verbs": [
           "create",
           "delete",
@@ -3659,6 +3998,9 @@
         "version": "v1",
         "kind": "TokenRequest",
         "rust": "api::authentication::v1::TokenRequest",
+        "spec": "api::authentication::v1::TokenRequestSpec",
+        "status": "api::authentication::v1::TokenRequestStatus",
+        "condition": null,
         "verbs": [
           "create"
         ],
@@ -3680,6 +4022,9 @@
         "version": "v1",
         "kind": "Service",
         "rust": "api::core::v1::Service",
+        "spec": "api::core::v1::ServiceSpec",
+        "status": "api::core::v1::ServiceStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "create",
           "delete",
@@ -3716,6 +4061,9 @@
         "version": "v1",
         "kind": "Service",
         "rust": "api::core::v1::Service",
+        "spec": "api::core::v1::ServiceSpec",
+        "status": "api::core::v1::ServiceStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "connect"
         ],
@@ -3738,6 +4086,9 @@
         "version": "v1",
         "kind": "Service",
         "rust": "api::core::v1::Service",
+        "spec": "api::core::v1::ServiceSpec",
+        "status": "api::core::v1::ServiceStatus",
+        "condition": "apimachinery::pkg::apis::meta::v1::Condition",
         "verbs": [
           "get",
           "patch",
