@@ -12,6 +12,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
     # Exclude List. .properties.metadata.$ref "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
     | .value["x-kubernetes-group-version-kind"]? as $gvks
     | select($gvks != null and ($gvks | length == 1) and (.value.properties?.metadata?["$ref"]? != "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"))
+    | (.value.properties?.metadata?["$ref"] | fmap(strip_ref_prefix | to_rust)) as $metadata
     | (.value.properties?.spec?["$ref"] | fmap(strip_ref_prefix | to_rust)) as $spec
     | (.value.properties?.status?["$ref"] | fmap(strip_ref_prefix)) as $statusName
     | ($statusName | fmap($defs[.].properties?.conditions?.items?["$ref"]) | fmap(strip_ref_prefix | to_rust)) as $condition
@@ -19,6 +20,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
       key: $gvks[0] | gvk_string,
       value: {
         rust: .key | to_rust,
+        metadata: $metadata,
         spec: $spec,
         status: $statusName | fmap(to_rust),
         condition: $condition,
@@ -60,6 +62,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
     version: $gvk.version,
     subresource: ($path | test("\\{name\\}/")),
     rust: $definition.rust,
+    metadata: $definition.metadata,
     spec: $definition.spec,
     status: $definition.status,
     condition: $definition.condition,
@@ -81,6 +84,7 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
       version: .[0].version,
       kind: .[0].kind,
       rust: .[0].rust,
+      metadata: .[0].metadata,
       spec: .[0].spec,
       status: .[0].status,
       condition: .[0].condition,
