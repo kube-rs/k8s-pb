@@ -3,7 +3,9 @@ use prost_types::FileDescriptorSet;
 #[macro_use]
 extern crate log;
 use anyhow::{Context, Result};
-use std::{fs, path::Path};
+use std::{collections::HashMap, fs, path::Path};
+
+use k8s_pb_codegen::Resource;
 
 fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
     fs::read_to_string(&path).with_context(|| format!("read {}", path.as_ref().display()))
@@ -26,6 +28,11 @@ fn main() -> Result<()> {
         .out_dir("./out")
         .compile_protos(protos.as_slice(), &["protos/"])?;
 
+    info!("loading json");
+    let apif: String = read_file(root.join("openapi/transformed.json"))?;
+    let resources: HashMap<String, Resource> =
+        serde_json::from_str(&apif).with_context(|| "parse transformed.json".to_string())?;
+
     let buf =
         std::fs::read(root.join("protos.fds")).with_context(|| "read protos.fds".to_string())?;
     let fds = FileDescriptorSet::decode(&*buf).unwrap(); // pulls in proto::Message
@@ -34,7 +41,15 @@ fn main() -> Result<()> {
     // FDS usage: https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-build/src/lib.rs#L765-L825
     for f in fds.file {
         if let Some(pkg) = f.package {
-            info!("generating {}", pkg);
+            for m in f.message_type {
+                if let Some(name) = m.name {
+                    let path = format!("{}.{}", pkg, name);
+                    if let Some(resource) = resources.get(&path) {
+                        info!("generating resource {}", path);
+                        debug!("{:?}", resource);
+                    }
+                }
+            }
         }
     }
 

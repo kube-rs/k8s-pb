@@ -56,7 +56,7 @@ swagger-transform:
     #!/usr/bin/env bash
     set -exuo pipefail
     cd k8s-pb-codegen/openapi
-    jq -f list-resources.jq < swagger.json > api-resources.json
+    jq -f transform.jq < swagger.json > transformed.json
 
 # Download and generate all swagger dependent files
 swagger: swagger-dl swagger-patch swagger-transform
