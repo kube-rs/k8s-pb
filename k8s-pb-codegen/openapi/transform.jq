@@ -48,9 +48,9 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
   .key as $path |
   .value |
   to_entries[] |
-  # Only process path infos with GVK (methods) and ignore deprecated.
+  # Only process path infos with GVK (methods) and ignore deprecated `/watch/` paths that doesn't fit the pattern.
   .value["x-kubernetes-group-version-kind"]? as $gvk |
-  select($gvk != null and (.value.description | test("deprecated: "; "i") | not)) |
+  select($gvk != null and (.value.description | test("deprecated: use the 'watch'"; "i") | not)) |
   # Use group and version from path to group by because subresource's GVK might be different.
   # e.g., `autoscale/v1` in `apps/v1`.
   (
