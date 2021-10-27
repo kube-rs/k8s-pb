@@ -1,4 +1,4 @@
-# Transform `swagger.json` map of proto path to resource infos.
+# Transform `swagger.json` to a map of proto path to resource infos.
 def fmap(f): if . != null then . | f else . end;
 def to_rust: . | sub("^io\\.k8s\\."; "") | gsub("-"; "_") | gsub("\\."; "::");
 def strip_ref_prefix: . | sub("^#/definitions/"; "");
@@ -103,20 +103,17 @@ def gvk_string: [.group, .version, .kind] | map(select(. != "")) | join("/");
       paths: (map(.path) | unique | sort_by(length)),
     })
     # Add subresource infos to parent and remove them
+    | ([.[] | select(.subresource) | {name, scopedVerbs, paths}]) as $subresources
     | [
-      ([.[] | select(.subresource) | {name, scopedVerbs, paths}]) as $subresources
-      | .[]
-      | if .subresource then
-          .
-        else
-          (.name + "/") as $parent
-          | ([$subresources | .[] | select(.name | startswith($parent)) | {name: (.name | sub($parent; "")), scopedVerbs, paths}]) as $subs
-          | . + {subresources: $subs}
-        end
+      .[]
       | select(.subresource | not)
+      | (.name + "/") as $parent
+        | ([$subresources | .[] | select(.name | startswith($parent)) | {name: (.name | sub($parent; "")), scopedVerbs, paths}]) as $subs
+        | . + {subresources: $subs}
       | del(.subresource)
     ]
   )
 })
 | [.[].resources[] | {key: .proto, value: .}]
+| sort_by(.key)
 | from_entries

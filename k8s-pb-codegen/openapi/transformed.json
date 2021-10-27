@@ -59,19 +59,19 @@
     ],
     "subresources": []
   },
-  "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition": {
-    "name": "customresourcedefinitions",
+  "api.apiserverinternal.v1alpha1.StorageVersion": {
+    "name": "storageversions",
     "namespaced": false,
-    "apiGroupVersion": "apiextensions.k8s.io/v1",
-    "group": "apiextensions.k8s.io",
-    "version": "v1",
-    "kind": "CustomResourceDefinition",
-    "proto": "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition",
-    "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
+    "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
+    "group": "internal.apiserver.k8s.io",
+    "version": "v1alpha1",
+    "kind": "StorageVersion",
+    "proto": "api.apiserverinternal.v1alpha1.StorageVersion",
+    "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec",
-    "status": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionStatus",
-    "condition": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionCondition",
+    "spec": "api::apiserverinternal::v1alpha1::StorageVersionSpec",
+    "status": "api::apiserverinternal::v1alpha1::StorageVersionStatus",
+    "condition": "api::apiserverinternal::v1alpha1::StorageVersionCondition",
     "scopedVerbs": {
       "all": [
         "create",
@@ -84,8 +84,8 @@
       ]
     },
     "paths": [
-      "/apis/apiextensions.k8s.io/v1/customresourcedefinitions",
-      "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}"
+      "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions",
+      "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}"
     ],
     "subresources": [
       {
@@ -98,51 +98,7 @@
           ]
         },
         "paths": [
-          "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}/status"
-        ]
-      }
-    ]
-  },
-  "kube_aggregator.pkg.apis.apiregistration.v1.APIService": {
-    "name": "apiservices",
-    "namespaced": false,
-    "apiGroupVersion": "apiregistration.k8s.io/v1",
-    "group": "apiregistration.k8s.io",
-    "version": "v1",
-    "kind": "APIService",
-    "proto": "kube_aggregator.pkg.apis.apiregistration.v1.APIService",
-    "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec",
-    "status": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceStatus",
-    "condition": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceCondition",
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/apiregistration.k8s.io/v1/apiservices",
-      "/apis/apiregistration.k8s.io/v1/apiservices/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/apiregistration.k8s.io/v1/apiservices/{name}/status"
+          "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}/status"
         ]
       }
     ]
@@ -906,1150 +862,6 @@
     ],
     "subresources": []
   },
-  "api.discovery.v1.EndpointSlice": {
-    "name": "endpointslices",
-    "namespaced": true,
-    "apiGroupVersion": "discovery.k8s.io/v1",
-    "group": "discovery.k8s.io",
-    "version": "v1",
-    "kind": "EndpointSlice",
-    "proto": "api.discovery.v1.EndpointSlice",
-    "rust": "api::discovery::v1::EndpointSlice",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/discovery.k8s.io/v1/endpointslices",
-      "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices",
-      "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices/{name}"
-    ],
-    "subresources": []
-  },
-  "api.discovery.v1beta1.EndpointSlice": {
-    "name": "endpointslices",
-    "namespaced": true,
-    "apiGroupVersion": "discovery.k8s.io/v1beta1",
-    "group": "discovery.k8s.io",
-    "version": "v1beta1",
-    "kind": "EndpointSlice",
-    "proto": "api.discovery.v1beta1.EndpointSlice",
-    "rust": "api::discovery::v1beta1::EndpointSlice",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/discovery.k8s.io/v1beta1/endpointslices",
-      "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices",
-      "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices/{name}"
-    ],
-    "subresources": []
-  },
-  "api.events.v1.Event": {
-    "name": "events",
-    "namespaced": true,
-    "apiGroupVersion": "events.k8s.io/v1",
-    "group": "events.k8s.io",
-    "version": "v1",
-    "kind": "Event",
-    "proto": "api.events.v1.Event",
-    "rust": "api::events::v1::Event",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/events.k8s.io/v1/events",
-      "/apis/events.k8s.io/v1/namespaces/{namespace}/events",
-      "/apis/events.k8s.io/v1/namespaces/{namespace}/events/{name}"
-    ],
-    "subresources": []
-  },
-  "api.events.v1beta1.Event": {
-    "name": "events",
-    "namespaced": true,
-    "apiGroupVersion": "events.k8s.io/v1beta1",
-    "group": "events.k8s.io",
-    "version": "v1beta1",
-    "kind": "Event",
-    "proto": "api.events.v1beta1.Event",
-    "rust": "api::events::v1beta1::Event",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/events.k8s.io/v1beta1/events",
-      "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events",
-      "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events/{name}"
-    ],
-    "subresources": []
-  },
-  "api.flowcontrol.v1beta1.FlowSchema": {
-    "name": "flowschemas",
-    "namespaced": false,
-    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
-    "group": "flowcontrol.apiserver.k8s.io",
-    "version": "v1beta1",
-    "kind": "FlowSchema",
-    "proto": "api.flowcontrol.v1beta1.FlowSchema",
-    "rust": "api::flowcontrol::v1beta1::FlowSchema",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::flowcontrol::v1beta1::FlowSchemaSpec",
-    "status": "api::flowcontrol::v1beta1::FlowSchemaStatus",
-    "condition": "api::flowcontrol::v1beta1::FlowSchemaCondition",
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas",
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.flowcontrol.v1beta1.PriorityLevelConfiguration": {
-    "name": "prioritylevelconfigurations",
-    "namespaced": false,
-    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
-    "group": "flowcontrol.apiserver.k8s.io",
-    "version": "v1beta1",
-    "kind": "PriorityLevelConfiguration",
-    "proto": "api.flowcontrol.v1beta1.PriorityLevelConfiguration",
-    "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::flowcontrol::v1beta1::PriorityLevelConfigurationSpec",
-    "status": "api::flowcontrol::v1beta1::PriorityLevelConfigurationStatus",
-    "condition": "api::flowcontrol::v1beta1::PriorityLevelConfigurationCondition",
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations",
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.apiserverinternal.v1alpha1.StorageVersion": {
-    "name": "storageversions",
-    "namespaced": false,
-    "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
-    "group": "internal.apiserver.k8s.io",
-    "version": "v1alpha1",
-    "kind": "StorageVersion",
-    "proto": "api.apiserverinternal.v1alpha1.StorageVersion",
-    "rust": "api::apiserverinternal::v1alpha1::StorageVersion",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::apiserverinternal::v1alpha1::StorageVersionSpec",
-    "status": "api::apiserverinternal::v1alpha1::StorageVersionStatus",
-    "condition": "api::apiserverinternal::v1alpha1::StorageVersionCondition",
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions",
-      "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/internal.apiserver.k8s.io/v1alpha1/storageversions/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.networking.v1.IngressClass": {
-    "name": "ingressclasses",
-    "namespaced": false,
-    "apiGroupVersion": "networking.k8s.io/v1",
-    "group": "networking.k8s.io",
-    "version": "v1",
-    "kind": "IngressClass",
-    "proto": "api.networking.v1.IngressClass",
-    "rust": "api::networking::v1::IngressClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::networking::v1::IngressClassSpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/networking.k8s.io/v1/ingressclasses",
-      "/apis/networking.k8s.io/v1/ingressclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.networking.v1.Ingress": {
-    "name": "ingresses",
-    "namespaced": true,
-    "apiGroupVersion": "networking.k8s.io/v1",
-    "group": "networking.k8s.io",
-    "version": "v1",
-    "kind": "Ingress",
-    "proto": "api.networking.v1.Ingress",
-    "rust": "api::networking::v1::Ingress",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::networking::v1::IngressSpec",
-    "status": "api::networking::v1::IngressStatus",
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/networking.k8s.io/v1/ingresses",
-      "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses",
-      "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.networking.v1.NetworkPolicy": {
-    "name": "networkpolicies",
-    "namespaced": true,
-    "apiGroupVersion": "networking.k8s.io/v1",
-    "group": "networking.k8s.io",
-    "version": "v1",
-    "kind": "NetworkPolicy",
-    "proto": "api.networking.v1.NetworkPolicy",
-    "rust": "api::networking::v1::NetworkPolicy",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::networking::v1::NetworkPolicySpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/networking.k8s.io/v1/networkpolicies",
-      "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies",
-      "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}"
-    ],
-    "subresources": []
-  },
-  "api.node.v1.RuntimeClass": {
-    "name": "runtimeclasses",
-    "namespaced": false,
-    "apiGroupVersion": "node.k8s.io/v1",
-    "group": "node.k8s.io",
-    "version": "v1",
-    "kind": "RuntimeClass",
-    "proto": "api.node.v1.RuntimeClass",
-    "rust": "api::node::v1::RuntimeClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/node.k8s.io/v1/runtimeclasses",
-      "/apis/node.k8s.io/v1/runtimeclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.node.v1alpha1.RuntimeClass": {
-    "name": "runtimeclasses",
-    "namespaced": false,
-    "apiGroupVersion": "node.k8s.io/v1alpha1",
-    "group": "node.k8s.io",
-    "version": "v1alpha1",
-    "kind": "RuntimeClass",
-    "proto": "api.node.v1alpha1.RuntimeClass",
-    "rust": "api::node::v1alpha1::RuntimeClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::node::v1alpha1::RuntimeClassSpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/node.k8s.io/v1alpha1/runtimeclasses",
-      "/apis/node.k8s.io/v1alpha1/runtimeclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.node.v1beta1.RuntimeClass": {
-    "name": "runtimeclasses",
-    "namespaced": false,
-    "apiGroupVersion": "node.k8s.io/v1beta1",
-    "group": "node.k8s.io",
-    "version": "v1beta1",
-    "kind": "RuntimeClass",
-    "proto": "api.node.v1beta1.RuntimeClass",
-    "rust": "api::node::v1beta1::RuntimeClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/node.k8s.io/v1beta1/runtimeclasses",
-      "/apis/node.k8s.io/v1beta1/runtimeclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.policy.v1.PodDisruptionBudget": {
-    "name": "poddisruptionbudgets",
-    "namespaced": true,
-    "apiGroupVersion": "policy/v1",
-    "group": "policy",
-    "version": "v1",
-    "kind": "PodDisruptionBudget",
-    "proto": "api.policy.v1.PodDisruptionBudget",
-    "rust": "api::policy::v1::PodDisruptionBudget",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::policy::v1::PodDisruptionBudgetSpec",
-    "status": "api::policy::v1::PodDisruptionBudgetStatus",
-    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/policy/v1/poddisruptionbudgets",
-      "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets",
-      "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.policy.v1beta1.PodDisruptionBudget": {
-    "name": "poddisruptionbudgets",
-    "namespaced": true,
-    "apiGroupVersion": "policy/v1beta1",
-    "group": "policy",
-    "version": "v1beta1",
-    "kind": "PodDisruptionBudget",
-    "proto": "api.policy.v1beta1.PodDisruptionBudget",
-    "rust": "api::policy::v1beta1::PodDisruptionBudget",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::policy::v1beta1::PodDisruptionBudgetSpec",
-    "status": "api::policy::v1beta1::PodDisruptionBudgetStatus",
-    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/policy/v1beta1/poddisruptionbudgets",
-      "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets",
-      "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "namespaced": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.policy.v1beta1.PodSecurityPolicy": {
-    "name": "podsecuritypolicies",
-    "namespaced": false,
-    "apiGroupVersion": "policy/v1beta1",
-    "group": "policy",
-    "version": "v1beta1",
-    "kind": "PodSecurityPolicy",
-    "proto": "api.policy.v1beta1.PodSecurityPolicy",
-    "rust": "api::policy::v1beta1::PodSecurityPolicy",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::policy::v1beta1::PodSecurityPolicySpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/policy/v1beta1/podsecuritypolicies",
-      "/apis/policy/v1beta1/podsecuritypolicies/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1.ClusterRoleBinding": {
-    "name": "clusterrolebindings",
-    "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1",
-    "kind": "ClusterRoleBinding",
-    "proto": "api.rbac.v1.ClusterRoleBinding",
-    "rust": "api::rbac::v1::ClusterRoleBinding",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings",
-      "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1.ClusterRole": {
-    "name": "clusterroles",
-    "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1",
-    "kind": "ClusterRole",
-    "proto": "api.rbac.v1.ClusterRole",
-    "rust": "api::rbac::v1::ClusterRole",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1/clusterroles",
-      "/apis/rbac.authorization.k8s.io/v1/clusterroles/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1.RoleBinding": {
-    "name": "rolebindings",
-    "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1",
-    "kind": "RoleBinding",
-    "proto": "api.rbac.v1.RoleBinding",
-    "rust": "api::rbac::v1::RoleBinding",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1/rolebindings",
-      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings",
-      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1.Role": {
-    "name": "roles",
-    "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1",
-    "kind": "Role",
-    "proto": "api.rbac.v1.Role",
-    "rust": "api::rbac::v1::Role",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1/roles",
-      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles",
-      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1alpha1.ClusterRoleBinding": {
-    "name": "clusterrolebindings",
-    "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1alpha1",
-    "kind": "ClusterRoleBinding",
-    "proto": "api.rbac.v1alpha1.ClusterRoleBinding",
-    "rust": "api::rbac::v1alpha1::ClusterRoleBinding",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings",
-      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1alpha1.ClusterRole": {
-    "name": "clusterroles",
-    "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1alpha1",
-    "kind": "ClusterRole",
-    "proto": "api.rbac.v1alpha1.ClusterRole",
-    "rust": "api::rbac::v1alpha1::ClusterRole",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles",
-      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1alpha1.RoleBinding": {
-    "name": "rolebindings",
-    "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1alpha1",
-    "kind": "RoleBinding",
-    "proto": "api.rbac.v1alpha1.RoleBinding",
-    "rust": "api::rbac::v1alpha1::RoleBinding",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1alpha1/rolebindings",
-      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings",
-      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings/{name}"
-    ],
-    "subresources": []
-  },
-  "api.rbac.v1alpha1.Role": {
-    "name": "roles",
-    "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
-    "group": "rbac.authorization.k8s.io",
-    "version": "v1alpha1",
-    "kind": "Role",
-    "proto": "api.rbac.v1alpha1.Role",
-    "rust": "api::rbac::v1alpha1::Role",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/rbac.authorization.k8s.io/v1alpha1/roles",
-      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles",
-      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles/{name}"
-    ],
-    "subresources": []
-  },
-  "api.scheduling.v1.PriorityClass": {
-    "name": "priorityclasses",
-    "namespaced": false,
-    "apiGroupVersion": "scheduling.k8s.io/v1",
-    "group": "scheduling.k8s.io",
-    "version": "v1",
-    "kind": "PriorityClass",
-    "proto": "api.scheduling.v1.PriorityClass",
-    "rust": "api::scheduling::v1::PriorityClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/scheduling.k8s.io/v1/priorityclasses",
-      "/apis/scheduling.k8s.io/v1/priorityclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.scheduling.v1alpha1.PriorityClass": {
-    "name": "priorityclasses",
-    "namespaced": false,
-    "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
-    "group": "scheduling.k8s.io",
-    "version": "v1alpha1",
-    "kind": "PriorityClass",
-    "proto": "api.scheduling.v1alpha1.PriorityClass",
-    "rust": "api::scheduling::v1alpha1::PriorityClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/scheduling.k8s.io/v1alpha1/priorityclasses",
-      "/apis/scheduling.k8s.io/v1alpha1/priorityclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.storage.v1.CSIDriver": {
-    "name": "csidrivers",
-    "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
-    "group": "storage.k8s.io",
-    "version": "v1",
-    "kind": "CSIDriver",
-    "proto": "api.storage.v1.CSIDriver",
-    "rust": "api::storage::v1::CSIDriver",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::storage::v1::CSIDriverSpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1/csidrivers",
-      "/apis/storage.k8s.io/v1/csidrivers/{name}"
-    ],
-    "subresources": []
-  },
-  "api.storage.v1.CSINode": {
-    "name": "csinodes",
-    "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
-    "group": "storage.k8s.io",
-    "version": "v1",
-    "kind": "CSINode",
-    "proto": "api.storage.v1.CSINode",
-    "rust": "api::storage::v1::CSINode",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::storage::v1::CSINodeSpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1/csinodes",
-      "/apis/storage.k8s.io/v1/csinodes/{name}"
-    ],
-    "subresources": []
-  },
-  "api.storage.v1.StorageClass": {
-    "name": "storageclasses",
-    "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
-    "group": "storage.k8s.io",
-    "version": "v1",
-    "kind": "StorageClass",
-    "proto": "api.storage.v1.StorageClass",
-    "rust": "api::storage::v1::StorageClass",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1/storageclasses",
-      "/apis/storage.k8s.io/v1/storageclasses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.storage.v1.VolumeAttachment": {
-    "name": "volumeattachments",
-    "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
-    "group": "storage.k8s.io",
-    "version": "v1",
-    "kind": "VolumeAttachment",
-    "proto": "api.storage.v1.VolumeAttachment",
-    "rust": "api::storage::v1::VolumeAttachment",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::storage::v1::VolumeAttachmentSpec",
-    "status": "api::storage::v1::VolumeAttachmentStatus",
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1/volumeattachments",
-      "/apis/storage.k8s.io/v1/volumeattachments/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/storage.k8s.io/v1/volumeattachments/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.storage.v1alpha1.CSIStorageCapacity": {
-    "name": "csistoragecapacities",
-    "namespaced": true,
-    "apiGroupVersion": "storage.k8s.io/v1alpha1",
-    "group": "storage.k8s.io",
-    "version": "v1alpha1",
-    "kind": "CSIStorageCapacity",
-    "proto": "api.storage.v1alpha1.CSIStorageCapacity",
-    "rust": "api::storage::v1alpha1::CSIStorageCapacity",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1alpha1/csistoragecapacities",
-      "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities",
-      "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities/{name}"
-    ],
-    "subresources": []
-  },
-  "api.storage.v1alpha1.VolumeAttachment": {
-    "name": "volumeattachments",
-    "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1alpha1",
-    "group": "storage.k8s.io",
-    "version": "v1alpha1",
-    "kind": "VolumeAttachment",
-    "proto": "api.storage.v1alpha1.VolumeAttachment",
-    "rust": "api::storage::v1alpha1::VolumeAttachment",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::storage::v1alpha1::VolumeAttachmentSpec",
-    "status": "api::storage::v1alpha1::VolumeAttachmentStatus",
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1alpha1/volumeattachments",
-      "/apis/storage.k8s.io/v1alpha1/volumeattachments/{name}"
-    ],
-    "subresources": []
-  },
-  "api.storage.v1beta1.CSIStorageCapacity": {
-    "name": "csistoragecapacities",
-    "namespaced": true,
-    "apiGroupVersion": "storage.k8s.io/v1beta1",
-    "group": "storage.k8s.io",
-    "version": "v1beta1",
-    "kind": "CSIStorageCapacity",
-    "proto": "api.storage.v1beta1.CSIStorageCapacity",
-    "rust": "api::storage::v1beta1::CSIStorageCapacity",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/storage.k8s.io/v1beta1/csistoragecapacities",
-      "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities",
-      "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities/{name}"
-    ],
-    "subresources": []
-  },
   "api.core.v1.Binding": {
     "name": "bindings",
     "namespaced": true,
@@ -2344,6 +1156,50 @@
       }
     ]
   },
+  "api.core.v1.PersistentVolume": {
+    "name": "persistentvolumes",
+    "namespaced": false,
+    "apiGroupVersion": "v1",
+    "group": "",
+    "version": "v1",
+    "kind": "PersistentVolume",
+    "proto": "api.core.v1.PersistentVolume",
+    "rust": "api::core::v1::PersistentVolume",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::core::v1::PersistentVolumeSpec",
+    "status": "api::core::v1::PersistentVolumeStatus",
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/api/v1/persistentvolumes",
+      "/api/v1/persistentvolumes/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/api/v1/persistentvolumes/{name}/status"
+        ]
+      }
+    ]
+  },
   "api.core.v1.PersistentVolumeClaim": {
     "name": "persistentvolumeclaims",
     "namespaced": true,
@@ -2388,50 +1244,6 @@
         },
         "paths": [
           "/api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.core.v1.PersistentVolume": {
-    "name": "persistentvolumes",
-    "namespaced": false,
-    "apiGroupVersion": "v1",
-    "group": "",
-    "version": "v1",
-    "kind": "PersistentVolume",
-    "proto": "api.core.v1.PersistentVolume",
-    "rust": "api::core::v1::PersistentVolume",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::core::v1::PersistentVolumeSpec",
-    "status": "api::core::v1::PersistentVolumeStatus",
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/api/v1/persistentvolumes",
-      "/api/v1/persistentvolumes/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/api/v1/persistentvolumes/{name}/status"
         ]
       }
     ]
@@ -2752,52 +1564,6 @@
     ],
     "subresources": []
   },
-  "api.core.v1.ServiceAccount": {
-    "name": "serviceaccounts",
-    "namespaced": true,
-    "apiGroupVersion": "v1",
-    "group": "",
-    "version": "v1",
-    "kind": "ServiceAccount",
-    "proto": "api.core.v1.ServiceAccount",
-    "rust": "api::core::v1::ServiceAccount",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "list"
-      ],
-      "namespaced": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/api/v1/serviceaccounts",
-      "/api/v1/namespaces/{namespace}/serviceaccounts",
-      "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "token",
-        "scopedVerbs": {
-          "namespaced": [
-            "create"
-          ]
-        },
-        "paths": [
-          "/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token"
-        ]
-      }
-    ]
-  },
   "api.core.v1.Service": {
     "name": "services",
     "namespaced": true,
@@ -2853,6 +1619,1240 @@
         },
         "paths": [
           "/api/v1/namespaces/{namespace}/services/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.core.v1.ServiceAccount": {
+    "name": "serviceaccounts",
+    "namespaced": true,
+    "apiGroupVersion": "v1",
+    "group": "",
+    "version": "v1",
+    "kind": "ServiceAccount",
+    "proto": "api.core.v1.ServiceAccount",
+    "rust": "api::core::v1::ServiceAccount",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/api/v1/serviceaccounts",
+      "/api/v1/namespaces/{namespace}/serviceaccounts",
+      "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "token",
+        "scopedVerbs": {
+          "namespaced": [
+            "create"
+          ]
+        },
+        "paths": [
+          "/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token"
+        ]
+      }
+    ]
+  },
+  "api.discovery.v1.EndpointSlice": {
+    "name": "endpointslices",
+    "namespaced": true,
+    "apiGroupVersion": "discovery.k8s.io/v1",
+    "group": "discovery.k8s.io",
+    "version": "v1",
+    "kind": "EndpointSlice",
+    "proto": "api.discovery.v1.EndpointSlice",
+    "rust": "api::discovery::v1::EndpointSlice",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/discovery.k8s.io/v1/endpointslices",
+      "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices",
+      "/apis/discovery.k8s.io/v1/namespaces/{namespace}/endpointslices/{name}"
+    ],
+    "subresources": []
+  },
+  "api.discovery.v1beta1.EndpointSlice": {
+    "name": "endpointslices",
+    "namespaced": true,
+    "apiGroupVersion": "discovery.k8s.io/v1beta1",
+    "group": "discovery.k8s.io",
+    "version": "v1beta1",
+    "kind": "EndpointSlice",
+    "proto": "api.discovery.v1beta1.EndpointSlice",
+    "rust": "api::discovery::v1beta1::EndpointSlice",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/discovery.k8s.io/v1beta1/endpointslices",
+      "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices",
+      "/apis/discovery.k8s.io/v1beta1/namespaces/{namespace}/endpointslices/{name}"
+    ],
+    "subresources": []
+  },
+  "api.events.v1.Event": {
+    "name": "events",
+    "namespaced": true,
+    "apiGroupVersion": "events.k8s.io/v1",
+    "group": "events.k8s.io",
+    "version": "v1",
+    "kind": "Event",
+    "proto": "api.events.v1.Event",
+    "rust": "api::events::v1::Event",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/events.k8s.io/v1/events",
+      "/apis/events.k8s.io/v1/namespaces/{namespace}/events",
+      "/apis/events.k8s.io/v1/namespaces/{namespace}/events/{name}"
+    ],
+    "subresources": []
+  },
+  "api.events.v1beta1.Event": {
+    "name": "events",
+    "namespaced": true,
+    "apiGroupVersion": "events.k8s.io/v1beta1",
+    "group": "events.k8s.io",
+    "version": "v1beta1",
+    "kind": "Event",
+    "proto": "api.events.v1beta1.Event",
+    "rust": "api::events::v1beta1::Event",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/events.k8s.io/v1beta1/events",
+      "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events",
+      "/apis/events.k8s.io/v1beta1/namespaces/{namespace}/events/{name}"
+    ],
+    "subresources": []
+  },
+  "api.flowcontrol.v1beta1.FlowSchema": {
+    "name": "flowschemas",
+    "namespaced": false,
+    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+    "group": "flowcontrol.apiserver.k8s.io",
+    "version": "v1beta1",
+    "kind": "FlowSchema",
+    "proto": "api.flowcontrol.v1beta1.FlowSchema",
+    "rust": "api::flowcontrol::v1beta1::FlowSchema",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::flowcontrol::v1beta1::FlowSchemaSpec",
+    "status": "api::flowcontrol::v1beta1::FlowSchemaStatus",
+    "condition": "api::flowcontrol::v1beta1::FlowSchemaCondition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas",
+      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/flowschemas/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.flowcontrol.v1beta1.PriorityLevelConfiguration": {
+    "name": "prioritylevelconfigurations",
+    "namespaced": false,
+    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+    "group": "flowcontrol.apiserver.k8s.io",
+    "version": "v1beta1",
+    "kind": "PriorityLevelConfiguration",
+    "proto": "api.flowcontrol.v1beta1.PriorityLevelConfiguration",
+    "rust": "api::flowcontrol::v1beta1::PriorityLevelConfiguration",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::flowcontrol::v1beta1::PriorityLevelConfigurationSpec",
+    "status": "api::flowcontrol::v1beta1::PriorityLevelConfigurationStatus",
+    "condition": "api::flowcontrol::v1beta1::PriorityLevelConfigurationCondition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations",
+      "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/flowcontrol.apiserver.k8s.io/v1beta1/prioritylevelconfigurations/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.networking.v1.Ingress": {
+    "name": "ingresses",
+    "namespaced": true,
+    "apiGroupVersion": "networking.k8s.io/v1",
+    "group": "networking.k8s.io",
+    "version": "v1",
+    "kind": "Ingress",
+    "proto": "api.networking.v1.Ingress",
+    "rust": "api::networking::v1::Ingress",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::networking::v1::IngressSpec",
+    "status": "api::networking::v1::IngressStatus",
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/networking.k8s.io/v1/ingresses",
+      "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses",
+      "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/networking.k8s.io/v1/namespaces/{namespace}/ingresses/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.networking.v1.IngressClass": {
+    "name": "ingressclasses",
+    "namespaced": false,
+    "apiGroupVersion": "networking.k8s.io/v1",
+    "group": "networking.k8s.io",
+    "version": "v1",
+    "kind": "IngressClass",
+    "proto": "api.networking.v1.IngressClass",
+    "rust": "api::networking::v1::IngressClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::networking::v1::IngressClassSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/networking.k8s.io/v1/ingressclasses",
+      "/apis/networking.k8s.io/v1/ingressclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.networking.v1.NetworkPolicy": {
+    "name": "networkpolicies",
+    "namespaced": true,
+    "apiGroupVersion": "networking.k8s.io/v1",
+    "group": "networking.k8s.io",
+    "version": "v1",
+    "kind": "NetworkPolicy",
+    "proto": "api.networking.v1.NetworkPolicy",
+    "rust": "api::networking::v1::NetworkPolicy",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::networking::v1::NetworkPolicySpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/networking.k8s.io/v1/networkpolicies",
+      "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies",
+      "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}"
+    ],
+    "subresources": []
+  },
+  "api.node.v1.RuntimeClass": {
+    "name": "runtimeclasses",
+    "namespaced": false,
+    "apiGroupVersion": "node.k8s.io/v1",
+    "group": "node.k8s.io",
+    "version": "v1",
+    "kind": "RuntimeClass",
+    "proto": "api.node.v1.RuntimeClass",
+    "rust": "api::node::v1::RuntimeClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/node.k8s.io/v1/runtimeclasses",
+      "/apis/node.k8s.io/v1/runtimeclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.node.v1alpha1.RuntimeClass": {
+    "name": "runtimeclasses",
+    "namespaced": false,
+    "apiGroupVersion": "node.k8s.io/v1alpha1",
+    "group": "node.k8s.io",
+    "version": "v1alpha1",
+    "kind": "RuntimeClass",
+    "proto": "api.node.v1alpha1.RuntimeClass",
+    "rust": "api::node::v1alpha1::RuntimeClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::node::v1alpha1::RuntimeClassSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/node.k8s.io/v1alpha1/runtimeclasses",
+      "/apis/node.k8s.io/v1alpha1/runtimeclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.node.v1beta1.RuntimeClass": {
+    "name": "runtimeclasses",
+    "namespaced": false,
+    "apiGroupVersion": "node.k8s.io/v1beta1",
+    "group": "node.k8s.io",
+    "version": "v1beta1",
+    "kind": "RuntimeClass",
+    "proto": "api.node.v1beta1.RuntimeClass",
+    "rust": "api::node::v1beta1::RuntimeClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/node.k8s.io/v1beta1/runtimeclasses",
+      "/apis/node.k8s.io/v1beta1/runtimeclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.policy.v1.PodDisruptionBudget": {
+    "name": "poddisruptionbudgets",
+    "namespaced": true,
+    "apiGroupVersion": "policy/v1",
+    "group": "policy",
+    "version": "v1",
+    "kind": "PodDisruptionBudget",
+    "proto": "api.policy.v1.PodDisruptionBudget",
+    "rust": "api::policy::v1::PodDisruptionBudget",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::policy::v1::PodDisruptionBudgetSpec",
+    "status": "api::policy::v1::PodDisruptionBudgetStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/policy/v1/poddisruptionbudgets",
+      "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets",
+      "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/policy/v1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.policy.v1beta1.PodDisruptionBudget": {
+    "name": "poddisruptionbudgets",
+    "namespaced": true,
+    "apiGroupVersion": "policy/v1beta1",
+    "group": "policy",
+    "version": "v1beta1",
+    "kind": "PodDisruptionBudget",
+    "proto": "api.policy.v1beta1.PodDisruptionBudget",
+    "rust": "api::policy::v1beta1::PodDisruptionBudget",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::policy::v1beta1::PodDisruptionBudgetSpec",
+    "status": "api::policy::v1beta1::PodDisruptionBudgetStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/policy/v1beta1/poddisruptionbudgets",
+      "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets",
+      "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/policy/v1beta1/namespaces/{namespace}/poddisruptionbudgets/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.policy.v1beta1.PodSecurityPolicy": {
+    "name": "podsecuritypolicies",
+    "namespaced": false,
+    "apiGroupVersion": "policy/v1beta1",
+    "group": "policy",
+    "version": "v1beta1",
+    "kind": "PodSecurityPolicy",
+    "proto": "api.policy.v1beta1.PodSecurityPolicy",
+    "rust": "api::policy::v1beta1::PodSecurityPolicy",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::policy::v1beta1::PodSecurityPolicySpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/policy/v1beta1/podsecuritypolicies",
+      "/apis/policy/v1beta1/podsecuritypolicies/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1.ClusterRole": {
+    "name": "clusterroles",
+    "namespaced": false,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1",
+    "kind": "ClusterRole",
+    "proto": "api.rbac.v1.ClusterRole",
+    "rust": "api::rbac::v1::ClusterRole",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1/clusterroles",
+      "/apis/rbac.authorization.k8s.io/v1/clusterroles/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1.ClusterRoleBinding": {
+    "name": "clusterrolebindings",
+    "namespaced": false,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1",
+    "kind": "ClusterRoleBinding",
+    "proto": "api.rbac.v1.ClusterRoleBinding",
+    "rust": "api::rbac::v1::ClusterRoleBinding",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings",
+      "/apis/rbac.authorization.k8s.io/v1/clusterrolebindings/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1.Role": {
+    "name": "roles",
+    "namespaced": true,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1",
+    "kind": "Role",
+    "proto": "api.rbac.v1.Role",
+    "rust": "api::rbac::v1::Role",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1/roles",
+      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles",
+      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1.RoleBinding": {
+    "name": "rolebindings",
+    "namespaced": true,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1",
+    "kind": "RoleBinding",
+    "proto": "api.rbac.v1.RoleBinding",
+    "rust": "api::rbac::v1::RoleBinding",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1/rolebindings",
+      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings",
+      "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1alpha1.ClusterRole": {
+    "name": "clusterroles",
+    "namespaced": false,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1alpha1",
+    "kind": "ClusterRole",
+    "proto": "api.rbac.v1alpha1.ClusterRole",
+    "rust": "api::rbac::v1alpha1::ClusterRole",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles",
+      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1alpha1.ClusterRoleBinding": {
+    "name": "clusterrolebindings",
+    "namespaced": false,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1alpha1",
+    "kind": "ClusterRoleBinding",
+    "proto": "api.rbac.v1alpha1.ClusterRoleBinding",
+    "rust": "api::rbac::v1alpha1::ClusterRoleBinding",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings",
+      "/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1alpha1.Role": {
+    "name": "roles",
+    "namespaced": true,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1alpha1",
+    "kind": "Role",
+    "proto": "api.rbac.v1alpha1.Role",
+    "rust": "api::rbac::v1alpha1::Role",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1alpha1/roles",
+      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles",
+      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles/{name}"
+    ],
+    "subresources": []
+  },
+  "api.rbac.v1alpha1.RoleBinding": {
+    "name": "rolebindings",
+    "namespaced": true,
+    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "group": "rbac.authorization.k8s.io",
+    "version": "v1alpha1",
+    "kind": "RoleBinding",
+    "proto": "api.rbac.v1alpha1.RoleBinding",
+    "rust": "api::rbac::v1alpha1::RoleBinding",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/rbac.authorization.k8s.io/v1alpha1/rolebindings",
+      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings",
+      "/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings/{name}"
+    ],
+    "subresources": []
+  },
+  "api.scheduling.v1.PriorityClass": {
+    "name": "priorityclasses",
+    "namespaced": false,
+    "apiGroupVersion": "scheduling.k8s.io/v1",
+    "group": "scheduling.k8s.io",
+    "version": "v1",
+    "kind": "PriorityClass",
+    "proto": "api.scheduling.v1.PriorityClass",
+    "rust": "api::scheduling::v1::PriorityClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/scheduling.k8s.io/v1/priorityclasses",
+      "/apis/scheduling.k8s.io/v1/priorityclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.scheduling.v1alpha1.PriorityClass": {
+    "name": "priorityclasses",
+    "namespaced": false,
+    "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
+    "group": "scheduling.k8s.io",
+    "version": "v1alpha1",
+    "kind": "PriorityClass",
+    "proto": "api.scheduling.v1alpha1.PriorityClass",
+    "rust": "api::scheduling::v1alpha1::PriorityClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/scheduling.k8s.io/v1alpha1/priorityclasses",
+      "/apis/scheduling.k8s.io/v1alpha1/priorityclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.storage.v1.CSIDriver": {
+    "name": "csidrivers",
+    "namespaced": false,
+    "apiGroupVersion": "storage.k8s.io/v1",
+    "group": "storage.k8s.io",
+    "version": "v1",
+    "kind": "CSIDriver",
+    "proto": "api.storage.v1.CSIDriver",
+    "rust": "api::storage::v1::CSIDriver",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::storage::v1::CSIDriverSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1/csidrivers",
+      "/apis/storage.k8s.io/v1/csidrivers/{name}"
+    ],
+    "subresources": []
+  },
+  "api.storage.v1.CSINode": {
+    "name": "csinodes",
+    "namespaced": false,
+    "apiGroupVersion": "storage.k8s.io/v1",
+    "group": "storage.k8s.io",
+    "version": "v1",
+    "kind": "CSINode",
+    "proto": "api.storage.v1.CSINode",
+    "rust": "api::storage::v1::CSINode",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::storage::v1::CSINodeSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1/csinodes",
+      "/apis/storage.k8s.io/v1/csinodes/{name}"
+    ],
+    "subresources": []
+  },
+  "api.storage.v1.StorageClass": {
+    "name": "storageclasses",
+    "namespaced": false,
+    "apiGroupVersion": "storage.k8s.io/v1",
+    "group": "storage.k8s.io",
+    "version": "v1",
+    "kind": "StorageClass",
+    "proto": "api.storage.v1.StorageClass",
+    "rust": "api::storage::v1::StorageClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1/storageclasses",
+      "/apis/storage.k8s.io/v1/storageclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.storage.v1.VolumeAttachment": {
+    "name": "volumeattachments",
+    "namespaced": false,
+    "apiGroupVersion": "storage.k8s.io/v1",
+    "group": "storage.k8s.io",
+    "version": "v1",
+    "kind": "VolumeAttachment",
+    "proto": "api.storage.v1.VolumeAttachment",
+    "rust": "api::storage::v1::VolumeAttachment",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::storage::v1::VolumeAttachmentSpec",
+    "status": "api::storage::v1::VolumeAttachmentStatus",
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1/volumeattachments",
+      "/apis/storage.k8s.io/v1/volumeattachments/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/storage.k8s.io/v1/volumeattachments/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.storage.v1alpha1.CSIStorageCapacity": {
+    "name": "csistoragecapacities",
+    "namespaced": true,
+    "apiGroupVersion": "storage.k8s.io/v1alpha1",
+    "group": "storage.k8s.io",
+    "version": "v1alpha1",
+    "kind": "CSIStorageCapacity",
+    "proto": "api.storage.v1alpha1.CSIStorageCapacity",
+    "rust": "api::storage::v1alpha1::CSIStorageCapacity",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1alpha1/csistoragecapacities",
+      "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities",
+      "/apis/storage.k8s.io/v1alpha1/namespaces/{namespace}/csistoragecapacities/{name}"
+    ],
+    "subresources": []
+  },
+  "api.storage.v1alpha1.VolumeAttachment": {
+    "name": "volumeattachments",
+    "namespaced": false,
+    "apiGroupVersion": "storage.k8s.io/v1alpha1",
+    "group": "storage.k8s.io",
+    "version": "v1alpha1",
+    "kind": "VolumeAttachment",
+    "proto": "api.storage.v1alpha1.VolumeAttachment",
+    "rust": "api::storage::v1alpha1::VolumeAttachment",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::storage::v1alpha1::VolumeAttachmentSpec",
+    "status": "api::storage::v1alpha1::VolumeAttachmentStatus",
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1alpha1/volumeattachments",
+      "/apis/storage.k8s.io/v1alpha1/volumeattachments/{name}"
+    ],
+    "subresources": []
+  },
+  "api.storage.v1beta1.CSIStorageCapacity": {
+    "name": "csistoragecapacities",
+    "namespaced": true,
+    "apiGroupVersion": "storage.k8s.io/v1beta1",
+    "group": "storage.k8s.io",
+    "version": "v1beta1",
+    "kind": "CSIStorageCapacity",
+    "proto": "api.storage.v1beta1.CSIStorageCapacity",
+    "rust": "api::storage::v1beta1::CSIStorageCapacity",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1beta1/csistoragecapacities",
+      "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities",
+      "/apis/storage.k8s.io/v1beta1/namespaces/{namespace}/csistoragecapacities/{name}"
+    ],
+    "subresources": []
+  },
+  "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition": {
+    "name": "customresourcedefinitions",
+    "namespaced": false,
+    "apiGroupVersion": "apiextensions.k8s.io/v1",
+    "group": "apiextensions.k8s.io",
+    "version": "v1",
+    "kind": "CustomResourceDefinition",
+    "proto": "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition",
+    "rust": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinition",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec",
+    "status": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionStatus",
+    "condition": "apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionCondition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/apiextensions.k8s.io/v1/customresourcedefinitions",
+      "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/{name}/status"
+        ]
+      }
+    ]
+  },
+  "kube_aggregator.pkg.apis.apiregistration.v1.APIService": {
+    "name": "apiservices",
+    "namespaced": false,
+    "apiGroupVersion": "apiregistration.k8s.io/v1",
+    "group": "apiregistration.k8s.io",
+    "version": "v1",
+    "kind": "APIService",
+    "proto": "kube_aggregator.pkg.apis.apiregistration.v1.APIService",
+    "rust": "kube_aggregator::pkg::apis::apiregistration::v1::APIService",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec",
+    "status": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceStatus",
+    "condition": "kube_aggregator::pkg::apis::apiregistration::v1::APIServiceCondition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/apiregistration.k8s.io/v1/apiservices",
+      "/apis/apiregistration.k8s.io/v1/apiservices/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/apiregistration.k8s.io/v1/apiservices/{name}/status"
         ]
       }
     ]
