@@ -78,6 +78,9 @@ codegen-fds:
 codegen: codegen-fds
     #!/usr/bin/env bash
     set -exuo pipefail
+    rm -rf k8s-pb/src && mkdir k8s-pb/src
+    # src/lib.rs must exist to `cargo run`
+    touch k8s-pb/src/lib.rs
     cd k8s-pb-codegen
-    rm -rf out/ && mkdir out
+    rm -rf tmp/ && mkdir tmp
     cargo run
