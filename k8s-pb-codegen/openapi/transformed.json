@@ -2,7 +2,7 @@
   "api.admissionregistration.v1.MutatingWebhookConfiguration": {
     "name": "mutatingwebhookconfigurations",
     "namespaced": false,
-    "apiGroupVersion": "admissionregistration.k8s.io/v1",
+    "apiVersion": "admissionregistration.k8s.io/v1",
     "group": "admissionregistration.k8s.io",
     "version": "v1",
     "kind": "MutatingWebhookConfiguration",
@@ -32,7 +32,7 @@
   "api.admissionregistration.v1.ValidatingWebhookConfiguration": {
     "name": "validatingwebhookconfigurations",
     "namespaced": false,
-    "apiGroupVersion": "admissionregistration.k8s.io/v1",
+    "apiVersion": "admissionregistration.k8s.io/v1",
     "group": "admissionregistration.k8s.io",
     "version": "v1",
     "kind": "ValidatingWebhookConfiguration",
@@ -62,7 +62,7 @@
   "api.apiserverinternal.v1alpha1.StorageVersion": {
     "name": "storageversions",
     "namespaced": false,
-    "apiGroupVersion": "internal.apiserver.k8s.io/v1alpha1",
+    "apiVersion": "internal.apiserver.k8s.io/v1alpha1",
     "group": "internal.apiserver.k8s.io",
     "version": "v1alpha1",
     "kind": "StorageVersion",
@@ -106,7 +106,7 @@
   "api.apps.v1.ControllerRevision": {
     "name": "controllerrevisions",
     "namespaced": true,
-    "apiGroupVersion": "apps/v1",
+    "apiVersion": "apps/v1",
     "group": "apps",
     "version": "v1",
     "kind": "ControllerRevision",
@@ -140,7 +140,7 @@
   "api.apps.v1.DaemonSet": {
     "name": "daemonsets",
     "namespaced": true,
-    "apiGroupVersion": "apps/v1",
+    "apiVersion": "apps/v1",
     "group": "apps",
     "version": "v1",
     "kind": "DaemonSet",
@@ -188,7 +188,7 @@
   "api.apps.v1.Deployment": {
     "name": "deployments",
     "namespaced": true,
-    "apiGroupVersion": "apps/v1",
+    "apiVersion": "apps/v1",
     "group": "apps",
     "version": "v1",
     "kind": "Deployment",
@@ -249,7 +249,7 @@
   "api.apps.v1.ReplicaSet": {
     "name": "replicasets",
     "namespaced": true,
-    "apiGroupVersion": "apps/v1",
+    "apiVersion": "apps/v1",
     "group": "apps",
     "version": "v1",
     "kind": "ReplicaSet",
@@ -310,7 +310,7 @@
   "api.apps.v1.StatefulSet": {
     "name": "statefulsets",
     "namespaced": true,
-    "apiGroupVersion": "apps/v1",
+    "apiVersion": "apps/v1",
     "group": "apps",
     "version": "v1",
     "kind": "StatefulSet",
@@ -371,7 +371,7 @@
   "api.authentication.v1.TokenReview": {
     "name": "tokenreviews",
     "namespaced": false,
-    "apiGroupVersion": "authentication.k8s.io/v1",
+    "apiVersion": "authentication.k8s.io/v1",
     "group": "authentication.k8s.io",
     "version": "v1",
     "kind": "TokenReview",
@@ -394,7 +394,7 @@
   "api.authorization.v1.LocalSubjectAccessReview": {
     "name": "localsubjectaccessreviews",
     "namespaced": true,
-    "apiGroupVersion": "authorization.k8s.io/v1",
+    "apiVersion": "authorization.k8s.io/v1",
     "group": "authorization.k8s.io",
     "version": "v1",
     "kind": "LocalSubjectAccessReview",
@@ -417,7 +417,7 @@
   "api.authorization.v1.SelfSubjectAccessReview": {
     "name": "selfsubjectaccessreviews",
     "namespaced": false,
-    "apiGroupVersion": "authorization.k8s.io/v1",
+    "apiVersion": "authorization.k8s.io/v1",
     "group": "authorization.k8s.io",
     "version": "v1",
     "kind": "SelfSubjectAccessReview",
@@ -440,7 +440,7 @@
   "api.authorization.v1.SelfSubjectRulesReview": {
     "name": "selfsubjectrulesreviews",
     "namespaced": false,
-    "apiGroupVersion": "authorization.k8s.io/v1",
+    "apiVersion": "authorization.k8s.io/v1",
     "group": "authorization.k8s.io",
     "version": "v1",
     "kind": "SelfSubjectRulesReview",
@@ -463,7 +463,7 @@
   "api.authorization.v1.SubjectAccessReview": {
     "name": "subjectaccessreviews",
     "namespaced": false,
-    "apiGroupVersion": "authorization.k8s.io/v1",
+    "apiVersion": "authorization.k8s.io/v1",
     "group": "authorization.k8s.io",
     "version": "v1",
     "kind": "SubjectAccessReview",
@@ -486,7 +486,7 @@
   "api.autoscaling.v1.HorizontalPodAutoscaler": {
     "name": "horizontalpodautoscalers",
     "namespaced": true,
-    "apiGroupVersion": "autoscaling/v1",
+    "apiVersion": "autoscaling/v1",
     "group": "autoscaling",
     "version": "v1",
     "kind": "HorizontalPodAutoscaler",
@@ -534,7 +534,7 @@
   "api.autoscaling.v2beta1.HorizontalPodAutoscaler": {
     "name": "horizontalpodautoscalers",
     "namespaced": true,
-    "apiGroupVersion": "autoscaling/v2beta1",
+    "apiVersion": "autoscaling/v2beta1",
     "group": "autoscaling",
     "version": "v2beta1",
     "kind": "HorizontalPodAutoscaler",
@@ -582,7 +582,7 @@
   "api.autoscaling.v2beta2.HorizontalPodAutoscaler": {
     "name": "horizontalpodautoscalers",
     "namespaced": true,
-    "apiGroupVersion": "autoscaling/v2beta2",
+    "apiVersion": "autoscaling/v2beta2",
     "group": "autoscaling",
     "version": "v2beta2",
     "kind": "HorizontalPodAutoscaler",
@@ -630,7 +630,7 @@
   "api.batch.v1.CronJob": {
     "name": "cronjobs",
     "namespaced": true,
-    "apiGroupVersion": "batch/v1",
+    "apiVersion": "batch/v1",
     "group": "batch",
     "version": "v1",
     "kind": "CronJob",
@@ -678,7 +678,7 @@
   "api.batch.v1.Job": {
     "name": "jobs",
     "namespaced": true,
-    "apiGroupVersion": "batch/v1",
+    "apiVersion": "batch/v1",
     "group": "batch",
     "version": "v1",
     "kind": "Job",
@@ -726,7 +726,7 @@
   "api.batch.v1beta1.CronJob": {
     "name": "cronjobs",
     "namespaced": true,
-    "apiGroupVersion": "batch/v1beta1",
+    "apiVersion": "batch/v1beta1",
     "group": "batch",
     "version": "v1beta1",
     "kind": "CronJob",
@@ -774,7 +774,7 @@
   "api.certificates.v1.CertificateSigningRequest": {
     "name": "certificatesigningrequests",
     "namespaced": false,
-    "apiGroupVersion": "certificates.k8s.io/v1",
+    "apiVersion": "certificates.k8s.io/v1",
     "group": "certificates.k8s.io",
     "version": "v1",
     "kind": "CertificateSigningRequest",
@@ -831,7 +831,7 @@
   "api.coordination.v1.Lease": {
     "name": "leases",
     "namespaced": true,
-    "apiGroupVersion": "coordination.k8s.io/v1",
+    "apiVersion": "coordination.k8s.io/v1",
     "group": "coordination.k8s.io",
     "version": "v1",
     "kind": "Lease",
@@ -865,7 +865,7 @@
   "api.core.v1.Binding": {
     "name": "bindings",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Binding",
@@ -888,7 +888,7 @@
   "api.core.v1.ComponentStatus": {
     "name": "componentstatuses",
     "namespaced": false,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "ComponentStatus",
@@ -913,7 +913,7 @@
   "api.core.v1.ConfigMap": {
     "name": "configmaps",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "ConfigMap",
@@ -947,7 +947,7 @@
   "api.core.v1.Endpoints": {
     "name": "endpoints",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Endpoints",
@@ -981,7 +981,7 @@
   "api.core.v1.Event": {
     "name": "events",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Event",
@@ -1015,7 +1015,7 @@
   "api.core.v1.LimitRange": {
     "name": "limitranges",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "LimitRange",
@@ -1049,7 +1049,7 @@
   "api.core.v1.Namespace": {
     "name": "namespaces",
     "namespaced": false,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Namespace",
@@ -1103,7 +1103,7 @@
   "api.core.v1.Node": {
     "name": "nodes",
     "namespaced": false,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Node",
@@ -1159,7 +1159,7 @@
   "api.core.v1.PersistentVolume": {
     "name": "persistentvolumes",
     "namespaced": false,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "PersistentVolume",
@@ -1203,7 +1203,7 @@
   "api.core.v1.PersistentVolumeClaim": {
     "name": "persistentvolumeclaims",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "PersistentVolumeClaim",
@@ -1251,7 +1251,7 @@
   "api.core.v1.Pod": {
     "name": "pods",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Pod",
@@ -1390,7 +1390,7 @@
   "api.core.v1.PodTemplate": {
     "name": "podtemplates",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "PodTemplate",
@@ -1424,7 +1424,7 @@
   "api.core.v1.ReplicationController": {
     "name": "replicationcontrollers",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "ReplicationController",
@@ -1485,7 +1485,7 @@
   "api.core.v1.ResourceQuota": {
     "name": "resourcequotas",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "ResourceQuota",
@@ -1533,7 +1533,7 @@
   "api.core.v1.Secret": {
     "name": "secrets",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Secret",
@@ -1567,7 +1567,7 @@
   "api.core.v1.Service": {
     "name": "services",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "Service",
@@ -1626,7 +1626,7 @@
   "api.core.v1.ServiceAccount": {
     "name": "serviceaccounts",
     "namespaced": true,
-    "apiGroupVersion": "v1",
+    "apiVersion": "v1",
     "group": "",
     "version": "v1",
     "kind": "ServiceAccount",
@@ -1672,7 +1672,7 @@
   "api.discovery.v1.EndpointSlice": {
     "name": "endpointslices",
     "namespaced": true,
-    "apiGroupVersion": "discovery.k8s.io/v1",
+    "apiVersion": "discovery.k8s.io/v1",
     "group": "discovery.k8s.io",
     "version": "v1",
     "kind": "EndpointSlice",
@@ -1706,7 +1706,7 @@
   "api.discovery.v1beta1.EndpointSlice": {
     "name": "endpointslices",
     "namespaced": true,
-    "apiGroupVersion": "discovery.k8s.io/v1beta1",
+    "apiVersion": "discovery.k8s.io/v1beta1",
     "group": "discovery.k8s.io",
     "version": "v1beta1",
     "kind": "EndpointSlice",
@@ -1740,7 +1740,7 @@
   "api.events.v1.Event": {
     "name": "events",
     "namespaced": true,
-    "apiGroupVersion": "events.k8s.io/v1",
+    "apiVersion": "events.k8s.io/v1",
     "group": "events.k8s.io",
     "version": "v1",
     "kind": "Event",
@@ -1774,7 +1774,7 @@
   "api.events.v1beta1.Event": {
     "name": "events",
     "namespaced": true,
-    "apiGroupVersion": "events.k8s.io/v1beta1",
+    "apiVersion": "events.k8s.io/v1beta1",
     "group": "events.k8s.io",
     "version": "v1beta1",
     "kind": "Event",
@@ -1808,7 +1808,7 @@
   "api.flowcontrol.v1beta1.FlowSchema": {
     "name": "flowschemas",
     "namespaced": false,
-    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+    "apiVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
     "group": "flowcontrol.apiserver.k8s.io",
     "version": "v1beta1",
     "kind": "FlowSchema",
@@ -1852,7 +1852,7 @@
   "api.flowcontrol.v1beta1.PriorityLevelConfiguration": {
     "name": "prioritylevelconfigurations",
     "namespaced": false,
-    "apiGroupVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
+    "apiVersion": "flowcontrol.apiserver.k8s.io/v1beta1",
     "group": "flowcontrol.apiserver.k8s.io",
     "version": "v1beta1",
     "kind": "PriorityLevelConfiguration",
@@ -1896,7 +1896,7 @@
   "api.networking.v1.Ingress": {
     "name": "ingresses",
     "namespaced": true,
-    "apiGroupVersion": "networking.k8s.io/v1",
+    "apiVersion": "networking.k8s.io/v1",
     "group": "networking.k8s.io",
     "version": "v1",
     "kind": "Ingress",
@@ -1944,7 +1944,7 @@
   "api.networking.v1.IngressClass": {
     "name": "ingressclasses",
     "namespaced": false,
-    "apiGroupVersion": "networking.k8s.io/v1",
+    "apiVersion": "networking.k8s.io/v1",
     "group": "networking.k8s.io",
     "version": "v1",
     "kind": "IngressClass",
@@ -1974,7 +1974,7 @@
   "api.networking.v1.NetworkPolicy": {
     "name": "networkpolicies",
     "namespaced": true,
-    "apiGroupVersion": "networking.k8s.io/v1",
+    "apiVersion": "networking.k8s.io/v1",
     "group": "networking.k8s.io",
     "version": "v1",
     "kind": "NetworkPolicy",
@@ -2008,7 +2008,7 @@
   "api.node.v1.RuntimeClass": {
     "name": "runtimeclasses",
     "namespaced": false,
-    "apiGroupVersion": "node.k8s.io/v1",
+    "apiVersion": "node.k8s.io/v1",
     "group": "node.k8s.io",
     "version": "v1",
     "kind": "RuntimeClass",
@@ -2038,7 +2038,7 @@
   "api.node.v1alpha1.RuntimeClass": {
     "name": "runtimeclasses",
     "namespaced": false,
-    "apiGroupVersion": "node.k8s.io/v1alpha1",
+    "apiVersion": "node.k8s.io/v1alpha1",
     "group": "node.k8s.io",
     "version": "v1alpha1",
     "kind": "RuntimeClass",
@@ -2068,7 +2068,7 @@
   "api.node.v1beta1.RuntimeClass": {
     "name": "runtimeclasses",
     "namespaced": false,
-    "apiGroupVersion": "node.k8s.io/v1beta1",
+    "apiVersion": "node.k8s.io/v1beta1",
     "group": "node.k8s.io",
     "version": "v1beta1",
     "kind": "RuntimeClass",
@@ -2098,7 +2098,7 @@
   "api.policy.v1.PodDisruptionBudget": {
     "name": "poddisruptionbudgets",
     "namespaced": true,
-    "apiGroupVersion": "policy/v1",
+    "apiVersion": "policy/v1",
     "group": "policy",
     "version": "v1",
     "kind": "PodDisruptionBudget",
@@ -2146,7 +2146,7 @@
   "api.policy.v1beta1.PodDisruptionBudget": {
     "name": "poddisruptionbudgets",
     "namespaced": true,
-    "apiGroupVersion": "policy/v1beta1",
+    "apiVersion": "policy/v1beta1",
     "group": "policy",
     "version": "v1beta1",
     "kind": "PodDisruptionBudget",
@@ -2194,7 +2194,7 @@
   "api.policy.v1beta1.PodSecurityPolicy": {
     "name": "podsecuritypolicies",
     "namespaced": false,
-    "apiGroupVersion": "policy/v1beta1",
+    "apiVersion": "policy/v1beta1",
     "group": "policy",
     "version": "v1beta1",
     "kind": "PodSecurityPolicy",
@@ -2224,7 +2224,7 @@
   "api.rbac.v1.ClusterRole": {
     "name": "clusterroles",
     "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "apiVersion": "rbac.authorization.k8s.io/v1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1",
     "kind": "ClusterRole",
@@ -2254,7 +2254,7 @@
   "api.rbac.v1.ClusterRoleBinding": {
     "name": "clusterrolebindings",
     "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "apiVersion": "rbac.authorization.k8s.io/v1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1",
     "kind": "ClusterRoleBinding",
@@ -2284,7 +2284,7 @@
   "api.rbac.v1.Role": {
     "name": "roles",
     "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "apiVersion": "rbac.authorization.k8s.io/v1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1",
     "kind": "Role",
@@ -2318,7 +2318,7 @@
   "api.rbac.v1.RoleBinding": {
     "name": "rolebindings",
     "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1",
+    "apiVersion": "rbac.authorization.k8s.io/v1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1",
     "kind": "RoleBinding",
@@ -2352,7 +2352,7 @@
   "api.rbac.v1alpha1.ClusterRole": {
     "name": "clusterroles",
     "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "apiVersion": "rbac.authorization.k8s.io/v1alpha1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1alpha1",
     "kind": "ClusterRole",
@@ -2382,7 +2382,7 @@
   "api.rbac.v1alpha1.ClusterRoleBinding": {
     "name": "clusterrolebindings",
     "namespaced": false,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "apiVersion": "rbac.authorization.k8s.io/v1alpha1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1alpha1",
     "kind": "ClusterRoleBinding",
@@ -2412,7 +2412,7 @@
   "api.rbac.v1alpha1.Role": {
     "name": "roles",
     "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "apiVersion": "rbac.authorization.k8s.io/v1alpha1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1alpha1",
     "kind": "Role",
@@ -2446,7 +2446,7 @@
   "api.rbac.v1alpha1.RoleBinding": {
     "name": "rolebindings",
     "namespaced": true,
-    "apiGroupVersion": "rbac.authorization.k8s.io/v1alpha1",
+    "apiVersion": "rbac.authorization.k8s.io/v1alpha1",
     "group": "rbac.authorization.k8s.io",
     "version": "v1alpha1",
     "kind": "RoleBinding",
@@ -2480,7 +2480,7 @@
   "api.scheduling.v1.PriorityClass": {
     "name": "priorityclasses",
     "namespaced": false,
-    "apiGroupVersion": "scheduling.k8s.io/v1",
+    "apiVersion": "scheduling.k8s.io/v1",
     "group": "scheduling.k8s.io",
     "version": "v1",
     "kind": "PriorityClass",
@@ -2510,7 +2510,7 @@
   "api.scheduling.v1alpha1.PriorityClass": {
     "name": "priorityclasses",
     "namespaced": false,
-    "apiGroupVersion": "scheduling.k8s.io/v1alpha1",
+    "apiVersion": "scheduling.k8s.io/v1alpha1",
     "group": "scheduling.k8s.io",
     "version": "v1alpha1",
     "kind": "PriorityClass",
@@ -2540,7 +2540,7 @@
   "api.storage.v1.CSIDriver": {
     "name": "csidrivers",
     "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
+    "apiVersion": "storage.k8s.io/v1",
     "group": "storage.k8s.io",
     "version": "v1",
     "kind": "CSIDriver",
@@ -2570,7 +2570,7 @@
   "api.storage.v1.CSINode": {
     "name": "csinodes",
     "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
+    "apiVersion": "storage.k8s.io/v1",
     "group": "storage.k8s.io",
     "version": "v1",
     "kind": "CSINode",
@@ -2600,7 +2600,7 @@
   "api.storage.v1.StorageClass": {
     "name": "storageclasses",
     "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
+    "apiVersion": "storage.k8s.io/v1",
     "group": "storage.k8s.io",
     "version": "v1",
     "kind": "StorageClass",
@@ -2630,7 +2630,7 @@
   "api.storage.v1.VolumeAttachment": {
     "name": "volumeattachments",
     "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1",
+    "apiVersion": "storage.k8s.io/v1",
     "group": "storage.k8s.io",
     "version": "v1",
     "kind": "VolumeAttachment",
@@ -2674,7 +2674,7 @@
   "api.storage.v1alpha1.CSIStorageCapacity": {
     "name": "csistoragecapacities",
     "namespaced": true,
-    "apiGroupVersion": "storage.k8s.io/v1alpha1",
+    "apiVersion": "storage.k8s.io/v1alpha1",
     "group": "storage.k8s.io",
     "version": "v1alpha1",
     "kind": "CSIStorageCapacity",
@@ -2708,7 +2708,7 @@
   "api.storage.v1alpha1.VolumeAttachment": {
     "name": "volumeattachments",
     "namespaced": false,
-    "apiGroupVersion": "storage.k8s.io/v1alpha1",
+    "apiVersion": "storage.k8s.io/v1alpha1",
     "group": "storage.k8s.io",
     "version": "v1alpha1",
     "kind": "VolumeAttachment",
@@ -2738,7 +2738,7 @@
   "api.storage.v1beta1.CSIStorageCapacity": {
     "name": "csistoragecapacities",
     "namespaced": true,
-    "apiGroupVersion": "storage.k8s.io/v1beta1",
+    "apiVersion": "storage.k8s.io/v1beta1",
     "group": "storage.k8s.io",
     "version": "v1beta1",
     "kind": "CSIStorageCapacity",
@@ -2772,7 +2772,7 @@
   "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition": {
     "name": "customresourcedefinitions",
     "namespaced": false,
-    "apiGroupVersion": "apiextensions.k8s.io/v1",
+    "apiVersion": "apiextensions.k8s.io/v1",
     "group": "apiextensions.k8s.io",
     "version": "v1",
     "kind": "CustomResourceDefinition",
@@ -2816,7 +2816,7 @@
   "kube_aggregator.pkg.apis.apiregistration.v1.APIService": {
     "name": "apiservices",
     "namespaced": false,
-    "apiGroupVersion": "apiregistration.k8s.io/v1",
+    "apiVersion": "apiregistration.k8s.io/v1",
     "group": "apiregistration.k8s.io",
     "version": "v1",
     "kind": "APIService",
