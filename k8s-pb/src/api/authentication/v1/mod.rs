@@ -165,3 +165,39 @@ pub struct UserInfo {
     #[prost(map="string, message", tag="4")]
     pub extra: ::std::collections::HashMap<::prost::alloc::string::String, ExtraValue>,
 }
+
+impl crate::Resource for TokenReview {
+    const API_VERSION: &'static str = "authentication.k8s.io/v1";
+    const GROUP: &'static str = "authentication.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "TokenReview";
+    const NAME: &'static str = "tokenreviews";
+}
+impl crate::HasMetadata for TokenReview {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for TokenReview {
+    type Spec = crate::api::authentication::v1::TokenReviewSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for TokenReview {
+    type Status = crate::api::authentication::v1::TokenReviewStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+

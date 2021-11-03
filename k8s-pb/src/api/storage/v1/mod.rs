@@ -446,3 +446,111 @@ pub struct VolumeNodeResources {
     #[prost(int32, optional, tag="1")]
     pub count: ::core::option::Option<i32>,
 }
+
+impl crate::Resource for CsiDriver {
+    const API_VERSION: &'static str = "storage.k8s.io/v1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "CSIDriver";
+    const NAME: &'static str = "csidrivers";
+}
+impl crate::HasMetadata for CsiDriver {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for CsiDriver {
+    type Spec = crate::api::storage::v1::CsiDriverSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+
+
+impl crate::Resource for CsiNode {
+    const API_VERSION: &'static str = "storage.k8s.io/v1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "CSINode";
+    const NAME: &'static str = "csinodes";
+}
+impl crate::HasMetadata for CsiNode {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for CsiNode {
+    type Spec = crate::api::storage::v1::CsiNodeSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+
+
+impl crate::Resource for StorageClass {
+    const API_VERSION: &'static str = "storage.k8s.io/v1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "StorageClass";
+    const NAME: &'static str = "storageclasses";
+}
+impl crate::HasMetadata for StorageClass {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for VolumeAttachment {
+    const API_VERSION: &'static str = "storage.k8s.io/v1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "VolumeAttachment";
+    const NAME: &'static str = "volumeattachments";
+}
+impl crate::HasMetadata for VolumeAttachment {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for VolumeAttachment {
+    type Spec = crate::api::storage::v1::VolumeAttachmentSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for VolumeAttachment {
+    type Status = crate::api::storage::v1::VolumeAttachmentStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+

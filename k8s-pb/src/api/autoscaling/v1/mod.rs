@@ -482,3 +482,39 @@ pub struct ScaleStatus {
     #[prost(string, optional, tag="2")]
     pub selector: ::core::option::Option<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for HorizontalPodAutoscaler {
+    const API_VERSION: &'static str = "autoscaling/v1";
+    const GROUP: &'static str = "autoscaling";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "HorizontalPodAutoscaler";
+    const NAME: &'static str = "horizontalpodautoscalers";
+}
+impl crate::HasMetadata for HorizontalPodAutoscaler {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for HorizontalPodAutoscaler {
+    type Spec = crate::api::autoscaling::v1::HorizontalPodAutoscalerSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for HorizontalPodAutoscaler {
+    type Status = crate::api::autoscaling::v1::HorizontalPodAutoscalerStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+

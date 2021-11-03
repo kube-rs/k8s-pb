@@ -44,3 +44,21 @@ pub struct PriorityClassList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<PriorityClass>,
 }
+
+impl crate::Resource for PriorityClass {
+    const API_VERSION: &'static str = "scheduling.k8s.io/v1";
+    const GROUP: &'static str = "scheduling.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "PriorityClass";
+    const NAME: &'static str = "priorityclasses";
+}
+impl crate::HasMetadata for PriorityClass {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

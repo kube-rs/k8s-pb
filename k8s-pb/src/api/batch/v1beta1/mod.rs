@@ -114,3 +114,39 @@ pub struct JobTemplateSpec {
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<super::v1::JobSpec>,
 }
+
+impl crate::Resource for CronJob {
+    const API_VERSION: &'static str = "batch/v1beta1";
+    const GROUP: &'static str = "batch";
+    const VERSION: &'static str = "v1beta1";
+    const KIND: &'static str = "CronJob";
+    const NAME: &'static str = "cronjobs";
+}
+impl crate::HasMetadata for CronJob {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for CronJob {
+    type Spec = crate::api::batch::v1beta1::CronJobSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for CronJob {
+    type Status = crate::api::batch::v1beta1::CronJobStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+

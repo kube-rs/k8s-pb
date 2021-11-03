@@ -125,3 +125,50 @@ pub struct ServiceReference {
     #[prost(int32, optional, tag="3")]
     pub port: ::core::option::Option<i32>,
 }
+
+impl crate::Resource for ApiService {
+    const API_VERSION: &'static str = "apiregistration.k8s.io/v1";
+    const GROUP: &'static str = "apiregistration.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "APIService";
+    const NAME: &'static str = "apiservices";
+}
+impl crate::HasMetadata for ApiService {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for ApiService {
+    type Spec = crate::kube_aggregator::pkg::apis::apiregistration::v1::ApiServiceSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for ApiService {
+    type Status = crate::kube_aggregator::pkg::apis::apiregistration::v1::ApiServiceStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for ApiService {
+    type Condition = crate::kube_aggregator::pkg::apis::apiregistration::v1::ApiServiceCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

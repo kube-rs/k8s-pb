@@ -100,3 +100,21 @@ pub struct EventSeries {
     #[prost(message, optional, tag="2")]
     pub last_observed_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
 }
+
+impl crate::Resource for Event {
+    const API_VERSION: &'static str = "events.k8s.io/v1beta1";
+    const GROUP: &'static str = "events.k8s.io";
+    const VERSION: &'static str = "v1beta1";
+    const KIND: &'static str = "Event";
+    const NAME: &'static str = "events";
+}
+impl crate::HasMetadata for Event {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

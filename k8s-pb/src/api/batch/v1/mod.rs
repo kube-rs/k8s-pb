@@ -348,3 +348,86 @@ pub struct UncountedTerminatedPods {
     #[prost(string, repeated, tag="2")]
     pub failed: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for CronJob {
+    const API_VERSION: &'static str = "batch/v1";
+    const GROUP: &'static str = "batch";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "CronJob";
+    const NAME: &'static str = "cronjobs";
+}
+impl crate::HasMetadata for CronJob {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for CronJob {
+    type Spec = crate::api::batch::v1::CronJobSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for CronJob {
+    type Status = crate::api::batch::v1::CronJobStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+
+
+impl crate::Resource for Job {
+    const API_VERSION: &'static str = "batch/v1";
+    const GROUP: &'static str = "batch";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Job";
+    const NAME: &'static str = "jobs";
+}
+impl crate::HasMetadata for Job {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Job {
+    type Spec = crate::api::batch::v1::JobSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for Job {
+    type Status = crate::api::batch::v1::JobStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for Job {
+    type Condition = crate::api::batch::v1::JobCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

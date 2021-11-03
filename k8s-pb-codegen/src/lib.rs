@@ -5,7 +5,7 @@ pub struct Resource {
     pub name: String,
     /// True if the resource is namespaced. May still have `all` verbs like `list`.
     pub namespaced: bool,
-    pub api_group_version: String,
+    pub api_version: String,
     pub group: String,
     pub version: String,
     pub kind: String,

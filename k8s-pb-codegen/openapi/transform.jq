@@ -106,7 +106,7 @@ map({
       # `namespaced` is true if it can be namespaced.
       namespaced: (map(.namespaced) | any),
       subresource: .[0].subresource,
-      apiGroupVersion: .[0].apiGroupVersion,
+      apiVersion: .[0].apiGroupVersion,
       group: .[0].group,
       version: .[0].version,
       kind: .[0].kind,

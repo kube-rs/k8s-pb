@@ -457,3 +457,39 @@ pub struct WebhookClientConfig {
     #[prost(bytes="vec", optional, tag="2")]
     pub ca_bundle: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
+
+impl crate::Resource for MutatingWebhookConfiguration {
+    const API_VERSION: &'static str = "admissionregistration.k8s.io/v1";
+    const GROUP: &'static str = "admissionregistration.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "MutatingWebhookConfiguration";
+    const NAME: &'static str = "mutatingwebhookconfigurations";
+}
+impl crate::HasMetadata for MutatingWebhookConfiguration {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for ValidatingWebhookConfiguration {
+    const API_VERSION: &'static str = "admissionregistration.k8s.io/v1";
+    const GROUP: &'static str = "admissionregistration.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ValidatingWebhookConfiguration";
+    const NAME: &'static str = "validatingwebhookconfigurations";
+}
+impl crate::HasMetadata for ValidatingWebhookConfiguration {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

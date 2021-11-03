@@ -51,3 +51,30 @@ pub struct LeaseSpec {
     #[prost(int32, optional, tag="5")]
     pub lease_transitions: ::core::option::Option<i32>,
 }
+
+impl crate::Resource for Lease {
+    const API_VERSION: &'static str = "coordination.k8s.io/v1";
+    const GROUP: &'static str = "coordination.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Lease";
+    const NAME: &'static str = "leases";
+}
+impl crate::HasMetadata for Lease {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Lease {
+    type Spec = crate::api::coordination::v1::LeaseSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+

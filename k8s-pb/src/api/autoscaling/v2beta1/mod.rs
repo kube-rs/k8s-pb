@@ -459,3 +459,50 @@ pub struct ResourceMetricStatus {
     #[prost(message, optional, tag="3")]
     pub current_average_value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
+
+impl crate::Resource for HorizontalPodAutoscaler {
+    const API_VERSION: &'static str = "autoscaling/v2beta1";
+    const GROUP: &'static str = "autoscaling";
+    const VERSION: &'static str = "v2beta1";
+    const KIND: &'static str = "HorizontalPodAutoscaler";
+    const NAME: &'static str = "horizontalpodautoscalers";
+}
+impl crate::HasMetadata for HorizontalPodAutoscaler {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for HorizontalPodAutoscaler {
+    type Spec = crate::api::autoscaling::v2beta1::HorizontalPodAutoscalerSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for HorizontalPodAutoscaler {
+    type Status = crate::api::autoscaling::v2beta1::HorizontalPodAutoscalerStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for HorizontalPodAutoscaler {
+    type Condition = crate::api::autoscaling::v2beta1::HorizontalPodAutoscalerCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
