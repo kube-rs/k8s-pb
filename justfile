@@ -61,21 +61,8 @@ swagger-transform:
 # Download and generate all swagger dependent files
 swagger: swagger-dl swagger-patch swagger-transform
 
-# Build a FileDescriptorSet for custom code generation
-codegen-fds:
-    #!/usr/bin/env bash
-    set -exuo pipefail
-    shopt -s globstar
-    cd k8s-pb-codegen
-    protoc \
-        --include_imports \
-        --include_source_info \
-        --descriptor_set_out=protos.fds \
-        --proto_path=./protos \
-        ./protos/**/*.proto
-
 # Generate the library code from completed swagger and protos
-codegen: codegen-fds
+codegen:
     #!/usr/bin/env bash
     set -exuo pipefail
     rm -rf k8s-pb/src && mkdir k8s-pb/src
