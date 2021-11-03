@@ -5824,3 +5824,528 @@ pub struct WindowsSecurityContextOptions {
     #[prost(bool, optional, tag="4")]
     pub host_process: ::core::option::Option<bool>,
 }
+
+impl crate::Resource for Binding {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Binding";
+    const NAME: &'static str = "bindings";
+}
+impl crate::HasMetadata for Binding {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for ComponentStatus {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ComponentStatus";
+    const NAME: &'static str = "componentstatuses";
+}
+impl crate::HasMetadata for ComponentStatus {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for ConfigMap {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ConfigMap";
+    const NAME: &'static str = "configmaps";
+}
+impl crate::HasMetadata for ConfigMap {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for Endpoints {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Endpoints";
+    const NAME: &'static str = "endpoints";
+}
+impl crate::HasMetadata for Endpoints {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for Event {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Event";
+    const NAME: &'static str = "events";
+}
+impl crate::HasMetadata for Event {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for LimitRange {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "LimitRange";
+    const NAME: &'static str = "limitranges";
+}
+impl crate::HasMetadata for LimitRange {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for LimitRange {
+    type Spec = crate::api::core::v1::LimitRangeSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+
+
+impl crate::Resource for Namespace {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Namespace";
+    const NAME: &'static str = "namespaces";
+}
+impl crate::HasMetadata for Namespace {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Namespace {
+    type Spec = crate::api::core::v1::NamespaceSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for Namespace {
+    type Status = crate::api::core::v1::NamespaceStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for Namespace {
+    type Condition = crate::api::core::v1::NamespaceCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for Node {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Node";
+    const NAME: &'static str = "nodes";
+}
+impl crate::HasMetadata for Node {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Node {
+    type Spec = crate::api::core::v1::NodeSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for Node {
+    type Status = crate::api::core::v1::NodeStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for Node {
+    type Condition = crate::api::core::v1::NodeCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for PersistentVolume {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "PersistentVolume";
+    const NAME: &'static str = "persistentvolumes";
+}
+impl crate::HasMetadata for PersistentVolume {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for PersistentVolume {
+    type Spec = crate::api::core::v1::PersistentVolumeSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for PersistentVolume {
+    type Status = crate::api::core::v1::PersistentVolumeStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+
+
+impl crate::Resource for PersistentVolumeClaim {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "PersistentVolumeClaim";
+    const NAME: &'static str = "persistentvolumeclaims";
+}
+impl crate::HasMetadata for PersistentVolumeClaim {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for PersistentVolumeClaim {
+    type Spec = crate::api::core::v1::PersistentVolumeClaimSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for PersistentVolumeClaim {
+    type Status = crate::api::core::v1::PersistentVolumeClaimStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for PersistentVolumeClaim {
+    type Condition = crate::api::core::v1::PersistentVolumeClaimCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for Pod {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Pod";
+    const NAME: &'static str = "pods";
+}
+impl crate::HasMetadata for Pod {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Pod {
+    type Spec = crate::api::core::v1::PodSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for Pod {
+    type Status = crate::api::core::v1::PodStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for Pod {
+    type Condition = crate::api::core::v1::PodCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for PodTemplate {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "PodTemplate";
+    const NAME: &'static str = "podtemplates";
+}
+impl crate::HasMetadata for PodTemplate {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for ReplicationController {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ReplicationController";
+    const NAME: &'static str = "replicationcontrollers";
+}
+impl crate::HasMetadata for ReplicationController {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for ReplicationController {
+    type Spec = crate::api::core::v1::ReplicationControllerSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for ReplicationController {
+    type Status = crate::api::core::v1::ReplicationControllerStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for ReplicationController {
+    type Condition = crate::api::core::v1::ReplicationControllerCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for ResourceQuota {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ResourceQuota";
+    const NAME: &'static str = "resourcequotas";
+}
+impl crate::HasMetadata for ResourceQuota {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for ResourceQuota {
+    type Spec = crate::api::core::v1::ResourceQuotaSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for ResourceQuota {
+    type Status = crate::api::core::v1::ResourceQuotaStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+
+
+impl crate::Resource for Secret {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Secret";
+    const NAME: &'static str = "secrets";
+}
+impl crate::HasMetadata for Secret {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for Service {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Service";
+    const NAME: &'static str = "services";
+}
+impl crate::HasMetadata for Service {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Service {
+    type Spec = crate::api::core::v1::ServiceSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for Service {
+    type Status = crate::api::core::v1::ServiceStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for Service {
+    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for ServiceAccount {
+    const API_VERSION: &'static str = "v1";
+    const GROUP: &'static str = "";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ServiceAccount";
+    const NAME: &'static str = "serviceaccounts";
+}
+impl crate::HasMetadata for ServiceAccount {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

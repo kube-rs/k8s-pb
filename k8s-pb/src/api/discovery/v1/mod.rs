@@ -171,3 +171,21 @@ pub struct ForZone {
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for EndpointSlice {
+    const API_VERSION: &'static str = "discovery.k8s.io/v1";
+    const GROUP: &'static str = "discovery.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "EndpointSlice";
+    const NAME: &'static str = "endpointslices";
+}
+impl crate::HasMetadata for EndpointSlice {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

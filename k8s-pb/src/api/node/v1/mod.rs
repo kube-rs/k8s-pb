@@ -80,3 +80,21 @@ pub struct Scheduling {
     #[prost(message, repeated, tag="2")]
     pub tolerations: ::prost::alloc::vec::Vec<super::super::core::v1::Toleration>,
 }
+
+impl crate::Resource for RuntimeClass {
+    const API_VERSION: &'static str = "node.k8s.io/v1";
+    const GROUP: &'static str = "node.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "RuntimeClass";
+    const NAME: &'static str = "runtimeclasses";
+}
+impl crate::HasMetadata for RuntimeClass {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

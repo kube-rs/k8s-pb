@@ -223,3 +223,50 @@ pub struct ExtraValue {
     #[prost(string, repeated, tag="1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for CertificateSigningRequest {
+    const API_VERSION: &'static str = "certificates.k8s.io/v1";
+    const GROUP: &'static str = "certificates.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "CertificateSigningRequest";
+    const NAME: &'static str = "certificatesigningrequests";
+}
+impl crate::HasMetadata for CertificateSigningRequest {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for CertificateSigningRequest {
+    type Spec = crate::api::certificates::v1::CertificateSigningRequestSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for CertificateSigningRequest {
+    type Status = crate::api::certificates::v1::CertificateSigningRequestStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for CertificateSigningRequest {
+    type Condition = crate::api::certificates::v1::CertificateSigningRequestCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

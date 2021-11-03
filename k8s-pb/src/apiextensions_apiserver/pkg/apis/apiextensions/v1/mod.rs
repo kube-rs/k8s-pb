@@ -649,3 +649,51 @@ pub struct WebhookConversion {
     #[prost(string, repeated, tag="3")]
     pub conversion_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for CustomResourceDefinition {
+    const API_VERSION: &'static str = "apiextensions.k8s.io/v1";
+    const GROUP: &'static str = "apiextensions.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "CustomResourceDefinition";
+    const NAME: &'static str = "customresourcedefinitions";
+}
+impl crate::HasMetadata for CustomResourceDefinition {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for CustomResourceDefinition {
+    type Spec =
+        crate::apiextensions_apiserver::pkg::apis::apiextensions::v1::CustomResourceDefinitionSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for CustomResourceDefinition {
+    type Status = crate :: apiextensions_apiserver :: pkg :: apis :: apiextensions :: v1 :: CustomResourceDefinitionStatus ;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for CustomResourceDefinition {
+    type Condition = crate :: apiextensions_apiserver :: pkg :: apis :: apiextensions :: v1 :: CustomResourceDefinitionCondition ;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

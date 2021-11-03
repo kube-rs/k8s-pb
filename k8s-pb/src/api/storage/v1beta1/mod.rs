@@ -540,3 +540,21 @@ pub struct VolumeNodeResources {
     #[prost(int32, optional, tag="1")]
     pub count: ::core::option::Option<i32>,
 }
+
+impl crate::Resource for CsiStorageCapacity {
+    const API_VERSION: &'static str = "storage.k8s.io/v1beta1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1beta1";
+    const KIND: &'static str = "CSIStorageCapacity";
+    const NAME: &'static str = "csistoragecapacities";
+}
+impl crate::HasMetadata for CsiStorageCapacity {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+

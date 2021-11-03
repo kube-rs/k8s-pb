@@ -97,3 +97,50 @@ pub struct StorageVersionStatus {
     #[prost(message, repeated, tag="3")]
     pub conditions: ::prost::alloc::vec::Vec<StorageVersionCondition>,
 }
+
+impl crate::Resource for StorageVersion {
+    const API_VERSION: &'static str = "internal.apiserver.k8s.io/v1alpha1";
+    const GROUP: &'static str = "internal.apiserver.k8s.io";
+    const VERSION: &'static str = "v1alpha1";
+    const KIND: &'static str = "StorageVersion";
+    const NAME: &'static str = "storageversions";
+}
+impl crate::HasMetadata for StorageVersion {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for StorageVersion {
+    type Spec = crate::api::apiserverinternal::v1alpha1::StorageVersionSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for StorageVersion {
+    type Status = crate::api::apiserverinternal::v1alpha1::StorageVersionStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for StorageVersion {
+    type Condition = crate::api::apiserverinternal::v1alpha1::StorageVersionCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

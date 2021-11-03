@@ -123,3 +123,50 @@ pub struct PodDisruptionBudgetStatus {
     #[prost(message, repeated, tag="7")]
     pub conditions: ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
+
+impl crate::Resource for PodDisruptionBudget {
+    const API_VERSION: &'static str = "policy/v1";
+    const GROUP: &'static str = "policy";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "PodDisruptionBudget";
+    const NAME: &'static str = "poddisruptionbudgets";
+}
+impl crate::HasMetadata for PodDisruptionBudget {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for PodDisruptionBudget {
+    type Spec = crate::api::policy::v1::PodDisruptionBudgetSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for PodDisruptionBudget {
+    type Status = crate::api::policy::v1::PodDisruptionBudgetStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for PodDisruptionBudget {
+    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

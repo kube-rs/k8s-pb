@@ -494,3 +494,93 @@ pub struct ServiceBackendPort {
     #[prost(int32, optional, tag="2")]
     pub number: ::core::option::Option<i32>,
 }
+
+impl crate::Resource for Ingress {
+    const API_VERSION: &'static str = "networking.k8s.io/v1";
+    const GROUP: &'static str = "networking.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "Ingress";
+    const NAME: &'static str = "ingresses";
+}
+impl crate::HasMetadata for Ingress {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for Ingress {
+    type Spec = crate::api::networking::v1::IngressSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for Ingress {
+    type Status = crate::api::networking::v1::IngressStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+
+
+impl crate::Resource for IngressClass {
+    const API_VERSION: &'static str = "networking.k8s.io/v1";
+    const GROUP: &'static str = "networking.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "IngressClass";
+    const NAME: &'static str = "ingressclasses";
+}
+impl crate::HasMetadata for IngressClass {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for IngressClass {
+    type Spec = crate::api::networking::v1::IngressClassSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+
+
+impl crate::Resource for NetworkPolicy {
+    const API_VERSION: &'static str = "networking.k8s.io/v1";
+    const GROUP: &'static str = "networking.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "NetworkPolicy";
+    const NAME: &'static str = "networkpolicies";
+}
+impl crate::HasMetadata for NetworkPolicy {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for NetworkPolicy {
+    type Spec = crate::api::networking::v1::NetworkPolicySpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+

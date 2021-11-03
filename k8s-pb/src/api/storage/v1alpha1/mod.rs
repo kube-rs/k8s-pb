@@ -201,3 +201,57 @@ pub struct VolumeError {
     #[prost(string, optional, tag="2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for CsiStorageCapacity {
+    const API_VERSION: &'static str = "storage.k8s.io/v1alpha1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1alpha1";
+    const KIND: &'static str = "CSIStorageCapacity";
+    const NAME: &'static str = "csistoragecapacities";
+}
+impl crate::HasMetadata for CsiStorageCapacity {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
+
+impl crate::Resource for VolumeAttachment {
+    const API_VERSION: &'static str = "storage.k8s.io/v1alpha1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1alpha1";
+    const KIND: &'static str = "VolumeAttachment";
+    const NAME: &'static str = "volumeattachments";
+}
+impl crate::HasMetadata for VolumeAttachment {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for VolumeAttachment {
+    type Spec = crate::api::storage::v1alpha1::VolumeAttachmentSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for VolumeAttachment {
+    type Status = crate::api::storage::v1alpha1::VolumeAttachmentStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+
