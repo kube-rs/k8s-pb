@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "exclude"
+
+  - package-ecosystem: "cargo"
+    directory: "/"
+    labels:
+      - "dependencies"
+    schedule:
+      interval: "weekly"
+    groups:
+      rust:
+        patterns:
+          - .*
