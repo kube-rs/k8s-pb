@@ -48,12 +48,13 @@
 /// +k8s:deepcopy-gen=true
 /// +protobuf=true
 /// +k8s:openapi-gen=true
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RawExtension {
     /// Raw is the underlying serialization of this object.
     ///
     /// TODO: Determine how to detect ContentType and ContentEncoding of 'Raw' data.
-    #[prost(bytes="vec", optional, tag="1")]
+    #[prost(bytes = "vec", optional, tag = "1")]
     pub raw: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// TypeMeta is shared by all top level objects. The proper way to use it is to inline it in your type,
@@ -72,13 +73,14 @@ pub struct RawExtension {
 /// +k8s:deepcopy-gen=false
 /// +protobuf=true
 /// +k8s:openapi-gen=true
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypeMeta {
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Unknown allows api objects with unknown types to be passed-through. This can be used
@@ -91,21 +93,22 @@ pub struct TypeMeta {
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 /// +protobuf=true
 /// +k8s:openapi-gen=true
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Unknown {
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub type_meta: ::core::option::Option<TypeMeta>,
     /// Raw will hold the complete serialized object which couldn't be matched
     /// with a registered type. Most likely, nothing should be done with this
     /// except for passing it through the system.
-    #[prost(bytes="vec", optional, tag="2")]
+    #[prost(bytes = "vec", optional, tag = "2")]
     pub raw: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
     /// ContentEncoding is encoding used to encode 'Raw' data.
     /// Unspecified means no encoding.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub content_encoding: ::core::option::Option<::prost::alloc::string::String>,
     /// ContentType  is serialization method used to serialize 'Raw'.
     /// Unspecified means ContentTypeJSON.
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub content_type: ::core::option::Option<::prost::alloc::string::String>,
 }
