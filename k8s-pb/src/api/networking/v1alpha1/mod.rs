@@ -147,7 +147,7 @@ impl crate::HasMetadata for ClusterCidr {
     }
 }
 impl crate::HasSpec for ClusterCidr {
-    type Spec = crate::api::networking::v1alpha1::ClusterCIDRSpec;
+    type Spec = crate::api::networking::v1alpha1::ClusterCidrSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -174,7 +174,7 @@ impl crate::HasMetadata for IpAddress {
     }
 }
 impl crate::HasSpec for IpAddress {
-    type Spec = crate::api::networking::v1alpha1::IPAddressSpec;
+    type Spec = crate::api::networking::v1alpha1::IpAddressSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
