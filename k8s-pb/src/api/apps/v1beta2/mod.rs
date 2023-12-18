@@ -105,6 +105,7 @@ pub struct DaemonSetSpec {
     /// The DaemonSet will create exactly one copy of this pod on every node
     /// that matches the template's node selector (or on every node if no node
     /// selector is specified).
+    /// The only allowed template.spec.restartPolicy value is "Always".
     /// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
     #[prost(message, optional, tag="2")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
@@ -144,8 +145,8 @@ pub struct DaemonSetStatus {
     /// More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
     #[prost(int32, optional, tag="3")]
     pub desired_number_scheduled: ::core::option::Option<i32>,
-    /// The number of nodes that should be running the daemon pod and have one
-    /// or more of the daemon pod running and ready.
+    /// Total number of nodes that should be running the daemon pod and have one
+    /// or more of the daemon pod running with a Ready Condition by passing the readinessProbe.
     #[prost(int32, optional, tag="4")]
     pub number_ready: ::core::option::Option<i32>,
     /// The most recent generation observed by the daemon set controller.
@@ -262,6 +263,7 @@ pub struct DeploymentSpec {
     #[prost(message, optional, tag="2")]
     pub selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template describes the pods that will be created.
+    /// The only allowed template.spec.restartPolicy value is "Always".
     #[prost(message, optional, tag="3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
     /// The deployment strategy to use to replace existing pods with new ones.
@@ -308,7 +310,7 @@ pub struct DeploymentStatus {
     /// +optional
     #[prost(int32, optional, tag="3")]
     pub updated_replicas: ::core::option::Option<i32>,
-    /// Total number of ready pods targeted by this deployment.
+    /// readyReplicas is the number of pods targeted by this Deployment controller with a Ready Condition.
     /// +optional
     #[prost(int32, optional, tag="7")]
     pub ready_replicas: ::core::option::Option<i32>,
@@ -442,7 +444,7 @@ pub struct ReplicaSetSpec {
 /// ReplicaSetStatus represents the current status of a ReplicaSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetStatus {
-    /// Replicas is the most recently oberved number of replicas.
+    /// Replicas is the most recently observed number of replicas.
     /// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
     #[prost(int32, optional, tag="1")]
     pub replicas: ::core::option::Option<i32>,
@@ -450,7 +452,7 @@ pub struct ReplicaSetStatus {
     /// +optional
     #[prost(int32, optional, tag="2")]
     pub fully_labeled_replicas: ::core::option::Option<i32>,
-    /// The number of ready replicas for this replica set.
+    /// readyReplicas is the number of pods targeted by this ReplicaSet controller with a Ready Condition.
     /// +optional
     #[prost(int32, optional, tag="4")]
     pub ready_replicas: ::core::option::Option<i32>,
@@ -507,7 +509,6 @@ pub struct RollingUpdateDaemonSet {
     /// daemonset on any given node can double if the readiness check fails, and
     /// so resource intensive daemonsets should take into account that they may
     /// cause evictions during disruption.
-    /// This is beta field and enabled/disabled by DaemonSetUpdateSurge feature gate.
     /// +optional
     #[prost(message, optional, tag="2")]
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
@@ -546,12 +547,23 @@ pub struct RollingUpdateDeployment {
 /// RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateStatefulSetStrategy {
-    /// Partition indicates the ordinal at which the StatefulSet should be
-    /// partitioned.
-    /// Default value is 0.
+    /// Partition indicates the ordinal at which the StatefulSet should be partitioned
+    /// for updates. During a rolling update, all pods from ordinal Replicas-1 to
+    /// Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched.
+    /// This is helpful in being able to do a canary based deployment. The default value is 0.
     /// +optional
     #[prost(int32, optional, tag="1")]
     pub partition: ::core::option::Option<i32>,
+    /// The maximum number of pods that can be unavailable during the update.
+    /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+    /// Absolute number is calculated from percentage by rounding up. This can not be 0.
+    /// Defaults to 1. This field is alpha-level and is only honored by servers that enable the
+    /// MaxUnavailableStatefulSet feature. The field applies to all pods in the range 0 to
+    /// Replicas-1. That means if there is any unavailable pod in the range 0 to Replicas-1, it
+    /// will be counted towards MaxUnavailable.
+    /// +optional
+    #[prost(message, optional, tag="2")]
+    pub max_unavailable: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Scale represents a scaling request for a resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -583,7 +595,7 @@ pub struct ScaleStatus {
     /// actual number of observed instances of the scaled object.
     #[prost(int32, optional, tag="1")]
     pub replicas: ::core::option::Option<i32>,
-    /// label query over pods that should match the replicas count. More info: http://kubernetes.io/docs/user-guide/labels#label-selectors
+    /// selector is a label query over pods that should match the replicas count. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     /// +optional
     /// +mapType=atomic
     #[prost(map="string, string", tag="2")]
@@ -602,8 +614,9 @@ pub struct ScaleStatus {
 /// more information.
 /// StatefulSet represents a set of pods with consistent identities.
 /// Identities are defined as:
-///  - Network: A single stable DNS and hostname.
-///  - Storage: As many VolumeClaims as requested.
+///   - Network: A single stable DNS and hostname.
+///   - Storage: As many VolumeClaims as requested.
+///
 /// The StatefulSet guarantees that a given network identity will always
 /// map to the same storage identity.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -652,6 +665,40 @@ pub struct StatefulSetList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<StatefulSet>,
 }
+/// StatefulSetOrdinals describes the policy used for replica ordinal assignment
+/// in this StatefulSet.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StatefulSetOrdinals {
+    /// start is the number representing the first replica's index. It may be used
+    /// to number replicas from an alternate index (eg: 1-indexed) over the default
+    /// 0-indexed names, or to orchestrate progressive movement of replicas from
+    /// one StatefulSet to another.
+    /// If set, replica indices will be in the range:
+    ///   [.spec.ordinals.start, .spec.ordinals.start + .spec.replicas).
+    /// If unset, defaults to 0. Replica indices will be in the range:
+    ///   [0, .spec.replicas).
+    /// +optional
+    #[prost(int32, optional, tag="1")]
+    pub start: ::core::option::Option<i32>,
+}
+/// StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs
+/// created from the StatefulSet VolumeClaimTemplates.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
+    /// WhenDeleted specifies what happens to PVCs created from StatefulSet
+    /// VolumeClaimTemplates when the StatefulSet is deleted. The default policy
+    /// of `Retain` causes PVCs to not be affected by StatefulSet deletion. The
+    /// `Delete` policy causes those PVCs to be deleted.
+    #[prost(string, optional, tag="1")]
+    pub when_deleted: ::core::option::Option<::prost::alloc::string::String>,
+    /// WhenScaled specifies what happens to PVCs created from StatefulSet
+    /// VolumeClaimTemplates when the StatefulSet is scaled down. The default
+    /// policy of `Retain` causes PVCs to not be affected by a scaledown. The
+    /// `Delete` policy causes the associated PVCs for any excess pods above
+    /// the replica count to be deleted.
+    #[prost(string, optional, tag="2")]
+    pub when_scaled: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// A StatefulSetSpec is the specification of a StatefulSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetSpec {
@@ -671,7 +718,10 @@ pub struct StatefulSetSpec {
     /// template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. Each pod stamped out by the StatefulSet
     /// will fulfill this Template, but have a unique identity from the rest
-    /// of the StatefulSet.
+    /// of the StatefulSet. Each pod will be named with the format
+    /// <statefulsetname>-<podindex>. For example, a pod in a StatefulSet named
+    /// "web" with index number "3" would be named "web-3".
+    /// The only allowed template.spec.restartPolicy value is "Always".
     #[prost(message, optional, tag="3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
     /// volumeClaimTemplates is a list of claims that pods are allowed to reference.
@@ -716,10 +766,23 @@ pub struct StatefulSetSpec {
     /// Minimum number of seconds for which a newly created pod should be ready
     /// without any of its container crashing for it to be considered available.
     /// Defaults to 0 (pod will be considered available as soon as it is ready)
-    /// This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate.
     /// +optional
     #[prost(int32, optional, tag="9")]
     pub min_ready_seconds: ::core::option::Option<i32>,
+    /// PersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from
+    /// the StatefulSet VolumeClaimTemplates. This requires the
+    /// StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.
+    /// +optional
+    #[prost(message, optional, tag="10")]
+    pub persistent_volume_claim_retention_policy: ::core::option::Option<StatefulSetPersistentVolumeClaimRetentionPolicy>,
+    /// ordinals controls the numbering of replica indices in a StatefulSet. The
+    /// default ordinals behavior assigns a "0" index to the first replica and
+    /// increments the index by one for each additional replica requested. Using
+    /// the ordinals field requires the StatefulSetStartOrdinal feature gate to be
+    /// enabled, which is beta.
+    /// +optional
+    #[prost(message, optional, tag="11")]
+    pub ordinals: ::core::option::Option<StatefulSetOrdinals>,
 }
 /// StatefulSetStatus represents the current state of a StatefulSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -732,7 +795,7 @@ pub struct StatefulSetStatus {
     /// replicas is the number of Pods created by the StatefulSet controller.
     #[prost(int32, optional, tag="2")]
     pub replicas: ::core::option::Option<i32>,
-    /// readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition.
+    /// readyReplicas is the number of pods created by this StatefulSet controller with a Ready Condition.
     #[prost(int32, optional, tag="3")]
     pub ready_replicas: ::core::option::Option<i32>,
     /// currentReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version
@@ -764,8 +827,6 @@ pub struct StatefulSetStatus {
     #[prost(message, repeated, tag="10")]
     pub conditions: ::prost::alloc::vec::Vec<StatefulSetCondition>,
     /// Total number of available pods (ready for at least minReadySeconds) targeted by this StatefulSet.
-    /// This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate.
-    /// Remove omitempty when graduating to beta
     /// +optional
     #[prost(int32, optional, tag="11")]
     pub available_replicas: ::core::option::Option<i32>,

@@ -1,3 +1,38 @@
+/// ExemptPriorityLevelConfiguration describes the configurable aspects
+/// of the handling of exempt requests.
+/// In the mandatory exempt configuration object the values in the fields
+/// here can be modified by authorized users, unlike the rest of the `spec`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExemptPriorityLevelConfiguration {
+    /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
+    /// NominalConcurrencyLimit (NominalCL) of this level.
+    /// This is the number of execution seats nominally reserved for this priority level.
+    /// This DOES NOT limit the dispatching from this priority level
+    /// but affects the other priority levels through the borrowing mechanism.
+    /// The server's concurrency limit (ServerCL) is divided among all the
+    /// priority levels in proportion to their NCS values:
+    ///
+    /// NominalCL(i)  = ceil( ServerCL * NCS(i) / sum_ncs )
+    /// sum_ncs = sum[priority level k] NCS(k)
+    ///
+    /// Bigger numbers mean a larger nominal concurrency limit,
+    /// at the expense of every other priority level.
+    /// This field has a default value of zero.
+    /// +optional
+    #[prost(int32, optional, tag="1")]
+    pub nominal_concurrency_shares: ::core::option::Option<i32>,
+    /// `lendablePercent` prescribes the fraction of the level's NominalCL that
+    /// can be borrowed by other priority levels.  This value of this
+    /// field must be between 0 and 100, inclusive, and it defaults to 0.
+    /// The number of seats that other levels can borrow from this level, known
+    /// as this level's LendableConcurrencyLimit (LendableCL), is defined as follows.
+    ///
+    /// LendableCL(i) = round( NominalCL(i) * lendablePercent(i)/100.0 )
+    ///
+    /// +optional
+    #[prost(int32, optional, tag="2")]
+    pub lendable_percent: ::core::option::Option<i32>,
+}
 /// FlowDistinguisherMethod specifies the method of a flow distinguisher.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowDistinguisherMethod {
@@ -131,8 +166,8 @@ pub struct LimitResponse {
 }
 /// LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits.
 /// It addresses two issues:
-///  * How are requests for this priority level limited?
-///  * What should be done with requests that exceed the limit?
+///   - How are requests for this priority level limited?
+///   - What should be done with requests that exceed the limit?
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitedPriorityLevelConfiguration {
     /// `assuredConcurrencyShares` (ACS) configures the execution
@@ -156,6 +191,35 @@ pub struct LimitedPriorityLevelConfiguration {
     /// `limitResponse` indicates what to do with requests that can not be executed right now
     #[prost(message, optional, tag="2")]
     pub limit_response: ::core::option::Option<LimitResponse>,
+    /// `lendablePercent` prescribes the fraction of the level's NominalCL that
+    /// can be borrowed by other priority levels. The value of this
+    /// field must be between 0 and 100, inclusive, and it defaults to 0.
+    /// The number of seats that other levels can borrow from this level, known
+    /// as this level's LendableConcurrencyLimit (LendableCL), is defined as follows.
+    ///
+    /// LendableCL(i) = round( NominalCL(i) * lendablePercent(i)/100.0 )
+    ///
+    /// +optional
+    #[prost(int32, optional, tag="3")]
+    pub lendable_percent: ::core::option::Option<i32>,
+    /// `borrowingLimitPercent`, if present, configures a limit on how many
+    /// seats this priority level can borrow from other priority levels.
+    /// The limit is known as this level's BorrowingConcurrencyLimit
+    /// (BorrowingCL) and is a limit on the total number of seats that this
+    /// level may borrow at any one time.
+    /// This field holds the ratio of that limit to the level's nominal
+    /// concurrency limit. When this field is non-nil, it must hold a
+    /// non-negative integer and the limit is calculated as follows.
+    ///
+    /// BorrowingCL(i) = round( NominalCL(i) * borrowingLimitPercent(i)/100.0 )
+    ///
+    /// The value of this field can be more than 100, implying that this
+    /// priority level can borrow a number of seats that is greater than
+    /// its own nominal concurrency limit (NominalCL).
+    /// When this field is left `nil`, the limit is effectively infinite.
+    /// +optional
+    #[prost(int32, optional, tag="4")]
+    pub borrowing_limit_percent: ::core::option::Option<i32>,
 }
 /// NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and the
 /// target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at least one member
@@ -290,6 +354,14 @@ pub struct PriorityLevelConfigurationSpec {
     /// +optional
     #[prost(message, optional, tag="2")]
     pub limited: ::core::option::Option<LimitedPriorityLevelConfiguration>,
+    /// `exempt` specifies how requests are handled for an exempt priority level.
+    /// This field MUST be empty if `type` is `"Limited"`.
+    /// This field MAY be non-empty if `type` is `"Exempt"`.
+    /// If empty and `type` is `"Exempt"` then the default values
+    /// for `ExemptPriorityLevelConfiguration` apply.
+    /// +optional
+    #[prost(message, optional, tag="3")]
+    pub exempt: ::core::option::Option<ExemptPriorityLevelConfiguration>,
 }
 /// PriorityLevelConfigurationStatus represents the current state of a "request-priority".
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -340,8 +412,10 @@ pub struct QueuingConfiguration {
 /// ResourcePolicyRule matches a resource request if and only if: (a)
 /// at least one member of verbs matches the request, (b) at least one
 /// member of apiGroups matches the request, (c) at least one member of
-/// resources matches the request, and (d) least one member of
-/// namespaces matches the request.
+/// resources matches the request, and (d) either (d1) the request does
+/// not specify a namespace (i.e., `Namespace==""`) and clusterScope is
+/// true or (d2) the request specifies a namespace and least one member
+/// of namespaces matches the request's namespace.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourcePolicyRule {
     /// `verbs` is a list of matching verbs and may not be empty.

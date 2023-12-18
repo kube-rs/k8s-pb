@@ -5,7 +5,8 @@ pub struct Endpoint {
     /// according to the corresponding EndpointSlice addressType field. Consumers
     /// must handle different types of addresses in the context of their own
     /// capabilities. This must contain at least one address but no more than
-    /// 100.
+    /// 100. These are all assumed to be fungible and clients may choose to only
+    /// use the first element. Refer to: https://issue.k8s.io/106267
     /// +listType=set
     #[prost(string, repeated, tag="1")]
     pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -42,8 +43,7 @@ pub struct Endpoint {
     #[prost(map="string, string", tag="5")]
     pub topology: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// nodeName represents the name of the Node hosting this endpoint. This can
-    /// be used to determine endpoints local to a Node. This field can be enabled
-    /// with the EndpointSliceNodeName feature gate.
+    /// be used to determine endpoints local to a Node.
     /// +optional
     #[prost(string, optional, tag="6")]
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
@@ -68,15 +68,13 @@ pub struct EndpointConditions {
     /// serving is identical to ready except that it is set regardless of the
     /// terminating state of endpoints. This condition should be set to true for
     /// a ready endpoint that is terminating. If nil, consumers should defer to
-    /// the ready condition. This field can be enabled with the
-    /// EndpointSliceTerminatingCondition feature gate.
+    /// the ready condition.
     /// +optional
     #[prost(bool, optional, tag="2")]
     pub serving: ::core::option::Option<bool>,
     /// terminating indicates that this endpoint is terminating. A nil value
     /// indicates an unknown state. Consumers should interpret this unknown state
-    /// to mean that the endpoint is not terminating. This field can be enabled
-    /// with the EndpointSliceTerminatingCondition feature gate.
+    /// to mean that the endpoint is not terminating.
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub terminating: ::core::option::Option<bool>,
@@ -93,9 +91,8 @@ pub struct EndpointHints {
 /// EndpointPort represents a Port used by an EndpointSlice
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointPort {
-    /// The name of this port. All ports in an EndpointSlice must have a unique
-    /// name. If the EndpointSlice is dervied from a Kubernetes service, this
-    /// corresponds to the Service.ports[].name.
+    /// name represents the name of this port. All ports in an EndpointSlice must have a unique name.
+    /// If the EndpointSlice is dervied from a Kubernetes service, this corresponds to the Service.ports[].name.
     /// Name must either be an empty string or pass DNS_LABEL validation:
     /// * must be no more than 63 characters long.
     /// * must consist of lower case alphanumeric characters or '-'.
@@ -103,20 +100,20 @@ pub struct EndpointPort {
     /// Default is empty string.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// The IP protocol for this port.
+    /// protocol represents the IP protocol for this port.
     /// Must be UDP, TCP, or SCTP.
     /// Default is TCP.
     #[prost(string, optional, tag="2")]
     pub protocol: ::core::option::Option<::prost::alloc::string::String>,
-    /// The port number of the endpoint.
+    /// port represents the port number of the endpoint.
     /// If this is not specified, ports are not restricted and must be
     /// interpreted in the context of the specific consumer.
     #[prost(int32, optional, tag="3")]
     pub port: ::core::option::Option<i32>,
-    /// The application protocol for this port.
+    /// appProtocol represents the application protocol for this port.
     /// This field follows standard Kubernetes label syntax.
     /// Un-prefixed names are reserved for IANA standard service names (as per
-    /// RFC-6335 and http://www.iana.org/assignments/service-names).
+    /// RFC-6335 and https://www.iana.org/assignments/service-names).
     /// Non-standard protocols should use prefixed names such as
     /// mycompany.com/my-custom-protocol.
     /// +optional
@@ -163,7 +160,7 @@ pub struct EndpointSliceList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// List of endpoint slices
+    /// items is the list of endpoint slices
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<EndpointSlice>,
 }
@@ -174,21 +171,3 @@ pub struct ForZone {
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
-
-impl crate::Resource for EndpointSlice {
-    const API_VERSION: &'static str = "discovery.k8s.io/v1beta1";
-    const GROUP: &'static str = "discovery.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "EndpointSlice";
-    const NAME: &'static str = "endpointslices";
-}
-impl crate::HasMetadata for EndpointSlice {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-

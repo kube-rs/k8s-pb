@@ -95,7 +95,7 @@ pub struct CarpSpec {
     #[prost(map="string, string", tag="7")]
     pub node_selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// ServiceAccountName is the name of the ServiceAccount to use to run this carp.
-    /// More info: https://git.k8s.io/community/contributors/design-proposals/auth/service_accounts.md
+    /// More info: https://kubernetes.io/docs/concepts/security/service-accounts/
     /// +optional
     #[prost(string, optional, tag="8")]
     pub service_account_name: ::core::option::Option<::prost::alloc::string::String>,

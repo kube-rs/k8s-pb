@@ -1,5 +1,6 @@
 pub mod admission;
 pub mod admissionregistration;
+pub mod apidiscovery;
 pub mod apiserverinternal;
 pub mod apps;
 pub mod authentication;
@@ -18,5 +19,6 @@ pub mod networking;
 pub mod node;
 pub mod policy;
 pub mod rbac;
+pub mod resource;
 pub mod scheduling;
 pub mod storage;

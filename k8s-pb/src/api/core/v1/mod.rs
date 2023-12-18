@@ -6,11 +6,11 @@
 /// ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AwsElasticBlockStoreVolumeSource {
-    /// Unique ID of the persistent disk resource in AWS (Amazon EBS volume).
+    /// volumeID is unique ID of the persistent disk resource in AWS (Amazon EBS volume).
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
     #[prost(string, optional, tag="1")]
     pub volume_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type of the volume that you want to mount.
+    /// fsType is the filesystem type of the volume that you want to mount.
     /// Tip: Ensure that the filesystem type is supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
@@ -18,15 +18,14 @@ pub struct AwsElasticBlockStoreVolumeSource {
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// The partition in the volume that you want to mount.
+    /// partition is the partition in the volume that you want to mount.
     /// If omitted, the default is to mount by volume name.
     /// Examples: For volume /dev/sda1, you specify the partition as "1".
     /// Similarly, the volume partition for /dev/sda is "0" (or you can leave the property empty).
     /// +optional
     #[prost(int32, optional, tag="3")]
     pub partition: ::core::option::Option<i32>,
-    /// Specify "true" to force and set the ReadOnly property in VolumeMounts to "true".
-    /// If omitted, the default is "false".
+    /// readOnly value true will force the readOnly setting in VolumeMounts.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
     /// +optional
     #[prost(bool, optional, tag="4")]
@@ -72,46 +71,46 @@ pub struct AvoidPods {
 /// AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzureDiskVolumeSource {
-    /// The Name of the data disk in the blob storage
+    /// diskName is the Name of the data disk in the blob storage
     #[prost(string, optional, tag="1")]
     pub disk_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// The URI the data disk in the blob storage
+    /// diskURI is the URI of data disk in the blob storage
     #[prost(string, optional, tag="2")]
     pub disk_uri: ::core::option::Option<::prost::alloc::string::String>,
-    /// Host Caching mode: None, Read Only, Read Write.
+    /// cachingMode is the Host Caching mode: None, Read Only, Read Write.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub caching_mode: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is Filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// +optional
     #[prost(string, optional, tag="4")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="5")]
     pub read_only: ::core::option::Option<bool>,
-    /// Expected values Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared
+    /// kind expected values are Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared
     #[prost(string, optional, tag="6")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzureFilePersistentVolumeSource {
-    /// the name of secret that contains Azure Storage Account Name and Key
+    /// secretName is the name of secret that contains Azure Storage Account Name and Key
     #[prost(string, optional, tag="1")]
     pub secret_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Share Name
+    /// shareName is the azure Share Name
     #[prost(string, optional, tag="2")]
     pub share_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub read_only: ::core::option::Option<bool>,
-    /// the namespace of the secret that contains Azure Storage Account Name and Key
+    /// secretNamespace is the namespace of the secret that contains Azure Storage Account Name and Key
     /// default is the same as the Pod
     /// +optional
     #[prost(string, optional, tag="4")]
@@ -120,13 +119,13 @@ pub struct AzureFilePersistentVolumeSource {
 /// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzureFileVolumeSource {
-    /// the name of secret that contains Azure Storage Account Name and Key
+    /// secretName is the  name of secret that contains Azure Storage Account Name and Key
     #[prost(string, optional, tag="1")]
     pub secret_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Share Name
+    /// shareName is the azure share Name
     #[prost(string, optional, tag="2")]
     pub share_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="3")]
@@ -148,31 +147,30 @@ pub struct Binding {
 /// Represents storage that is managed by an external CSI volume driver (Beta feature)
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiPersistentVolumeSource {
-    /// Driver is the name of the driver to use for this volume.
+    /// driver is the name of the driver to use for this volume.
     /// Required.
     #[prost(string, optional, tag="1")]
     pub driver: ::core::option::Option<::prost::alloc::string::String>,
-    /// VolumeHandle is the unique volume name returned by the CSI volume
+    /// volumeHandle is the unique volume name returned by the CSI volume
     /// plugin’s CreateVolume to refer to the volume on all subsequent calls.
     /// Required.
     #[prost(string, optional, tag="2")]
     pub volume_handle: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: The value to pass to ControllerPublishVolumeRequest.
+    /// readOnly value to pass to ControllerPublishVolumeRequest.
     /// Defaults to false (read/write).
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub read_only: ::core::option::Option<bool>,
-    /// Filesystem type to mount.
-    /// Must be a filesystem type supported by the host operating system.
+    /// fsType to mount. Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs".
     /// +optional
     #[prost(string, optional, tag="4")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Attributes of the volume to publish.
+    /// volumeAttributes of the volume to publish.
     /// +optional
     #[prost(map="string, string", tag="5")]
     pub volume_attributes: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
-    /// ControllerPublishSecretRef is a reference to the secret object containing
+    /// controllerPublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// ControllerPublishVolume and ControllerUnpublishVolume calls.
     /// This field is optional, and may be empty if no secret is required. If the
@@ -180,7 +178,7 @@ pub struct CsiPersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag="6")]
     pub controller_publish_secret_ref: ::core::option::Option<SecretReference>,
-    /// NodeStageSecretRef is a reference to the secret object containing sensitive
+    /// nodeStageSecretRef is a reference to the secret object containing sensitive
     /// information to pass to the CSI driver to complete the CSI NodeStageVolume
     /// and NodeStageVolume and NodeUnstageVolume calls.
     /// This field is optional, and may be empty if no secret is required. If the
@@ -188,7 +186,7 @@ pub struct CsiPersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag="7")]
     pub node_stage_secret_ref: ::core::option::Option<SecretReference>,
-    /// NodePublishSecretRef is a reference to the secret object containing
+    /// nodePublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// NodePublishVolume and NodeUnpublishVolume calls.
     /// This field is optional, and may be empty if no secret is required. If the
@@ -196,40 +194,49 @@ pub struct CsiPersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag="8")]
     pub node_publish_secret_ref: ::core::option::Option<SecretReference>,
-    /// ControllerExpandSecretRef is a reference to the secret object containing
+    /// controllerExpandSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// ControllerExpandVolume call.
-    /// This is an alpha field and requires enabling ExpandCSIVolumes feature gate.
     /// This field is optional, and may be empty if no secret is required. If the
     /// secret object contains more than one secret, all secrets are passed.
     /// +optional
     #[prost(message, optional, tag="9")]
     pub controller_expand_secret_ref: ::core::option::Option<SecretReference>,
+    /// nodeExpandSecretRef is a reference to the secret object containing
+    /// sensitive information to pass to the CSI driver to complete the CSI
+    /// NodeExpandVolume call.
+    /// This is a beta field which is enabled default by CSINodeExpandSecret feature gate.
+    /// This field is optional, may be omitted if no secret is required. If the
+    /// secret object contains more than one secret, all secrets are passed.
+    /// +featureGate=CSINodeExpandSecret
+    /// +optional
+    #[prost(message, optional, tag="10")]
+    pub node_expand_secret_ref: ::core::option::Option<SecretReference>,
 }
 /// Represents a source location of a volume to mount, managed by an external CSI driver
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiVolumeSource {
-    /// Driver is the name of the CSI driver that handles this volume.
+    /// driver is the name of the CSI driver that handles this volume.
     /// Consult with your admin for the correct name as registered in the cluster.
     #[prost(string, optional, tag="1")]
     pub driver: ::core::option::Option<::prost::alloc::string::String>,
-    /// Specifies a read-only configuration for the volume.
+    /// readOnly specifies a read-only configuration for the volume.
     /// Defaults to false (read/write).
     /// +optional
     #[prost(bool, optional, tag="2")]
     pub read_only: ::core::option::Option<bool>,
-    /// Filesystem type to mount. Ex. "ext4", "xfs", "ntfs".
+    /// fsType to mount. Ex. "ext4", "xfs", "ntfs".
     /// If not provided, the empty value is passed to the associated CSI driver
     /// which will determine the default filesystem to apply.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// VolumeAttributes stores driver-specific properties that are passed to the CSI
+    /// volumeAttributes stores driver-specific properties that are passed to the CSI
     /// driver. Consult your driver's documentation for supported values.
     /// +optional
     #[prost(map="string, string", tag="4")]
     pub volume_attributes: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
-    /// NodePublishSecretRef is a reference to the secret object containing
+    /// nodePublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// NodePublishVolume and NodeUnpublishVolume calls.
     /// This field is optional, and  may be empty if no secret is required. If the
@@ -254,30 +261,30 @@ pub struct Capabilities {
 /// Cephfs volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CephFsPersistentVolumeSource {
-    /// Required: Monitors is a collection of Ceph monitors
+    /// monitors is Required: Monitors is a collection of Ceph monitors
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     #[prost(string, repeated, tag="1")]
     pub monitors: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Optional: Used as the mounted root, rather than the full Ceph tree, default is /
+    /// path is Optional: Used as the mounted root, rather than the full Ceph tree, default is /
     /// +optional
     #[prost(string, optional, tag="2")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: User is the rados user name, default is admin
+    /// user is Optional: User is the rados user name, default is admin
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="3")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret
+    /// secretFile is Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="4")]
     pub secret_file: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: SecretRef is reference to the authentication secret for User, default is empty.
+    /// secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
     #[prost(message, optional, tag="5")]
     pub secret_ref: ::core::option::Option<SecretReference>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly is Optional: Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
@@ -288,30 +295,30 @@ pub struct CephFsPersistentVolumeSource {
 /// Cephfs volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CephFsVolumeSource {
-    /// Required: Monitors is a collection of Ceph monitors
+    /// monitors is Required: Monitors is a collection of Ceph monitors
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     #[prost(string, repeated, tag="1")]
     pub monitors: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Optional: Used as the mounted root, rather than the full Ceph tree, default is /
+    /// path is Optional: Used as the mounted root, rather than the full Ceph tree, default is /
     /// +optional
     #[prost(string, optional, tag="2")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: User is the rados user name, default is admin
+    /// user is optional: User is the rados user name, default is admin
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="3")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret
+    /// secretFile is Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="4")]
     pub secret_file: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: SecretRef is reference to the authentication secret for User, default is empty.
+    /// secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
     #[prost(message, optional, tag="5")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly is Optional: Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
     /// +optional
@@ -324,24 +331,24 @@ pub struct CephFsVolumeSource {
 /// Cinder volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CinderPersistentVolumeSource {
-    /// volume id used to identify the volume in cinder.
+    /// volumeID used to identify the volume in cinder.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     #[prost(string, optional, tag="1")]
     pub volume_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType Filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly is Optional: Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub read_only: ::core::option::Option<bool>,
-    /// Optional: points to a secret object containing parameters used to connect
+    /// secretRef is Optional: points to a secret object containing parameters used to connect
     /// to OpenStack.
     /// +optional
     #[prost(message, optional, tag="4")]
@@ -353,28 +360,53 @@ pub struct CinderPersistentVolumeSource {
 /// Cinder volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CinderVolumeSource {
-    /// volume id used to identify the volume in cinder.
+    /// volumeID used to identify the volume in cinder.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     #[prost(string, optional, tag="1")]
     pub volume_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub read_only: ::core::option::Option<bool>,
-    /// Optional: points to a secret object containing parameters used to connect
+    /// secretRef is optional: points to a secret object containing parameters used to connect
     /// to OpenStack.
     /// +optional
     #[prost(message, optional, tag="4")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
+}
+/// ClaimSource describes a reference to a ResourceClaim.
+///
+/// Exactly one of these fields should be set.  Consumers of this type must
+/// treat an empty object as if it has an unknown value.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClaimSource {
+    /// ResourceClaimName is the name of a ResourceClaim object in the same
+    /// namespace as this pod.
+    #[prost(string, optional, tag="1")]
+    pub resource_claim_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// ResourceClaimTemplateName is the name of a ResourceClaimTemplate
+    /// object in the same namespace as this pod.
+    ///
+    /// The template will be used to create a new ResourceClaim, which will
+    /// be bound to this pod. When this pod is deleted, the ResourceClaim
+    /// will also be deleted. The pod name and resource name, along with a
+    /// generated component, will be used to form a unique name for the
+    /// ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
+    ///
+    /// This field is immutable and no changes will be made to the
+    /// corresponding ResourceClaim by the control plane after creating the
+    /// ResourceClaim.
+    #[prost(string, optional, tag="2")]
+    pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ClientIPConfig represents the configurations of Client IP based session affinity.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -550,7 +582,7 @@ pub struct ConfigMapNodeConfigSource {
 pub struct ConfigMapProjection {
     #[prost(message, optional, tag="1")]
     pub local_object_reference: ::core::option::Option<LocalObjectReference>,
-    /// If unspecified, each key-value pair in the Data field of the referenced
+    /// items if unspecified, each key-value pair in the Data field of the referenced
     /// ConfigMap will be projected into the volume as a file whose name is the
     /// key and content is the value. If specified, the listed keys will be
     /// projected into the specified paths, and unlisted keys will not be
@@ -560,7 +592,7 @@ pub struct ConfigMapProjection {
     /// +optional
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<KeyToPath>,
-    /// Specify whether the ConfigMap or its keys must be defined
+    /// optional specify whether the ConfigMap or its keys must be defined
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub optional: ::core::option::Option<bool>,
@@ -575,7 +607,7 @@ pub struct ConfigMapProjection {
 pub struct ConfigMapVolumeSource {
     #[prost(message, optional, tag="1")]
     pub local_object_reference: ::core::option::Option<LocalObjectReference>,
-    /// If unspecified, each key-value pair in the Data field of the referenced
+    /// items if unspecified, each key-value pair in the Data field of the referenced
     /// ConfigMap will be projected into the volume as a file whose name is the
     /// key and content is the value. If specified, the listed keys will be
     /// projected into the specified paths, and unlisted keys will not be
@@ -585,7 +617,7 @@ pub struct ConfigMapVolumeSource {
     /// +optional
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<KeyToPath>,
-    /// Optional: mode bits used to set permissions on created files by default.
+    /// defaultMode is optional: mode bits used to set permissions on created files by default.
     /// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
     /// YAML accepts both octal and decimal values, JSON requires decimal values for mode bits.
     /// Defaults to 0644.
@@ -595,7 +627,7 @@ pub struct ConfigMapVolumeSource {
     /// +optional
     #[prost(int32, optional, tag="3")]
     pub default_mode: ::core::option::Option<i32>,
-    /// Specify whether the ConfigMap or its keys must be defined
+    /// optional specify whether the ConfigMap or its keys must be defined
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub optional: ::core::option::Option<bool>,
@@ -608,7 +640,7 @@ pub struct Container {
     /// Cannot be updated.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Docker image name.
+    /// Container image name.
     /// More info: https://kubernetes.io/docs/concepts/containers/images
     /// This field is optional to allow higher level config management to default or override
     /// container images in workload controllers like Deployments and StatefulSets.
@@ -616,7 +648,7 @@ pub struct Container {
     #[prost(string, optional, tag="2")]
     pub image: ::core::option::Option<::prost::alloc::string::String>,
     /// Entrypoint array. Not executed within a shell.
-    /// The docker image's ENTRYPOINT is used if this is not provided.
+    /// The container image's ENTRYPOINT is used if this is not provided.
     /// Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
     /// cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
     /// to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
@@ -627,7 +659,7 @@ pub struct Container {
     #[prost(string, repeated, tag="3")]
     pub command: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Arguments to the entrypoint.
-    /// The docker image's CMD is used if this is not provided.
+    /// The container image's CMD is used if this is not provided.
     /// Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
     /// cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
     /// to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
@@ -644,12 +676,12 @@ pub struct Container {
     /// +optional
     #[prost(string, optional, tag="5")]
     pub working_dir: ::core::option::Option<::prost::alloc::string::String>,
-    /// List of ports to expose from the container. Exposing a port here gives
-    /// the system additional information about the network connections a
-    /// container uses, but is primarily informational. Not specifying a port here
+    /// List of ports to expose from the container. Not specifying a port here
     /// DOES NOT prevent that port from being exposed. Any port which is
     /// listening on the default "0.0.0.0" address inside a container will be
     /// accessible from the network.
+    /// Modifying this array with strategic merge patch may corrupt the data.
+    /// For more information See https://github.com/kubernetes/kubernetes/issues/108255.
     /// Cannot be updated.
     /// +optional
     /// +patchMergeKey=containerPort
@@ -681,6 +713,31 @@ pub struct Container {
     /// +optional
     #[prost(message, optional, tag="8")]
     pub resources: ::core::option::Option<ResourceRequirements>,
+    /// Resources resize policy for the container.
+    /// +featureGate=InPlacePodVerticalScaling
+    /// +optional
+    /// +listType=atomic
+    #[prost(message, repeated, tag="23")]
+    pub resize_policy: ::prost::alloc::vec::Vec<ContainerResizePolicy>,
+    /// RestartPolicy defines the restart behavior of individual containers in a pod.
+    /// This field may only be set for init containers, and the only allowed value is "Always".
+    /// For non-init containers or when this field is not specified,
+    /// the restart behavior is defined by the Pod's restart policy and the container type.
+    /// Setting the RestartPolicy as "Always" for the init container will have the following effect:
+    /// this init container will be continually restarted on
+    /// exit until all regular containers have terminated. Once all regular
+    /// containers have completed, all init containers with restartPolicy "Always"
+    /// will be shut down. This lifecycle differs from normal init containers and
+    /// is often referred to as a "sidecar" container. Although this init
+    /// container still starts in the init container sequence, it does not wait
+    /// for the container to complete before proceeding to the next init
+    /// container. Instead, the next init container starts immediately after this
+    /// init container is started, or after any startupProbe has successfully
+    /// completed.
+    /// +featureGate=SidecarContainers
+    /// +optional
+    #[prost(string, optional, tag="24")]
+    pub restart_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// Pod volumes to mount into the container's filesystem.
     /// Cannot be updated.
     /// +optional
@@ -783,7 +840,7 @@ pub struct Container {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerImage {
     /// Names by which this image is known.
-    /// e.g. ["k8s.gcr.io/hyperkube:v1.0.7", "dockerhub.io/google_containers/hyperkube:v1.0.7"]
+    /// e.g. ["kubernetes.example/hyperkube:v1.0.7", "cloud-vendor.registry.example/cloud-vendor/hyperkube:v1.0.7"]
     /// +optional
     #[prost(string, repeated, tag="1")]
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -822,6 +879,18 @@ pub struct ContainerPort {
     /// +optional
     #[prost(string, optional, tag="5")]
     pub host_ip: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ContainerResizePolicy represents resource resize policy for the container.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ContainerResizePolicy {
+    /// Name of the resource to which this resource resize policy applies.
+    /// Supported values: cpu, memory.
+    #[prost(string, optional, tag="1")]
+    pub resource_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Restart policy to apply when specified resource is resized.
+    /// If not specified, it defaults to NotRequired.
+    #[prost(string, optional, tag="2")]
+    pub restart_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ContainerState holds a possible state of container.
 /// Only one of its members may be specified.
@@ -875,7 +944,7 @@ pub struct ContainerStateTerminated {
     /// +optional
     #[prost(message, optional, tag="6")]
     pub finished_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-    /// Container's ID in the format 'docker://<container_id>'
+    /// Container's ID in the format '<type>://<container_id>'
     /// +optional
     #[prost(string, optional, tag="7")]
     pub container_id: ::core::option::Option<::prost::alloc::string::String>,
@@ -895,46 +964,77 @@ pub struct ContainerStateWaiting {
 /// ContainerStatus contains details for the current status of this container.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerStatus {
-    /// This must be a DNS_LABEL. Each container in a pod must have a unique name.
+    /// Name is a DNS_LABEL representing the unique name of the container.
+    /// Each container in a pod must have a unique name across all container types.
     /// Cannot be updated.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Details about the container's current condition.
+    /// State holds details about the container's current condition.
     /// +optional
     #[prost(message, optional, tag="2")]
     pub state: ::core::option::Option<ContainerState>,
-    /// Details about the container's last termination condition.
+    /// LastTerminationState holds the last termination state of the container to
+    /// help debug container crashes and restarts. This field is not
+    /// populated if the container is still running and RestartCount is 0.
     /// +optional
     #[prost(message, optional, tag="3")]
     pub last_state: ::core::option::Option<ContainerState>,
-    /// Specifies whether the container has passed its readiness probe.
+    /// Ready specifies whether the container is currently passing its readiness check.
+    /// The value will change as readiness probes keep executing. If no readiness
+    /// probes are specified, this field defaults to true once the container is
+    /// fully started (see Started field).
+    ///
+    /// The value is typically used to determine whether a container is ready to
+    /// accept traffic.
     #[prost(bool, optional, tag="4")]
     pub ready: ::core::option::Option<bool>,
-    /// The number of times the container has been restarted, currently based on
-    /// the number of dead containers that have not yet been removed.
-    /// Note that this is calculated from dead containers. But those containers are subject to
-    /// garbage collection. This value will get capped at 5 by GC.
+    /// RestartCount holds the number of times the container has been restarted.
+    /// Kubelet makes an effort to always increment the value, but there
+    /// are cases when the state may be lost due to node restarts and then the value
+    /// may be reset to 0. The value is never negative.
     #[prost(int32, optional, tag="5")]
     pub restart_count: ::core::option::Option<i32>,
-    /// The image the container is running.
-    /// More info: https://kubernetes.io/docs/concepts/containers/images
-    /// TODO(dchen1107): Which image the container is running with?
+    /// Image is the name of container image that the container is running.
+    /// The container image may not match the image used in the PodSpec,
+    /// as it may have been resolved by the runtime.
+    /// More info: https://kubernetes.io/docs/concepts/containers/images.
     #[prost(string, optional, tag="6")]
     pub image: ::core::option::Option<::prost::alloc::string::String>,
-    /// ImageID of the container's image.
+    /// ImageID is the image ID of the container's image. The image ID may not
+    /// match the image ID of the image used in the PodSpec, as it may have been
+    /// resolved by the runtime.
     #[prost(string, optional, tag="7")]
     pub image_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Container's ID in the format 'docker://<container_id>'.
+    /// ContainerID is the ID of the container in the format '<type>://<container_id>'.
+    /// Where type is a container runtime identifier, returned from Version call of CRI API
+    /// (for example "containerd").
     /// +optional
     #[prost(string, optional, tag="8")]
     pub container_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Specifies whether the container has passed its startup probe.
-    /// Initialized as false, becomes true after startupProbe is considered successful.
-    /// Resets to false when the container is restarted, or if kubelet loses state temporarily.
-    /// Is always true when no startupProbe is defined.
+    /// Started indicates whether the container has finished its postStart lifecycle hook
+    /// and passed its startup probe.
+    /// Initialized as false, becomes true after startupProbe is considered
+    /// successful. Resets to false when the container is restarted, or if kubelet
+    /// loses state temporarily. In both cases, startup probes will run again.
+    /// Is always true when no startupProbe is defined and container is running and
+    /// has passed the postStart lifecycle hook. The null value must be treated the
+    /// same as false.
     /// +optional
     #[prost(bool, optional, tag="9")]
     pub started: ::core::option::Option<bool>,
+    /// AllocatedResources represents the compute resources allocated for this container by the
+    /// node. Kubelet sets this value to Container.Resources.Requests upon successful pod admission
+    /// and after successfully admitting desired pod resize.
+    /// +featureGate=InPlacePodVerticalScaling
+    /// +optional
+    #[prost(map="string, message", tag="10")]
+    pub allocated_resources: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// Resources represents the compute resource requests and limits that have been successfully
+    /// enacted on the running container after it has been started or has been successfully resized.
+    /// +featureGate=InPlacePodVerticalScaling
+    /// +optional
+    #[prost(message, optional, tag="11")]
+    pub resources: ::core::option::Option<ResourceRequirements>,
 }
 /// DaemonEndpoint contains information about a single Daemon endpoint.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1002,19 +1102,19 @@ pub struct DownwardApiVolumeSource {
 /// Empty directory volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmptyDirVolumeSource {
-    /// What type of storage medium should back this directory.
+    /// medium represents what type of storage medium should back this directory.
     /// The default is "" which means to use the node's default medium.
     /// Must be an empty string (default) or Memory.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
     /// +optional
     #[prost(string, optional, tag="1")]
     pub medium: ::core::option::Option<::prost::alloc::string::String>,
-    /// Total amount of local storage required for this EmptyDir volume.
+    /// sizeLimit is the total amount of local storage required for this EmptyDir volume.
     /// The size limit is also applicable for memory medium.
     /// The maximum usage on memory medium EmptyDir would be the minimum value between
     /// the SizeLimit specified here and the sum of memory limits of all containers in a pod.
     /// The default is nil which means that the limit is undefined.
-    /// More info: http://kubernetes.io/docs/user-guide/volumes#emptydir
+    /// More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
     /// +optional
     #[prost(message, optional, tag="2")]
     pub size_limit: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
@@ -1024,11 +1124,8 @@ pub struct EmptyDirVolumeSource {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointAddress {
     /// The IP of this endpoint.
-    /// May not be loopback (127.0.0.0/8), link-local (169.254.0.0/16),
-    /// or link-local multicast ((224.0.0.0/24).
-    /// IPv6 is also accepted but not fully supported on all platforms. Also, certain
-    /// kubernetes components, like kube-proxy, are not IPv6 ready.
-    /// TODO: This should allow hostname or IP, See #4447.
+    /// May not be loopback (127.0.0.0/8 or ::1), link-local (169.254.0.0/16 or fe80::/10),
+    /// or link-local multicast (224.0.0.0/24 or ff02::/16).
     #[prost(string, optional, tag="1")]
     pub ip: ::core::option::Option<::prost::alloc::string::String>,
     /// The Hostname of this endpoint
@@ -1065,10 +1162,19 @@ pub struct EndpointPort {
     #[prost(string, optional, tag="3")]
     pub protocol: ::core::option::Option<::prost::alloc::string::String>,
     /// The application protocol for this port.
+    /// This is used as a hint for implementations to offer richer behavior for protocols that they understand.
     /// This field follows standard Kubernetes label syntax.
-    /// Un-prefixed names are reserved for IANA standard service names (as per
-    /// RFC-6335 and http://www.iana.org/assignments/service-names).
-    /// Non-standard protocols should use prefixed names such as
+    /// Valid values are either:
+    ///
+    /// * Un-prefixed protocol names - reserved for IANA standard service names (as per
+    /// RFC-6335 and https://www.iana.org/assignments/service-names).
+    ///
+    /// * Kubernetes-defined prefixed names:
+    ///   * 'kubernetes.io/h2c' - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+    ///   * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+    ///   * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+    ///
+    /// * Other protocols should use implementation-defined prefixed names such as
     /// mycompany.com/my-custom-protocol.
     /// +optional
     #[prost(string, optional, tag="4")]
@@ -1077,13 +1183,16 @@ pub struct EndpointPort {
 /// EndpointSubset is a group of addresses with a common set of ports. The
 /// expanded set of endpoints is the Cartesian product of Addresses x Ports.
 /// For example, given:
-///   {
-///     Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],
-///     Ports:     [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]
-///   }
+///
+/// 	{
+/// 	  Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],
+/// 	  Ports:     [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]
+/// 	}
+///
 /// The resulting set of endpoints can be viewed as:
-///     a: [ 10.10.1.1:8675, 10.10.2.2:8675 ],
-///     b: [ 10.10.1.1:309, 10.10.2.2:309 ]
+///
+/// 	a: [ 10.10.1.1:8675, 10.10.2.2:8675 ],
+/// 	b: [ 10.10.1.1:309, 10.10.2.2:309 ]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointSubset {
     /// IP addresses which offer the related ports that are marked as ready. These endpoints
@@ -1103,17 +1212,18 @@ pub struct EndpointSubset {
     pub ports: ::prost::alloc::vec::Vec<EndpointPort>,
 }
 /// Endpoints is a collection of endpoints that implement the actual service. Example:
-///   Name: "mysvc",
-///   Subsets: [
-///     {
-///       Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],
-///       Ports: [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]
-///     },
-///     {
-///       Addresses: [{"ip": "10.10.3.3"}],
-///       Ports: [{"name": "a", "port": 93}, {"name": "b", "port": 76}]
-///     },
-///  ]
+///
+/// 	 Name: "mysvc",
+/// 	 Subsets: [
+/// 	   {
+/// 	     Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],
+/// 	     Ports: [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]
+/// 	   },
+/// 	   {
+/// 	     Addresses: [{"ip": "10.10.3.3"}],
+/// 	     Ports: [{"name": "a", "port": 93}, {"name": "b", "port": 76}]
+/// 	   },
+/// 	]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoints {
     /// Standard object's metadata.
@@ -1205,15 +1315,14 @@ pub struct EnvVarSource {
     #[prost(message, optional, tag="4")]
     pub secret_key_ref: ::core::option::Option<SecretKeySelector>,
 }
-/// An EphemeralContainer is a container that may be added temporarily to an existing pod for
+/// An EphemeralContainer is a temporary container that you may add to an existing Pod for
 /// user-initiated activities such as debugging. Ephemeral containers have no resource or
-/// scheduling guarantees, and they will not be restarted when they exit or when a pod is
-/// removed or restarted. If an ephemeral container causes a pod to exceed its resource
-/// allocation, the pod may be evicted.
-/// Ephemeral containers may not be added by directly updating the pod spec. They must be added
-/// via the pod's ephemeralcontainers subresource, and they will appear in the pod spec
-/// once added.
-/// This is an alpha feature enabled by the EphemeralContainers feature flag.
+/// scheduling guarantees, and they will not be restarted when they exit or when a Pod is
+/// removed or restarted. The kubelet may evict a Pod if an ephemeral container causes the
+/// Pod to exceed its resource allocation.
+///
+/// To add an ephemeral container, use the ephemeralcontainers subresource of an existing
+/// Pod. Ephemeral containers may not be removed or restarted.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EphemeralContainer {
     /// Ephemeral containers have all of the fields of Container, plus additional fields
@@ -1224,8 +1333,10 @@ pub struct EphemeralContainer {
     pub ephemeral_container_common: ::core::option::Option<EphemeralContainerCommon>,
     /// If set, the name of the container from PodSpec that this ephemeral container targets.
     /// The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container.
-    /// If not set then the ephemeral container is run in whatever namespaces are shared
-    /// for the pod. Note that the container runtime must support this feature.
+    /// If not set then the ephemeral container uses the namespaces configured in the Pod spec.
+    ///
+    /// The container runtime must implement support for this feature. If the runtime does not
+    /// support namespace targeting then the result of setting this field is undefined.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub target_container_name: ::core::option::Option<::prost::alloc::string::String>,
@@ -1240,12 +1351,12 @@ pub struct EphemeralContainerCommon {
     /// This name must be unique among all containers, init containers and ephemeral containers.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Docker image name.
+    /// Container image name.
     /// More info: https://kubernetes.io/docs/concepts/containers/images
     #[prost(string, optional, tag="2")]
     pub image: ::core::option::Option<::prost::alloc::string::String>,
     /// Entrypoint array. Not executed within a shell.
-    /// The docker image's ENTRYPOINT is used if this is not provided.
+    /// The image's ENTRYPOINT is used if this is not provided.
     /// Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
     /// cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
     /// to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
@@ -1256,7 +1367,7 @@ pub struct EphemeralContainerCommon {
     #[prost(string, repeated, tag="3")]
     pub command: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Arguments to the entrypoint.
-    /// The docker image's CMD is used if this is not provided.
+    /// The image's CMD is used if this is not provided.
     /// Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
     /// cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
     /// to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
@@ -1274,6 +1385,12 @@ pub struct EphemeralContainerCommon {
     #[prost(string, optional, tag="5")]
     pub working_dir: ::core::option::Option<::prost::alloc::string::String>,
     /// Ports are not allowed for ephemeral containers.
+    /// +optional
+    /// +patchMergeKey=containerPort
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=containerPort
+    /// +listMapKey=protocol
     #[prost(message, repeated, tag="6")]
     pub ports: ::prost::alloc::vec::Vec<ContainerPort>,
     /// List of sources to populate environment variables in the container.
@@ -1297,7 +1414,21 @@ pub struct EphemeralContainerCommon {
     /// +optional
     #[prost(message, optional, tag="8")]
     pub resources: ::core::option::Option<ResourceRequirements>,
-    /// Pod volumes to mount into the container's filesystem.
+    /// Resources resize policy for the container.
+    /// +featureGate=InPlacePodVerticalScaling
+    /// +optional
+    /// +listType=atomic
+    #[prost(message, repeated, tag="23")]
+    pub resize_policy: ::prost::alloc::vec::Vec<ContainerResizePolicy>,
+    /// Restart policy for the container to manage the restart behavior of each
+    /// container within a pod.
+    /// This may only be set for init containers. You cannot set this field on
+    /// ephemeral containers.
+    /// +featureGate=SidecarContainers
+    /// +optional
+    #[prost(string, optional, tag="24")]
+    pub restart_policy: ::core::option::Option<::prost::alloc::string::String>,
+    /// Pod volumes to mount into the container's filesystem. Subpath mounts are not allowed for ephemeral containers.
     /// Cannot be updated.
     /// +optional
     /// +patchMergeKey=mountPath
@@ -1531,27 +1662,27 @@ pub struct ExecAction {
 /// Fibre Channel volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FcVolumeSource {
-    /// Optional: FC target worldwide names (WWNs)
+    /// targetWWNs is Optional: FC target worldwide names (WWNs)
     /// +optional
     #[prost(string, repeated, tag="1")]
     pub target_ww_ns: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Optional: FC target lun number
+    /// lun is Optional: FC target lun number
     /// +optional
     #[prost(int32, optional, tag="2")]
     pub lun: ::core::option::Option<i32>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// TODO: how do we prevent errors in the filesystem from compromising the machine
     /// +optional
     #[prost(string, optional, tag="3")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly is Optional: Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub read_only: ::core::option::Option<bool>,
-    /// Optional: FC volume world wide identifiers (wwids)
+    /// wwids Optional: FC volume world wide identifiers (wwids)
     /// Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously.
     /// +optional
     #[prost(string, repeated, tag="5")]
@@ -1561,16 +1692,16 @@ pub struct FcVolumeSource {
 /// provisioned/attached using an exec based plugin.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlexPersistentVolumeSource {
-    /// Driver is the name of the driver to use for this volume.
+    /// driver is the name of the driver to use for this volume.
     #[prost(string, optional, tag="1")]
     pub driver: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the Filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: SecretRef is reference to the secret object containing
+    /// secretRef is Optional: SecretRef is reference to the secret object containing
     /// sensitive information to pass to the plugin scripts. This may be
     /// empty if no secret object is specified. If the secret object
     /// contains more than one secret, all secrets are passed to the plugin
@@ -1578,12 +1709,12 @@ pub struct FlexPersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag="3")]
     pub secret_ref: ::core::option::Option<SecretReference>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly is Optional: defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub read_only: ::core::option::Option<bool>,
-    /// Optional: Extra command options if any.
+    /// options is Optional: this field holds extra command options if any.
     /// +optional
     #[prost(map="string, string", tag="5")]
     pub options: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
@@ -1592,16 +1723,16 @@ pub struct FlexPersistentVolumeSource {
 /// provisioned/attached using an exec based plugin.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlexVolumeSource {
-    /// Driver is the name of the driver to use for this volume.
+    /// driver is the name of the driver to use for this volume.
     #[prost(string, optional, tag="1")]
     pub driver: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: SecretRef is reference to the secret object containing
+    /// secretRef is Optional: secretRef is reference to the secret object containing
     /// sensitive information to pass to the plugin scripts. This may be
     /// empty if no secret object is specified. If the secret object
     /// contains more than one secret, all secrets are passed to the plugin
@@ -1609,12 +1740,12 @@ pub struct FlexVolumeSource {
     /// +optional
     #[prost(message, optional, tag="3")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
-    /// Optional: Defaults to false (read/write). ReadOnly here will force
+    /// readOnly is Optional: defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub read_only: ::core::option::Option<bool>,
-    /// Optional: Extra command options if any.
+    /// options is Optional: this field holds extra command options if any.
     /// +optional
     #[prost(map="string, string", tag="5")]
     pub options: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
@@ -1624,12 +1755,12 @@ pub struct FlexVolumeSource {
 /// Flocker volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlockerVolumeSource {
-    /// Name of the dataset stored as metadata -> name on the dataset for Flocker
+    /// datasetName is Name of the dataset stored as metadata -> name on the dataset for Flocker
     /// should be considered as deprecated
     /// +optional
     #[prost(string, optional, tag="1")]
     pub dataset_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// UUID of the dataset. This is unique identifier of a Flocker dataset
+    /// datasetUUID is the UUID of the dataset. This is unique identifier of a Flocker dataset
     /// +optional
     #[prost(string, optional, tag="2")]
     pub dataset_uuid: ::core::option::Option<::prost::alloc::string::String>,
@@ -1642,11 +1773,11 @@ pub struct FlockerVolumeSource {
 /// PDs support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcePersistentDiskVolumeSource {
-    /// Unique name of the PD resource in GCE. Used to identify the disk in GCE.
+    /// pdName is unique name of the PD resource in GCE. Used to identify the disk in GCE.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
     #[prost(string, optional, tag="1")]
     pub pd_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type of the volume that you want to mount.
+    /// fsType is filesystem type of the volume that you want to mount.
     /// Tip: Ensure that the filesystem type is supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
@@ -1654,7 +1785,7 @@ pub struct GcePersistentDiskVolumeSource {
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// The partition in the volume that you want to mount.
+    /// partition is the partition in the volume that you want to mount.
     /// If omitted, the default is to mount by volume name.
     /// Examples: For volume /dev/sda1, you specify the partition as "1".
     /// Similarly, the volume partition for /dev/sda is "0" (or you can leave the property empty).
@@ -1662,12 +1793,26 @@ pub struct GcePersistentDiskVolumeSource {
     /// +optional
     #[prost(int32, optional, tag="3")]
     pub partition: ::core::option::Option<i32>,
-    /// ReadOnly here will force the ReadOnly setting in VolumeMounts.
+    /// readOnly here will force the ReadOnly setting in VolumeMounts.
     /// Defaults to false.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub read_only: ::core::option::Option<bool>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GrpcAction {
+    /// Port number of the gRPC service. Number must be in the range 1 to 65535.
+    #[prost(int32, optional, tag="1")]
+    pub port: ::core::option::Option<i32>,
+    /// Service is the name of the service to place in the gRPC HealthCheckRequest
+    /// (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
+    ///
+    /// If this is not specified, the default behavior is defined by gRPC.
+    /// +optional
+    /// +default=""
+    #[prost(string, optional, tag="2")]
+    pub service: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Represents a volume that is populated with the contents of a git repository.
 /// Git repo volumes do not support ownership management.
@@ -1678,14 +1823,14 @@ pub struct GcePersistentDiskVolumeSource {
 /// into the Pod's container.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GitRepoVolumeSource {
-    /// Repository URL
+    /// repository is the URL
     #[prost(string, optional, tag="1")]
     pub repository: ::core::option::Option<::prost::alloc::string::String>,
-    /// Commit hash for the specified revision.
+    /// revision is the commit hash for the specified revision.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub revision: ::core::option::Option<::prost::alloc::string::String>,
-    /// Target directory name.
+    /// directory is the target directory name.
     /// Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the
     /// git repository.  Otherwise, if specified, the volume will contain the git repository in
     /// the subdirectory with the given name.
@@ -1697,21 +1842,21 @@ pub struct GitRepoVolumeSource {
 /// Glusterfs volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlusterfsPersistentVolumeSource {
-    /// EndpointsName is the endpoint name that details Glusterfs topology.
+    /// endpoints is the endpoint name that details Glusterfs topology.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     #[prost(string, optional, tag="1")]
     pub endpoints: ::core::option::Option<::prost::alloc::string::String>,
-    /// Path is the Glusterfs volume path.
+    /// path is the Glusterfs volume path.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     #[prost(string, optional, tag="2")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// ReadOnly here will force the Glusterfs volume to be mounted with read-only permissions.
+    /// readOnly here will force the Glusterfs volume to be mounted with read-only permissions.
     /// Defaults to false.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub read_only: ::core::option::Option<bool>,
-    /// EndpointsNamespace is the namespace that contains Glusterfs endpoint.
+    /// endpointsNamespace is the namespace that contains Glusterfs endpoint.
     /// If this field is empty, the EndpointNamespace defaults to the same namespace as the bound PVC.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     /// +optional
@@ -1722,15 +1867,15 @@ pub struct GlusterfsPersistentVolumeSource {
 /// Glusterfs volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlusterfsVolumeSource {
-    /// EndpointsName is the endpoint name that details Glusterfs topology.
+    /// endpoints is the endpoint name that details Glusterfs topology.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     #[prost(string, optional, tag="1")]
     pub endpoints: ::core::option::Option<::prost::alloc::string::String>,
-    /// Path is the Glusterfs volume path.
+    /// path is the Glusterfs volume path.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     #[prost(string, optional, tag="2")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// ReadOnly here will force the Glusterfs volume to be mounted with read-only permissions.
+    /// readOnly here will force the Glusterfs volume to be mounted with read-only permissions.
     /// Defaults to false.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
     /// +optional
@@ -1767,32 +1912,13 @@ pub struct HttpGetAction {
 /// HTTPHeader describes a custom header to be used in HTTP probes
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpHeader {
-    /// The header field name
+    /// The header field name.
+    /// This will be canonicalized upon output, so case-variant names will be understood as the same header.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// The header field value
     #[prost(string, optional, tag="2")]
     pub value: ::core::option::Option<::prost::alloc::string::String>,
-}
-/// Handler defines a specific action that should be taken
-/// TODO: pass structured data to these actions, and document that data here.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Handler {
-    /// One and only one of the following should be specified.
-    /// Exec specifies the action to take.
-    /// +optional
-    #[prost(message, optional, tag="1")]
-    pub exec: ::core::option::Option<ExecAction>,
-    /// HTTPGet specifies the http request to perform.
-    /// +optional
-    #[prost(message, optional, tag="2")]
-    pub http_get: ::core::option::Option<HttpGetAction>,
-    /// TCPSocket specifies an action involving a TCP port.
-    /// TCP hooks not yet supported
-    /// TODO: implement a realistic TCP lifecycle hook
-    /// +optional
-    #[prost(message, optional, tag="3")]
-    pub tcp_socket: ::core::option::Option<TcpSocketAction>,
 }
 /// HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
 /// pod's hosts file.
@@ -1805,16 +1931,23 @@ pub struct HostAlias {
     #[prost(string, repeated, tag="2")]
     pub hostnames: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+/// HostIP represents a single IP address allocated to the host.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HostIp {
+    /// IP is the IP address assigned to the host
+    #[prost(string, optional, tag="1")]
+    pub ip: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// Represents a host path mapped into a pod.
 /// Host path volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HostPathVolumeSource {
-    /// Path of the directory on the host.
+    /// path of the directory on the host.
     /// If the path is a symlink, it will follow the link to the real path.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
     #[prost(string, optional, tag="1")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// Type for HostPath Volume
+    /// type for HostPath Volume
     /// Defaults to ""
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
     /// +optional
@@ -1826,22 +1959,22 @@ pub struct HostPathVolumeSource {
 /// ISCSI volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IscsiPersistentVolumeSource {
-    /// iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port
+    /// targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port
     /// is other than default (typically TCP ports 860 and 3260).
     #[prost(string, optional, tag="1")]
     pub target_portal: ::core::option::Option<::prost::alloc::string::String>,
-    /// Target iSCSI Qualified Name.
+    /// iqn is Target iSCSI Qualified Name.
     #[prost(string, optional, tag="2")]
     pub iqn: ::core::option::Option<::prost::alloc::string::String>,
-    /// iSCSI Target Lun number.
+    /// lun is iSCSI Target Lun number.
     #[prost(int32, optional, tag="3")]
     pub lun: ::core::option::Option<i32>,
-    /// iSCSI Interface Name that uses an iSCSI transport.
+    /// iscsiInterface is the interface Name that uses an iSCSI transport.
     /// Defaults to 'default' (tcp).
     /// +optional
     #[prost(string, optional, tag="4")]
     pub iscsi_interface: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type of the volume that you want to mount.
+    /// fsType is the filesystem type of the volume that you want to mount.
     /// Tip: Ensure that the filesystem type is supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
@@ -1849,29 +1982,29 @@ pub struct IscsiPersistentVolumeSource {
     /// +optional
     #[prost(string, optional, tag="5")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// ReadOnly here will force the ReadOnly setting in VolumeMounts.
+    /// readOnly here will force the ReadOnly setting in VolumeMounts.
     /// Defaults to false.
     /// +optional
     #[prost(bool, optional, tag="6")]
     pub read_only: ::core::option::Option<bool>,
-    /// iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port
+    /// portals is the iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port
     /// is other than default (typically TCP ports 860 and 3260).
     /// +optional
     #[prost(string, repeated, tag="7")]
     pub portals: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// whether support iSCSI Discovery CHAP authentication
+    /// chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication
     /// +optional
     #[prost(bool, optional, tag="8")]
     pub chap_auth_discovery: ::core::option::Option<bool>,
-    /// whether support iSCSI Session CHAP authentication
+    /// chapAuthSession defines whether support iSCSI Session CHAP authentication
     /// +optional
     #[prost(bool, optional, tag="11")]
     pub chap_auth_session: ::core::option::Option<bool>,
-    /// CHAP Secret for iSCSI target and initiator authentication
+    /// secretRef is the CHAP Secret for iSCSI target and initiator authentication
     /// +optional
     #[prost(message, optional, tag="10")]
     pub secret_ref: ::core::option::Option<SecretReference>,
-    /// Custom iSCSI Initiator Name.
+    /// initiatorName is the custom iSCSI Initiator Name.
     /// If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface
     /// <target portal>:<volume name> will be created for the connection.
     /// +optional
@@ -1883,22 +2016,22 @@ pub struct IscsiPersistentVolumeSource {
 /// ISCSI volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IscsiVolumeSource {
-    /// iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port
+    /// targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port
     /// is other than default (typically TCP ports 860 and 3260).
     #[prost(string, optional, tag="1")]
     pub target_portal: ::core::option::Option<::prost::alloc::string::String>,
-    /// Target iSCSI Qualified Name.
+    /// iqn is the target iSCSI Qualified Name.
     #[prost(string, optional, tag="2")]
     pub iqn: ::core::option::Option<::prost::alloc::string::String>,
-    /// iSCSI Target Lun number.
+    /// lun represents iSCSI Target Lun number.
     #[prost(int32, optional, tag="3")]
     pub lun: ::core::option::Option<i32>,
-    /// iSCSI Interface Name that uses an iSCSI transport.
+    /// iscsiInterface is the interface Name that uses an iSCSI transport.
     /// Defaults to 'default' (tcp).
     /// +optional
     #[prost(string, optional, tag="4")]
     pub iscsi_interface: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type of the volume that you want to mount.
+    /// fsType is the filesystem type of the volume that you want to mount.
     /// Tip: Ensure that the filesystem type is supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
@@ -1906,29 +2039,29 @@ pub struct IscsiVolumeSource {
     /// +optional
     #[prost(string, optional, tag="5")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// ReadOnly here will force the ReadOnly setting in VolumeMounts.
+    /// readOnly here will force the ReadOnly setting in VolumeMounts.
     /// Defaults to false.
     /// +optional
     #[prost(bool, optional, tag="6")]
     pub read_only: ::core::option::Option<bool>,
-    /// iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port
+    /// portals is the iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port
     /// is other than default (typically TCP ports 860 and 3260).
     /// +optional
     #[prost(string, repeated, tag="7")]
     pub portals: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// whether support iSCSI Discovery CHAP authentication
+    /// chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication
     /// +optional
     #[prost(bool, optional, tag="8")]
     pub chap_auth_discovery: ::core::option::Option<bool>,
-    /// whether support iSCSI Session CHAP authentication
+    /// chapAuthSession defines whether support iSCSI Session CHAP authentication
     /// +optional
     #[prost(bool, optional, tag="11")]
     pub chap_auth_session: ::core::option::Option<bool>,
-    /// CHAP Secret for iSCSI target and initiator authentication
+    /// secretRef is the CHAP Secret for iSCSI target and initiator authentication
     /// +optional
     #[prost(message, optional, tag="10")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
-    /// Custom iSCSI Initiator Name.
+    /// initiatorName is the custom iSCSI Initiator Name.
     /// If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface
     /// <target portal>:<volume name> will be created for the connection.
     /// +optional
@@ -1938,16 +2071,16 @@ pub struct IscsiVolumeSource {
 /// Maps a string key to a path within a volume.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyToPath {
-    /// The key to project.
+    /// key is the key to project.
     #[prost(string, optional, tag="1")]
     pub key: ::core::option::Option<::prost::alloc::string::String>,
-    /// The relative path of the file to map the key to.
+    /// path is the relative path of the file to map the key to.
     /// May not be an absolute path.
     /// May not contain the path element '..'.
     /// May not start with the string '..'.
     #[prost(string, optional, tag="2")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// Optional: mode bits used to set permissions on this file.
+    /// mode is Optional: mode bits used to set permissions on this file.
     /// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
     /// YAML accepts both octal and decimal values, JSON requires decimal values for mode bits.
     /// If not specified, the volume defaultMode will be used.
@@ -1968,20 +2101,38 @@ pub struct Lifecycle {
     /// More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
     /// +optional
     #[prost(message, optional, tag="1")]
-    pub post_start: ::core::option::Option<Handler>,
+    pub post_start: ::core::option::Option<LifecycleHandler>,
     /// PreStop is called immediately before a container is terminated due to an
     /// API request or management event such as liveness/startup probe failure,
     /// preemption, resource contention, etc. The handler is not called if the
-    /// container crashes or exits. The reason for termination is passed to the
-    /// handler. The Pod's termination grace period countdown begins before the
-    /// PreStop hooked is executed. Regardless of the outcome of the handler, the
+    /// container crashes or exits. The Pod's termination grace period countdown begins before the
+    /// PreStop hook is executed. Regardless of the outcome of the handler, the
     /// container will eventually terminate within the Pod's termination grace
-    /// period. Other management of the container blocks until the hook completes
+    /// period (unless delayed by finalizers). Other management of the container blocks until the hook completes
     /// or until the termination grace period is reached.
     /// More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
     /// +optional
     #[prost(message, optional, tag="2")]
-    pub pre_stop: ::core::option::Option<Handler>,
+    pub pre_stop: ::core::option::Option<LifecycleHandler>,
+}
+/// LifecycleHandler defines a specific action that should be taken in a lifecycle
+/// hook. One and only one of the fields, except TCPSocket must be specified.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LifecycleHandler {
+    /// Exec specifies the action to take.
+    /// +optional
+    #[prost(message, optional, tag="1")]
+    pub exec: ::core::option::Option<ExecAction>,
+    /// HTTPGet specifies the http request to perform.
+    /// +optional
+    #[prost(message, optional, tag="2")]
+    pub http_get: ::core::option::Option<HttpGetAction>,
+    /// Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
+    /// for the backward compatibility. There are no validation of this field and
+    /// lifecycle hooks will fail in runtime when tcp handler is specified.
+    /// +optional
+    #[prost(message, optional, tag="3")]
+    pub tcp_socket: ::core::option::Option<TcpSocketAction>,
 }
 /// LimitRange sets resource usage limits for each kind of resource in a Namespace.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2101,14 +2252,14 @@ pub struct LocalObjectReference {
 /// Local represents directly-attached storage with node affinity (Beta feature)
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalVolumeSource {
-    /// The full path to the volume on the node.
+    /// path of the full path to the volume on the node.
     /// It can be either a directory or block device (disk, partition, ...).
     #[prost(string, optional, tag="1")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// It applies only when the Path is a block device.
     /// Must be a filesystem type supported by the host operating system.
-    /// Ex. "ext4", "xfs", "ntfs". The default value is to auto-select a fileystem if unspecified.
+    /// Ex. "ext4", "xfs", "ntfs". The default value is to auto-select a filesystem if unspecified.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
@@ -2117,16 +2268,15 @@ pub struct LocalVolumeSource {
 /// NFS volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NfsVolumeSource {
-    /// Server is the hostname or IP address of the NFS server.
+    /// server is the hostname or IP address of the NFS server.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
     #[prost(string, optional, tag="1")]
     pub server: ::core::option::Option<::prost::alloc::string::String>,
-    /// Path that is exported by the NFS server.
+    /// path that is exported by the NFS server.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
     #[prost(string, optional, tag="2")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// ReadOnly here will force
-    /// the NFS export to be mounted with read-only permissions.
+    /// readOnly here will force the NFS export to be mounted with read-only permissions.
     /// Defaults to false.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
     /// +optional
@@ -2458,9 +2608,7 @@ pub struct NodeSpec {
     /// +optional
     #[prost(message, repeated, tag="5")]
     pub taints: ::prost::alloc::vec::Vec<Taint>,
-    /// Deprecated. If specified, the source of the node's configuration.
-    /// The DynamicKubeletConfig feature gate must be enabled for the Kubelet to use this field.
-    /// This field is deprecated as of 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration
+    /// Deprecated: Previously used to specify the source of the node's configuration for the DynamicKubeletConfig feature. This feature is removed.
     /// +optional
     #[prost(message, optional, tag="6")]
     pub config_source: ::core::option::Option<NodeConfigSource>,
@@ -2501,7 +2649,11 @@ pub struct NodeStatus {
     /// More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses
     /// Note: This field is declared as mergeable, but the merge key is not sufficiently
     /// unique, which can cause data corruption when it is merged. Callers should instead
-    /// use a full-replacement patch. See http://pr.k8s.io/79391 for an example.
+    /// use a full-replacement patch. See https://pr.k8s.io/79391 for an example.
+    /// Consumers should assume that addresses can change during the
+    /// lifetime of a Node. However, there are some exceptions where this may not
+    /// be possible, such as Pods that inherit a Node's address in its own status or
+    /// consumers of the downward API (status.hostIP).
     /// +optional
     /// +patchMergeKey=type
     /// +patchStrategy=merge
@@ -2555,7 +2707,7 @@ pub struct NodeSystemInfo {
     /// OS Image reported by the node from /etc/os-release (e.g. Debian GNU/Linux 7 (wheezy)).
     #[prost(string, optional, tag="5")]
     pub os_image: ::core::option::Option<::prost::alloc::string::String>,
-    /// ContainerRuntime Version reported by the node through runtime remote API (e.g. docker://1.5.0).
+    /// ContainerRuntime Version reported by the node through runtime remote API (e.g. containerd://1.4.2).
     #[prost(string, optional, tag="6")]
     pub container_runtime_version: ::core::option::Option<::prost::alloc::string::String>,
     /// Kubelet Version reported by the node.
@@ -2596,6 +2748,7 @@ pub struct ObjectFieldSelector {
 ///     and the version of the actual struct is irrelevant.
 ///  5. We cannot easily change it.  Because this type is embedded in many locations, updates to this type
 ///     will affect numerous schemas.  Don't make new APIs embed an underspecified API type they do not control.
+///
 /// Instead of using this type, create a locally provided and used type that is well-focused on your reference.
 /// For example, ServiceReferences for admission registration: https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533 .
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -2653,13 +2806,13 @@ pub struct PersistentVolume {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec defines a specification of a persistent volume owned by the cluster.
+    /// spec defines a specification of a persistent volume owned by the cluster.
     /// Provisioned by an administrator.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
     /// +optional
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<PersistentVolumeSpec>,
-    /// Status represents the current information/status for the persistent volume.
+    /// status represents the current information/status for the persistent volume.
     /// Populated by the system.
     /// Read-only.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
@@ -2675,40 +2828,40 @@ pub struct PersistentVolumeClaim {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec defines the desired characteristics of a volume requested by a pod author.
+    /// spec defines the desired characteristics of a volume requested by a pod author.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
     /// +optional
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<PersistentVolumeClaimSpec>,
-    /// Status represents the current information/status of a persistent volume claim.
+    /// status represents the current information/status of a persistent volume claim.
     /// Read-only.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
     /// +optional
     #[prost(message, optional, tag="3")]
     pub status: ::core::option::Option<PersistentVolumeClaimStatus>,
 }
-/// PersistentVolumeClaimCondition contails details about state of pvc
+/// PersistentVolumeClaimCondition contains details about state of pvc
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimCondition {
     #[prost(string, optional, tag="1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(string, optional, tag="2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
-    /// Last time we probed the condition.
+    /// lastProbeTime is the time we probed the condition.
     /// +optional
     #[prost(message, optional, tag="3")]
     pub last_probe_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-    /// Last time the condition transitioned from one status to another.
+    /// lastTransitionTime is the time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag="4")]
     pub last_transition_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-    /// Unique, this should be a short, machine understandable string that gives the reason
+    /// reason is a unique, this should be a short, machine understandable string that gives the reason
     /// for condition's last transition. If it reports "ResizeStarted" that means the underlying
     /// persistent volume is being resized.
     /// +optional
     #[prost(string, optional, tag="5")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
-    /// Human-readable message indicating details about last transition.
+    /// message is the human-readable message indicating details about last transition.
     /// +optional
     #[prost(string, optional, tag="6")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
@@ -2721,7 +2874,7 @@ pub struct PersistentVolumeClaimList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// A list of persistent volume claims.
+    /// items is a list of persistent volume claims.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<PersistentVolumeClaim>,
@@ -2730,25 +2883,28 @@ pub struct PersistentVolumeClaimList {
 /// and allows a Source for provider-specific attributes
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimSpec {
-    /// AccessModes contains the desired access modes the volume should have.
+    /// accessModes contains the desired access modes the volume should have.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
     /// +optional
     #[prost(string, repeated, tag="1")]
     pub access_modes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// A label query over volumes to consider for binding.
+    /// selector is a label query over volumes to consider for binding.
     /// +optional
     #[prost(message, optional, tag="4")]
     pub selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// Resources represents the minimum resources the volume should have.
+    /// resources represents the minimum resources the volume should have.
+    /// If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
+    /// that are lower than previous value but must still be higher than capacity recorded in the
+    /// status field of the claim.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
     /// +optional
     #[prost(message, optional, tag="2")]
     pub resources: ::core::option::Option<ResourceRequirements>,
-    /// VolumeName is the binding reference to the PersistentVolume backing this claim.
+    /// volumeName is the binding reference to the PersistentVolume backing this claim.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub volume_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Name of the StorageClass required by the claim.
+    /// storageClassName is the name of the StorageClass required by the claim.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
     /// +optional
     #[prost(string, optional, tag="5")]
@@ -2758,60 +2914,133 @@ pub struct PersistentVolumeClaimSpec {
     /// +optional
     #[prost(string, optional, tag="6")]
     pub volume_mode: ::core::option::Option<::prost::alloc::string::String>,
-    /// This field can be used to specify either:
+    /// dataSource field can be used to specify either:
     /// * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot)
     /// * An existing PVC (PersistentVolumeClaim)
     /// If the provisioner or an external controller can support the specified data source,
     /// it will create a new volume based on the contents of the specified data source.
-    /// If the AnyVolumeDataSource feature gate is enabled, this field will always have
-    /// the same contents as the DataSourceRef field.
+    /// When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
+    /// and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
+    /// If the namespace is specified, then dataSourceRef will not be copied to dataSource.
     /// +optional
     #[prost(message, optional, tag="7")]
     pub data_source: ::core::option::Option<TypedLocalObjectReference>,
-    /// Specifies the object from which to populate the volume with data, if a non-empty
-    /// volume is desired. This may be any local object from a non-empty API group (non
+    /// dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
+    /// volume is desired. This may be any object from a non-empty API group (non
     /// core object) or a PersistentVolumeClaim object.
     /// When this field is specified, volume binding will only succeed if the type of
     /// the specified object matches some installed volume populator or dynamic
     /// provisioner.
-    /// This field will replace the functionality of the DataSource field and as such
+    /// This field will replace the functionality of the dataSource field and as such
     /// if both fields are non-empty, they must have the same value. For backwards
-    /// compatibility, both fields (DataSource and DataSourceRef) will be set to the same
+    /// compatibility, when namespace isn't specified in dataSourceRef,
+    /// both fields (dataSource and dataSourceRef) will be set to the same
     /// value automatically if one of them is empty and the other is non-empty.
-    /// There are two important differences between DataSource and DataSourceRef:
-    /// * While DataSource only allows two specific types of objects, DataSourceRef
+    /// When namespace is specified in dataSourceRef,
+    /// dataSource isn't set to the same value and must be empty.
+    /// There are three important differences between dataSource and dataSourceRef:
+    /// * While dataSource only allows two specific types of objects, dataSourceRef
     ///   allows any non-core object, as well as PersistentVolumeClaim objects.
-    /// * While DataSource ignores disallowed values (dropping them), DataSourceRef
+    /// * While dataSource ignores disallowed values (dropping them), dataSourceRef
     ///   preserves all values, and generates an error if a disallowed value is
     ///   specified.
-    /// (Alpha) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
+    /// * While dataSource only allows local objects, dataSourceRef allows objects
+    ///   in any namespaces.
+    /// (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
+    /// (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
     /// +optional
     #[prost(message, optional, tag="8")]
-    pub data_source_ref: ::core::option::Option<TypedLocalObjectReference>,
+    pub data_source_ref: ::core::option::Option<TypedObjectReference>,
 }
 /// PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimStatus {
-    /// Phase represents the current phase of PersistentVolumeClaim.
+    /// phase represents the current phase of PersistentVolumeClaim.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub phase: ::core::option::Option<::prost::alloc::string::String>,
-    /// AccessModes contains the actual access modes the volume backing the PVC has.
+    /// accessModes contains the actual access modes the volume backing the PVC has.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
     /// +optional
     #[prost(string, repeated, tag="2")]
     pub access_modes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Represents the actual resources of the underlying volume.
+    /// capacity represents the actual resources of the underlying volume.
     /// +optional
     #[prost(map="string, message", tag="3")]
     pub capacity: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
-    /// Current Condition of persistent volume claim. If underlying persistent volume is being
+    /// conditions is the current Condition of persistent volume claim. If underlying persistent volume is being
     /// resized then the Condition will be set to 'ResizeStarted'.
     /// +optional
     /// +patchMergeKey=type
     /// +patchStrategy=merge
     #[prost(message, repeated, tag="4")]
     pub conditions: ::prost::alloc::vec::Vec<PersistentVolumeClaimCondition>,
+    /// allocatedResources tracks the resources allocated to a PVC including its capacity.
+    /// Key names follow standard Kubernetes label syntax. Valid values are either:
+    /// 	* Un-prefixed keys:
+    /// 		- storage - the capacity of the volume.
+    /// 	* Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
+    /// Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
+    /// reserved and hence may not be used.
+    ///
+    /// Capacity reported here may be larger than the actual capacity when a volume expansion operation
+    /// is requested.
+    /// For storage quota, the larger value from allocatedResources and PVC.spec.resources is used.
+    /// If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation.
+    /// If a volume expansion capacity request is lowered, allocatedResources is only
+    /// lowered if there are no expansion operations in progress and if the actual volume capacity
+    /// is equal or lower than the requested capacity.
+    ///
+    /// A controller that receives PVC update with previously unknown resourceName
+    /// should ignore the update for the purpose it was designed. For example - a controller that
+    /// only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
+    /// resources associated with PVC.
+    ///
+    /// This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
+    /// +featureGate=RecoverVolumeExpansionFailure
+    /// +optional
+    #[prost(map="string, message", tag="5")]
+    pub allocated_resources: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// allocatedResourceStatuses stores status of resource being resized for the given PVC.
+    /// Key names follow standard Kubernetes label syntax. Valid values are either:
+    /// 	* Un-prefixed keys:
+    /// 		- storage - the capacity of the volume.
+    /// 	* Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
+    /// Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
+    /// reserved and hence may not be used.
+    ///
+    /// ClaimResourceStatus can be in any of following states:
+    /// 	- ControllerResizeInProgress:
+    /// 		State set when resize controller starts resizing the volume in control-plane.
+    /// 	- ControllerResizeFailed:
+    /// 		State set when resize has failed in resize controller with a terminal error.
+    /// 	- NodeResizePending:
+    /// 		State set when resize controller has finished resizing the volume but further resizing of
+    /// 		volume is needed on the node.
+    /// 	- NodeResizeInProgress:
+    /// 		State set when kubelet starts resizing the volume.
+    /// 	- NodeResizeFailed:
+    /// 		State set when resizing has failed in kubelet with a terminal error. Transient errors don't set
+    /// 		NodeResizeFailed.
+    /// For example: if expanding a PVC for more capacity - this field can be one of the following states:
+    /// 	- pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeInProgress"
+    ///      - pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeFailed"
+    ///      - pvc.status.allocatedResourceStatus['storage'] = "NodeResizePending"
+    ///      - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeInProgress"
+    ///      - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeFailed"
+    /// When this field is not set, it means that no resize operation is in progress for the given PVC.
+    ///
+    /// A controller that receives PVC update with previously unknown resourceName or ClaimResourceStatus
+    /// should ignore the update for the purpose it was designed. For example - a controller that
+    /// only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
+    /// resources associated with PVC.
+    ///
+    /// This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
+    /// +featureGate=RecoverVolumeExpansionFailure
+    /// +mapType=granular
+    /// +optional
+    #[prost(map="string, string", tag="7")]
+    pub allocated_resource_statuses: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
 /// PersistentVolumeClaimTemplate is used to produce
 /// PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
@@ -2837,11 +3066,11 @@ pub struct PersistentVolumeClaimTemplate {
 /// type of volume that is owned by someone else (the system).
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimVolumeSource {
-    /// ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume.
+    /// claimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
     #[prost(string, optional, tag="1")]
     pub claim_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Will force the ReadOnly setting in VolumeMounts.
+    /// readOnly Will force the ReadOnly setting in VolumeMounts.
     /// Default false.
     /// +optional
     #[prost(bool, optional, tag="2")]
@@ -2855,7 +3084,7 @@ pub struct PersistentVolumeList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// List of persistent volumes.
+    /// items is a list of persistent volumes.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<PersistentVolume>,
@@ -2864,19 +3093,19 @@ pub struct PersistentVolumeList {
 /// administrator who creates PVs. Exactly one of its members must be set.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeSource {
-    /// GCEPersistentDisk represents a GCE Disk resource that is attached to a
+    /// gcePersistentDisk represents a GCE Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod. Provisioned by an admin.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
     /// +optional
     #[prost(message, optional, tag="1")]
     pub gce_persistent_disk: ::core::option::Option<GcePersistentDiskVolumeSource>,
-    /// AWSElasticBlockStore represents an AWS Disk resource that is attached to a
+    /// awsElasticBlockStore represents an AWS Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
     /// +optional
     #[prost(message, optional, tag="2")]
     pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
-    /// HostPath represents a directory on the host.
+    /// hostPath represents a directory on the host.
     /// Provisioned by a developer or tester.
     /// This is useful for single-node development and testing only!
     /// On-host storage is not supported in any way and WILL NOT WORK in a multi-node cluster.
@@ -2884,86 +3113,86 @@ pub struct PersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag="3")]
     pub host_path: ::core::option::Option<HostPathVolumeSource>,
-    /// Glusterfs represents a Glusterfs volume that is attached to a host and
+    /// glusterfs represents a Glusterfs volume that is attached to a host and
     /// exposed to the pod. Provisioned by an admin.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md
     /// +optional
     #[prost(message, optional, tag="4")]
     pub glusterfs: ::core::option::Option<GlusterfsPersistentVolumeSource>,
-    /// NFS represents an NFS mount on the host. Provisioned by an admin.
+    /// nfs represents an NFS mount on the host. Provisioned by an admin.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
     /// +optional
     #[prost(message, optional, tag="5")]
     pub nfs: ::core::option::Option<NfsVolumeSource>,
-    /// RBD represents a Rados Block Device mount on the host that shares a pod's lifetime.
+    /// rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md
     /// +optional
     #[prost(message, optional, tag="6")]
     pub rbd: ::core::option::Option<RbdPersistentVolumeSource>,
-    /// ISCSI represents an ISCSI Disk resource that is attached to a
+    /// iscsi represents an ISCSI Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod. Provisioned by an admin.
     /// +optional
     #[prost(message, optional, tag="7")]
     pub iscsi: ::core::option::Option<IscsiPersistentVolumeSource>,
-    /// Cinder represents a cinder volume attached and mounted on kubelets host machine.
+    /// cinder represents a cinder volume attached and mounted on kubelets host machine.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     /// +optional
     #[prost(message, optional, tag="8")]
     pub cinder: ::core::option::Option<CinderPersistentVolumeSource>,
-    /// CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+    /// cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
     /// +optional
     #[prost(message, optional, tag="9")]
     pub cephfs: ::core::option::Option<CephFsPersistentVolumeSource>,
-    /// FC represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
+    /// fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
     /// +optional
     #[prost(message, optional, tag="10")]
     pub fc: ::core::option::Option<FcVolumeSource>,
-    /// Flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running
+    /// flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running
     /// +optional
     #[prost(message, optional, tag="11")]
     pub flocker: ::core::option::Option<FlockerVolumeSource>,
-    /// FlexVolume represents a generic volume resource that is
+    /// flexVolume represents a generic volume resource that is
     /// provisioned/attached using an exec based plugin.
     /// +optional
     #[prost(message, optional, tag="12")]
     pub flex_volume: ::core::option::Option<FlexPersistentVolumeSource>,
-    /// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
+    /// azureFile represents an Azure File Service mount on the host and bind mount to the pod.
     /// +optional
     #[prost(message, optional, tag="13")]
     pub azure_file: ::core::option::Option<AzureFilePersistentVolumeSource>,
-    /// VsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
+    /// vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
     /// +optional
     #[prost(message, optional, tag="14")]
     pub vsphere_volume: ::core::option::Option<VsphereVirtualDiskVolumeSource>,
-    /// Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+    /// quobyte represents a Quobyte mount on the host that shares a pod's lifetime
     /// +optional
     #[prost(message, optional, tag="15")]
     pub quobyte: ::core::option::Option<QuobyteVolumeSource>,
-    /// AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+    /// azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
     /// +optional
     #[prost(message, optional, tag="16")]
     pub azure_disk: ::core::option::Option<AzureDiskVolumeSource>,
-    /// PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
+    /// photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
     #[prost(message, optional, tag="17")]
     pub photon_persistent_disk: ::core::option::Option<PhotonPersistentDiskVolumeSource>,
-    /// PortworxVolume represents a portworx volume attached and mounted on kubelets host machine
+    /// portworxVolume represents a portworx volume attached and mounted on kubelets host machine
     /// +optional
     #[prost(message, optional, tag="18")]
     pub portworx_volume: ::core::option::Option<PortworxVolumeSource>,
-    /// ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
+    /// scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
     /// +optional
     #[prost(message, optional, tag="19")]
     pub scale_io: ::core::option::Option<ScaleIoPersistentVolumeSource>,
-    /// Local represents directly-attached storage with node affinity
+    /// local represents directly-attached storage with node affinity
     /// +optional
     #[prost(message, optional, tag="20")]
     pub local: ::core::option::Option<LocalVolumeSource>,
-    /// StorageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod
+    /// storageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod
     /// More info: https://examples.k8s.io/volumes/storageos/README.md
     /// +optional
     #[prost(message, optional, tag="21")]
     pub storageos: ::core::option::Option<StorageOsPersistentVolumeSource>,
-    /// CSI represents storage that is handled by an external CSI driver (Beta feature).
+    /// csi represents storage that is handled by an external CSI driver (Beta feature).
     /// +optional
     #[prost(message, optional, tag="22")]
     pub csi: ::core::option::Option<CsiPersistentVolumeSource>,
@@ -2971,27 +3200,28 @@ pub struct PersistentVolumeSource {
 /// PersistentVolumeSpec is the specification of a persistent volume.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeSpec {
-    /// A description of the persistent volume's resources and capacity.
+    /// capacity is the description of the persistent volume's resources and capacity.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
     /// +optional
     #[prost(map="string, message", tag="1")]
     pub capacity: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
-    /// The actual volume backing the persistent volume.
+    /// persistentVolumeSource is the actual volume backing the persistent volume.
     #[prost(message, optional, tag="2")]
     pub persistent_volume_source: ::core::option::Option<PersistentVolumeSource>,
-    /// AccessModes contains all ways the volume can be mounted.
+    /// accessModes contains all ways the volume can be mounted.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
     /// +optional
     #[prost(string, repeated, tag="3")]
     pub access_modes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// ClaimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim.
+    /// claimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim.
     /// Expected to be non-nil when bound.
     /// claim.VolumeName is the authoritative bind between PV and PVC.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
     /// +optional
+    /// +structType=granular
     #[prost(message, optional, tag="4")]
     pub claim_ref: ::core::option::Option<ObjectReference>,
-    /// What happens to a persistent volume when released from its claim.
+    /// persistentVolumeReclaimPolicy defines what happens to a persistent volume when released from its claim.
     /// Valid options are Retain (default for manually created PersistentVolumes), Delete (default
     /// for dynamically provisioned PersistentVolumes), and Recycle (deprecated).
     /// Recycle must be supported by the volume plugin underlying this PersistentVolume.
@@ -2999,12 +3229,12 @@ pub struct PersistentVolumeSpec {
     /// +optional
     #[prost(string, optional, tag="5")]
     pub persistent_volume_reclaim_policy: ::core::option::Option<::prost::alloc::string::String>,
-    /// Name of StorageClass to which this persistent volume belongs. Empty value
+    /// storageClassName is the name of StorageClass to which this persistent volume belongs. Empty value
     /// means that this volume does not belong to any StorageClass.
     /// +optional
     #[prost(string, optional, tag="6")]
     pub storage_class_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will
+    /// mountOptions is the list of mount options, e.g. ["ro", "soft"]. Not validated - mount will
     /// simply fail if one is invalid.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
     /// +optional
@@ -3015,7 +3245,7 @@ pub struct PersistentVolumeSpec {
     /// +optional
     #[prost(string, optional, tag="8")]
     pub volume_mode: ::core::option::Option<::prost::alloc::string::String>,
-    /// NodeAffinity defines constraints that limit what nodes this volume can be accessed from.
+    /// nodeAffinity defines constraints that limit what nodes this volume can be accessed from.
     /// This field influences the scheduling of pods that use this volume.
     /// +optional
     #[prost(message, optional, tag="9")]
@@ -3024,28 +3254,35 @@ pub struct PersistentVolumeSpec {
 /// PersistentVolumeStatus is the current status of a persistent volume.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeStatus {
-    /// Phase indicates if a volume is available, bound to a claim, or released by a claim.
+    /// phase indicates if a volume is available, bound to a claim, or released by a claim.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase
     /// +optional
     #[prost(string, optional, tag="1")]
     pub phase: ::core::option::Option<::prost::alloc::string::String>,
-    /// A human-readable message indicating details about why the volume is in this state.
+    /// message is a human-readable message indicating details about why the volume is in this state.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
-    /// Reason is a brief CamelCase string that describes any failure and is meant
+    /// reason is a brief CamelCase string that describes any failure and is meant
     /// for machine parsing and tidy display in the CLI.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
+    /// lastPhaseTransitionTime is the time the phase transitioned from one to another
+    /// and automatically resets to current time everytime a volume phase transitions.
+    /// This is an alpha field and requires enabling PersistentVolumeLastPhaseTransitionTime feature.
+    /// +featureGate=PersistentVolumeLastPhaseTransitionTime
+    /// +optional
+    #[prost(message, optional, tag="4")]
+    pub last_phase_transition_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// Represents a Photon Controller persistent disk resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhotonPersistentDiskVolumeSource {
-    /// ID that identifies Photon Controller persistent disk
+    /// pdID is the ID that identifies Photon Controller persistent disk
     #[prost(string, optional, tag="1")]
     pub pd_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     #[prost(string, optional, tag="2")]
@@ -3115,7 +3352,7 @@ pub struct PodAffinityTerm {
     /// namespaces specifies a static list of namespace names that the term applies to.
     /// The term is applied to the union of the namespaces listed in this field
     /// and the ones selected by namespaceSelector.
-    /// null or empty namespaces list and null namespaceSelector means "this pod's namespace"
+    /// null or empty namespaces list and null namespaceSelector means "this pod's namespace".
     /// +optional
     #[prost(string, repeated, tag="2")]
     pub namespaces: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -3131,7 +3368,6 @@ pub struct PodAffinityTerm {
     /// and the ones listed in the namespaces field.
     /// null selector and null or empty namespaces list means "this pod's namespace".
     /// An empty selector ({}) matches all namespaces.
-    /// This field is beta-level and is only honored when PodAffinityNamespaceSelector feature is enabled.
     /// +optional
     #[prost(message, optional, tag="4")]
     pub namespace_selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
@@ -3271,12 +3507,10 @@ pub struct PodExecOptions {
     #[prost(bool, optional, tag="1")]
     pub stdin: ::core::option::Option<bool>,
     /// Redirect the standard output stream of the pod for this call.
-    /// Defaults to true.
     /// +optional
     #[prost(bool, optional, tag="2")]
     pub stdout: ::core::option::Option<bool>,
     /// Redirect the standard error stream of the pod for this call.
-    /// Defaults to true.
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub stderr: ::core::option::Option<bool>,
@@ -3294,12 +3528,10 @@ pub struct PodExecOptions {
     #[prost(string, repeated, tag="6")]
     pub command: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// IP address information for entries in the (plural) PodIPs field.
-/// Each entry includes:
-///    IP: An IP address allocated to the pod. Routable at least within the cluster.
+/// PodIP represents a single IP address allocated to the pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodIp {
-    /// ip is an IP address (IPv4 or IPv6) assigned to the pod
+    /// IP is the IP address assigned to the pod
     #[prost(string, optional, tag="1")]
     pub ip: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -3371,6 +3603,16 @@ pub struct PodLogOptions {
     #[prost(bool, optional, tag="9")]
     pub insecure_skip_tls_verify_backend: ::core::option::Option<bool>,
 }
+/// PodOS defines the OS parameters of a pod.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PodOs {
+    /// Name is the name of the operating system. The currently supported values are linux and windows.
+    /// Additional value may be defined in future and can be one of:
+    /// https://github.com/opencontainers/runtime-spec/blob/master/config.md#platform-specific-configuration
+    /// Clients should expect to handle additional values and treat unrecognized values in this field as os: null
+    #[prost(string, optional, tag="1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// PodPortForwardOptions is the query options to a Pod's port forward call
 /// when using WebSockets.
 /// The `port` query parameter must specify the port or
@@ -3400,6 +3642,46 @@ pub struct PodReadinessGate {
     #[prost(string, optional, tag="1")]
     pub condition_type: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// PodResourceClaim references exactly one ResourceClaim through a ClaimSource.
+/// It adds a name to it that uniquely identifies the ResourceClaim inside the Pod.
+/// Containers that need access to the ResourceClaim reference it with this name.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PodResourceClaim {
+    /// Name uniquely identifies this resource claim inside the pod.
+    /// This must be a DNS_LABEL.
+    #[prost(string, optional, tag="1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Source describes where to find the ResourceClaim.
+    #[prost(message, optional, tag="2")]
+    pub source: ::core::option::Option<ClaimSource>,
+}
+/// PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim
+/// which references a ResourceClaimTemplate. It stores the generated name for
+/// the corresponding ResourceClaim.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PodResourceClaimStatus {
+    /// Name uniquely identifies this resource claim inside the pod.
+    /// This must match the name of an entry in pod.spec.resourceClaims,
+    /// which implies that the string must be a DNS_LABEL.
+    #[prost(string, optional, tag="1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// ResourceClaimName is the name of the ResourceClaim that was
+    /// generated for the Pod in the namespace of the Pod. It this is
+    /// unset, then generating a ResourceClaim was not necessary. The
+    /// pod.spec.resourceClaims entry can be ignored in this case.
+    ///
+    /// +optional
+    #[prost(string, optional, tag="2")]
+    pub resource_claim_name: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// PodSchedulingGate is associated to a Pod to guard its scheduling.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PodSchedulingGate {
+    /// Name of the scheduling gate.
+    /// Each scheduling gate must have a unique name field.
+    #[prost(string, optional, tag="1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// PodSecurityContext holds pod-level security attributes and common container settings.
 /// Some fields are also present in container.securityContext.  Field values of
 /// container.securityContext take precedence over field values of PodSecurityContext.
@@ -3410,12 +3692,14 @@ pub struct PodSecurityContext {
     /// container.  May also be set in SecurityContext.  If set in
     /// both SecurityContext and PodSecurityContext, the value specified in SecurityContext
     /// takes precedence for that container.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(message, optional, tag="1")]
     pub se_linux_options: ::core::option::Option<SeLinuxOptions>,
     /// The Windows specific settings applied to all containers.
     /// If unspecified, the options within a container's SecurityContext will be used.
     /// If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+    /// Note that this field cannot be set when spec.os.name is linux.
     /// +optional
     #[prost(message, optional, tag="8")]
     pub windows_options: ::core::option::Option<WindowsSecurityContextOptions>,
@@ -3424,6 +3708,7 @@ pub struct PodSecurityContext {
     /// May also be set in SecurityContext.  If set in both SecurityContext and
     /// PodSecurityContext, the value specified in SecurityContext takes precedence
     /// for that container.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(int64, optional, tag="2")]
     pub run_as_user: ::core::option::Option<i64>,
@@ -3432,6 +3717,7 @@ pub struct PodSecurityContext {
     /// May also be set in SecurityContext.  If set in both SecurityContext and
     /// PodSecurityContext, the value specified in SecurityContext takes precedence
     /// for that container.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(int64, optional, tag="6")]
     pub run_as_group: ::core::option::Option<i64>,
@@ -3445,8 +3731,12 @@ pub struct PodSecurityContext {
     #[prost(bool, optional, tag="3")]
     pub run_as_non_root: ::core::option::Option<bool>,
     /// A list of groups applied to the first process run in each container, in addition
-    /// to the container's primary GID.  If unspecified, no groups will be added to
-    /// any container.
+    /// to the container's primary GID, the fsGroup (if specified), and group memberships
+    /// defined in the container image for the uid of the container process. If unspecified,
+    /// no additional groups are added to any container. Note that group memberships
+    /// defined in the container image for the uid of the container process are still effective,
+    /// even if they are not included in this list.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(int64, repeated, packed="false", tag="4")]
     pub supplemental_groups: ::prost::alloc::vec::Vec<i64>,
@@ -3459,11 +3749,13 @@ pub struct PodSecurityContext {
     /// 3. The permission bits are OR'd with rw-rw----
     ///
     /// If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(int64, optional, tag="5")]
     pub fs_group: ::core::option::Option<i64>,
     /// Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
     /// sysctls (by the container runtime) might fail to launch.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(message, repeated, tag="7")]
     pub sysctls: ::prost::alloc::vec::Vec<Sysctl>,
@@ -3473,10 +3765,12 @@ pub struct PodSecurityContext {
     /// It will have no effect on ephemeral volume types such as: secret, configmaps
     /// and emptydir.
     /// Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(string, optional, tag="9")]
     pub fs_group_change_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// The seccomp options to use by the containers in this pod.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(message, optional, tag="10")]
     pub seccomp_profile: ::core::option::Option<SeccompProfile>,
@@ -3529,14 +3823,13 @@ pub struct PodSpec {
     /// pod to perform user-initiated actions such as debugging. This list cannot be specified when
     /// creating a pod, and it cannot be modified by updating the pod spec. In order to add an
     /// ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource.
-    /// This field is alpha-level and is only honored by servers that enable the EphemeralContainers feature.
     /// +optional
     /// +patchMergeKey=name
     /// +patchStrategy=merge
     #[prost(message, repeated, tag="34")]
     pub ephemeral_containers: ::prost::alloc::vec::Vec<EphemeralContainer>,
     /// Restart policy for all containers within the pod.
-    /// One of Always, OnFailure, Never.
+    /// One of Always, OnFailure, Never. In some contexts, only a subset of those values may be permitted.
     /// Default to Always.
     /// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
     /// +optional
@@ -3630,8 +3923,7 @@ pub struct PodSpec {
     #[prost(message, optional, tag="14")]
     pub security_context: ::core::option::Option<PodSecurityContext>,
     /// ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec.
-    /// If specified, these secrets will be passed to individual puller implementations for them to use. For example,
-    /// in the case of docker, only DockerConfig type secrets are honored.
+    /// If specified, these secrets will be passed to individual puller implementations for them to use.
     /// More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
     /// +optional
     /// +patchMergeKey=name
@@ -3703,7 +3995,6 @@ pub struct PodSpec {
     /// If unset or empty, the "legacy" RuntimeClass will be used, which is an implicit class with an
     /// empty definition that uses the default runtime handler.
     /// More info: https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class
-    /// This is a beta feature as of Kubernetes v1.14.
     /// +optional
     #[prost(string, optional, tag="29")]
     pub runtime_class_name: ::core::option::Option<::prost::alloc::string::String>,
@@ -3716,7 +4007,6 @@ pub struct PodSpec {
     /// PreemptionPolicy is the Policy for preempting pods with lower priority.
     /// One of Never, PreemptLowerPriority.
     /// Defaults to PreemptLowerPriority if unset.
-    /// This field is beta-level, gated by the NonPreemptingPriority feature-gate.
     /// +optional
     #[prost(string, optional, tag="31")]
     pub preemption_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -3727,7 +4017,6 @@ pub struct PodSpec {
     /// set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value
     /// defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero.
     /// More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md
-    /// This field is beta-level as of Kubernetes v1.18, and is only honored by servers that enable the PodOverhead feature.
     /// +optional
     #[prost(map="string, message", tag="32")]
     pub overhead: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
@@ -3750,6 +4039,84 @@ pub struct PodSpec {
     /// +optional
     #[prost(bool, optional, tag="35")]
     pub set_hostname_as_fqdn: ::core::option::Option<bool>,
+    /// Specifies the OS of the containers in the pod.
+    /// Some pod and container fields are restricted if this is set.
+    ///
+    /// If the OS field is set to linux, the following fields must be unset:
+    /// -securityContext.windowsOptions
+    ///
+    /// If the OS field is set to windows, following fields must be unset:
+    /// - spec.hostPID
+    /// - spec.hostIPC
+    /// - spec.hostUsers
+    /// - spec.securityContext.seLinuxOptions
+    /// - spec.securityContext.seccompProfile
+    /// - spec.securityContext.fsGroup
+    /// - spec.securityContext.fsGroupChangePolicy
+    /// - spec.securityContext.sysctls
+    /// - spec.shareProcessNamespace
+    /// - spec.securityContext.runAsUser
+    /// - spec.securityContext.runAsGroup
+    /// - spec.securityContext.supplementalGroups
+    /// - spec.containers[*].securityContext.seLinuxOptions
+    /// - spec.containers[*].securityContext.seccompProfile
+    /// - spec.containers[*].securityContext.capabilities
+    /// - spec.containers[*].securityContext.readOnlyRootFilesystem
+    /// - spec.containers[*].securityContext.privileged
+    /// - spec.containers[*].securityContext.allowPrivilegeEscalation
+    /// - spec.containers[*].securityContext.procMount
+    /// - spec.containers[*].securityContext.runAsUser
+    /// - spec.containers[*].securityContext.runAsGroup
+    /// +optional
+    #[prost(message, optional, tag="36")]
+    pub os: ::core::option::Option<PodOs>,
+    /// Use the host's user namespace.
+    /// Optional: Default to true.
+    /// If set to true or not present, the pod will be run in the host user namespace, useful
+    /// for when the pod needs a feature only available to the host user namespace, such as
+    /// loading a kernel module with CAP_SYS_MODULE.
+    /// When set to false, a new userns is created for the pod. Setting false is useful for
+    /// mitigating container breakout vulnerabilities even allowing users to run their
+    /// containers as root without actually having root privileges on the host.
+    /// This field is alpha-level and is only honored by servers that enable the UserNamespacesSupport feature.
+    /// +k8s:conversion-gen=false
+    /// +optional
+    #[prost(bool, optional, tag="37")]
+    pub host_users: ::core::option::Option<bool>,
+    /// SchedulingGates is an opaque list of values that if specified will block scheduling the pod.
+    /// If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the
+    /// scheduler will not attempt to schedule the pod.
+    ///
+    /// SchedulingGates can only be set at pod creation time, and be removed only afterwards.
+    ///
+    /// This is a beta feature enabled by the PodSchedulingReadiness feature gate.
+    ///
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=name
+    /// +featureGate=PodSchedulingReadiness
+    /// +optional
+    #[prost(message, repeated, tag="38")]
+    pub scheduling_gates: ::prost::alloc::vec::Vec<PodSchedulingGate>,
+    /// ResourceClaims defines which ResourceClaims must be allocated
+    /// and reserved before the Pod is allowed to start. The resources
+    /// will be made available to those containers which consume them
+    /// by name.
+    ///
+    /// This is an alpha field and requires enabling the
+    /// DynamicResourceAllocation feature gate.
+    ///
+    /// This field is immutable.
+    ///
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge,retainKeys
+    /// +listType=map
+    /// +listMapKey=name
+    /// +featureGate=DynamicResourceAllocation
+    /// +optional
+    #[prost(message, repeated, tag="39")]
+    pub resource_claims: ::prost::alloc::vec::Vec<PodResourceClaim>,
 }
 /// PodStatus represents information about the status of a pod. Status may trail the actual
 /// state of a system, especially if the node that hosts the pod cannot contact the control
@@ -3803,11 +4170,23 @@ pub struct PodStatus {
     /// +optional
     #[prost(string, optional, tag="11")]
     pub nominated_node_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// IP address of the host to which the pod is assigned. Empty if not yet scheduled.
+    /// hostIP holds the IP address of the host to which the pod is assigned. Empty if the pod has not started yet.
+    /// A pod can be assigned to a node that has a problem in kubelet which in turns mean that HostIP will
+    /// not be updated even if there is a node is assigned to pod
     /// +optional
     #[prost(string, optional, tag="5")]
     pub host_ip: ::core::option::Option<::prost::alloc::string::String>,
-    /// IP address allocated to the pod. Routable at least within the cluster.
+    /// hostIPs holds the IP addresses allocated to the host. If this field is specified, the first entry must
+    /// match the hostIP field. This list is empty if the pod has not started yet.
+    /// A pod can be assigned to a node that has a problem in kubelet which in turns means that HostIPs will
+    /// not be updated even if there is a node is assigned to this pod.
+    /// +optional
+    /// +patchStrategy=merge
+    /// +patchMergeKey=ip
+    /// +listType=atomic
+    #[prost(message, repeated, tag="16")]
+    pub host_i_ps: ::prost::alloc::vec::Vec<HostIp>,
+    /// podIP address allocated to the pod. Routable at least within the cluster.
     /// Empty if not yet allocated.
     /// +optional
     #[prost(string, optional, tag="6")]
@@ -3831,23 +4210,37 @@ pub struct PodStatus {
     /// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
     #[prost(message, repeated, tag="10")]
     pub init_container_statuses: ::prost::alloc::vec::Vec<ContainerStatus>,
-    /// The list has one entry per container in the manifest. Each entry is currently the output
-    /// of `docker inspect`.
+    /// The list has one entry per container in the manifest.
     /// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
     /// +optional
     #[prost(message, repeated, tag="8")]
     pub container_statuses: ::prost::alloc::vec::Vec<ContainerStatus>,
     /// The Quality of Service (QOS) classification assigned to the pod based on resource requirements
     /// See PodQOSClass type for available QOS classes
-    /// More info: https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md
+    /// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes
     /// +optional
     #[prost(string, optional, tag="9")]
     pub qos_class: ::core::option::Option<::prost::alloc::string::String>,
     /// Status for any ephemeral containers that have run in this pod.
-    /// This field is alpha-level and is only populated by servers that enable the EphemeralContainers feature.
     /// +optional
     #[prost(message, repeated, tag="13")]
     pub ephemeral_container_statuses: ::prost::alloc::vec::Vec<ContainerStatus>,
+    /// Status of resources resize desired for pod's containers.
+    /// It is empty if no resources resize is pending.
+    /// Any changes to container resources will automatically set this to "Proposed"
+    /// +featureGate=InPlacePodVerticalScaling
+    /// +optional
+    #[prost(string, optional, tag="14")]
+    pub resize: ::core::option::Option<::prost::alloc::string::String>,
+    /// Status of resource claims.
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge,retainKeys
+    /// +listType=map
+    /// +listMapKey=name
+    /// +featureGate=DynamicResourceAllocation
+    /// +optional
+    #[prost(message, repeated, tag="15")]
+    pub resource_claim_statuses: ::prost::alloc::vec::Vec<PodResourceClaimStatus>,
 }
 /// PodStatusResult is a wrapper for PodStatus returned by kubelet that can be encode/decoded
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3933,15 +4326,15 @@ pub struct PortStatus {
 /// PortworxVolumeSource represents a Portworx volume resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PortworxVolumeSource {
-    /// VolumeID uniquely identifies a Portworx volume
+    /// volumeID uniquely identifies a Portworx volume
     #[prost(string, optional, tag="1")]
     pub volume_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// FSType represents the filesystem type to mount
+    /// fSType represents the filesystem type to mount
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified.
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="3")]
@@ -3992,7 +4385,7 @@ pub struct PreferredSchedulingTerm {
 pub struct Probe {
     /// The action taken to determine the health of a container
     #[prost(message, optional, tag="1")]
-    pub handler: ::core::option::Option<Handler>,
+    pub handler: ::core::option::Option<ProbeHandler>,
     /// Number of seconds after the container has started before liveness probes are initiated.
     /// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
     /// +optional
@@ -4033,14 +4426,35 @@ pub struct Probe {
     #[prost(int64, optional, tag="7")]
     pub termination_grace_period_seconds: ::core::option::Option<i64>,
 }
+/// ProbeHandler defines a specific action that should be taken in a probe.
+/// One and only one of the fields must be specified.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ProbeHandler {
+    /// Exec specifies the action to take.
+    /// +optional
+    #[prost(message, optional, tag="1")]
+    pub exec: ::core::option::Option<ExecAction>,
+    /// HTTPGet specifies the http request to perform.
+    /// +optional
+    #[prost(message, optional, tag="2")]
+    pub http_get: ::core::option::Option<HttpGetAction>,
+    /// TCPSocket specifies an action involving a TCP port.
+    /// +optional
+    #[prost(message, optional, tag="3")]
+    pub tcp_socket: ::core::option::Option<TcpSocketAction>,
+    /// GRPC specifies an action involving a GRPC port.
+    /// +optional
+    #[prost(message, optional, tag="4")]
+    pub grpc: ::core::option::Option<GrpcAction>,
+}
 /// Represents a projected volume source
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectedVolumeSource {
-    /// list of volume projections
+    /// sources is the list of volume projections
     /// +optional
     #[prost(message, repeated, tag="1")]
     pub sources: ::prost::alloc::vec::Vec<VolumeProjection>,
-    /// Mode bits used to set permissions on created files by default.
+    /// defaultMode are the mode bits used to set permissions on created files by default.
     /// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
     /// YAML accepts both octal and decimal values, JSON requires decimal values for mode bits.
     /// Directories within the path are not affected by this setting.
@@ -4054,30 +4468,30 @@ pub struct ProjectedVolumeSource {
 /// Quobyte volumes do not support ownership management or SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuobyteVolumeSource {
-    /// Registry represents a single or multiple Quobyte Registry services
+    /// registry represents a single or multiple Quobyte Registry services
     /// specified as a string as host:port pair (multiple entries are separated with commas)
     /// which acts as the central registry for volumes
     #[prost(string, optional, tag="1")]
     pub registry: ::core::option::Option<::prost::alloc::string::String>,
-    /// Volume is a string that references an already created Quobyte volume by name.
+    /// volume is a string that references an already created Quobyte volume by name.
     #[prost(string, optional, tag="2")]
     pub volume: ::core::option::Option<::prost::alloc::string::String>,
-    /// ReadOnly here will force the Quobyte volume to be mounted with read-only permissions.
+    /// readOnly here will force the Quobyte volume to be mounted with read-only permissions.
     /// Defaults to false.
     /// +optional
     #[prost(bool, optional, tag="3")]
     pub read_only: ::core::option::Option<bool>,
-    /// User to map volume access to
+    /// user to map volume access to
     /// Defaults to serivceaccount user
     /// +optional
     #[prost(string, optional, tag="4")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
-    /// Group to map volume access to
+    /// group to map volume access to
     /// Default is no group
     /// +optional
     #[prost(string, optional, tag="5")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    /// Tenant owning the given Quobyte volume in the Backend
+    /// tenant owning the given Quobyte volume in the Backend
     /// Used with dynamically provisioned Quobyte volumes, value is set by the plugin
     /// +optional
     #[prost(string, optional, tag="6")]
@@ -4087,15 +4501,15 @@ pub struct QuobyteVolumeSource {
 /// RBD volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RbdPersistentVolumeSource {
-    /// A collection of Ceph monitors.
+    /// monitors is a collection of Ceph monitors.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     #[prost(string, repeated, tag="1")]
     pub monitors: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// The rados image name.
+    /// image is the rados image name.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     #[prost(string, optional, tag="2")]
     pub image: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type of the volume that you want to mount.
+    /// fsType is the filesystem type of the volume that you want to mount.
     /// Tip: Ensure that the filesystem type is supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
@@ -4103,32 +4517,32 @@ pub struct RbdPersistentVolumeSource {
     /// +optional
     #[prost(string, optional, tag="3")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// The rados pool name.
+    /// pool is the rados pool name.
     /// Default is rbd.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="4")]
     pub pool: ::core::option::Option<::prost::alloc::string::String>,
-    /// The rados user name.
+    /// user is the rados user name.
     /// Default is admin.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="5")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
-    /// Keyring is the path to key ring for RBDUser.
+    /// keyring is the path to key ring for RBDUser.
     /// Default is /etc/ceph/keyring.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="6")]
     pub keyring: ::core::option::Option<::prost::alloc::string::String>,
-    /// SecretRef is name of the authentication secret for RBDUser. If provided
+    /// secretRef is name of the authentication secret for RBDUser. If provided
     /// overrides keyring.
     /// Default is nil.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(message, optional, tag="7")]
     pub secret_ref: ::core::option::Option<SecretReference>,
-    /// ReadOnly here will force the ReadOnly setting in VolumeMounts.
+    /// readOnly here will force the ReadOnly setting in VolumeMounts.
     /// Defaults to false.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
@@ -4139,15 +4553,15 @@ pub struct RbdPersistentVolumeSource {
 /// RBD volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RbdVolumeSource {
-    /// A collection of Ceph monitors.
+    /// monitors is a collection of Ceph monitors.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     #[prost(string, repeated, tag="1")]
     pub monitors: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// The rados image name.
+    /// image is the rados image name.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     #[prost(string, optional, tag="2")]
     pub image: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type of the volume that you want to mount.
+    /// fsType is the filesystem type of the volume that you want to mount.
     /// Tip: Ensure that the filesystem type is supported by the host operating system.
     /// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
@@ -4155,32 +4569,32 @@ pub struct RbdVolumeSource {
     /// +optional
     #[prost(string, optional, tag="3")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// The rados pool name.
+    /// pool is the rados pool name.
     /// Default is rbd.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="4")]
     pub pool: ::core::option::Option<::prost::alloc::string::String>,
-    /// The rados user name.
+    /// user is the rados user name.
     /// Default is admin.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="5")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
-    /// Keyring is the path to key ring for RBDUser.
+    /// keyring is the path to key ring for RBDUser.
     /// Default is /etc/ceph/keyring.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(string, optional, tag="6")]
     pub keyring: ::core::option::Option<::prost::alloc::string::String>,
-    /// SecretRef is name of the authentication secret for RBDUser. If provided
+    /// secretRef is name of the authentication secret for RBDUser. If provided
     /// overrides keyring.
     /// Default is nil.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
     #[prost(message, optional, tag="7")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
-    /// ReadOnly here will force the ReadOnly setting in VolumeMounts.
+    /// readOnly here will force the ReadOnly setting in VolumeMounts.
     /// Defaults to false.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
     /// +optional
@@ -4287,6 +4701,7 @@ pub struct ReplicationControllerSpec {
     pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. This takes precedence over a TemplateRef.
+    /// The only allowed template.spec.restartPolicy value is "Always".
     /// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
     /// +optional
     #[prost(message, optional, tag="3")]
@@ -4296,7 +4711,7 @@ pub struct ReplicationControllerSpec {
 /// controller.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationControllerStatus {
-    /// Replicas is the most recently oberved number of replicas.
+    /// Replicas is the most recently observed number of replicas.
     /// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller
     #[prost(int32, optional, tag="1")]
     pub replicas: ::core::option::Option<i32>,
@@ -4322,6 +4737,15 @@ pub struct ReplicationControllerStatus {
     /// +patchStrategy=merge
     #[prost(message, repeated, tag="6")]
     pub conditions: ::prost::alloc::vec::Vec<ReplicationControllerCondition>,
+}
+/// ResourceClaim references one entry in PodSpec.ResourceClaims.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResourceClaim {
+    /// Name must match the name of one entry in pod.spec.resourceClaims of
+    /// the Pod where this field is used. It makes that resource available
+    /// inside a container.
+    #[prost(string, optional, tag="1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceFieldSelector represents container resources (cpu, memory) and their output format
 /// +structType=atomic
@@ -4414,11 +4838,25 @@ pub struct ResourceRequirements {
     pub limits: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// Requests describes the minimum amount of compute resources required.
     /// If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
-    /// otherwise to an implementation-defined value.
+    /// otherwise to an implementation-defined value. Requests cannot exceed Limits.
     /// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
     /// +optional
     #[prost(map="string, message", tag="2")]
     pub requests: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// Claims lists the names of resources, defined in spec.resourceClaims,
+    /// that are used by this container.
+    ///
+    /// This is an alpha field and requires enabling the
+    /// DynamicResourceAllocation feature gate.
+    ///
+    /// This field is immutable. It can only be set for containers.
+    ///
+    /// +listType=map
+    /// +listMapKey=name
+    /// +featureGate=DynamicResourceAllocation
+    /// +optional
+    #[prost(message, repeated, tag="3")]
+    pub claims: ::prost::alloc::vec::Vec<ResourceClaim>,
 }
 /// SELinuxOptions are the labels to be applied to the container
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4443,45 +4881,45 @@ pub struct SeLinuxOptions {
 /// ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleIoPersistentVolumeSource {
-    /// The host address of the ScaleIO API Gateway.
+    /// gateway is the host address of the ScaleIO API Gateway.
     #[prost(string, optional, tag="1")]
     pub gateway: ::core::option::Option<::prost::alloc::string::String>,
-    /// The name of the storage system as configured in ScaleIO.
+    /// system is the name of the storage system as configured in ScaleIO.
     #[prost(string, optional, tag="2")]
     pub system: ::core::option::Option<::prost::alloc::string::String>,
-    /// SecretRef references to the secret for ScaleIO user and other
+    /// secretRef references to the secret for ScaleIO user and other
     /// sensitive information. If this is not provided, Login operation will fail.
     #[prost(message, optional, tag="3")]
     pub secret_ref: ::core::option::Option<SecretReference>,
-    /// Flag to enable/disable SSL communication with Gateway, default false
+    /// sslEnabled is the flag to enable/disable SSL communication with Gateway, default false
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub ssl_enabled: ::core::option::Option<bool>,
-    /// The name of the ScaleIO Protection Domain for the configured storage.
+    /// protectionDomain is the name of the ScaleIO Protection Domain for the configured storage.
     /// +optional
     #[prost(string, optional, tag="5")]
     pub protection_domain: ::core::option::Option<::prost::alloc::string::String>,
-    /// The ScaleIO Storage Pool associated with the protection domain.
+    /// storagePool is the ScaleIO Storage Pool associated with the protection domain.
     /// +optional
     #[prost(string, optional, tag="6")]
     pub storage_pool: ::core::option::Option<::prost::alloc::string::String>,
-    /// Indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned.
+    /// storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned.
     /// Default is ThinProvisioned.
     /// +optional
     #[prost(string, optional, tag="7")]
     pub storage_mode: ::core::option::Option<::prost::alloc::string::String>,
-    /// The name of a volume already created in the ScaleIO system
+    /// volumeName is the name of a volume already created in the ScaleIO system
     /// that is associated with this volume source.
     #[prost(string, optional, tag="8")]
     pub volume_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs".
     /// Default is "xfs"
     /// +optional
     #[prost(string, optional, tag="9")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="10")]
@@ -4490,45 +4928,45 @@ pub struct ScaleIoPersistentVolumeSource {
 /// ScaleIOVolumeSource represents a persistent ScaleIO volume
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleIoVolumeSource {
-    /// The host address of the ScaleIO API Gateway.
+    /// gateway is the host address of the ScaleIO API Gateway.
     #[prost(string, optional, tag="1")]
     pub gateway: ::core::option::Option<::prost::alloc::string::String>,
-    /// The name of the storage system as configured in ScaleIO.
+    /// system is the name of the storage system as configured in ScaleIO.
     #[prost(string, optional, tag="2")]
     pub system: ::core::option::Option<::prost::alloc::string::String>,
-    /// SecretRef references to the secret for ScaleIO user and other
+    /// secretRef references to the secret for ScaleIO user and other
     /// sensitive information. If this is not provided, Login operation will fail.
     #[prost(message, optional, tag="3")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
-    /// Flag to enable/disable SSL communication with Gateway, default false
+    /// sslEnabled Flag enable/disable SSL communication with Gateway, default false
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub ssl_enabled: ::core::option::Option<bool>,
-    /// The name of the ScaleIO Protection Domain for the configured storage.
+    /// protectionDomain is the name of the ScaleIO Protection Domain for the configured storage.
     /// +optional
     #[prost(string, optional, tag="5")]
     pub protection_domain: ::core::option::Option<::prost::alloc::string::String>,
-    /// The ScaleIO Storage Pool associated with the protection domain.
+    /// storagePool is the ScaleIO Storage Pool associated with the protection domain.
     /// +optional
     #[prost(string, optional, tag="6")]
     pub storage_pool: ::core::option::Option<::prost::alloc::string::String>,
-    /// Indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned.
+    /// storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned.
     /// Default is ThinProvisioned.
     /// +optional
     #[prost(string, optional, tag="7")]
     pub storage_mode: ::core::option::Option<::prost::alloc::string::String>,
-    /// The name of a volume already created in the ScaleIO system
+    /// volumeName is the name of a volume already created in the ScaleIO system
     /// that is associated with this volume source.
     #[prost(string, optional, tag="8")]
     pub volume_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs".
     /// Default is "xfs".
     /// +optional
     #[prost(string, optional, tag="9")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="10")]
@@ -4580,7 +5018,7 @@ pub struct SeccompProfile {
     /// localhostProfile indicates a profile defined in a file on the node should be used.
     /// The profile must be preconfigured on the node to work.
     /// Must be a descending path, relative to the kubelet's configured seccomp profile location.
-    /// Must only be set if type is "Localhost".
+    /// Must be set if type is "Localhost". Must NOT be set for any other type.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub localhost_profile: ::core::option::Option<::prost::alloc::string::String>,
@@ -4617,6 +5055,7 @@ pub struct Secret {
     #[prost(map="string, string", tag="4")]
     pub string_data: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Used to facilitate programmatic handling of secret data.
+    /// More info: https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
     /// +optional
     #[prost(string, optional, tag="3")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
@@ -4674,7 +5113,7 @@ pub struct SecretList {
 pub struct SecretProjection {
     #[prost(message, optional, tag="1")]
     pub local_object_reference: ::core::option::Option<LocalObjectReference>,
-    /// If unspecified, each key-value pair in the Data field of the referenced
+    /// items if unspecified, each key-value pair in the Data field of the referenced
     /// Secret will be projected into the volume as a file whose name is the
     /// key and content is the value. If specified, the listed keys will be
     /// projected into the specified paths, and unlisted keys will not be
@@ -4684,7 +5123,7 @@ pub struct SecretProjection {
     /// +optional
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<KeyToPath>,
-    /// Specify whether the Secret or its key must be defined
+    /// optional field specify whether the Secret or its key must be defined
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub optional: ::core::option::Option<bool>,
@@ -4694,11 +5133,11 @@ pub struct SecretProjection {
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretReference {
-    /// Name is unique within a namespace to reference a secret resource.
+    /// name is unique within a namespace to reference a secret resource.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Namespace defines the space within which the secret name must be unique.
+    /// namespace defines the space within which the secret name must be unique.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
@@ -4710,12 +5149,12 @@ pub struct SecretReference {
 /// Secret volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretVolumeSource {
-    /// Name of the secret in the pod's namespace to use.
+    /// secretName is the name of the secret in the pod's namespace to use.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#secret
     /// +optional
     #[prost(string, optional, tag="1")]
     pub secret_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// If unspecified, each key-value pair in the Data field of the referenced
+    /// items If unspecified, each key-value pair in the Data field of the referenced
     /// Secret will be projected into the volume as a file whose name is the
     /// key and content is the value. If specified, the listed keys will be
     /// projected into the specified paths, and unlisted keys will not be
@@ -4725,7 +5164,7 @@ pub struct SecretVolumeSource {
     /// +optional
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<KeyToPath>,
-    /// Optional: mode bits used to set permissions on created files by default.
+    /// defaultMode is Optional: mode bits used to set permissions on created files by default.
     /// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
     /// YAML accepts both octal and decimal values, JSON requires decimal values
     /// for mode bits. Defaults to 0644.
@@ -4735,7 +5174,7 @@ pub struct SecretVolumeSource {
     /// +optional
     #[prost(int32, optional, tag="3")]
     pub default_mode: ::core::option::Option<i32>,
-    /// Specify whether the Secret or its keys must be defined
+    /// optional field specify whether the Secret or its keys must be defined
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub optional: ::core::option::Option<bool>,
@@ -4747,12 +5186,14 @@ pub struct SecretVolumeSource {
 pub struct SecurityContext {
     /// The capabilities to add/drop when running containers.
     /// Defaults to the default set of capabilities granted by the container runtime.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(message, optional, tag="1")]
     pub capabilities: ::core::option::Option<Capabilities>,
     /// Run container in privileged mode.
     /// Processes in privileged containers are essentially equivalent to root on the host.
     /// Defaults to false.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(bool, optional, tag="2")]
     pub privileged: ::core::option::Option<bool>,
@@ -4760,12 +5201,14 @@ pub struct SecurityContext {
     /// If unspecified, the container runtime will allocate a random SELinux context for each
     /// container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
     /// PodSecurityContext, the value specified in SecurityContext takes precedence.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(message, optional, tag="3")]
     pub se_linux_options: ::core::option::Option<SeLinuxOptions>,
     /// The Windows specific settings applied to all containers.
     /// If unspecified, the options from the PodSecurityContext will be used.
     /// If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+    /// Note that this field cannot be set when spec.os.name is linux.
     /// +optional
     #[prost(message, optional, tag="10")]
     pub windows_options: ::core::option::Option<WindowsSecurityContextOptions>,
@@ -4773,6 +5216,7 @@ pub struct SecurityContext {
     /// Defaults to user specified in image metadata if unspecified.
     /// May also be set in PodSecurityContext.  If set in both SecurityContext and
     /// PodSecurityContext, the value specified in SecurityContext takes precedence.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(int64, optional, tag="4")]
     pub run_as_user: ::core::option::Option<i64>,
@@ -4780,6 +5224,7 @@ pub struct SecurityContext {
     /// Uses runtime default if unset.
     /// May also be set in PodSecurityContext.  If set in both SecurityContext and
     /// PodSecurityContext, the value specified in SecurityContext takes precedence.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(int64, optional, tag="8")]
     pub run_as_group: ::core::option::Option<i64>,
@@ -4794,6 +5239,7 @@ pub struct SecurityContext {
     pub run_as_non_root: ::core::option::Option<bool>,
     /// Whether this container has a read-only root filesystem.
     /// Default is false.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(bool, optional, tag="6")]
     pub read_only_root_filesystem: ::core::option::Option<bool>,
@@ -4803,6 +5249,7 @@ pub struct SecurityContext {
     /// AllowPrivilegeEscalation is true always when the container is:
     /// 1) run as Privileged
     /// 2) has CAP_SYS_ADMIN
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(bool, optional, tag="7")]
     pub allow_privilege_escalation: ::core::option::Option<bool>,
@@ -4810,12 +5257,14 @@ pub struct SecurityContext {
     /// The default is DefaultProcMount which uses the container runtime defaults for
     /// readonly paths and masked paths.
     /// This requires the ProcMountType feature flag to be enabled.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(string, optional, tag="9")]
     pub proc_mount: ::core::option::Option<::prost::alloc::string::String>,
     /// The seccomp options to use by this container. If seccomp options are
     /// provided at both the pod & container level, the container options
     /// override the pod options.
+    /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     #[prost(message, optional, tag="11")]
     pub seccomp_profile: ::core::option::Option<SeccompProfile>,
@@ -4862,7 +5311,10 @@ pub struct ServiceAccount {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Secrets is the list of secrets allowed to be used by pods running using this ServiceAccount.
+    /// Secrets is a list of the secrets in the same namespace that pods running using this ServiceAccount are allowed to use.
+    /// Pods are only limited to this list if this service account has a "kubernetes.io/enforce-mountable-secrets" annotation set to "true".
+    /// This field should not be used to find auto-generated service account token secrets for use outside of pods.
+    /// Instead, tokens can be requested directly using the TokenRequest API, or service account token secrets can be manually created.
     /// More info: https://kubernetes.io/docs/concepts/configuration/secret
     /// +optional
     /// +patchMergeKey=name
@@ -4901,14 +5353,14 @@ pub struct ServiceAccountList {
 /// otherwise).
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccountTokenProjection {
-    /// Audience is the intended audience of the token. A recipient of a token
+    /// audience is the intended audience of the token. A recipient of a token
     /// must identify itself with an identifier specified in the audience of the
     /// token, and otherwise should reject the token. The audience defaults to the
     /// identifier of the apiserver.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub audience: ::core::option::Option<::prost::alloc::string::String>,
-    /// ExpirationSeconds is the requested duration of validity of the service
+    /// expirationSeconds is the requested duration of validity of the service
     /// account token. As the token approaches expiration, the kubelet volume
     /// plugin will proactively rotate the service account token. The kubelet will
     /// start trying to rotate the token if the token is older than 80 percent of
@@ -4917,7 +5369,7 @@ pub struct ServiceAccountTokenProjection {
     /// +optional
     #[prost(int64, optional, tag="2")]
     pub expiration_seconds: ::core::option::Option<i64>,
-    /// Path is the path relative to the mount point of the file to project the
+    /// path is the path relative to the mount point of the file to project the
     /// token into.
     #[prost(string, optional, tag="3")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
@@ -4952,10 +5404,19 @@ pub struct ServicePort {
     #[prost(string, optional, tag="2")]
     pub protocol: ::core::option::Option<::prost::alloc::string::String>,
     /// The application protocol for this port.
+    /// This is used as a hint for implementations to offer richer behavior for protocols that they understand.
     /// This field follows standard Kubernetes label syntax.
-    /// Un-prefixed names are reserved for IANA standard service names (as per
-    /// RFC-6335 and http://www.iana.org/assignments/service-names).
-    /// Non-standard protocols should use prefixed names such as
+    /// Valid values are either:
+    ///
+    /// * Un-prefixed protocol names - reserved for IANA standard service names (as per
+    /// RFC-6335 and https://www.iana.org/assignments/service-names).
+    ///
+    /// * Kubernetes-defined prefixed names:
+    ///   * 'kubernetes.io/h2c' - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+    ///   * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+    ///   * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+    ///
+    /// * Other protocols should use implementation-defined prefixed names such as
     /// mycompany.com/my-custom-protocol.
     /// +optional
     #[prost(string, optional, tag="6")]
@@ -5058,12 +5519,9 @@ pub struct ServiceSpec {
     /// clients must ensure that clusterIPs[0] and clusterIP have the same
     /// value.
     ///
-    /// Unless the "IPv6DualStack" feature gate is enabled, this field is
-    /// limited to one value, which must be the same as the clusterIP field.  If
-    /// the feature gate is enabled, this field may hold a maximum of two
-    /// entries (dual-stack IPs, in either order).  These IPs must correspond to
-    /// the values of the ipFamilies field. Both clusterIPs and ipFamilies are
-    /// governed by the ipFamilyPolicy field.
+    /// This field may hold a maximum of two entries (dual-stack IPs, in either order).
+    /// These IPs must correspond to the values of the ipFamilies field. Both
+    /// clusterIPs and ipFamilies are governed by the ipFamilyPolicy field.
     /// More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
     /// +listType=atomic
     /// +optional
@@ -5104,11 +5562,13 @@ pub struct ServiceSpec {
     /// +optional
     #[prost(string, optional, tag="7")]
     pub session_affinity: ::core::option::Option<::prost::alloc::string::String>,
-    /// Only applies to Service Type: LoadBalancer
-    /// LoadBalancer will get created with the IP specified in this field.
+    /// Only applies to Service Type: LoadBalancer.
     /// This feature depends on whether the underlying cloud-provider supports specifying
     /// the loadBalancerIP when a load balancer is created.
     /// This field will be ignored if the cloud-provider does not support the feature.
+    /// Deprecated: This field was under-specified and its meaning varies across implementations.
+    /// Using it is non-portable and it may not support dual-stack.
+    /// Users are encouraged to use implementation-specific annotations when available.
     /// +optional
     #[prost(string, optional, tag="8")]
     pub load_balancer_ip: ::core::option::Option<::prost::alloc::string::String>,
@@ -5126,12 +5586,19 @@ pub struct ServiceSpec {
     /// +optional
     #[prost(string, optional, tag="10")]
     pub external_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// externalTrafficPolicy denotes if this Service desires to route external
-    /// traffic to node-local or cluster-wide endpoints. "Local" preserves the
-    /// client source IP and avoids a second hop for LoadBalancer and Nodeport
-    /// type services, but risks potentially imbalanced traffic spreading.
-    /// "Cluster" obscures the client source IP and may cause a second hop to
-    /// another node, but should have good overall load-spreading.
+    /// externalTrafficPolicy describes how nodes distribute service traffic they
+    /// receive on one of the Service's "externally-facing" addresses (NodePorts,
+    /// ExternalIPs, and LoadBalancer IPs). If set to "Local", the proxy will configure
+    /// the service in a way that assumes that external load balancers will take care
+    /// of balancing the service traffic between nodes, and so each node will deliver
+    /// traffic only to the node-local endpoints of the service, without masquerading
+    /// the client source IP. (Traffic mistakenly sent to a node with no endpoints will
+    /// be dropped.) The default value, "Cluster", uses the standard behavior of
+    /// routing to all endpoints evenly (possibly modified by topology and other
+    /// features). Note that traffic sent to an External IP or LoadBalancer IP from
+    /// within the cluster will always get "Cluster" semantics, but clients sending to
+    /// a NodePort from within the cluster may need to take traffic policy into account
+    /// when picking a node.
     /// +optional
     #[prost(string, optional, tag="11")]
     pub external_traffic_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -5144,6 +5611,7 @@ pub struct ServiceSpec {
     /// service or not.  If this field is specified when creating a Service
     /// which does not need it, creation will fail. This field will be wiped
     /// when updating a Service to no longer need it (e.g. changing type).
+    /// This field cannot be updated once set.
     /// +optional
     #[prost(int32, optional, tag="12")]
     pub health_check_node_port: ::core::option::Option<i32>,
@@ -5163,17 +5631,16 @@ pub struct ServiceSpec {
     #[prost(message, optional, tag="14")]
     pub session_affinity_config: ::core::option::Option<SessionAffinityConfig>,
     /// IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this
-    /// service, and is gated by the "IPv6DualStack" feature gate.  This field
-    /// is usually assigned automatically based on cluster configuration and the
-    /// ipFamilyPolicy field. If this field is specified manually, the requested
-    /// family is available in the cluster, and ipFamilyPolicy allows it, it
-    /// will be used; otherwise creation of the service will fail.  This field
-    /// is conditionally mutable: it allows for adding or removing a secondary
-    /// IP family, but it does not allow changing the primary IP family of the
-    /// Service.  Valid values are "IPv4" and "IPv6".  This field only applies
-    /// to Services of types ClusterIP, NodePort, and LoadBalancer, and does
-    /// apply to "headless" services.  This field will be wiped when updating a
-    /// Service to type ExternalName.
+    /// service. This field is usually assigned automatically based on cluster
+    /// configuration and the ipFamilyPolicy field. If this field is specified
+    /// manually, the requested family is available in the cluster,
+    /// and ipFamilyPolicy allows it, it will be used; otherwise creation of
+    /// the service will fail. This field is conditionally mutable: it allows
+    /// for adding or removing a secondary IP family, but it does not allow
+    /// changing the primary IP family of the Service. Valid values are "IPv4"
+    /// and "IPv6".  This field only applies to Services of types ClusterIP,
+    /// NodePort, and LoadBalancer, and does apply to "headless" services.
+    /// This field will be wiped when updating a Service to type ExternalName.
     ///
     /// This field may hold a maximum of two entries (dual-stack families, in
     /// either order).  These families must correspond to the values of the
@@ -5184,14 +5651,13 @@ pub struct ServiceSpec {
     #[prost(string, repeated, tag="19")]
     pub ip_families: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// IPFamilyPolicy represents the dual-stack-ness requested or required by
-    /// this Service, and is gated by the "IPv6DualStack" feature gate.  If
-    /// there is no value provided, then this field will be set to SingleStack.
-    /// Services can be "SingleStack" (a single IP family), "PreferDualStack"
-    /// (two IP families on dual-stack configured clusters or a single IP family
-    /// on single-stack clusters), or "RequireDualStack" (two IP families on
-    /// dual-stack configured clusters, otherwise fail). The ipFamilies and
-    /// clusterIPs fields depend on the value of this field.  This field will be
-    /// wiped when updating a service to type ExternalName.
+    /// this Service. If there is no value provided, then this field will be set
+    /// to SingleStack. Services can be "SingleStack" (a single IP family),
+    /// "PreferDualStack" (two IP families on dual-stack configured clusters or
+    /// a single IP family on single-stack clusters), or "RequireDualStack"
+    /// (two IP families on dual-stack configured clusters, otherwise fail). The
+    /// ipFamilies and clusterIPs fields depend on the value of this field. This
+    /// field will be wiped when updating a service to type ExternalName.
     /// +optional
     #[prost(string, optional, tag="17")]
     pub ip_family_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -5202,8 +5668,6 @@ pub struct ServiceSpec {
     /// value), those requests will be respected, regardless of this field.
     /// This field may only be set for services with type LoadBalancer and will
     /// be cleared if the type is changed to any other type.
-    /// This field is beta-level and is only honored by servers that enable the ServiceLBNodePortControl feature.
-    /// +featureGate=ServiceLBNodePortControl
     /// +optional
     #[prost(bool, optional, tag="20")]
     pub allocate_load_balancer_node_ports: ::core::option::Option<bool>,
@@ -5217,17 +5681,15 @@ pub struct ServiceSpec {
     /// implementation (e.g. cloud providers) should ignore Services that set this field.
     /// This field can only be set when creating or updating a Service to type 'LoadBalancer'.
     /// Once set, it can not be changed. This field will be wiped when a service is updated to a non 'LoadBalancer' type.
-    /// +featureGate=LoadBalancerClass
     /// +optional
     #[prost(string, optional, tag="21")]
     pub load_balancer_class: ::core::option::Option<::prost::alloc::string::String>,
-    /// InternalTrafficPolicy specifies if the cluster internal traffic
-    /// should be routed to all endpoints or node-local endpoints only.
-    /// "Cluster" routes internal traffic to a Service to all endpoints.
-    /// "Local" routes traffic to node-local endpoints only, traffic is
-    /// dropped if no node-local endpoints are ready.
-    /// The default value is "Cluster".
-    /// +featureGate=ServiceInternalTrafficPolicy
+    /// InternalTrafficPolicy describes how nodes distribute service traffic they
+    /// receive on the ClusterIP. If set to "Local", the proxy will assume that pods
+    /// only want to talk to endpoints of the service on the same node as the pod,
+    /// dropping the traffic if there are no local endpoints. The default value,
+    /// "Cluster", uses the standard behavior of routing to all endpoints evenly
+    /// (possibly modified by topology and other features).
     /// +optional
     #[prost(string, optional, tag="22")]
     pub internal_traffic_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -5260,11 +5722,11 @@ pub struct SessionAffinityConfig {
 /// Represents a StorageOS persistent volume resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageOsPersistentVolumeSource {
-    /// VolumeName is the human-readable name of the StorageOS volume.  Volume
+    /// volumeName is the human-readable name of the StorageOS volume.  Volume
     /// names are only unique within a namespace.
     #[prost(string, optional, tag="1")]
     pub volume_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// VolumeNamespace specifies the scope of the volume within StorageOS.  If no
+    /// volumeNamespace specifies the scope of the volume within StorageOS.  If no
     /// namespace is specified then the Pod's namespace will be used.  This allows the
     /// Kubernetes name scoping to be mirrored within StorageOS for tighter integration.
     /// Set VolumeName to any name to override the default behaviour.
@@ -5273,18 +5735,18 @@ pub struct StorageOsPersistentVolumeSource {
     /// +optional
     #[prost(string, optional, tag="2")]
     pub volume_namespace: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub read_only: ::core::option::Option<bool>,
-    /// SecretRef specifies the secret to use for obtaining the StorageOS API
+    /// secretRef specifies the secret to use for obtaining the StorageOS API
     /// credentials.  If not specified, default values will be attempted.
     /// +optional
     #[prost(message, optional, tag="5")]
@@ -5293,11 +5755,11 @@ pub struct StorageOsPersistentVolumeSource {
 /// Represents a StorageOS persistent volume resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageOsVolumeSource {
-    /// VolumeName is the human-readable name of the StorageOS volume.  Volume
+    /// volumeName is the human-readable name of the StorageOS volume.  Volume
     /// names are only unique within a namespace.
     #[prost(string, optional, tag="1")]
     pub volume_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// VolumeNamespace specifies the scope of the volume within StorageOS.  If no
+    /// volumeNamespace specifies the scope of the volume within StorageOS.  If no
     /// namespace is specified then the Pod's namespace will be used.  This allows the
     /// Kubernetes name scoping to be mirrored within StorageOS for tighter integration.
     /// Set VolumeName to any name to override the default behaviour.
@@ -5306,18 +5768,18 @@ pub struct StorageOsVolumeSource {
     /// +optional
     #[prost(string, optional, tag="2")]
     pub volume_namespace: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is the filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Defaults to false (read/write). ReadOnly here will force
+    /// readOnly defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub read_only: ::core::option::Option<bool>,
-    /// SecretRef specifies the secret to use for obtaining the StorageOS API
+    /// secretRef specifies the secret to use for obtaining the StorageOS API
     /// credentials.  If not specified, default values will be attempted.
     /// +optional
     #[prost(message, optional, tag="5")]
@@ -5433,15 +5895,18 @@ pub struct TopologySpreadConstraint {
     /// MaxSkew describes the degree to which pods may be unevenly distributed.
     /// When `whenUnsatisfiable=DoNotSchedule`, it is the maximum permitted difference
     /// between the number of matching pods in the target topology and the global minimum.
+    /// The global minimum is the minimum number of matching pods in an eligible domain
+    /// or zero if the number of eligible domains is less than MinDomains.
     /// For example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same
-    /// labelSelector spread as 1/1/0:
+    /// labelSelector spread as 2/2/1:
+    /// In this case, the global minimum is 1.
     /// +-------+-------+-------+
     /// | zone1 | zone2 | zone3 |
     /// +-------+-------+-------+
-    /// |   P   |   P   |       |
+    /// |  P P  |  P P  |   P   |
     /// +-------+-------+-------+
-    /// - if MaxSkew is 1, incoming pod can only be scheduled to zone3 to become 1/1/1;
-    /// scheduling it onto zone1(zone2) would make the ActualSkew(2-0) on zone1(zone2)
+    /// - if MaxSkew is 1, incoming pod can only be scheduled to zone3 to become 2/2/2;
+    /// scheduling it onto zone1(zone2) would make the ActualSkew(3-1) on zone1(zone2)
     /// violate MaxSkew(1).
     /// - if MaxSkew is 2, incoming pod can be scheduled onto any zone.
     /// When `whenUnsatisfiable=ScheduleAnyway`, it is used to give higher precedence
@@ -5453,6 +5918,11 @@ pub struct TopologySpreadConstraint {
     /// and identical values are considered to be in the same topology.
     /// We consider each <key, value> as a "bucket", and try to put balanced number
     /// of pods into each bucket.
+    /// We define a domain as a particular instance of a topology.
+    /// Also, we define an eligible domain as a domain whose nodes meet the requirements of
+    /// nodeAffinityPolicy and nodeTaintsPolicy.
+    /// e.g. If TopologyKey is "kubernetes.io/hostname", each Node is a domain of that topology.
+    /// And, if TopologyKey is "topology.kubernetes.io/zone", each zone is a domain of that topology.
     /// It's a required field.
     #[prost(string, optional, tag="2")]
     pub topology_key: ::core::option::Option<::prost::alloc::string::String>,
@@ -5463,7 +5933,7 @@ pub struct TopologySpreadConstraint {
     ///   but giving higher precedence to topologies that would help reduce the
     ///   skew.
     /// A constraint is considered "Unsatisfiable" for an incoming pod
-    /// if and only if every possible node assigment for that pod would violate
+    /// if and only if every possible node assignment for that pod would violate
     /// "MaxSkew" on some topology.
     /// For example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same
     /// labelSelector spread as 3/1/1:
@@ -5485,6 +5955,68 @@ pub struct TopologySpreadConstraint {
     /// +optional
     #[prost(message, optional, tag="4")]
     pub label_selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    /// MinDomains indicates a minimum number of eligible domains.
+    /// When the number of eligible domains with matching topology keys is less than minDomains,
+    /// Pod Topology Spread treats "global minimum" as 0, and then the calculation of Skew is performed.
+    /// And when the number of eligible domains with matching topology keys equals or greater than minDomains,
+    /// this value has no effect on scheduling.
+    /// As a result, when the number of eligible domains is less than minDomains,
+    /// scheduler won't schedule more than maxSkew Pods to those domains.
+    /// If value is nil, the constraint behaves as if MinDomains is equal to 1.
+    /// Valid values are integers greater than 0.
+    /// When value is not nil, WhenUnsatisfiable must be DoNotSchedule.
+    ///
+    /// For example, in a 3-zone cluster, MaxSkew is set to 2, MinDomains is set to 5 and pods with the same
+    /// labelSelector spread as 2/2/2:
+    /// +-------+-------+-------+
+    /// | zone1 | zone2 | zone3 |
+    /// +-------+-------+-------+
+    /// |  P P  |  P P  |  P P  |
+    /// +-------+-------+-------+
+    /// The number of domains is less than 5(MinDomains), so "global minimum" is treated as 0.
+    /// In this situation, new pod with the same labelSelector cannot be scheduled,
+    /// because computed skew will be 3(3 - 0) if new Pod is scheduled to any of the three zones,
+    /// it will violate MaxSkew.
+    ///
+    /// This is a beta field and requires the MinDomainsInPodTopologySpread feature gate to be enabled (enabled by default).
+    /// +optional
+    #[prost(int32, optional, tag="5")]
+    pub min_domains: ::core::option::Option<i32>,
+    /// NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector
+    /// when calculating pod topology spread skew. Options are:
+    /// - Honor: only nodes matching nodeAffinity/nodeSelector are included in the calculations.
+    /// - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.
+    ///
+    /// If this value is nil, the behavior is equivalent to the Honor policy.
+    /// This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
+    /// +optional
+    #[prost(string, optional, tag="6")]
+    pub node_affinity_policy: ::core::option::Option<::prost::alloc::string::String>,
+    /// NodeTaintsPolicy indicates how we will treat node taints when calculating
+    /// pod topology spread skew. Options are:
+    /// - Honor: nodes without taints, along with tainted nodes for which the incoming pod
+    /// has a toleration, are included.
+    /// - Ignore: node taints are ignored. All nodes are included.
+    ///
+    /// If this value is nil, the behavior is equivalent to the Ignore policy.
+    /// This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
+    /// +optional
+    #[prost(string, optional, tag="7")]
+    pub node_taints_policy: ::core::option::Option<::prost::alloc::string::String>,
+    /// MatchLabelKeys is a set of pod label keys to select the pods over which
+    /// spreading will be calculated. The keys are used to lookup values from the
+    /// incoming pod labels, those key-value labels are ANDed with labelSelector
+    /// to select the group of existing pods over which spreading will be calculated
+    /// for the incoming pod. The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
+    /// MatchLabelKeys cannot be set when LabelSelector isn't set.
+    /// Keys that don't exist in the incoming pod labels will
+    /// be ignored. A null or empty list means only match against labelSelector.
+    ///
+    /// This is a beta field and requires the MatchLabelKeysInPodTopologySpread feature gate to be enabled (enabled by default).
+    /// +listType=atomic
+    /// +optional
+    #[prost(string, repeated, tag="8")]
+    pub match_label_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// TypedLocalObjectReference contains enough information to let you locate the
 /// typed referenced object inside the same namespace.
@@ -5504,15 +6036,37 @@ pub struct TypedLocalObjectReference {
     #[prost(string, optional, tag="3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TypedObjectReference {
+    /// APIGroup is the group for the resource being referenced.
+    /// If APIGroup is not specified, the specified Kind must be in the core API group.
+    /// For any other third-party types, APIGroup is required.
+    /// +optional
+    #[prost(string, optional, tag="1")]
+    pub api_group: ::core::option::Option<::prost::alloc::string::String>,
+    /// Kind is the type of resource being referenced
+    #[prost(string, optional, tag="2")]
+    pub kind: ::core::option::Option<::prost::alloc::string::String>,
+    /// Name is the name of resource being referenced
+    #[prost(string, optional, tag="3")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Namespace is the namespace of resource being referenced
+    /// Note that when a namespace is specified, a gateway.networking.k8s.io/ReferenceGrant object is required in the referent namespace to allow that namespace's owner to accept the reference. See the ReferenceGrant documentation for details.
+    /// (Alpha) This field requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
+    /// +featureGate=CrossNamespaceVolumeDataSource
+    /// +optional
+    #[prost(string, optional, tag="4")]
+    pub namespace: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// Volume represents a named volume in a pod that may be accessed by any container in the pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Volume {
-    /// Volume's name.
+    /// name of the volume.
     /// Must be a DNS_LABEL and unique within the pod.
     /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// VolumeSource represents the location and type of the mounted volume.
+    /// volumeSource represents the location and type of the mounted volume.
     /// If not specified, the Volume is implied to be an EmptyDir.
     /// This implied behavior is deprecated and will be removed in a future version.
     #[prost(message, optional, tag="2")]
@@ -5566,26 +6120,26 @@ pub struct VolumeMount {
 /// VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeNodeAffinity {
-    /// Required specifies hard node constraints that must be met.
+    /// required specifies hard node constraints that must be met.
     #[prost(message, optional, tag="1")]
     pub required: ::core::option::Option<NodeSelector>,
 }
 /// Projection that may be projected along with other supported volume types
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeProjection {
-    /// information about the secret data to project
+    /// secret information about the secret data to project
     /// +optional
     #[prost(message, optional, tag="1")]
     pub secret: ::core::option::Option<SecretProjection>,
-    /// information about the downwardAPI data to project
+    /// downwardAPI information about the downwardAPI data to project
     /// +optional
     #[prost(message, optional, tag="2")]
     pub downward_api: ::core::option::Option<DownwardApiProjection>,
-    /// information about the configMap data to project
+    /// configMap information about the configMap data to project
     /// +optional
     #[prost(message, optional, tag="3")]
     pub config_map: ::core::option::Option<ConfigMapProjection>,
-    /// information about the serviceAccountToken data to project
+    /// serviceAccountToken is information about the serviceAccountToken data to project
     /// +optional
     #[prost(message, optional, tag="4")]
     pub service_account_token: ::core::option::Option<ServiceAccountTokenProjection>,
@@ -5594,7 +6148,7 @@ pub struct VolumeProjection {
 /// Only one of its members may be specified.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeSource {
-    /// HostPath represents a pre-existing file or directory on the host
+    /// hostPath represents a pre-existing file or directory on the host
     /// machine that is directly exposed to the container. This is generally
     /// used for system agents or other privileged things that are allowed
     /// to see the host machine. Most containers will NOT need this.
@@ -5605,131 +6159,131 @@ pub struct VolumeSource {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub host_path: ::core::option::Option<HostPathVolumeSource>,
-    /// EmptyDir represents a temporary directory that shares a pod's lifetime.
+    /// emptyDir represents a temporary directory that shares a pod's lifetime.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
     /// +optional
     #[prost(message, optional, tag="2")]
     pub empty_dir: ::core::option::Option<EmptyDirVolumeSource>,
-    /// GCEPersistentDisk represents a GCE Disk resource that is attached to a
+    /// gcePersistentDisk represents a GCE Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
     /// +optional
     #[prost(message, optional, tag="3")]
     pub gce_persistent_disk: ::core::option::Option<GcePersistentDiskVolumeSource>,
-    /// AWSElasticBlockStore represents an AWS Disk resource that is attached to a
+    /// awsElasticBlockStore represents an AWS Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
     /// +optional
     #[prost(message, optional, tag="4")]
     pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
-    /// GitRepo represents a git repository at a particular revision.
+    /// gitRepo represents a git repository at a particular revision.
     /// DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an
     /// EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
     /// into the Pod's container.
     /// +optional
     #[prost(message, optional, tag="5")]
     pub git_repo: ::core::option::Option<GitRepoVolumeSource>,
-    /// Secret represents a secret that should populate this volume.
+    /// secret represents a secret that should populate this volume.
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#secret
     /// +optional
     #[prost(message, optional, tag="6")]
     pub secret: ::core::option::Option<SecretVolumeSource>,
-    /// NFS represents an NFS mount on the host that shares a pod's lifetime
+    /// nfs represents an NFS mount on the host that shares a pod's lifetime
     /// More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
     /// +optional
     #[prost(message, optional, tag="7")]
     pub nfs: ::core::option::Option<NfsVolumeSource>,
-    /// ISCSI represents an ISCSI Disk resource that is attached to a
+    /// iscsi represents an ISCSI Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
     /// More info: https://examples.k8s.io/volumes/iscsi/README.md
     /// +optional
     #[prost(message, optional, tag="8")]
     pub iscsi: ::core::option::Option<IscsiVolumeSource>,
-    /// Glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
+    /// glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
     /// More info: https://examples.k8s.io/volumes/glusterfs/README.md
     /// +optional
     #[prost(message, optional, tag="9")]
     pub glusterfs: ::core::option::Option<GlusterfsVolumeSource>,
-    /// PersistentVolumeClaimVolumeSource represents a reference to a
+    /// persistentVolumeClaimVolumeSource represents a reference to a
     /// PersistentVolumeClaim in the same namespace.
     /// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
     /// +optional
     #[prost(message, optional, tag="10")]
     pub persistent_volume_claim: ::core::option::Option<PersistentVolumeClaimVolumeSource>,
-    /// RBD represents a Rados Block Device mount on the host that shares a pod's lifetime.
+    /// rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
     /// More info: https://examples.k8s.io/volumes/rbd/README.md
     /// +optional
     #[prost(message, optional, tag="11")]
     pub rbd: ::core::option::Option<RbdVolumeSource>,
-    /// FlexVolume represents a generic volume resource that is
+    /// flexVolume represents a generic volume resource that is
     /// provisioned/attached using an exec based plugin.
     /// +optional
     #[prost(message, optional, tag="12")]
     pub flex_volume: ::core::option::Option<FlexVolumeSource>,
-    /// Cinder represents a cinder volume attached and mounted on kubelets host machine.
+    /// cinder represents a cinder volume attached and mounted on kubelets host machine.
     /// More info: https://examples.k8s.io/mysql-cinder-pd/README.md
     /// +optional
     #[prost(message, optional, tag="13")]
     pub cinder: ::core::option::Option<CinderVolumeSource>,
-    /// CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+    /// cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
     /// +optional
     #[prost(message, optional, tag="14")]
     pub cephfs: ::core::option::Option<CephFsVolumeSource>,
-    /// Flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
+    /// flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
     /// +optional
     #[prost(message, optional, tag="15")]
     pub flocker: ::core::option::Option<FlockerVolumeSource>,
-    /// DownwardAPI represents downward API about the pod that should populate this volume
+    /// downwardAPI represents downward API about the pod that should populate this volume
     /// +optional
     #[prost(message, optional, tag="16")]
     pub downward_api: ::core::option::Option<DownwardApiVolumeSource>,
-    /// FC represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
+    /// fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
     /// +optional
     #[prost(message, optional, tag="17")]
     pub fc: ::core::option::Option<FcVolumeSource>,
-    /// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
+    /// azureFile represents an Azure File Service mount on the host and bind mount to the pod.
     /// +optional
     #[prost(message, optional, tag="18")]
     pub azure_file: ::core::option::Option<AzureFileVolumeSource>,
-    /// ConfigMap represents a configMap that should populate this volume
+    /// configMap represents a configMap that should populate this volume
     /// +optional
     #[prost(message, optional, tag="19")]
     pub config_map: ::core::option::Option<ConfigMapVolumeSource>,
-    /// VsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
+    /// vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
     /// +optional
     #[prost(message, optional, tag="20")]
     pub vsphere_volume: ::core::option::Option<VsphereVirtualDiskVolumeSource>,
-    /// Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+    /// quobyte represents a Quobyte mount on the host that shares a pod's lifetime
     /// +optional
     #[prost(message, optional, tag="21")]
     pub quobyte: ::core::option::Option<QuobyteVolumeSource>,
-    /// AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+    /// azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
     /// +optional
     #[prost(message, optional, tag="22")]
     pub azure_disk: ::core::option::Option<AzureDiskVolumeSource>,
-    /// PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
+    /// photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
     #[prost(message, optional, tag="23")]
     pub photon_persistent_disk: ::core::option::Option<PhotonPersistentDiskVolumeSource>,
-    /// Items for all in one resources secrets, configmaps, and downward API
+    /// projected items for all in one resources secrets, configmaps, and downward API
     #[prost(message, optional, tag="26")]
     pub projected: ::core::option::Option<ProjectedVolumeSource>,
-    /// PortworxVolume represents a portworx volume attached and mounted on kubelets host machine
+    /// portworxVolume represents a portworx volume attached and mounted on kubelets host machine
     /// +optional
     #[prost(message, optional, tag="24")]
     pub portworx_volume: ::core::option::Option<PortworxVolumeSource>,
-    /// ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
+    /// scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
     /// +optional
     #[prost(message, optional, tag="25")]
     pub scale_io: ::core::option::Option<ScaleIoVolumeSource>,
-    /// StorageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
+    /// storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
     /// +optional
     #[prost(message, optional, tag="27")]
     pub storageos: ::core::option::Option<StorageOsVolumeSource>,
-    /// CSI (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
+    /// csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
     /// +optional
     #[prost(message, optional, tag="28")]
     pub csi: ::core::option::Option<CsiVolumeSource>,
-    /// Ephemeral represents a volume that is handled by a cluster storage driver.
+    /// ephemeral represents a volume that is handled by a cluster storage driver.
     /// The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,
     /// and deleted when the pod is removed.
     ///
@@ -5754,9 +6308,6 @@ pub struct VolumeSource {
     /// A pod can use both types of ephemeral volumes and
     /// persistent volumes at the same time.
     ///
-    /// This is a beta feature and only available when the GenericEphemeralVolume
-    /// feature gate is enabled.
-    ///
     /// +optional
     #[prost(message, optional, tag="29")]
     pub ephemeral: ::core::option::Option<EphemeralVolumeSource>,
@@ -5764,20 +6315,20 @@ pub struct VolumeSource {
 /// Represents a vSphere volume resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VsphereVirtualDiskVolumeSource {
-    /// Path that identifies vSphere volume vmdk
+    /// volumePath is the path that identifies vSphere volume vmdk
     #[prost(string, optional, tag="1")]
     pub volume_path: ::core::option::Option<::prost::alloc::string::String>,
-    /// Filesystem type to mount.
+    /// fsType is filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Storage Policy Based Management (SPBM) profile name.
+    /// storagePolicyName is the storage Policy Based Management (SPBM) profile name.
     /// +optional
     #[prost(string, optional, tag="3")]
     pub storage_policy_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Storage Policy Based Management (SPBM) profile ID associated with the StoragePolicyName.
+    /// storagePolicyID is the storage Policy Based Management (SPBM) profile ID associated with the StoragePolicyName.
     /// +optional
     #[prost(string, optional, tag="4")]
     pub storage_policy_id: ::core::option::Option<::prost::alloc::string::String>,
@@ -5814,12 +6365,9 @@ pub struct WindowsSecurityContextOptions {
     #[prost(string, optional, tag="3")]
     pub run_as_user_name: ::core::option::Option<::prost::alloc::string::String>,
     /// HostProcess determines if a container should be run as a 'Host Process' container.
-    /// This field is alpha-level and will only be honored by components that enable the
-    /// WindowsHostProcessContainers feature flag. Setting this field without the feature
-    /// flag will result in errors when validating the Pod. All of a Pod's containers must
-    /// have the same effective HostProcess value (it is not allowed to have a mix of HostProcess
-    /// containers and non-HostProcess containers).  In addition, if HostProcess is true
-    /// then HostNetwork must also be set to true.
+    /// All of a Pod's containers must have the same effective HostProcess value
+    /// (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+    /// In addition, if HostProcess is true then HostNetwork must also be set to true.
     /// +optional
     #[prost(bool, optional, tag="4")]
     pub host_process: ::core::option::Option<bool>,

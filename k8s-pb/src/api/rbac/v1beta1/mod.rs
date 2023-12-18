@@ -72,11 +72,11 @@ pub struct ClusterRoleList {
 /// about who the rule applies to or which namespace the rule applies to.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicyRule {
-    /// Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule. '*' represents all verbs.
+    /// Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '*' represents all verbs.
     #[prost(string, repeated, tag="1")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of
-    /// the enumerated resources in any API group will be allowed.
+    /// the enumerated resources in any API group will be allowed. "" represents the core API group and "*" represents all API groups.
     /// +optional
     #[prost(string, repeated, tag="2")]
     pub api_groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,

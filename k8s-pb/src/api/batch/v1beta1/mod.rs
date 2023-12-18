@@ -35,6 +35,18 @@ pub struct CronJobSpec {
     /// The schedule in Cron format, see https://en.wikipedia.org/wiki/Cron.
     #[prost(string, optional, tag="1")]
     pub schedule: ::core::option::Option<::prost::alloc::string::String>,
+    /// The time zone name for the given schedule, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
+    /// If not specified, this will default to the time zone of the kube-controller-manager process.
+    /// The set of valid time zone names and the time zone offset is loaded from the system-wide time zone
+    /// database by the API server during CronJob validation and the controller manager during execution.
+    /// If no system-wide time zone database can be found a bundled version of the database is used instead.
+    /// If the time zone name becomes invalid during the lifetime of a CronJob or due to a change in host
+    /// configuration, the controller will stop creating new new Jobs and will create a system event with the
+    /// reason UnknownTimeZone.
+    /// More information can be found in https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones
+    /// +optional
+    #[prost(string, optional, tag="8")]
+    pub time_zone: ::core::option::Option<::prost::alloc::string::String>,
     /// Optional deadline in seconds for starting the job if it misses scheduled
     /// time for any reason.  Missed jobs executions will be counted as failed ones.
     /// +optional
@@ -42,6 +54,7 @@ pub struct CronJobSpec {
     pub starting_deadline_seconds: ::core::option::Option<i64>,
     /// Specifies how to treat concurrent executions of a Job.
     /// Valid values are:
+    ///
     /// - "Allow" (default): allows CronJobs to run concurrently;
     /// - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet;
     /// - "Replace": cancels currently running job and replaces it with a new one
@@ -86,20 +99,6 @@ pub struct CronJobStatus {
     #[prost(message, optional, tag="5")]
     pub last_successful_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
-/// JobTemplate describes a template for creating copies of a predefined pod.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct JobTemplate {
-    /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-    /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Defines jobs that will be created from this template.
-    /// https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-    /// +optional
-    #[prost(message, optional, tag="2")]
-    pub template: ::core::option::Option<JobTemplateSpec>,
-}
 /// JobTemplateSpec describes the data a Job should have when created from a template
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobTemplateSpec {
@@ -114,39 +113,3 @@ pub struct JobTemplateSpec {
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<super::v1::JobSpec>,
 }
-
-impl crate::Resource for CronJob {
-    const API_VERSION: &'static str = "batch/v1beta1";
-    const GROUP: &'static str = "batch";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "CronJob";
-    const NAME: &'static str = "cronjobs";
-}
-impl crate::HasMetadata for CronJob {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for CronJob {
-    type Spec = crate::api::batch::v1beta1::CronJobSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for CronJob {
-    type Status = crate::api::batch::v1beta1::CronJobStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-

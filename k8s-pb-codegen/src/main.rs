@@ -194,6 +194,8 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
         let spec = spec
             .replace("APIService", "ApiService")
             .replace("CSIDriver", "CsiDriver")
+            .replace("ClusterCIDR", "ClusterCidr")
+            .replace("IPAddress", "IpAddress")
             .replace("CSINode", "CsiNode");
         let spec = spec.split("::").map(|m| format_ident!("{}", m));
         quote! {

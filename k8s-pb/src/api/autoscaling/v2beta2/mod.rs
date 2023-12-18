@@ -24,26 +24,26 @@ pub struct ContainerResourceMetricSource {
 /// normal per-pod metrics using the "pods" source.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
-    /// Name is the name of the resource in question.
+    /// name is the name of the resource in question.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// current contains the current value for the given metric
     #[prost(message, optional, tag="2")]
     pub current: ::core::option::Option<MetricValueStatus>,
-    /// Container is the name of the container in the pods of the scaling target
+    /// container is the name of the container in the pods of the scaling target
     #[prost(string, optional, tag="3")]
     pub container: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrossVersionObjectReference {
-    /// Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
+    /// kind is the kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
     #[prost(string, optional, tag="1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
-    /// Name of the referent; More info: http://kubernetes.io/docs/user-guide/identifiers#names
+    /// name is the name of the referent; More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
     #[prost(string, optional, tag="2")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// API version of the referent
+    /// apiVersion is the API version of the referent
     /// +optional
     #[prost(string, optional, tag="3")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
@@ -74,14 +74,14 @@ pub struct ExternalMetricStatus {
 /// HPAScalingPolicy is a single policy which must hold true for a specified past interval.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HpaScalingPolicy {
-    /// Type is used to specify the scaling policy.
+    /// type is used to specify the scaling policy.
     #[prost(string, optional, tag="1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Value contains the amount of change which is permitted by the policy.
+    /// value contains the amount of change which is permitted by the policy.
     /// It must be greater than zero
     #[prost(int32, optional, tag="2")]
     pub value: ::core::option::Option<i32>,
-    /// PeriodSeconds specifies the window of time for which the policy should hold true.
+    /// periodSeconds specifies the window of time for which the policy should hold true.
     /// PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
     #[prost(int32, optional, tag="3")]
     pub period_seconds: ::core::option::Option<i32>,
@@ -94,7 +94,7 @@ pub struct HpaScalingPolicy {
 /// window is chosen.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HpaScalingRules {
-    /// StabilizationWindowSeconds is the number of seconds for which past recommendations should be
+    /// stabilizationWindowSeconds is the number of seconds for which past recommendations should be
     /// considered while scaling up or scaling down.
     /// StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
     /// If not set, use the default values:
@@ -253,6 +253,7 @@ pub struct HorizontalPodAutoscalerStatus {
     pub current_metrics: ::prost::alloc::vec::Vec<MetricStatus>,
     /// conditions is the set of conditions required for this autoscaler to scale its target,
     /// and indicates whether or not those conditions are met.
+    /// +optional
     #[prost(message, repeated, tag="6")]
     pub conditions: ::prost::alloc::vec::Vec<HorizontalPodAutoscalerCondition>,
 }
@@ -344,7 +345,7 @@ pub struct MetricStatus {
     /// +optional
     #[prost(message, optional, tag="4")]
     pub resource: ::core::option::Option<ResourceMetricStatus>,
-    /// container resource refers to a resource metric (such as those specified in
+    /// containerResource refers to a resource metric (such as those specified in
     /// requests and limits) known to Kubernetes describing a single container in each pod in the
     /// current scale target (e.g. CPU or memory). Such metrics are built in to
     /// Kubernetes, and have special scaling options on top of those available
@@ -396,7 +397,7 @@ pub struct MetricValueStatus {
     /// +optional
     #[prost(message, optional, tag="2")]
     pub average_value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
-    /// currentAverageUtilization is the current value of the average of the
+    /// averageUtilization is the current value of the average of the
     /// resource metric across all relevant pods, represented as a percentage of
     /// the requested value of the resource for the pods.
     /// +optional
@@ -476,57 +477,10 @@ pub struct ResourceMetricSource {
 /// normal per-pod metrics using the "pods" source.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricStatus {
-    /// Name is the name of the resource in question.
+    /// name is the name of the resource in question.
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// current contains the current value for the given metric
     #[prost(message, optional, tag="2")]
     pub current: ::core::option::Option<MetricValueStatus>,
 }
-
-impl crate::Resource for HorizontalPodAutoscaler {
-    const API_VERSION: &'static str = "autoscaling/v2beta2";
-    const GROUP: &'static str = "autoscaling";
-    const VERSION: &'static str = "v2beta2";
-    const KIND: &'static str = "HorizontalPodAutoscaler";
-    const NAME: &'static str = "horizontalpodautoscalers";
-}
-impl crate::HasMetadata for HorizontalPodAutoscaler {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for HorizontalPodAutoscaler {
-    type Spec = crate::api::autoscaling::v2beta2::HorizontalPodAutoscalerSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for HorizontalPodAutoscaler {
-    type Status = crate::api::autoscaling::v2beta2::HorizontalPodAutoscalerStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for HorizontalPodAutoscaler {
-    type Condition = crate::api::autoscaling::v2beta2::HorizontalPodAutoscalerCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
-

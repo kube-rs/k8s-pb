@@ -2,14 +2,14 @@
 /// path are forwarded to the backend.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpIngressPath {
-    /// Path is matched against the path of an incoming request. Currently it can
+    /// path is matched against the path of an incoming request. Currently it can
     /// contain characters disallowed from the conventional "path" part of a URL
     /// as defined by RFC 3986. Paths must begin with a '/' and must be present
     /// when using PathType with value "Exact" or "Prefix".
     /// +optional
     #[prost(string, optional, tag="1")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// PathType determines the interpretation of the Path matching. PathType can
+    /// pathType determines the interpretation of the path matching. PathType can
     /// be one of the following values:
     /// * Exact: Matches the URL path exactly.
     /// * Prefix: Matches based on a URL path prefix split by '/'. Matching is
@@ -26,7 +26,7 @@ pub struct HttpIngressPath {
     /// Defaults to ImplementationSpecific.
     #[prost(string, optional, tag="3")]
     pub path_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Backend defines the referenced service endpoint to which the traffic
+    /// backend defines the referenced service endpoint to which the traffic
     /// will be forwarded to.
     #[prost(message, optional, tag="2")]
     pub backend: ::core::option::Option<IngressBackend>,
@@ -38,7 +38,7 @@ pub struct HttpIngressPath {
 /// or '#'.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpIngressRuleValue {
-    /// A collection of paths that map requests to backends.
+    /// paths is a collection of paths that map requests to backends.
     #[prost(message, repeated, tag="1")]
     pub paths: ::prost::alloc::vec::Vec<HttpIngressPath>,
 }
@@ -53,12 +53,12 @@ pub struct Ingress {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec is the desired state of the Ingress.
+    /// spec is the desired state of the Ingress.
     /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
     /// +optional
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<IngressSpec>,
-    /// Status is the current state of the Ingress.
+    /// status is the current state of the Ingress.
     /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
     /// +optional
     #[prost(message, optional, tag="3")]
@@ -67,15 +67,15 @@ pub struct Ingress {
 /// IngressBackend describes all endpoints for a given service and port.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressBackend {
-    /// Specifies the name of the referenced service.
+    /// serviceName specifies the name of the referenced service.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub service_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Specifies the port of the referenced service.
+    /// servicePort Specifies the port of the referenced service.
     /// +optional
     #[prost(message, optional, tag="2")]
     pub service_port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
-    /// Resource is an ObjectRef to another Kubernetes resource in the namespace
+    /// resource is an ObjectRef to another Kubernetes resource in the namespace
     /// of the Ingress object. If resource is specified, serviceName and servicePort
     /// must not be specified.
     /// +optional
@@ -94,7 +94,7 @@ pub struct IngressClass {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec is the desired state of the IngressClass.
+    /// spec is the desired state of the IngressClass.
     /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
     /// +optional
     #[prost(message, optional, tag="2")]
@@ -107,7 +107,7 @@ pub struct IngressClassList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is the list of IngressClasses.
+    /// items is the list of IngressClasses.
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<IngressClass>,
 }
@@ -115,45 +115,41 @@ pub struct IngressClassList {
 /// to specify a cluster or namespace-scoped resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClassParametersReference {
-    /// APIGroup is the group for the resource being referenced. If APIGroup is
+    /// apiGroup is the group for the resource being referenced. If APIGroup is
     /// not specified, the specified Kind must be in the core API group. For any
     /// other third-party types, APIGroup is required.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub a_pi_group: ::core::option::Option<::prost::alloc::string::String>,
-    /// Kind is the type of resource being referenced.
+    /// kind is the type of resource being referenced.
     #[prost(string, optional, tag="2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
-    /// Name is the name of resource being referenced.
+    /// name is the name of resource being referenced.
     #[prost(string, optional, tag="3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Scope represents if this refers to a cluster or namespace scoped resource.
+    /// scope represents if this refers to a cluster or namespace scoped resource.
     /// This may be set to "Cluster" (default) or "Namespace".
-    /// Field can be enabled with IngressClassNamespacedParams feature gate.
-    /// +optional
-    /// +featureGate=IngressClassNamespacedParams
     #[prost(string, optional, tag="4")]
     pub scope: ::core::option::Option<::prost::alloc::string::String>,
-    /// Namespace is the namespace of the resource being referenced. This field is
+    /// namespace is the namespace of the resource being referenced. This field is
     /// required when scope is set to "Namespace" and must be unset when scope is set to
     /// "Cluster".
     /// +optional
-    /// +featureGate=IngressClassNamespacedParams
     #[prost(string, optional, tag="5")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// IngressClassSpec provides information about the class of an Ingress.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClassSpec {
-    /// Controller refers to the name of the controller that should handle this
+    /// controller refers to the name of the controller that should handle this
     /// class. This allows for different "flavors" that are controlled by the
-    /// same controller. For example, you may have different Parameters for the
+    /// same controller. For example, you may have different parameters for the
     /// same implementing controller. This should be specified as a
     /// domain-prefixed path no more than 250 characters in length, e.g.
     /// "acme.io/ingress-controller". This field is immutable.
     #[prost(string, optional, tag="1")]
     pub controller: ::core::option::Option<::prost::alloc::string::String>,
-    /// Parameters is a link to a custom resource containing additional
+    /// parameters is a link to a custom resource containing additional
     /// configuration for the controller. This is optional if the controller does
     /// not require extra parameters.
     /// +optional
@@ -168,16 +164,66 @@ pub struct IngressList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is the list of Ingress.
+    /// items is the list of Ingress.
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<Ingress>,
+}
+/// IngressLoadBalancerIngress represents the status of a load-balancer ingress point.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IngressLoadBalancerIngress {
+    /// ip is set for load-balancer ingress points that are IP based.
+    /// +optional
+    #[prost(string, optional, tag="1")]
+    pub ip: ::core::option::Option<::prost::alloc::string::String>,
+    /// hostname is set for load-balancer ingress points that are DNS based.
+    /// +optional
+    #[prost(string, optional, tag="2")]
+    pub hostname: ::core::option::Option<::prost::alloc::string::String>,
+    /// ports provides information about the ports exposed by this LoadBalancer.
+    /// +listType=atomic
+    /// +optional
+    #[prost(message, repeated, tag="4")]
+    pub ports: ::prost::alloc::vec::Vec<IngressPortStatus>,
+}
+/// LoadBalancerStatus represents the status of a load-balancer.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IngressLoadBalancerStatus {
+    /// ingress is a list containing ingress points for the load-balancer.
+    /// +optional
+    #[prost(message, repeated, tag="1")]
+    pub ingress: ::prost::alloc::vec::Vec<IngressLoadBalancerIngress>,
+}
+/// IngressPortStatus represents the error condition of a service port
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IngressPortStatus {
+    /// port is the port number of the ingress port.
+    #[prost(int32, optional, tag="1")]
+    pub port: ::core::option::Option<i32>,
+    /// protocol is the protocol of the ingress port.
+    /// The supported values are: "TCP", "UDP", "SCTP"
+    #[prost(string, optional, tag="2")]
+    pub protocol: ::core::option::Option<::prost::alloc::string::String>,
+    /// error is to record the problem with the service port
+    /// The format of the error shall comply with the following rules:
+    /// - built-in error values shall be specified in this file and those shall use
+    ///   CamelCase names
+    /// - cloud provider specific error values must have names that comply with the
+    ///   format foo.example.com/CamelCase.
+    /// ---
+    /// The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+    /// +optional
+    /// +kubebuilder:validation:Required
+    /// +kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$`
+    /// +kubebuilder:validation:MaxLength=316
+    #[prost(string, optional, tag="3")]
+    pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// IngressRule represents the rules mapping the paths under a specified host to
 /// the related backend services. Incoming requests are first evaluated for a host
 /// match, then routed to the backend associated with the matching IngressRuleValue.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressRule {
-    /// Host is the fully qualified domain name of a network host, as defined by RFC 3986.
+    /// host is the fully qualified domain name of a network host, as defined by RFC 3986.
     /// Note the following deviations from the "host" part of the
     /// URI as defined in RFC 3986:
     /// 1. IPs are not allowed. Currently an IngressRuleValue can only apply to
@@ -190,7 +236,7 @@ pub struct IngressRule {
     /// IngressRuleValue. If the host is unspecified, the Ingress routes all
     /// traffic based on the specified IngressRuleValue.
     ///
-    /// Host can be "precise" which is a domain name without the terminating dot of
+    /// host can be "precise" which is a domain name without the terminating dot of
     /// a network host (e.g. "foo.bar.com") or "wildcard", which is a domain name
     /// prefixed with a single wildcard label (e.g. "*.foo.com").
     /// The wildcard character '*' must appear by itself as the first DNS label and
@@ -224,7 +270,7 @@ pub struct IngressRuleValue {
 /// IngressSpec describes the Ingress the user wishes to exist.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressSpec {
-    /// IngressClassName is the name of the IngressClass cluster resource. The
+    /// ingressClassName is the name of the IngressClass cluster resource. The
     /// associated IngressClass defines which controller will implement the
     /// resource. This replaces the deprecated `kubernetes.io/ingress.class`
     /// annotation. For backwards compatibility, when that annotation is set, it
@@ -237,46 +283,46 @@ pub struct IngressSpec {
     /// +optional
     #[prost(string, optional, tag="4")]
     pub ingress_class_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// A default backend capable of servicing requests that don't match any
+    /// backend is the default backend capable of servicing requests that don't match any
     /// rule. At least one of 'backend' or 'rules' must be specified. This field
     /// is optional to allow the loadbalancer controller or defaulting logic to
     /// specify a global default.
     /// +optional
     #[prost(message, optional, tag="1")]
     pub backend: ::core::option::Option<IngressBackend>,
-    /// TLS configuration. Currently the Ingress only supports a single TLS
-    /// port, 443. If multiple members of this list specify different hosts, they
-    /// will be multiplexed on the same port according to the hostname specified
+    /// tls represents the TLS configuration. Currently the Ingress only supports a
+    /// single TLS port, 443. If multiple members of this list specify different hosts,
+    /// they will be multiplexed on the same port according to the hostname specified
     /// through the SNI TLS extension, if the ingress controller fulfilling the
     /// ingress supports SNI.
     /// +optional
     #[prost(message, repeated, tag="2")]
     pub tls: ::prost::alloc::vec::Vec<IngressTls>,
-    /// A list of host rules used to configure the Ingress. If unspecified, or
+    /// rules is a list of host rules used to configure the Ingress. If unspecified, or
     /// no rule matches, all traffic is sent to the default backend.
     /// +optional
     #[prost(message, repeated, tag="3")]
     pub rules: ::prost::alloc::vec::Vec<IngressRule>,
 }
-/// IngressStatus describe the current state of the Ingress.
+/// IngressStatus describes the current state of the Ingress.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressStatus {
-    /// LoadBalancer contains the current status of the load-balancer.
+    /// loadBalancer contains the current status of the load-balancer.
     /// +optional
     #[prost(message, optional, tag="1")]
-    pub load_balancer: ::core::option::Option<super::super::core::v1::LoadBalancerStatus>,
+    pub load_balancer: ::core::option::Option<IngressLoadBalancerStatus>,
 }
 /// IngressTLS describes the transport layer security associated with an Ingress.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressTls {
-    /// Hosts are a list of hosts included in the TLS certificate. The values in
+    /// hosts is a list of hosts included in the TLS certificate. The values in
     /// this list must match the name/s used in the tlsSecret. Defaults to the
     /// wildcard host setting for the loadbalancer controller fulfilling this
     /// Ingress, if left unspecified.
     /// +optional
     #[prost(string, repeated, tag="1")]
     pub hosts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// SecretName is the name of the secret used to terminate TLS traffic on
+    /// secretName is the name of the secret used to terminate TLS traffic on
     /// port 443. Field is left optional to allow TLS routing based on SNI
     /// hostname alone. If the SNI host in a listener conflicts with the "Host"
     /// header field used by an IngressRule, the SNI host is used for termination
