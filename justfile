@@ -10,7 +10,7 @@ protos-dl:
     cd k8s-pb-codegen
     rm -rf protos && mkdir protos && cd protos
     for x in api apimachinery apiextensions-apiserver kube-aggregator metrics; do
-        mkdir ./$x -p
+        mkdir -p ./$x
         curl -sSL https://github.com/kubernetes/$x/archive/refs/tags/kubernetes-{{VERSION}}.tar.gz | tar xzf - -C ./$x/ --strip-components=1
         fd -e proto -x sh -c "mkdir -p k8s.io/'{//}'; mv '{}' k8s.io/'{}'" ';' . ./$x
         rm -rf ./$x
