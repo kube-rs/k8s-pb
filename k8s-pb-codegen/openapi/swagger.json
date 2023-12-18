@@ -21525,7 +21525,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodAttachOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -21586,7 +21586,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodAttachOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       }
@@ -21995,7 +21995,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodExecOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22059,7 +22059,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodExecOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       }
@@ -22172,7 +22172,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodPortForwardOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22221,7 +22221,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodPortForwardOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       }
@@ -22256,7 +22256,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22289,7 +22289,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22322,7 +22322,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22355,7 +22355,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22404,7 +22404,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22437,7 +22437,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22470,7 +22470,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       }
@@ -22505,7 +22505,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22538,7 +22538,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22571,7 +22571,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22604,7 +22604,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22656,7 +22656,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22689,7 +22689,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       },
@@ -22722,7 +22722,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "PodProxyOptions",
+          "kind": "Pod",
           "version": "v1"
         }
       }
@@ -26519,7 +26519,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26552,7 +26552,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26585,7 +26585,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26618,7 +26618,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26667,7 +26667,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26700,7 +26700,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26733,7 +26733,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       }
@@ -26768,7 +26768,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26801,7 +26801,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26834,7 +26834,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26867,7 +26867,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26919,7 +26919,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26952,7 +26952,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       },
@@ -26985,7 +26985,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "ServiceProxyOptions",
+          "kind": "Service",
           "version": "v1"
         }
       }
@@ -28208,7 +28208,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28241,7 +28241,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28274,7 +28274,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28307,7 +28307,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28353,7 +28353,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28386,7 +28386,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28419,7 +28419,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       }
@@ -28454,7 +28454,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28487,7 +28487,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28520,7 +28520,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28553,7 +28553,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28602,7 +28602,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28635,7 +28635,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       },
@@ -28668,7 +28668,7 @@
         "x-kubernetes-action": "connect",
         "x-kubernetes-group-version-kind": {
           "group": "",
-          "kind": "NodeProxyOptions",
+          "kind": "Node",
           "version": "v1"
         }
       }
