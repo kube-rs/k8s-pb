@@ -1,0 +1,42 @@
+name: test
+on:
+  pull_request:
+
+env:
+  RUST_BACKTRACE: 1
+
+# Spend CI time only on latest ref: https://docs.github.com/en/actions/using-jobs/using-concurrency
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    strategy:
+      # Prevent GitHub from cancelling all in-progress jobs when a matrix job fails.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          override: true
+          toolchain: stable
+          profile: minimal
+      # Smart caching for Rust projects.
+      # Includes workaround for macos cache corruption.
+      # - https://github.com/rust-lang/cargo/issues/8603
+      # - https://github.com/actions/cache/issues/403
+      - uses: Swatinem/rust-cache@v2
+
+      # Real CI work starts here
+      - name: Build workspace
+        run: cargo build
+
+      - name: Run workspace unit tests
+        run: cargo test --workspace --lib
+      - name: Run workspace doc tests
+        run: cargo test --workspace --doc
+        if: false # currently go doc generates stuff that rust expects to be valid symbols
