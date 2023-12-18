@@ -7,39 +7,46 @@
 /// case of multiple matching ClusterCIDR resources, the allocator will attempt
 /// to break ties using internal heuristics, but any ClusterCIDR whose node
 /// selector matches the Node may be used.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterCidr {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is the desired state of the ClusterCIDR.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ClusterCidrSpec>,
 }
 /// ClusterCIDRList contains a list of ClusterCIDR.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterCidrList {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of ClusterCIDRs.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterCidr>,
 }
 /// ClusterCIDRSpec defines the desired state of ClusterCIDR.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterCidrSpec {
     /// nodeSelector defines which nodes the config is applicable to.
     /// An empty or nil nodeSelector selects all nodes.
     /// This field is immutable.
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub node_selector: ::core::option::Option<super::super::core::v1::NodeSelector>,
     /// perNodeHostBits defines the number of host bits to be configured per node.
     /// A subnet mask determines how much of the address is used for network bits
@@ -49,19 +56,19 @@ pub struct ClusterCidrSpec {
     /// Minimum value is 4 (16 IPs).
     /// This field is immutable.
     /// +required
-    #[prost(int32, optional, tag="2")]
+    #[prost(int32, optional, tag = "2")]
     pub per_node_host_bits: ::core::option::Option<i32>,
     /// ipv4 defines an IPv4 IP block in CIDR notation(e.g. "10.0.0.0/8").
     /// At least one of ipv4 and ipv6 must be specified.
     /// This field is immutable.
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub ipv4: ::core::option::Option<::prost::alloc::string::String>,
     /// ipv6 defines an IPv6 IP block in CIDR notation(e.g. "2001:db8::/64").
     /// At least one of ipv4 and ipv6 must be specified.
     /// This field is immutable.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub ipv6: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs
@@ -71,62 +78,70 @@ pub struct ClusterCidrSpec {
 /// by dots suppressing leading zeros for IPv4 and the representation defined by RFC 5952 for IPv6.
 /// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddress {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is the desired state of the IPAddress.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<IpAddressSpec>,
 }
 /// IPAddressList contains a list of IPAddress.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddressList {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of IPAddresses.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<IpAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
     /// +required
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
 /// ParentReference describes a reference to a parent object.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParentReference {
     /// Group is the group of the object being referenced.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
     /// Resource is the resource of the object being referenced.
     /// +required
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
     /// Namespace is the namespace of the object being referenced.
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of the object being referenced.
     /// +required
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// UID is the uid of the object being referenced.
     /// +optional
-    #[prost(string, optional, tag="5")]
+    #[prost(string, optional, tag = "5")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
 }
 

@@ -17,7 +17,7 @@
 /// <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI>
 /// <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei
 ///
-/// 	(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)
+/// 	(International System of units; See: <http://physics.nist.gov/cuu/Units/binary.html>)
 ///
 /// <decimalSI>       ::= m | "" | k | M | G | T | P | E
 ///
@@ -67,9 +67,10 @@
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen=true
 /// +k8s:openapi-gen=true
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Quantity {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub string: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// QuantityValue makes it possible to use a Quantity as value for a command
@@ -80,8 +81,9 @@ pub struct Quantity {
 /// +protobuf.options.marshal=false
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen=true
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuantityValue {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub string: ::core::option::Option<::prost::alloc::string::String>,
 }

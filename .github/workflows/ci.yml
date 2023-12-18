@@ -40,3 +40,37 @@ jobs:
       - name: Run workspace doc tests
         run: cargo test --workspace --doc
         if: false # currently go doc generates stuff that rust expects to be valid symbols
+
+  codegen:
+    strategy:
+      # Prevent GitHub from cancelling all in-progress jobs when a matrix job fails.
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          override: true
+          toolchain: stable
+          profile: minimal
+      # Smart caching for Rust projects.
+      # Includes workaround for macos cache corruption.
+      # - https://github.com/rust-lang/cargo/issues/8603
+      # - https://github.com/actions/cache/issues/403
+      - uses: Swatinem/rust-cache@v2
+      - uses: extractions/setup-just@v1
+      - run: |-
+          curl -sSL https://github.com/sharkdp/fd/releases/download/v8.7.1/fd-v8.7.1-i686-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
+      - run: |-
+          curl -sSL https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
+      - uses: arduino/setup-protoc@v2
+      - run: just protos
+      - run: just swagger
+      - run: just codegen
+      - name: Ensure generated output is committed
+        run: |
+          if ! git diff --exit-code .; then
+              echo "Uncommitted changes"
+              echo "Please run codegeneration locally and commit the results"
+              exit 1
+          fi

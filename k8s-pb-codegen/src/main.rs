@@ -55,6 +55,14 @@ fn main() -> Result<()> {
     // FDS usage: https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-build/src/lib.rs#L765-L825
     for f in fds.file {
         if let Some(package_name) = f.package {
+            println!(
+                "got package name: {}, looking in {}",
+                package_name,
+                tmp_dir.display()
+            );
+            if package_name.contains(".schema") {
+                continue;
+            }
             let mut pkg_rs = OpenOptions::new()
                 .append(true)
                 .open(tmp_dir.join(format!("{}.rs", package_name)))
@@ -151,9 +159,9 @@ fn append_trait_def(lib_rs: &mut File) {
 }
 
 fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource) {
-    use heck::CamelCase;
+    use heck::ToUpperCamelCase;
     // Convert to match prost
-    let type_name = message_name.to_camel_case();
+    let type_name = message_name.to_upper_camel_case();
     let type_name = format_ident!("{}", type_name);
 
     let api_version = &resource.api_version;

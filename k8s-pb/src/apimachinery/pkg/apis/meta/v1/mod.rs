@@ -1,17 +1,18 @@
 /// APIGroup contains the name, the supported versions, and the preferred version
 /// of a group.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiGroup {
     /// name is the name of the group.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// versions are the versions supported in this group.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub versions: ::prost::alloc::vec::Vec<GroupVersionForDiscovery>,
     /// preferredVersion is the version preferred by the API server, which
     /// probably is the storage version.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub preferred_version: ::core::option::Option<GroupVersionForDiscovery>,
     /// a map of client CIDR to server address that is serving this group.
     /// This is to help clients reach servers in the most network-efficient way possible.
@@ -21,51 +22,55 @@ pub struct ApiGroup {
     /// For example: the master will return an internal IP CIDR only, if the client reaches the server using an internal IP.
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
     /// +optional
-    #[prost(message, repeated, tag="4")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
+    #[prost(message, repeated, tag = "4")]
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<
+        ServerAddressByClientCidr,
+    >,
 }
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiGroupList {
     /// groups is a list of APIGroup.
-    #[prost(message, repeated, tag="1")]
+    #[prost(message, repeated, tag = "1")]
     pub groups: ::prost::alloc::vec::Vec<ApiGroup>,
 }
 /// APIResource specifies the name of a resource and whether it is namespaced.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiResource {
     /// name is the plural name of the resource.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// singularName is the singular name of the resource.  This allows clients to handle plural and singular opaquely.
     /// The singularName is more correct for reporting status on a single item and both singular and plural are allowed
     /// from the kubectl CLI interface.
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub singular_name: ::core::option::Option<::prost::alloc::string::String>,
     /// namespaced indicates if a resource is namespaced or not.
-    #[prost(bool, optional, tag="2")]
+    #[prost(bool, optional, tag = "2")]
     pub namespaced: ::core::option::Option<bool>,
     /// group is the preferred group of the resource.  Empty implies the group of the containing resource list.
     /// For subresources, this may have a different value, for example: Scale".
-    #[prost(string, optional, tag="8")]
+    #[prost(string, optional, tag = "8")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
     /// version is the preferred version of the resource.  Empty implies the version of the containing resource list
     /// For subresources, this may have a different value, for example: v1 (while inside a v1beta1 version of the core resource's group)".
-    #[prost(string, optional, tag="9")]
+    #[prost(string, optional, tag = "9")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
     /// kind is the kind for the resource (e.g. 'Foo' is the kind for a resource 'foo')
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// verbs is a list of supported kube verbs (this includes get, list, watch, create,
     /// update, patch, delete, deletecollection, and proxy)
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub verbs: ::core::option::Option<Verbs>,
     /// shortNames is a list of suggested short names of the resource.
-    #[prost(string, repeated, tag="5")]
+    #[prost(string, repeated, tag = "5")]
     pub short_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// categories is a list of the grouped resources this resource belongs to (e.g. 'all')
-    #[prost(string, repeated, tag="7")]
+    #[prost(string, repeated, tag = "7")]
     pub categories: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The hash value of the storage version, the version this resource is
     /// converted to when written to the data store. Value must be treated
@@ -75,19 +80,20 @@ pub struct ApiResource {
     /// StorageVersionHash feature gate is enabled.
     /// This field will remain optional even if it graduates.
     /// +optional
-    #[prost(string, optional, tag="10")]
+    #[prost(string, optional, tag = "10")]
     pub storage_version_hash: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// APIResourceList is a list of APIResource, it is used to expose the name of the
 /// resources supported in a specific group and version, and if the resource
 /// is namespaced.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiResourceList {
     /// groupVersion is the group and version this APIResourceList is for.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group_version: ::core::option::Option<::prost::alloc::string::String>,
     /// resources contains the name of the resources and if they are namespaced.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub resources: ::prost::alloc::vec::Vec<ApiResource>,
 }
 /// APIVersions lists the versions that are available, to allow clients to
@@ -95,10 +101,11 @@ pub struct ApiResourceList {
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiVersions {
     /// versions are the api versions that are available.
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// a map of client CIDR to server address that is serving this group.
     /// This is to help clients reach servers in the most network-efficient way possible.
@@ -107,13 +114,16 @@ pub struct ApiVersions {
     /// The server returns only those CIDRs that it thinks that the client can match.
     /// For example: the master will return an internal IP CIDR only, if the client reaches the server using an internal IP.
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
-    #[prost(message, repeated, tag="2")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
+    #[prost(message, repeated, tag = "2")]
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<
+        ServerAddressByClientCidr,
+    >,
 }
 /// ApplyOptions may be provided when applying an API object.
 /// FieldManager is required for apply requests.
 /// ApplyOptions is equivalent to PatchOptions. It is provided as a convenience with documentation
 /// that speaks specifically to how the options fields relate to apply.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApplyOptions {
     /// When present, indicates that modifications should not be
@@ -122,18 +132,18 @@ pub struct ApplyOptions {
     /// request. Valid values are:
     /// - All: all dry run stages will be processed
     /// +optional
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub dry_run: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Force is going to "force" Apply requests. It means user will
     /// re-acquire conflicting fields owned by other people.
-    #[prost(bool, optional, tag="2")]
+    #[prost(bool, optional, tag = "2")]
     pub force: ::core::option::Option<bool>,
     /// fieldManager is a name associated with the actor or entity
     /// that is making these changes. The value must be less than or
     /// 128 characters long, and only contain printable characters,
-    /// as defined by https://golang.org/pkg/unicode/#IsPrint. This
+    /// as defined by <https://golang.org/pkg/unicode/#IsPrint.> This
     /// field is required.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Condition contains details for one aspect of the current state of this API Resource.
@@ -147,10 +157,11 @@ pub struct ApplyOptions {
 /// 	    // +patchStrategy=merge
 /// 	    // +listType=map
 /// 	    // +listMapKey=type
-/// 	    Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
+/// 	    Conditions \[\]metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
 ///
 /// 	    // other fields
 /// 	}
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Condition {
     /// type of condition in CamelCase or in foo.example.com/CamelCase.
@@ -160,22 +171,22 @@ pub struct Condition {
     /// The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
     /// +required
     /// +kubebuilder:validation:Required
-    /// +kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$`
+    /// +kubebuilder:validation:Pattern=`^([a-z0-9](\[-a-z0-9\]*[a-z0-9])?(\.[a-z0-9](\[-a-z0-9\]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?\[A-Za-z0-9\])$`
     /// +kubebuilder:validation:MaxLength=316
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// status of the condition, one of True, False, Unknown.
     /// +required
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:Enum=True;False;Unknown
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// observedGeneration represents the .metadata.generation that the condition was set based upon.
-    /// For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+    /// For instance, if .metadata.generation is currently 12, but the .status.conditions\[x\].observedGeneration is 9, the condition is out of date
     /// with respect to the current state of the instance.
     /// +optional
     /// +kubebuilder:validation:Minimum=0
-    #[prost(int64, optional, tag="3")]
+    #[prost(int64, optional, tag = "3")]
     pub observed_generation: ::core::option::Option<i64>,
     /// lastTransitionTime is the last time the condition transitioned from one status to another.
     /// This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
@@ -183,7 +194,7 @@ pub struct Condition {
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:Type=string
     /// +kubebuilder:validation:Format=date-time
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub last_transition_time: ::core::option::Option<Time>,
     /// reason contains a programmatic identifier indicating the reason for the condition's last transition.
     /// Producers of specific condition types may define expected values and meanings for this field,
@@ -194,18 +205,19 @@ pub struct Condition {
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:MaxLength=1024
     /// +kubebuilder:validation:MinLength=1
-    /// +kubebuilder:validation:Pattern=`^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$`
-    #[prost(string, optional, tag="5")]
+    /// +kubebuilder:validation:Pattern=`^[A-Za-z](\[A-Za-z0-9_,:\]*[A-Za-z0-9_])?$`
+    #[prost(string, optional, tag = "5")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// message is a human readable message indicating details about the transition.
     /// This may be an empty string.
     /// +required
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:MaxLength=32768
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CreateOptions may be provided when creating an API object.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateOptions {
     /// When present, indicates that modifications should not be
@@ -214,14 +226,14 @@ pub struct CreateOptions {
     /// request. Valid values are:
     /// - All: all dry run stages will be processed
     /// +optional
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub dry_run: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// fieldManager is a name associated with the actor or entity
     /// that is making these changes. The value must be less than or
     /// 128 characters long, and only contain printable characters,
-    /// as defined by https://golang.org/pkg/unicode/#IsPrint.
+    /// as defined by <https://golang.org/pkg/unicode/#IsPrint.>
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
     /// fieldValidation instructs the server on how to handle
     /// objects in the request (POST/PUT/PATCH) containing unknown
@@ -240,10 +252,11 @@ pub struct CreateOptions {
     /// duplicate fields are present. The error returned from the server
     /// will contain all unknown and duplicate fields encountered.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeleteOptions may be provided when deleting an API object.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteOptions {
     /// The duration in seconds before the object should be deleted. Value must be non-negative integer.
@@ -251,20 +264,20 @@ pub struct DeleteOptions {
     /// specified type will be used.
     /// Defaults to a per object value if not specified. zero means delete immediately.
     /// +optional
-    #[prost(int64, optional, tag="1")]
+    #[prost(int64, optional, tag = "1")]
     pub grace_period_seconds: ::core::option::Option<i64>,
     /// Must be fulfilled before a deletion is carried out. If not possible, a 409 Conflict status will be
     /// returned.
     /// +k8s:conversion-gen=false
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub preconditions: ::core::option::Option<Preconditions>,
     /// Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7.
     /// Should the dependent objects be orphaned. If true/false, the "orphan"
     /// finalizer will be added to/removed from the object's finalizers list.
     /// Either this field or PropagationPolicy may be set, but not both.
     /// +optional
-    #[prost(bool, optional, tag="3")]
+    #[prost(bool, optional, tag = "3")]
     pub orphan_dependents: ::core::option::Option<bool>,
     /// Whether and how garbage collection will be performed.
     /// Either this field or OrphanDependents may be set, but not both.
@@ -275,7 +288,7 @@ pub struct DeleteOptions {
     /// 'Foreground' - a cascading policy that deletes all dependents in the
     /// foreground.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub propagation_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// When present, indicates that modifications should not be
     /// persisted. An invalid or unrecognized dryRun directive will
@@ -283,15 +296,16 @@ pub struct DeleteOptions {
     /// request. Valid values are:
     /// - All: all dry run stages will be processed
     /// +optional
-    #[prost(string, repeated, tag="5")]
+    #[prost(string, repeated, tag = "5")]
     pub dry_run: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Duration is a wrapper around time.Duration which supports correct
 /// marshaling to YAML and JSON. In particular, it marshals into strings, which
 /// can be used as map keys in json.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Duration {
-    #[prost(int64, optional, tag="1")]
+    #[prost(int64, optional, tag = "1")]
     pub duration: ::core::option::Option<i64>,
 }
 /// FieldsV1 stores a set of fields in a data structure like a Trie, in JSON format.
@@ -306,158 +320,173 @@ pub struct Duration {
 ///
 /// The exact format is defined in sigs.k8s.io/structured-merge-diff
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FieldsV1 {
     /// Raw is the underlying serialization of this object.
-    #[prost(bytes="vec", optional, tag="1")]
+    #[prost(bytes = "vec", optional, tag = "1")]
     pub raw: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// GetOptions is the standard query options to the standard REST get call.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOptions {
     /// resourceVersion sets a constraint on what resource versions a request may be served from.
-    /// See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for
+    /// See <https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions> for
     /// details.
     ///
     /// Defaults to unset
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub resource_version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
 /// concepts during lookup stages without having partially valid types
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupKind {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupResource specifies a Group and a Resource, but does not force a version.  This is useful for identifying
 /// concepts during lookup stages without having partially valid types
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupResource {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupVersion contains the "group" and the "version", which uniquely identifies the API.
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupVersion {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupVersion contains the "group/version" and "version" string of a version.
 /// It is made a struct to keep extensibility.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupVersionForDiscovery {
     /// groupVersion specifies the API group and version in the form "group/version"
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group_version: ::core::option::Option<::prost::alloc::string::String>,
     /// version specifies the version in the form of "version". This is to save
     /// the clients the trouble of splitting the GroupVersion.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupVersionKind unambiguously identifies a kind.  It doesn't anonymously include GroupVersion
 /// to avoid automatic coercion.  It doesn't use a GroupVersion to avoid custom marshalling
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupVersionKind {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupVersionResource unambiguously identifies a resource.  It doesn't anonymously include GroupVersion
 /// to avoid automatic coercion.  It doesn't use a GroupVersion to avoid custom marshalling
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupVersionResource {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A label selector is a label query over a set of resources. The result of matchLabels and
 /// matchExpressions are ANDed. An empty label selector matches all objects. A null
 /// label selector matches no objects.
 /// +structType=atomic
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelSelector {
     /// matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
     /// map is equivalent to an element of matchExpressions, whose key field is "key", the
     /// operator is "In", and the values array contains only "value". The requirements are ANDed.
     /// +optional
-    #[prost(map="string, string", tag="1")]
-    pub match_labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(map = "string, string", tag = "1")]
+    pub match_labels: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// matchExpressions is a list of label selector requirements. The requirements are ANDed.
     /// +optional
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub match_expressions: ::prost::alloc::vec::Vec<LabelSelectorRequirement>,
 }
 /// A label selector requirement is a selector that contains values, a key, and an operator that
 /// relates the key and values.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelSelectorRequirement {
     /// key is the label key that the selector applies to.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub key: ::core::option::Option<::prost::alloc::string::String>,
     /// operator represents a key's relationship to a set of values.
     /// Valid operators are In, NotIn, Exists and DoesNotExist.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub operator: ::core::option::Option<::prost::alloc::string::String>,
     /// values is an array of string values. If the operator is In or NotIn,
     /// the values array must be non-empty. If the operator is Exists or DoesNotExist,
     /// the values array must be empty. This array is replaced during a strategic
     /// merge patch.
     /// +optional
-    #[prost(string, repeated, tag="3")]
+    #[prost(string, repeated, tag = "3")]
     pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// List holds a list of objects, which may not be known by the server.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct List {
     /// Standard list metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<ListMeta>,
     /// List of objects
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<super::super::super::runtime::RawExtension>,
 }
 /// ListMeta describes metadata that synthetic resources must have, including lists and
 /// various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeta {
     /// Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub self_link: ::core::option::Option<::prost::alloc::string::String>,
     /// String that identifies the server's internal version of this object that
     /// can be used by clients to determine when objects have changed.
     /// Value must be treated as opaque by clients and passed unmodified back to the server.
     /// Populated by the system.
     /// Read-only.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency>
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub resource_version: ::core::option::Option<::prost::alloc::string::String>,
     /// continue may be set if the user set a limit on the number of items returned, and indicates that
     /// the server has more data available. The value is opaque and may be used to issue another request
@@ -466,7 +495,7 @@ pub struct ListMeta {
     /// minutes have passed. The resourceVersion field returned when using this continue value will be
     /// identical to the value in the first response, unless you have received this token from an error
     /// message.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub r#continue: ::core::option::Option<::prost::alloc::string::String>,
     /// remainingItemCount is the number of subsequent items in the list which are not included in this
     /// list response. If the list request contained label or field selectors, then the number of
@@ -478,26 +507,27 @@ pub struct ListMeta {
     /// The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
     /// should not rely on the remainingItemCount to be set or to be exact.
     /// +optional
-    #[prost(int64, optional, tag="4")]
+    #[prost(int64, optional, tag = "4")]
     pub remaining_item_count: ::core::option::Option<i64>,
 }
 /// ListOptions is the query options to a standard REST list call.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOptions {
     /// A selector to restrict the list of returned objects by their labels.
     /// Defaults to everything.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub label_selector: ::core::option::Option<::prost::alloc::string::String>,
     /// A selector to restrict the list of returned objects by their fields.
     /// Defaults to everything.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub field_selector: ::core::option::Option<::prost::alloc::string::String>,
     /// Watch for changes to the described resources and return them as a stream of
     /// add, update, and remove notifications. Specify resourceVersion.
     /// +optional
-    #[prost(bool, optional, tag="3")]
+    #[prost(bool, optional, tag = "3")]
     pub watch: ::core::option::Option<bool>,
     /// allowWatchBookmarks requests watch events with type "BOOKMARK".
     /// Servers that do not implement bookmarks may ignore this flag and
@@ -506,30 +536,30 @@ pub struct ListOptions {
     /// assume the server will send any BOOKMARK event during a session.
     /// If this is not a watch, this field is ignored.
     /// +optional
-    #[prost(bool, optional, tag="9")]
+    #[prost(bool, optional, tag = "9")]
     pub allow_watch_bookmarks: ::core::option::Option<bool>,
     /// resourceVersion sets a constraint on what resource versions a request may be served from.
-    /// See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for
+    /// See <https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions> for
     /// details.
     ///
     /// Defaults to unset
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub resource_version: ::core::option::Option<::prost::alloc::string::String>,
     /// resourceVersionMatch determines how resourceVersion is applied to list calls.
     /// It is highly recommended that resourceVersionMatch be set for list calls where
     /// resourceVersion is set
-    /// See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for
+    /// See <https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions> for
     /// details.
     ///
     /// Defaults to unset
     /// +optional
-    #[prost(string, optional, tag="10")]
+    #[prost(string, optional, tag = "10")]
     pub resource_version_match: ::core::option::Option<::prost::alloc::string::String>,
     /// Timeout for the list/watch call.
     /// This limits the duration of the call, regardless of any activity or inactivity.
     /// +optional
-    #[prost(int64, optional, tag="5")]
+    #[prost(int64, optional, tag = "5")]
     pub timeout_seconds: ::core::option::Option<i64>,
     /// limit is a maximum number of responses to return for a list call. If more items exist, the
     /// server will set the `continue` field on the list metadata to a value that can be used with the
@@ -547,7 +577,7 @@ pub struct ListOptions {
     /// smaller chunks of a very large result can ensure they see all possible objects. If objects are
     /// updated during a chunked list the version of the object that was present at the time the first list
     /// result was calculated is returned.
-    #[prost(int64, optional, tag="7")]
+    #[prost(int64, optional, tag = "7")]
     pub limit: ::core::option::Option<i64>,
     /// The continue option should be set when retrieving more results from the server. Since this value is
     /// server defined, clients may only use the continue value from a previous query result with identical
@@ -563,7 +593,7 @@ pub struct ListOptions {
     ///
     /// This field is not supported when watch is true. Clients may start a watch from the last
     /// resourceVersion value returned by the server and not miss any modifications.
-    #[prost(string, optional, tag="8")]
+    #[prost(string, optional, tag = "8")]
     pub r#continue: ::core::option::Option<::prost::alloc::string::String>,
     /// `sendInitialEvents=true` may be set together with `watch=true`.
     /// In that case, the watch stream will begin with synthetic events to
@@ -577,37 +607,38 @@ pub struct ListOptions {
     /// When `sendInitialEvents` option is set, we require `resourceVersionMatch`
     /// option to also be set. The semantic of the watch request is as following:
     /// - `resourceVersionMatch` = NotOlderThan
-    ///   is interpreted as "data at least as new as the provided `resourceVersion`"
-    ///   and the bookmark event is send when the state is synced
-    ///   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.
-    ///   If `resourceVersion` is unset, this is interpreted as "consistent read" and the
-    ///   bookmark event is send when the state is synced at least to the moment
-    ///   when request started being processed.
+    ///    is interpreted as "data at least as new as the provided `resourceVersion`"
+    ///    and the bookmark event is send when the state is synced
+    ///    to a `resourceVersion` at least as fresh as the one provided by the ListOptions.
+    ///    If `resourceVersion` is unset, this is interpreted as "consistent read" and the
+    ///    bookmark event is send when the state is synced at least to the moment
+    ///    when request started being processed.
     /// - `resourceVersionMatch` set to any other value or unset
-    ///   Invalid error is returned.
+    ///    Invalid error is returned.
     ///
     /// Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward
     /// compatibility reasons) and to false otherwise.
     /// +optional
-    #[prost(bool, optional, tag="11")]
+    #[prost(bool, optional, tag = "11")]
     pub send_initial_events: ::core::option::Option<bool>,
 }
 /// ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource
 /// that the fieldset applies to.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ManagedFieldsEntry {
     /// Manager is an identifier of the workflow managing these fields.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub manager: ::core::option::Option<::prost::alloc::string::String>,
     /// Operation is the type of operation which lead to this ManagedFieldsEntry being created.
     /// The only valid values for this field are 'Apply' and 'Update'.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub operation: ::core::option::Option<::prost::alloc::string::String>,
     /// APIVersion defines the version of this resource that this field set
     /// applies to. The format is "group/version" just like the top-level
     /// APIVersion field. It is necessary to track the version of a field
     /// set because it cannot be automatically converted.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
     /// Time is the timestamp of when the ManagedFields entry was added. The
     /// timestamp will also be updated if a field is added, the manager
@@ -615,15 +646,15 @@ pub struct ManagedFieldsEntry {
     /// timestamp does not update when a field is removed from the entry
     /// because another manager took it over.
     /// +optional
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub time: ::core::option::Option<Time>,
     /// FieldsType is the discriminator for the different fields format and version.
     /// There is currently only one possible value: "FieldsV1"
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub fields_type: ::core::option::Option<::prost::alloc::string::String>,
     /// FieldsV1 holds the first JSON version format as described in the "FieldsV1" type.
     /// +optional
-    #[prost(message, optional, tag="7")]
+    #[prost(message, optional, tag = "7")]
     pub fields_v1: ::core::option::Option<FieldsV1>,
     /// Subresource is the name of the subresource used to update that object, or
     /// empty string if the object was updated through the main resource. The
@@ -632,7 +663,7 @@ pub struct ManagedFieldsEntry {
     /// regular update using the same manager name.
     /// Note that the APIVersion field is not related to the Subresource field and
     /// it always corresponds to the version of the main resource.
-    #[prost(string, optional, tag="8")]
+    #[prost(string, optional, tag = "8")]
     pub subresource: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// MicroTime is version of Time with microsecond level precision.
@@ -640,22 +671,24 @@ pub struct ManagedFieldsEntry {
 /// +protobuf.options.marshal=false
 /// +protobuf.as=Timestamp
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MicroTime {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
     /// 9999-12-31T23:59:59Z inclusive.
-    #[prost(int64, optional, tag="1")]
+    #[prost(int64, optional, tag = "1")]
     pub seconds: ::core::option::Option<i64>,
     /// Non-negative fractions of a second at nanosecond resolution. Negative
     /// second values with fractions must still have non-negative nanos values
     /// that count forward in time. Must be from 0 to 999,999,999
     /// inclusive. This field may be limited in precision depending on context.
-    #[prost(int32, optional, tag="2")]
+    #[prost(int32, optional, tag = "2")]
     pub nanos: ::core::option::Option<i32>,
 }
 /// ObjectMeta is metadata that all persisted resources must have, which includes all objects
 /// users must create.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMeta {
     /// Name must be unique within a namespace. Is required when creating resources, although
@@ -663,9 +696,9 @@ pub struct ObjectMeta {
     /// automatically. Name is primarily intended for creation idempotence and configuration
     /// definition.
     /// Cannot be updated.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names>
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// GenerateName is an optional prefix, used by the server, to generate a unique
     /// name ONLY IF the Name field has not been provided.
@@ -678,9 +711,9 @@ pub struct ObjectMeta {
     /// If this field is specified and the generated name exists, the server will return a 409.
     ///
     /// Applied only if Name is not specified.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency>
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub generate_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Namespace defines the space within which each name must be unique. An empty namespace is
     /// equivalent to the "default" namespace, but "default" is the canonical representation.
@@ -689,13 +722,13 @@ pub struct ObjectMeta {
     ///
     /// Must be a DNS_LABEL.
     /// Cannot be updated.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces>
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
     /// Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub self_link: ::core::option::Option<::prost::alloc::string::String>,
     /// UID is the unique in time and space value for this object. It is typically generated by
     /// the server on successful creation of a resource and is not allowed to change on PUT
@@ -703,9 +736,9 @@ pub struct ObjectMeta {
     ///
     /// Populated by the system.
     /// Read-only.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids>
     /// +optional
-    #[prost(string, optional, tag="5")]
+    #[prost(string, optional, tag = "5")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// An opaque value that represents the internal version of this object that can
     /// be used by clients to determine when objects have changed. May be used for optimistic
@@ -716,14 +749,14 @@ pub struct ObjectMeta {
     /// Populated by the system.
     /// Read-only.
     /// Value must be treated as opaque by clients and .
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency>
     /// +optional
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub resource_version: ::core::option::Option<::prost::alloc::string::String>,
     /// A sequence number representing a specific generation of the desired state.
     /// Populated by the system. Read-only.
     /// +optional
-    #[prost(int64, optional, tag="7")]
+    #[prost(int64, optional, tag = "7")]
     pub generation: ::core::option::Option<i64>,
     /// CreationTimestamp is a timestamp representing the server time when this object was
     /// created. It is not guaranteed to be set in happens-before order across separate operations.
@@ -732,9 +765,9 @@ pub struct ObjectMeta {
     /// Populated by the system.
     /// Read-only.
     /// Null for lists.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="8")]
+    #[prost(message, optional, tag = "8")]
     pub creation_timestamp: ::core::option::Option<Time>,
     /// DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This
     /// field is set by the server when a graceful deletion is requested by the user, and is not
@@ -753,31 +786,37 @@ pub struct ObjectMeta {
     ///
     /// Populated by the system when a graceful deletion is requested.
     /// Read-only.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="9")]
+    #[prost(message, optional, tag = "9")]
     pub deletion_timestamp: ::core::option::Option<Time>,
     /// Number of seconds allowed for this object to gracefully terminate before
     /// it will be removed from the system. Only set when deletionTimestamp is also set.
     /// May only be shortened.
     /// Read-only.
     /// +optional
-    #[prost(int64, optional, tag="10")]
+    #[prost(int64, optional, tag = "10")]
     pub deletion_grace_period_seconds: ::core::option::Option<i64>,
     /// Map of string keys and values that can be used to organize and categorize
     /// (scope and select) objects. May match selectors of replication controllers
     /// and services.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels>
     /// +optional
-    #[prost(map="string, string", tag="11")]
-    pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(map = "string, string", tag = "11")]
+    pub labels: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// Annotations is an unstructured key value map stored with a resource that may be
     /// set by external tools to store and retrieve arbitrary metadata. They are not
     /// queryable and should be preserved when modifying objects.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations>
     /// +optional
-    #[prost(map="string, string", tag="12")]
-    pub annotations: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(map = "string, string", tag = "12")]
+    pub annotations: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// List of objects depended by this object. If ALL objects in the list have
     /// been deleted, this object will be garbage collected. If this object is managed by a controller,
     /// then an entry in this list will point to this controller, with the controller field set to true.
@@ -785,7 +824,7 @@ pub struct ObjectMeta {
     /// +optional
     /// +patchMergeKey=uid
     /// +patchStrategy=merge
-    #[prost(message, repeated, tag="13")]
+    #[prost(message, repeated, tag = "13")]
     pub owner_references: ::prost::alloc::vec::Vec<OwnerReference>,
     /// Must be empty before the object is deleted from the registry. Each entry
     /// is an identifier for the responsible component that will remove the entry
@@ -802,7 +841,7 @@ pub struct ObjectMeta {
     /// are not vulnerable to ordering changes in the list.
     /// +optional
     /// +patchStrategy=merge
-    #[prost(string, repeated, tag="14")]
+    #[prost(string, repeated, tag = "14")]
     pub finalizers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// ManagedFields maps workflow-id and version to the set of fields
     /// that are managed by that workflow. This is mostly for internal
@@ -813,76 +852,80 @@ pub struct ObjectMeta {
     /// workflow used when modifying the object.
     ///
     /// +optional
-    #[prost(message, repeated, tag="17")]
+    #[prost(message, repeated, tag = "17")]
     pub managed_fields: ::prost::alloc::vec::Vec<ManagedFieldsEntry>,
 }
 /// OwnerReference contains enough information to let you identify an owning
 /// object. An owning object must be in the same namespace as the dependent, or
 /// be cluster-scoped, so there is no namespace field.
 /// +structType=atomic
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OwnerReference {
     /// API version of the referent.
-    #[prost(string, optional, tag="5")]
+    #[prost(string, optional, tag = "5")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
     /// Kind of the referent.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-    #[prost(string, optional, tag="1")]
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
+    #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name of the referent.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
-    #[prost(string, optional, tag="3")]
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names>
+    #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// UID of the referent.
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
-    #[prost(string, optional, tag="4")]
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids>
+    #[prost(string, optional, tag = "4")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// If true, this reference points to the managing controller.
     /// +optional
-    #[prost(bool, optional, tag="6")]
+    #[prost(bool, optional, tag = "6")]
     pub controller: ::core::option::Option<bool>,
     /// If true, AND if the owner has the "foregroundDeletion" finalizer, then
     /// the owner cannot be deleted from the key-value store until this
     /// reference is removed.
-    /// See https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion
+    /// See <https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion>
     /// for how the garbage collector interacts with this field and enforces the foreground deletion.
     /// Defaults to false.
     /// To set this field, a user needs "delete" permission of the owner,
     /// otherwise 422 (Unprocessable Entity) will be returned.
     /// +optional
-    #[prost(bool, optional, tag="7")]
+    #[prost(bool, optional, tag = "7")]
     pub block_owner_deletion: ::core::option::Option<bool>,
 }
 /// PartialObjectMetadata is a generic representation of any object with ObjectMeta. It allows clients
 /// to get access to a particular ObjectMeta schema without knowing the details of the version.
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartialObjectMetadata {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<ObjectMeta>,
 }
 /// PartialObjectMetadataList contains a list of objects containing only their metadata
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartialObjectMetadataList {
     /// Standard list metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<ListMeta>,
     /// items contains each of the included items.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PartialObjectMetadata>,
 }
 /// Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Patch {
-}
+pub struct Patch {}
 /// PatchOptions may be provided when patching an API object.
 /// PatchOptions is meant to be a superset of UpdateOptions.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchOptions {
     /// When present, indicates that modifications should not be
@@ -891,23 +934,23 @@ pub struct PatchOptions {
     /// request. Valid values are:
     /// - All: all dry run stages will be processed
     /// +optional
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub dry_run: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Force is going to "force" Apply requests. It means user will
     /// re-acquire conflicting fields owned by other people. Force
     /// flag must be unset for non-apply patch requests.
     /// +optional
-    #[prost(bool, optional, tag="2")]
+    #[prost(bool, optional, tag = "2")]
     pub force: ::core::option::Option<bool>,
     /// fieldManager is a name associated with the actor or entity
     /// that is making these changes. The value must be less than or
     /// 128 characters long, and only contain printable characters,
-    /// as defined by https://golang.org/pkg/unicode/#IsPrint. This
+    /// as defined by <https://golang.org/pkg/unicode/#IsPrint.> This
     /// field is required for apply requests
     /// (application/apply-patch) but optional for non-apply patch
     /// types (JsonPatch, MergePatch, StrategicMergePatch).
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
     /// fieldValidation instructs the server on how to handle
     /// objects in the request (POST/PUT/PATCH) containing unknown
@@ -926,90 +969,95 @@ pub struct PatchOptions {
     /// duplicate fields are present. The error returned from the server
     /// will contain all unknown and duplicate fields encountered.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Preconditions {
     /// Specifies the target UID.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// Specifies the target ResourceVersion
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub resource_version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// RootPaths lists the paths available at root.
 /// For example: "/healthz", "/apis".
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RootPaths {
     /// paths are the paths available at root.
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub paths: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerAddressByClientCidr {
     /// The CIDR with which clients can match their IP to figure out the server address that they should use.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub client_cidr: ::core::option::Option<::prost::alloc::string::String>,
     /// Address of this server, suitable for a client that matches the above CIDR.
     /// This can be a hostname, hostname:port, IP or IP:port.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub server_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Status is a return value for calls that don't return other objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Status {
     /// Standard list metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<ListMeta>,
     /// Status of the operation.
     /// One of: "Success" or "Failure".
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// A human-readable description of the status of this operation.
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
     /// A machine-readable description of why this operation is in the
     /// "Failure" status. If this value is empty there
     /// is no information available. A Reason clarifies an HTTP status
     /// code but does not override it.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// Extended data associated with the reason.  Each reason may define its
     /// own extended details. This field is optional and the data returned
     /// is not guaranteed to conform to any schema except that defined by
     /// the reason type.
     /// +optional
-    #[prost(message, optional, tag="5")]
+    #[prost(message, optional, tag = "5")]
     pub details: ::core::option::Option<StatusDetails>,
     /// Suggested HTTP return code for this status, 0 if not set.
     /// +optional
-    #[prost(int32, optional, tag="6")]
+    #[prost(int32, optional, tag = "6")]
     pub code: ::core::option::Option<i32>,
 }
 /// StatusCause provides more information about an api.Status failure, including
 /// cases when multiple errors are encountered.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatusCause {
     /// A machine-readable description of the cause of the error. If this value is
     /// empty there is no information available.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// A human-readable description of the cause of the error.  This field may be
     /// presented as-is to a reader.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
     /// The field of the resource that has caused this error, as named by its JSON
     /// serialization. May include dot and postfix notation for nested attributes.
@@ -1018,10 +1066,10 @@ pub struct StatusCause {
     /// Optional.
     ///
     /// Examples:
-    ///   "name" - the field "name" on the current resource
-    ///   "items[0].name" - the field "name" on the first array entry in "items"
+    ///    "name" - the field "name" on the current resource
+    ///    "items\[0\].name" - the field "name" on the first array entry in "items"
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub field: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// StatusDetails is a set of additional properties that MAY be set by the
@@ -1030,50 +1078,52 @@ pub struct StatusCause {
 /// must ignore fields that do not match the defined type of each attribute,
 /// and should assume that any attribute may be empty, invalid, or under
 /// defined.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatusDetails {
     /// The name attribute of the resource associated with the status StatusReason
     /// (when there is a single name which can be described).
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// The group attribute of the resource associated with the status StatusReason.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
     /// The kind attribute of the resource associated with the status StatusReason.
     /// On some operations may differ from the requested resource Kind.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// UID of the resource.
     /// (when there is a single resource which can be described).
-    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
+    /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids>
     /// +optional
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// The Causes array includes more details associated with the StatusReason
     /// failure. Not all StatusReasons may provide detailed causes.
     /// +optional
-    #[prost(message, repeated, tag="4")]
+    #[prost(message, repeated, tag = "4")]
     pub causes: ::prost::alloc::vec::Vec<StatusCause>,
     /// If specified, the time in seconds before the operation should be retried. Some errors may indicate
     /// the client must take an alternate action - for those errors this field may indicate how long to wait
     /// before taking the alternate action.
     /// +optional
-    #[prost(int32, optional, tag="5")]
+    #[prost(int32, optional, tag = "5")]
     pub retry_after_seconds: ::core::option::Option<i32>,
 }
 /// TableOptions are used when a Table is requested by the caller.
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableOptions {
     /// includeObject decides whether to include each object along with its columnar information.
     /// Specifying "None" will return no object, specifying "Object" will return the full object contents, and
     /// specifying "Metadata" (the default) will return the object's metadata in the PartialObjectMetadata kind
     /// in version v1beta1 of the meta.k8s.io API group.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub include_object: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Time is a wrapper around time.Time which supports correct
@@ -1083,35 +1133,37 @@ pub struct TableOptions {
 /// +protobuf.options.marshal=false
 /// +protobuf.as=Timestamp
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Time {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
     /// 9999-12-31T23:59:59Z inclusive.
-    #[prost(int64, optional, tag="1")]
+    #[prost(int64, optional, tag = "1")]
     pub seconds: ::core::option::Option<i64>,
     /// Non-negative fractions of a second at nanosecond resolution. Negative
     /// second values with fractions must still have non-negative nanos values
     /// that count forward in time. Must be from 0 to 999,999,999
     /// inclusive. This field may be limited in precision depending on context.
-    #[prost(int32, optional, tag="2")]
+    #[prost(int32, optional, tag = "2")]
     pub nanos: ::core::option::Option<i32>,
 }
 /// Timestamp is a struct that is equivalent to Time, but intended for
 /// protobuf marshalling/unmarshalling. It is generated into a serialization
 /// that matches Time. Do not use in Go structs.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Timestamp {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
     /// 9999-12-31T23:59:59Z inclusive.
-    #[prost(int64, optional, tag="1")]
+    #[prost(int64, optional, tag = "1")]
     pub seconds: ::core::option::Option<i64>,
     /// Non-negative fractions of a second at nanosecond resolution. Negative
     /// second values with fractions must still have non-negative nanos values
     /// that count forward in time. Must be from 0 to 999,999,999
     /// inclusive. This field may be limited in precision depending on context.
-    #[prost(int32, optional, tag="2")]
+    #[prost(int32, optional, tag = "2")]
     pub nanos: ::core::option::Option<i32>,
 }
 /// TypeMeta describes an individual object in an API response or request
@@ -1119,26 +1171,28 @@ pub struct Timestamp {
 /// Structures that are versioned or persisted should inline TypeMeta.
 ///
 /// +k8s:deepcopy-gen=false
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypeMeta {
     /// Kind is a string value representing the REST resource this object represents.
     /// Servers may infer this from the endpoint the client submits requests to.
     /// Cannot be updated.
     /// In CamelCase.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// APIVersion defines the versioned schema of this representation of an object.
     /// Servers should convert recognized schemas to the latest internal value, and
     /// may reject unrecognized values.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources>
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// UpdateOptions may be provided when updating an API object.
 /// All fields in UpdateOptions should also be present in PatchOptions.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateOptions {
     /// When present, indicates that modifications should not be
@@ -1147,14 +1201,14 @@ pub struct UpdateOptions {
     /// request. Valid values are:
     /// - All: all dry run stages will be processed
     /// +optional
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub dry_run: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// fieldManager is a name associated with the actor or entity
     /// that is making these changes. The value must be less than or
     /// 128 characters long, and only contain printable characters,
-    /// as defined by https://golang.org/pkg/unicode/#IsPrint.
+    /// as defined by <https://golang.org/pkg/unicode/#IsPrint.>
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
     /// fieldValidation instructs the server on how to handle
     /// objects in the request (POST/PUT/PATCH) containing unknown
@@ -1173,7 +1227,7 @@ pub struct UpdateOptions {
     /// duplicate fields are present. The error returned from the server
     /// will contain all unknown and duplicate fields encountered.
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Verbs masks the value so protobuf can generate
@@ -1182,9 +1236,10 @@ pub struct UpdateOptions {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Verbs {
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Event represents a single event to a watched resource.
@@ -1192,15 +1247,16 @@ pub struct Verbs {
 /// +protobuf=true
 /// +k8s:deepcopy-gen=true
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WatchEvent {
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// Object is:
-    ///  * If Type is Added or Modified: the new state of the object.
-    ///  * If Type is Deleted: the state of the object immediately before deletion.
-    ///  * If Type is Error: *Status is recommended; other types may make sense
-    ///    depending on context.
-    #[prost(message, optional, tag="2")]
+    ///   * If Type is Added or Modified: the new state of the object.
+    ///   * If Type is Deleted: the state of the object immediately before deletion.
+    ///   * If Type is Error: *Status is recommended; other types may make sense
+    ///     depending on context.
+    #[prost(message, optional, tag = "2")]
     pub object: ::core::option::Option<super::super::super::runtime::RawExtension>,
 }

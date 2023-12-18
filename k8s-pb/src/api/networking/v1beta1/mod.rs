@@ -1,5 +1,6 @@
 /// HTTPIngressPath associates a path with a backend. Incoming urls matching the
 /// path are forwarded to the backend.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpIngressPath {
     /// path is matched against the path of an incoming request. Currently it can
@@ -7,138 +8,155 @@ pub struct HttpIngressPath {
     /// as defined by RFC 3986. Paths must begin with a '/' and must be present
     /// when using PathType with value "Exact" or "Prefix".
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
     /// pathType determines the interpretation of the path matching. PathType can
     /// be one of the following values:
     /// * Exact: Matches the URL path exactly.
     /// * Prefix: Matches based on a URL path prefix split by '/'. Matching is
-    ///   done on a path element by element basis. A path element refers is the
-    ///   list of labels in the path split by the '/' separator. A request is a
-    ///   match for path p if every p is an element-wise prefix of p of the
-    ///   request path. Note that if the last element of the path is a substring
-    ///   of the last element in request path, it is not a match (e.g. /foo/bar
-    ///   matches /foo/bar/baz, but does not match /foo/barbaz).
+    ///    done on a path element by element basis. A path element refers is the
+    ///    list of labels in the path split by the '/' separator. A request is a
+    ///    match for path p if every p is an element-wise prefix of p of the
+    ///    request path. Note that if the last element of the path is a substring
+    ///    of the last element in request path, it is not a match (e.g. /foo/bar
+    ///    matches /foo/bar/baz, but does not match /foo/barbaz).
     /// * ImplementationSpecific: Interpretation of the Path matching is up to
-    ///   the IngressClass. Implementations can treat this as a separate PathType
-    ///   or treat it identically to Prefix or Exact path types.
+    ///    the IngressClass. Implementations can treat this as a separate PathType
+    ///    or treat it identically to Prefix or Exact path types.
     /// Implementations are required to support all path types.
     /// Defaults to ImplementationSpecific.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub path_type: ::core::option::Option<::prost::alloc::string::String>,
     /// backend defines the referenced service endpoint to which the traffic
     /// will be forwarded to.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub backend: ::core::option::Option<IngressBackend>,
 }
 /// HTTPIngressRuleValue is a list of http selectors pointing to backends.
-/// In the example: http://<host>/<path>?<searchpart> -> backend where
+/// In the example: <http://<host>/<path>?<searchpart>> -> backend where
 /// where parts of the url correspond to RFC 3986, this resource will be used
 /// to match against everything after the last '/' and before the first '?'
 /// or '#'.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpIngressRuleValue {
     /// paths is a collection of paths that map requests to backends.
-    #[prost(message, repeated, tag="1")]
+    #[prost(message, repeated, tag = "1")]
     pub paths: ::prost::alloc::vec::Vec<HttpIngressPath>,
 }
 /// Ingress is a collection of rules that allow inbound connections to reach the
 /// endpoints defined by a backend. An Ingress can be configured to give services
 /// externally-reachable urls, load balance traffic, terminate SSL, offer name
 /// based virtual hosting etc.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Ingress {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is the desired state of the Ingress.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<IngressSpec>,
     /// status is the current state of the Ingress.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<IngressStatus>,
 }
 /// IngressBackend describes all endpoints for a given service and port.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressBackend {
     /// serviceName specifies the name of the referenced service.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub service_name: ::core::option::Option<::prost::alloc::string::String>,
     /// servicePort Specifies the port of the referenced service.
     /// +optional
-    #[prost(message, optional, tag="2")]
-    pub service_port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
+    #[prost(message, optional, tag = "2")]
+    pub service_port: ::core::option::Option<
+        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
+    >,
     /// resource is an ObjectRef to another Kubernetes resource in the namespace
     /// of the Ingress object. If resource is specified, serviceName and servicePort
     /// must not be specified.
     /// +optional
-    #[prost(message, optional, tag="3")]
-    pub resource: ::core::option::Option<super::super::core::v1::TypedLocalObjectReference>,
+    #[prost(message, optional, tag = "3")]
+    pub resource: ::core::option::Option<
+        super::super::core::v1::TypedLocalObjectReference,
+    >,
 }
 /// IngressClass represents the class of the Ingress, referenced by the Ingress
 /// Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be
 /// used to indicate that an IngressClass should be considered default. When a
 /// single IngressClass resource has this annotation set to true, new Ingress
 /// resources without a class specified will be assigned this default class.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClass {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is the desired state of the IngressClass.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<IngressClassSpec>,
 }
 /// IngressClassList is a collection of IngressClasses.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClassList {
     /// Standard list metadata.
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of IngressClasses.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<IngressClass>,
 }
 /// IngressClassParametersReference identifies an API object. This can be used
 /// to specify a cluster or namespace-scoped resource.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClassParametersReference {
     /// apiGroup is the group for the resource being referenced. If APIGroup is
     /// not specified, the specified Kind must be in the core API group. For any
     /// other third-party types, APIGroup is required.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub a_pi_group: ::core::option::Option<::prost::alloc::string::String>,
     /// kind is the type of resource being referenced.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// name is the name of resource being referenced.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// scope represents if this refers to a cluster or namespace scoped resource.
     /// This may be set to "Cluster" (default) or "Namespace".
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub scope: ::core::option::Option<::prost::alloc::string::String>,
     /// namespace is the namespace of the resource being referenced. This field is
     /// required when scope is set to "Namespace" and must be unset when scope is set to
     /// "Cluster".
     /// +optional
-    #[prost(string, optional, tag="5")]
+    #[prost(string, optional, tag = "5")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// IngressClassSpec provides information about the class of an Ingress.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClassSpec {
     /// controller refers to the name of the controller that should handle this
@@ -147,87 +165,94 @@ pub struct IngressClassSpec {
     /// same implementing controller. This should be specified as a
     /// domain-prefixed path no more than 250 characters in length, e.g.
     /// "acme.io/ingress-controller". This field is immutable.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub controller: ::core::option::Option<::prost::alloc::string::String>,
     /// parameters is a link to a custom resource containing additional
     /// configuration for the controller. This is optional if the controller does
     /// not require extra parameters.
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub parameters: ::core::option::Option<IngressClassParametersReference>,
 }
 /// IngressList is a collection of Ingress.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressList {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of Ingress.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Ingress>,
 }
 /// IngressLoadBalancerIngress represents the status of a load-balancer ingress point.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressLoadBalancerIngress {
     /// ip is set for load-balancer ingress points that are IP based.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub ip: ::core::option::Option<::prost::alloc::string::String>,
     /// hostname is set for load-balancer ingress points that are DNS based.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub hostname: ::core::option::Option<::prost::alloc::string::String>,
     /// ports provides information about the ports exposed by this LoadBalancer.
     /// +listType=atomic
     /// +optional
-    #[prost(message, repeated, tag="4")]
+    #[prost(message, repeated, tag = "4")]
     pub ports: ::prost::alloc::vec::Vec<IngressPortStatus>,
 }
 /// LoadBalancerStatus represents the status of a load-balancer.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressLoadBalancerStatus {
     /// ingress is a list containing ingress points for the load-balancer.
     /// +optional
-    #[prost(message, repeated, tag="1")]
+    #[prost(message, repeated, tag = "1")]
     pub ingress: ::prost::alloc::vec::Vec<IngressLoadBalancerIngress>,
 }
 /// IngressPortStatus represents the error condition of a service port
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressPortStatus {
     /// port is the port number of the ingress port.
-    #[prost(int32, optional, tag="1")]
+    #[prost(int32, optional, tag = "1")]
     pub port: ::core::option::Option<i32>,
     /// protocol is the protocol of the ingress port.
     /// The supported values are: "TCP", "UDP", "SCTP"
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub protocol: ::core::option::Option<::prost::alloc::string::String>,
     /// error is to record the problem with the service port
     /// The format of the error shall comply with the following rules:
     /// - built-in error values shall be specified in this file and those shall use
-    ///   CamelCase names
+    ///    CamelCase names
     /// - cloud provider specific error values must have names that comply with the
-    ///   format foo.example.com/CamelCase.
+    ///    format foo.example.com/CamelCase.
     /// ---
     /// The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
     /// +optional
     /// +kubebuilder:validation:Required
-    /// +kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$`
+    /// +kubebuilder:validation:Pattern=`^([a-z0-9](\[-a-z0-9\]*[a-z0-9])?(\.[a-z0-9](\[-a-z0-9\]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?\[A-Za-z0-9\])$`
     /// +kubebuilder:validation:MaxLength=316
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// IngressRule represents the rules mapping the paths under a specified host to
 /// the related backend services. Incoming requests are first evaluated for a host
 /// match, then routed to the backend associated with the matching IngressRuleValue.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressRule {
     /// host is the fully qualified domain name of a network host, as defined by RFC 3986.
     /// Note the following deviations from the "host" part of the
     /// URI as defined in RFC 3986:
     /// 1. IPs are not allowed. Currently an IngressRuleValue can only apply to
-    ///    the IP in the Spec of the parent Ingress.
+    ///     the IP in the Spec of the parent Ingress.
     /// 2. The `:` delimiter is not respected because ports are not allowed.
     /// 	  Currently the port of an Ingress is implicitly :80 for http and
     /// 	  :443 for https.
@@ -246,7 +271,7 @@ pub struct IngressRule {
     /// 2. If Host is a wildcard, then the request matches this rule if the http host header
     /// is to equal to the suffix (removing the first label) of the wildcard rule.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub host: ::core::option::Option<::prost::alloc::string::String>,
     /// IngressRuleValue represents a rule to route requests for this IngressRule.
     /// If unspecified, the rule defaults to a http catch-all. Whether that sends
@@ -254,20 +279,22 @@ pub struct IngressRule {
     /// default backend, is left to the controller fulfilling the Ingress. Http is
     /// currently the only supported IngressRuleValue.
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub ingress_rule_value: ::core::option::Option<IngressRuleValue>,
 }
 /// IngressRuleValue represents a rule to apply against incoming requests. If the
 /// rule is satisfied, the request is routed to the specified backend. Currently
 /// mixing different types of rules in a single Ingress is disallowed, so exactly
 /// one of the following must be set.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressRuleValue {
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub http: ::core::option::Option<HttpIngressRuleValue>,
 }
 /// IngressSpec describes the Ingress the user wishes to exist.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressSpec {
     /// ingressClassName is the name of the IngressClass cluster resource. The
@@ -281,14 +308,14 @@ pub struct IngressSpec {
     /// be used to set a default value for this field. For more information,
     /// refer to the IngressClass documentation.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub ingress_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// backend is the default backend capable of servicing requests that don't match any
     /// rule. At least one of 'backend' or 'rules' must be specified. This field
     /// is optional to allow the loadbalancer controller or defaulting logic to
     /// specify a global default.
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub backend: ::core::option::Option<IngressBackend>,
     /// tls represents the TLS configuration. Currently the Ingress only supports a
     /// single TLS port, 443. If multiple members of this list specify different hosts,
@@ -296,23 +323,25 @@ pub struct IngressSpec {
     /// through the SNI TLS extension, if the ingress controller fulfilling the
     /// ingress supports SNI.
     /// +optional
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub tls: ::prost::alloc::vec::Vec<IngressTls>,
     /// rules is a list of host rules used to configure the Ingress. If unspecified, or
     /// no rule matches, all traffic is sent to the default backend.
     /// +optional
-    #[prost(message, repeated, tag="3")]
+    #[prost(message, repeated, tag = "3")]
     pub rules: ::prost::alloc::vec::Vec<IngressRule>,
 }
 /// IngressStatus describes the current state of the Ingress.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressStatus {
     /// loadBalancer contains the current status of the load-balancer.
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub load_balancer: ::core::option::Option<IngressLoadBalancerStatus>,
 }
 /// IngressTLS describes the transport layer security associated with an Ingress.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressTls {
     /// hosts is a list of hosts included in the TLS certificate. The values in
@@ -320,7 +349,7 @@ pub struct IngressTls {
     /// wildcard host setting for the loadbalancer controller fulfilling this
     /// Ingress, if left unspecified.
     /// +optional
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub hosts: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// secretName is the name of the secret used to terminate TLS traffic on
     /// port 443. Field is left optional to allow TLS routing based on SNI
@@ -328,6 +357,6 @@ pub struct IngressTls {
     /// header field used by an IngressRule, the SNI host is used for termination
     /// and value of the Host header is used for routing.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub secret_name: ::core::option::Option<::prost::alloc::string::String>,
 }

@@ -1,4 +1,5 @@
 /// MatchCondition represents a condition which must by fulfilled for a request to be sent to a webhook.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchCondition {
     /// Name is an identifier for this match condition, used for strategic merging of MatchConditions,
@@ -6,11 +7,11 @@ pub struct MatchCondition {
     /// the associated expression.
     /// Name must be a qualified name consisting of alphanumeric characters, '-', '_' or '.', and
     /// must start and end with an alphanumeric character (e.g. 'MyName',  or 'my.name',  or
-    /// '123-abc', regex used for validation is '([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]') with an
+    /// '123-abc', regex used for validation is '([A-Za-z0-9][-A-Za-z0-9_.]*)?\[A-Za-z0-9\]') with an
     /// optional DNS subdomain prefix and '/' (e.g. 'example.com/MyName')
     ///
     /// Required.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// Expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
     /// CEL expressions have access to the contents of the AdmissionRequest and Authorizer, organized into CEL variables:
@@ -19,16 +20,17 @@ pub struct MatchCondition {
     /// 'oldObject' - The existing object. The value is null for CREATE requests.
     /// 'request' - Attributes of the admission request(/pkg/apis/admission/types.go#AdmissionRequest).
     /// 'authorizer' - A CEL Authorizer. May be used to perform authorization checks for the principal (user or service account) of the request.
-    ///   See https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz
+    ///    See <https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz>
     /// 'authorizer.requestResource' - A CEL ResourceCheck constructed from the 'authorizer' and configured with the
-    ///   request resource.
-    /// Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+    ///    request resource.
+    /// Documentation on CEL: <https://kubernetes.io/docs/reference/using-api/cel/>
     ///
     /// Required.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub expression: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// MutatingWebhook describes an admission webhook and the resources and operations it applies to.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhook {
     /// The name of the admission webhook.
@@ -36,11 +38,11 @@ pub struct MutatingWebhook {
     /// "imagepolicy" is the name of the webhook, and kubernetes.io is the name
     /// of the organization.
     /// Required.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// ClientConfig defines how to communicate with the hook.
     /// Required
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub client_config: ::core::option::Option<WebhookClientConfig>,
     /// Rules describes what operations on what resources/subresources the webhook cares about.
     /// The webhook cares about an operation if it matches _any_ Rule.
@@ -48,29 +50,29 @@ pub struct MutatingWebhook {
     /// from putting the cluster in a state which cannot be recovered from without completely
     /// disabling the plugin, ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks are never called
     /// on admission requests for ValidatingWebhookConfiguration and MutatingWebhookConfiguration objects.
-    #[prost(message, repeated, tag="3")]
+    #[prost(message, repeated, tag = "3")]
     pub rules: ::prost::alloc::vec::Vec<RuleWithOperations>,
     /// FailurePolicy defines how unrecognized errors from the admission endpoint are handled -
     /// allowed values are Ignore or Fail. Defaults to Fail.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub failure_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// matchPolicy defines how the "rules" list is used to match incoming requests.
     /// Allowed values are "Exact" or "Equivalent".
     ///
     /// - Exact: match a request only if it exactly matches a specified rule.
     /// For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1,
-    /// but "rules" only included `apiGroups:["apps"], apiVersions:["v1"], resources: ["deployments"]`,
+    /// but "rules" only included `apiGroups:\["apps"\], apiVersions:\["v1"\], resources: \["deployments"\]`,
     /// a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.
     ///
     /// - Equivalent: match a request if modifies a resource listed in rules, even via another API group or version.
     /// For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1,
-    /// and "rules" only included `apiGroups:["apps"], apiVersions:["v1"], resources: ["deployments"]`,
+    /// and "rules" only included `apiGroups:\["apps"\], apiVersions:\["v1"\], resources: \["deployments"\]`,
     /// a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.
     ///
     /// Defaults to "Equivalent"
     /// +optional
-    #[prost(string, optional, tag="9")]
+    #[prost(string, optional, tag = "9")]
     pub match_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// NamespaceSelector decides whether to run the webhook on an object based
     /// on whether the namespace for that object matches the selector. If the
@@ -82,42 +84,44 @@ pub struct MutatingWebhook {
     /// associated with "runlevel" of "0" or "1";  you will set the selector as
     /// follows:
     /// "namespaceSelector": {
-    ///   "matchExpressions": [
-    ///     {
-    ///       "key": "runlevel",
-    ///       "operator": "NotIn",
-    ///       "values": [
-    ///         "0",
-    ///         "1"
-    ///       ]
-    ///     }
-    ///   ]
+    ///    "matchExpressions": [
+    ///      {
+    ///        "key": "runlevel",
+    ///        "operator": "NotIn",
+    ///        "values": [
+    ///          "0",
+    ///          "1"
+    ///        ]
+    ///      }
+    ///    ]
     /// }
     ///
     /// If instead you want to only run the webhook on any objects whose
     /// namespace is associated with the "environment" of "prod" or "staging";
     /// you will set the selector as follows:
     /// "namespaceSelector": {
-    ///   "matchExpressions": [
-    ///     {
-    ///       "key": "environment",
-    ///       "operator": "In",
-    ///       "values": [
-    ///         "prod",
-    ///         "staging"
-    ///       ]
-    ///     }
-    ///   ]
+    ///    "matchExpressions": [
+    ///      {
+    ///        "key": "environment",
+    ///        "operator": "In",
+    ///        "values": [
+    ///          "prod",
+    ///          "staging"
+    ///        ]
+    ///      }
+    ///    ]
     /// }
     ///
     /// See
-    /// https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+    /// <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
     /// for more examples of label selectors.
     ///
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
-    #[prost(message, optional, tag="5")]
-    pub namespace_selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    #[prost(message, optional, tag = "5")]
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// ObjectSelector decides whether to run the webhook based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the webhook, and
@@ -130,15 +134,17 @@ pub struct MutatingWebhook {
     /// users may skip the admission webhook by setting the labels.
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
-    #[prost(message, optional, tag="11")]
-    pub object_selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    #[prost(message, optional, tag = "11")]
+    pub object_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// SideEffects states whether this webhook has side effects.
     /// Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown).
     /// Webhooks with side effects MUST implement a reconciliation system, since a request may be
     /// rejected by a future step in the admission chain and the side effects therefore need to be undone.
     /// Requests with the dryRun attribute will be auto-rejected if they match a webhook with
     /// sideEffects == Unknown or Some.
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub side_effects: ::core::option::Option<::prost::alloc::string::String>,
     /// TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
     /// the webhook call will be ignored or the API call will fail based on the
@@ -146,7 +152,7 @@ pub struct MutatingWebhook {
     /// The timeout value must be between 1 and 30 seconds.
     /// Default to 10 seconds.
     /// +optional
-    #[prost(int32, optional, tag="7")]
+    #[prost(int32, optional, tag = "7")]
     pub timeout_seconds: ::core::option::Option<i32>,
     /// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
     /// versions the Webhook expects. API server will try to use first version in
@@ -155,8 +161,10 @@ pub struct MutatingWebhook {
     /// If a persisted webhook configuration specifies allowed versions and does not
     /// include any versions known to the API Server, calls to the webhook will fail
     /// and be subject to the failure policy.
-    #[prost(string, repeated, tag="8")]
-    pub admission_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "8")]
+    pub admission_review_versions: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation.
     /// Allowed values are "Never" and "IfNeeded".
     ///
@@ -173,7 +181,7 @@ pub struct MutatingWebhook {
     ///
     /// Defaults to "Never".
     /// +optional
-    #[prost(string, optional, tag="10")]
+    #[prost(string, optional, tag = "10")]
     pub reinvocation_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// MatchConditions is a list of conditions that must be met for a request to be sent to this
     /// webhook. Match conditions filter requests that have already been matched by the rules,
@@ -181,11 +189,11 @@ pub struct MutatingWebhook {
     /// There are a maximum of 64 match conditions allowed.
     ///
     /// The exact matching logic is (in order):
-    ///   1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.
-    ///   2. If ALL matchConditions evaluate to TRUE, the webhook is called.
-    ///   3. If any matchCondition evaluates to an error (but none are FALSE):
-    ///      - If failurePolicy=Fail, reject the request
-    ///      - If failurePolicy=Ignore, the error is ignored and the webhook is skipped
+    ///    1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.
+    ///    2. If ALL matchConditions evaluate to TRUE, the webhook is called.
+    ///    3. If any matchCondition evaluates to an error (but none are FALSE):
+    ///       - If failurePolicy=Fail, reject the request
+    ///       - If failurePolicy=Ignore, the error is ignored and the webhook is skipped
     ///
     /// This is a beta feature and managed by the AdmissionWebhookMatchConditions feature gate.
     ///
@@ -195,50 +203,57 @@ pub struct MutatingWebhook {
     /// +listMapKey=name
     /// +featureGate=AdmissionWebhookMatchConditions
     /// +optional
-    #[prost(message, repeated, tag="12")]
+    #[prost(message, repeated, tag = "12")]
     pub match_conditions: ::prost::alloc::vec::Vec<MatchCondition>,
 }
 /// MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhookConfiguration {
-    /// Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
+    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Webhooks is a list of webhooks and the affected resources and operations.
     /// +optional
     /// +patchMergeKey=name
     /// +patchStrategy=merge
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub webhooks: ::prost::alloc::vec::Vec<MutatingWebhook>,
 }
 /// MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhookConfigurationList {
     /// Standard list metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of MutatingWebhookConfiguration.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<MutatingWebhookConfiguration>,
 }
 /// Rule is a tuple of APIGroups, APIVersion, and Resources.It is recommended
 /// to make sure that all the tuple expansions are valid.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Rule {
     /// APIGroups is the API groups the resources belong to. '*' is all groups.
     /// If '*' is present, the length of the slice must be one.
     /// Required.
     /// +listType=atomic
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub api_groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// APIVersions is the API versions the resources belong to. '*' is all versions.
     /// If '*' is present, the length of the slice must be one.
     /// Required.
     /// +listType=atomic
-    #[prost(string, repeated, tag="2")]
+    #[prost(string, repeated, tag = "2")]
     pub api_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Resources is a list of resources this rule applies to.
     ///
@@ -256,7 +271,7 @@ pub struct Rule {
     /// Depending on the enclosing object, subresources might not be allowed.
     /// Required.
     /// +listType=atomic
-    #[prost(string, repeated, tag="3")]
+    #[prost(string, repeated, tag = "3")]
     pub resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// scope specifies the scope of this rule.
     /// Valid values are "Cluster", "Namespaced", and "*"
@@ -268,11 +283,12 @@ pub struct Rule {
     /// Default is "*".
     ///
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub scope: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// RuleWithOperations is a tuple of Operations and Resources. It is recommended to make
 /// sure that all the tuple expansions are valid.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RuleWithOperations {
     /// Operations is the operations the admission hook cares about - CREATE, UPDATE, DELETE, CONNECT or *
@@ -280,37 +296,39 @@ pub struct RuleWithOperations {
     /// If '*' is present, the length of the slice must be one.
     /// Required.
     /// +listType=atomic
-    #[prost(string, repeated, tag="1")]
+    #[prost(string, repeated, tag = "1")]
     pub operations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Rule is embedded, it describes other criteria of the rule, like
     /// APIGroups, APIVersions, Resources, etc.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub rule: ::core::option::Option<Rule>,
 }
 /// ServiceReference holds a reference to Service.legacy.k8s.io
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceReference {
     /// `namespace` is the namespace of the service.
     /// Required
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
     /// `name` is the name of the service.
     /// Required
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// `path` is an optional URL path which will be sent in any request to
     /// this service.
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
     /// If specified, the port on the service that hosting webhook.
     /// Default to 443 for backward compatibility.
     /// `port` should be a valid port number (1-65535, inclusive).
     /// +optional
-    #[prost(int32, optional, tag="4")]
+    #[prost(int32, optional, tag = "4")]
     pub port: ::core::option::Option<i32>,
 }
 /// ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingWebhook {
     /// The name of the admission webhook.
@@ -318,11 +336,11 @@ pub struct ValidatingWebhook {
     /// "imagepolicy" is the name of the webhook, and kubernetes.io is the name
     /// of the organization.
     /// Required.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// ClientConfig defines how to communicate with the hook.
     /// Required
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub client_config: ::core::option::Option<WebhookClientConfig>,
     /// Rules describes what operations on what resources/subresources the webhook cares about.
     /// The webhook cares about an operation if it matches _any_ Rule.
@@ -330,29 +348,29 @@ pub struct ValidatingWebhook {
     /// from putting the cluster in a state which cannot be recovered from without completely
     /// disabling the plugin, ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks are never called
     /// on admission requests for ValidatingWebhookConfiguration and MutatingWebhookConfiguration objects.
-    #[prost(message, repeated, tag="3")]
+    #[prost(message, repeated, tag = "3")]
     pub rules: ::prost::alloc::vec::Vec<RuleWithOperations>,
     /// FailurePolicy defines how unrecognized errors from the admission endpoint are handled -
     /// allowed values are Ignore or Fail. Defaults to Fail.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub failure_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// matchPolicy defines how the "rules" list is used to match incoming requests.
     /// Allowed values are "Exact" or "Equivalent".
     ///
     /// - Exact: match a request only if it exactly matches a specified rule.
     /// For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1,
-    /// but "rules" only included `apiGroups:["apps"], apiVersions:["v1"], resources: ["deployments"]`,
+    /// but "rules" only included `apiGroups:\["apps"\], apiVersions:\["v1"\], resources: \["deployments"\]`,
     /// a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.
     ///
     /// - Equivalent: match a request if modifies a resource listed in rules, even via another API group or version.
     /// For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1,
-    /// and "rules" only included `apiGroups:["apps"], apiVersions:["v1"], resources: ["deployments"]`,
+    /// and "rules" only included `apiGroups:\["apps"\], apiVersions:\["v1"\], resources: \["deployments"\]`,
     /// a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.
     ///
     /// Defaults to "Equivalent"
     /// +optional
-    #[prost(string, optional, tag="9")]
+    #[prost(string, optional, tag = "9")]
     pub match_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// NamespaceSelector decides whether to run the webhook on an object based
     /// on whether the namespace for that object matches the selector. If the
@@ -364,42 +382,44 @@ pub struct ValidatingWebhook {
     /// associated with "runlevel" of "0" or "1";  you will set the selector as
     /// follows:
     /// "namespaceSelector": {
-    ///   "matchExpressions": [
-    ///     {
-    ///       "key": "runlevel",
-    ///       "operator": "NotIn",
-    ///       "values": [
-    ///         "0",
-    ///         "1"
-    ///       ]
-    ///     }
-    ///   ]
+    ///    "matchExpressions": [
+    ///      {
+    ///        "key": "runlevel",
+    ///        "operator": "NotIn",
+    ///        "values": [
+    ///          "0",
+    ///          "1"
+    ///        ]
+    ///      }
+    ///    ]
     /// }
     ///
     /// If instead you want to only run the webhook on any objects whose
     /// namespace is associated with the "environment" of "prod" or "staging";
     /// you will set the selector as follows:
     /// "namespaceSelector": {
-    ///   "matchExpressions": [
-    ///     {
-    ///       "key": "environment",
-    ///       "operator": "In",
-    ///       "values": [
-    ///         "prod",
-    ///         "staging"
-    ///       ]
-    ///     }
-    ///   ]
+    ///    "matchExpressions": [
+    ///      {
+    ///        "key": "environment",
+    ///        "operator": "In",
+    ///        "values": [
+    ///          "prod",
+    ///          "staging"
+    ///        ]
+    ///      }
+    ///    ]
     /// }
     ///
     /// See
-    /// https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+    /// <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels>
     /// for more examples of label selectors.
     ///
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
-    #[prost(message, optional, tag="5")]
-    pub namespace_selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    #[prost(message, optional, tag = "5")]
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// ObjectSelector decides whether to run the webhook based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the webhook, and
@@ -412,15 +432,17 @@ pub struct ValidatingWebhook {
     /// users may skip the admission webhook by setting the labels.
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
-    #[prost(message, optional, tag="10")]
-    pub object_selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    #[prost(message, optional, tag = "10")]
+    pub object_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// SideEffects states whether this webhook has side effects.
     /// Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown).
     /// Webhooks with side effects MUST implement a reconciliation system, since a request may be
     /// rejected by a future step in the admission chain and the side effects therefore need to be undone.
     /// Requests with the dryRun attribute will be auto-rejected if they match a webhook with
     /// sideEffects == Unknown or Some.
-    #[prost(string, optional, tag="6")]
+    #[prost(string, optional, tag = "6")]
     pub side_effects: ::core::option::Option<::prost::alloc::string::String>,
     /// TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
     /// the webhook call will be ignored or the API call will fail based on the
@@ -428,7 +450,7 @@ pub struct ValidatingWebhook {
     /// The timeout value must be between 1 and 30 seconds.
     /// Default to 10 seconds.
     /// +optional
-    #[prost(int32, optional, tag="7")]
+    #[prost(int32, optional, tag = "7")]
     pub timeout_seconds: ::core::option::Option<i32>,
     /// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
     /// versions the Webhook expects. API server will try to use first version in
@@ -437,19 +459,21 @@ pub struct ValidatingWebhook {
     /// If a persisted webhook configuration specifies allowed versions and does not
     /// include any versions known to the API Server, calls to the webhook will fail
     /// and be subject to the failure policy.
-    #[prost(string, repeated, tag="8")]
-    pub admission_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "8")]
+    pub admission_review_versions: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// MatchConditions is a list of conditions that must be met for a request to be sent to this
     /// webhook. Match conditions filter requests that have already been matched by the rules,
     /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
     /// There are a maximum of 64 match conditions allowed.
     ///
     /// The exact matching logic is (in order):
-    ///   1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.
-    ///   2. If ALL matchConditions evaluate to TRUE, the webhook is called.
-    ///   3. If any matchCondition evaluates to an error (but none are FALSE):
-    ///      - If failurePolicy=Fail, reject the request
-    ///      - If failurePolicy=Ignore, the error is ignored and the webhook is skipped
+    ///    1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.
+    ///    2. If ALL matchConditions evaluate to TRUE, the webhook is called.
+    ///    3. If any matchCondition evaluates to an error (but none are FALSE):
+    ///       - If failurePolicy=Fail, reject the request
+    ///       - If failurePolicy=Ignore, the error is ignored and the webhook is skipped
     ///
     /// This is a beta feature and managed by the AdmissionWebhookMatchConditions feature gate.
     ///
@@ -459,37 +483,44 @@ pub struct ValidatingWebhook {
     /// +listMapKey=name
     /// +featureGate=AdmissionWebhookMatchConditions
     /// +optional
-    #[prost(message, repeated, tag="11")]
+    #[prost(message, repeated, tag = "11")]
     pub match_conditions: ::prost::alloc::vec::Vec<MatchCondition>,
 }
 /// ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and object without changing it.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingWebhookConfiguration {
-    /// Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
+    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Webhooks is a list of webhooks and the affected resources and operations.
     /// +optional
     /// +patchMergeKey=name
     /// +patchStrategy=merge
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub webhooks: ::prost::alloc::vec::Vec<ValidatingWebhook>,
 }
 /// ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingWebhookConfigurationList {
     /// Standard list metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ValidatingWebhookConfiguration.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingWebhookConfiguration>,
 }
 /// WebhookClientConfig contains the information to make a TLS
 /// connection with the webhook
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebhookClientConfig {
     /// `url` gives the location of the webhook, in standard URL form
@@ -508,7 +539,7 @@ pub struct WebhookClientConfig {
     /// webhook. Such installs are likely to be non-portable, i.e., not easy
     /// to turn up in a new cluster.
     ///
-    /// The scheme must be "https"; the URL must begin with "https://".
+    /// The scheme must be "https"; the URL must begin with "<https://".>
     ///
     /// A path is optional, and if present may be any string permissible in
     /// a URL. You may use the path to pass an arbitrary string to the
@@ -519,7 +550,7 @@ pub struct WebhookClientConfig {
     /// allowed, either.
     ///
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub url: ::core::option::Option<::prost::alloc::string::String>,
     /// `service` is a reference to the service for this webhook. Either
     /// `service` or `url` must be specified.
@@ -527,12 +558,12 @@ pub struct WebhookClientConfig {
     /// If the webhook is running within the cluster, then you should use `service`.
     ///
     /// +optional
-    #[prost(message, optional, tag="1")]
+    #[prost(message, optional, tag = "1")]
     pub service: ::core::option::Option<ServiceReference>,
     /// `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server certificate.
     /// If unspecified, system trust roots on the apiserver are used.
     /// +optional
-    #[prost(bytes="vec", optional, tag="2")]
+    #[prost(bytes = "vec", optional, tag = "2")]
     pub ca_bundle: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 

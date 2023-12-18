@@ -6,6 +6,7 @@
 /// Kubernetes attach detach controller uses this object to determine whether attach is required.
 /// Kubelet uses this object to determine whether pod information needs to be passed on mount.
 /// CSIDriver objects are non-namespaced.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiDriver {
     /// Standard object metadata.
@@ -13,28 +14,34 @@ pub struct CsiDriver {
     /// refers to; it MUST be the same name returned by the CSI GetPluginName()
     /// call for that driver.
     /// The driver name must be 63 characters or less, beginning and ending with
-    /// an alphanumeric character ([a-z0-9A-Z]) with dashes (-), dots (.), and
+    /// an alphanumeric character (\[a-z0-9A-Z\]) with dashes (-), dots (.), and
     /// alphanumerics between.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec represents the specification of the CSI Driver.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<CsiDriverSpec>,
 }
 /// CSIDriverList is a collection of CSIDriver objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiDriverList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of CSIDriver
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CsiDriver>,
 }
 /// CSIDriverSpec is the specification of a CSIDriver.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiDriverSpec {
     /// attachRequired indicates this CSI volume driver requires an attach
@@ -51,7 +58,7 @@ pub struct CsiDriverSpec {
     /// This field is immutable.
     ///
     /// +optional
-    #[prost(bool, optional, tag="1")]
+    #[prost(bool, optional, tag = "1")]
     pub attach_required: ::core::option::Option<bool>,
     /// podInfoOnMount indicates this CSI volume driver requires additional pod information (like podName, podUID, etc.)
     /// during mount operations, if set to true.
@@ -68,7 +75,7 @@ pub struct CsiDriverSpec {
     /// "csi.storage.k8s.io/pod.namespace": pod.Namespace
     /// "csi.storage.k8s.io/pod.uid": string(pod.UID)
     /// "csi.storage.k8s.io/ephemeral": "true" if the volume is an ephemeral inline volume
-    ///                                 defined by a CSIVolumeSource, otherwise "false"
+    ///                                  defined by a CSIVolumeSource, otherwise "false"
     ///
     /// "csi.storage.k8s.io/ephemeral" is a new feature in Kubernetes 1.16. It is only
     /// required for drivers which support both the "Persistent" and "Ephemeral" VolumeLifecycleMode.
@@ -80,7 +87,7 @@ pub struct CsiDriverSpec {
     /// This field is immutable.
     ///
     /// +optional
-    #[prost(bool, optional, tag="2")]
+    #[prost(bool, optional, tag = "2")]
     pub pod_info_on_mount: ::core::option::Option<bool>,
     /// volumeLifecycleModes defines what kind of volumes this CSI volume driver supports.
     /// The default if the list is empty is "Persistent", which is the usage defined by the
@@ -91,14 +98,14 @@ pub struct CsiDriverSpec {
     /// A driver has to be aware of this because it is only going to get a NodePublishVolume call for such a volume.
     ///
     /// For more information about implementing this mode, see
-    /// https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html
+    /// <https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html>
     /// A driver can support one or more of these modes and
     /// more modes may be added in the future.
     ///
     /// This field is immutable.
     ///
     /// +optional
-    #[prost(string, repeated, tag="3")]
+    #[prost(string, repeated, tag = "3")]
     pub volume_lifecycle_modes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// storageCapacity indicates that the CSI volume driver wants pod scheduling to consider the storage
     /// capacity that the driver deployment will report by creating
@@ -116,7 +123,7 @@ pub struct CsiDriverSpec {
     /// This field was immutable in Kubernetes <= 1.22 and now is mutable.
     ///
     /// +optional
-    #[prost(bool, optional, tag="4")]
+    #[prost(bool, optional, tag = "4")]
     pub storage_capacity: ::core::option::Option<bool>,
     /// fsGroupPolicy defines if the underlying volume supports changing ownership and
     /// permission of the volume before being mounted.
@@ -130,18 +137,18 @@ pub struct CsiDriverSpec {
     /// if a fstype is defined and the volume's access mode contains ReadWriteOnce.
     ///
     /// +optional
-    #[prost(string, optional, tag="5")]
+    #[prost(string, optional, tag = "5")]
     pub fs_group_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// tokenRequests indicates the CSI driver needs pods' service account
     /// tokens it is mounting volume for to do necessary authentication. Kubelet
     /// will pass the tokens in VolumeContext in the CSI NodePublishVolume calls.
     /// The CSI driver should parse and validate the following VolumeContext:
     /// "csi.storage.k8s.io/serviceAccount.tokens": {
-    ///   "<audience>": {
-    ///     "token": <token>,
-    ///     "expirationTimestamp": <expiration timestamp in RFC3339>,
-    ///   },
-    ///   ...
+    ///    "<audience>": {
+    ///      "token": <token>,
+    ///      "expirationTimestamp": <expiration timestamp in RFC3339>,
+    ///    },
+    ///    ...
     /// }
     ///
     /// Note: Audience in each TokenRequest should be different and at
@@ -150,7 +157,7 @@ pub struct CsiDriverSpec {
     ///
     /// +optional
     /// +listType=atomic
-    #[prost(message, repeated, tag="6")]
+    #[prost(message, repeated, tag = "6")]
     pub token_requests: ::prost::alloc::vec::Vec<TokenRequest>,
     /// requiresRepublish indicates the CSI driver wants `NodePublishVolume`
     /// being periodically called to reflect any possible change in the mounted
@@ -161,7 +168,7 @@ pub struct CsiDriverSpec {
     /// mount points will not be seen by a running container.
     ///
     /// +optional
-    #[prost(bool, optional, tag="7")]
+    #[prost(bool, optional, tag = "7")]
     pub requires_republish: ::core::option::Option<bool>,
     /// seLinuxMount specifies if the CSI driver supports "-o context"
     /// mount option.
@@ -183,7 +190,7 @@ pub struct CsiDriverSpec {
     ///
     /// +featureGate=SELinuxMountReadWriteOncePod
     /// +optional
-    #[prost(bool, optional, tag="8")]
+    #[prost(bool, optional, tag = "8")]
     pub se_linux_mount: ::core::option::Option<bool>,
 }
 /// DEPRECATED - This group version of CSINode is deprecated by storage/v1/CSINode.
@@ -197,22 +204,26 @@ pub struct CsiDriverSpec {
 /// there are no CSI Drivers available on the node, or the Kubelet version is low
 /// enough that it doesn't create this object.
 /// CSINode has an OwnerReference that points to the corresponding node object.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNode {
     /// metadata.name must be the Kubernetes node name.
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is the specification of CSINode
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<CsiNodeSpec>,
 }
 /// CSINodeDriver holds information about the specification of one CSI driver installed on a node
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNodeDriver {
     /// name represents the name of the CSI driver that this object refers to.
     /// This MUST be the same name returned by the CSI GetPluginName() call for
     /// that driver.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// nodeID of the node from the driver point of view.
     /// This field enables Kubernetes to communicate with storage systems that do
@@ -222,7 +233,7 @@ pub struct CsiNodeDriver {
     /// system to attach a volume to a specific node, it can use this field to
     /// refer to the node name using the ID that the storage system will
     /// understand, e.g. "nodeA" instead of "node1". This field is required.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub node_id: ::core::option::Option<::prost::alloc::string::String>,
     /// topologyKeys is the list of keys supported by the driver.
     /// When a driver is initialized on a cluster, it provides a set of topology
@@ -236,33 +247,37 @@ pub struct CsiNodeDriver {
     /// It is possible for different nodes to use different topology keys.
     /// This can be empty if driver does not support topology.
     /// +optional
-    #[prost(string, repeated, tag="3")]
+    #[prost(string, repeated, tag = "3")]
     pub topology_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// allocatable represents the volume resources of a node that are available for scheduling.
     /// +optional
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub allocatable: ::core::option::Option<VolumeNodeResources>,
 }
 /// CSINodeList is a collection of CSINode objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNodeList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of CSINode
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CsiNode>,
 }
 /// CSINodeSpec holds information about the specification of all CSI drivers installed on a node
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNodeSpec {
     /// drivers is a list of information of all CSI Drivers existing on a node.
     /// If all drivers in the list are uninstalled, this can become empty.
     /// +patchMergeKey=name
     /// +patchStrategy=merge
-    #[prost(message, repeated, tag="1")]
+    #[prost(message, repeated, tag = "1")]
     pub drivers: ::prost::alloc::vec::Vec<CsiNodeDriver>,
 }
 /// CSIStorageCapacity stores the result of one CSI GetCapacity call.
@@ -289,6 +304,7 @@ pub struct CsiNodeSpec {
 /// to a comparison against the less precise Capacity. If that is also unset,
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
@@ -299,10 +315,12 @@ pub struct CsiStorageCapacity {
     ///
     /// Objects are namespaced.
     ///
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// nodeTopology defines which nodes have access to the storage
     /// for which capacity was reported. If not set, the storage is
     /// not accessible from any node in the cluster. If empty, the
@@ -310,15 +328,17 @@ pub struct CsiStorageCapacity {
     /// immutable.
     ///
     /// +optional
-    #[prost(message, optional, tag="2")]
-    pub node_topology: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    #[prost(message, optional, tag = "2")]
+    pub node_topology: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// storageClassName represents the name of the StorageClass that the reported capacity applies to.
     /// It must meet the same requirements as the name of a StorageClass
     /// object (non-empty, DNS subdomain). If that object no longer exists,
     /// the CSIStorageCapacity object is obsolete and should be removed by its
     /// creator.
     /// This field is immutable.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub storage_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// capacity is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
@@ -330,8 +350,10 @@ pub struct CsiStorageCapacity {
     /// unavailable.
     ///
     /// +optional
-    #[prost(message, optional, tag="4")]
-    pub capacity: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    #[prost(message, optional, tag = "4")]
+    pub capacity: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// maximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
     /// previous fields.
@@ -344,21 +366,26 @@ pub struct CsiStorageCapacity {
     /// API is ResourceRequirements.Requests in a volume claim.
     ///
     /// +optional
-    #[prost(message, optional, tag="5")]
-    pub maximum_volume_size: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    #[prost(message, optional, tag = "5")]
+    pub maximum_volume_size: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacityList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of CSIStorageCapacity objects.
     /// +listType=map
     /// +listMapKey=name
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CsiStorageCapacity>,
 }
 /// StorageClass describes the parameters for a class of storage for
@@ -366,41 +393,47 @@ pub struct CsiStorageCapacityList {
 ///
 /// StorageClasses are non-namespaced; the name of the storage class
 /// according to etcd is in ObjectMeta.Name.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageClass {
     /// Standard object's metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// provisioner indicates the type of the provisioner.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub provisioner: ::core::option::Option<::prost::alloc::string::String>,
     /// parameters holds the parameters for the provisioner that should
     /// create volumes of this storage class.
     /// +optional
-    #[prost(map="string, string", tag="3")]
-    pub parameters: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(map = "string, string", tag = "3")]
+    pub parameters: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// reclaimPolicy controls the reclaimPolicy for dynamically provisioned PersistentVolumes of this storage class.
     /// Defaults to Delete.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub reclaim_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// mountOptions controls the mountOptions for dynamically provisioned PersistentVolumes of this storage class.
-    /// e.g. ["ro", "soft"]. Not validated -
+    /// e.g. \["ro", "soft"\]. Not validated -
     /// mount of the PVs will simply fail if one is invalid.
     /// +optional
-    #[prost(string, repeated, tag="5")]
+    #[prost(string, repeated, tag = "5")]
     pub mount_options: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// allowVolumeExpansion shows whether the storage class allow volume expand
     /// +optional
-    #[prost(bool, optional, tag="6")]
+    #[prost(bool, optional, tag = "6")]
     pub allow_volume_expansion: ::core::option::Option<bool>,
     /// volumeBindingMode indicates how PersistentVolumeClaims should be
     /// provisioned and bound.  When unset, VolumeBindingImmediate is used.
     /// This field is only honored by servers that enable the VolumeScheduling feature.
     /// +optional
-    #[prost(string, optional, tag="7")]
+    #[prost(string, optional, tag = "7")]
     pub volume_binding_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// allowedTopologies restrict the node topologies where volumes can be dynamically provisioned.
     /// Each volume plugin defines its own supported topology specifications.
@@ -408,78 +441,91 @@ pub struct StorageClass {
     /// This field is only honored by servers that enable the VolumeScheduling feature.
     /// +optional
     /// +listType=atomic
-    #[prost(message, repeated, tag="8")]
-    pub allowed_topologies: ::prost::alloc::vec::Vec<super::super::core::v1::TopologySelectorTerm>,
+    #[prost(message, repeated, tag = "8")]
+    pub allowed_topologies: ::prost::alloc::vec::Vec<
+        super::super::core::v1::TopologySelectorTerm,
+    >,
 }
 /// StorageClassList is a collection of storage classes.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageClassList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of StorageClasses
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<StorageClass>,
 }
 /// TokenRequest contains parameters of a service account token.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenRequest {
     /// audience is the intended audience of the token in "TokenRequestSpec".
     /// It will default to the audiences of kube apiserver.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub audience: ::core::option::Option<::prost::alloc::string::String>,
     /// expirationSeconds is the duration of validity of the token in "TokenRequestSpec".
     /// It has the same default value of "ExpirationSeconds" in "TokenRequestSpec"
     ///
     /// +optional
-    #[prost(int64, optional, tag="2")]
+    #[prost(int64, optional, tag = "2")]
     pub expiration_seconds: ::core::option::Option<i64>,
 }
 /// VolumeAttachment captures the intent to attach or detach the specified volume
 /// to/from the specified node.
 ///
 /// VolumeAttachment objects are non-namespaced.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachment {
     /// Standard object metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
     /// status represents status of the VolumeAttachment request.
     /// Populated by the entity completing the attach or detach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<VolumeAttachmentStatus>,
 }
 /// VolumeAttachmentList is a collection of VolumeAttachment objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of VolumeAttachments
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<VolumeAttachment>,
 }
 /// VolumeAttachmentSource represents a volume that should be attached.
 /// Right now only PersistenVolumes can be attached via external attacher,
 /// in future we may allow also inline volumes in pods.
 /// Exactly one member can be set.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSource {
     /// persistentVolumeName represents the name of the persistent volume to attach.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub persistent_volume_name: ::core::option::Option<::prost::alloc::string::String>,
     /// inlineVolumeSpec contains all the information necessary to attach
     /// a persistent volume defined by a pod's inline VolumeSource. This field
@@ -488,30 +534,34 @@ pub struct VolumeAttachmentSource {
     /// PersistentVolumeSpec. This field is beta-level and is only
     /// honored by servers that enabled the CSIMigration feature.
     /// +optional
-    #[prost(message, optional, tag="2")]
-    pub inline_volume_spec: ::core::option::Option<super::super::core::v1::PersistentVolumeSpec>,
+    #[prost(message, optional, tag = "2")]
+    pub inline_volume_spec: ::core::option::Option<
+        super::super::core::v1::PersistentVolumeSpec,
+    >,
 }
 /// VolumeAttachmentSpec is the specification of a VolumeAttachment request.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
     /// source represents the volume that should be attached.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub source: ::core::option::Option<VolumeAttachmentSource>,
     /// nodeName represents the node that the volume should be attached to.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeAttachmentStatus is the status of a VolumeAttachment request.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentStatus {
     /// attached indicates the volume is successfully attached.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
-    #[prost(bool, optional, tag="1")]
+    #[prost(bool, optional, tag = "1")]
     pub attached: ::core::option::Option<bool>,
     /// attachmentMetadata is populated with any
     /// information returned by the attach operation, upon successful attach, that must be passed
@@ -519,36 +569,43 @@ pub struct VolumeAttachmentStatus {
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(map="string, string", tag="2")]
-    pub attachment_metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(map = "string, string", tag = "2")]
+    pub attachment_metadata: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// attachError represents the last error encountered during attach operation, if any.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub attach_error: ::core::option::Option<VolumeError>,
     /// detachError represents the last error encountered during detach operation, if any.
     /// This field must only be set by the entity completing the detach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub detach_error: ::core::option::Option<VolumeError>,
 }
 /// VolumeError captures an error encountered during a volume operation.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    #[prost(message, optional, tag = "1")]
+    pub time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// message represents the error encountered during Attach or Detach operation.
     /// This string may be logged, so it should not contain sensitive
     /// information.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeNodeResources is a set of resource limits for scheduling of volumes.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeNodeResources {
     /// count indicates the maximum number of unique volumes managed by the CSI driver that can be used on a node.
@@ -556,6 +613,6 @@ pub struct VolumeNodeResources {
     /// The same rule applies for a unique volume that is shared among multiple pods on the same node.
     /// If this field is nil, then the supported number of volumes on this node is unbounded.
     /// +optional
-    #[prost(int32, optional, tag="1")]
+    #[prost(int32, optional, tag = "1")]
     pub count: ::core::option::Option<i32>,
 }

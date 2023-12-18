@@ -22,6 +22,7 @@
 /// to a comparison against the less precise Capacity. If that is also unset,
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
@@ -32,10 +33,12 @@ pub struct CsiStorageCapacity {
     ///
     /// Objects are namespaced.
     ///
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// nodeTopology defines which nodes have access to the storage
     /// for which capacity was reported. If not set, the storage is
     /// not accessible from any node in the cluster. If empty, the
@@ -43,15 +46,17 @@ pub struct CsiStorageCapacity {
     /// immutable.
     ///
     /// +optional
-    #[prost(message, optional, tag="2")]
-    pub node_topology: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    #[prost(message, optional, tag = "2")]
+    pub node_topology: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// storageClassName represents the name of the StorageClass that the reported capacity applies to.
     /// It must meet the same requirements as the name of a StorageClass
     /// object (non-empty, DNS subdomain). If that object no longer exists,
     /// the CSIStorageCapacity object is obsolete and should be removed by its
     /// creator.
     /// This field is immutable.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub storage_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// capacity is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
@@ -63,8 +68,10 @@ pub struct CsiStorageCapacity {
     /// unavailable.
     ///
     /// +optional
-    #[prost(message, optional, tag="4")]
-    pub capacity: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    #[prost(message, optional, tag = "4")]
+    pub capacity: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// maximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
     /// previous fields.
@@ -77,66 +84,78 @@ pub struct CsiStorageCapacity {
     /// API is ResourceRequirements.Requests in a volume claim.
     ///
     /// +optional
-    #[prost(message, optional, tag="5")]
-    pub maximum_volume_size: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    #[prost(message, optional, tag = "5")]
+    pub maximum_volume_size: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacityList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of CSIStorageCapacity objects.
     /// +listType=map
     /// +listMapKey=name
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CsiStorageCapacity>,
 }
 /// VolumeAttachment captures the intent to attach or detach the specified volume
 /// to/from the specified node.
 ///
 /// VolumeAttachment objects are non-namespaced.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachment {
     /// Standard object metadata.
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
     /// status represents status of the VolumeAttachment request.
     /// Populated by the entity completing the attach or detach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<VolumeAttachmentStatus>,
 }
 /// VolumeAttachmentList is a collection of VolumeAttachment objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentList {
     /// Standard list metadata
-    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of VolumeAttachments
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<VolumeAttachment>,
 }
 /// VolumeAttachmentSource represents a volume that should be attached.
 /// Right now only PersistenVolumes can be attached via external attacher,
 /// in future we may allow also inline volumes in pods.
 /// Exactly one member can be set.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSource {
     /// persistentVolumeName represents the name of the persistent volume to attach.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub persistent_volume_name: ::core::option::Option<::prost::alloc::string::String>,
     /// inlineVolumeSpec contains all the information necessary to attach
     /// a persistent volume defined by a pod's inline VolumeSource. This field
@@ -145,30 +164,34 @@ pub struct VolumeAttachmentSource {
     /// PersistentVolumeSpec. This field is alpha-level and is only
     /// honored by servers that enabled the CSIMigration feature.
     /// +optional
-    #[prost(message, optional, tag="2")]
-    pub inline_volume_spec: ::core::option::Option<super::super::core::v1::PersistentVolumeSpec>,
+    #[prost(message, optional, tag = "2")]
+    pub inline_volume_spec: ::core::option::Option<
+        super::super::core::v1::PersistentVolumeSpec,
+    >,
 }
 /// VolumeAttachmentSpec is the specification of a VolumeAttachment request.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
     /// source represents the volume that should be attached.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub source: ::core::option::Option<VolumeAttachmentSource>,
     /// nodeName represents the node that the volume should be attached to.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeAttachmentStatus is the status of a VolumeAttachment request.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentStatus {
     /// attached indicates the volume is successfully attached.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
-    #[prost(bool, optional, tag="1")]
+    #[prost(bool, optional, tag = "1")]
     pub attached: ::core::option::Option<bool>,
     /// attachmentMetadata is populated with any
     /// information returned by the attach operation, upon successful attach, that must be passed
@@ -176,32 +199,38 @@ pub struct VolumeAttachmentStatus {
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(map="string, string", tag="2")]
-    pub attachment_metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(map = "string, string", tag = "2")]
+    pub attachment_metadata: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// attachError represents the last error encountered during attach operation, if any.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub attach_error: ::core::option::Option<VolumeError>,
     /// detachError represents the last error encountered during detach operation, if any.
     /// This field must only be set by the entity completing the detach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub detach_error: ::core::option::Option<VolumeError>,
 }
 /// VolumeError captures an error encountered during a volume operation.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    #[prost(message, optional, tag = "1")]
+    pub time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// message represents the error encountered during Attach or Detach operation.
     /// This string maybe logged, so it should not contain sensitive
     /// information.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }

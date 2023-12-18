@@ -1,4 +1,5 @@
 /// AllocationResult contains attributes of an allocated resource.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AllocationResult {
     /// ResourceHandles contain the state associated with an allocation that
@@ -16,7 +17,7 @@ pub struct AllocationResult {
     ///
     /// +listType=atomic
     /// +optional
-    #[prost(message, repeated, tag="1")]
+    #[prost(message, repeated, tag = "1")]
     pub resource_handles: ::prost::alloc::vec::Vec<ResourceHandle>,
     /// This field will get set by the resource driver after it has allocated
     /// the resource to inform the scheduler where it can schedule Pods using
@@ -25,12 +26,12 @@ pub struct AllocationResult {
     /// Setting this field is optional. If null, the resource is available
     /// everywhere.
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub available_on_nodes: ::core::option::Option<super::super::core::v1::NodeSelector>,
     /// Shareable determines whether the resource supports more
     /// than one consumer at a time.
     /// +optional
-    #[prost(bool, optional, tag="3")]
+    #[prost(bool, optional, tag = "3")]
     pub shareable: ::core::option::Option<bool>,
 }
 /// PodSchedulingContext objects hold information that is needed to schedule
@@ -39,39 +40,46 @@ pub struct AllocationResult {
 ///
 /// This is an alpha type and requires enabling the DynamicResourceAllocation
 /// feature gate.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSchedulingContext {
     /// Standard object metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec describes where resources for the Pod are needed.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<PodSchedulingContextSpec>,
     /// Status describes where resources for the Pod can be allocated.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<PodSchedulingContextStatus>,
 }
 /// PodSchedulingContextList is a collection of Pod scheduling objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSchedulingContextList {
     /// Standard list metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of PodSchedulingContext objects.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodSchedulingContext>,
 }
 /// PodSchedulingContextSpec describes where resources for the Pod are needed.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSchedulingContextSpec {
     /// SelectedNode is the node for which allocation of ResourceClaims that
     /// are referenced by the Pod and that use "WaitForFirstConsumer"
     /// allocation is to be attempted.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub selected_node: ::core::option::Option<::prost::alloc::string::String>,
     /// PotentialNodes lists nodes where the Pod might be able to run.
     ///
@@ -82,10 +90,11 @@ pub struct PodSchedulingContextSpec {
     ///
     /// +listType=set
     /// +optional
-    #[prost(string, repeated, tag="2")]
+    #[prost(string, repeated, tag = "2")]
     pub potential_nodes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// PodSchedulingContextStatus describes where resources for the Pod can be allocated.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSchedulingContextStatus {
     /// ResourceClaims describes resource availability for each
@@ -95,7 +104,7 @@ pub struct PodSchedulingContextStatus {
     /// +listType=map
     /// +listMapKey=name
     /// +optional
-    #[prost(message, repeated, tag="1")]
+    #[prost(message, repeated, tag = "1")]
     pub resource_claims: ::prost::alloc::vec::Vec<ResourceClaimSchedulingStatus>,
 }
 /// ResourceClaim describes which resources are needed by a resource consumer.
@@ -104,81 +113,90 @@ pub struct PodSchedulingContextStatus {
 ///
 /// This is an alpha type and requires enabling the DynamicResourceAllocation
 /// feature gate.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaim {
     /// Standard object metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec describes the desired attributes of a resource that then needs
     /// to be allocated. It can only be set once when creating the
     /// ResourceClaim.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ResourceClaimSpec>,
     /// Status describes whether the resource is available and with which
     /// attributes.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<ResourceClaimStatus>,
 }
 /// ResourceClaimConsumerReference contains enough information to let you
 /// locate the consumer of a ResourceClaim. The user must be a resource in the same
 /// namespace as the ResourceClaim.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimConsumerReference {
     /// APIGroup is the group for the resource being referenced. It is
     /// empty for the core API. This matches the group in the APIVersion
     /// that is used when creating the resources.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub api_group: ::core::option::Option<::prost::alloc::string::String>,
     /// Resource is the type of resource being referenced, for example "pods".
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of resource being referenced.
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// UID identifies exactly one incarnation of the resource.
-    #[prost(string, optional, tag="5")]
+    #[prost(string, optional, tag = "5")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceClaimList is a collection of claims.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimList {
     /// Standard list metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource claims.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaim>,
 }
 /// ResourceClaimParametersReference contains enough information to let you
 /// locate the parameters for a ResourceClaim. The object must be in the same
 /// namespace as the ResourceClaim.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimParametersReference {
     /// APIGroup is the group for the resource being referenced. It is
     /// empty for the core API. This matches the group in the APIVersion
     /// that is used when creating the resources.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub api_group: ::core::option::Option<::prost::alloc::string::String>,
     /// Kind is the type of resource being referenced. This is the same
     /// value as in the parameter object's metadata, for example "ConfigMap".
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of resource being referenced.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceClaimSchedulingStatus contains information about one particular
 /// ResourceClaim with "WaitForFirstConsumer" allocation mode.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimSchedulingStatus {
-    /// Name matches the pod.spec.resourceClaims[*].Name field.
+    /// Name matches the pod.spec.resourceClaims\[*\].Name field.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// UnsuitableNodes lists nodes that the ResourceClaim cannot be
     /// allocated for.
@@ -189,16 +207,17 @@ pub struct ResourceClaimSchedulingStatus {
     ///
     /// +listType=set
     /// +optional
-    #[prost(string, repeated, tag="2")]
+    #[prost(string, repeated, tag = "2")]
     pub unsuitable_nodes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ResourceClaimSpec defines how a resource is to be allocated.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimSpec {
     /// ResourceClassName references the driver and additional parameters
     /// via the name of a ResourceClass that was created as part of the
     /// driver deployment.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub resource_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// ParametersRef references a separate object with arbitrary parameters
     /// that will be used by the driver when allocating a resource for the
@@ -206,28 +225,29 @@ pub struct ResourceClaimSpec {
     ///
     /// The object must be in the same namespace as the ResourceClaim.
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub parameters_ref: ::core::option::Option<ResourceClaimParametersReference>,
     /// Allocation can start immediately or when a Pod wants to use the
     /// resource. "WaitForFirstConsumer" is the default.
     /// +optional
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub allocation_mode: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceClaimStatus tracks whether the resource has been allocated and what
 /// the resulting attributes are.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimStatus {
     /// DriverName is a copy of the driver name from the ResourceClass at
     /// the time when allocation started.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub driver_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Allocation is set by the resource driver once a resource or set of
     /// resources has been allocated successfully. If this is not specified, the
     /// resources have not been allocated yet.
     /// +optional
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub allocation: ::core::option::Option<AllocationResult>,
     /// ReservedFor indicates which entities are currently allowed to use
     /// the claim. A Pod which references a ResourceClaim which is not
@@ -239,7 +259,7 @@ pub struct ResourceClaimStatus {
     /// +listType=map
     /// +listMapKey=uid
     /// +optional
-    #[prost(message, repeated, tag="3")]
+    #[prost(message, repeated, tag = "3")]
     pub reserved_for: ::prost::alloc::vec::Vec<ResourceClaimConsumerReference>,
     /// DeallocationRequested indicates that a ResourceClaim is to be
     /// deallocated.
@@ -250,48 +270,57 @@ pub struct ResourceClaimStatus {
     /// While DeallocationRequested is set, no new consumers may be added to
     /// ReservedFor.
     /// +optional
-    #[prost(bool, optional, tag="4")]
+    #[prost(bool, optional, tag = "4")]
     pub deallocation_requested: ::core::option::Option<bool>,
 }
 /// ResourceClaimTemplate is used to produce ResourceClaim objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimTemplate {
     /// Standard object metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Describes the ResourceClaim that is to be generated.
     ///
     /// This field is immutable. A ResourceClaim will get created by the
     /// control plane for a Pod when needed and then not get updated
     /// anymore.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ResourceClaimTemplateSpec>,
 }
 /// ResourceClaimTemplateList is a collection of claim templates.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimTemplateList {
     /// Standard list metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource claim templates.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaimTemplate>,
 }
 /// ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaimTemplateSpec {
     /// ObjectMeta may contain labels and annotations that will be copied into the PVC
     /// when creating it. No other fields are allowed and will be rejected during
     /// validation.
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec for the ResourceClaim. The entire content is copied unchanged
     /// into the ResourceClaim that gets created from this template. The
     /// same fields as in a ResourceClaim are also valid here.
-    #[prost(message, optional, tag="2")]
+    #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ResourceClaimSpec>,
 }
 /// ResourceClass is used by administrators to influence how resources
@@ -299,18 +328,21 @@ pub struct ResourceClaimTemplateSpec {
 ///
 /// This is an alpha type and requires enabling the DynamicResourceAllocation
 /// feature gate.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClass {
     /// Standard object metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// DriverName defines the name of the dynamic resource driver that is
     /// used for allocation of a ResourceClaim that uses this class.
     ///
     /// Resource drivers have a unique name in forward domain order
     /// (acme.example.com).
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub driver_name: ::core::option::Option<::prost::alloc::string::String>,
     /// ParametersRef references an arbitrary separate object that may hold
     /// parameters that will be used by the driver when allocating a
@@ -318,7 +350,7 @@ pub struct ResourceClass {
     /// distinguish between parameters stored here and and those stored in
     /// ResourceClaimSpec.
     /// +optional
-    #[prost(message, optional, tag="3")]
+    #[prost(message, optional, tag = "3")]
     pub parameters_ref: ::core::option::Option<ResourceClassParametersReference>,
     /// Only nodes matching the selector will be considered by the scheduler
     /// when trying to find a Node that fits a Pod when that Pod uses
@@ -326,52 +358,57 @@ pub struct ResourceClass {
     ///
     /// Setting this field is optional. If null, all nodes are candidates.
     /// +optional
-    #[prost(message, optional, tag="4")]
+    #[prost(message, optional, tag = "4")]
     pub suitable_nodes: ::core::option::Option<super::super::core::v1::NodeSelector>,
 }
 /// ResourceClassList is a collection of classes.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClassList {
     /// Standard list metadata
     /// +optional
-    #[prost(message, optional, tag="1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource classes.
-    #[prost(message, repeated, tag="2")]
+    #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClass>,
 }
 /// ResourceClassParametersReference contains enough information to let you
 /// locate the parameters for a ResourceClass.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClassParametersReference {
     /// APIGroup is the group for the resource being referenced. It is
     /// empty for the core API. This matches the group in the APIVersion
     /// that is used when creating the resources.
     /// +optional
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub api_group: ::core::option::Option<::prost::alloc::string::String>,
     /// Kind is the type of resource being referenced. This is the same
     /// value as in the parameter object's metadata.
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of resource being referenced.
-    #[prost(string, optional, tag="3")]
+    #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// Namespace that contains the referenced resource. Must be empty
     /// for cluster-scoped resources and non-empty for namespaced
     /// resources.
     /// +optional
-    #[prost(string, optional, tag="4")]
+    #[prost(string, optional, tag = "4")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceHandle holds opaque resource data for processing by a specific kubelet plugin.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceHandle {
     /// DriverName specifies the name of the resource driver whose kubelet
     /// plugin should be invoked to process this ResourceHandle's data once it
     /// lands on a node. This may differ from the DriverName set in
     /// ResourceClaimStatus this ResourceHandle is embedded in.
-    #[prost(string, optional, tag="1")]
+    #[prost(string, optional, tag = "1")]
     pub driver_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Data contains the opaque data associated with this ResourceHandle. It is
     /// set by the controller component of the resource driver whose name
@@ -383,7 +420,7 @@ pub struct ResourceHandle {
     /// The maximum size of this field is 16KiB. This may get increased in the
     /// future, but not reduced.
     /// +optional
-    #[prost(string, optional, tag="2")]
+    #[prost(string, optional, tag = "2")]
     pub data: ::core::option::Option<::prost::alloc::string::String>,
 }
 
