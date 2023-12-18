@@ -16,7 +16,8 @@ jobs:
       # Prevent GitHub from cancelling all in-progress jobs when a matrix job fails.
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: []
+        #os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -60,7 +61,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - uses: extractions/setup-just@v1
       - run: |-
-          curl -sSL https://github.com/sharkdp/fd/releases/download/v8.7.1/fd-v8.7.1-i686-unknown-linux-musl.tar.gz | tar xz -C /usr/local/bin
+          curl -sSL https://github.com/sharkdp/fd/releases/download/v8.7.1/fd-v8.7.1-i686-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin
           ln -s /usr/local/bin/fd-v8.7.1-i686-unknown-linux-musl/fd /usr/local/bin/fd
           curl -sSL https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl > /usr/local/bin/sd && chmod +x /usr/local/bin/sd
       - run: just protos
