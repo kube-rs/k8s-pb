@@ -12,7 +12,6 @@ concurrency:
 
 jobs:
   unit:
-    if: ${{ false }}
     strategy:
       # Prevent GitHub from cancelling all in-progress jobs when a matrix job fails.
       fail-fast: false
