@@ -1,3 +1,33 @@
+/// MatchCondition represents a condition which must by fulfilled for a request to be sent to a webhook.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MatchCondition {
+    /// Name is an identifier for this match condition, used for strategic merging of MatchConditions,
+    /// as well as providing an identifier for logging purposes. A good name should be descriptive of
+    /// the associated expression.
+    /// Name must be a qualified name consisting of alphanumeric characters, '-', '_' or '.', and
+    /// must start and end with an alphanumeric character (e.g. 'MyName',  or 'my.name',  or
+    /// '123-abc', regex used for validation is '([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]') with an
+    /// optional DNS subdomain prefix and '/' (e.g. 'example.com/MyName')
+    ///
+    /// Required.
+    #[prost(string, optional, tag="1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
+    /// CEL expressions have access to the contents of the AdmissionRequest and Authorizer, organized into CEL variables:
+    ///
+    /// 'object' - The object from the incoming request. The value is null for DELETE requests.
+    /// 'oldObject' - The existing object. The value is null for CREATE requests.
+    /// 'request' - Attributes of the admission request(/pkg/apis/admission/types.go#AdmissionRequest).
+    /// 'authorizer' - A CEL Authorizer. May be used to perform authorization checks for the principal (user or service account) of the request.
+    ///   See https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz
+    /// 'authorizer.requestResource' - A CEL ResourceCheck constructed from the 'authorizer' and configured with the
+    ///   request resource.
+    /// Documentation on CEL: https://kubernetes.io/docs/reference/using-api/cel/
+    ///
+    /// Required.
+    #[prost(string, optional, tag="2")]
+    pub expression: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhook {
@@ -145,6 +175,28 @@ pub struct MutatingWebhook {
     /// +optional
     #[prost(string, optional, tag="10")]
     pub reinvocation_policy: ::core::option::Option<::prost::alloc::string::String>,
+    /// MatchConditions is a list of conditions that must be met for a request to be sent to this
+    /// webhook. Match conditions filter requests that have already been matched by the rules,
+    /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
+    /// There are a maximum of 64 match conditions allowed.
+    ///
+    /// The exact matching logic is (in order):
+    ///   1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.
+    ///   2. If ALL matchConditions evaluate to TRUE, the webhook is called.
+    ///   3. If any matchCondition evaluates to an error (but none are FALSE):
+    ///      - If failurePolicy=Fail, reject the request
+    ///      - If failurePolicy=Ignore, the error is ignored and the webhook is skipped
+    ///
+    /// This is a beta feature and managed by the AdmissionWebhookMatchConditions feature gate.
+    ///
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=name
+    /// +featureGate=AdmissionWebhookMatchConditions
+    /// +optional
+    #[prost(message, repeated, tag="12")]
+    pub match_conditions: ::prost::alloc::vec::Vec<MatchCondition>,
 }
 /// MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -179,11 +231,13 @@ pub struct Rule {
     /// APIGroups is the API groups the resources belong to. '*' is all groups.
     /// If '*' is present, the length of the slice must be one.
     /// Required.
+    /// +listType=atomic
     #[prost(string, repeated, tag="1")]
     pub api_groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// APIVersions is the API versions the resources belong to. '*' is all versions.
     /// If '*' is present, the length of the slice must be one.
     /// Required.
+    /// +listType=atomic
     #[prost(string, repeated, tag="2")]
     pub api_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Resources is a list of resources this rule applies to.
@@ -201,6 +255,7 @@ pub struct Rule {
     ///
     /// Depending on the enclosing object, subresources might not be allowed.
     /// Required.
+    /// +listType=atomic
     #[prost(string, repeated, tag="3")]
     pub resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// scope specifies the scope of this rule.
@@ -224,6 +279,7 @@ pub struct RuleWithOperations {
     /// for all of those operations and any future admission operations that are added.
     /// If '*' is present, the length of the slice must be one.
     /// Required.
+    /// +listType=atomic
     #[prost(string, repeated, tag="1")]
     pub operations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Rule is embedded, it describes other criteria of the rule, like
@@ -383,6 +439,28 @@ pub struct ValidatingWebhook {
     /// and be subject to the failure policy.
     #[prost(string, repeated, tag="8")]
     pub admission_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// MatchConditions is a list of conditions that must be met for a request to be sent to this
+    /// webhook. Match conditions filter requests that have already been matched by the rules,
+    /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
+    /// There are a maximum of 64 match conditions allowed.
+    ///
+    /// The exact matching logic is (in order):
+    ///   1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.
+    ///   2. If ALL matchConditions evaluate to TRUE, the webhook is called.
+    ///   3. If any matchCondition evaluates to an error (but none are FALSE):
+    ///      - If failurePolicy=Fail, reject the request
+    ///      - If failurePolicy=Ignore, the error is ignored and the webhook is skipped
+    ///
+    /// This is a beta feature and managed by the AdmissionWebhookMatchConditions feature gate.
+    ///
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=name
+    /// +featureGate=AdmissionWebhookMatchConditions
+    /// +optional
+    #[prost(message, repeated, tag="11")]
+    pub match_conditions: ::prost::alloc::vec::Vec<MatchCondition>,
 }
 /// ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and object without changing it.
 #[derive(Clone, PartialEq, ::prost::Message)]

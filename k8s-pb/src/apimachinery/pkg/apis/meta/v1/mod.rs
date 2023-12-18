@@ -139,17 +139,18 @@ pub struct ApplyOptions {
 /// Condition contains details for one aspect of the current state of this API Resource.
 /// ---
 /// This struct is intended for direct use as an array at the field path .status.conditions.  For example,
-/// type FooStatus struct{
-///     // Represents the observations of a foo's current state.
-///     // Known .status.conditions.type are: "Available", "Progressing", and "Degraded"
-///     // +patchMergeKey=type
-///     // +patchStrategy=merge
-///     // +listType=map
-///     // +listMapKey=type
-///     Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
 ///
-///     // other fields
-/// }
+/// 	type FooStatus struct{
+/// 	    // Represents the observations of a foo's current state.
+/// 	    // Known .status.conditions.type are: "Available", "Progressing", and "Degraded"
+/// 	    // +patchMergeKey=type
+/// 	    // +patchStrategy=merge
+/// 	    // +listType=map
+/// 	    // +listMapKey=type
+/// 	    Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
+///
+/// 	    // other fields
+/// 	}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Condition {
     /// type of condition in CamelCase or in foo.example.com/CamelCase.
@@ -222,6 +223,25 @@ pub struct CreateOptions {
     /// +optional
     #[prost(string, optional, tag="3")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
+    /// fieldValidation instructs the server on how to handle
+    /// objects in the request (POST/PUT/PATCH) containing unknown
+    /// or duplicate fields. Valid values are:
+    /// - Ignore: This will ignore any unknown fields that are silently
+    /// dropped from the object, and will ignore all but the last duplicate
+    /// field that the decoder encounters. This is the default behavior
+    /// prior to v1.23.
+    /// - Warn: This will send a warning via the standard warning response
+    /// header for each unknown field that is dropped from the object, and
+    /// for each duplicate field that is encountered. The request will
+    /// still succeed if there are no other errors, and will only persist
+    /// the last of any duplicate fields. This is the default in v1.23+
+    /// - Strict: This will fail the request with a BadRequest error if
+    /// any unknown fields would be dropped from the object, or if any
+    /// duplicate fields are present. The error returned from the server
+    /// will contain all unknown and duplicate fields encountered.
+    /// +optional
+    #[prost(string, optional, tag="4")]
+    pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeleteOptions may be provided when deleting an API object.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -349,7 +369,7 @@ pub struct GroupVersionForDiscovery {
     pub version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupVersionKind unambiguously identifies a kind.  It doesn't anonymously include GroupVersion
-/// to avoid automatic coersion.  It doesn't use a GroupVersion to avoid custom marshalling
+/// to avoid automatic coercion.  It doesn't use a GroupVersion to avoid custom marshalling
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -362,7 +382,7 @@ pub struct GroupVersionKind {
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// GroupVersionResource unambiguously identifies a resource.  It doesn't anonymously include GroupVersion
-/// to avoid automatic coersion.  It doesn't use a GroupVersion to avoid custom marshalling
+/// to avoid automatic coercion.  It doesn't use a GroupVersion to avoid custom marshalling
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -396,8 +416,6 @@ pub struct LabelSelector {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelSelectorRequirement {
     /// key is the label key that the selector applies to.
-    /// +patchMergeKey=key
-    /// +patchStrategy=merge
     #[prost(string, optional, tag="1")]
     pub key: ::core::option::Option<::prost::alloc::string::String>,
     /// operator represents a key's relationship to a set of values.
@@ -428,13 +446,7 @@ pub struct List {
 /// various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeta {
-    /// selfLink is a URL representing this object.
-    /// Populated by the system.
-    /// Read-only.
-    ///
-    /// DEPRECATED
-    /// Kubernetes will stop propagating this field in 1.20 release and the field is planned
-    /// to be removed in 1.21 release.
+    /// Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub self_link: ::core::option::Option<::prost::alloc::string::String>,
@@ -553,6 +565,32 @@ pub struct ListOptions {
     /// resourceVersion value returned by the server and not miss any modifications.
     #[prost(string, optional, tag="8")]
     pub r#continue: ::core::option::Option<::prost::alloc::string::String>,
+    /// `sendInitialEvents=true` may be set together with `watch=true`.
+    /// In that case, the watch stream will begin with synthetic events to
+    /// produce the current state of objects in the collection. Once all such
+    /// events have been sent, a synthetic "Bookmark" event  will be sent.
+    /// The bookmark will report the ResourceVersion (RV) corresponding to the
+    /// set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation.
+    /// Afterwards, the watch stream will proceed as usual, sending watch events
+    /// corresponding to changes (subsequent to the RV) to objects watched.
+    ///
+    /// When `sendInitialEvents` option is set, we require `resourceVersionMatch`
+    /// option to also be set. The semantic of the watch request is as following:
+    /// - `resourceVersionMatch` = NotOlderThan
+    ///   is interpreted as "data at least as new as the provided `resourceVersion`"
+    ///   and the bookmark event is send when the state is synced
+    ///   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.
+    ///   If `resourceVersion` is unset, this is interpreted as "consistent read" and the
+    ///   bookmark event is send when the state is synced at least to the moment
+    ///   when request started being processed.
+    /// - `resourceVersionMatch` set to any other value or unset
+    ///   Invalid error is returned.
+    ///
+    /// Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward
+    /// compatibility reasons) and to false otherwise.
+    /// +optional
+    #[prost(bool, optional, tag="11")]
+    pub send_initial_events: ::core::option::Option<bool>,
 }
 /// ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource
 /// that the fieldset applies to.
@@ -571,7 +609,11 @@ pub struct ManagedFieldsEntry {
     /// set because it cannot be automatically converted.
     #[prost(string, optional, tag="3")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// Time is timestamp of when these fields were set. It should always be empty if Operation is 'Apply'
+    /// Time is the timestamp of when the ManagedFields entry was added. The
+    /// timestamp will also be updated if a field is added, the manager
+    /// changes any of the owned fields value or removes a field. The
+    /// timestamp does not update when a field is removed from the entry
+    /// because another manager took it over.
     /// +optional
     #[prost(message, optional, tag="4")]
     pub time: ::core::option::Option<Time>,
@@ -621,7 +663,7 @@ pub struct ObjectMeta {
     /// automatically. Name is primarily intended for creation idempotence and configuration
     /// definition.
     /// Cannot be updated.
-    /// More info: http://kubernetes.io/docs/user-guide/identifiers#names
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
     /// +optional
     #[prost(string, optional, tag="1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -633,10 +675,7 @@ pub struct ObjectMeta {
     /// and may be truncated by the length of the suffix required to make the value
     /// unique on the server.
     ///
-    /// If this field is specified and the generated name exists, the server will
-    /// NOT return a 409 - instead, it will either return 201 Created or 500 with Reason
-    /// ServerTimeout indicating a unique name could not be found in the time allotted, and the client
-    /// should retry (optionally after the time indicated in the Retry-After header).
+    /// If this field is specified and the generated name exists, the server will return a 409.
     ///
     /// Applied only if Name is not specified.
     /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency
@@ -650,17 +689,11 @@ pub struct ObjectMeta {
     ///
     /// Must be a DNS_LABEL.
     /// Cannot be updated.
-    /// More info: http://kubernetes.io/docs/user-guide/namespaces
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces
     /// +optional
     #[prost(string, optional, tag="3")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
-    /// SelfLink is a URL representing this object.
-    /// Populated by the system.
-    /// Read-only.
-    ///
-    /// DEPRECATED
-    /// Kubernetes will stop propagating this field in 1.20 release and the field is planned
-    /// to be removed in 1.21 release.
+    /// Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
     /// +optional
     #[prost(string, optional, tag="4")]
     pub self_link: ::core::option::Option<::prost::alloc::string::String>,
@@ -670,7 +703,7 @@ pub struct ObjectMeta {
     ///
     /// Populated by the system.
     /// Read-only.
-    /// More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
     /// +optional
     #[prost(string, optional, tag="5")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
@@ -734,14 +767,14 @@ pub struct ObjectMeta {
     /// Map of string keys and values that can be used to organize and categorize
     /// (scope and select) objects. May match selectors of replication controllers
     /// and services.
-    /// More info: http://kubernetes.io/docs/user-guide/labels
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
     /// +optional
     #[prost(map="string, string", tag="11")]
     pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Annotations is an unstructured key value map stored with a resource that may be
     /// set by external tools to store and retrieve arbitrary metadata. They are not
     /// queryable and should be preserved when modifying objects.
-    /// More info: http://kubernetes.io/docs/user-guide/annotations
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations
     /// +optional
     #[prost(map="string, string", tag="12")]
     pub annotations: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
@@ -771,12 +804,6 @@ pub struct ObjectMeta {
     /// +patchStrategy=merge
     #[prost(string, repeated, tag="14")]
     pub finalizers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// The name of the cluster which the object belongs to.
-    /// This is used to distinguish resources with same name and namespace in different clusters.
-    /// This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request.
-    /// +optional
-    #[prost(string, optional, tag="15")]
-    pub cluster_name: ::core::option::Option<::prost::alloc::string::String>,
     /// ManagedFields maps workflow-id and version to the set of fields
     /// that are managed by that workflow. This is mostly for internal
     /// housekeeping, and users typically shouldn't need to set or
@@ -803,11 +830,11 @@ pub struct OwnerReference {
     #[prost(string, optional, tag="1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name of the referent.
-    /// More info: http://kubernetes.io/docs/user-guide/identifiers#names
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
     #[prost(string, optional, tag="3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// UID of the referent.
-    /// More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
     #[prost(string, optional, tag="4")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// If true, this reference points to the managing controller.
@@ -817,6 +844,8 @@ pub struct OwnerReference {
     /// If true, AND if the owner has the "foregroundDeletion" finalizer, then
     /// the owner cannot be deleted from the key-value store until this
     /// reference is removed.
+    /// See https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion
+    /// for how the garbage collector interacts with this field and enforces the foreground deletion.
     /// Defaults to false.
     /// To set this field, a user needs "delete" permission of the owner,
     /// otherwise 422 (Unprocessable Entity) will be returned.
@@ -880,6 +909,25 @@ pub struct PatchOptions {
     /// +optional
     #[prost(string, optional, tag="3")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
+    /// fieldValidation instructs the server on how to handle
+    /// objects in the request (POST/PUT/PATCH) containing unknown
+    /// or duplicate fields. Valid values are:
+    /// - Ignore: This will ignore any unknown fields that are silently
+    /// dropped from the object, and will ignore all but the last duplicate
+    /// field that the decoder encounters. This is the default behavior
+    /// prior to v1.23.
+    /// - Warn: This will send a warning via the standard warning response
+    /// header for each unknown field that is dropped from the object, and
+    /// for each duplicate field that is encountered. The request will
+    /// still succeed if there are no other errors, and will only persist
+    /// the last of any duplicate fields. This is the default in v1.23+
+    /// - Strict: This will fail the request with a BadRequest error if
+    /// any unknown fields would be dropped from the object, or if any
+    /// duplicate fields are present. The error returned from the server
+    /// will contain all unknown and duplicate fields encountered.
+    /// +optional
+    #[prost(string, optional, tag="4")]
+    pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1001,7 +1049,7 @@ pub struct StatusDetails {
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// UID of the resource.
     /// (when there is a single resource which can be described).
-    /// More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+    /// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
     /// +optional
     #[prost(string, optional, tag="6")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
@@ -1108,6 +1156,25 @@ pub struct UpdateOptions {
     /// +optional
     #[prost(string, optional, tag="2")]
     pub field_manager: ::core::option::Option<::prost::alloc::string::String>,
+    /// fieldValidation instructs the server on how to handle
+    /// objects in the request (POST/PUT/PATCH) containing unknown
+    /// or duplicate fields. Valid values are:
+    /// - Ignore: This will ignore any unknown fields that are silently
+    /// dropped from the object, and will ignore all but the last duplicate
+    /// field that the decoder encounters. This is the default behavior
+    /// prior to v1.23.
+    /// - Warn: This will send a warning via the standard warning response
+    /// header for each unknown field that is dropped from the object, and
+    /// for each duplicate field that is encountered. The request will
+    /// still succeed if there are no other errors, and will only persist
+    /// the last of any duplicate fields. This is the default in v1.23+
+    /// - Strict: This will fail the request with a BadRequest error if
+    /// any unknown fields would be dropped from the object, or if any
+    /// duplicate fields are present. The error returned from the server
+    /// will contain all unknown and duplicate fields encountered.
+    /// +optional
+    #[prost(string, optional, tag="3")]
+    pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Verbs masks the value so protobuf can generate
 ///

@@ -1,7 +1,7 @@
 /// Overhead structure represents the resource overhead associated with running a pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Overhead {
-    /// PodFixed represents the fixed resource overhead associated with running a pod.
+    /// podFixed represents the fixed resource overhead associated with running a pod.
     /// +optional
     #[prost(map="string, message", tag="1")]
     pub pod_fixed: ::std::collections::HashMap<::prost::alloc::string::String, super::super::super::apimachinery::pkg::api::resource::Quantity>,
@@ -19,7 +19,7 @@ pub struct RuntimeClass {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Handler specifies the underlying runtime and configuration that the CRI
+    /// handler specifies the underlying runtime and configuration that the CRI
     /// implementation will use to handle pods of this class. The possible values
     /// are specific to the node & CRI configuration.  It is assumed that all
     /// handlers are available on every node, and handlers of the same name are
@@ -27,18 +27,17 @@ pub struct RuntimeClass {
     /// For example, a handler called "runc" might specify that the runc OCI
     /// runtime (using native Linux containers) will be used to run the containers
     /// in a pod.
-    /// The Handler must be lowercase, conform to the DNS Label (RFC 1123) requirements,
+    /// The handler must be lowercase, conform to the DNS Label (RFC 1123) requirements,
     /// and is immutable.
     #[prost(string, optional, tag="2")]
     pub handler: ::core::option::Option<::prost::alloc::string::String>,
-    /// Overhead represents the resource overhead associated with running a pod for a
+    /// overhead represents the resource overhead associated with running a pod for a
     /// given RuntimeClass. For more details, see
     /// https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md
-    /// This field is beta-level as of Kubernetes v1.18, and is only honored by servers that enable the PodOverhead feature.
     /// +optional
     #[prost(message, optional, tag="3")]
     pub overhead: ::core::option::Option<Overhead>,
-    /// Scheduling holds the scheduling constraints to ensure that pods running
+    /// scheduling holds the scheduling constraints to ensure that pods running
     /// with this RuntimeClass are scheduled to nodes that support it.
     /// If scheduling is nil, this RuntimeClass is assumed to be supported by all
     /// nodes.
@@ -54,7 +53,7 @@ pub struct RuntimeClassList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is a list of schema objects.
+    /// items is a list of schema objects.
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<RuntimeClass>,
 }
@@ -79,21 +78,3 @@ pub struct Scheduling {
     #[prost(message, repeated, tag="2")]
     pub tolerations: ::prost::alloc::vec::Vec<super::super::core::v1::Toleration>,
 }
-
-impl crate::Resource for RuntimeClass {
-    const API_VERSION: &'static str = "node.k8s.io/v1beta1";
-    const GROUP: &'static str = "node.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "RuntimeClass";
-    const NAME: &'static str = "runtimeclasses";
-}
-impl crate::HasMetadata for RuntimeClass {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-

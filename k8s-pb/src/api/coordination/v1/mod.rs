@@ -5,7 +5,7 @@ pub struct Lease {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the Lease.
+    /// spec contains the specification of the Lease.
     /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
     /// +optional
     #[prost(message, optional, tag="2")]
@@ -19,7 +19,7 @@ pub struct LeaseList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is a list of schema objects.
+    /// items is a list of schema objects.
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<Lease>,
 }
@@ -32,7 +32,7 @@ pub struct LeaseSpec {
     pub holder_identity: ::core::option::Option<::prost::alloc::string::String>,
     /// leaseDurationSeconds is a duration that candidates for a lease need
     /// to wait to force acquire it. This is measure against time of last
-    /// observed RenewTime.
+    /// observed renewTime.
     /// +optional
     #[prost(int32, optional, tag="2")]
     pub lease_duration_seconds: ::core::option::Option<i32>,

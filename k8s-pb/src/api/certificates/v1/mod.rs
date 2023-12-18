@@ -127,8 +127,6 @@ pub struct CertificateSigningRequestSpec {
     ///
     /// The minimum valid value for expirationSeconds is 600, i.e. 10 minutes.
     ///
-    /// As of v1.22, this field is beta and is controlled via the CSRDuration feature gate.
-    ///
     /// +optional
     #[prost(int32, optional, tag="8")]
     pub expiration_seconds: ::core::option::Option<i32>,

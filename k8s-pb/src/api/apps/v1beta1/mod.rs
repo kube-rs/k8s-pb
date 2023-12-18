@@ -16,10 +16,10 @@ pub struct ControllerRevision {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Data is the serialized representation of the state.
+    /// data is the serialized representation of the state.
     #[prost(message, optional, tag="2")]
     pub data: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
-    /// Revision indicates the revision of the state represented by Data.
+    /// revision indicates the revision of the state represented by Data.
     #[prost(int64, optional, tag="3")]
     pub revision: ::core::option::Option<i64>,
 }
@@ -103,17 +103,18 @@ pub struct DeploymentRollback {
 /// DeploymentSpec is the specification of the desired behavior of the Deployment.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentSpec {
-    /// Number of desired pods. This is a pointer to distinguish between explicit
+    /// replicas is the number of desired pods. This is a pointer to distinguish between explicit
     /// zero and not specified. Defaults to 1.
     /// +optional
     #[prost(int32, optional, tag="1")]
     pub replicas: ::core::option::Option<i32>,
-    /// Label selector for pods. Existing ReplicaSets whose pods are
+    /// selector is the label selector for pods. Existing ReplicaSets whose pods are
     /// selected by this will be the ones affected by this deployment.
     /// +optional
     #[prost(message, optional, tag="2")]
     pub selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template describes the pods that will be created.
+    /// The only allowed template.spec.restartPolicy value is "Always".
     #[prost(message, optional, tag="3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
     /// The deployment strategy to use to replace existing pods with new ones.
@@ -121,28 +122,28 @@ pub struct DeploymentSpec {
     /// +patchStrategy=retainKeys
     #[prost(message, optional, tag="4")]
     pub strategy: ::core::option::Option<DeploymentStrategy>,
-    /// Minimum number of seconds for which a newly created pod should be ready
+    /// minReadySeconds is the minimum number of seconds for which a newly created pod should be ready
     /// without any of its container crashing, for it to be considered available.
     /// Defaults to 0 (pod will be considered available as soon as it is ready)
     /// +optional
     #[prost(int32, optional, tag="5")]
     pub min_ready_seconds: ::core::option::Option<i32>,
-    /// The number of old ReplicaSets to retain to allow rollback.
+    /// revisionHistoryLimit is the number of old ReplicaSets to retain to allow rollback.
     /// This is a pointer to distinguish between explicit zero and not specified.
     /// Defaults to 2.
     /// +optional
     #[prost(int32, optional, tag="6")]
     pub revision_history_limit: ::core::option::Option<i32>,
-    /// Indicates that the deployment is paused.
+    /// paused indicates that the deployment is paused.
     /// +optional
     #[prost(bool, optional, tag="7")]
     pub paused: ::core::option::Option<bool>,
     /// DEPRECATED.
-    /// The config this deployment is rolling back to. Will be cleared after rollback is done.
+    /// rollbackTo is the config this deployment is rolling back to. Will be cleared after rollback is done.
     /// +optional
     #[prost(message, optional, tag="8")]
     pub rollback_to: ::core::option::Option<RollbackConfig>,
-    /// The maximum time in seconds for a deployment to make progress before it
+    /// progressDeadlineSeconds is the maximum time in seconds for a deployment to make progress before it
     /// is considered to be failed. The deployment controller will continue to
     /// process failed deployments and a condition with a ProgressDeadlineExceeded
     /// reason will be surfaced in the deployment status. Note that progress will
@@ -154,19 +155,19 @@ pub struct DeploymentSpec {
 /// DeploymentStatus is the most recently observed status of the Deployment.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentStatus {
-    /// The generation observed by the deployment controller.
+    /// observedGeneration is the generation observed by the deployment controller.
     /// +optional
     #[prost(int64, optional, tag="1")]
     pub observed_generation: ::core::option::Option<i64>,
-    /// Total number of non-terminated pods targeted by this deployment (their labels match the selector).
+    /// replicas is the total number of non-terminated pods targeted by this deployment (their labels match the selector).
     /// +optional
     #[prost(int32, optional, tag="2")]
     pub replicas: ::core::option::Option<i32>,
-    /// Total number of non-terminated pods targeted by this deployment that have the desired template spec.
+    /// updatedReplicas is the total number of non-terminated pods targeted by this deployment that have the desired template spec.
     /// +optional
     #[prost(int32, optional, tag="3")]
     pub updated_replicas: ::core::option::Option<i32>,
-    /// Total number of ready pods targeted by this deployment.
+    /// readyReplicas is the number of pods targeted by this Deployment controller with a Ready Condition.
     /// +optional
     #[prost(int32, optional, tag="7")]
     pub ready_replicas: ::core::option::Option<i32>,
@@ -174,18 +175,18 @@ pub struct DeploymentStatus {
     /// +optional
     #[prost(int32, optional, tag="4")]
     pub available_replicas: ::core::option::Option<i32>,
-    /// Total number of unavailable pods targeted by this deployment. This is the total number of
+    /// unavailableReplicas is the total number of unavailable pods targeted by this deployment. This is the total number of
     /// pods that are still required for the deployment to have 100% available capacity. They may
     /// either be pods that are running but not yet available or pods that still have not been created.
     /// +optional
     #[prost(int32, optional, tag="5")]
     pub unavailable_replicas: ::core::option::Option<i32>,
-    /// Represents the latest available observations of a deployment's current state.
+    /// Conditions represent the latest available observations of a deployment's current state.
     /// +patchMergeKey=type
     /// +patchStrategy=merge
     #[prost(message, repeated, tag="6")]
     pub conditions: ::prost::alloc::vec::Vec<DeploymentCondition>,
-    /// Count of hash collisions for the Deployment. The Deployment controller uses this
+    /// collisionCount is the count of hash collisions for the Deployment. The Deployment controller uses this
     /// field as a collision avoidance mechanism when it needs to create the name for the
     /// newest ReplicaSet.
     /// +optional
@@ -250,10 +251,22 @@ pub struct RollingUpdateDeployment {
 /// RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateStatefulSetStrategy {
-    /// Partition indicates the ordinal at which the StatefulSet should be
-    /// partitioned.
+    /// Partition indicates the ordinal at which the StatefulSet should be partitioned
+    /// for updates. During a rolling update, all pods from ordinal Replicas-1 to
+    /// Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched.
+    /// This is helpful in being able to do a canary based deployment. The default value is 0.
     #[prost(int32, optional, tag="1")]
     pub partition: ::core::option::Option<i32>,
+    /// maxUnavailable is the maximum number of pods that can be unavailable during the update.
+    /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
+    /// Absolute number is calculated from percentage by rounding up. This can not be 0.
+    /// Defaults to 1. This field is alpha-level and is only honored by servers that enable the
+    /// MaxUnavailableStatefulSet feature. The field applies to all pods in the range 0 to
+    /// Replicas-1. That means if there is any unavailable pod in the range 0 to Replicas-1, it
+    /// will be counted towards MaxUnavailable.
+    /// +optional
+    #[prost(message, optional, tag="2")]
+    pub max_unavailable: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Scale represents a scaling request for a resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -262,11 +275,11 @@ pub struct Scale {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// defines the behavior of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
+    /// spec defines the behavior of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
     /// +optional
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<ScaleSpec>,
-    /// current status of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status. Read-only.
+    /// status defines current status of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status. Read-only.
     /// +optional
     #[prost(message, optional, tag="3")]
     pub status: ::core::option::Option<ScaleStatus>,
@@ -274,7 +287,7 @@ pub struct Scale {
 /// ScaleSpec describes the attributes of a scale subresource
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
-    /// desired number of instances for the scaled object.
+    /// replicas is the number of observed instances of the scaled object.
     /// +optional
     #[prost(int32, optional, tag="1")]
     pub replicas: ::core::option::Option<i32>,
@@ -282,14 +295,14 @@ pub struct ScaleSpec {
 /// ScaleStatus represents the current status of a scale subresource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleStatus {
-    /// actual number of observed instances of the scaled object.
+    /// replias is the actual number of observed instances of the scaled object.
     #[prost(int32, optional, tag="1")]
     pub replicas: ::core::option::Option<i32>,
-    /// label query over pods that should match the replicas count. More info: http://kubernetes.io/docs/user-guide/labels#label-selectors
+    /// selector is a label query over pods that should match the replicas count. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     /// +optional
     #[prost(map="string, string", tag="2")]
     pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
-    /// label selector for pods that should match the replicas count. This is a serializated
+    /// targetSelector is the label selector for pods that should match the replicas count. This is a serializated
     /// version of both map-based and more expressive set-based selectors. This is done to
     /// avoid introspection in the clients. The string will be in the same format as the
     /// query-param syntax. If the target type only supports map-based selectors, both this
@@ -303,8 +316,9 @@ pub struct ScaleStatus {
 /// more information.
 /// StatefulSet represents a set of pods with consistent identities.
 /// Identities are defined as:
-///  - Network: A single stable DNS and hostname.
-///  - Storage: As many VolumeClaims as requested.
+///   - Network: A single stable DNS and hostname.
+///   - Storage: As many VolumeClaims as requested.
+///
 /// The StatefulSet guarantees that a given network identity will always
 /// map to the same storage identity.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -353,6 +367,40 @@ pub struct StatefulSetList {
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<StatefulSet>,
 }
+/// StatefulSetOrdinals describes the policy used for replica ordinal assignment
+/// in this StatefulSet.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StatefulSetOrdinals {
+    /// start is the number representing the first replica's index. It may be used
+    /// to number replicas from an alternate index (eg: 1-indexed) over the default
+    /// 0-indexed names, or to orchestrate progressive movement of replicas from
+    /// one StatefulSet to another.
+    /// If set, replica indices will be in the range:
+    ///   [.spec.ordinals.start, .spec.ordinals.start + .spec.replicas).
+    /// If unset, defaults to 0. Replica indices will be in the range:
+    ///   [0, .spec.replicas).
+    /// +optional
+    #[prost(int32, optional, tag="1")]
+    pub start: ::core::option::Option<i32>,
+}
+/// StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs
+/// created from the StatefulSet VolumeClaimTemplates.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
+    /// whenDeleted specifies what happens to PVCs created from StatefulSet
+    /// VolumeClaimTemplates when the StatefulSet is deleted. The default policy
+    /// of `Retain` causes PVCs to not be affected by StatefulSet deletion. The
+    /// `Delete` policy causes those PVCs to be deleted.
+    #[prost(string, optional, tag="1")]
+    pub when_deleted: ::core::option::Option<::prost::alloc::string::String>,
+    /// whenScaled specifies what happens to PVCs created from StatefulSet
+    /// VolumeClaimTemplates when the StatefulSet is scaled down. The default
+    /// policy of `Retain` causes PVCs to not be affected by a scaledown. The
+    /// `Delete` policy causes the associated PVCs for any excess pods above
+    /// the replica count to be deleted.
+    #[prost(string, optional, tag="2")]
+    pub when_scaled: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// A StatefulSetSpec is the specification of a StatefulSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetSpec {
@@ -373,7 +421,9 @@ pub struct StatefulSetSpec {
     /// template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. Each pod stamped out by the StatefulSet
     /// will fulfill this Template, but have a unique identity from the rest
-    /// of the StatefulSet.
+    /// of the StatefulSet. Each pod will be named with the format
+    /// <statefulsetname>-<podindex>. For example, a pod in a StatefulSet named
+    /// "web" with index number "3" would be named "web-3".
     #[prost(message, optional, tag="3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
     /// volumeClaimTemplates is a list of claims that pods are allowed to reference.
@@ -415,13 +465,26 @@ pub struct StatefulSetSpec {
     /// StatefulSetSpec version. The default value is 10.
     #[prost(int32, optional, tag="8")]
     pub revision_history_limit: ::core::option::Option<i32>,
-    /// Minimum number of seconds for which a newly created pod should be ready
+    /// minReadySeconds is the minimum number of seconds for which a newly created pod should be ready
     /// without any of its container crashing for it to be considered available.
     /// Defaults to 0 (pod will be considered available as soon as it is ready)
-    /// This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate.
     /// +optional
     #[prost(int32, optional, tag="9")]
     pub min_ready_seconds: ::core::option::Option<i32>,
+    /// PersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from
+    /// the StatefulSet VolumeClaimTemplates. This requires the
+    /// StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.
+    /// +optional
+    #[prost(message, optional, tag="10")]
+    pub persistent_volume_claim_retention_policy: ::core::option::Option<StatefulSetPersistentVolumeClaimRetentionPolicy>,
+    /// ordinals controls the numbering of replica indices in a StatefulSet. The
+    /// default ordinals behavior assigns a "0" index to the first replica and
+    /// increments the index by one for each additional replica requested. Using
+    /// the ordinals field requires the StatefulSetStartOrdinal feature gate to be
+    /// enabled, which is beta.
+    /// +optional
+    #[prost(message, optional, tag="11")]
+    pub ordinals: ::core::option::Option<StatefulSetOrdinals>,
 }
 /// StatefulSetStatus represents the current state of a StatefulSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -434,7 +497,7 @@ pub struct StatefulSetStatus {
     /// replicas is the number of Pods created by the StatefulSet controller.
     #[prost(int32, optional, tag="2")]
     pub replicas: ::core::option::Option<i32>,
-    /// readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition.
+    /// readyReplicas is the number of pods created by this StatefulSet controller with a Ready Condition.
     #[prost(int32, optional, tag="3")]
     pub ready_replicas: ::core::option::Option<i32>,
     /// currentReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version
@@ -459,15 +522,13 @@ pub struct StatefulSetStatus {
     /// +optional
     #[prost(int32, optional, tag="9")]
     pub collision_count: ::core::option::Option<i32>,
-    /// Represents the latest available observations of a statefulset's current state.
+    /// conditions represent the latest available observations of a statefulset's current state.
     /// +optional
     /// +patchMergeKey=type
     /// +patchStrategy=merge
     #[prost(message, repeated, tag="10")]
     pub conditions: ::prost::alloc::vec::Vec<StatefulSetCondition>,
-    /// Total number of available pods (ready for at least minReadySeconds) targeted by this StatefulSet.
-    /// This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate.
-    /// Remove omitempty when graduating to beta
+    /// availableReplicas is the total number of available pods (ready for at least minReadySeconds) targeted by this StatefulSet.
     /// +optional
     #[prost(int32, optional, tag="11")]
     pub available_replicas: ::core::option::Option<i32>,

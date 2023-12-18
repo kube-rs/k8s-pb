@@ -14,8 +14,13 @@ pub struct ServerStorageVersion {
     /// +listType=set
     #[prost(string, repeated, tag="3")]
     pub decodable_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// The API server can serve these versions.
+    /// DecodableVersions must include all ServedVersions.
+    /// +listType=set
+    #[prost(string, repeated, tag="4")]
+    pub served_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-///  Storage version of a specific resource.
+/// Storage version of a specific resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageVersion {
     /// The name is <group>.<resource>.

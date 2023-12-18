@@ -72,11 +72,11 @@ pub struct ClusterRoleList {
 /// about who the rule applies to or which namespace the rule applies to.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicyRule {
-    /// Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule. '*' represents all verbs.
+    /// Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '*' represents all verbs.
     #[prost(string, repeated, tag="1")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of
-    /// the enumerated resources in any API group will be allowed.
+    /// the enumerated resources in any API group will be allowed. "" represents the core API group and "*" represents all API groups.
     /// +optional
     #[prost(string, repeated, tag="3")]
     pub api_groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -188,75 +188,3 @@ pub struct Subject {
     #[prost(string, optional, tag="4")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
-
-impl crate::Resource for ClusterRole {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1alpha1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "ClusterRole";
-    const NAME: &'static str = "clusterroles";
-}
-impl crate::HasMetadata for ClusterRole {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-
-
-impl crate::Resource for ClusterRoleBinding {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1alpha1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "ClusterRoleBinding";
-    const NAME: &'static str = "clusterrolebindings";
-}
-impl crate::HasMetadata for ClusterRoleBinding {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-
-
-impl crate::Resource for Role {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1alpha1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "Role";
-    const NAME: &'static str = "roles";
-}
-impl crate::HasMetadata for Role {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-
-
-impl crate::Resource for RoleBinding {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1alpha1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "RoleBinding";
-    const NAME: &'static str = "rolebindings";
-}
-impl crate::HasMetadata for RoleBinding {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-

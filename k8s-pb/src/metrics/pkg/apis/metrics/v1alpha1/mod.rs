@@ -11,6 +11,9 @@ pub struct ContainerMetrics {
 /// NodeMetrics sets resource usage metrics of a node.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeMetrics {
+    /// Standard object's metadata.
+    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The following fields define time interval from which metrics were
@@ -37,6 +40,9 @@ pub struct NodeMetricsList {
 /// PodMetrics sets resource usage metrics of a pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodMetrics {
+    /// Standard object's metadata.
+    /// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+    /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The following fields define time interval from which metrics were

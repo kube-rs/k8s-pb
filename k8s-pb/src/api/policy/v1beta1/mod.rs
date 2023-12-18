@@ -122,7 +122,6 @@ pub struct PodDisruptionBudgetSpec {
     /// A null selector selects no pods.
     /// An empty selector ({}) also selects no pods, which differs from standard behavior of selecting all pods.
     /// In policy/v1, an empty selector will select all pods in the namespace.
-    /// +patchStrategy=replace
     /// +optional
     #[prost(message, optional, tag="2")]
     pub selector: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
@@ -133,6 +132,34 @@ pub struct PodDisruptionBudgetSpec {
     /// +optional
     #[prost(message, optional, tag="3")]
     pub max_unavailable: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
+    /// UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods
+    /// should be considered for eviction. Current implementation considers healthy pods,
+    /// as pods that have status.conditions item with type="Ready",status="True".
+    ///
+    /// Valid policies are IfHealthyBudget and AlwaysAllow.
+    /// If no policy is specified, the default behavior will be used,
+    /// which corresponds to the IfHealthyBudget policy.
+    ///
+    /// IfHealthyBudget policy means that running pods (status.phase="Running"),
+    /// but not yet healthy can be evicted only if the guarded application is not
+    /// disrupted (status.currentHealthy is at least equal to status.desiredHealthy).
+    /// Healthy pods will be subject to the PDB for eviction.
+    ///
+    /// AlwaysAllow policy means that all running pods (status.phase="Running"),
+    /// but not yet healthy are considered disrupted and can be evicted regardless
+    /// of whether the criteria in a PDB is met. This means perspective running
+    /// pods of a disrupted application might not get a chance to become healthy.
+    /// Healthy pods will be subject to the PDB for eviction.
+    ///
+    /// Additional policies may be added in the future.
+    /// Clients making eviction decisions should disallow eviction of unhealthy pods
+    /// if they encounter an unrecognized policy in this field.
+    ///
+    /// This field is beta-level. The eviction API uses this field when
+    /// the feature gate PDBUnhealthyPodEvictionPolicy is enabled (enabled by default).
+    /// +optional
+    #[prost(string, optional, tag="4")]
+    pub unhealthy_pod_eviction_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodDisruptionBudgetStatus represents information about the status of a
 /// PodDisruptionBudget. Status may trail the actual state of a system.
@@ -312,7 +339,6 @@ pub struct PodSecurityPolicySpec {
     pub allowed_flex_volumes: ::prost::alloc::vec::Vec<AllowedFlexVolume>,
     /// AllowedCSIDrivers is an allowlist of inline CSI drivers that must be explicitly set to be embedded within a pod spec.
     /// An empty value indicates that any CSI driver can be used for inline ephemeral volumes.
-    /// This is a beta field, and is only honored if the API server enables the CSIInlineVolume feature gate.
     /// +optional
     #[prost(message, repeated, tag="23")]
     pub allowed_csi_drivers: ::prost::alloc::vec::Vec<AllowedCsiDriver>,
@@ -415,77 +441,3 @@ pub struct SupplementalGroupsStrategyOptions {
     #[prost(message, repeated, tag="2")]
     pub ranges: ::prost::alloc::vec::Vec<IdRange>,
 }
-
-impl crate::Resource for PodDisruptionBudget {
-    const API_VERSION: &'static str = "policy/v1beta1";
-    const GROUP: &'static str = "policy";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "PodDisruptionBudget";
-    const NAME: &'static str = "poddisruptionbudgets";
-}
-impl crate::HasMetadata for PodDisruptionBudget {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PodDisruptionBudget {
-    type Spec = crate::api::policy::v1beta1::PodDisruptionBudgetSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for PodDisruptionBudget {
-    type Status = crate::api::policy::v1beta1::PodDisruptionBudgetStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for PodDisruptionBudget {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
-
-
-impl crate::Resource for PodSecurityPolicy {
-    const API_VERSION: &'static str = "policy/v1beta1";
-    const GROUP: &'static str = "policy";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "PodSecurityPolicy";
-    const NAME: &'static str = "podsecuritypolicies";
-}
-impl crate::HasMetadata for PodSecurityPolicy {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PodSecurityPolicy {
-    type Spec = crate::api::policy::v1beta1::PodSecurityPolicySpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-

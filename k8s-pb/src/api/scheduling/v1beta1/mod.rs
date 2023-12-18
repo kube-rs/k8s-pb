@@ -8,7 +8,7 @@ pub struct PriorityClass {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// The value of this priority class. This is the actual priority that pods
+    /// value represents the integer value of this priority class. This is the actual priority that pods
     /// receive when they have the name of this class in their pod spec.
     #[prost(int32, optional, tag="2")]
     pub value: ::core::option::Option<i32>,
@@ -25,10 +25,9 @@ pub struct PriorityClass {
     /// +optional
     #[prost(string, optional, tag="4")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
-    /// PreemptionPolicy is the Policy for preempting pods with lower priority.
+    /// preemptionPolicy is the Policy for preempting pods with lower priority.
     /// One of Never, PreemptLowerPriority.
     /// Defaults to PreemptLowerPriority if unset.
-    /// This field is beta-level, gated by the NonPreemptingPriority feature-gate.
     /// +optional
     #[prost(string, optional, tag="5")]
     pub preemption_policy: ::core::option::Option<::prost::alloc::string::String>,

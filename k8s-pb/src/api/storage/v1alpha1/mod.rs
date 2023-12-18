@@ -15,9 +15,13 @@
 ///
 /// The producer of these objects can decide which approach is more suitable.
 ///
-/// They are consumed by the kube-scheduler if the CSIStorageCapacity beta feature gate
-/// is enabled there and a CSI driver opts into capacity-aware scheduling with
-/// CSIDriver.StorageCapacity.
+/// They are consumed by the kube-scheduler when a CSI driver opts into
+/// capacity-aware scheduling with CSIDriverSpec.StorageCapacity. The scheduler
+/// compares the MaximumVolumeSize against the requested size of pending volumes
+/// to filter out unsuitable nodes. If MaximumVolumeSize is unset, it falls back
+/// to a comparison against the less precise Capacity. If that is also unset,
+/// the scheduler assumes that capacity is insufficient and tries some other
+/// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
@@ -32,7 +36,7 @@ pub struct CsiStorageCapacity {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// NodeTopology defines which nodes have access to the storage
+    /// nodeTopology defines which nodes have access to the storage
     /// for which capacity was reported. If not set, the storage is
     /// not accessible from any node in the cluster. If empty, the
     /// storage is accessible from all nodes. This field is
@@ -41,7 +45,7 @@ pub struct CsiStorageCapacity {
     /// +optional
     #[prost(message, optional, tag="2")]
     pub node_topology: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// The name of the StorageClass that the reported capacity applies to.
+    /// storageClassName represents the name of the StorageClass that the reported capacity applies to.
     /// It must meet the same requirements as the name of a StorageClass
     /// object (non-empty, DNS subdomain). If that object no longer exists,
     /// the CSIStorageCapacity object is obsolete and should be removed by its
@@ -49,19 +53,19 @@ pub struct CsiStorageCapacity {
     /// This field is immutable.
     #[prost(string, optional, tag="3")]
     pub storage_class_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Capacity is the value reported by the CSI driver in its GetCapacityResponse
+    /// capacity is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
     /// previous fields.
     ///
     /// The semantic is currently (CSI spec 1.2) defined as:
     /// The available capacity, in bytes, of the storage that can be used
     /// to provision volumes. If not set, that information is currently
-    /// unavailable and treated like zero capacity.
+    /// unavailable.
     ///
     /// +optional
     #[prost(message, optional, tag="4")]
     pub capacity: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
-    /// MaximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse
+    /// maximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
     /// previous fields.
     ///
@@ -84,7 +88,7 @@ pub struct CsiStorageCapacityList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is the list of CSIStorageCapacity objects.
+    /// items is the list of CSIStorageCapacity objects.
     /// +listType=map
     /// +listMapKey=name
     #[prost(message, repeated, tag="2")]
@@ -101,11 +105,11 @@ pub struct VolumeAttachment {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired attach/detach volume behavior.
+    /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
     #[prost(message, optional, tag="2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
-    /// Status of the VolumeAttachment request.
+    /// status represents status of the VolumeAttachment request.
     /// Populated by the entity completing the attach or detach
     /// operation, i.e. the external-attacher.
     /// +optional
@@ -120,7 +124,7 @@ pub struct VolumeAttachmentList {
     /// +optional
     #[prost(message, optional, tag="1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is the list of VolumeAttachments
+    /// items is the list of VolumeAttachments
     #[prost(message, repeated, tag="2")]
     pub items: ::prost::alloc::vec::Vec<VolumeAttachment>,
 }
@@ -130,7 +134,7 @@ pub struct VolumeAttachmentList {
 /// Exactly one member can be set.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSource {
-    /// Name of the persistent volume to attach.
+    /// persistentVolumeName represents the name of the persistent volume to attach.
     /// +optional
     #[prost(string, optional, tag="1")]
     pub persistent_volume_name: ::core::option::Option<::prost::alloc::string::String>,
@@ -147,40 +151,40 @@ pub struct VolumeAttachmentSource {
 /// VolumeAttachmentSpec is the specification of a VolumeAttachment request.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSpec {
-    /// Attacher indicates the name of the volume driver that MUST handle this
+    /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
     #[prost(string, optional, tag="1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
-    /// Source represents the volume that should be attached.
+    /// source represents the volume that should be attached.
     #[prost(message, optional, tag="2")]
     pub source: ::core::option::Option<VolumeAttachmentSource>,
-    /// The node that the volume should be attached to.
+    /// nodeName represents the node that the volume should be attached to.
     #[prost(string, optional, tag="3")]
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeAttachmentStatus is the status of a VolumeAttachment request.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentStatus {
-    /// Indicates the volume is successfully attached.
+    /// attached indicates the volume is successfully attached.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     #[prost(bool, optional, tag="1")]
     pub attached: ::core::option::Option<bool>,
-    /// Upon successful attach, this field is populated with any
-    /// information returned by the attach operation that must be passed
+    /// attachmentMetadata is populated with any
+    /// information returned by the attach operation, upon successful attach, that must be passed
     /// into subsequent WaitForAttach or Mount calls.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
     #[prost(map="string, string", tag="2")]
     pub attachment_metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
-    /// The last error encountered during attach operation, if any.
+    /// attachError represents the last error encountered during attach operation, if any.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
     #[prost(message, optional, tag="3")]
     pub attach_error: ::core::option::Option<VolumeError>,
-    /// The last error encountered during detach operation, if any.
+    /// detachError represents the last error encountered during detach operation, if any.
     /// This field must only be set by the entity completing the detach
     /// operation, i.e. the external-attacher.
     /// +optional
@@ -190,68 +194,14 @@ pub struct VolumeAttachmentStatus {
 /// VolumeError captures an error encountered during a volume operation.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeError {
-    /// Time the error was encountered.
+    /// time represents the time the error was encountered.
     /// +optional
     #[prost(message, optional, tag="1")]
     pub time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-    /// String detailing the error encountered during Attach or Detach operation.
+    /// message represents the error encountered during Attach or Detach operation.
     /// This string maybe logged, so it should not contain sensitive
     /// information.
     /// +optional
     #[prost(string, optional, tag="2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
-
-impl crate::Resource for CsiStorageCapacity {
-    const API_VERSION: &'static str = "storage.k8s.io/v1alpha1";
-    const GROUP: &'static str = "storage.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "CSIStorageCapacity";
-    const NAME: &'static str = "csistoragecapacities";
-}
-impl crate::HasMetadata for CsiStorageCapacity {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-
-
-impl crate::Resource for VolumeAttachment {
-    const API_VERSION: &'static str = "storage.k8s.io/v1alpha1";
-    const GROUP: &'static str = "storage.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "VolumeAttachment";
-    const NAME: &'static str = "volumeattachments";
-}
-impl crate::HasMetadata for VolumeAttachment {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for VolumeAttachment {
-    type Spec = crate::api::storage::v1alpha1::VolumeAttachmentSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for VolumeAttachment {
-    type Status = crate::api::storage::v1alpha1::VolumeAttachmentStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-
