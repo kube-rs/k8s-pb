@@ -4,3 +4,4 @@ members = [
   "k8s-pb-codegen",
   "k8s-pb"
 ]
+resolver = "2"

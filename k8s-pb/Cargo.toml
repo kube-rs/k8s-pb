@@ -1,7 +1,18 @@
 [package]
 name = "k8s-pb"
 version = "0.1.0"
-edition = "2018"
+authors = [
+  "clux <sszynrae@gmail.com>",
+  "kazk <kazk.dev@gmail.com>",
+]
+license = "Apache-2.0"
+repository = "https://github.com/kube-rs/k8s-pb"
+description = "Bindings for the Kubernetes Client API"
+readme = "../README.md"
+keywords = ["kubernetes", "openapi", "protos"]
+categories = ["network-programming", "caching", "api-bindings", "configuration", "encoding"]
+rust-version = "1.65.0"
+edition = "2021"
 
 [dependencies]
 prost = "0.8.0"
