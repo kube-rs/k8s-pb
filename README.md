@@ -1,4 +1,5 @@
 # k8s-pb
+[![Crates.io](https://img.shields.io/crates/v/k8s-pb.svg)](https://crates.io/crates/k8s-pb)
 
 Kubernetes protobuf bindings for [kube-rs](https://github.com/kube-rs).
 WIP. Not yet useable as is.
@@ -6,6 +7,7 @@ WIP. Not yet useable as is.
 ## Usage
 This library is **not currently usable** from `kube`.
 For now consider these structs a reference location for Kubernetes structs that are not found in `k8s-openapi`.
+See [docs.rs/k8s-pb](https://docs.rs/k8s-pb/latest/k8s_pb/).
 
 ## Build Process
 The code generation process consists of 3 steps;
