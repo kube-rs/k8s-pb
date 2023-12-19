@@ -177,7 +177,7 @@ impl crate::HasMetadata for ServiceCidr {
     }
 }
 impl crate::HasSpec for ServiceCidr {
-    type Spec = crate::api::networking::v1alpha1::ServiceCIDRSpec;
+    type Spec = crate::api::networking::v1alpha1::ServiceCidrSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -186,7 +186,7 @@ impl crate::HasSpec for ServiceCidr {
     }
 }
 impl crate::HasStatus for ServiceCidr {
-    type Status = crate::api::networking::v1alpha1::ServiceCIDRStatus;
+    type Status = crate::api::networking::v1alpha1::ServiceCidrStatus;
     fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
         self.status.as_ref()
     }
