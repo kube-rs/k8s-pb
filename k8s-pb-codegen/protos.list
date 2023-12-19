@@ -30,7 +30,7 @@ protos/api/discovery/v1beta1/generated.proto
 protos/api/events/v1/generated.proto
 protos/api/events/v1beta1/generated.proto
 protos/api/extensions/v1beta1/generated.proto
-protos/api/flowcontrol/v1alpha1/generated.proto
+protos/api/flowcontrol/v1/generated.proto
 protos/api/flowcontrol/v1beta1/generated.proto
 protos/api/flowcontrol/v1beta2/generated.proto
 protos/api/flowcontrol/v1beta3/generated.proto

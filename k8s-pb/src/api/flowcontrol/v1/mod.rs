@@ -145,6 +145,8 @@ pub struct FlowSchemaStatus {
     /// `conditions` is a list of the current states of FlowSchema.
     /// +listType=map
     /// +listMapKey=type
+    /// +patchMergeKey=type
+    /// +patchStrategy=merge
     /// +optional
     #[prost(message, repeated, tag = "1")]
     pub conditions: ::prost::alloc::vec::Vec<FlowSchemaCondition>,
@@ -188,24 +190,29 @@ pub struct LimitResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitedPriorityLevelConfiguration {
-    /// `assuredConcurrencyShares` (ACS) configures the execution
-    /// limit, which is a limit on the number of requests of this
-    /// priority level that may be exeucting at a given time.  ACS must
-    /// be a positive number. The server's concurrency limit (SCL) is
-    /// divided among the concurrency-controlled priority levels in
-    /// proportion to their assured concurrency shares. This produces
-    /// the assured concurrency value (ACV) --- the number of requests
-    /// that may be executing at a time --- for each such priority
-    /// level:
+    /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
+    /// NominalConcurrencyLimit (NominalCL) of this level.
+    /// This is the number of execution seats available at this priority level.
+    /// This is used both for requests dispatched from this priority level
+    /// as well as requests dispatched from other priority levels
+    /// borrowing seats from this level.
+    /// The server's concurrency limit (ServerCL) is divided among the
+    /// Limited priority levels in proportion to their NCS values:
     ///
-    ///              ACV(l) = ceil( SCL * ACS(l) / ( sum\[priority levels k\] ACS(k) ) )
+    /// NominalCL(i)  = ceil( ServerCL * NCS(i) / sum_ncs )
+    /// sum_ncs = sum\[priority level k\] NCS(k)
     ///
-    /// bigger numbers of ACS mean more reserved concurrent requests (at the
-    /// expense of every other PL).
-    /// This field has a default value of 30.
+    /// Bigger numbers mean a larger nominal concurrency limit,
+    /// at the expense of every other priority level.
+    ///
+    /// If not specified, this field defaults to a value of 30.
+    ///
+    /// Setting this field to zero supports the construction of a
+    /// "jail" for this priority level that is used to hold some request(s)
+    ///
     /// +optional
     #[prost(int32, optional, tag = "1")]
-    pub assured_concurrency_shares: ::core::option::Option<i32>,
+    pub nominal_concurrency_shares: ::core::option::Option<i32>,
     /// `limitResponse` indicates what to do with requests that can not be executed right now
     #[prost(message, optional, tag = "2")]
     pub limit_response: ::core::option::Option<LimitResponse>,
@@ -401,6 +408,8 @@ pub struct PriorityLevelConfigurationStatus {
     /// `conditions` is the current state of "request-priority".
     /// +listType=map
     /// +listMapKey=type
+    /// +patchMergeKey=type
+    /// +patchStrategy=merge
     /// +optional
     #[prost(message, repeated, tag = "1")]
     pub conditions: ::prost::alloc::vec::Vec<PriorityLevelConfigurationCondition>,
@@ -539,3 +548,97 @@ pub struct UserSubject {
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for FlowSchema {
+    const API_VERSION: &'static str = "flowcontrol.apiserver.k8s.io/v1";
+    const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "FlowSchema";
+    const NAME: &'static str = "flowschemas";
+}
+impl crate::HasMetadata for FlowSchema {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for FlowSchema {
+    type Spec = crate::api::flowcontrol::v1::FlowSchemaSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for FlowSchema {
+    type Status = crate::api::flowcontrol::v1::FlowSchemaStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for FlowSchema {
+    type Condition = crate::api::flowcontrol::v1::FlowSchemaCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+
+impl crate::Resource for PriorityLevelConfiguration {
+    const API_VERSION: &'static str = "flowcontrol.apiserver.k8s.io/v1";
+    const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "PriorityLevelConfiguration";
+    const NAME: &'static str = "prioritylevelconfigurations";
+}
+impl crate::HasMetadata for PriorityLevelConfiguration {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for PriorityLevelConfiguration {
+    type Spec = crate::api::flowcontrol::v1::PriorityLevelConfigurationSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for PriorityLevelConfiguration {
+    type Status = crate::api::flowcontrol::v1::PriorityLevelConfigurationStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for PriorityLevelConfiguration {
+    type Condition = crate::api::flowcontrol::v1::PriorityLevelConfigurationCondition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

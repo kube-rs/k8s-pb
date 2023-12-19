@@ -708,6 +708,18 @@ pub struct ValidationRule {
     ///    - 'map': `X + Y` performs a merge where the array positions of all keys in `X` are preserved but the values
     ///      are overwritten by values in `Y` when the key sets of `X` and `Y` intersect. Elements in `Y` with
     ///      non-intersecting keys are appended, retaining their partial order.
+    ///
+    /// If `rule` makes use of the `oldSelf` variable it is implicitly a
+    /// `transition rule`.
+    ///
+    /// By default, the `oldSelf` variable is the same type as `self`.
+    /// When `optionalOldSelf` is true, the `oldSelf` variable is a CEL optional
+    ///   variable whose value() is the same type as `self`.
+    /// See the documentation for the `optionalOldSelf` field for details.
+    ///
+    /// Transition rules by default are applied only on UPDATE requests and are
+    /// skipped if an old value could not be found. You can opt a transition
+    /// rule into unconditional evaluation by setting `optionalOldSelf` to true.
     #[prost(string, optional, tag = "1")]
     pub rule: ::core::option::Option<::prost::alloc::string::String>,
     /// Message represents the message displayed when validation fails. The message is required if the Rule contains
@@ -749,6 +761,24 @@ pub struct ValidationRule {
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub field_path: ::core::option::Option<::prost::alloc::string::String>,
+    /// optionalOldSelf is used to opt a transition rule into evaluation
+    /// even when the object is first created, or if the old object is
+    /// missing the value.
+    ///
+    /// When enabled `oldSelf` will be a CEL optional whose value will be
+    /// `None` if there is no old value, or when the object is initially created.
+    ///
+    /// You may check for presence of oldSelf using `oldSelf.hasValue()` and
+    /// unwrap it after checking using `oldSelf.value()`. Check the CEL
+    /// documentation for Optional types for more information:
+    /// <https://pkg.go.dev/github.com/google/cel-go/cel#OptionalTypes>
+    ///
+    /// May not be set unless `oldSelf` is used in `rule`.
+    ///
+    /// +featureGate=CRDValidationRatcheting
+    /// +optional
+    #[prost(bool, optional, tag = "6")]
+    pub optional_old_self: ::core::option::Option<bool>,
 }
 /// WebhookClientConfig contains the information to make a TLS connection with the webhook.
 #[allow(clippy::derive_partial_eq_without_eq)]

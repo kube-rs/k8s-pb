@@ -219,10 +219,8 @@ pub struct CsiPersistentVolumeSource {
     /// nodeExpandSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// NodeExpandVolume call.
-    /// This is a beta field which is enabled default by CSINodeExpandSecret feature gate.
     /// This field is optional, may be omitted if no secret is required. If the
     /// secret object contains more than one secret, all secrets are passed.
-    /// +featureGate=CSINodeExpandSecret
     /// +optional
     #[prost(message, optional, tag = "10")]
     pub node_expand_secret_ref: ::core::option::Option<SecretReference>,
@@ -444,6 +442,44 @@ pub struct ClientIpConfig {
     /// +optional
     #[prost(int32, optional, tag = "1")]
     pub timeout_seconds: ::core::option::Option<i32>,
+}
+/// ClusterTrustBundleProjection describes how to select a set of
+/// ClusterTrustBundle objects and project their contents into the pod
+/// filesystem.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClusterTrustBundleProjection {
+    /// Select a single ClusterTrustBundle by object name.  Mutually-exclusive
+    /// with signerName and labelSelector.
+    /// +optional
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Select all ClusterTrustBundles that match this signer name.
+    /// Mutually-exclusive with name.  The contents of all selected
+    /// ClusterTrustBundles will be unified and deduplicated.
+    /// +optional
+    #[prost(string, optional, tag = "2")]
+    pub signer_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Select all ClusterTrustBundles that match this label selector.  Only has
+    /// effect if signerName is set.  Mutually-exclusive with name.  If unset,
+    /// interpreted as "match nothing".  If set but empty, interpreted as "match
+    /// everything".
+    /// +optional
+    #[prost(message, optional, tag = "3")]
+    pub label_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
+    /// If true, don't block pod startup if the referenced ClusterTrustBundle(s)
+    /// aren't available.  If using name, then the named ClusterTrustBundle is
+    /// allowed not to exist.  If using signerName, then the combination of
+    /// signerName and labelSelector is allowed to match zero
+    /// ClusterTrustBundles.
+    /// +optional
+    #[prost(bool, optional, tag = "5")]
+    pub optional: ::core::option::Option<bool>,
+    /// Relative path from the volume root to write the bundle.
+    #[prost(string, optional, tag = "4")]
+    pub path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Information about the condition of a component.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1250,7 +1286,7 @@ pub struct EndpointPort {
     /// RFC-6335 and <https://www.iana.org/assignments/service-names>).
     ///
     /// * Kubernetes-defined prefixed names:
-    ///    * 'kubernetes.io/h2c' - HTTP/2 over cleartext as described in <https://www.rfc-editor.org/rfc/rfc7540>
+    ///    * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in <https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior->
     ///    * 'kubernetes.io/ws'  - WebSocket over cleartext as described in <https://www.rfc-editor.org/rfc/rfc6455>
     ///    * 'kubernetes.io/wss' - WebSocket over TLS as described in <https://www.rfc-editor.org/rfc/rfc6455>
     ///
@@ -2272,6 +2308,11 @@ pub struct LifecycleHandler {
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub tcp_socket: ::core::option::Option<TcpSocketAction>,
+    /// Sleep represents the duration that the container should sleep before being terminated.
+    /// +featureGate=PodLifecycleSleepAction
+    /// +optional
+    #[prost(message, optional, tag = "4")]
+    pub sleep: ::core::option::Option<SleepAction>,
 }
 /// LimitRange sets resource usage limits for each kind of resource in a Namespace.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2389,6 +2430,15 @@ pub struct LoadBalancerIngress {
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub hostname: ::core::option::Option<::prost::alloc::string::String>,
+    /// IPMode specifies how the load-balancer IP behaves, and may only be specified when the ip field is specified.
+    /// Setting this to "VIP" indicates that traffic is delivered to the node with
+    /// the destination set to the load-balancer's IP and port.
+    /// Setting this to "Proxy" indicates that traffic is delivered to the node or pod with
+    /// the destination set to the node's IP and node port or the pod's IP and port.
+    /// Service implementations may use this information to adjust traffic routing.
+    /// +optional
+    #[prost(string, optional, tag = "3")]
+    pub ip_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// Ports is a list of records of service ports
     /// If used, every port defined in the service should have an entry in it
     /// +listType=atomic
@@ -2434,6 +2484,28 @@ pub struct LocalVolumeSource {
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ModifyVolumeStatus {
+    /// targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
+    #[prost(string, optional, tag = "1")]
+    pub target_volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
+    /// status is the status of the ControllerModifyVolume operation. It can be in any of following states:
+    ///   - Pending
+    ///     Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
+    ///     the specified VolumeAttributesClass not existing.
+    ///   - InProgress
+    ///     InProgress indicates that the volume is being modified.
+    ///   - Infeasible
+    ///    Infeasible indicates that the request has been rejected as invalid by the CSI driver. To
+    /// 	  resolve the error, a valid VolumeAttributesClass needs to be specified.
+    /// Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
+    #[prost(string, optional, tag = "2")]
+    pub status: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Represents an NFS mount that lasts the lifetime of a pod.
 /// NFS volumes do not support ownership management or SELinux relabeling.
@@ -3140,7 +3212,7 @@ pub struct PersistentVolumeClaimSpec {
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub resources: ::core::option::Option<ResourceRequirements>,
+    pub resources: ::core::option::Option<VolumeResourceRequirements>,
     /// volumeName is the binding reference to the PersistentVolume backing this claim.
     /// +optional
     #[prost(string, optional, tag = "3")]
@@ -3192,6 +3264,24 @@ pub struct PersistentVolumeClaimSpec {
     /// +optional
     #[prost(message, optional, tag = "8")]
     pub data_source_ref: ::core::option::Option<TypedObjectReference>,
+    /// volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
+    /// If specified, the CSI driver will create or update the volume with the attributes defined
+    /// in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
+    /// it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
+    /// will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
+    /// If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
+    /// will be set by the persistentvolume controller if it exists.
+    /// If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
+    /// set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
+    /// exists.
+    /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass>
+    /// (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+    /// +featureGate=VolumeAttributesClass
+    /// +optional
+    #[prost(string, optional, tag = "9")]
+    pub volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3292,6 +3382,22 @@ pub struct PersistentVolumeClaimStatus {
         ::prost::alloc::string::String,
         ::prost::alloc::string::String,
     >,
+    /// currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
+    /// When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
+    /// This is an alpha field and requires enabling VolumeAttributesClass feature.
+    /// +featureGate=VolumeAttributesClass
+    /// +optional
+    #[prost(string, optional, tag = "8")]
+    pub current_volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
+    /// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
+    /// When this is unset, there is no ModifyVolume operation being attempted.
+    /// This is an alpha field and requires enabling VolumeAttributesClass feature.
+    /// +featureGate=VolumeAttributesClass
+    /// +optional
+    #[prost(message, optional, tag = "9")]
+    pub modify_volume_status: ::core::option::Option<ModifyVolumeStatus>,
 }
 /// PersistentVolumeClaimTemplate is used to produce
 /// PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
@@ -3517,6 +3623,19 @@ pub struct PersistentVolumeSpec {
     /// +optional
     #[prost(message, optional, tag = "9")]
     pub node_affinity: ::core::option::Option<VolumeNodeAffinity>,
+    /// Name of VolumeAttributesClass to which this persistent volume belongs. Empty value
+    /// is not allowed. When this field is not set, it indicates that this volume does not belong to any
+    /// VolumeAttributesClass. This field is mutable and can be changed by the CSI driver
+    /// after a volume has been updated successfully to a new class.
+    /// For an unbound PersistentVolume, the volumeAttributesClassName will be matched with unbound
+    /// PersistentVolumeClaims during the binding process.
+    /// This is an alpha field and requires enabling VolumeAttributesClass feature.
+    /// +featureGate=VolumeAttributesClass
+    /// +optional
+    #[prost(string, optional, tag = "10")]
+    pub volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// PersistentVolumeStatus is the current status of a persistent volume.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3626,6 +3745,7 @@ pub struct PodAffinity {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodAffinityTerm {
     /// A label query over a set of resources, in this case pods.
+    /// If it's null, this PodAffinityTerm matches with no Pods.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub label_selector: ::core::option::Option<
@@ -3655,6 +3775,32 @@ pub struct PodAffinityTerm {
     pub namespace_selector: ::core::option::Option<
         super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
     >,
+    /// MatchLabelKeys is a set of pod label keys to select which pods will
+    /// be taken into consideration. The keys are used to lookup values from the
+    /// incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
+    /// to select the group of existing pods which pods will be taken into consideration
+    /// for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+    /// pod labels will be ignored. The default value is empty.
+    /// The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
+    /// Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
+    /// This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+    /// +listType=atomic
+    /// +optional
+    #[prost(string, repeated, tag = "5")]
+    pub match_label_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// MismatchLabelKeys is a set of pod label keys to select which pods will
+    /// be taken into consideration. The keys are used to lookup values from the
+    /// incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
+    /// to select the group of existing pods which pods will be taken into consideration
+    /// for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+    /// pod labels will be ignored. The default value is empty.
+    /// The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
+    /// Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
+    /// This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+    /// +listType=atomic
+    /// +optional
+    #[prost(string, repeated, tag = "6")]
+    pub mismatch_label_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Pod anti affinity is a group of inter pod anti affinity scheduling rules.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -5847,7 +5993,7 @@ pub struct ServicePort {
     /// RFC-6335 and <https://www.iana.org/assignments/service-names>).
     ///
     /// * Kubernetes-defined prefixed names:
-    ///    * 'kubernetes.io/h2c' - HTTP/2 over cleartext as described in <https://www.rfc-editor.org/rfc/rfc7540>
+    ///    * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in <https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior->
     ///    * 'kubernetes.io/ws'  - WebSocket over cleartext as described in <https://www.rfc-editor.org/rfc/rfc6455>
     ///    * 'kubernetes.io/wss' - WebSocket over TLS as described in <https://www.rfc-editor.org/rfc/rfc6455>
     ///
@@ -6166,6 +6312,14 @@ pub struct SessionAffinityConfig {
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub client_ip: ::core::option::Option<ClientIpConfig>,
+}
+/// SleepAction describes a "sleep" action.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SleepAction {
+    /// Seconds is the number of seconds to sleep.
+    #[prost(int64, optional, tag = "1")]
+    pub seconds: ::core::option::Option<i64>,
 }
 /// Represents a StorageOS persistent volume resource.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -6615,6 +6769,47 @@ pub struct VolumeProjection {
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub service_account_token: ::core::option::Option<ServiceAccountTokenProjection>,
+    /// ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
+    /// of ClusterTrustBundle objects in an auto-updating file.
+    ///
+    /// Alpha, gated by the ClusterTrustBundleProjection feature gate.
+    ///
+    /// ClusterTrustBundle objects can either be selected by name, or by the
+    /// combination of signer name and a label selector.
+    ///
+    /// Kubelet performs aggressive normalization of the PEM contents written
+    /// into the pod filesystem.  Esoteric PEM features such as inter-block
+    /// comments and block headers are stripped.  Certificates are deduplicated.
+    /// The ordering of certificates within the file is arbitrary, and Kubelet
+    /// may change the order over time.
+    ///
+    /// +featureGate=ClusterTrustBundleProjection
+    /// +optional
+    #[prost(message, optional, tag = "5")]
+    pub cluster_trust_bundle: ::core::option::Option<ClusterTrustBundleProjection>,
+}
+/// VolumeResourceRequirements describes the storage resource requirements for a volume.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VolumeResourceRequirements {
+    /// Limits describes the maximum amount of compute resources allowed.
+    /// More info: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/>
+    /// +optional
+    #[prost(map = "string, message", tag = "1")]
+    pub limits: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
+    /// Requests describes the minimum amount of compute resources required.
+    /// If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+    /// otherwise to an implementation-defined value. Requests cannot exceed Limits.
+    /// More info: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/>
+    /// +optional
+    #[prost(map = "string, message", tag = "2")]
+    pub requests: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// Represents the source of a volume to mount.
 /// Only one of its members may be specified.
