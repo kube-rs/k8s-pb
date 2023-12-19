@@ -88,7 +88,7 @@ pub struct PodSchedulingContextSpec {
     /// that suits all pending resources. This may get increased in the
     /// future, but not reduced.
     ///
-    /// +listType=set
+    /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "2")]
     pub potential_nodes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -205,7 +205,7 @@ pub struct ResourceClaimSchedulingStatus {
     /// PodSchedulingSpec.PotentialNodes. This may get increased in the
     /// future, but not reduced.
     ///
-    /// +listType=set
+    /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "2")]
     pub unsuitable_nodes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,

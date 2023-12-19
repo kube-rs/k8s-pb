@@ -1,76 +1,3 @@
-/// ClusterCIDR represents a single configuration for per-Node Pod CIDR
-/// allocations when the MultiCIDRRangeAllocator is enabled (see the config for
-/// kube-controller-manager).  A cluster may have any number of ClusterCIDR
-/// resources, all of which will be considered when allocating a CIDR for a
-/// Node.  A ClusterCIDR is eligible to be used for a given Node when the node
-/// selector matches the node in question and has free CIDRs to allocate.  In
-/// case of multiple matching ClusterCIDR resources, the allocator will attempt
-/// to break ties using internal heuristics, but any ClusterCIDR whose node
-/// selector matches the Node may be used.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ClusterCidr {
-    /// Standard object's metadata.
-    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
-    /// spec is the desired state of the ClusterCIDR.
-    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
-    /// +optional
-    #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<ClusterCidrSpec>,
-}
-/// ClusterCIDRList contains a list of ClusterCIDR.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ClusterCidrList {
-    /// Standard object's metadata.
-    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
-    /// items is the list of ClusterCIDRs.
-    #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<ClusterCidr>,
-}
-/// ClusterCIDRSpec defines the desired state of ClusterCIDR.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ClusterCidrSpec {
-    /// nodeSelector defines which nodes the config is applicable to.
-    /// An empty or nil nodeSelector selects all nodes.
-    /// This field is immutable.
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub node_selector: ::core::option::Option<super::super::core::v1::NodeSelector>,
-    /// perNodeHostBits defines the number of host bits to be configured per node.
-    /// A subnet mask determines how much of the address is used for network bits
-    /// and host bits. For example an IPv4 address of 192.168.0.0/24, splits the
-    /// address into 24 bits for the network portion and 8 bits for the host portion.
-    /// To allocate 256 IPs, set this field to 8 (a /24 mask for IPv4 or a /120 for IPv6).
-    /// Minimum value is 4 (16 IPs).
-    /// This field is immutable.
-    /// +required
-    #[prost(int32, optional, tag = "2")]
-    pub per_node_host_bits: ::core::option::Option<i32>,
-    /// ipv4 defines an IPv4 IP block in CIDR notation(e.g. "10.0.0.0/8").
-    /// At least one of ipv4 and ipv6 must be specified.
-    /// This field is immutable.
-    /// +optional
-    #[prost(string, optional, tag = "3")]
-    pub ipv4: ::core::option::Option<::prost::alloc::string::String>,
-    /// ipv6 defines an IPv6 IP block in CIDR notation(e.g. "2001:db8::/64").
-    /// At least one of ipv4 and ipv6 must be specified.
-    /// This field is immutable.
-    /// +optional
-    #[prost(string, optional, tag = "4")]
-    pub ipv6: ::core::option::Option<::prost::alloc::string::String>,
-}
 /// IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs
 /// that operate on IP addresses. The object is used by the Service core API for allocation of IP addresses.
 /// An IP address can be represented in different formats, to guarantee the uniqueness of the IP,
@@ -139,38 +66,72 @@ pub struct ParentReference {
     /// +required
     #[prost(string, optional, tag = "4")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// UID is the uid of the object being referenced.
+}
+/// ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
+/// This range is used to allocate ClusterIPs to Service objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCidr {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    #[prost(string, optional, tag = "5")]
-    pub uid: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
+    /// spec is the desired state of the ServiceCIDR.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
+    /// +optional
+    #[prost(message, optional, tag = "2")]
+    pub spec: ::core::option::Option<ServiceCidrSpec>,
+    /// status represents the current state of the ServiceCIDR.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
+    /// +optional
+    #[prost(message, optional, tag = "3")]
+    pub status: ::core::option::Option<ServiceCidrStatus>,
 }
-
-impl crate::Resource for ClusterCidr {
-    const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";
-    const GROUP: &'static str = "networking.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "ClusterCIDR";
-    const NAME: &'static str = "clustercidrs";
+/// ServiceCIDRList contains a list of ServiceCIDR objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCidrList {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
+    /// items is the list of ServiceCIDRs.
+    #[prost(message, repeated, tag = "2")]
+    pub items: ::prost::alloc::vec::Vec<ServiceCidr>,
 }
-impl crate::HasMetadata for ClusterCidr {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
+/// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCidrSpec {
+    /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
+    /// from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family.
+    /// This field is immutable.
+    /// +optional
+    #[prost(string, repeated, tag = "1")]
+    pub cidrs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-impl crate::HasSpec for ClusterCidr {
-    type Spec = crate::api::networking::v1alpha1::ClusterCidrSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
+/// ServiceCIDRStatus describes the current state of the ServiceCIDR.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCidrStatus {
+    /// conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR.
+    /// Current service state
+    /// +optional
+    /// +patchMergeKey=type
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=type
+    #[prost(message, repeated, tag = "1")]
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
 }
-
 
 impl crate::Resource for IpAddress {
     const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";

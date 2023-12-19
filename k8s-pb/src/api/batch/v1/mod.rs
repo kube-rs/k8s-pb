@@ -230,8 +230,8 @@ pub struct JobSpec {
     /// batch.kubernetes.io/job-index-failure-count annotation. It can only
     /// be set when Job's completionMode=Indexed, and the Pod's restart
     /// policy is Never. The field is immutable.
-    /// This field is alpha-level. It can be used when the `JobBackoffLimitPerIndex`
-    /// feature gate is enabled (disabled by default).
+    /// This field is beta-level. It can be used when the `JobBackoffLimitPerIndex`
+    /// feature gate is enabled (enabled by default).
     /// +optional
     #[prost(int32, optional, tag = "12")]
     pub backoff_limit_per_index: ::core::option::Option<i32>,
@@ -243,8 +243,8 @@ pub struct JobSpec {
     /// It can only be specified when backoffLimitPerIndex is set.
     /// It can be null or up to completions. It is required and must be
     /// less than or equal to 10^4 when is completions greater than 10^5.
-    /// This field is alpha-level. It can be used when the `JobBackoffLimitPerIndex`
-    /// feature gate is enabled (disabled by default).
+    /// This field is beta-level. It can be used when the `JobBackoffLimitPerIndex`
+    /// feature gate is enabled (enabled by default).
     /// +optional
     #[prost(int32, optional, tag = "13")]
     pub max_failed_indexes: ::core::option::Option<i32>,
@@ -329,7 +329,8 @@ pub struct JobSpec {
     ///
     /// When using podFailurePolicy, Failed is the the only allowed value.
     /// TerminatingOrFailed and Failed are allowed values when podFailurePolicy is not in use.
-    /// This is an alpha field. Enable JobPodReplacementPolicy to be able to use this field.
+    /// This is an beta field. To use this, enable the JobPodReplacementPolicy feature toggle.
+    /// This is on by default.
     /// +optional
     #[prost(string, optional, tag = "14")]
     pub pod_replacement_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -384,8 +385,8 @@ pub struct JobStatus {
     /// The number of pods which are terminating (in phase Pending or Running
     /// and have a deletionTimestamp).
     ///
-    /// This field is alpha-level. The job controller populates the field when
-    /// the feature gate JobPodReplacementPolicy is enabled (disabled by default).
+    /// This field is beta-level. The job controller populates the field when
+    /// the feature gate JobPodReplacementPolicy is enabled (enabled by default).
     /// +optional
     #[prost(int32, optional, tag = "11")]
     pub terminating: ::core::option::Option<i32>,
@@ -407,8 +408,8 @@ pub struct JobStatus {
     /// last element of the series, separated by a hyphen.
     /// For example, if the failed indexes are 1, 3, 4, 5 and 7, they are
     /// represented as "1,3-5,7".
-    /// This field is alpha-level. It can be used when the `JobBackoffLimitPerIndex`
-    /// feature gate is enabled (disabled by default).
+    /// This field is beta-level. It can be used when the `JobBackoffLimitPerIndex`
+    /// feature gate is enabled (enabled by default).
     /// +optional
     #[prost(string, optional, tag = "10")]
     pub failed_indexes: ::core::option::Option<::prost::alloc::string::String>,
@@ -430,9 +431,6 @@ pub struct JobStatus {
     #[prost(message, optional, tag = "8")]
     pub uncounted_terminated_pods: ::core::option::Option<UncountedTerminatedPods>,
     /// The number of pods which have a Ready condition.
-    ///
-    /// This field is beta-level. The job controller populates the field when
-    /// the feature gate JobReadyPods is enabled (enabled by default).
     /// +optional
     #[prost(int32, optional, tag = "9")]
     pub ready: ::core::option::Option<i32>,
@@ -533,8 +531,8 @@ pub struct PodFailurePolicyRule {
     ///    running pods are terminated.
     /// - FailIndex: indicates that the pod's index is marked as Failed and will
     ///    not be restarted.
-    ///    This value is alpha-level. It can be used when the
-    ///    `JobBackoffLimitPerIndex` feature gate is enabled (disabled by default).
+    ///    This value is beta-level. It can be used when the
+    ///    `JobBackoffLimitPerIndex` feature gate is enabled (enabled by default).
     /// - Ignore: indicates that the counter towards the .backoffLimit is not
     ///    incremented and a replacement pod is created.
     /// - Count: indicates that the pod is handled in the default way - the
