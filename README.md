@@ -36,22 +36,6 @@ then applies any needed [patches](https://github.com/kube-rs/k8s-pb/tree/main/k8
 
 This json file complements the protos with type type properties needed for trait implementations.
 
-#### Swagger Details
-Use `x-kubernetes-group-version-kind` to join `.definitions` and `.paths`.
-
-We should be able to find the following:
-
-- GVK
-- Plural name (path segments)
-  - `singularName` in `APIResourceList` seems to be always empty for builtins. It's used by `kubectl` for CRDs? ([kubernetes/kubernetes#18622](https://github.com/kubernetes/kubernetes/issues/18622#issuecomment-434481731))
-- Supported verbs
-  - `x-kubernetes-action` can be one of `get`, `list`, `put`, `patch`, `post`, `delete`, `deletecollection`, `watch`, `watchlist`, `proxy`, or `connect`. `verbs` in `APIResourceList` uses `create` instead of `post` and `update` instead of `put`? No `connect`?
-- Supported content types
-- Scope
-  - Namespaced if any possible path contains `/namespaces/{namespace}/`
-    - May also have paths for all namespaces for some verbs (e.g., `list` all pods)
-  - Subresource if path contains `/{name}/` (`/` after `{name}`)
-
 ### just codegen
 Runs [main.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/main.rs), using the outputs from the `swagger` and `protobuf` recipes above. In particular;
 

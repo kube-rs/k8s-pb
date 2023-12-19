@@ -1,4 +1,22 @@
 # Transform `swagger.json` to a map of proto path to resource infos.
+#
+# Uses `x-kubernetes-group-version-kind` to join `.definitions` and `.paths`.
+#
+# We should be able to find the following:
+#
+# - GVK
+# - Plural name (path segments)
+#  - `singularName` in `APIResourceList` seems to be always empty for builtins. It's used by `kubectl` for CRDs? ([kubernetes/kubernetes#18622](https://github.com/kubernetes/kubernetes/issues/18622#issuecomment-434481731))
+# - Supported verbs
+#   - `x-kubernetes-action` can be one of `get`, `list`, `put`, `patch`, `post`, `delete`, `deletecollection`, `watch`, `watchlist`, `proxy`, or `connect`. `verbs` in `APIResourceList` uses `create` instead of `post` and `update` instead of `put`? No `connect`?
+# - Supported content types
+# - Scope
+#   - Namespaced if any possible path contains `/namespaces/{namespace}/`
+#     - May also have paths for all namespaces for some verbs (e.g., `list` all pods)
+#   - Subresource if path contains `/{name}/` (`/` after `{name}`)
+#
+# See https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec for more information.
+
 def fmap(f): if . != null then . | f else . end;
 def to_rust: . | sub("^io\\.k8s\\."; "") | gsub("-"; "_") | gsub("\\."; "::");
 def strip_ref_prefix: . | sub("^#/definitions/"; "");
