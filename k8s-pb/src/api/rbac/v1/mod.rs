@@ -219,7 +219,8 @@ impl crate::Resource for ClusterRole {
     const GROUP: &'static str = "rbac.authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ClusterRole";
-    const NAME: &'static str = "clusterroles";
+    const URL_PATH_SEGMENT: &'static str = "clusterroles";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ClusterRole {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -237,7 +238,8 @@ impl crate::Resource for ClusterRoleBinding {
     const GROUP: &'static str = "rbac.authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ClusterRoleBinding";
-    const NAME: &'static str = "clusterrolebindings";
+    const URL_PATH_SEGMENT: &'static str = "clusterrolebindings";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ClusterRoleBinding {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -255,7 +257,8 @@ impl crate::Resource for Role {
     const GROUP: &'static str = "rbac.authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Role";
-    const NAME: &'static str = "roles";
+    const URL_PATH_SEGMENT: &'static str = "roles";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Role {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -273,7 +276,8 @@ impl crate::Resource for RoleBinding {
     const GROUP: &'static str = "rbac.authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "RoleBinding";
-    const NAME: &'static str = "rolebindings";
+    const URL_PATH_SEGMENT: &'static str = "rolebindings";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for RoleBinding {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

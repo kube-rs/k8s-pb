@@ -549,7 +549,8 @@ impl crate::Resource for FlowSchema {
     const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
     const VERSION: &'static str = "v1beta3";
     const KIND: &'static str = "FlowSchema";
-    const NAME: &'static str = "flowschemas";
+    const URL_PATH_SEGMENT: &'static str = "flowschemas";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for FlowSchema {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -596,7 +597,8 @@ impl crate::Resource for PriorityLevelConfiguration {
     const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
     const VERSION: &'static str = "v1beta3";
     const KIND: &'static str = "PriorityLevelConfiguration";
-    const NAME: &'static str = "prioritylevelconfigurations";
+    const URL_PATH_SEGMENT: &'static str = "prioritylevelconfigurations";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for PriorityLevelConfiguration {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

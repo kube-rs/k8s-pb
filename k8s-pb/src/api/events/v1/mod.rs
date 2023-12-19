@@ -119,7 +119,8 @@ impl crate::Resource for Event {
     const GROUP: &'static str = "events.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Event";
-    const NAME: &'static str = "events";
+    const URL_PATH_SEGMENT: &'static str = "events";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Event {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

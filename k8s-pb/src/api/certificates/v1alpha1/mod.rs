@@ -87,7 +87,8 @@ impl crate::Resource for ClusterTrustBundle {
     const GROUP: &'static str = "certificates.k8s.io";
     const VERSION: &'static str = "v1alpha1";
     const KIND: &'static str = "ClusterTrustBundle";
-    const NAME: &'static str = "clustertrustbundles";
+    const URL_PATH_SEGMENT: &'static str = "clustertrustbundles";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ClusterTrustBundle {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

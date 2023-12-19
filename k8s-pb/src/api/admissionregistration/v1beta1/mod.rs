@@ -1125,7 +1125,8 @@ impl crate::Resource for ValidatingAdmissionPolicy {
     const GROUP: &'static str = "admissionregistration.k8s.io";
     const VERSION: &'static str = "v1beta1";
     const KIND: &'static str = "ValidatingAdmissionPolicy";
-    const NAME: &'static str = "validatingadmissionpolicies";
+    const URL_PATH_SEGMENT: &'static str = "validatingadmissionpolicies";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ValidatingAdmissionPolicy {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -1172,7 +1173,8 @@ impl crate::Resource for ValidatingAdmissionPolicyBinding {
     const GROUP: &'static str = "admissionregistration.k8s.io";
     const VERSION: &'static str = "v1beta1";
     const KIND: &'static str = "ValidatingAdmissionPolicyBinding";
-    const NAME: &'static str = "validatingadmissionpolicybindings";
+    const URL_PATH_SEGMENT: &'static str = "validatingadmissionpolicybindings";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ValidatingAdmissionPolicyBinding {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

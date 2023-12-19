@@ -55,7 +55,8 @@ impl crate::Resource for PriorityClass {
     const GROUP: &'static str = "scheduling.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "PriorityClass";
-    const NAME: &'static str = "priorityclasses";
+    const URL_PATH_SEGMENT: &'static str = "priorityclasses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for PriorityClass {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

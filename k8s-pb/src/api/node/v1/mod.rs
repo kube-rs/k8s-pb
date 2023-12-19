@@ -98,7 +98,8 @@ impl crate::Resource for RuntimeClass {
     const GROUP: &'static str = "node.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "RuntimeClass";
-    const NAME: &'static str = "runtimeclasses";
+    const URL_PATH_SEGMENT: &'static str = "runtimeclasses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for RuntimeClass {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

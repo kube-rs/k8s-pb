@@ -621,7 +621,8 @@ impl crate::Resource for CsiDriver {
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "CSIDriver";
-    const NAME: &'static str = "csidrivers";
+    const URL_PATH_SEGMENT: &'static str = "csidrivers";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for CsiDriver {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -648,7 +649,8 @@ impl crate::Resource for CsiNode {
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "CSINode";
-    const NAME: &'static str = "csinodes";
+    const URL_PATH_SEGMENT: &'static str = "csinodes";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for CsiNode {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -675,7 +677,8 @@ impl crate::Resource for CsiStorageCapacity {
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "CSIStorageCapacity";
-    const NAME: &'static str = "csistoragecapacities";
+    const URL_PATH_SEGMENT: &'static str = "csistoragecapacities";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for CsiStorageCapacity {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -693,7 +696,8 @@ impl crate::Resource for StorageClass {
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "StorageClass";
-    const NAME: &'static str = "storageclasses";
+    const URL_PATH_SEGMENT: &'static str = "storageclasses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for StorageClass {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -711,7 +715,8 @@ impl crate::Resource for VolumeAttachment {
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "VolumeAttachment";
-    const NAME: &'static str = "volumeattachments";
+    const URL_PATH_SEGMENT: &'static str = "volumeattachments";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for VolumeAttachment {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

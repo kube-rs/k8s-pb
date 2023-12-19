@@ -891,7 +891,8 @@ impl crate::Resource for ControllerRevision {
     const GROUP: &'static str = "apps";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ControllerRevision";
-    const NAME: &'static str = "controllerrevisions";
+    const URL_PATH_SEGMENT: &'static str = "controllerrevisions";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ControllerRevision {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -909,7 +910,8 @@ impl crate::Resource for DaemonSet {
     const GROUP: &'static str = "apps";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "DaemonSet";
-    const NAME: &'static str = "daemonsets";
+    const URL_PATH_SEGMENT: &'static str = "daemonsets";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for DaemonSet {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -956,7 +958,8 @@ impl crate::Resource for Deployment {
     const GROUP: &'static str = "apps";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Deployment";
-    const NAME: &'static str = "deployments";
+    const URL_PATH_SEGMENT: &'static str = "deployments";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Deployment {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -1003,7 +1006,8 @@ impl crate::Resource for ReplicaSet {
     const GROUP: &'static str = "apps";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ReplicaSet";
-    const NAME: &'static str = "replicasets";
+    const URL_PATH_SEGMENT: &'static str = "replicasets";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ReplicaSet {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -1050,7 +1054,8 @@ impl crate::Resource for StatefulSet {
     const GROUP: &'static str = "apps";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "StatefulSet";
-    const NAME: &'static str = "statefulsets";
+    const URL_PATH_SEGMENT: &'static str = "statefulsets";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for StatefulSet {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

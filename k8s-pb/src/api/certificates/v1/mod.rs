@@ -241,7 +241,8 @@ impl crate::Resource for CertificateSigningRequest {
     const GROUP: &'static str = "certificates.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "CertificateSigningRequest";
-    const NAME: &'static str = "certificatesigningrequests";
+    const URL_PATH_SEGMENT: &'static str = "certificatesigningrequests";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for CertificateSigningRequest {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

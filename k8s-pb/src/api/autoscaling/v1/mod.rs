@@ -559,7 +559,8 @@ impl crate::Resource for HorizontalPodAutoscaler {
     const GROUP: &'static str = "autoscaling";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "HorizontalPodAutoscaler";
-    const NAME: &'static str = "horizontalpodautoscalers";
+    const URL_PATH_SEGMENT: &'static str = "horizontalpodautoscalers";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for HorizontalPodAutoscaler {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

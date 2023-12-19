@@ -138,7 +138,8 @@ impl crate::Resource for IpAddress {
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1alpha1";
     const KIND: &'static str = "IPAddress";
-    const NAME: &'static str = "ipaddresses";
+    const URL_PATH_SEGMENT: &'static str = "ipaddresses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for IpAddress {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -165,7 +166,8 @@ impl crate::Resource for ServiceCidr {
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1alpha1";
     const KIND: &'static str = "ServiceCIDR";
-    const NAME: &'static str = "servicecidrs";
+    const URL_PATH_SEGMENT: &'static str = "servicecidrs";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ServiceCidr {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

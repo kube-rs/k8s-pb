@@ -143,7 +143,8 @@ impl crate::Resource for ApiService {
     const GROUP: &'static str = "apiregistration.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "APIService";
-    const NAME: &'static str = "apiservices";
+    const URL_PATH_SEGMENT: &'static str = "apiservices";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ApiService {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

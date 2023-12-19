@@ -7055,7 +7055,8 @@ impl crate::Resource for Binding {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Binding";
-    const NAME: &'static str = "bindings";
+    const URL_PATH_SEGMENT: &'static str = "bindings";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Binding {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7073,7 +7074,8 @@ impl crate::Resource for ComponentStatus {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ComponentStatus";
-    const NAME: &'static str = "componentstatuses";
+    const URL_PATH_SEGMENT: &'static str = "componentstatuses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ComponentStatus {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7091,7 +7093,8 @@ impl crate::Resource for ConfigMap {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ConfigMap";
-    const NAME: &'static str = "configmaps";
+    const URL_PATH_SEGMENT: &'static str = "configmaps";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ConfigMap {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7109,7 +7112,8 @@ impl crate::Resource for Endpoints {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Endpoints";
-    const NAME: &'static str = "endpoints";
+    const URL_PATH_SEGMENT: &'static str = "endpoints";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Endpoints {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7127,7 +7131,8 @@ impl crate::Resource for Event {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Event";
-    const NAME: &'static str = "events";
+    const URL_PATH_SEGMENT: &'static str = "events";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Event {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7145,7 +7150,8 @@ impl crate::Resource for LimitRange {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "LimitRange";
-    const NAME: &'static str = "limitranges";
+    const URL_PATH_SEGMENT: &'static str = "limitranges";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for LimitRange {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7172,7 +7178,8 @@ impl crate::Resource for Namespace {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Namespace";
-    const NAME: &'static str = "namespaces";
+    const URL_PATH_SEGMENT: &'static str = "namespaces";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for Namespace {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7219,7 +7226,8 @@ impl crate::Resource for Node {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Node";
-    const NAME: &'static str = "nodes";
+    const URL_PATH_SEGMENT: &'static str = "nodes";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for Node {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7266,7 +7274,8 @@ impl crate::Resource for PersistentVolume {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "PersistentVolume";
-    const NAME: &'static str = "persistentvolumes";
+    const URL_PATH_SEGMENT: &'static str = "persistentvolumes";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for PersistentVolume {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7302,7 +7311,8 @@ impl crate::Resource for PersistentVolumeClaim {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "PersistentVolumeClaim";
-    const NAME: &'static str = "persistentvolumeclaims";
+    const URL_PATH_SEGMENT: &'static str = "persistentvolumeclaims";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for PersistentVolumeClaim {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7349,7 +7359,8 @@ impl crate::Resource for Pod {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Pod";
-    const NAME: &'static str = "pods";
+    const URL_PATH_SEGMENT: &'static str = "pods";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Pod {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7396,7 +7407,8 @@ impl crate::Resource for PodTemplate {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "PodTemplate";
-    const NAME: &'static str = "podtemplates";
+    const URL_PATH_SEGMENT: &'static str = "podtemplates";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for PodTemplate {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7414,7 +7426,8 @@ impl crate::Resource for ReplicationController {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ReplicationController";
-    const NAME: &'static str = "replicationcontrollers";
+    const URL_PATH_SEGMENT: &'static str = "replicationcontrollers";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ReplicationController {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7461,7 +7474,8 @@ impl crate::Resource for ResourceQuota {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ResourceQuota";
-    const NAME: &'static str = "resourcequotas";
+    const URL_PATH_SEGMENT: &'static str = "resourcequotas";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ResourceQuota {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7497,7 +7511,8 @@ impl crate::Resource for Secret {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Secret";
-    const NAME: &'static str = "secrets";
+    const URL_PATH_SEGMENT: &'static str = "secrets";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Secret {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7515,7 +7530,8 @@ impl crate::Resource for Service {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Service";
-    const NAME: &'static str = "services";
+    const URL_PATH_SEGMENT: &'static str = "services";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Service {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -7562,7 +7578,8 @@ impl crate::Resource for ServiceAccount {
     const GROUP: &'static str = "";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ServiceAccount";
-    const NAME: &'static str = "serviceaccounts";
+    const URL_PATH_SEGMENT: &'static str = "serviceaccounts";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ServiceAccount {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

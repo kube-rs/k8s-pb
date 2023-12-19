@@ -291,7 +291,8 @@ impl crate::Resource for LocalSubjectAccessReview {
     const GROUP: &'static str = "authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "LocalSubjectAccessReview";
-    const NAME: &'static str = "localsubjectaccessreviews";
+    const URL_PATH_SEGMENT: &'static str = "localsubjectaccessreviews";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for LocalSubjectAccessReview {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -327,7 +328,8 @@ impl crate::Resource for SelfSubjectAccessReview {
     const GROUP: &'static str = "authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "SelfSubjectAccessReview";
-    const NAME: &'static str = "selfsubjectaccessreviews";
+    const URL_PATH_SEGMENT: &'static str = "selfsubjectaccessreviews";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for SelfSubjectAccessReview {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -363,7 +365,8 @@ impl crate::Resource for SelfSubjectRulesReview {
     const GROUP: &'static str = "authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "SelfSubjectRulesReview";
-    const NAME: &'static str = "selfsubjectrulesreviews";
+    const URL_PATH_SEGMENT: &'static str = "selfsubjectrulesreviews";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for SelfSubjectRulesReview {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -399,7 +402,8 @@ impl crate::Resource for SubjectAccessReview {
     const GROUP: &'static str = "authorization.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "SubjectAccessReview";
-    const NAME: &'static str = "subjectaccessreviews";
+    const URL_PATH_SEGMENT: &'static str = "subjectaccessreviews";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for SubjectAccessReview {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

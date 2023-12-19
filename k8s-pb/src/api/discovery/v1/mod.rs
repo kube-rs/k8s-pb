@@ -199,7 +199,8 @@ impl crate::Resource for EndpointSlice {
     const GROUP: &'static str = "discovery.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "EndpointSlice";
-    const NAME: &'static str = "endpointslices";
+    const URL_PATH_SEGMENT: &'static str = "endpointslices";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for EndpointSlice {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
