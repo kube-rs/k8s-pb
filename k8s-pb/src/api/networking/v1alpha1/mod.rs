@@ -159,3 +159,50 @@ impl crate::HasSpec for IpAddress {
     }
 }
 
+
+impl crate::Resource for ServiceCidr {
+    const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";
+    const GROUP: &'static str = "networking.k8s.io";
+    const VERSION: &'static str = "v1alpha1";
+    const KIND: &'static str = "ServiceCIDR";
+    const NAME: &'static str = "servicecidrs";
+}
+impl crate::HasMetadata for ServiceCidr {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for ServiceCidr {
+    type Spec = crate::api::networking::v1alpha1::ServiceCIDRSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for ServiceCidr {
+    type Status = crate::api::networking::v1alpha1::ServiceCIDRStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for ServiceCidr {
+    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status
+            .as_mut()
+            .and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+

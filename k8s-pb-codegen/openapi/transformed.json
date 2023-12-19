@@ -1889,19 +1889,19 @@
     ],
     "subresources": []
   },
-  "api.flowcontrol.v1beta2.FlowSchema": {
+  "api.flowcontrol.v1.FlowSchema": {
     "name": "flowschemas",
     "namespaced": false,
-    "apiVersion": "flowcontrol.apiserver.k8s.io/v1beta2",
+    "apiVersion": "flowcontrol.apiserver.k8s.io/v1",
     "group": "flowcontrol.apiserver.k8s.io",
-    "version": "v1beta2",
+    "version": "v1",
     "kind": "FlowSchema",
-    "proto": "api.flowcontrol.v1beta2.FlowSchema",
-    "rust": "api::flowcontrol::v1beta2::FlowSchema",
+    "proto": "api.flowcontrol.v1.FlowSchema",
+    "rust": "api::flowcontrol::v1::FlowSchema",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::flowcontrol::v1beta2::FlowSchemaSpec",
-    "status": "api::flowcontrol::v1beta2::FlowSchemaStatus",
-    "condition": "api::flowcontrol::v1beta2::FlowSchemaCondition",
+    "spec": "api::flowcontrol::v1::FlowSchemaSpec",
+    "status": "api::flowcontrol::v1::FlowSchemaStatus",
+    "condition": "api::flowcontrol::v1::FlowSchemaCondition",
     "scopedVerbs": {
       "all": [
         "create",
@@ -1914,8 +1914,8 @@
       ]
     },
     "paths": [
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta2/flowschemas",
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta2/flowschemas/{name}"
+      "/apis/flowcontrol.apiserver.k8s.io/v1/flowschemas",
+      "/apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}"
     ],
     "subresources": [
       {
@@ -1928,24 +1928,24 @@
           ]
         },
         "paths": [
-          "/apis/flowcontrol.apiserver.k8s.io/v1beta2/flowschemas/{name}/status"
+          "/apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}/status"
         ]
       }
     ]
   },
-  "api.flowcontrol.v1beta2.PriorityLevelConfiguration": {
+  "api.flowcontrol.v1.PriorityLevelConfiguration": {
     "name": "prioritylevelconfigurations",
     "namespaced": false,
-    "apiVersion": "flowcontrol.apiserver.k8s.io/v1beta2",
+    "apiVersion": "flowcontrol.apiserver.k8s.io/v1",
     "group": "flowcontrol.apiserver.k8s.io",
-    "version": "v1beta2",
+    "version": "v1",
     "kind": "PriorityLevelConfiguration",
-    "proto": "api.flowcontrol.v1beta2.PriorityLevelConfiguration",
-    "rust": "api::flowcontrol::v1beta2::PriorityLevelConfiguration",
+    "proto": "api.flowcontrol.v1.PriorityLevelConfiguration",
+    "rust": "api::flowcontrol::v1::PriorityLevelConfiguration",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::flowcontrol::v1beta2::PriorityLevelConfigurationSpec",
-    "status": "api::flowcontrol::v1beta2::PriorityLevelConfigurationStatus",
-    "condition": "api::flowcontrol::v1beta2::PriorityLevelConfigurationCondition",
+    "spec": "api::flowcontrol::v1::PriorityLevelConfigurationSpec",
+    "status": "api::flowcontrol::v1::PriorityLevelConfigurationStatus",
+    "condition": "api::flowcontrol::v1::PriorityLevelConfigurationCondition",
     "scopedVerbs": {
       "all": [
         "create",
@@ -1958,8 +1958,8 @@
       ]
     },
     "paths": [
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta2/prioritylevelconfigurations",
-      "/apis/flowcontrol.apiserver.k8s.io/v1beta2/prioritylevelconfigurations/{name}"
+      "/apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations",
+      "/apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}"
     ],
     "subresources": [
       {
@@ -1972,7 +1972,7 @@
           ]
         },
         "paths": [
-          "/apis/flowcontrol.apiserver.k8s.io/v1beta2/prioritylevelconfigurations/{name}/status"
+          "/apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}/status"
         ]
       }
     ]
@@ -2177,36 +2177,6 @@
     ],
     "subresources": []
   },
-  "api.networking.v1alpha1.ClusterCIDR": {
-    "name": "clustercidrs",
-    "namespaced": false,
-    "apiVersion": "networking.k8s.io/v1alpha1",
-    "group": "networking.k8s.io",
-    "version": "v1alpha1",
-    "kind": "ClusterCIDR",
-    "proto": "api.networking.v1alpha1.ClusterCIDR",
-    "rust": "api::networking::v1alpha1::ClusterCIDR",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::networking::v1alpha1::ClusterCIDRSpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/networking.k8s.io/v1alpha1/clustercidrs",
-      "/apis/networking.k8s.io/v1alpha1/clustercidrs/{name}"
-    ],
-    "subresources": []
-  },
   "api.networking.v1alpha1.IPAddress": {
     "name": "ipaddresses",
     "namespaced": false,
@@ -2236,6 +2206,50 @@
       "/apis/networking.k8s.io/v1alpha1/ipaddresses/{name}"
     ],
     "subresources": []
+  },
+  "api.networking.v1alpha1.ServiceCIDR": {
+    "name": "servicecidrs",
+    "namespaced": false,
+    "apiVersion": "networking.k8s.io/v1alpha1",
+    "group": "networking.k8s.io",
+    "version": "v1alpha1",
+    "kind": "ServiceCIDR",
+    "proto": "api.networking.v1alpha1.ServiceCIDR",
+    "rust": "api::networking::v1alpha1::ServiceCIDR",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::networking::v1alpha1::ServiceCIDRSpec",
+    "status": "api::networking::v1alpha1::ServiceCIDRStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/networking.k8s.io/v1alpha1/servicecidrs",
+      "/apis/networking.k8s.io/v1alpha1/servicecidrs/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/networking.k8s.io/v1alpha1/servicecidrs/{name}/status"
+        ]
+      }
+    ]
   },
   "api.node.v1.RuntimeClass": {
     "name": "runtimeclasses",
@@ -2800,6 +2814,36 @@
         ]
       }
     ]
+  },
+  "api.storage.v1alpha1.VolumeAttributesClass": {
+    "name": "volumeattributesclasses",
+    "namespaced": false,
+    "apiVersion": "storage.k8s.io/v1alpha1",
+    "group": "storage.k8s.io",
+    "version": "v1alpha1",
+    "kind": "VolumeAttributesClass",
+    "proto": "api.storage.v1alpha1.VolumeAttributesClass",
+    "rust": "api::storage::v1alpha1::VolumeAttributesClass",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storage.k8s.io/v1alpha1/volumeattributesclasses",
+      "/apis/storage.k8s.io/v1alpha1/volumeattributesclasses/{name}"
+    ],
+    "subresources": []
   },
   "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition": {
     "name": "customresourcedefinitions",

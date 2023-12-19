@@ -285,3 +285,21 @@ pub struct VolumeError {
     #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
+
+impl crate::Resource for VolumeAttributesClass {
+    const API_VERSION: &'static str = "storage.k8s.io/v1alpha1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1alpha1";
+    const KIND: &'static str = "VolumeAttributesClass";
+    const NAME: &'static str = "volumeattributesclasses";
+}
+impl crate::HasMetadata for VolumeAttributesClass {
+    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+        self.metadata.as_mut()
+    }
+}
+
