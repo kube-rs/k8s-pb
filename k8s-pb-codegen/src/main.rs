@@ -55,11 +55,7 @@ fn main() -> Result<()> {
     // FDS usage: https://github.com/tokio-rs/prost/blob/32bc87cd0b7301f6af1a338e9afd7717d0f42ca9/prost-build/src/lib.rs#L765-L825
     for f in fds.file {
         if let Some(package_name) = f.package {
-            println!(
-                "got package name: {}, looking in {}",
-                package_name,
-                tmp_dir.display()
-            );
+            info!("building pkg: {package_name}");
             if package_name.contains(".schema") {
                 continue;
             }

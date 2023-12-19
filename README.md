@@ -1,14 +1,23 @@
-Experimenting with Kubernetes protobufs.
+# k8s-pb
 
-## Build Dependencies
+Kubernetes protobuf bindings for [kube-rs](https://github.com/kube-rs).
+WIP. Not yet useable as is.
 
-- [fd](https://github.com/sharkdp/fd)
-- [jq](https://stedolan.github.io/jq/)
-- [just](https://github.com/casey/just)
-- [sd](https://github.com/chmln/sd)
+## Usage
+This library is **not currently usable** from `kube`.
+For now consider these structs a reference location for Kubernetes structs that are not found in `k8s-openapi`.
 
-## Protobufs
-We get protos by extracting them from pinned Kubernetes releases:
+## Build Process
+The code generation process consists of 3 steps;
+
+1. `just protos` - download and patch protobufs
+2. `just swagger` - download and transform openapi schema
+3. `just codegen` - combine info and build with prost
+
+The [k8s-pb](https://github.com/kube-rs/k8s-pb/tree/main/k8s-pb) crate is generated as a result of this process and then published periodically.
+
+### just protos
+Obtains the [version pinned](https://github.com/kube-rs/k8s-pb/blob/main/justfile#L1) protobufs from upstream:
 
 - https://github.com/kubernetes/api/releases
 - https://github.com/kubernetes/apimachinery/releases
@@ -16,33 +25,18 @@ We get protos by extracting them from pinned Kubernetes releases:
 - https://github.com/kubernetes/kube-aggregator/releases
 - https://github.com/kubernetes/metrics/releases
 
-We then do minor transforms on top of that to prepare for building.
-Results of this step is committed already. But to run, invoke `just protos`
+then does [minor transforms](https://github.com/kube-rs/k8s-pb/blob/main/justfile#L19-L34) to prepare them for building.
 
-## Openapi
-To complement the protos with generic information, we also download the swagger schema, patch it, and transform it as described below.
+### just swagger
+Obtains the [version pinned](https://github.com/kube-rs/k8s-pb/blob/main/justfile#L1) swagger openapi schema from upstream:
 
-Results of this step is committed already. But to run, invoke `just swagger`.
+- https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
 
+then applies any needed [patches](https://github.com/kube-rs/k8s-pb/tree/main/k8s-pb-codegen/openapi/patches) before [transforming](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/openapi/transform.jq) the schema into a shorter [json file](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/openapi/transformed.json) containing desired generic information.
 
-## Building
-To build the [out](./out) directory from [build.rs](./build.rs) we will use the outputs from the `swagger`, `protobuf`, and `protobuf-fds` targets.
+This json file complements the protos with type type properties needed for trait implementations.
 
-Results of this step is committed already. But to run, invoke `just codegen`
-
-### Hack
-
-Generate a [`FileDescriptorSet`] containing all of the input files wih `just codegen-fds`
-
-
-## OpenAPI Strategy
-
-We need to use `swagger.json` to fill in some information.
-
-### Generics
-
-Used for request path and de/serializing JSON.
-
+#### Swagger Details
 Use `x-kubernetes-group-version-kind` to join `.definitions` and `.paths`.
 
 We should be able to find the following:
@@ -57,3 +51,19 @@ We should be able to find the following:
   - Namespaced if any possible path contains `/namespaces/{namespace}/`
     - May also have paths for all namespaces for some verbs (e.g., `list` all pods)
   - Subresource if path contains `/{name}/` (`/` after `{name}`)
+
+### just codegen
+Runs [main.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/main.rs), using the outputs from the `swagger` and `protobuf` recipes above. In particular;
+
+- The protos are built with [prost](https://github.com/tokio-rs/prost) via `protoc` and provides a [`FileDescriptorSet`](https://docs.rs/prost-types/latest/prost_types/struct.FileDescriptorSet.html) via [`Config::file_descriptor_set_path`](https://docs.rs/prost-build/latest/prost_build/struct.Config.html#method.file_descriptor_set_path).
+- The transformed swagger result json is deserialized through [lib.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/lib.rs) into a `HashMap<String, Resource>` where the string is a GVK string.
+- We loop through all the generated modules and
+  * inject generics from this hashmap
+  * in memory `rustfmt` before finalising
+
+### Build Dependencies
+
+- [fd](https://github.com/sharkdp/fd)
+- [jq](https://stedolan.github.io/jq/)
+- [just](https://github.com/casey/just)
+- [sd](https://github.com/chmln/sd)
