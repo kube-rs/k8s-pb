@@ -212,7 +212,8 @@ impl crate::Resource for SelfSubjectReview {
     const GROUP: &'static str = "authentication.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "SelfSubjectReview";
-    const NAME: &'static str = "selfsubjectreviews";
+    const URL_PATH_SEGMENT: &'static str = "selfsubjectreviews";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for SelfSubjectReview {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -239,7 +240,8 @@ impl crate::Resource for TokenReview {
     const GROUP: &'static str = "authentication.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "TokenReview";
-    const NAME: &'static str = "tokenreviews";
+    const URL_PATH_SEGMENT: &'static str = "tokenreviews";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for TokenReview {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

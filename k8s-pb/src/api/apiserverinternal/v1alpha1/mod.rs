@@ -119,7 +119,8 @@ impl crate::Resource for StorageVersion {
     const GROUP: &'static str = "internal.apiserver.k8s.io";
     const VERSION: &'static str = "v1alpha1";
     const KIND: &'static str = "StorageVersion";
-    const NAME: &'static str = "storageversions";
+    const URL_PATH_SEGMENT: &'static str = "storageversions";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for StorageVersion {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

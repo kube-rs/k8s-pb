@@ -577,7 +577,8 @@ impl crate::Resource for CronJob {
     const GROUP: &'static str = "batch";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "CronJob";
-    const NAME: &'static str = "cronjobs";
+    const URL_PATH_SEGMENT: &'static str = "cronjobs";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for CronJob {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -613,7 +614,8 @@ impl crate::Resource for Job {
     const GROUP: &'static str = "batch";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Job";
-    const NAME: &'static str = "jobs";
+    const URL_PATH_SEGMENT: &'static str = "jobs";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Job {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

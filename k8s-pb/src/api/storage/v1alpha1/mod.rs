@@ -291,7 +291,8 @@ impl crate::Resource for VolumeAttributesClass {
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1alpha1";
     const KIND: &'static str = "VolumeAttributesClass";
-    const NAME: &'static str = "volumeattributesclasses";
+    const URL_PATH_SEGMENT: &'static str = "volumeattributesclasses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for VolumeAttributesClass {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

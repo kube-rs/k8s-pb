@@ -120,12 +120,54 @@ fn main() -> Result<()> {
 
 fn append_trait_def(lib_rs: &mut File) {
     let tokens = quote! {
+        /// The scope of a [`Resource`].
+        pub trait ResourceScope {}
+
+        /// Indicates that a [`Resource`] is cluster-scoped.
+        pub struct ClusterResourceScope {}
+        impl ResourceScope for ClusterResourceScope {}
+
+        /// Indicates that a [`Resource`] is namespace-scoped.
+        pub struct NamespaceResourceScope {}
+        impl ResourceScope for NamespaceResourceScope {}
+
+        /// Indicates that a [`Resource`] is neither cluster-scoped nor namespace-scoped.
+        pub struct SubResourceScope {}
+        impl ResourceScope for SubResourceScope {}
+
+        /// A trait applied to all Kubernetes resources.
         pub trait Resource {
+            /// The API version of the resource. This is a composite of [`Resource::GROUP`] and [`Resource::VERSION`] (eg `"apiextensions.k8s.io/v1beta1"`)
+            /// or just the version for resources without a group (eg `"v1"`).
+            ///
+            /// This is the string used in the `apiVersion` field of the resource's serialized form.
             const API_VERSION: &'static str;
+
+            /// The group of the resource, or the empty string if the resource doesn't have a group.
             const GROUP: &'static str;
-            const VERSION: &'static str;
+
+            /// The kind of the resource.
+            ///
+            /// This is the string used in the `kind` field of the resource's serialized form.
             const KIND: &'static str;
-            const NAME: &'static str;
+            /// The version of the resource.
+            const VERSION: &'static str;
+
+            /// The URL path segment used to construct URLs related to this resource.
+            ///
+            /// For cluster- and namespaced-scoped resources, this is the plural name of the resource that is followed by the resource name.
+            /// For example, [`api::core::v1::Pod`](crate::api::core::v1::Pod)'s value is `"pods"` and its URLs look like `.../pods/{name}`.
+            ///
+            /// For subresources, this is the subresource name that comes after the parent resource's name.
+            /// For example, [`api::authentication::v1::TokenRequest`](crate::api::authentication::v1::TokenRequest)'s value is `"token"`,
+            /// and its URLs look like `.../serviceaccounts/{name}/token`.
+            const URL_PATH_SEGMENT: &'static str;
+
+            /// Indicates whether the resource is namespace-scoped or cluster-scoped or a subresource.
+            ///
+            /// If you need to restrict some generic code to resources of a specific scope, use this associated type to create a bound on the generic.
+            /// For example, `fn foo<T: k8s_openapi::Resource<Scope = k8s_openapi::ClusterResourceScope>>() { }` can only be called with cluster-scoped resources.
+            type Scope: ResourceScope;
         }
 
         pub trait HasMetadata {
@@ -165,13 +207,19 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
     let kind = &resource.kind;
     let version = &resource.version;
     let name = &resource.name;
+    let scope = if resource.namespaced {
+        format_ident!("NamespaceResourceScope")
+    } else {
+        format_ident!("ClusterResourceScope")
+    };
     let tokens = quote! {
         impl crate::Resource for #type_name {
             const API_VERSION: &'static str = #api_version;
             const GROUP: &'static str = #group;
             const VERSION: &'static str = #version;
             const KIND: &'static str = #kind;
-            const NAME: &'static str = #name;
+            const URL_PATH_SEGMENT: &'static str = #name;
+            type Scope = crate::#scope;
         }
     };
     let tokens = if let Some(metadata) = &resource.metadata {

@@ -183,7 +183,8 @@ impl crate::Resource for PodDisruptionBudget {
     const GROUP: &'static str = "policy";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "PodDisruptionBudget";
-    const NAME: &'static str = "poddisruptionbudgets";
+    const URL_PATH_SEGMENT: &'static str = "poddisruptionbudgets";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for PodDisruptionBudget {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

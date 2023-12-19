@@ -572,7 +572,8 @@ impl crate::Resource for MutatingWebhookConfiguration {
     const GROUP: &'static str = "admissionregistration.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "MutatingWebhookConfiguration";
-    const NAME: &'static str = "mutatingwebhookconfigurations";
+    const URL_PATH_SEGMENT: &'static str = "mutatingwebhookconfigurations";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for MutatingWebhookConfiguration {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -590,7 +591,8 @@ impl crate::Resource for ValidatingWebhookConfiguration {
     const GROUP: &'static str = "admissionregistration.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "ValidatingWebhookConfiguration";
-    const NAME: &'static str = "validatingwebhookconfigurations";
+    const URL_PATH_SEGMENT: &'static str = "validatingwebhookconfigurations";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ValidatingWebhookConfiguration {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

@@ -429,7 +429,8 @@ impl crate::Resource for PodSchedulingContext {
     const GROUP: &'static str = "resource.k8s.io";
     const VERSION: &'static str = "v1alpha2";
     const KIND: &'static str = "PodSchedulingContext";
-    const NAME: &'static str = "podschedulingcontexts";
+    const URL_PATH_SEGMENT: &'static str = "podschedulingcontexts";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for PodSchedulingContext {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -465,7 +466,8 @@ impl crate::Resource for ResourceClaim {
     const GROUP: &'static str = "resource.k8s.io";
     const VERSION: &'static str = "v1alpha2";
     const KIND: &'static str = "ResourceClaim";
-    const NAME: &'static str = "resourceclaims";
+    const URL_PATH_SEGMENT: &'static str = "resourceclaims";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ResourceClaim {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -501,7 +503,8 @@ impl crate::Resource for ResourceClaimTemplate {
     const GROUP: &'static str = "resource.k8s.io";
     const VERSION: &'static str = "v1alpha2";
     const KIND: &'static str = "ResourceClaimTemplate";
-    const NAME: &'static str = "resourceclaimtemplates";
+    const URL_PATH_SEGMENT: &'static str = "resourceclaimtemplates";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for ResourceClaimTemplate {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -528,7 +531,8 @@ impl crate::Resource for ResourceClass {
     const GROUP: &'static str = "resource.k8s.io";
     const VERSION: &'static str = "v1alpha2";
     const KIND: &'static str = "ResourceClass";
-    const NAME: &'static str = "resourceclasses";
+    const URL_PATH_SEGMENT: &'static str = "resourceclasses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for ResourceClass {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

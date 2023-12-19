@@ -594,7 +594,8 @@ impl crate::Resource for Ingress {
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Ingress";
-    const NAME: &'static str = "ingresses";
+    const URL_PATH_SEGMENT: &'static str = "ingresses";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Ingress {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -630,7 +631,8 @@ impl crate::Resource for IngressClass {
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "IngressClass";
-    const NAME: &'static str = "ingressclasses";
+    const URL_PATH_SEGMENT: &'static str = "ingressclasses";
+    type Scope = crate::ClusterResourceScope;
 }
 impl crate::HasMetadata for IngressClass {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
@@ -657,7 +659,8 @@ impl crate::Resource for NetworkPolicy {
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "NetworkPolicy";
-    const NAME: &'static str = "networkpolicies";
+    const URL_PATH_SEGMENT: &'static str = "networkpolicies";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for NetworkPolicy {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;

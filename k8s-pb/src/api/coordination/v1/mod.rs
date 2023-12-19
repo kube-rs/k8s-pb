@@ -68,7 +68,8 @@ impl crate::Resource for Lease {
     const GROUP: &'static str = "coordination.k8s.io";
     const VERSION: &'static str = "v1";
     const KIND: &'static str = "Lease";
-    const NAME: &'static str = "leases";
+    const URL_PATH_SEGMENT: &'static str = "leases";
+    type Scope = crate::NamespaceResourceScope;
 }
 impl crate::HasMetadata for Lease {
     type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
