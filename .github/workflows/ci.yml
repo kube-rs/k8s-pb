@@ -63,7 +63,7 @@ jobs:
           curl -sSL https://github.com/sharkdp/fd/releases/download/v8.7.1/fd-v8.7.1-i686-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
       - run: |-
           curl -sSL https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
-      - uses: arduino/setup-protoc@v2
+      - uses: arduino/setup-protoc@v3
       - run: just protos
       - run: just swagger
       - run: just codegen
