@@ -58,7 +58,7 @@ jobs:
       # - https://github.com/rust-lang/cargo/issues/8603
       # - https://github.com/actions/cache/issues/403
       - uses: Swatinem/rust-cache@v2
-      - uses: extractions/setup-just@v1
+      - uses: extractions/setup-just@v2
       - run: |-
           curl -sSL https://github.com/sharkdp/fd/releases/download/v8.7.1/fd-v8.7.1-i686-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
       - run: |-
