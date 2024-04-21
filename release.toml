@@ -2,10 +2,8 @@
 #
 # Run `cargo release minor` to publish and create and push a signed tag
 
-pre-release-commit-message = "{{version}}"
 push = true
 tag = true
-tag-name = "{{version}}"
 sign-tag = true
 sign-commit = true
 enable-all-features = true
