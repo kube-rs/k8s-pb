@@ -7,5 +7,6 @@ tag = true
 sign-tag = true
 sign-commit = true
 enable-all-features = true
+tag-name = "{{version}}"
 
 # Ref: https://github.com/crate-ci/cargo-release/blob/master/docs/reference.md
