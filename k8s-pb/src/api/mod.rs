@@ -22,3 +22,4 @@ pub mod rbac;
 pub mod resource;
 pub mod scheduling;
 pub mod storage;
+pub mod storagemigration;
