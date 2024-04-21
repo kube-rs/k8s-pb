@@ -3,6 +3,7 @@ protos/api/admission/v1beta1/generated.proto
 protos/api/admissionregistration/v1/generated.proto
 protos/api/admissionregistration/v1alpha1/generated.proto
 protos/api/admissionregistration/v1beta1/generated.proto
+protos/api/apidiscovery/v2/generated.proto
 protos/api/apidiscovery/v2beta1/generated.proto
 protos/api/apiserverinternal/v1alpha1/generated.proto
 protos/api/apps/v1/generated.proto
@@ -53,6 +54,7 @@ protos/api/scheduling/v1beta1/generated.proto
 protos/api/storage/v1/generated.proto
 protos/api/storage/v1alpha1/generated.proto
 protos/api/storage/v1beta1/generated.proto
+protos/api/storagemigration/v1alpha1/generated.proto
 protos/apiextensions-apiserver/pkg/apis/apiextensions/v1/generated.proto
 protos/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/generated.proto
 protos/apimachinery/pkg/api/resource/generated.proto

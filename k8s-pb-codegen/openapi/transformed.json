@@ -29,6 +29,80 @@
     ],
     "subresources": []
   },
+  "api.admissionregistration.v1.ValidatingAdmissionPolicy": {
+    "name": "validatingadmissionpolicies",
+    "namespaced": false,
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "group": "admissionregistration.k8s.io",
+    "version": "v1",
+    "kind": "ValidatingAdmissionPolicy",
+    "proto": "api.admissionregistration.v1.ValidatingAdmissionPolicy",
+    "rust": "api::admissionregistration::v1::ValidatingAdmissionPolicy",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::admissionregistration::v1::ValidatingAdmissionPolicySpec",
+    "status": "api::admissionregistration::v1::ValidatingAdmissionPolicyStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies",
+      "/apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.admissionregistration.v1.ValidatingAdmissionPolicyBinding": {
+    "name": "validatingadmissionpolicybindings",
+    "namespaced": false,
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "group": "admissionregistration.k8s.io",
+    "version": "v1",
+    "kind": "ValidatingAdmissionPolicyBinding",
+    "proto": "api.admissionregistration.v1.ValidatingAdmissionPolicyBinding",
+    "rust": "api::admissionregistration::v1::ValidatingAdmissionPolicyBinding",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::admissionregistration::v1::ValidatingAdmissionPolicyBindingSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/admissionregistration.k8s.io/v1/validatingadmissionpolicybindings",
+      "/apis/admissionregistration.k8s.io/v1/validatingadmissionpolicybindings/{name}"
+    ],
+    "subresources": []
+  },
   "api.admissionregistration.v1.ValidatingWebhookConfiguration": {
     "name": "validatingwebhookconfigurations",
     "namespaced": false,
@@ -2553,6 +2627,40 @@
       }
     ]
   },
+  "api.resource.v1alpha2.ResourceClaimParameters": {
+    "name": "resourceclaimparameters",
+    "namespaced": true,
+    "apiVersion": "resource.k8s.io/v1alpha2",
+    "group": "resource.k8s.io",
+    "version": "v1alpha2",
+    "kind": "ResourceClaimParameters",
+    "proto": "api.resource.v1alpha2.ResourceClaimParameters",
+    "rust": "api::resource::v1alpha2::ResourceClaimParameters",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/resource.k8s.io/v1alpha2/resourceclaimparameters",
+      "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+      "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}"
+    ],
+    "subresources": []
+  },
   "api.resource.v1alpha2.ResourceClaimTemplate": {
     "name": "resourceclaimtemplates",
     "namespaced": true,
@@ -2614,6 +2722,70 @@
     "paths": [
       "/apis/resource.k8s.io/v1alpha2/resourceclasses",
       "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}"
+    ],
+    "subresources": []
+  },
+  "api.resource.v1alpha2.ResourceClassParameters": {
+    "name": "resourceclassparameters",
+    "namespaced": true,
+    "apiVersion": "resource.k8s.io/v1alpha2",
+    "group": "resource.k8s.io",
+    "version": "v1alpha2",
+    "kind": "ResourceClassParameters",
+    "proto": "api.resource.v1alpha2.ResourceClassParameters",
+    "rust": "api::resource::v1alpha2::ResourceClassParameters",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/resource.k8s.io/v1alpha2/resourceclassparameters",
+      "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+      "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}"
+    ],
+    "subresources": []
+  },
+  "api.resource.v1alpha2.ResourceSlice": {
+    "name": "resourceslices",
+    "namespaced": false,
+    "apiVersion": "resource.k8s.io/v1alpha2",
+    "group": "resource.k8s.io",
+    "version": "v1alpha2",
+    "kind": "ResourceSlice",
+    "proto": "api.resource.v1alpha2.ResourceSlice",
+    "rust": "api::resource::v1alpha2::ResourceSlice",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": null,
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/resource.k8s.io/v1alpha2/resourceslices",
+      "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}"
     ],
     "subresources": []
   },
@@ -2844,6 +3016,50 @@
       "/apis/storage.k8s.io/v1alpha1/volumeattributesclasses/{name}"
     ],
     "subresources": []
+  },
+  "api.storagemigration.v1alpha1.StorageVersionMigration": {
+    "name": "storageversionmigrations",
+    "namespaced": false,
+    "apiVersion": "storagemigration.k8s.io/v1alpha1",
+    "group": "storagemigration.k8s.io",
+    "version": "v1alpha1",
+    "kind": "StorageVersionMigration",
+    "proto": "api.storagemigration.v1alpha1.StorageVersionMigration",
+    "rust": "api::storagemigration::v1alpha1::StorageVersionMigration",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::storagemigration::v1alpha1::StorageVersionMigrationSpec",
+    "status": "api::storagemigration::v1alpha1::StorageVersionMigrationStatus",
+    "condition": "api::storagemigration::v1alpha1::MigrationCondition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/storagemigration.k8s.io/v1alpha1/storageversionmigrations",
+      "/apis/storagemigration.k8s.io/v1alpha1/storageversionmigrations/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/storagemigration.k8s.io/v1alpha1/storageversionmigrations/{name}/status"
+        ]
+      }
+    ]
   },
   "apiextensions_apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition": {
     "name": "customresourcedefinitions",
