@@ -6,7 +6,6 @@ license = "Apache-2.0"
 publish = false
 
 [dependencies]
-bytes = "1.0.1"
 prost = "0.12.3"
 prost-build = "0.12.3"
 prost-types = "0.12.3"
