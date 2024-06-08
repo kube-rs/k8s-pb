@@ -1,4 +1,5 @@
-VERSION := "1.30.1"
+# renovate: datasource=github-releases depName=kubernetes/kubernetes
+KUBERNETES_VERSION := "1.30.1"
 
 default:
   @just --list
@@ -11,7 +12,7 @@ protos-dl:
     rm -rf protos && mkdir protos && cd protos
     for x in api apimachinery apiextensions-apiserver kube-aggregator metrics; do
         mkdir -p ./$x
-        curl -sSL https://github.com/kubernetes/$x/archive/refs/tags/kubernetes-{{VERSION}}.tar.gz | tar xzf - -C ./$x/ --strip-components=1
+        curl -sSL https://github.com/kubernetes/$x/archive/refs/tags/kubernetes-{{KUBERNETES_VERSION}}.tar.gz | tar xzf - -C ./$x/ --strip-components=1
         fd -e proto -x sh -c "mkdir -p k8s.io/'{//}'; mv '{}' k8s.io/'{}'" ';' . ./$x
         rm -rf ./$x
     done
@@ -41,7 +42,7 @@ swagger-dl:
     #!/usr/bin/env bash
     set -exuo pipefail
     curl -sSL -o k8s-pb-codegen/openapi/swagger.json \
-        https://raw.githubusercontent.com/kubernetes/kubernetes/v{{VERSION}}/api/openapi-spec/swagger.json
+        https://raw.githubusercontent.com/kubernetes/kubernetes/v{{KUBERNETES_VERSION}}/api/openapi-spec/swagger.json
 
 # Patch swagger schema for upstream bugs
 swagger-patch:
@@ -71,3 +72,6 @@ codegen:
     cd k8s-pb-codegen
     rm -rf tmp/ && mkdir tmp
     cargo run
+
+[hide]
+renovate: swagger protos codegen
