@@ -315,7 +315,7 @@ pub struct DeleteOptions {
 /// marshaling to YAML and JSON. In particular, it marshals into strings, which
 /// can be used as map keys in json.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Duration {
     #[prost(int64, optional, tag = "1")]
     pub duration: ::core::option::Option<i64>,
@@ -686,7 +686,7 @@ pub struct ManagedFieldsEntry {
 /// +protobuf.as=Timestamp
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MicroTime {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -939,7 +939,7 @@ pub struct PartialObjectMetadataList {
 }
 /// Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Patch {}
 /// PatchOptions may be provided when patching an API object.
 /// PatchOptions is meant to be a superset of UpdateOptions.
@@ -1156,7 +1156,7 @@ pub struct TableOptions {
 /// +protobuf.as=Timestamp
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Time {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -1174,7 +1174,7 @@ pub struct Time {
 /// protobuf marshalling/unmarshalling. It is generated into a serialization
 /// that matches Time. Do not use in Go structs.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Timestamp {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to

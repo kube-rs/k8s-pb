@@ -4,7 +4,7 @@
 /// In the mandatory exempt configuration object the values in the fields
 /// here can be modified by authorized users, unlike the rest of the `spec`.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExemptPriorityLevelConfiguration {
     /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
     /// NominalConcurrencyLimit (NominalCL) of this level.
@@ -412,7 +412,7 @@ pub struct PriorityLevelConfigurationStatus {
 }
 /// QueuingConfiguration holds the configuration parameters for queuing
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct QueuingConfiguration {
     /// `queues` is the number of queues for this priority level. The
     /// queues exist independently at each apiserver. The value must be

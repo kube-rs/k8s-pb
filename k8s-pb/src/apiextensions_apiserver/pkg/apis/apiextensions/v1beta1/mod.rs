@@ -426,7 +426,7 @@ pub struct CustomResourceSubresourceScale {
 /// * PUT requests to the /status subresource take a custom resource object, and ignore changes to anything except the status stanza
 /// * PUT/POST/PATCH requests to the custom resource ignore changes to the status stanza
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomResourceSubresourceStatus {}
 /// CustomResourceSubresources defines the status and scale subresources for CustomResources.
 #[allow(clippy::derive_partial_eq_without_eq)]

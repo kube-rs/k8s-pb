@@ -73,5 +73,5 @@ codegen:
     rm -rf tmp/ && mkdir tmp
     cargo run
 
-[hide]
+[private]
 renovate: swagger protos codegen

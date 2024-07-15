@@ -700,7 +700,7 @@ pub struct StatefulSetList {
 /// StatefulSetOrdinals describes the policy used for replica ordinal assignment
 /// in this StatefulSet.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StatefulSetOrdinals {
     /// start is the number representing the first replica's index. It may be used
     /// to number replicas from an alternate index (eg: 1-indexed) over the default
