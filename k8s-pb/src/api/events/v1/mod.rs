@@ -103,7 +103,7 @@ pub struct EventList {
 /// The default event reporter in "k8s.io/client-go/tools/events/event_broadcaster.go" shows
 /// how this struct is updated on heartbeats and can guide customized reporter implementations.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EventSeries {
     /// count is the number of occurrences in this series up to the last heartbeat time.
     #[prost(int32, optional, tag = "1")]

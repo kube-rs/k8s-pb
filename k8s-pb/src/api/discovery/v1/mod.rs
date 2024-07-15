@@ -57,7 +57,7 @@ pub struct Endpoint {
 }
 /// EndpointConditions represents the current condition of an endpoint.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EndpointConditions {
     /// ready indicates that this endpoint is prepared to receive traffic,
     /// according to whatever system is managing the endpoint. A nil value

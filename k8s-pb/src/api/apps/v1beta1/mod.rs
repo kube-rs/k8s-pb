@@ -242,7 +242,7 @@ pub struct DeploymentStrategy {
 }
 /// DEPRECATED.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RollbackConfig {
     /// The revision to rollback to. If set to 0, rollback to the last revision.
     /// +optional
@@ -329,7 +329,7 @@ pub struct Scale {
 }
 /// ScaleSpec describes the attributes of a scale subresource
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
     /// replicas is the number of observed instances of the scaled object.
     /// +optional
@@ -427,7 +427,7 @@ pub struct StatefulSetList {
 /// StatefulSetOrdinals describes the policy used for replica ordinal assignment
 /// in this StatefulSet.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StatefulSetOrdinals {
     /// start is the number representing the first replica's index. It may be used
     /// to number replicas from an alternate index (eg: 1-indexed) over the default

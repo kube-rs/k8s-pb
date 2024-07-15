@@ -224,7 +224,7 @@ pub struct HorizontalPodAutoscalerSpec {
 }
 /// current status of a horizontal pod autoscaler
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerStatus {
     /// observedGeneration is the most recent generation observed by this autoscaler.
     /// +optional
@@ -532,7 +532,7 @@ pub struct Scale {
 }
 /// ScaleSpec describes the attributes of a scale subresource.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
     /// replicas is the desired number of instances for the scaled object.
     /// +optional

@@ -32,7 +32,8 @@ protos-list:
     #!/usr/bin/env bash
     set -exuo pipefail
     cd k8s-pb-codegen
-    fd -e proto | sort > protos.list
+    sort --version
+    fd -e proto | sort -fd > protos.list
 
 # Download and generate all protos dependent files
 protos: protos-dl protos-patch protos-list
@@ -73,5 +74,5 @@ codegen:
     rm -rf tmp/ && mkdir tmp
     cargo run
 
-[hide]
+[private]
 renovate: swagger protos codegen

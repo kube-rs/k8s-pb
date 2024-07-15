@@ -1025,7 +1025,7 @@ pub struct ReplicaSetStatus {
 }
 /// DEPRECATED.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RollbackConfig {
     /// The revision to rollback to. If set to 0, rollback to the last revision.
     /// +optional
@@ -1137,7 +1137,7 @@ pub struct Scale {
 }
 /// describes the attributes of a scale subresource
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
     /// desired number of instances for the scaled object.
     /// +optional

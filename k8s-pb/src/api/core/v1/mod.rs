@@ -461,7 +461,7 @@ pub struct ClaimSource {
 }
 /// ClientIPConfig represents the configurations of Client IP based session affinity.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ClientIpConfig {
     /// timeoutSeconds specifies the seconds of ClientIP type session sticky time.
     /// The value must be >0 && <=86400(for 1 day) if ServiceAffinity == "ClientIP".
@@ -1047,7 +1047,7 @@ pub struct ContainerState {
 }
 /// ContainerStateRunning is a running state of a container.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ContainerStateRunning {
     /// Time at which the container was last (re-)started
     /// +optional
@@ -1195,7 +1195,7 @@ pub struct ContainerStatus {
 }
 /// DaemonEndpoint contains information about a single Daemon endpoint.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DaemonEndpoint {
     /// Port number of the given endpoint.
     #[prost(int32, optional, tag = "1")]
@@ -1833,7 +1833,7 @@ pub struct EventList {
 /// EventSeries contain information on series of events, i.e. thing that was/is happening
 /// continuously for some time.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EventSeries {
     /// Number of occurrences in this series up to the last heartbeat time
     #[prost(int32, optional, tag = "1")]
@@ -2858,7 +2858,7 @@ pub struct NodeConfigStatus {
 }
 /// NodeDaemonEndpoints lists ports opened by daemons running on the Node.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NodeDaemonEndpoints {
     /// Endpoint on which Kubelet is listening.
     /// +optional
@@ -2905,7 +2905,7 @@ pub struct NodeRuntimeHandler {
 }
 /// NodeRuntimeHandlerFeatures is a set of runtime features.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NodeRuntimeHandlerFeatures {
     /// RecursiveReadOnlyMounts is set to true if the runtime handler supports RecursiveReadOnlyMounts.
     /// +featureGate=RecursiveReadOnlyMounts
@@ -6497,7 +6497,7 @@ pub struct ServiceStatus {
 }
 /// SessionAffinityConfig represents the configurations of session affinity.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SessionAffinityConfig {
     /// clientIP contains the configurations of Client IP based session affinity.
     /// +optional
@@ -6506,7 +6506,7 @@ pub struct SessionAffinityConfig {
 }
 /// SleepAction describes a "sleep" action.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SleepAction {
     /// Seconds is the number of seconds to sleep.
     #[prost(int64, optional, tag = "1")]

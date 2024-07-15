@@ -610,7 +610,7 @@ pub struct VolumeError {
 }
 /// VolumeNodeResources is a set of resource limits for scheduling of volumes.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VolumeNodeResources {
     /// count indicates the maximum number of unique volumes managed by the CSI driver that can be used on a node.
     /// A volume that is both attached and mounted on a node is considered to be used once, not twice.

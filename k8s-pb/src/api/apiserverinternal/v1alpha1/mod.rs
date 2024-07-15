@@ -86,7 +86,7 @@ pub struct StorageVersionList {
 }
 /// StorageVersionSpec is an empty spec.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StorageVersionSpec {}
 /// API server instances report the versions they can decode and the version they
 /// encode objects to when persisting objects in the backend.
