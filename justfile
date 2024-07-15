@@ -32,7 +32,8 @@ protos-list:
     #!/usr/bin/env bash
     set -exuo pipefail
     cd k8s-pb-codegen
-    fd -e proto | sort -hf > protos.list
+    sort --version
+    fd -e proto | sort -fd > protos.list
 
 # Download and generate all protos dependent files
 protos: protos-dl protos-patch protos-list
