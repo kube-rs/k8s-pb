@@ -7,5 +7,19 @@
   ignorePaths: ["k8s-pb*/**"],
   postUpgradeTasks: {
     commands: ["just renovate"]
-  }
+  },
+  customManagers: [
+    {
+      customType: "regex",
+      fileMatch: ["^justfile$"],
+      matchStrings: [
+        // example:
+        // renovate: datasource=github-releases depName=clux/whyq versioning=semver
+        //KUBERNETES_VERSION := "x.x.x"
+        "renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?_VERSION \\:= \"(?<currentValue>.*)\"",
+      ],
+      versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      extractVersionTemplate: '^?(?<version>\\d+\\.\\d+\\.\\d+)',
+    },
+  ],
 }
