@@ -1,5 +1,4 @@
 #!/bin/bash
-set -exuo pipefail
 
 # renovate: datasource=github-releases depName=clux/whyq
 export YQ_VER=0.10.2

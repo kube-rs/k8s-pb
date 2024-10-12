@@ -1,7 +1,6 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
-    "config:base",
     ":gitSignOff",
     ":disableDependencyDashboard"
   ],
@@ -14,6 +13,7 @@
     "This PR bumps the Kubernetes version in the justfile and runs just renovate.",
     "{{#if isMinor}}Please check for inconsistencies in the new version{{/if}}",
   ],
+  branchPrefix: "ghreno",
   customManagers: [
     {
       customType: "regex",
