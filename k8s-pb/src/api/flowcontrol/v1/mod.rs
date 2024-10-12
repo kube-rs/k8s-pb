@@ -3,7 +3,6 @@
 /// of the handling of exempt requests.
 /// In the mandatory exempt configuration object the values in the fields
 /// here can be modified by authorized users, unlike the rest of the `spec`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExemptPriorityLevelConfiguration {
     /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
@@ -36,7 +35,6 @@ pub struct ExemptPriorityLevelConfiguration {
     pub lendable_percent: ::core::option::Option<i32>,
 }
 /// FlowDistinguisherMethod specifies the method of a flow distinguisher.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowDistinguisherMethod {
     /// `type` is the type of flow distinguisher method
@@ -47,7 +45,6 @@ pub struct FlowDistinguisherMethod {
 }
 /// FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with
 /// similar attributes and is identified by a pair of strings: the name of the FlowSchema and a "flow distinguisher".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowSchema {
     /// `metadata` is the standard object's metadata.
@@ -67,7 +64,6 @@ pub struct FlowSchema {
     pub status: ::core::option::Option<FlowSchemaStatus>,
 }
 /// FlowSchemaCondition describes conditions for a FlowSchema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowSchemaCondition {
     /// `type` is the type of the condition.
@@ -91,7 +87,6 @@ pub struct FlowSchemaCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// FlowSchemaList is a list of FlowSchema objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowSchemaList {
     /// `metadata` is the standard list metadata.
@@ -104,7 +99,6 @@ pub struct FlowSchemaList {
     pub items: ::prost::alloc::vec::Vec<FlowSchema>,
 }
 /// FlowSchemaSpec describes how the FlowSchema's specification looks like.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowSchemaSpec {
     /// `priorityLevelConfiguration` should reference a PriorityLevelConfiguration in the cluster. If the reference cannot
@@ -133,7 +127,6 @@ pub struct FlowSchemaSpec {
     pub rules: ::prost::alloc::vec::Vec<PolicyRulesWithSubjects>,
 }
 /// FlowSchemaStatus represents the current state of a FlowSchema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowSchemaStatus {
     /// `conditions` is a list of the current states of FlowSchema.
@@ -146,7 +139,6 @@ pub struct FlowSchemaStatus {
     pub conditions: ::prost::alloc::vec::Vec<FlowSchemaCondition>,
 }
 /// GroupSubject holds detailed information for group-kind subject.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupSubject {
     /// name is the user group that matches, or "*" to match all user groups.
@@ -158,7 +150,6 @@ pub struct GroupSubject {
 }
 /// LimitResponse defines how to handle requests that can not be executed right now.
 /// +union
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitResponse {
     /// `type` is "Queue" or "Reject".
@@ -181,7 +172,6 @@ pub struct LimitResponse {
 /// It addresses two issues:
 ///    - How are requests for this priority level limited?
 ///    - What should be done with requests that exceed the limit?
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitedPriorityLevelConfiguration {
     /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
@@ -243,7 +233,6 @@ pub struct LimitedPriorityLevelConfiguration {
 /// NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and the
 /// target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at least one member
 /// of verbs matches the request and (b) at least one member of nonResourceURLs matches the request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NonResourcePolicyRule {
     /// `verbs` is a list of matching verbs and may not be empty.
@@ -269,7 +258,6 @@ pub struct NonResourcePolicyRule {
 /// making the request, the verb being requested, and the resource to be acted upon. This PolicyRulesWithSubjects matches
 /// a request if and only if both (a) at least one member of subjects matches the request and (b) at least one member
 /// of resourceRules or nonResourceRules matches the request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicyRulesWithSubjects {
     /// subjects is the list of normal user, serviceaccount, or group that this rule cares about.
@@ -294,7 +282,6 @@ pub struct PolicyRulesWithSubjects {
     pub non_resource_rules: ::prost::alloc::vec::Vec<NonResourcePolicyRule>,
 }
 /// PriorityLevelConfiguration represents the configuration of a priority level.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfiguration {
     /// `metadata` is the standard object's metadata.
@@ -314,7 +301,6 @@ pub struct PriorityLevelConfiguration {
     pub status: ::core::option::Option<PriorityLevelConfigurationStatus>,
 }
 /// PriorityLevelConfigurationCondition defines the condition of priority level.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfigurationCondition {
     /// `type` is the type of the condition.
@@ -338,7 +324,6 @@ pub struct PriorityLevelConfigurationCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfigurationList {
     /// `metadata` is the standard object's metadata.
@@ -351,7 +336,6 @@ pub struct PriorityLevelConfigurationList {
     pub items: ::prost::alloc::vec::Vec<PriorityLevelConfiguration>,
 }
 /// PriorityLevelConfigurationReference contains information that points to the "request-priority" being used.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfigurationReference {
     /// `name` is the name of the priority level configuration being referenced
@@ -361,7 +345,6 @@ pub struct PriorityLevelConfigurationReference {
 }
 /// PriorityLevelConfigurationSpec specifies the configuration of a priority level.
 /// +union
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfigurationSpec {
     /// `type` indicates whether this priority level is subject to
@@ -391,7 +374,6 @@ pub struct PriorityLevelConfigurationSpec {
     pub exempt: ::core::option::Option<ExemptPriorityLevelConfiguration>,
 }
 /// PriorityLevelConfigurationStatus represents the current state of a "request-priority".
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfigurationStatus {
     /// `conditions` is the current state of "request-priority".
@@ -404,7 +386,6 @@ pub struct PriorityLevelConfigurationStatus {
     pub conditions: ::prost::alloc::vec::Vec<PriorityLevelConfigurationCondition>,
 }
 /// QueuingConfiguration holds the configuration parameters for queuing
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct QueuingConfiguration {
     /// `queues` is the number of queues for this priority level. The
@@ -447,7 +428,6 @@ pub struct QueuingConfiguration {
 /// not specify a namespace (i.e., `Namespace==""`) and clusterScope is
 /// true or (d2) the request specifies a namespace and least one member
 /// of namespaces matches the request's namespace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourcePolicyRule {
     /// `verbs` is a list of matching verbs and may not be empty.
@@ -492,7 +472,6 @@ pub struct ResourcePolicyRule {
     pub namespaces: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServiceAccountSubject holds detailed information for service-account-kind subject.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccountSubject {
     /// `namespace` is the namespace of matching ServiceAccount objects.
@@ -507,7 +486,6 @@ pub struct ServiceAccountSubject {
 /// Subject matches the originator of a request, as identified by the request authentication system. There are three
 /// ways of matching an originator; by user, group, or service account.
 /// +union
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Subject {
     /// `kind` indicates which one of the other fields is non-empty.
@@ -529,7 +507,6 @@ pub struct Subject {
     pub service_account: ::core::option::Option<ServiceAccountSubject>,
 }
 /// UserSubject holds detailed information for user-kind subject.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserSubject {
     /// `name` is the username that matches, or "*" to match all usernames.

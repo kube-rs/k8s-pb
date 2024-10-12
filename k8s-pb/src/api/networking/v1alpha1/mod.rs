@@ -6,7 +6,6 @@
 /// by dots suppressing leading zeros for IPv4 and the representation defined by RFC 5952 for IPv6.
 /// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddress {
     /// Standard object's metadata.
@@ -21,7 +20,6 @@ pub struct IpAddress {
     pub spec: ::core::option::Option<IpAddressSpec>,
 }
 /// IPAddressList contains a list of IPAddress.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddressList {
     /// Standard object's metadata.
@@ -34,7 +32,6 @@ pub struct IpAddressList {
     pub items: ::prost::alloc::vec::Vec<IpAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
@@ -44,7 +41,6 @@ pub struct IpAddressSpec {
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
 /// ParentReference describes a reference to a parent object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParentReference {
     /// Group is the group of the object being referenced.
@@ -66,7 +62,6 @@ pub struct ParentReference {
 }
 /// ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
 /// This range is used to allocate ClusterIPs to Service objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidr {
     /// Standard object's metadata.
@@ -86,7 +81,6 @@ pub struct ServiceCidr {
     pub status: ::core::option::Option<ServiceCidrStatus>,
 }
 /// ServiceCIDRList contains a list of ServiceCIDR objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidrList {
     /// Standard object's metadata.
@@ -99,7 +93,6 @@ pub struct ServiceCidrList {
     pub items: ::prost::alloc::vec::Vec<ServiceCidr>,
 }
 /// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidrSpec {
     /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
@@ -111,7 +104,6 @@ pub struct ServiceCidrSpec {
     pub cidrs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServiceCIDRStatus describes the current state of the ServiceCIDR.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidrStatus {
     /// conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR.

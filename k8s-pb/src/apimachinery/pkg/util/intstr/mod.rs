@@ -8,7 +8,6 @@
 /// +protobuf=true
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:openapi-gen=true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IntOrString {
     #[prost(int64, optional, tag = "1")]

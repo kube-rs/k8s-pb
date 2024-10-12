@@ -4,7 +4,6 @@
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExtraValue {
     #[prost(string, repeated, tag = "1")]
@@ -13,7 +12,6 @@ pub struct ExtraValue {
 /// LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given namespace.
 /// Having a namespace scoped resource makes it much easier to grant namespace scoped policy that includes permissions
 /// checking.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalSubjectAccessReview {
     /// Standard list metadata.
@@ -31,7 +29,6 @@ pub struct LocalSubjectAccessReview {
     pub status: ::core::option::Option<SubjectAccessReviewStatus>,
 }
 /// NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NonResourceAttributes {
     /// Path is the URL path of the request
@@ -44,7 +41,6 @@ pub struct NonResourceAttributes {
     pub verb: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// NonResourceRule holds information that describes a rule for the non-resource
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NonResourceRule {
     /// Verb is a list of kubernetes non-resource API verbs, like: get, post, put, delete, patch, head, options.  "*" means all.
@@ -59,7 +55,6 @@ pub struct NonResourceRule {
     pub non_resource_ur_ls: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceAttributes {
     /// Namespace is the namespace of the action being requested.  Currently, there is no distinction between no namespace and all namespaces
@@ -96,7 +91,6 @@ pub struct ResourceAttributes {
 }
 /// ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant,
 /// may contain duplicates, and possibly be incomplete.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceRule {
     /// Verb is a list of kubernetes resource API verbs, like: get, list, watch, create, update, delete, proxy.  "*" means all.
@@ -124,7 +118,6 @@ pub struct ResourceRule {
 /// SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a
 /// spec.namespace means "in all namespaces".  Self is a special case, because users should always be able
 /// to check whether they can perform an action
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectAccessReview {
     /// Standard list metadata.
@@ -142,7 +135,6 @@ pub struct SelfSubjectAccessReview {
 }
 /// SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes
 /// and NonResourceAuthorizationAttributes must be set
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectAccessReviewSpec {
     /// ResourceAuthorizationAttributes describes information for a resource access request
@@ -160,7 +152,6 @@ pub struct SelfSubjectAccessReviewSpec {
 /// or to quickly let an end user reason about their permissions. It should NOT Be used by external systems to
 /// drive authorization decisions as this raises confused deputy, cache lifetime/revocation, and correctness concerns.
 /// SubjectAccessReview, and LocalAccessReview are the correct way to defer authorization decisions to the API server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectRulesReview {
     /// Standard list metadata.
@@ -177,7 +168,6 @@ pub struct SelfSubjectRulesReview {
     pub status: ::core::option::Option<SubjectRulesReviewStatus>,
 }
 /// SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectRulesReviewSpec {
     /// Namespace to evaluate rules for. Required.
@@ -185,7 +175,6 @@ pub struct SelfSubjectRulesReviewSpec {
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// SubjectAccessReview checks whether or not a user or group can perform an action.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectAccessReview {
     /// Standard list metadata.
@@ -203,7 +192,6 @@ pub struct SubjectAccessReview {
 }
 /// SubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes
 /// and NonResourceAuthorizationAttributes must be set
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectAccessReviewSpec {
     /// ResourceAuthorizationAttributes describes information for a resource access request
@@ -235,7 +223,6 @@ pub struct SubjectAccessReviewSpec {
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// SubjectAccessReviewStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectAccessReviewStatus {
     /// Allowed is required. True if the action would be allowed, false otherwise.
@@ -263,7 +250,6 @@ pub struct SubjectAccessReviewStatus {
 /// the set of authorizers the server is configured with and any errors experienced during evaluation.
 /// Because authorization rules are additive, if a rule appears in a list it's safe to assume the subject has that permission,
 /// even if that list is incomplete.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectRulesReviewStatus {
     /// ResourceRules is the list of actions the subject is allowed to perform on resources.

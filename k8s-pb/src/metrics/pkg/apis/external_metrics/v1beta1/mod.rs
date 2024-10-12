@@ -2,7 +2,6 @@
 /// ExternalMetricValue is a metric value for external metric
 /// A single metric value is identified by metric name and a set of string labels.
 /// For one metric there can be multiple values with different sets of labels.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricValue {
     /// the name of the metric
@@ -28,7 +27,6 @@ pub struct ExternalMetricValue {
         ::core::option::Option<super::super::super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ExternalMetricValueList is a list of values for a given metric for some set labels
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricValueList {
     #[prost(message, optional, tag = "1")]

@@ -7,7 +7,6 @@
 /// Kubernetes attach detach controller uses this object to determine whether attach is required.
 /// Kubelet uses this object to determine whether pod information needs to be passed on mount.
 /// CSIDriver objects are non-namespaced.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiDriver {
     /// Standard object metadata.
@@ -25,7 +24,6 @@ pub struct CsiDriver {
     pub spec: ::core::option::Option<CsiDriverSpec>,
 }
 /// CSIDriverList is a collection of CSIDriver objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiDriverList {
     /// Standard list metadata
@@ -38,7 +36,6 @@ pub struct CsiDriverList {
     pub items: ::prost::alloc::vec::Vec<CsiDriver>,
 }
 /// CSIDriverSpec is the specification of a CSIDriver.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiDriverSpec {
     /// attachRequired indicates this CSI volume driver requires an attach
@@ -202,7 +199,6 @@ pub struct CsiDriverSpec {
 /// there are no CSI Drivers available on the node, or the Kubelet version is low
 /// enough that it doesn't create this object.
 /// CSINode has an OwnerReference that points to the corresponding node object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNode {
     /// metadata.name must be the Kubernetes node name.
@@ -213,7 +209,6 @@ pub struct CsiNode {
     pub spec: ::core::option::Option<CsiNodeSpec>,
 }
 /// CSINodeDriver holds information about the specification of one CSI driver installed on a node
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNodeDriver {
     /// name represents the name of the CSI driver that this object refers to.
@@ -252,7 +247,6 @@ pub struct CsiNodeDriver {
     pub allocatable: ::core::option::Option<VolumeNodeResources>,
 }
 /// CSINodeList is a collection of CSINode objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNodeList {
     /// Standard list metadata
@@ -265,7 +259,6 @@ pub struct CsiNodeList {
     pub items: ::prost::alloc::vec::Vec<CsiNode>,
 }
 /// CSINodeSpec holds information about the specification of all CSI drivers installed on a node
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiNodeSpec {
     /// drivers is a list of information of all CSI Drivers existing on a node.
@@ -301,7 +294,6 @@ pub struct CsiNodeSpec {
 /// to a comparison against the less precise Capacity. If that is also unset,
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
@@ -363,7 +355,6 @@ pub struct CsiStorageCapacity {
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacityList {
     /// Standard list metadata
@@ -380,7 +371,6 @@ pub struct CsiStorageCapacityList {
 ///
 /// StorageClasses are non-namespaced; the name of the storage class
 /// according to etcd is in ObjectMeta.Name.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageClass {
     /// Standard object's metadata.
@@ -429,7 +419,6 @@ pub struct StorageClass {
     pub allowed_topologies: ::prost::alloc::vec::Vec<super::super::core::v1::TopologySelectorTerm>,
 }
 /// StorageClassList is a collection of storage classes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageClassList {
     /// Standard list metadata
@@ -442,7 +431,6 @@ pub struct StorageClassList {
     pub items: ::prost::alloc::vec::Vec<StorageClass>,
 }
 /// TokenRequest contains parameters of a service account token.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenRequest {
     /// audience is the intended audience of the token in "TokenRequestSpec".
@@ -460,7 +448,6 @@ pub struct TokenRequest {
 /// to/from the specified node.
 ///
 /// VolumeAttachment objects are non-namespaced.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachment {
     /// Standard object metadata.
@@ -480,7 +467,6 @@ pub struct VolumeAttachment {
     pub status: ::core::option::Option<VolumeAttachmentStatus>,
 }
 /// VolumeAttachmentList is a collection of VolumeAttachment objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentList {
     /// Standard list metadata
@@ -496,7 +482,6 @@ pub struct VolumeAttachmentList {
 /// Right now only PersistenVolumes can be attached via external attacher,
 /// in future we may allow also inline volumes in pods.
 /// Exactly one member can be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSource {
     /// persistentVolumeName represents the name of the persistent volume to attach.
@@ -514,7 +499,6 @@ pub struct VolumeAttachmentSource {
     pub inline_volume_spec: ::core::option::Option<super::super::core::v1::PersistentVolumeSpec>,
 }
 /// VolumeAttachmentSpec is the specification of a VolumeAttachment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
@@ -529,7 +513,6 @@ pub struct VolumeAttachmentSpec {
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeAttachmentStatus is the status of a VolumeAttachment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentStatus {
     /// attached indicates the volume is successfully attached.
@@ -560,7 +543,6 @@ pub struct VolumeAttachmentStatus {
     pub detach_error: ::core::option::Option<VolumeError>,
 }
 /// VolumeError captures an error encountered during a volume operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
@@ -575,7 +557,6 @@ pub struct VolumeError {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeNodeResources is a set of resource limits for scheduling of volumes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VolumeNodeResources {
     /// count indicates the maximum number of unique volumes managed by the CSI driver that can be used on a node.

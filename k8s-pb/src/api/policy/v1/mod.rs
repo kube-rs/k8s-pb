@@ -2,7 +2,6 @@
 /// Eviction evicts a pod from its node subject to certain policies and safety constraints.
 /// This is a subresource of Pod.  A request to cause such an eviction is
 /// created by POSTing to .../pods/<pod name>/evictions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Eviction {
     /// ObjectMeta describes the pod that is being evicted.
@@ -16,7 +15,6 @@ pub struct Eviction {
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::DeleteOptions>,
 }
 /// PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDisruptionBudget {
     /// Standard object's metadata.
@@ -34,7 +32,6 @@ pub struct PodDisruptionBudget {
     pub status: ::core::option::Option<PodDisruptionBudgetStatus>,
 }
 /// PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDisruptionBudgetList {
     /// Standard object's metadata.
@@ -47,7 +44,6 @@ pub struct PodDisruptionBudgetList {
     pub items: ::prost::alloc::vec::Vec<PodDisruptionBudget>,
 }
 /// PodDisruptionBudgetSpec is a description of a PodDisruptionBudget.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDisruptionBudgetSpec {
     /// An eviction is allowed if at least "minAvailable" pods selected by
@@ -106,7 +102,6 @@ pub struct PodDisruptionBudgetSpec {
 }
 /// PodDisruptionBudgetStatus represents information about the status of a
 /// PodDisruptionBudget. Status may trail the actual state of a system.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDisruptionBudgetStatus {
     /// Most recent generation observed when updating this PDB status. DisruptionsAllowed and other

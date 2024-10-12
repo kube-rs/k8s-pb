@@ -14,7 +14,6 @@
 /// multiple associated ClusterTrustBundles; each is an independent set of trust
 /// anchors for that signer. Admission control is used to enforce that only users
 /// with permissions on the signer can create or modify the corresponding bundle.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterTrustBundle {
     /// metadata contains the object metadata.
@@ -26,7 +25,6 @@ pub struct ClusterTrustBundle {
     pub spec: ::core::option::Option<ClusterTrustBundleSpec>,
 }
 /// ClusterTrustBundleList is a collection of ClusterTrustBundle objects
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterTrustBundleList {
     /// metadata contains the list metadata.
@@ -39,7 +37,6 @@ pub struct ClusterTrustBundleList {
     pub items: ::prost::alloc::vec::Vec<ClusterTrustBundle>,
 }
 /// ClusterTrustBundleSpec contains the signer and trust anchors.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterTrustBundleSpec {
     /// signerName indicates the associated signer, if any.

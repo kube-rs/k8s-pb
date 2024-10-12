@@ -6,7 +6,6 @@
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source. Only one "target" type
 /// should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricSource {
     /// name is the name of the resource in question.
@@ -34,7 +33,6 @@ pub struct ContainerResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
     /// name is the name of the resource in question.
@@ -61,7 +59,6 @@ pub struct ContainerResourceMetricStatus {
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// kind is the kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
@@ -78,7 +75,6 @@ pub struct CrossVersionObjectReference {
 /// ExternalMetricSource indicates how to scale on a metric not associated with
 /// any Kubernetes object (for example length of queue in cloud
 /// messaging service, or QPS from loadbalancer running outside of cluster).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricSource {
     /// metricName is the name of the metric in question.
@@ -104,7 +100,6 @@ pub struct ExternalMetricSource {
 }
 /// ExternalMetricStatus indicates the current value of a global metric
 /// not associated with any Kubernetes object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricStatus {
     /// metricName is the name of a metric used for autoscaling in
@@ -128,7 +123,6 @@ pub struct ExternalMetricStatus {
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// configuration of a horizontal pod autoscaler.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscaler {
     /// Standard object metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
@@ -146,7 +140,6 @@ pub struct HorizontalPodAutoscaler {
 }
 /// HorizontalPodAutoscalerCondition describes the state of
 /// a HorizontalPodAutoscaler at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerCondition {
     /// type describes the current condition
@@ -172,7 +165,6 @@ pub struct HorizontalPodAutoscalerCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// list of horizontal pod autoscaler objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerList {
     /// Standard list metadata.
@@ -184,7 +176,6 @@ pub struct HorizontalPodAutoscalerList {
     pub items: ::prost::alloc::vec::Vec<HorizontalPodAutoscaler>,
 }
 /// specification of a horizontal pod autoscaler.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerSpec {
     /// reference to scaled resource; horizontal pod autoscaler will learn the current resource consumption
@@ -209,7 +200,6 @@ pub struct HorizontalPodAutoscalerSpec {
     pub target_cpu_utilization_percentage: ::core::option::Option<i32>,
 }
 /// current status of a horizontal pod autoscaler
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerStatus {
     /// observedGeneration is the most recent generation observed by this autoscaler.
@@ -235,7 +225,6 @@ pub struct HorizontalPodAutoscalerStatus {
 }
 /// MetricSpec specifies how to scale based on a single metric
 /// (only `type` and one other matching field should be set at once).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricSpec {
     /// type is the type of metric source.  It should be one of "ContainerResource",
@@ -282,7 +271,6 @@ pub struct MetricSpec {
     pub external: ::core::option::Option<ExternalMetricSource>,
 }
 /// MetricStatus describes the last-read state of a single metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricStatus {
     /// type is the type of metric source.  It will be one of "ContainerResource",
@@ -329,7 +317,6 @@ pub struct MetricStatus {
 }
 /// ObjectMetricSource indicates how to scale on a metric describing a
 /// kubernetes object (for example, hits-per-second on an Ingress object).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMetricSource {
     /// target is the described Kubernetes object.
@@ -357,7 +344,6 @@ pub struct ObjectMetricSource {
 }
 /// ObjectMetricStatus indicates the current value of a metric describing a
 /// kubernetes object (for example, hits-per-second on an Ingress object).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMetricStatus {
     /// target is the described Kubernetes object.
@@ -388,7 +374,6 @@ pub struct ObjectMetricStatus {
 /// the current scale target (for example, transactions-processed-per-second).
 /// The values will be averaged together before being compared to the target
 /// value.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodsMetricSource {
     /// metricName is the name of the metric in question
@@ -409,7 +394,6 @@ pub struct PodsMetricSource {
 }
 /// PodsMetricStatus indicates the current value of a metric describing each pod in
 /// the current scale target (for example, transactions-processed-per-second).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodsMetricStatus {
     /// metricName is the name of the metric in question
@@ -435,7 +419,6 @@ pub struct PodsMetricStatus {
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricSource {
     /// name is the name of the resource in question.
@@ -460,7 +443,6 @@ pub struct ResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricStatus {
     /// name is the name of the resource in question.
@@ -483,7 +465,6 @@ pub struct ResourceMetricStatus {
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// Scale represents a scaling request for a resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Scale {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
@@ -500,7 +481,6 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// ScaleSpec describes the attributes of a scale subresource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
     /// replicas is the desired number of instances for the scaled object.
@@ -509,7 +489,6 @@ pub struct ScaleSpec {
     pub replicas: ::core::option::Option<i32>,
 }
 /// ScaleStatus represents the current status of a scale subresource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleStatus {
     /// replicas is the actual number of observed instances of the scaled object.

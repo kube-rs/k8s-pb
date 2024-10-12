@@ -5,7 +5,6 @@
 /// must also be in the same AWS zone as the kubelet. An AWS EBS disk
 /// can only be mounted as read/write once. AWS EBS volumes support
 /// ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AwsElasticBlockStoreVolumeSource {
     /// volumeID is unique ID of the persistent disk resource in AWS (Amazon EBS volume).
@@ -34,7 +33,6 @@ pub struct AwsElasticBlockStoreVolumeSource {
     pub read_only: ::core::option::Option<bool>,
 }
 /// Affinity is a group of affinity scheduling rules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Affinity {
     /// Describes node affinity scheduling rules for the pod.
@@ -52,7 +50,6 @@ pub struct Affinity {
 }
 /// AppArmorProfile defines a pod or container's AppArmor settings.
 /// +union
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppArmorProfile {
     /// type indicates which kind of AppArmor profile will be applied.
@@ -72,7 +69,6 @@ pub struct AppArmorProfile {
     pub localhost_profile: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// AttachedVolume describes a volume attached to a node
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttachedVolume {
     /// Name of the attached volume
@@ -85,7 +81,6 @@ pub struct AttachedVolume {
 /// AvoidPods describes pods that should avoid this node. This is the value for a
 /// Node annotation with key scheduler.alpha.kubernetes.io/preferAvoidPods and
 /// will eventually become a field of NodeStatus.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AvoidPods {
     /// Bounded-sized list of signatures of pods that should avoid this node, sorted
@@ -96,7 +91,6 @@ pub struct AvoidPods {
     pub prefer_avoid_pods: ::prost::alloc::vec::Vec<PreferAvoidPodsEntry>,
 }
 /// AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzureDiskVolumeSource {
     /// diskName is the Name of the data disk in the blob storage
@@ -125,7 +119,6 @@ pub struct AzureDiskVolumeSource {
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzureFilePersistentVolumeSource {
     /// secretName is the name of secret that contains Azure Storage Account Name and Key
@@ -146,7 +139,6 @@ pub struct AzureFilePersistentVolumeSource {
     pub secret_namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzureFileVolumeSource {
     /// secretName is the  name of secret that contains Azure Storage Account Name and Key
@@ -163,7 +155,6 @@ pub struct AzureFileVolumeSource {
 }
 /// Binding ties one object to another; for example, a pod is bound to a node by a scheduler.
 /// Deprecated in 1.7, please use the bindings subresource of pods instead.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Binding {
     /// Standard object's metadata.
@@ -176,7 +167,6 @@ pub struct Binding {
     pub target: ::core::option::Option<ObjectReference>,
 }
 /// Represents storage that is managed by an external CSI volume driver (Beta feature)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiPersistentVolumeSource {
     /// driver is the name of the driver to use for this volume.
@@ -245,7 +235,6 @@ pub struct CsiPersistentVolumeSource {
     pub node_expand_secret_ref: ::core::option::Option<SecretReference>,
 }
 /// Represents a source location of a volume to mount, managed by an external CSI driver
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiVolumeSource {
     /// driver is the name of the CSI driver that handles this volume.
@@ -279,7 +268,6 @@ pub struct CsiVolumeSource {
     pub node_publish_secret_ref: ::core::option::Option<LocalObjectReference>,
 }
 /// Adds and removes POSIX capabilities from running containers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Capabilities {
     /// Added capabilities
@@ -295,7 +283,6 @@ pub struct Capabilities {
 }
 /// Represents a Ceph Filesystem mount that lasts the lifetime of a pod
 /// Cephfs volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CephFsPersistentVolumeSource {
     /// monitors is Required: Monitors is a collection of Ceph monitors
@@ -331,7 +318,6 @@ pub struct CephFsPersistentVolumeSource {
 }
 /// Represents a Ceph Filesystem mount that lasts the lifetime of a pod
 /// Cephfs volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CephFsVolumeSource {
     /// monitors is Required: Monitors is a collection of Ceph monitors
@@ -369,7 +355,6 @@ pub struct CephFsVolumeSource {
 /// A Cinder volume must exist before mounting to a container.
 /// The volume must also be in the same region as the kubelet.
 /// Cinder volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CinderPersistentVolumeSource {
     /// volumeID used to identify the volume in cinder.
@@ -399,7 +384,6 @@ pub struct CinderPersistentVolumeSource {
 /// A Cinder volume must exist before mounting to a container.
 /// The volume must also be in the same region as the kubelet.
 /// Cinder volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CinderVolumeSource {
     /// volumeID used to identify the volume in cinder.
@@ -429,7 +413,6 @@ pub struct CinderVolumeSource {
 ///
 /// Exactly one of these fields should be set.  Consumers of this type must
 /// treat an empty object as if it has an unknown value.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClaimSource {
     /// ResourceClaimName is the name of a ResourceClaim object in the same
@@ -452,7 +435,6 @@ pub struct ClaimSource {
     pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ClientIPConfig represents the configurations of Client IP based session affinity.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ClientIpConfig {
     /// timeoutSeconds specifies the seconds of ClientIP type session sticky time.
@@ -465,7 +447,6 @@ pub struct ClientIpConfig {
 /// ClusterTrustBundleProjection describes how to select a set of
 /// ClusterTrustBundle objects and project their contents into the pod
 /// filesystem.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterTrustBundleProjection {
     /// Select a single ClusterTrustBundle by object name.  Mutually-exclusive
@@ -500,7 +481,6 @@ pub struct ClusterTrustBundleProjection {
     pub path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Information about the condition of a component.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComponentCondition {
     /// Type of condition for a component.
@@ -524,7 +504,6 @@ pub struct ComponentCondition {
 }
 /// ComponentStatus (and ComponentStatusList) holds the cluster validation info.
 /// Deprecated: This API is deprecated in v1.19+
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComponentStatus {
     /// Standard object's metadata.
@@ -543,7 +522,6 @@ pub struct ComponentStatus {
 }
 /// Status of all the conditions for the component as a list of ComponentStatus objects.
 /// Deprecated: This API is deprecated in v1.19+
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComponentStatusList {
     /// Standard list metadata.
@@ -556,7 +534,6 @@ pub struct ComponentStatusList {
     pub items: ::prost::alloc::vec::Vec<ComponentStatus>,
 }
 /// ConfigMap holds configuration data for pods to consume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMap {
     /// Standard object's metadata.
@@ -596,7 +573,6 @@ pub struct ConfigMap {
 ///
 /// The contents of the target ConfigMap's Data field will represent the
 /// key-value pairs as environment variables.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMapEnvSource {
     /// The ConfigMap to select from.
@@ -609,7 +585,6 @@ pub struct ConfigMapEnvSource {
 }
 /// Selects a key from a ConfigMap.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMapKeySelector {
     /// The ConfigMap to select from.
@@ -624,7 +599,6 @@ pub struct ConfigMapKeySelector {
     pub optional: ::core::option::Option<bool>,
 }
 /// ConfigMapList is a resource containing a list of ConfigMap objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMapList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
@@ -637,7 +611,6 @@ pub struct ConfigMapList {
 }
 /// ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
 /// This API is deprecated since 1.22: <https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMapNodeConfigSource {
     /// Namespace is the metadata.namespace of the referenced ConfigMap.
@@ -670,7 +643,6 @@ pub struct ConfigMapNodeConfigSource {
 /// unless the items element is populated with specific mappings of keys to paths.
 /// Note that this is identical to a configmap volume source without the default
 /// mode.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMapProjection {
     #[prost(message, optional, tag = "1")]
@@ -697,7 +669,6 @@ pub struct ConfigMapProjection {
 /// volume as files using the keys in the Data field as the file names, unless
 /// the items element is populated with specific mappings of keys to paths.
 /// ConfigMap volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigMapVolumeSource {
     #[prost(message, optional, tag = "1")]
@@ -729,7 +700,6 @@ pub struct ConfigMapVolumeSource {
     pub optional: ::core::option::Option<bool>,
 }
 /// A single application container that you want to run within a pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Container {
     /// Name of the container specified as a DNS_LABEL.
@@ -943,7 +913,6 @@ pub struct Container {
     pub tty: ::core::option::Option<bool>,
 }
 /// Describe a container image
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerImage {
     /// Names by which this image is known.
@@ -958,7 +927,6 @@ pub struct ContainerImage {
     pub size_bytes: ::core::option::Option<i64>,
 }
 /// ContainerPort represents a network port in a single container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerPort {
     /// If specified, this must be an IANA_SVC_NAME and unique within the pod. Each
@@ -990,7 +958,6 @@ pub struct ContainerPort {
     pub host_ip: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ContainerResizePolicy represents resource resize policy for the container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResizePolicy {
     /// Name of the resource to which this resource resize policy applies.
@@ -1005,7 +972,6 @@ pub struct ContainerResizePolicy {
 /// ContainerState holds a possible state of container.
 /// Only one of its members may be specified.
 /// If none of them is specified, the default one is ContainerStateWaiting.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerState {
     /// Details about a waiting container
@@ -1022,7 +988,6 @@ pub struct ContainerState {
     pub terminated: ::core::option::Option<ContainerStateTerminated>,
 }
 /// ContainerStateRunning is a running state of a container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ContainerStateRunning {
     /// Time at which the container was last (re-)started
@@ -1031,7 +996,6 @@ pub struct ContainerStateRunning {
     pub started_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// ContainerStateTerminated is a terminated state of a container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerStateTerminated {
     /// Exit status from the last termination of the container
@@ -1063,7 +1027,6 @@ pub struct ContainerStateTerminated {
     pub container_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ContainerStateWaiting is a waiting state of a container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerStateWaiting {
     /// (brief) reason the container is not yet running.
@@ -1076,7 +1039,6 @@ pub struct ContainerStateWaiting {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ContainerStatus contains details for the current status of this container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerStatus {
     /// Name is a DNS_LABEL representing the unique name of the container.
@@ -1164,7 +1126,6 @@ pub struct ContainerStatus {
     pub volume_mounts: ::prost::alloc::vec::Vec<VolumeMountStatus>,
 }
 /// DaemonEndpoint contains information about a single Daemon endpoint.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DaemonEndpoint {
     /// Port number of the given endpoint.
@@ -1174,7 +1135,6 @@ pub struct DaemonEndpoint {
 /// Represents downward API info for projecting into a projected volume.
 /// Note that this is identical to a downwardAPI volume source without the default
 /// mode.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DownwardApiProjection {
     /// Items is a list of DownwardAPIVolume file
@@ -1184,7 +1144,6 @@ pub struct DownwardApiProjection {
     pub items: ::prost::alloc::vec::Vec<DownwardApiVolumeFile>,
 }
 /// DownwardAPIVolumeFile represents information to create the file containing the pod field
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DownwardApiVolumeFile {
     /// Required: Path is  the relative path name of the file to be created. Must not be absolute or contain the '..' path. Must be utf-8 encoded. The first item of the relative path must not start with '..'
@@ -1211,7 +1170,6 @@ pub struct DownwardApiVolumeFile {
 }
 /// DownwardAPIVolumeSource represents a volume containing downward API info.
 /// Downward API volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DownwardApiVolumeSource {
     /// Items is a list of downward API volume file
@@ -1233,7 +1191,6 @@ pub struct DownwardApiVolumeSource {
 }
 /// Represents an empty directory for a pod.
 /// Empty directory volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmptyDirVolumeSource {
     /// medium represents what type of storage medium should back this directory.
@@ -1255,7 +1212,6 @@ pub struct EmptyDirVolumeSource {
 }
 /// EndpointAddress is a tuple that describes single IP address.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointAddress {
     /// The IP of this endpoint.
@@ -1278,7 +1234,6 @@ pub struct EndpointAddress {
 }
 /// EndpointPort is a tuple that describes a single port.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointPort {
     /// The name of this port.  This must match the 'name' field in the
@@ -1329,7 +1284,6 @@ pub struct EndpointPort {
 ///
 /// 	a: \[ 10.10.1.1:8675, 10.10.2.2:8675 \],
 /// 	b: \[ 10.10.1.1:309, 10.10.2.2:309 \]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointSubset {
     /// IP addresses which offer the related ports that are marked as ready. These endpoints
@@ -1364,7 +1318,6 @@ pub struct EndpointSubset {
 /// 	     Ports: \[{"name": "a", "port": 93}, {"name": "b", "port": 76}\]
 /// 	   },
 /// 	]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoints {
     /// Standard object's metadata.
@@ -1385,7 +1338,6 @@ pub struct Endpoints {
     pub subsets: ::prost::alloc::vec::Vec<EndpointSubset>,
 }
 /// EndpointsList is a list of endpoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointsList {
     /// Standard list metadata.
@@ -1398,7 +1350,6 @@ pub struct EndpointsList {
     pub items: ::prost::alloc::vec::Vec<Endpoints>,
 }
 /// EnvFromSource represents the source of a set of ConfigMaps
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnvFromSource {
     /// An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
@@ -1415,7 +1366,6 @@ pub struct EnvFromSource {
     pub secret_ref: ::core::option::Option<SecretEnvSource>,
 }
 /// EnvVar represents an environment variable present in a Container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnvVar {
     /// Name of the environment variable. Must be a C_IDENTIFIER.
@@ -1439,7 +1389,6 @@ pub struct EnvVar {
     pub value_from: ::core::option::Option<EnvVarSource>,
 }
 /// EnvVarSource represents a source for the value of an EnvVar.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnvVarSource {
     /// Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels\['<KEY>'\]`, `metadata.annotations\['<KEY>'\]`,
@@ -1469,7 +1418,6 @@ pub struct EnvVarSource {
 ///
 /// To add an ephemeral container, use the ephemeralcontainers subresource of an existing
 /// Pod. Ephemeral containers may not be removed or restarted.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EphemeralContainer {
     /// Ephemeral containers have all of the fields of Container, plus additional fields
@@ -1492,7 +1440,6 @@ pub struct EphemeralContainer {
 /// EphemeralContainer. This separate type allows easy conversion from EphemeralContainer
 /// to Container and allows separate documentation for the fields of EphemeralContainer.
 /// When a new field is added to Container it must be added here as well.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EphemeralContainerCommon {
     /// Name of the ephemeral container specified as a DNS_LABEL.
@@ -1670,7 +1617,6 @@ pub struct EphemeralContainerCommon {
     pub tty: ::core::option::Option<bool>,
 }
 /// Represents an ephemeral volume that is handled by a normal storage driver.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EphemeralVolumeSource {
     /// Will be used to create a stand-alone PVC to provision the volume.
@@ -1703,7 +1649,6 @@ pub struct EphemeralVolumeSource {
 /// with a given Reason reflecting a consistent underlying trigger, or the
 /// continued existence of events with that Reason.  Events should be
 /// treated as informative, best-effort, supplemental data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
     /// Standard object's metadata.
@@ -1770,7 +1715,6 @@ pub struct Event {
     pub reporting_instance: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// EventList is a list of events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventList {
     /// Standard list metadata.
@@ -1784,7 +1728,6 @@ pub struct EventList {
 }
 /// EventSeries contain information on series of events, i.e. thing that was/is happening
 /// continuously for some time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EventSeries {
     /// Number of occurrences in this series up to the last heartbeat time
@@ -1796,7 +1739,6 @@ pub struct EventSeries {
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
 }
 /// EventSource contains information for an event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventSource {
     /// Component from which the event is generated.
@@ -1809,7 +1751,6 @@ pub struct EventSource {
     pub host: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ExecAction describes a "run in container" action.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecAction {
     /// Command is the command line to execute inside the container, the working directory for the
@@ -1825,7 +1766,6 @@ pub struct ExecAction {
 /// Represents a Fibre Channel volume.
 /// Fibre Channel volumes can only be mounted as read/write once.
 /// Fibre Channel volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FcVolumeSource {
     /// targetWWNs is Optional: FC target worldwide names (WWNs)
@@ -1858,7 +1798,6 @@ pub struct FcVolumeSource {
 }
 /// FlexPersistentVolumeSource represents a generic persistent volume resource that is
 /// provisioned/attached using an exec based plugin.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlexPersistentVolumeSource {
     /// driver is the name of the driver to use for this volume.
@@ -1890,7 +1829,6 @@ pub struct FlexPersistentVolumeSource {
 }
 /// FlexVolume represents a generic volume resource that is
 /// provisioned/attached using an exec based plugin.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlexVolumeSource {
     /// driver is the name of the driver to use for this volume.
@@ -1923,7 +1861,6 @@ pub struct FlexVolumeSource {
 /// Represents a Flocker volume mounted by the Flocker agent.
 /// One and only one of datasetName and datasetUUID should be set.
 /// Flocker volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlockerVolumeSource {
     /// datasetName is Name of the dataset stored as metadata -> name on the dataset for Flocker
@@ -1942,7 +1879,6 @@ pub struct FlockerVolumeSource {
 /// also be in the same GCE project and zone as the kubelet. A GCE PD
 /// can only be mounted as read/write once or read-only many times. GCE
 /// PDs support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcePersistentDiskVolumeSource {
     /// pdName is unique name of the PD resource in GCE. Used to identify the disk in GCE.
@@ -1972,7 +1908,6 @@ pub struct GcePersistentDiskVolumeSource {
     #[prost(bool, optional, tag = "4")]
     pub read_only: ::core::option::Option<bool>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GrpcAction {
     /// Port number of the gRPC service. Number must be in the range 1 to 65535.
@@ -1994,7 +1929,6 @@ pub struct GrpcAction {
 /// DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an
 /// EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
 /// into the Pod's container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GitRepoVolumeSource {
     /// repository is the URL
@@ -2014,7 +1948,6 @@ pub struct GitRepoVolumeSource {
 }
 /// Represents a Glusterfs mount that lasts the lifetime of a pod.
 /// Glusterfs volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlusterfsPersistentVolumeSource {
     /// endpoints is the endpoint name that details Glusterfs topology.
@@ -2040,7 +1973,6 @@ pub struct GlusterfsPersistentVolumeSource {
 }
 /// Represents a Glusterfs mount that lasts the lifetime of a pod.
 /// Glusterfs volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlusterfsVolumeSource {
     /// endpoints is the endpoint name that details Glusterfs topology.
@@ -2059,7 +1991,6 @@ pub struct GlusterfsVolumeSource {
     pub read_only: ::core::option::Option<bool>,
 }
 /// HTTPGetAction describes an action based on HTTP Get requests.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpGetAction {
     /// Path to access on the HTTP server.
@@ -2088,7 +2019,6 @@ pub struct HttpGetAction {
     pub http_headers: ::prost::alloc::vec::Vec<HttpHeader>,
 }
 /// HTTPHeader describes a custom header to be used in HTTP probes
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpHeader {
     /// The header field name.
@@ -2101,7 +2031,6 @@ pub struct HttpHeader {
 }
 /// HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the
 /// pod's hosts file.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HostAlias {
     /// IP address of the host file entry.
@@ -2114,7 +2043,6 @@ pub struct HostAlias {
     pub hostnames: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// HostIP represents a single IP address allocated to the host.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HostIp {
     /// IP is the IP address assigned to the host
@@ -2123,7 +2051,6 @@ pub struct HostIp {
 }
 /// Represents a host path mapped into a pod.
 /// Host path volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HostPathVolumeSource {
     /// path of the directory on the host.
@@ -2141,7 +2068,6 @@ pub struct HostPathVolumeSource {
 /// ISCSIPersistentVolumeSource represents an ISCSI disk.
 /// ISCSI volumes can only be mounted as read/write once.
 /// ISCSI volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IscsiPersistentVolumeSource {
     /// targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port
@@ -2200,7 +2126,6 @@ pub struct IscsiPersistentVolumeSource {
 /// Represents an ISCSI disk.
 /// ISCSI volumes can only be mounted as read/write once.
 /// ISCSI volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IscsiVolumeSource {
     /// targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port
@@ -2257,7 +2182,6 @@ pub struct IscsiVolumeSource {
     pub initiator_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Maps a string key to a path within a volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyToPath {
     /// key is the key to project.
@@ -2282,7 +2206,6 @@ pub struct KeyToPath {
 /// Lifecycle describes actions that the management system should take in response to container lifecycle
 /// events. For the PostStart and PreStop lifecycle handlers, management of the container blocks
 /// until the action is complete, unless the container process fails, in which case the handler is aborted.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lifecycle {
     /// PostStart is called immediately after a container is created. If the handler fails,
@@ -2307,7 +2230,6 @@ pub struct Lifecycle {
 }
 /// LifecycleHandler defines a specific action that should be taken in a lifecycle
 /// hook. One and only one of the fields, except TCPSocket must be specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LifecycleHandler {
     /// Exec specifies the action to take.
@@ -2331,7 +2253,6 @@ pub struct LifecycleHandler {
     pub sleep: ::core::option::Option<SleepAction>,
 }
 /// LimitRange sets resource usage limits for each kind of resource in a Namespace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitRange {
     /// Standard object's metadata.
@@ -2346,7 +2267,6 @@ pub struct LimitRange {
     pub spec: ::core::option::Option<LimitRangeSpec>,
 }
 /// LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitRangeItem {
     /// Type of resource that this limit applies to.
@@ -2389,7 +2309,6 @@ pub struct LimitRangeItem {
     >,
 }
 /// LimitRangeList is a list of LimitRange items.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitRangeList {
     /// Standard list metadata.
@@ -2403,7 +2322,6 @@ pub struct LimitRangeList {
     pub items: ::prost::alloc::vec::Vec<LimitRange>,
 }
 /// LimitRangeSpec defines a min/max usage limit for resources that match on kind.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LimitRangeSpec {
     /// Limits is the list of LimitRangeItem objects that are enforced.
@@ -2412,7 +2330,6 @@ pub struct LimitRangeSpec {
     pub limits: ::prost::alloc::vec::Vec<LimitRangeItem>,
 }
 /// List holds a list of objects, which may not be known by the server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct List {
     /// Standard list metadata.
@@ -2426,7 +2343,6 @@ pub struct List {
 }
 /// LoadBalancerIngress represents the status of a load-balancer ingress point:
 /// traffic intended for the service should be sent to an ingress point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerIngress {
     /// IP is set for load-balancer ingress points that are IP based
@@ -2456,7 +2372,6 @@ pub struct LoadBalancerIngress {
     pub ports: ::prost::alloc::vec::Vec<PortStatus>,
 }
 /// LoadBalancerStatus represents the status of a load-balancer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerStatus {
     /// Ingress is a list containing ingress points for the load-balancer.
@@ -2469,7 +2384,6 @@ pub struct LoadBalancerStatus {
 /// LocalObjectReference contains enough information to let you locate the
 /// referenced object inside the same namespace.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalObjectReference {
     /// Name of the referent.
@@ -2486,7 +2400,6 @@ pub struct LocalObjectReference {
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Local represents directly-attached storage with node affinity (Beta feature)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalVolumeSource {
     /// path of the full path to the volume on the node.
@@ -2502,7 +2415,6 @@ pub struct LocalVolumeSource {
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModifyVolumeStatus {
     /// targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
@@ -2523,7 +2435,6 @@ pub struct ModifyVolumeStatus {
 }
 /// Represents an NFS mount that lasts the lifetime of a pod.
 /// NFS volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NfsVolumeSource {
     /// server is the hostname or IP address of the NFS server.
@@ -2543,7 +2454,6 @@ pub struct NfsVolumeSource {
 }
 /// Namespace provides a scope for Names.
 /// Use of multiple namespaces is optional.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespace {
     /// Standard object's metadata.
@@ -2563,7 +2473,6 @@ pub struct Namespace {
     pub status: ::core::option::Option<NamespaceStatus>,
 }
 /// NamespaceCondition contains details about state of namespace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamespaceCondition {
     /// Type of namespace controller condition.
@@ -2584,7 +2493,6 @@ pub struct NamespaceCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// NamespaceList is a list of Namespaces.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamespaceList {
     /// Standard list metadata.
@@ -2598,7 +2506,6 @@ pub struct NamespaceList {
     pub items: ::prost::alloc::vec::Vec<Namespace>,
 }
 /// NamespaceSpec describes the attributes on a Namespace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamespaceSpec {
     /// Finalizers is an opaque list of values that must be empty to permanently remove object from storage.
@@ -2609,7 +2516,6 @@ pub struct NamespaceSpec {
     pub finalizers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// NamespaceStatus is information about the current status of a Namespace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamespaceStatus {
     /// Phase is the current lifecycle phase of the namespace.
@@ -2628,7 +2534,6 @@ pub struct NamespaceStatus {
 }
 /// Node is a worker node in Kubernetes.
 /// Each node will have a unique identifier in the cache (i.e. in etcd).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Node {
     /// Standard object's metadata.
@@ -2650,7 +2555,6 @@ pub struct Node {
     pub status: ::core::option::Option<NodeStatus>,
 }
 /// NodeAddress contains information for the node's address.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeAddress {
     /// Node address type, one of Hostname, ExternalIP or InternalIP.
@@ -2661,7 +2565,6 @@ pub struct NodeAddress {
     pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Node affinity is a group of node affinity scheduling rules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeAffinity {
     /// If the affinity requirements specified by this field are not met at
@@ -2688,7 +2591,6 @@ pub struct NodeAffinity {
         ::prost::alloc::vec::Vec<PreferredSchedulingTerm>,
 }
 /// NodeCondition contains condition information for a node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeCondition {
     /// Type of node condition.
@@ -2718,7 +2620,6 @@ pub struct NodeCondition {
 }
 /// NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil.
 /// This API is deprecated since 1.22
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeConfigSource {
     /// ConfigMap is a reference to a Node's ConfigMap
@@ -2726,7 +2627,6 @@ pub struct NodeConfigSource {
     pub config_map: ::core::option::Option<ConfigMapNodeConfigSource>,
 }
 /// NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeConfigStatus {
     /// Assigned reports the checkpointed config the node will try to use.
@@ -2778,7 +2678,6 @@ pub struct NodeConfigStatus {
     pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// NodeDaemonEndpoints lists ports opened by daemons running on the Node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NodeDaemonEndpoints {
     /// Endpoint on which Kubelet is listening.
@@ -2787,7 +2686,6 @@ pub struct NodeDaemonEndpoints {
     pub kubelet_endpoint: ::core::option::Option<DaemonEndpoint>,
 }
 /// NodeList is the whole list of all Nodes which have been registered with master.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeList {
     /// Standard list metadata.
@@ -2800,7 +2698,6 @@ pub struct NodeList {
     pub items: ::prost::alloc::vec::Vec<Node>,
 }
 /// NodeProxyOptions is the query options to a Node's proxy call.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeProxyOptions {
     /// Path is the URL path to use for the current proxy request to node.
@@ -2809,7 +2706,6 @@ pub struct NodeProxyOptions {
     pub path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// NodeRuntimeHandler is a set of runtime handler information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeRuntimeHandler {
     /// Runtime handler name.
@@ -2823,7 +2719,6 @@ pub struct NodeRuntimeHandler {
     pub features: ::core::option::Option<NodeRuntimeHandlerFeatures>,
 }
 /// NodeRuntimeHandlerFeatures is a set of runtime features.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NodeRuntimeHandlerFeatures {
     /// RecursiveReadOnlyMounts is set to true if the runtime handler supports RecursiveReadOnlyMounts.
@@ -2836,7 +2731,6 @@ pub struct NodeRuntimeHandlerFeatures {
 /// over a set of nodes; that is, it represents the OR of the selectors represented
 /// by the node selector terms.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeSelector {
     /// Required. A list of node selector terms. The terms are ORed.
@@ -2846,7 +2740,6 @@ pub struct NodeSelector {
 }
 /// A node selector requirement is a selector that contains values, a key, and an operator
 /// that relates the key and values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeSelectorRequirement {
     /// The label key that the selector applies to.
@@ -2870,7 +2763,6 @@ pub struct NodeSelectorRequirement {
 /// them are ANDed.
 /// The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeSelectorTerm {
     /// A list of node selector requirements by node's labels.
@@ -2885,7 +2777,6 @@ pub struct NodeSelectorTerm {
     pub match_fields: ::prost::alloc::vec::Vec<NodeSelectorRequirement>,
 }
 /// NodeSpec describes the attributes that a node is created with.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeSpec {
     /// PodCIDR represents the pod IP range assigned to the node.
@@ -2925,7 +2816,6 @@ pub struct NodeSpec {
     pub external_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// NodeStatus is information about the current status of a node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeStatus {
     /// Capacity represents the total resources of a node.
@@ -3012,7 +2902,6 @@ pub struct NodeStatus {
     pub runtime_handlers: ::prost::alloc::vec::Vec<NodeRuntimeHandler>,
 }
 /// NodeSystemInfo is a set of ids/uuids to uniquely identify the node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeSystemInfo {
     /// MachineID reported by the node. For unique machine identification
@@ -3052,7 +2941,6 @@ pub struct NodeSystemInfo {
 }
 /// ObjectFieldSelector selects an APIVersioned field of an object.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectFieldSelector {
     /// Version of the schema the FieldPath is written in terms of, defaults to "v1".
@@ -3081,7 +2969,6 @@ pub struct ObjectFieldSelector {
 /// For example, ServiceReferences for admission registration: <https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533> .
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectReference {
     /// Kind of the referent.
@@ -3128,7 +3015,6 @@ pub struct ObjectReference {
 /// PersistentVolume (PV) is a storage resource provisioned by an administrator.
 /// It is analogous to a node.
 /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolume {
     /// Standard object's metadata.
@@ -3151,7 +3037,6 @@ pub struct PersistentVolume {
     pub status: ::core::option::Option<PersistentVolumeStatus>,
 }
 /// PersistentVolumeClaim is a user's request for and claim to a persistent volume
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaim {
     /// Standard object's metadata.
@@ -3172,7 +3057,6 @@ pub struct PersistentVolumeClaim {
     pub status: ::core::option::Option<PersistentVolumeClaimStatus>,
 }
 /// PersistentVolumeClaimCondition contains details about state of pvc
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimCondition {
     #[prost(string, optional, tag = "1")]
@@ -3200,7 +3084,6 @@ pub struct PersistentVolumeClaimCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimList {
     /// Standard list metadata.
@@ -3215,7 +3098,6 @@ pub struct PersistentVolumeClaimList {
 }
 /// PersistentVolumeClaimSpec describes the common attributes of storage devices
 /// and allows a Source for provider-specific attributes
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimSpec {
     /// accessModes contains the desired access modes the volume should have.
@@ -3306,7 +3188,6 @@ pub struct PersistentVolumeClaimSpec {
     pub volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PersistentVolumeClaimStatus is the current status of a persistent volume claim.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimStatus {
     /// phase represents the current phase of PersistentVolumeClaim.
@@ -3422,7 +3303,6 @@ pub struct PersistentVolumeClaimStatus {
 }
 /// PersistentVolumeClaimTemplate is used to produce
 /// PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimTemplate {
     /// May contain labels and annotations that will be copied into the PVC
@@ -3443,7 +3323,6 @@ pub struct PersistentVolumeClaimTemplate {
 /// This volume finds the bound PV and mounts that volume for the pod. A
 /// PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another
 /// type of volume that is owned by someone else (the system).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimVolumeSource {
     /// claimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume.
@@ -3457,7 +3336,6 @@ pub struct PersistentVolumeClaimVolumeSource {
     pub read_only: ::core::option::Option<bool>,
 }
 /// PersistentVolumeList is a list of PersistentVolume items.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeList {
     /// Standard list metadata.
@@ -3472,7 +3350,6 @@ pub struct PersistentVolumeList {
 }
 /// PersistentVolumeSource is similar to VolumeSource but meant for the
 /// administrator who creates PVs. Exactly one of its members must be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeSource {
     /// gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -3580,7 +3457,6 @@ pub struct PersistentVolumeSource {
     pub csi: ::core::option::Option<CsiPersistentVolumeSource>,
 }
 /// PersistentVolumeSpec is the specification of a persistent volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeSpec {
     /// capacity is the description of the persistent volume's resources and capacity.
@@ -3651,7 +3527,6 @@ pub struct PersistentVolumeSpec {
     pub volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PersistentVolumeStatus is the current status of a persistent volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeStatus {
     /// phase indicates if a volume is available, bound to a claim, or released by a claim.
@@ -3678,7 +3553,6 @@ pub struct PersistentVolumeStatus {
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// Represents a Photon Controller persistent disk resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhotonPersistentDiskVolumeSource {
     /// pdID is the ID that identifies Photon Controller persistent disk
@@ -3692,7 +3566,6 @@ pub struct PhotonPersistentDiskVolumeSource {
 }
 /// Pod is a collection of containers that can run on a host. This resource is created
 /// by clients and scheduled onto hosts.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pod {
     /// Standard object's metadata.
@@ -3715,7 +3588,6 @@ pub struct Pod {
     pub status: ::core::option::Option<PodStatus>,
 }
 /// Pod affinity is a group of inter pod affinity scheduling rules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodAffinity {
     /// If the affinity requirements specified by this field are not met at
@@ -3750,7 +3622,6 @@ pub struct PodAffinity {
 /// where co-located is defined as running on a node whose value of
 /// the label with key <topologyKey> matches that of any node on which
 /// a pod of the set of pods is running
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodAffinityTerm {
     /// A label query over a set of resources, in this case pods.
@@ -3811,7 +3682,6 @@ pub struct PodAffinityTerm {
     pub mismatch_label_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Pod anti affinity is a group of inter pod anti affinity scheduling rules.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodAntiAffinity {
     /// If the anti-affinity requirements specified by this field are not met at
@@ -3844,7 +3714,6 @@ pub struct PodAntiAffinity {
 /// ---
 /// TODO: merge w/ PodExecOptions below for stdin, stdout, etc
 /// and also when we cut V2, we should export a "StreamOptions" or somesuch that contains Stdin, Stdout, Stder and TTY
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodAttachOptions {
     /// Stdin if true, redirects the standard input stream of the pod for this call.
@@ -3876,7 +3745,6 @@ pub struct PodAttachOptions {
     pub container: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodCondition contains details for the current condition of this pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodCondition {
     /// Type is the type of the condition.
@@ -3908,7 +3776,6 @@ pub struct PodCondition {
 }
 /// PodDNSConfig defines the DNS parameters of a pod in addition to
 /// those generated from DNSPolicy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDnsConfig {
     /// A list of DNS name server IP addresses.
@@ -3935,7 +3802,6 @@ pub struct PodDnsConfig {
     pub options: ::prost::alloc::vec::Vec<PodDnsConfigOption>,
 }
 /// PodDNSConfigOption defines DNS resolver options of a pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDnsConfigOption {
     /// Required.
@@ -3949,7 +3815,6 @@ pub struct PodDnsConfigOption {
 /// ---
 /// TODO: This is largely identical to PodAttachOptions above, make sure they stay in sync and see about merging
 /// and also when we cut V2, we should export a "StreamOptions" or somesuch that contains Stdin, Stdout, Stder and TTY
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodExecOptions {
     /// Redirect the standard input stream of the pod for this call.
@@ -3981,7 +3846,6 @@ pub struct PodExecOptions {
     pub command: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// PodIP represents a single IP address allocated to the pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodIp {
     /// IP is the IP address assigned to the pod
@@ -3989,7 +3853,6 @@ pub struct PodIp {
     pub ip: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodList is a list of Pods.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodList {
     /// Standard list metadata.
@@ -4003,7 +3866,6 @@ pub struct PodList {
     pub items: ::prost::alloc::vec::Vec<Pod>,
 }
 /// PodLogOptions is the query options for a Pod's logs REST call.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodLogOptions {
     /// The container for which to stream logs. Defaults to only container if there is one container in the pod.
@@ -4059,7 +3921,6 @@ pub struct PodLogOptions {
     pub insecure_skip_tls_verify_backend: ::core::option::Option<bool>,
 }
 /// PodOS defines the OS parameters of a pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodOs {
     /// Name is the name of the operating system. The currently supported values are linux and windows.
@@ -4075,7 +3936,6 @@ pub struct PodOs {
 /// ports (comma separated) to forward over.
 /// Port forwarding over SPDY does not use these options. It requires the port
 /// to be passed in the `port` header as part of request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodPortForwardOptions {
     /// List of ports to forward
@@ -4086,7 +3946,6 @@ pub struct PodPortForwardOptions {
     pub ports: ::prost::alloc::vec::Vec<i32>,
 }
 /// PodProxyOptions is the query options to a Pod's proxy call.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodProxyOptions {
     /// Path is the URL path to use for the current proxy request to pod.
@@ -4095,7 +3954,6 @@ pub struct PodProxyOptions {
     pub path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodReadinessGate contains the reference to a pod condition
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodReadinessGate {
     /// ConditionType refers to a condition in the pod's condition list with matching type.
@@ -4105,7 +3963,6 @@ pub struct PodReadinessGate {
 /// PodResourceClaim references exactly one ResourceClaim through a ClaimSource.
 /// It adds a name to it that uniquely identifies the ResourceClaim inside the Pod.
 /// Containers that need access to the ResourceClaim reference it with this name.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodResourceClaim {
     /// Name uniquely identifies this resource claim inside the pod.
@@ -4119,7 +3976,6 @@ pub struct PodResourceClaim {
 /// PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim
 /// which references a ResourceClaimTemplate. It stores the generated name for
 /// the corresponding ResourceClaim.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodResourceClaimStatus {
     /// Name uniquely identifies this resource claim inside the pod.
@@ -4137,7 +3993,6 @@ pub struct PodResourceClaimStatus {
     pub resource_claim_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodSchedulingGate is associated to a Pod to guard its scheduling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSchedulingGate {
     /// Name of the scheduling gate.
@@ -4148,7 +4003,6 @@ pub struct PodSchedulingGate {
 /// PodSecurityContext holds pod-level security attributes and common container settings.
 /// Some fields are also present in container.securityContext.  Field values of
 /// container.securityContext take precedence over field values of PodSecurityContext.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSecurityContext {
     /// The SELinux context to be applied to all containers.
@@ -4248,7 +4102,6 @@ pub struct PodSecurityContext {
 }
 /// Describes the class of pods that should avoid this node.
 /// Exactly one field should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSignature {
     /// Reference to controller whose pods should avoid this node.
@@ -4258,7 +4111,6 @@ pub struct PodSignature {
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::OwnerReference>,
 }
 /// PodSpec is a description of a pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodSpec {
     /// List of volumes that can be mounted by containers belonging to the pod.
@@ -4612,7 +4464,6 @@ pub struct PodSpec {
 /// PodStatus represents information about the status of a pod. Status may trail the actual
 /// state of a system, especially if the node that hosts the pod cannot contact the control
 /// plane.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodStatus {
     /// The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle.
@@ -4742,7 +4593,6 @@ pub struct PodStatus {
     pub resource_claim_statuses: ::prost::alloc::vec::Vec<PodResourceClaimStatus>,
 }
 /// PodStatusResult is a wrapper for PodStatus returned by kubelet that can be encode/decoded
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodStatusResult {
     /// Standard object's metadata.
@@ -4760,7 +4610,6 @@ pub struct PodStatusResult {
     pub status: ::core::option::Option<PodStatus>,
 }
 /// PodTemplate describes a template for creating copies of a predefined pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodTemplate {
     /// Standard object's metadata.
@@ -4775,7 +4624,6 @@ pub struct PodTemplate {
     pub template: ::core::option::Option<PodTemplateSpec>,
 }
 /// PodTemplateList is a list of PodTemplates.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodTemplateList {
     /// Standard list metadata.
@@ -4788,7 +4636,6 @@ pub struct PodTemplateList {
     pub items: ::prost::alloc::vec::Vec<PodTemplate>,
 }
 /// PodTemplateSpec describes the data a pod should have when created from a template
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodTemplateSpec {
     /// Standard object's metadata.
@@ -4802,7 +4649,6 @@ pub struct PodTemplateSpec {
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<PodSpec>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PortStatus {
     /// Port is the port number of the service port of which status is recorded here
@@ -4828,7 +4674,6 @@ pub struct PortStatus {
     pub error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PortworxVolumeSource represents a Portworx volume resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PortworxVolumeSource {
     /// volumeID uniquely identifies a Portworx volume
@@ -4847,7 +4692,6 @@ pub struct PortworxVolumeSource {
 }
 /// Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
 /// +k8s:openapi-gen=false
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Preconditions {
     /// Specifies the target UID.
@@ -4856,7 +4700,6 @@ pub struct Preconditions {
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Describes a class of pods that should avoid this node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PreferAvoidPodsEntry {
     /// The class of pods.
@@ -4877,7 +4720,6 @@ pub struct PreferAvoidPodsEntry {
 }
 /// An empty preferred scheduling term matches all objects with implicit weight 0
 /// (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PreferredSchedulingTerm {
     /// Weight associated with matching the corresponding nodeSelectorTerm, in the range 1-100.
@@ -4889,7 +4731,6 @@ pub struct PreferredSchedulingTerm {
 }
 /// Probe describes a health check to be performed against a container to determine whether it is
 /// alive or ready to receive traffic.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Probe {
     /// The action taken to determine the health of a container
@@ -4937,7 +4778,6 @@ pub struct Probe {
 }
 /// ProbeHandler defines a specific action that should be taken in a probe.
 /// One and only one of the fields must be specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProbeHandler {
     /// Exec specifies the action to take.
@@ -4958,7 +4798,6 @@ pub struct ProbeHandler {
     pub grpc: ::core::option::Option<GrpcAction>,
 }
 /// Represents a projected volume source
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectedVolumeSource {
     /// sources is the list of volume projections
@@ -4978,7 +4817,6 @@ pub struct ProjectedVolumeSource {
 }
 /// Represents a Quobyte mount that lasts the lifetime of a pod.
 /// Quobyte volumes do not support ownership management or SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuobyteVolumeSource {
     /// registry represents a single or multiple Quobyte Registry services
@@ -5012,7 +4850,6 @@ pub struct QuobyteVolumeSource {
 }
 /// Represents a Rados Block Device mount that lasts the lifetime of a pod.
 /// RBD volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RbdPersistentVolumeSource {
     /// monitors is a collection of Ceph monitors.
@@ -5066,7 +4903,6 @@ pub struct RbdPersistentVolumeSource {
 }
 /// Represents a Rados Block Device mount that lasts the lifetime of a pod.
 /// RBD volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RbdVolumeSource {
     /// monitors is a collection of Ceph monitors.
@@ -5119,7 +4955,6 @@ pub struct RbdVolumeSource {
     pub read_only: ::core::option::Option<bool>,
 }
 /// RangeAllocation is not a public type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RangeAllocation {
     /// Standard object's metadata.
@@ -5135,7 +4970,6 @@ pub struct RangeAllocation {
     pub data: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// ReplicationController represents the configuration of a replication controller.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationController {
     /// If the Labels of a ReplicationController are empty, they are defaulted to
@@ -5159,7 +4993,6 @@ pub struct ReplicationController {
     pub status: ::core::option::Option<ReplicationControllerStatus>,
 }
 /// ReplicationControllerCondition describes the state of a replication controller at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationControllerCondition {
     /// Type of replication controller condition.
@@ -5183,7 +5016,6 @@ pub struct ReplicationControllerCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ReplicationControllerList is a collection of replication controllers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationControllerList {
     /// Standard list metadata.
@@ -5197,7 +5029,6 @@ pub struct ReplicationControllerList {
     pub items: ::prost::alloc::vec::Vec<ReplicationController>,
 }
 /// ReplicationControllerSpec is the specification of a replication controller.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationControllerSpec {
     /// Replicas is the number of desired replicas.
@@ -5232,7 +5063,6 @@ pub struct ReplicationControllerSpec {
 }
 /// ReplicationControllerStatus represents the current status of a replication
 /// controller.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationControllerStatus {
     /// Replicas is the most recently observed number of replicas.
@@ -5265,7 +5095,6 @@ pub struct ReplicationControllerStatus {
     pub conditions: ::prost::alloc::vec::Vec<ReplicationControllerCondition>,
 }
 /// ResourceClaim references one entry in PodSpec.ResourceClaims.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceClaim {
     /// Name must match the name of one entry in pod.spec.resourceClaims of
@@ -5276,7 +5105,6 @@ pub struct ResourceClaim {
 }
 /// ResourceFieldSelector represents container resources (cpu, memory) and their output format
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceFieldSelector {
     /// Container name: required for volumes, optional for env vars
@@ -5292,7 +5120,6 @@ pub struct ResourceFieldSelector {
     pub divisor: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ResourceQuota sets aggregate quota restrictions enforced per namespace
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceQuota {
     /// Standard object's metadata.
@@ -5312,7 +5139,6 @@ pub struct ResourceQuota {
     pub status: ::core::option::Option<ResourceQuotaStatus>,
 }
 /// ResourceQuotaList is a list of ResourceQuota items.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceQuotaList {
     /// Standard list metadata.
@@ -5326,7 +5152,6 @@ pub struct ResourceQuotaList {
     pub items: ::prost::alloc::vec::Vec<ResourceQuota>,
 }
 /// ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceQuotaSpec {
     /// hard is the set of desired hard limits for each named resource.
@@ -5351,7 +5176,6 @@ pub struct ResourceQuotaSpec {
     pub scope_selector: ::core::option::Option<ScopeSelector>,
 }
 /// ResourceQuotaStatus defines the enforced hard limits and observed use.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceQuotaStatus {
     /// Hard is the set of enforced hard limits for each named resource.
@@ -5371,7 +5195,6 @@ pub struct ResourceQuotaStatus {
     >,
 }
 /// ResourceRequirements describes the compute resource requirements.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceRequirements {
     /// Limits describes the maximum amount of compute resources allowed.
@@ -5408,7 +5231,6 @@ pub struct ResourceRequirements {
     pub claims: ::prost::alloc::vec::Vec<ResourceClaim>,
 }
 /// SELinuxOptions are the labels to be applied to the container
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SeLinuxOptions {
     /// User is a SELinux user label that applies to the container.
@@ -5429,7 +5251,6 @@ pub struct SeLinuxOptions {
     pub level: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleIoPersistentVolumeSource {
     /// gateway is the host address of the ScaleIO API Gateway.
@@ -5477,7 +5298,6 @@ pub struct ScaleIoPersistentVolumeSource {
     pub read_only: ::core::option::Option<bool>,
 }
 /// ScaleIOVolumeSource represents a persistent ScaleIO volume
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleIoVolumeSource {
     /// gateway is the host address of the ScaleIO API Gateway.
@@ -5527,7 +5347,6 @@ pub struct ScaleIoVolumeSource {
 /// A scope selector represents the AND of the selectors represented
 /// by the scoped-resource selector requirements.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScopeSelector {
     /// A list of scope selector requirements by scope of the resources.
@@ -5538,7 +5357,6 @@ pub struct ScopeSelector {
 }
 /// A scoped-resource selector requirement is a selector that contains values, a scope name, and an operator
 /// that relates the scope name and values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScopedResourceSelectorRequirement {
     /// The name of the scope that the selector applies to.
@@ -5560,7 +5378,6 @@ pub struct ScopedResourceSelectorRequirement {
 /// SeccompProfile defines a pod/container's seccomp profile settings.
 /// Only one profile source may be set.
 /// +union
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SeccompProfile {
     /// type indicates which kind of seccomp profile will be applied.
@@ -5582,7 +5399,6 @@ pub struct SeccompProfile {
 }
 /// Secret holds secret data of a certain type. The total bytes of the values in
 /// the Data field must be less than MaxSecretSize bytes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Secret {
     /// Standard object's metadata.
@@ -5624,7 +5440,6 @@ pub struct Secret {
 ///
 /// The contents of the target Secret's Data field will represent the
 /// key-value pairs as environment variables.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretEnvSource {
     /// The Secret to select from.
@@ -5637,7 +5452,6 @@ pub struct SecretEnvSource {
 }
 /// SecretKeySelector selects a key of a Secret.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretKeySelector {
     /// The name of the secret in the pod's namespace to select from.
@@ -5652,7 +5466,6 @@ pub struct SecretKeySelector {
     pub optional: ::core::option::Option<bool>,
 }
 /// SecretList is a list of Secret.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretList {
     /// Standard list metadata.
@@ -5671,7 +5484,6 @@ pub struct SecretList {
 /// projected volume as files using the keys in the Data field as the file names.
 /// Note that this is identical to a secret volume source without the default
 /// mode.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretProjection {
     #[prost(message, optional, tag = "1")]
@@ -5695,7 +5507,6 @@ pub struct SecretProjection {
 /// SecretReference represents a Secret Reference. It has enough information to retrieve secret
 /// in any namespace
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretReference {
     /// name is unique within a namespace to reference a secret resource.
@@ -5712,7 +5523,6 @@ pub struct SecretReference {
 /// The contents of the target Secret's Data field will be presented in a volume
 /// as files using the keys in the Data field as the file names.
 /// Secret volumes support ownership management and SELinux relabeling.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretVolumeSource {
     /// secretName is the name of the secret in the pod's namespace to use.
@@ -5749,7 +5559,6 @@ pub struct SecretVolumeSource {
 /// SecurityContext holds security configuration that will be applied to a container.
 /// Some fields are present in both SecurityContext and PodSecurityContext.  When both
 /// are set, the values in SecurityContext take precedence.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecurityContext {
     /// The capabilities to add/drop when running containers.
@@ -5844,7 +5653,6 @@ pub struct SecurityContext {
     pub app_armor_profile: ::core::option::Option<AppArmorProfile>,
 }
 /// SerializedReference is a reference to serialized object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SerializedReference {
     /// The reference to an object in the system.
@@ -5855,7 +5663,6 @@ pub struct SerializedReference {
 /// Service is a named abstraction of software service (for example, mysql) consisting of local port
 /// (for example 3306) that the proxy listens on, and the selector that determines which pods
 /// will answer requests sent through the proxy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
     /// Standard object's metadata.
@@ -5880,7 +5687,6 @@ pub struct Service {
 /// * a name, understood by users, and perhaps by peripheral systems, for an identity
 /// * a principal that can be authenticated and authorized
 /// * a set of secrets
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccount {
     /// Standard object's metadata.
@@ -5915,7 +5721,6 @@ pub struct ServiceAccount {
     pub automount_service_account_token: ::core::option::Option<bool>,
 }
 /// ServiceAccountList is a list of ServiceAccount objects
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccountList {
     /// Standard list metadata.
@@ -5932,7 +5737,6 @@ pub struct ServiceAccountList {
 /// volume. This projection can be used to insert a service account token into
 /// the pods runtime filesystem for use against APIs (Kubernetes API Server or
 /// otherwise).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccountTokenProjection {
     /// audience is the intended audience of the token. A recipient of a token
@@ -5957,7 +5761,6 @@ pub struct ServiceAccountTokenProjection {
     pub path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ServiceList holds a list of services.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceList {
     /// Standard list metadata.
@@ -5970,7 +5773,6 @@ pub struct ServiceList {
     pub items: ::prost::alloc::vec::Vec<Service>,
 }
 /// ServicePort contains information on service's port.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServicePort {
     /// The name of this port within the service. This must be a DNS_LABEL.
@@ -6034,7 +5836,6 @@ pub struct ServicePort {
     pub node_port: ::core::option::Option<i32>,
 }
 /// ServiceProxyOptions is the query options to a Service's proxy call.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceProxyOptions {
     /// Path is the part of URLs that include service endpoints, suffixes,
@@ -6047,7 +5848,6 @@ pub struct ServiceProxyOptions {
     pub path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ServiceSpec describes the attributes that a user creates on a service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceSpec {
     /// The list of ports that are exposed by this service.
@@ -6295,7 +6095,6 @@ pub struct ServiceSpec {
     pub traffic_distribution: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ServiceStatus represents the current status of a service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceStatus {
     /// LoadBalancer contains the current status of the load-balancer,
@@ -6314,7 +6113,6 @@ pub struct ServiceStatus {
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 /// SessionAffinityConfig represents the configurations of session affinity.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SessionAffinityConfig {
     /// clientIP contains the configurations of Client IP based session affinity.
@@ -6323,7 +6121,6 @@ pub struct SessionAffinityConfig {
     pub client_ip: ::core::option::Option<ClientIpConfig>,
 }
 /// SleepAction describes a "sleep" action.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SleepAction {
     /// Seconds is the number of seconds to sleep.
@@ -6331,7 +6128,6 @@ pub struct SleepAction {
     pub seconds: ::core::option::Option<i64>,
 }
 /// Represents a StorageOS persistent volume resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageOsPersistentVolumeSource {
     /// volumeName is the human-readable name of the StorageOS volume.  Volume
@@ -6365,7 +6161,6 @@ pub struct StorageOsPersistentVolumeSource {
     pub secret_ref: ::core::option::Option<ObjectReference>,
 }
 /// Represents a StorageOS persistent volume resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageOsVolumeSource {
     /// volumeName is the human-readable name of the StorageOS volume.  Volume
@@ -6399,7 +6194,6 @@ pub struct StorageOsVolumeSource {
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
 }
 /// Sysctl defines a kernel parameter to be set
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Sysctl {
     /// Name of a property to set
@@ -6410,7 +6204,6 @@ pub struct Sysctl {
     pub value: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// TCPSocketAction describes an action based on opening a socket
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TcpSocketAction {
     /// Number or name of the port to access on the container.
@@ -6425,7 +6218,6 @@ pub struct TcpSocketAction {
 }
 /// The node this Taint is attached to has the "effect" on
 /// any pod that does not tolerate the Taint.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Taint {
     /// Required. The taint key to be applied to a node.
@@ -6448,7 +6240,6 @@ pub struct Taint {
 }
 /// The pod this Toleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Toleration {
     /// Key is the taint key that the toleration applies to. Empty means match all taint keys.
@@ -6483,7 +6274,6 @@ pub struct Toleration {
 }
 /// A topology selector requirement is a selector that matches given label.
 /// This is an alpha feature and may change in the future.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TopologySelectorLabelRequirement {
     /// The label key that the selector applies to.
@@ -6501,7 +6291,6 @@ pub struct TopologySelectorLabelRequirement {
 /// It provides a subset of functionality as NodeSelectorTerm.
 /// This is an alpha feature and may change in the future.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TopologySelectorTerm {
     /// A list of topology selector requirements by labels.
@@ -6511,7 +6300,6 @@ pub struct TopologySelectorTerm {
     pub match_label_expressions: ::prost::alloc::vec::Vec<TopologySelectorLabelRequirement>,
 }
 /// TopologySpreadConstraint specifies how to spread matching pods among the given topology.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TopologySpreadConstraint {
     /// MaxSkew describes the degree to which pods may be unevenly distributed.
@@ -6642,7 +6430,6 @@ pub struct TopologySpreadConstraint {
 /// TypedLocalObjectReference contains enough information to let you locate the
 /// typed referenced object inside the same namespace.
 /// +structType=atomic
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypedLocalObjectReference {
     /// APIGroup is the group for the resource being referenced.
@@ -6658,7 +6445,6 @@ pub struct TypedLocalObjectReference {
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypedObjectReference {
     /// APIGroup is the group for the resource being referenced.
@@ -6682,7 +6468,6 @@ pub struct TypedObjectReference {
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Volume represents a named volume in a pod that may be accessed by any container in the pod.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Volume {
     /// name of the volume.
@@ -6697,7 +6482,6 @@ pub struct Volume {
     pub volume_source: ::core::option::Option<VolumeSource>,
 }
 /// volumeDevice describes a mapping of a raw block device within a container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeDevice {
     /// name must match the name of a persistentVolumeClaim in the pod
@@ -6708,7 +6492,6 @@ pub struct VolumeDevice {
     pub device_path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeMount describes a mounting of a Volume within a container.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeMount {
     /// This must match the Name of a Volume.
@@ -6767,7 +6550,6 @@ pub struct VolumeMount {
     pub sub_path_expr: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeMountStatus shows status of volume mounts.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeMountStatus {
     /// Name corresponds to the name of the original VolumeMount.
@@ -6789,7 +6571,6 @@ pub struct VolumeMountStatus {
     pub recursive_read_only: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeNodeAffinity {
     /// required specifies hard node constraints that must be met.
@@ -6797,7 +6578,6 @@ pub struct VolumeNodeAffinity {
     pub required: ::core::option::Option<NodeSelector>,
 }
 /// Projection that may be projected along with other supported volume types
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeProjection {
     /// secret information about the secret data to project
@@ -6836,7 +6616,6 @@ pub struct VolumeProjection {
     pub cluster_trust_bundle: ::core::option::Option<ClusterTrustBundleProjection>,
 }
 /// VolumeResourceRequirements describes the storage resource requirements for a volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeResourceRequirements {
     /// Limits describes the maximum amount of compute resources allowed.
@@ -6860,7 +6639,6 @@ pub struct VolumeResourceRequirements {
 }
 /// Represents the source of a volume to mount.
 /// Only one of its members may be specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeSource {
     /// hostPath represents a pre-existing file or directory on the host
@@ -7028,7 +6806,6 @@ pub struct VolumeSource {
     pub ephemeral: ::core::option::Option<EphemeralVolumeSource>,
 }
 /// Represents a vSphere volume resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VsphereVirtualDiskVolumeSource {
     /// volumePath is the path that identifies vSphere volume vmdk
@@ -7050,7 +6827,6 @@ pub struct VsphereVirtualDiskVolumeSource {
     pub storage_policy_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WeightedPodAffinityTerm {
     /// weight associated with matching the corresponding podAffinityTerm,
@@ -7062,7 +6838,6 @@ pub struct WeightedPodAffinityTerm {
     pub pod_affinity_term: ::core::option::Option<PodAffinityTerm>,
 }
 /// WindowsSecurityContextOptions contain Windows-specific options and credentials.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WindowsSecurityContextOptions {
     /// GMSACredentialSpecName is the name of the GMSA credential spec to use.

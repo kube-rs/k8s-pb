@@ -23,7 +23,6 @@
 /// to a comparison against the less precise Capacity. If that is also unset,
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
@@ -85,7 +84,6 @@ pub struct CsiStorageCapacity {
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsiStorageCapacityList {
     /// Standard list metadata
@@ -101,7 +99,6 @@ pub struct CsiStorageCapacityList {
 /// to/from the specified node.
 ///
 /// VolumeAttachment objects are non-namespaced.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachment {
     /// Standard object metadata.
@@ -121,7 +118,6 @@ pub struct VolumeAttachment {
     pub status: ::core::option::Option<VolumeAttachmentStatus>,
 }
 /// VolumeAttachmentList is a collection of VolumeAttachment objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentList {
     /// Standard list metadata
@@ -137,7 +133,6 @@ pub struct VolumeAttachmentList {
 /// Right now only PersistenVolumes can be attached via external attacher,
 /// in future we may allow also inline volumes in pods.
 /// Exactly one member can be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSource {
     /// persistentVolumeName represents the name of the persistent volume to attach.
@@ -155,7 +150,6 @@ pub struct VolumeAttachmentSource {
     pub inline_volume_spec: ::core::option::Option<super::super::core::v1::PersistentVolumeSpec>,
 }
 /// VolumeAttachmentSpec is the specification of a VolumeAttachment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
@@ -170,7 +164,6 @@ pub struct VolumeAttachmentSpec {
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// VolumeAttachmentStatus is the status of a VolumeAttachment request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentStatus {
     /// attached indicates the volume is successfully attached.
@@ -203,7 +196,6 @@ pub struct VolumeAttachmentStatus {
 /// VolumeAttributesClass represents a specification of mutable volume attributes
 /// defined by the CSI driver. The class can be specified during dynamic provisioning
 /// of PersistentVolumeClaims, and changed in the PersistentVolumeClaim spec after provisioning.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttributesClass {
     /// Standard object's metadata.
@@ -233,7 +225,6 @@ pub struct VolumeAttributesClass {
         ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
 /// VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttributesClassList {
     /// Standard list metadata
@@ -246,7 +237,6 @@ pub struct VolumeAttributesClassList {
     pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
 }
 /// VolumeError captures an error encountered during a volume operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.

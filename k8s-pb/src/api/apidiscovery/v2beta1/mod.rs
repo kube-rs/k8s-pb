@@ -2,7 +2,6 @@
 /// APIGroupDiscovery holds information about which resources are being served for all version of the API Group.
 /// It contains a list of APIVersionDiscovery that holds a list of APIResourceDiscovery types served for a version.
 /// Versions are in descending order of preference, with the first version being the preferred entry.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiGroupDiscovery {
     /// Standard object's metadata.
@@ -24,7 +23,6 @@ pub struct ApiGroupDiscovery {
 /// This is one of the types able to be returned from the /api and /apis endpoint and contains an aggregated
 /// list of API resources (built-ins, Custom Resource Definitions, resources from aggregated servers)
 /// that a cluster supports.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiGroupDiscoveryList {
     /// ResourceVersion will not be set, because this does not have a replayable ordering among multiple apiservers.
@@ -37,7 +35,6 @@ pub struct ApiGroupDiscoveryList {
     pub items: ::prost::alloc::vec::Vec<ApiGroupDiscovery>,
 }
 /// APIResourceDiscovery provides information about an API resource for discovery.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiResourceDiscovery {
     /// resource is the plural name of the resource.  This is used in the URL path and is the unique identifier
@@ -83,7 +80,6 @@ pub struct ApiResourceDiscovery {
     pub subresources: ::prost::alloc::vec::Vec<ApiSubresourceDiscovery>,
 }
 /// APISubresourceDiscovery provides information about an API subresource for discovery.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiSubresourceDiscovery {
     /// subresource is the name of the subresource.  This is used in the URL path and is the unique identifier
@@ -117,7 +113,6 @@ pub struct ApiSubresourceDiscovery {
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// APIVersionDiscovery holds a list of APIResourceDiscovery types that are served for a particular version within an API Group.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiVersionDiscovery {
     /// version is the name of the version within a group version.

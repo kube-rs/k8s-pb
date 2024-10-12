@@ -2,7 +2,6 @@
 /// DEPRECATED - This group version of DaemonSet is deprecated by apps/v1beta2/DaemonSet. See the release notes for
 /// more information.
 /// DaemonSet represents the configuration of a daemon set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSet {
     /// Standard object's metadata.
@@ -25,7 +24,6 @@ pub struct DaemonSet {
     pub status: ::core::option::Option<DaemonSetStatus>,
 }
 /// DaemonSetCondition describes the state of a DaemonSet at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetCondition {
     /// Type of DaemonSet condition.
@@ -49,7 +47,6 @@ pub struct DaemonSetCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DaemonSetList is a collection of daemon sets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetList {
     /// Standard list metadata.
@@ -62,7 +59,6 @@ pub struct DaemonSetList {
     pub items: ::prost::alloc::vec::Vec<DaemonSet>,
 }
 /// DaemonSetSpec is the specification of a daemon set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetSpec {
     /// A label query over pods that are managed by the daemon set.
@@ -105,7 +101,6 @@ pub struct DaemonSetSpec {
     pub revision_history_limit: ::core::option::Option<i32>,
 }
 /// DaemonSetStatus represents the current status of a daemon set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetStatus {
     /// The number of nodes that are running at least 1
@@ -165,7 +160,6 @@ pub struct DaemonSetStatus {
 /// DaemonSetUpdateStrategy indicates the strategy that the DaemonSet
 /// controller will use to perform updates. It includes any additional parameters
 /// necessary to perform the update for the indicated strategy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetUpdateStrategy {
     /// Type of daemon set update. Can be "RollingUpdate" or "OnDelete".
@@ -185,7 +179,6 @@ pub struct DaemonSetUpdateStrategy {
 /// DEPRECATED - This group version of Deployment is deprecated by apps/v1beta2/Deployment. See the release notes for
 /// more information.
 /// Deployment enables declarative updates for Pods and ReplicaSets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Deployment {
     /// Standard object metadata.
@@ -202,7 +195,6 @@ pub struct Deployment {
     pub status: ::core::option::Option<DeploymentStatus>,
 }
 /// DeploymentCondition describes the state of a deployment at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentCondition {
     /// Type of deployment condition.
@@ -227,7 +219,6 @@ pub struct DeploymentCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeploymentList is a list of Deployments.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentList {
     /// Standard list metadata.
@@ -240,7 +231,6 @@ pub struct DeploymentList {
 }
 /// DEPRECATED.
 /// DeploymentRollback stores the information required to rollback a deployment.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentRollback {
     /// Required: This must match the Name of a deployment.
@@ -256,7 +246,6 @@ pub struct DeploymentRollback {
     pub rollback_to: ::core::option::Option<RollbackConfig>,
 }
 /// DeploymentSpec is the specification of the desired behavior of the Deployment.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentSpec {
     /// Number of desired pods. This is a pointer to distinguish between explicit
@@ -312,7 +301,6 @@ pub struct DeploymentSpec {
     pub progress_deadline_seconds: ::core::option::Option<i32>,
 }
 /// DeploymentStatus is the most recently observed status of the Deployment.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentStatus {
     /// The generation observed by the deployment controller.
@@ -356,7 +344,6 @@ pub struct DeploymentStatus {
     pub collision_count: ::core::option::Option<i32>,
 }
 /// DeploymentStrategy describes how to replace existing pods with new ones.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentStrategy {
     /// Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
@@ -374,7 +361,6 @@ pub struct DeploymentStrategy {
 }
 /// HTTPIngressPath associates a path with a backend. Incoming urls matching the
 /// path are forwarded to the backend.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpIngressPath {
     /// Path is matched against the path of an incoming request. Currently it can
@@ -411,7 +397,6 @@ pub struct HttpIngressPath {
 /// where parts of the url correspond to RFC 3986, this resource will be used
 /// to match against everything after the last '/' and before the first '?'
 /// or '#'.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpIngressRuleValue {
     /// A collection of paths that map requests to backends.
@@ -423,7 +408,6 @@ pub struct HttpIngressRuleValue {
 /// IPBlock describes a particular CIDR (Ex. "192.168.1.0/24","2001:db8::/64") that is allowed
 /// to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs
 /// that should not be included within this rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpBlock {
     /// CIDR is a string representing the IP Block
@@ -443,7 +427,6 @@ pub struct IpBlock {
 /// externally-reachable urls, load balance traffic, terminate SSL, offer name
 /// based virtual hosting etc.
 /// DEPRECATED - This group version of Ingress is deprecated by networking.k8s.io/v1beta1 Ingress. See the release notes for more information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Ingress {
     /// Standard object's metadata.
@@ -463,7 +446,6 @@ pub struct Ingress {
     pub status: ::core::option::Option<IngressStatus>,
 }
 /// IngressBackend describes all endpoints for a given service and port.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressBackend {
     /// Specifies the name of the referenced service.
@@ -483,7 +465,6 @@ pub struct IngressBackend {
     pub resource: ::core::option::Option<super::super::core::v1::TypedLocalObjectReference>,
 }
 /// IngressList is a collection of Ingress.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressList {
     /// Standard object's metadata.
@@ -496,7 +477,6 @@ pub struct IngressList {
     pub items: ::prost::alloc::vec::Vec<Ingress>,
 }
 /// IngressLoadBalancerIngress represents the status of a load-balancer ingress point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressLoadBalancerIngress {
     /// IP is set for load-balancer ingress points that are IP based.
@@ -514,7 +494,6 @@ pub struct IngressLoadBalancerIngress {
     pub ports: ::prost::alloc::vec::Vec<IngressPortStatus>,
 }
 /// LoadBalancerStatus represents the status of a load-balancer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressLoadBalancerStatus {
     /// Ingress is a list containing ingress points for the load-balancer.
@@ -524,7 +503,6 @@ pub struct IngressLoadBalancerStatus {
     pub ingress: ::prost::alloc::vec::Vec<IngressLoadBalancerIngress>,
 }
 /// IngressPortStatus represents the error condition of a service port
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressPortStatus {
     /// Port is the port number of the ingress port.
@@ -552,7 +530,6 @@ pub struct IngressPortStatus {
 /// IngressRule represents the rules mapping the paths under a specified host to
 /// the related backend services. Incoming requests are first evaluated for a host
 /// match, then routed to the backend associated with the matching IngressRuleValue.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressRule {
     /// Host is the fully qualified domain name of a network host, as defined by RFC 3986.
@@ -593,7 +570,6 @@ pub struct IngressRule {
 /// rule is satisfied, the request is routed to the specified backend. Currently
 /// mixing different types of rules in a single Ingress is disallowed, so exactly
 /// one of the following must be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressRuleValue {
     /// http is a list of http selectors pointing to backends.
@@ -606,7 +582,6 @@ pub struct IngressRuleValue {
     pub http: ::core::option::Option<HttpIngressRuleValue>,
 }
 /// IngressSpec describes the Ingress the user wishes to exist.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressSpec {
     /// IngressClassName is the name of the IngressClass cluster resource. The
@@ -646,7 +621,6 @@ pub struct IngressSpec {
     pub rules: ::prost::alloc::vec::Vec<IngressRule>,
 }
 /// IngressStatus describe the current state of the Ingress.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressStatus {
     /// LoadBalancer contains the current status of the load-balancer.
@@ -655,7 +629,6 @@ pub struct IngressStatus {
     pub load_balancer: ::core::option::Option<IngressLoadBalancerStatus>,
 }
 /// IngressTLS describes the transport layer security associated with an Ingress.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressTls {
     /// Hosts are a list of hosts included in the TLS certificate. The values in
@@ -677,7 +650,6 @@ pub struct IngressTls {
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicy is deprecated by networking/v1/NetworkPolicy.
 /// NetworkPolicy describes what network traffic is allowed for a set of Pods
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicy {
     /// Standard object's metadata.
@@ -694,7 +666,6 @@ pub struct NetworkPolicy {
 /// NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods
 /// matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to.
 /// This type is beta-level in 1.8
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicyEgressRule {
     /// List of destination ports for outgoing traffic.
@@ -718,7 +689,6 @@ pub struct NetworkPolicyEgressRule {
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicyIngressRule is deprecated by networking/v1/NetworkPolicyIngressRule.
 /// This NetworkPolicyIngressRule matches traffic if and only if the traffic matches both ports AND from.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicyIngressRule {
     /// List of ports which should be made accessible on the pods selected for this rule.
@@ -742,7 +712,6 @@ pub struct NetworkPolicyIngressRule {
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicyList is deprecated by networking/v1/NetworkPolicyList.
 /// Network Policy List is a list of NetworkPolicy objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicyList {
     /// Standard list metadata.
@@ -755,7 +724,6 @@ pub struct NetworkPolicyList {
     pub items: ::prost::alloc::vec::Vec<NetworkPolicy>,
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicyPeer is deprecated by networking/v1/NetworkPolicyPeer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicyPeer {
     /// This is a label selector which selects Pods. This field follows standard label
@@ -785,7 +753,6 @@ pub struct NetworkPolicyPeer {
     pub ip_block: ::core::option::Option<IpBlock>,
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicyPort is deprecated by networking/v1/NetworkPolicyPort.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicyPort {
     /// Optional.  The protocol (TCP, UDP, or SCTP) which traffic must match.
@@ -809,7 +776,6 @@ pub struct NetworkPolicyPort {
     pub end_port: ::core::option::Option<i32>,
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicySpec is deprecated by networking/v1/NetworkPolicySpec.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicySpec {
     /// Selects the pods to which this NetworkPolicy object applies.  The array of ingress rules
@@ -860,7 +826,6 @@ pub struct NetworkPolicySpec {
 /// DEPRECATED - This group version of ReplicaSet is deprecated by apps/v1beta2/ReplicaSet. See the release notes for
 /// more information.
 /// ReplicaSet ensures that a specified number of pod replicas are running at any given time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSet {
     /// If the Labels of a ReplicaSet are empty, they are defaulted to
@@ -884,7 +849,6 @@ pub struct ReplicaSet {
     pub status: ::core::option::Option<ReplicaSetStatus>,
 }
 /// ReplicaSetCondition describes the state of a replica set at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetCondition {
     /// Type of replica set condition.
@@ -908,7 +872,6 @@ pub struct ReplicaSetCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ReplicaSetList is a collection of ReplicaSets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetList {
     /// Standard list metadata.
@@ -922,7 +885,6 @@ pub struct ReplicaSetList {
     pub items: ::prost::alloc::vec::Vec<ReplicaSet>,
 }
 /// ReplicaSetSpec is the specification of a ReplicaSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetSpec {
     /// Replicas is the number of desired replicas.
@@ -954,7 +916,6 @@ pub struct ReplicaSetSpec {
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
 }
 /// ReplicaSetStatus represents the current status of a ReplicaSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetStatus {
     /// Replicas is the most recently observed number of replicas.
@@ -987,7 +948,6 @@ pub struct ReplicaSetStatus {
     pub conditions: ::prost::alloc::vec::Vec<ReplicaSetCondition>,
 }
 /// DEPRECATED.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RollbackConfig {
     /// The revision to rollback to. If set to 0, rollback to the last revision.
@@ -996,7 +956,6 @@ pub struct RollbackConfig {
     pub revision: ::core::option::Option<i64>,
 }
 /// Spec to control the desired behavior of daemon set rolling update.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateDaemonSet {
     /// The maximum number of DaemonSet pods that can be unavailable during the
@@ -1041,7 +1000,6 @@ pub struct RollingUpdateDaemonSet {
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Spec to control the desired behavior of rolling update.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateDeployment {
     /// The maximum number of pods that can be unavailable during the update.
@@ -1074,7 +1032,6 @@ pub struct RollingUpdateDeployment {
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// represents a scaling request for a resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Scale {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
@@ -1091,7 +1048,6 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// describes the attributes of a scale subresource
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
     /// desired number of instances for the scaled object.
@@ -1100,7 +1056,6 @@ pub struct ScaleSpec {
     pub replicas: ::core::option::Option<i32>,
 }
 /// represents the current status of a scale subresource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleStatus {
     /// actual number of observed instances of the scaled object.

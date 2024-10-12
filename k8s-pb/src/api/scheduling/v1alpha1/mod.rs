@@ -2,7 +2,6 @@
 /// DEPRECATED - This group version of PriorityClass is deprecated by scheduling.k8s.io/v1/PriorityClass.
 /// PriorityClass defines mapping from a priority class name to the priority
 /// integer value. The value can be any valid integer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityClass {
     /// Standard object's metadata.
@@ -35,7 +34,6 @@ pub struct PriorityClass {
     pub preemption_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PriorityClassList is a collection of priority classes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityClassList {
     /// Standard list metadata

@@ -6,7 +6,6 @@
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricSource {
     /// name is the name of the resource in question.
@@ -24,7 +23,6 @@ pub struct ContainerResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
     /// name is the name of the resource in question.
@@ -38,7 +36,6 @@ pub struct ContainerResourceMetricStatus {
     pub container: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// kind is the kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
@@ -55,7 +52,6 @@ pub struct CrossVersionObjectReference {
 /// ExternalMetricSource indicates how to scale on a metric not associated with
 /// any Kubernetes object (for example length of queue in cloud
 /// messaging service, or QPS from loadbalancer running outside of cluster).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricSource {
     /// metric identifies the target metric by name and selector
@@ -67,7 +63,6 @@ pub struct ExternalMetricSource {
 }
 /// ExternalMetricStatus indicates the current value of a global metric
 /// not associated with any Kubernetes object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricStatus {
     /// metric identifies the target metric by name and selector
@@ -78,7 +73,6 @@ pub struct ExternalMetricStatus {
     pub current: ::core::option::Option<MetricValueStatus>,
 }
 /// HPAScalingPolicy is a single policy which must hold true for a specified past interval.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HpaScalingPolicy {
     /// type is used to specify the scaling policy.
@@ -99,7 +93,6 @@ pub struct HpaScalingPolicy {
 /// They can prevent flapping by specifying the stabilization window, so that the
 /// number of replicas is not set instantly, instead, the safest value from the stabilization
 /// window is chosen.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HpaScalingRules {
     /// stabilizationWindowSeconds is the number of seconds for which past recommendations should be
@@ -126,7 +119,6 @@ pub struct HpaScalingRules {
 /// HorizontalPodAutoscaler is the configuration for a horizontal pod
 /// autoscaler, which automatically manages the replica count of any resource
 /// implementing the scale subresource based on the metrics specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscaler {
     /// metadata is the standard object metadata.
@@ -146,7 +138,6 @@ pub struct HorizontalPodAutoscaler {
 }
 /// HorizontalPodAutoscalerBehavior configures the scaling behavior of the target
 /// in both Up and Down directions (scaleUp and scaleDown fields respectively).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerBehavior {
     /// scaleUp is scaling policy for scaling Up.
@@ -167,7 +158,6 @@ pub struct HorizontalPodAutoscalerBehavior {
 }
 /// HorizontalPodAutoscalerCondition describes the state of
 /// a HorizontalPodAutoscaler at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerCondition {
     /// type describes the current condition
@@ -193,7 +183,6 @@ pub struct HorizontalPodAutoscalerCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerList {
     /// metadata is the standard list metadata.
@@ -205,7 +194,6 @@ pub struct HorizontalPodAutoscalerList {
     pub items: ::prost::alloc::vec::Vec<HorizontalPodAutoscaler>,
 }
 /// HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerSpec {
     /// scaleTargetRef points to the target resource to scale, and is used to the pods for which metrics
@@ -244,7 +232,6 @@ pub struct HorizontalPodAutoscalerSpec {
     pub behavior: ::core::option::Option<HorizontalPodAutoscalerBehavior>,
 }
 /// HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerStatus {
     /// observedGeneration is the most recent generation observed by this autoscaler.
@@ -277,7 +264,6 @@ pub struct HorizontalPodAutoscalerStatus {
     pub conditions: ::prost::alloc::vec::Vec<HorizontalPodAutoscalerCondition>,
 }
 /// MetricIdentifier defines the name and optionally selector for a metric
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricIdentifier {
     /// name is the name of the given metric
@@ -293,7 +279,6 @@ pub struct MetricIdentifier {
 }
 /// MetricSpec specifies how to scale based on a single metric
 /// (only `type` and one other matching field should be set at once).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricSpec {
     /// type is the type of metric source.  It should be one of "ContainerResource", "External",
@@ -340,7 +325,6 @@ pub struct MetricSpec {
     pub external: ::core::option::Option<ExternalMetricSource>,
 }
 /// MetricStatus describes the last-read state of a single metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricStatus {
     /// type is the type of metric source.  It will be one of "ContainerResource", "External",
@@ -386,7 +370,6 @@ pub struct MetricStatus {
     pub external: ::core::option::Option<ExternalMetricStatus>,
 }
 /// MetricTarget defines the target value, average value, or average utilization of a specific metric
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricTarget {
     /// type represents whether the metric type is Utilization, Value, or AverageValue
@@ -411,7 +394,6 @@ pub struct MetricTarget {
     pub average_utilization: ::core::option::Option<i32>,
 }
 /// MetricValueStatus holds the current value for a metric
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricValueStatus {
     /// value is the current value of the metric (as a quantity).
@@ -433,7 +415,6 @@ pub struct MetricValueStatus {
 }
 /// ObjectMetricSource indicates how to scale on a metric describing a
 /// kubernetes object (for example, hits-per-second on an Ingress object).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMetricSource {
     #[prost(message, optional, tag = "1")]
@@ -447,7 +428,6 @@ pub struct ObjectMetricSource {
 }
 /// ObjectMetricStatus indicates the current value of a metric describing a
 /// kubernetes object (for example, hits-per-second on an Ingress object).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMetricStatus {
     /// metric identifies the target metric by name and selector
@@ -463,7 +443,6 @@ pub struct ObjectMetricStatus {
 /// the current scale target (for example, transactions-processed-per-second).
 /// The values will be averaged together before being compared to the target
 /// value.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodsMetricSource {
     /// metric identifies the target metric by name and selector
@@ -475,7 +454,6 @@ pub struct PodsMetricSource {
 }
 /// PodsMetricStatus indicates the current value of a metric describing each pod in
 /// the current scale target (for example, transactions-processed-per-second).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodsMetricStatus {
     /// metric identifies the target metric by name and selector
@@ -492,7 +470,6 @@ pub struct PodsMetricStatus {
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricSource {
     /// name is the name of the resource in question.
@@ -507,7 +484,6 @@ pub struct ResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricStatus {
     /// name is the name of the resource in question.

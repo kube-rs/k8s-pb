@@ -49,7 +49,6 @@
 /// +k8s:deepcopy-gen=true
 /// +protobuf=true
 /// +k8s:openapi-gen=true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RawExtension {
     /// Raw is the underlying serialization of this object.
@@ -74,7 +73,6 @@ pub struct RawExtension {
 /// +k8s:deepcopy-gen=false
 /// +protobuf=true
 /// +k8s:openapi-gen=true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypeMeta {
     /// +optional
@@ -94,7 +92,6 @@ pub struct TypeMeta {
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 /// +protobuf=true
 /// +k8s:openapi-gen=true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Unknown {
     #[prost(message, optional, tag = "1")]
