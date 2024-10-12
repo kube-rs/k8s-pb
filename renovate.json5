@@ -12,7 +12,7 @@
   prBodyNotes: [
     "{{#if isMinor}}:warning: Kubernetes Minor :warning:{{/if}}",
     "This PR bumps the Kubernetes version in the justfile and runs just renovate.",
-    "{{#if isMinor}}Please check for inconsistencies in the new version{{if}}",
+    "{{#if isMinor}}Please check for inconsistencies in the new version{{/if}}",
   ],
   customManagers: [
     {
