@@ -23,7 +23,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
           docker-cmd-file: .github/renovate-entrypoint.sh
           docker-user: root
-          configurationFile: .renovate.json5
+          configurationFile: renovate.json5
         env:
           LOG_LEVEL: 'debug'
       # hopefully not too late...
