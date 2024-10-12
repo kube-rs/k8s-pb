@@ -747,15 +747,14 @@ pub struct StatefulSetSpec {
     /// policy allows the lifecycle to be altered, for example by deleting persistent
     /// volume claims when their stateful set is deleted, or when their pod is scaled
     /// down. This requires the StatefulSetAutoDeletePVC feature gate to be enabled,
-    /// which is alpha.  +optional
+    /// which is beta.
+    /// +optional
     #[prost(message, optional, tag = "10")]
     pub persistent_volume_claim_retention_policy:
         ::core::option::Option<StatefulSetPersistentVolumeClaimRetentionPolicy>,
     /// ordinals controls the numbering of replica indices in a StatefulSet. The
     /// default ordinals behavior assigns a "0" index to the first replica and
-    /// increments the index by one for each additional replica requested. Using
-    /// the ordinals field requires the StatefulSetStartOrdinal feature gate to be
-    /// enabled, which is beta.
+    /// increments the index by one for each additional replica requested.
     /// +optional
     #[prost(message, optional, tag = "11")]
     pub ordinals: ::core::option::Option<StatefulSetOrdinals>,

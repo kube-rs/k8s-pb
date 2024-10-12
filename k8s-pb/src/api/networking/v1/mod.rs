@@ -539,6 +539,7 @@ pub struct NetworkPolicySpec {
     pub policy_types: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServiceBackendPort is the service port being referenced.
+/// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceBackendPort {
     /// name is the name of the port on the Service.

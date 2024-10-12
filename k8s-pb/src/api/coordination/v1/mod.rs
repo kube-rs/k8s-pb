@@ -28,11 +28,13 @@ pub struct LeaseList {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LeaseSpec {
     /// holderIdentity contains the identity of the holder of a current lease.
+    /// If Coordinated Leader Election is used, the holder identity must be
+    /// equal to the elected LeaseCandidate.metadata.name field.
     /// +optional
     #[prost(string, optional, tag = "1")]
     pub holder_identity: ::core::option::Option<::prost::alloc::string::String>,
     /// leaseDurationSeconds is a duration that candidates for a lease need
-    /// to wait to force acquire it. This is measure against time of last
+    /// to wait to force acquire it. This is measured against the time of last
     /// observed renewTime.
     /// +optional
     #[prost(int32, optional, tag = "2")]
@@ -52,6 +54,20 @@ pub struct LeaseSpec {
     /// +optional
     #[prost(int32, optional, tag = "5")]
     pub lease_transitions: ::core::option::Option<i32>,
+    /// Strategy indicates the strategy for picking the leader for coordinated leader election.
+    /// If the field is not specified, there is no active coordination for this lease.
+    /// (Alpha) Using this field requires the CoordinatedLeaderElection feature gate to be enabled.
+    /// +featureGate=CoordinatedLeaderElection
+    /// +optional
+    #[prost(string, optional, tag = "6")]
+    pub strategy: ::core::option::Option<::prost::alloc::string::String>,
+    /// PreferredHolder signals to a lease holder that the lease has a
+    /// more optimal holder and should be given up.
+    /// This field can only be set if Strategy is also set.
+    /// +featureGate=CoordinatedLeaderElection
+    /// +optional
+    #[prost(string, optional, tag = "7")]
+    pub preferred_holder: ::core::option::Option<::prost::alloc::string::String>,
 }
 
 impl crate::Resource for Lease {

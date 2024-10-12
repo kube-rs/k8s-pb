@@ -33,9 +33,9 @@ message PartialObjectMetadataList {
   // Standard list metadata.
   // More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
   // +optional
-  optional apimachinery.pkg.apis.meta.v1.ListMeta metadata = 2;
+  optional .apimachinery.pkg.apis.meta.v1.ListMeta metadata = 2;
 
   // items contains each of the included items.
-  repeated apimachinery.pkg.apis.meta.v1.PartialObjectMetadata items = 1;
+  repeated .apimachinery.pkg.apis.meta.v1.PartialObjectMetadata items = 1;
 }
 

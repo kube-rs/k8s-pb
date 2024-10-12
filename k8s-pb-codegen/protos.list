@@ -23,6 +23,7 @@ protos/api/batch/v1/generated.proto
 protos/api/certificates/v1alpha1/generated.proto
 protos/api/certificates/v1beta1/generated.proto
 protos/api/certificates/v1/generated.proto
+protos/api/coordination/v1alpha1/generated.proto
 protos/api/coordination/v1beta1/generated.proto
 protos/api/coordination/v1/generated.proto
 protos/api/core/v1/generated.proto
@@ -56,7 +57,7 @@ protos/api/policy/v1/generated.proto
 protos/api/rbac/v1alpha1/generated.proto
 protos/api/rbac/v1beta1/generated.proto
 protos/api/rbac/v1/generated.proto
-protos/api/resource/v1alpha2/generated.proto
+protos/api/resource/v1alpha3/generated.proto
 protos/api/scheduling/v1alpha1/generated.proto
 protos/api/scheduling/v1beta1/generated.proto
 protos/api/scheduling/v1/generated.proto
