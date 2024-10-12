@@ -42,17 +42,11 @@ jobs:
         if: false # currently go doc generates stuff that rust expects to be valid symbols
 
   codegen:
-    strategy:
-      # Prevent GitHub from cancelling all in-progress jobs when a matrix job fails.
-      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        with:
-          override: true
-          toolchain: stable
-          profile: minimal
+      - uses: extractions/setup-just@v2
+      - uses: dtolnay/rust-toolchain@stable
       # Smart caching for Rust projects.
       # Includes workaround for macos cache corruption.
       # - https://github.com/rust-lang/cargo/issues/8603
@@ -67,6 +61,7 @@ jobs:
       - run: just protos
       - run: just swagger
       - run: just codegen
+      - run: cargo fmt
       - name: Ensure generated output is committed
         run: |
           if ! git diff --exit-code .; then

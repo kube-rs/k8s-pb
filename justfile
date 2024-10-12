@@ -78,3 +78,4 @@ codegen:
 
 [private]
 renovate: swagger protos codegen
+  cargo run rustfmt

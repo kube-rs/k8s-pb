@@ -10,11 +10,12 @@ For now consider these structs a reference location for Kubernetes structs that 
 See [docs.rs/k8s-pb](https://docs.rs/k8s-pb/latest/k8s_pb/).
 
 ## Build Process
-The code generation process consists of 3 steps;
+The code generation process consists of 4 steps;
 
 1. `just protos` - download and patch protobufs
 2. `just swagger` - download and transform openapi schema
 3. `just codegen` - combine info and build with prost
+4. `cargo fmt`
 
 The [k8s-pb](https://github.com/kube-rs/k8s-pb/tree/main/k8s-pb) crate is generated as a result of this process and then published periodically.
 
