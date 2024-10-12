@@ -26,9 +26,8 @@ pub struct MigrationCondition {
     /// The last time this condition was updated.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_update_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_update_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -47,9 +46,7 @@ pub struct StorageVersionMigration {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the migration.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -67,9 +64,7 @@ pub struct StorageVersionMigrationList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of StorageVersionMigration
     /// +patchMergeKey=type
     /// +patchStrategy=merge
@@ -155,9 +150,6 @@ impl crate::HasConditions for StorageVersionMigration {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-

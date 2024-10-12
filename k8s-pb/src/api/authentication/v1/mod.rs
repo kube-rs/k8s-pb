@@ -41,9 +41,7 @@ pub struct SelfSubjectReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Status is filled in by the server with the user attributes.
     #[prost(message, optional, tag = "2")]
     pub status: ::core::option::Option<SelfSubjectReviewStatus>,
@@ -65,9 +63,7 @@ pub struct TokenRequest {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<TokenRequestSpec>,
@@ -113,9 +109,8 @@ pub struct TokenRequestStatus {
     pub token: ::core::option::Option<::prost::alloc::string::String>,
     /// ExpirationTimestamp is the time of expiration of the returned token.
     #[prost(message, optional, tag = "2")]
-    pub expiration_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub expiration_timestamp:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// TokenReview attempts to authenticate a token to a known user.
 /// Note: TokenReview requests may be cached by the webhook token authenticator
@@ -127,9 +122,7 @@ pub struct TokenReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<TokenReviewSpec>,
@@ -239,7 +232,6 @@ impl crate::HasStatus for SelfSubjectReview {
     }
 }
 
-
 impl crate::Resource for TokenReview {
     const API_VERSION: &'static str = "authentication.k8s.io/v1";
     const GROUP: &'static str = "authentication.k8s.io";
@@ -275,4 +267,3 @@ impl crate::HasStatus for TokenReview {
         self.status.as_mut()
     }
 }
-

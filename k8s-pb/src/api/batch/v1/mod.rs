@@ -7,9 +7,7 @@ pub struct CronJob {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of a cron job, including the schedule.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -29,9 +27,7 @@ pub struct CronJobList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CronJobs.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CronJob>,
@@ -100,15 +96,13 @@ pub struct CronJobStatus {
     /// Information when was the last time the job was successfully scheduled.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_schedule_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_schedule_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Information when was the last time the job successfully completed.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub last_successful_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_successful_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// Job represents the configuration of a single job.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -118,9 +112,7 @@ pub struct Job {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of a job.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -145,15 +137,12 @@ pub struct JobCondition {
     /// Last time the condition was checked.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_probe_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_probe_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transit from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// (brief) reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
@@ -171,9 +160,7 @@ pub struct JobList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of Jobs.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Job>,
@@ -265,9 +252,8 @@ pub struct JobSpec {
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// manualSelector controls generation of pod labels and pod selectors.
     /// Leave `manualSelector` unset unless you are certain what you are doing.
     /// When false or unset, the system pick labels unique to this job
@@ -394,9 +380,7 @@ pub struct JobStatus {
     ///
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub start_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Represents time when the job was completed. It is not guaranteed to
     /// be set in happens-before order across separate operations.
     /// It is represented in RFC3339 form and is in UTC.
@@ -405,9 +389,7 @@ pub struct JobStatus {
     /// later point in time as the startTime field.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub completion_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub completion_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The number of pending and running pods which are not terminating (without
     /// a deletionTimestamp).
     /// The value is zero for finished jobs.
@@ -489,9 +471,7 @@ pub struct JobTemplateSpec {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the job.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -597,9 +577,7 @@ pub struct PodFailurePolicyRule {
     /// +listType=atomic
     /// +optional
     #[prost(message, repeated, tag = "3")]
-    pub on_pod_conditions: ::prost::alloc::vec::Vec<
-        PodFailurePolicyOnPodConditionsPattern,
-    >,
+    pub on_pod_conditions: ::prost::alloc::vec::Vec<PodFailurePolicyOnPodConditionsPattern>,
 }
 /// SuccessPolicy describes when a Job can be declared as succeeded based on the success of some indexes.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -703,7 +681,6 @@ impl crate::HasStatus for CronJob {
     }
 }
 
-
 impl crate::Resource for Job {
     const API_VERSION: &'static str = "batch/v1";
     const GROUP: &'static str = "batch";
@@ -745,9 +722,6 @@ impl crate::HasConditions for Job {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-

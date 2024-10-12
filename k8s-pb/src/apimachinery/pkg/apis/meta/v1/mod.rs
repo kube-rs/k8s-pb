@@ -26,9 +26,7 @@ pub struct ApiGroup {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<
-        ServerAddressByClientCidr,
-    >,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
 }
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
@@ -124,9 +122,7 @@ pub struct ApiVersions {
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<
-        ServerAddressByClientCidr,
-    >,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
 }
 /// ApplyOptions may be provided when applying an API object.
 /// FieldManager is required for apply requests.
@@ -440,10 +436,8 @@ pub struct LabelSelector {
     /// operator is "In", and the values array contains only "value". The requirements are ANDed.
     /// +optional
     #[prost(map = "string, string", tag = "1")]
-    pub match_labels: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub match_labels:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// matchExpressions is a list of label selector requirements. The requirements are ANDed.
     /// +optional
     /// +listType=atomic
@@ -817,20 +811,15 @@ pub struct ObjectMeta {
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels>
     /// +optional
     #[prost(map = "string, string", tag = "11")]
-    pub labels: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Annotations is an unstructured key value map stored with a resource that may be
     /// set by external tools to store and retrieve arbitrary metadata. They are not
     /// queryable and should be preserved when modifying objects.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations>
     /// +optional
     #[prost(map = "string, string", tag = "12")]
-    pub annotations: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub annotations:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// List of objects depended by this object. If ALL objects in the list have
     /// been deleted, this object will be garbage collected. If this object is managed by a controller,
     /// then an entry in this list will point to this controller, with the controller field set to true.

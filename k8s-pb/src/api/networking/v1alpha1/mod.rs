@@ -13,9 +13,7 @@ pub struct IpAddress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the IPAddress.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -30,9 +28,7 @@ pub struct IpAddressList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IPAddresses.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<IpAddress>,
@@ -77,9 +73,7 @@ pub struct ServiceCidr {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the ServiceCIDR.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -99,9 +93,7 @@ pub struct ServiceCidrList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of ServiceCIDRs.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ServiceCidr>,
@@ -130,9 +122,8 @@ pub struct ServiceCidrStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "1")]
-    pub conditions: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
-    >,
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 
 impl crate::Resource for IpAddress {
@@ -161,7 +152,6 @@ impl crate::HasSpec for IpAddress {
         self.spec.as_mut()
     }
 }
-
 
 impl crate::Resource for ServiceCidr {
     const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";
@@ -204,9 +194,6 @@ impl crate::HasConditions for ServiceCidr {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-

@@ -17,14 +17,10 @@ pub struct ControllerRevision {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// data is the serialized representation of the state.
     #[prost(message, optional, tag = "2")]
-    pub data: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub data: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// revision indicates the revision of the state represented by Data.
     #[prost(int64, optional, tag = "3")]
     pub revision: ::core::option::Option<i64>,
@@ -36,9 +32,7 @@ pub struct ControllerRevisionList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of ControllerRevisions
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ControllerRevision>,
@@ -52,9 +46,7 @@ pub struct Deployment {
     /// Standard object metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the Deployment.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -76,14 +68,12 @@ pub struct DeploymentCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// The last time this condition was updated.
     #[prost(message, optional, tag = "6")]
-    pub last_update_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_update_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "7")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -98,9 +88,7 @@ pub struct DeploymentList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of Deployments.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Deployment>,
@@ -116,10 +104,8 @@ pub struct DeploymentRollback {
     /// The annotations to be updated to a deployment
     /// +optional
     #[prost(map = "string, string", tag = "2")]
-    pub updated_annotations: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub updated_annotations:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// The config of this deployment rollback.
     #[prost(message, optional, tag = "3")]
     pub rollback_to: ::core::option::Option<RollbackConfig>,
@@ -137,9 +123,8 @@ pub struct DeploymentSpec {
     /// selected by this will be the ones affected by this deployment.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template describes the pods that will be created.
     /// The only allowed template.spec.restartPolicy value is "Always".
     #[prost(message, optional, tag = "3")]
@@ -265,9 +250,8 @@ pub struct RollingUpdateDeployment {
     /// least 70% of desired pods.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// The maximum number of pods that can be scheduled above the desired number of
     /// pods.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -281,9 +265,7 @@ pub struct RollingUpdateDeployment {
     /// at any time during the update is at most 130% of desired pods.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_surge: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -304,9 +286,8 @@ pub struct RollingUpdateStatefulSetStrategy {
     /// will be counted towards MaxUnavailable.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Scale represents a scaling request for a resource.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -315,9 +296,7 @@ pub struct Scale {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec defines the behavior of the scale. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -346,10 +325,7 @@ pub struct ScaleStatus {
     /// selector is a label query over pods that should match the replicas count. More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
     /// +optional
     #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// targetSelector is the label selector for pods that should match the replicas count. This is a serializated
     /// version of both map-based and more expressive set-based selectors. This is done to
     /// avoid introspection in the clients. The string will be in the same format as the
@@ -374,9 +350,7 @@ pub struct ScaleStatus {
 pub struct StatefulSet {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the desired identities of pods in this set.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -400,9 +374,8 @@ pub struct StatefulSetCondition {
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -418,9 +391,7 @@ pub struct StatefulSetCondition {
 pub struct StatefulSetList {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<StatefulSet>,
 }
@@ -477,9 +448,8 @@ pub struct StatefulSetSpec {
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. Each pod stamped out by the StatefulSet
     /// will fulfill this Template, but have a unique identity from the rest
@@ -498,9 +468,7 @@ pub struct StatefulSetSpec {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub volume_claim_templates: ::prost::alloc::vec::Vec<
-        super::super::core::v1::PersistentVolumeClaim,
-    >,
+    pub volume_claim_templates: ::prost::alloc::vec::Vec<super::super::core::v1::PersistentVolumeClaim>,
     /// serviceName is the name of the service that governs this StatefulSet.
     /// This service must exist before the StatefulSet, and is responsible for
     /// the network identity of the set. Pods get DNS/hostnames that follow the
@@ -541,9 +509,8 @@ pub struct StatefulSetSpec {
     /// StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub persistent_volume_claim_retention_policy: ::core::option::Option<
-        StatefulSetPersistentVolumeClaimRetentionPolicy,
-    >,
+    pub persistent_volume_claim_retention_policy:
+        ::core::option::Option<StatefulSetPersistentVolumeClaimRetentionPolicy>,
     /// ordinals controls the numbering of replica indices in a StatefulSet. The
     /// default ordinals behavior assigns a "0" index to the first replica and
     /// increments the index by one for each additional replica requested. Using

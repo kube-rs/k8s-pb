@@ -14,9 +14,7 @@
 pub struct CertificateSigningRequest {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec contains the certificate request, and is immutable after creation.
     /// Only the request, signerName, expirationSeconds, and usages fields can be set on creation.
     /// Other fields are derived by Kubernetes and cannot be modified by users.
@@ -64,17 +62,15 @@ pub struct CertificateSigningRequestCondition {
     /// lastUpdateTime is the time of the last update to this condition
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_update_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_update_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// lastTransitionTime is the time the condition last transitioned from one status to another.
     /// If unset, when a new condition type is added or an existing condition's status is changed,
     /// the server defaults this to the current time.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// CertificateSigningRequestList is a collection of CertificateSigningRequest objects
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -82,9 +78,7 @@ pub struct CertificateSigningRequestCondition {
 pub struct CertificateSigningRequestList {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a collection of CertificateSigningRequest objects
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CertificateSigningRequest>,
@@ -278,9 +272,6 @@ impl crate::HasConditions for CertificateSigningRequest {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-

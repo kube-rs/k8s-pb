@@ -36,10 +36,8 @@ pub struct Endpoint {
     /// in the zone and nodeName fields instead.
     /// +optional
     #[prost(map = "string, string", tag = "5")]
-    pub deprecated_topology: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub deprecated_topology:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// nodeName represents the name of the Node hosting this endpoint. This can
     /// be used to determine endpoints local to a Node.
     /// +optional
@@ -145,9 +143,7 @@ pub struct EndpointSlice {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// addressType specifies the type of address carried by this EndpointSlice.
     /// All addresses in this slice must be the same type. This field is
     /// immutable after creation. The following address types are currently
@@ -179,9 +175,7 @@ pub struct EndpointSliceList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of endpoint slices
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<EndpointSlice>,
@@ -212,4 +206,3 @@ impl crate::HasMetadata for EndpointSlice {
         self.metadata.as_mut()
     }
 }
-

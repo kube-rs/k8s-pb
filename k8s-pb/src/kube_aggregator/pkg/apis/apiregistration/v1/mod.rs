@@ -32,9 +32,8 @@ pub struct ApiServiceCondition {
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Unique, one-word, CamelCase reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -180,9 +179,6 @@ impl crate::HasConditions for ApiService {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-

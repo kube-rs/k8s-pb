@@ -55,9 +55,8 @@ pub struct DriverAllocationResult {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub vendor_request_parameters: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub vendor_request_parameters:
+        ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     #[prost(message, optional, tag = "2")]
     pub allocation_result_model: ::core::option::Option<AllocationResultModel>,
 }
@@ -73,9 +72,8 @@ pub struct DriverRequests {
     ///
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub vendor_parameters: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub vendor_parameters:
+        ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// Requests describes all resources that are needed from the driver.
     /// +listType=atomic
     #[prost(message, repeated, tag = "3")]
@@ -106,9 +104,7 @@ pub struct NamedResourcesAttribute {
 pub struct NamedResourcesAttributeValue {
     /// QuantityValue is a quantity.
     #[prost(message, optional, tag = "6")]
-    pub quantity: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub quantity: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// BoolValue is a true/false value.
     #[prost(bool, optional, tag = "2")]
     pub bool: ::core::option::Option<bool>,
@@ -221,9 +217,7 @@ pub struct PodSchedulingContext {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec describes where resources for the Pod are needed.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<PodSchedulingContextSpec>,
@@ -239,9 +233,7 @@ pub struct PodSchedulingContextList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of PodSchedulingContext objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodSchedulingContext>,
@@ -294,9 +286,7 @@ pub struct ResourceClaim {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec describes the desired attributes of a resource that then needs
     /// to be allocated. It can only be set once when creating the
     /// ResourceClaim.
@@ -337,9 +327,7 @@ pub struct ResourceClaimList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of resource claims.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaim>,
@@ -351,9 +339,7 @@ pub struct ResourceClaimList {
 pub struct ResourceClaimParameters {
     /// Standard object metadata
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// If this object was created from some other resource, then this links
     /// back to that resource. This field is used to find the in-tree representation
     /// of the claim parameters when the parameter reference of the claim refers
@@ -384,9 +370,7 @@ pub struct ResourceClaimParametersList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of node resource capacity objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaimParameters>,
@@ -504,9 +488,7 @@ pub struct ResourceClaimTemplate {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Describes the ResourceClaim that is to be generated.
     ///
     /// This field is immutable. A ResourceClaim will get created by the
@@ -522,9 +504,7 @@ pub struct ResourceClaimTemplateList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of resource claim templates.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaimTemplate>,
@@ -538,9 +518,7 @@ pub struct ResourceClaimTemplateSpec {
     /// validation.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec for the ResourceClaim. The entire content is copied unchanged
     /// into the ResourceClaim that gets created from this template. The
     /// same fields as in a ResourceClaim are also valid here.
@@ -558,9 +536,7 @@ pub struct ResourceClass {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// DriverName defines the name of the dynamic resource driver that is
     /// used for allocation of a ResourceClaim that uses this class.
     ///
@@ -597,9 +573,7 @@ pub struct ResourceClassList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of resource classes.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClass>,
@@ -611,9 +585,7 @@ pub struct ResourceClassList {
 pub struct ResourceClassParameters {
     /// Standard object metadata
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// If this object was created from some other resource, then this links
     /// back to that resource. This field is used to find the in-tree representation
     /// of the class parameters when the parameter reference of the class refers
@@ -642,9 +614,7 @@ pub struct ResourceClassParametersList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of node resource capacity objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClassParameters>,
@@ -741,9 +711,8 @@ pub struct ResourceRequest {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub vendor_parameters: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub vendor_parameters:
+        ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     #[prost(message, optional, tag = "2")]
     pub resource_request_model: ::core::option::Option<ResourceRequestModel>,
 }
@@ -765,9 +734,7 @@ pub struct ResourceSlice {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// NodeName identifies the node which provides the resources
     /// if they are local to a node.
     ///
@@ -792,9 +759,7 @@ pub struct ResourceSliceList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of node resource capacity objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceSlice>,
@@ -808,18 +773,16 @@ pub struct StructuredResourceHandle {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub vendor_class_parameters: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub vendor_class_parameters:
+        ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// VendorClaimParameters are the per-claim configuration parameters
     /// from the resource claim parameters at the time that the claim was
     /// allocated.
     ///
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub vendor_claim_parameters: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub vendor_claim_parameters:
+        ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// NodeName is the name of the node providing the necessary resources
     /// if the resources are local to a node.
     ///
@@ -844,9 +807,7 @@ pub struct VendorParameters {
     ///
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub parameters: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub parameters: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
 }
 
 impl crate::Resource for PodSchedulingContext {
@@ -885,7 +846,6 @@ impl crate::HasStatus for PodSchedulingContext {
     }
 }
 
-
 impl crate::Resource for ResourceClaim {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha2";
     const GROUP: &'static str = "resource.k8s.io";
@@ -922,7 +882,6 @@ impl crate::HasStatus for ResourceClaim {
     }
 }
 
-
 impl crate::Resource for ResourceClaimParameters {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha2";
     const GROUP: &'static str = "resource.k8s.io";
@@ -940,7 +899,6 @@ impl crate::HasMetadata for ResourceClaimParameters {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for ResourceClaimTemplate {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha2";
@@ -969,7 +927,6 @@ impl crate::HasSpec for ResourceClaimTemplate {
     }
 }
 
-
 impl crate::Resource for ResourceClass {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha2";
     const GROUP: &'static str = "resource.k8s.io";
@@ -987,7 +944,6 @@ impl crate::HasMetadata for ResourceClass {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for ResourceClassParameters {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha2";
@@ -1007,7 +963,6 @@ impl crate::HasMetadata for ResourceClassParameters {
     }
 }
 
-
 impl crate::Resource for ResourceSlice {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha2";
     const GROUP: &'static str = "resource.k8s.io";
@@ -1025,4 +980,3 @@ impl crate::HasMetadata for ResourceSlice {
         self.metadata.as_mut()
     }
 }
-

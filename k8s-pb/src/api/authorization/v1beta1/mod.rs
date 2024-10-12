@@ -20,9 +20,7 @@ pub struct LocalSubjectAccessReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated.  spec.namespace must be equal to the namespace
     /// you made the request against.  If empty, it is defaulted.
     #[prost(message, optional, tag = "2")]
@@ -133,9 +131,7 @@ pub struct SelfSubjectAccessReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated.  user and groups must be empty
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<SelfSubjectAccessReviewSpec>,
@@ -171,9 +167,7 @@ pub struct SelfSubjectRulesReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<SelfSubjectRulesReviewSpec>,
@@ -198,9 +192,7 @@ pub struct SubjectAccessReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<SubjectAccessReviewSpec>,

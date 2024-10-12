@@ -20,9 +20,7 @@ pub struct SelfSubjectReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Status is filled in by the server with the user attributes.
     #[prost(message, optional, tag = "2")]
     pub status: ::core::option::Option<SelfSubjectReviewStatus>,
@@ -46,9 +44,7 @@ pub struct TokenReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<TokenReviewSpec>,
@@ -157,4 +153,3 @@ impl crate::HasStatus for SelfSubjectReview {
         self.status.as_mut()
     }
 }
-

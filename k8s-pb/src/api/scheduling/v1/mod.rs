@@ -8,9 +8,7 @@ pub struct PriorityClass {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// value represents the integer value of this priority class. This is the actual priority that pods
     /// receive when they have the name of this class in their pod spec.
     #[prost(int32, optional, tag = "2")]
@@ -43,9 +41,7 @@ pub struct PriorityClassList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of PriorityClasses
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PriorityClass>,
@@ -68,4 +64,3 @@ impl crate::HasMetadata for PriorityClass {
         self.metadata.as_mut()
     }
 }
-

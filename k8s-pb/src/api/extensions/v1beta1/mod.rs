@@ -9,9 +9,7 @@ pub struct DaemonSet {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The desired behavior of this daemon set.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -39,9 +37,8 @@ pub struct DaemonSetCondition {
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -59,9 +56,7 @@ pub struct DaemonSetList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// A list of daemon sets.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<DaemonSet>,
@@ -76,9 +71,8 @@ pub struct DaemonSetSpec {
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// An object that describes the pod that will be created.
     /// The DaemonSet will create exactly one copy of this pod on every node
     /// that matches the template's node selector (or on every node if no node
@@ -197,9 +191,7 @@ pub struct Deployment {
     /// Standard object metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the Deployment.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -221,14 +213,12 @@ pub struct DeploymentCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// The last time this condition was updated.
     #[prost(message, optional, tag = "6")]
-    pub last_update_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_update_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "7")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -243,9 +233,7 @@ pub struct DeploymentList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of Deployments.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Deployment>,
@@ -261,10 +249,8 @@ pub struct DeploymentRollback {
     /// The annotations to be updated to a deployment
     /// +optional
     #[prost(map = "string, string", tag = "2")]
-    pub updated_annotations: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub updated_annotations:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// The config of this deployment rollback.
     #[prost(message, optional, tag = "3")]
     pub rollback_to: ::core::option::Option<RollbackConfig>,
@@ -282,9 +268,8 @@ pub struct DeploymentSpec {
     /// selected by this will be the ones affected by this deployment.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template describes the pods that will be created.
     #[prost(message, optional, tag = "3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
@@ -465,9 +450,7 @@ pub struct Ingress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec is the desired state of the Ingress.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -490,17 +473,14 @@ pub struct IngressBackend {
     /// Specifies the port of the referenced service.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub service_port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub service_port:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// Resource is an ObjectRef to another Kubernetes resource in the namespace
     /// of the Ingress object. If resource is specified, serviceName and servicePort
     /// must not be specified.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub resource: ::core::option::Option<
-        super::super::core::v1::TypedLocalObjectReference,
-    >,
+    pub resource: ::core::option::Option<super::super::core::v1::TypedLocalObjectReference>,
 }
 /// IngressList is a collection of Ingress.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -510,9 +490,7 @@ pub struct IngressList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of Ingress.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Ingress>,
@@ -706,9 +684,7 @@ pub struct NetworkPolicy {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior for this NetworkPolicy.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -773,9 +749,7 @@ pub struct NetworkPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<NetworkPolicy>,
@@ -792,9 +766,8 @@ pub struct NetworkPolicyPeer {
     /// Otherwise it selects the Pods matching PodSelector in the policy's own Namespace.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub pod_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub pod_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Selects Namespaces using cluster-scoped labels. This field follows standard label
     /// selector semantics; if present but empty, it selects all namespaces.
     ///
@@ -803,9 +776,8 @@ pub struct NetworkPolicyPeer {
     /// Otherwise it selects all Pods in the Namespaces selected by NamespaceSelector.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub namespace_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub namespace_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// IPBlock defines policy on a particular IPBlock. If this field is set then
     /// neither of the other fields can be.
     /// +optional
@@ -827,9 +799,7 @@ pub struct NetworkPolicyPort {
     /// If present, only traffic on the specified protocol AND port will be matched.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// If set, indicates that the range of ports from port to endPort, inclusive,
     /// should be allowed by the policy. This field cannot be defined if the port field
     /// is not defined or if the port field is defined as a named (string) port.
@@ -848,9 +818,8 @@ pub struct NetworkPolicySpec {
     /// This field is NOT optional and follows standard label selector semantics.
     /// An empty podSelector matches all pods in this namespace.
     #[prost(message, optional, tag = "1")]
-    pub pod_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub pod_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// List of ingress rules to be applied to the selected pods.
     /// Traffic is allowed to a pod if there are no NetworkPolicies selecting the pod
     /// OR if the traffic source is the pod's local node,
@@ -899,9 +868,7 @@ pub struct ReplicaSet {
     /// Standard object's metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the specification of the desired behavior of the ReplicaSet.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -929,9 +896,8 @@ pub struct ReplicaSetCondition {
     /// The last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -949,9 +915,7 @@ pub struct ReplicaSetList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of ReplicaSets.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller>
     #[prost(message, repeated, tag = "2")]
@@ -980,9 +944,8 @@ pub struct ReplicaSetSpec {
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template is the object that describes the pod that will be created if
     /// insufficient replicas are detected.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template>
@@ -1052,9 +1015,8 @@ pub struct RollingUpdateDaemonSet {
     /// the update.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// The maximum number of nodes with an existing available DaemonSet pod that
     /// can have an updated DaemonSet pod during during an update.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -1076,9 +1038,7 @@ pub struct RollingUpdateDaemonSet {
     /// This is an alpha field and requires enabling DaemonSetUpdateSurge feature gate.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_surge: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Spec to control the desired behavior of rolling update.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1096,9 +1056,8 @@ pub struct RollingUpdateDeployment {
     /// least 70% of desired pods.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// The maximum number of pods that can be scheduled above the desired number of
     /// pods.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -1112,9 +1071,7 @@ pub struct RollingUpdateDeployment {
     /// at any time during the update is at most 130% of desired pods.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_surge: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// represents a scaling request for a resource.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1123,9 +1080,7 @@ pub struct Scale {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// defines the behavior of the scale. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -1155,10 +1110,7 @@ pub struct ScaleStatus {
     /// +optional
     /// +mapType=atomic
     #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// label selector for pods that should match the replicas count. This is a serializated
     /// version of both map-based and more expressive set-based selectors. This is done to
     /// avoid introspection in the clients. The string will be in the same format as the

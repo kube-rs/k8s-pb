@@ -20,9 +20,7 @@ pub struct ClusterTrustBundle {
     /// metadata contains the object metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec contains the signer (if any) and trust anchors.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ClusterTrustBundleSpec>,
@@ -35,9 +33,7 @@ pub struct ClusterTrustBundleList {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a collection of ClusterTrustBundle objects
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterTrustBundle>,
@@ -109,4 +105,3 @@ impl crate::HasSpec for ClusterTrustBundle {
         self.spec.as_mut()
     }
 }
-

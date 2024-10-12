@@ -15,9 +15,8 @@ pub struct ConversionRequest {
     /// objects is the list of custom resource objects to be converted.
     /// +listType=atomic
     #[prost(message, repeated, tag = "3")]
-    pub objects: ::prost::alloc::vec::Vec<
-        super::super::super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub objects:
+        ::prost::alloc::vec::Vec<super::super::super::super::super::apimachinery::pkg::runtime::RawExtension>,
 }
 /// ConversionResponse describes a conversion response.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -33,18 +32,16 @@ pub struct ConversionResponse {
     /// The webhook is allowed to mutate labels and annotations. Any other change to the metadata is silently ignored.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub converted_objects: ::prost::alloc::vec::Vec<
-        super::super::super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub converted_objects:
+        ::prost::alloc::vec::Vec<super::super::super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// result contains the result of conversion with extra details if the conversion failed. `result.status` determines if
     /// the conversion failed or succeeded. The `result.status` field is required and represents the success or failure of the
     /// conversion. A successful conversion must set `result.status` to `Success`. A failed conversion must set
     /// `result.status` to `Failure` and provide more details in `result.message` and return http status 200. The `result.message`
     /// will be used to construct an error message for the end user.
     #[prost(message, optional, tag = "3")]
-    pub result: ::core::option::Option<
-        super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Status,
-    >,
+    pub result:
+        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Status>,
 }
 /// ConversionReview describes a conversion request/response.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -116,9 +113,7 @@ pub struct CustomResourceConversion {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "3")]
-    pub conversion_review_versions: ::prost::alloc::vec::Vec<
-        ::prost::alloc::string::String,
-    >,
+    pub conversion_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name MUST be in the format
 /// <.spec.name>.<.spec.group>.
@@ -155,9 +150,8 @@ pub struct CustomResourceDefinitionCondition {
     /// lastTransitionTime last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// reason is a unique, one-word, CamelCase reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -277,9 +271,7 @@ pub struct CustomResourceDefinitionSpec {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "8")]
-    pub additional_printer_columns: ::prost::alloc::vec::Vec<
-        CustomResourceColumnDefinition,
-    >,
+    pub additional_printer_columns: ::prost::alloc::vec::Vec<CustomResourceColumnDefinition>,
     /// selectableFields specifies paths to fields that may be used as field selectors.
     /// See <https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors>
     ///
@@ -378,9 +370,7 @@ pub struct CustomResourceDefinitionVersion {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "6")]
-    pub additional_printer_columns: ::prost::alloc::vec::Vec<
-        CustomResourceColumnDefinition,
-    >,
+    pub additional_printer_columns: ::prost::alloc::vec::Vec<CustomResourceColumnDefinition>,
     /// selectableFields specifies paths to fields that may be used as field selectors.
     /// See <https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors>
     ///
@@ -552,9 +542,7 @@ pub struct JsonSchemaProps {
     #[prost(string, repeated, tag = "23")]
     pub required: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, boxed, tag = "24")]
-    pub items: ::core::option::Option<
-        ::prost::alloc::boxed::Box<JsonSchemaPropsOrArray>,
-    >,
+    pub items: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaPropsOrArray>>,
     /// +listType=atomic
     #[prost(message, repeated, tag = "25")]
     pub all_of: ::prost::alloc::vec::Vec<JsonSchemaProps>,
@@ -567,33 +555,18 @@ pub struct JsonSchemaProps {
     #[prost(message, optional, boxed, tag = "28")]
     pub not: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaProps>>,
     #[prost(map = "string, message", tag = "29")]
-    pub properties: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        JsonSchemaProps,
-    >,
+    pub properties: ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaProps>,
     #[prost(message, optional, boxed, tag = "30")]
-    pub additional_properties: ::core::option::Option<
-        ::prost::alloc::boxed::Box<JsonSchemaPropsOrBool>,
-    >,
+    pub additional_properties: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaPropsOrBool>>,
     #[prost(map = "string, message", tag = "31")]
-    pub pattern_properties: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        JsonSchemaProps,
-    >,
+    pub pattern_properties: ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaProps>,
     #[prost(map = "string, message", tag = "32")]
-    pub dependencies: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        JsonSchemaPropsOrStringArray,
-    >,
+    pub dependencies:
+        ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaPropsOrStringArray>,
     #[prost(message, optional, boxed, tag = "33")]
-    pub additional_items: ::core::option::Option<
-        ::prost::alloc::boxed::Box<JsonSchemaPropsOrBool>,
-    >,
+    pub additional_items: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaPropsOrBool>>,
     #[prost(map = "string, message", tag = "34")]
-    pub definitions: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        JsonSchemaProps,
-    >,
+    pub definitions: ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaProps>,
     #[prost(message, optional, tag = "35")]
     pub external_docs: ::core::option::Option<ExternalDocumentation>,
     #[prost(message, optional, tag = "36")]
@@ -645,9 +618,7 @@ pub struct JsonSchemaProps {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "41")]
-    pub x_kubernetes_list_map_keys: ::prost::alloc::vec::Vec<
-        ::prost::alloc::string::String,
-    >,
+    pub x_kubernetes_list_map_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// x-kubernetes-list-type annotates an array to further describe its topology.
     /// This extension must only be used on lists and may have 3 possible values:
     ///

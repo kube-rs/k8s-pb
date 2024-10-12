@@ -74,9 +74,7 @@ pub struct Ingress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the Ingress.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -103,9 +101,7 @@ pub struct IngressBackend {
     /// This is a mutually exclusive setting with "Service".
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub resource: ::core::option::Option<
-        super::super::core::v1::TypedLocalObjectReference,
-    >,
+    pub resource: ::core::option::Option<super::super::core::v1::TypedLocalObjectReference>,
 }
 /// IngressClass represents the class of the Ingress, referenced by the Ingress
 /// Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be
@@ -119,9 +115,7 @@ pub struct IngressClass {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the IngressClass.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -135,9 +129,7 @@ pub struct IngressClassList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IngressClasses.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<IngressClass>,
@@ -198,9 +190,7 @@ pub struct IngressList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of Ingress.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Ingress>,
@@ -401,9 +391,7 @@ pub struct NetworkPolicy {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents the specification of the desired behavior for this NetworkPolicy.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -466,9 +454,7 @@ pub struct NetworkPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<NetworkPolicy>,
@@ -486,9 +472,8 @@ pub struct NetworkPolicyPeer {
     /// Otherwise it selects the pods matching podSelector in the policy's own namespace.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub pod_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub pod_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// namespaceSelector selects namespaces using cluster-scoped labels. This field follows
     /// standard label selector semantics; if present but empty, it selects all namespaces.
     ///
@@ -497,9 +482,8 @@ pub struct NetworkPolicyPeer {
     /// Otherwise it selects all pods in the namespaces selected by namespaceSelector.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub namespace_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub namespace_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// ipBlock defines policy on a particular IPBlock. If this field is set then
     /// neither of the other fields can be.
     /// +optional
@@ -521,9 +505,7 @@ pub struct NetworkPolicyPort {
     /// If present, only traffic on the specified protocol AND port will be matched.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// endPort indicates that the range of ports from port to endPort if set, inclusive,
     /// should be allowed by the policy. This field cannot be defined if the port field
     /// is not defined or if the port field is defined as a named (string) port.
@@ -543,9 +525,8 @@ pub struct NetworkPolicySpec {
     /// This field is NOT optional and follows standard label selector semantics.
     /// An empty podSelector matches all pods in this namespace.
     #[prost(message, optional, tag = "1")]
-    pub pod_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub pod_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// ingress is a list of ingress rules to be applied to the selected pods.
     /// Traffic is allowed to a pod if there are no NetworkPolicies selecting the pod
     /// (and cluster policy otherwise allows the traffic), OR if the traffic source is
@@ -635,7 +616,6 @@ impl crate::HasStatus for Ingress {
     }
 }
 
-
 impl crate::Resource for IngressClass {
     const API_VERSION: &'static str = "networking.k8s.io/v1";
     const GROUP: &'static str = "networking.k8s.io";
@@ -663,7 +643,6 @@ impl crate::HasSpec for IngressClass {
     }
 }
 
-
 impl crate::Resource for NetworkPolicy {
     const API_VERSION: &'static str = "networking.k8s.io/v1";
     const GROUP: &'static str = "networking.k8s.io";
@@ -690,4 +669,3 @@ impl crate::HasSpec for NetworkPolicy {
         self.spec.as_mut()
     }
 }
-

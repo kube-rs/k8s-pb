@@ -65,4 +65,3 @@ pub trait HasConditions {
     fn conditions(&self) -> Option<&[Self::Condition]>;
     fn conditions_mut(&mut self) -> Option<&mut Vec<Self::Condition>>;
 }
-

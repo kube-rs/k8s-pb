@@ -6,9 +6,7 @@ pub struct Lease {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec contains the specification of the Lease.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -23,9 +21,7 @@ pub struct LeaseList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Lease>,
@@ -47,16 +43,13 @@ pub struct LeaseSpec {
     /// acquireTime is a time when the current lease was acquired.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub acquire_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub acquire_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
     /// renewTime is a time when the current holder of a lease has last
     /// updated the lease.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub renew_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub renew_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
     /// leaseTransitions is the number of transitions of a lease between
     /// holders.
     /// +optional
@@ -90,4 +83,3 @@ impl crate::HasSpec for Lease {
         self.spec.as_mut()
     }
 }
-

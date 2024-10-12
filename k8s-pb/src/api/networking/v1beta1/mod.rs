@@ -57,9 +57,7 @@ pub struct Ingress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the Ingress.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -82,17 +80,14 @@ pub struct IngressBackend {
     /// servicePort Specifies the port of the referenced service.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub service_port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub service_port:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// resource is an ObjectRef to another Kubernetes resource in the namespace
     /// of the Ingress object. If resource is specified, serviceName and servicePort
     /// must not be specified.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub resource: ::core::option::Option<
-        super::super::core::v1::TypedLocalObjectReference,
-    >,
+    pub resource: ::core::option::Option<super::super::core::v1::TypedLocalObjectReference>,
 }
 /// IngressClass represents the class of the Ingress, referenced by the Ingress
 /// Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be
@@ -106,9 +101,7 @@ pub struct IngressClass {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the IngressClass.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -122,9 +115,7 @@ pub struct IngressClassList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IngressClasses.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<IngressClass>,
@@ -184,9 +175,7 @@ pub struct IngressList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of Ingress.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Ingress>,

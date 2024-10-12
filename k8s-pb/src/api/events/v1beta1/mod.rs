@@ -12,14 +12,10 @@ pub struct Event {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// eventTime is the time when this Event was first observed. It is required.
     #[prost(message, optional, tag = "2")]
-    pub event_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub event_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
     /// series is data about the Event series this event represents or nil if it's a singleton Event.
     /// +optional
     #[prost(message, optional, tag = "3")]
@@ -73,15 +69,13 @@ pub struct Event {
     /// deprecatedFirstTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
     /// +optional
     #[prost(message, optional, tag = "13")]
-    pub deprecated_first_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub deprecated_first_timestamp:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// deprecatedLastTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
     /// +optional
     #[prost(message, optional, tag = "14")]
-    pub deprecated_last_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub deprecated_last_timestamp:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.
     /// +optional
     #[prost(int32, optional, tag = "15")]
@@ -95,9 +89,7 @@ pub struct EventList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Event>,
@@ -112,7 +104,6 @@ pub struct EventSeries {
     pub count: ::core::option::Option<i32>,
     /// lastObservedTime is the time when last Event from the series was seen before last heartbeat.
     #[prost(message, optional, tag = "2")]
-    pub last_observed_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub last_observed_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
 }

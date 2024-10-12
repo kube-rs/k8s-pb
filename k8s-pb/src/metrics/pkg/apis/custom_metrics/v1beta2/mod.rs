@@ -36,16 +36,14 @@ pub struct MetricListOptions {
 pub struct MetricValue {
     /// a reference to the described object
     #[prost(message, optional, tag = "1")]
-    pub described_object: ::core::option::Option<
-        super::super::super::super::super::api::core::v1::ObjectReference,
-    >,
+    pub described_object:
+        ::core::option::Option<super::super::super::super::super::api::core::v1::ObjectReference>,
     #[prost(message, optional, tag = "2")]
     pub metric: ::core::option::Option<MetricIdentifier>,
     /// indicates the time at which the metrics were produced
     #[prost(message, optional, tag = "3")]
-    pub timestamp: ::core::option::Option<
-        super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub timestamp:
+        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// indicates the window (\[Timestamp-Window, Timestamp\]) from
     /// which these metrics were calculated, when returning rate
     /// metrics calculated from cumulative metrics (or zero for
@@ -54,9 +52,8 @@ pub struct MetricValue {
     pub window_seconds: ::core::option::Option<i64>,
     /// the value of the metric for this
     #[prost(message, optional, tag = "5")]
-    pub value: ::core::option::Option<
-        super::super::super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub value:
+        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// MetricValueList is a list of values for a given metric for some set of objects
 #[allow(clippy::derive_partial_eq_without_eq)]

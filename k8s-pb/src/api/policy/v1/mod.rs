@@ -8,15 +8,12 @@ pub struct Eviction {
     /// ObjectMeta describes the pod that is being evicted.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// DeleteOptions may be provided
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub delete_options: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::DeleteOptions,
-    >,
+    pub delete_options:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::DeleteOptions>,
 }
 /// PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -26,9 +23,7 @@ pub struct PodDisruptionBudget {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the PodDisruptionBudget.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -46,9 +41,7 @@ pub struct PodDisruptionBudgetList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of PodDisruptionBudgets
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodDisruptionBudget>,
@@ -63,9 +56,8 @@ pub struct PodDisruptionBudgetSpec {
     /// evictions by specifying "100%".
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub min_available: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub min_available:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// Label query over pods whose evictions are managed by the disruption
     /// budget.
     /// A null selector will match no pods, while an empty ({}) selector will select
@@ -73,18 +65,16 @@ pub struct PodDisruptionBudgetSpec {
     /// +patchStrategy=replace
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// An eviction is allowed if at most "maxUnavailable" pods selected by
     /// "selector" are unavailable after the eviction, i.e. even in absence of
     /// the evicted pod. For example, one can prevent all voluntary evictions
     /// by specifying 0. This is a mutually exclusive setting with "minAvailable".
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// UnhealthyPodEvictionPolicy defines the criteria for when unhealthy pods
     /// should be considered for eviction. Current implementation considers healthy pods,
     /// as pods that have status.conditions item with type="Ready",status="True".
@@ -112,9 +102,7 @@ pub struct PodDisruptionBudgetSpec {
     /// the feature gate PDBUnhealthyPodEvictionPolicy is enabled (enabled by default).
     /// +optional
     #[prost(string, optional, tag = "4")]
-    pub unhealthy_pod_eviction_policy: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub unhealthy_pod_eviction_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodDisruptionBudgetStatus represents information about the status of a
 /// PodDisruptionBudget. Status may trail the actual state of a system.
@@ -174,9 +162,8 @@ pub struct PodDisruptionBudgetStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "7")]
-    pub conditions: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
-    >,
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 
 impl crate::Resource for PodDisruptionBudget {
@@ -220,9 +207,6 @@ impl crate::HasConditions for PodDisruptionBudget {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-

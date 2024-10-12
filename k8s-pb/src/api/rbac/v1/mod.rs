@@ -8,9 +8,8 @@ pub struct AggregationRule {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub cluster_role_selectors: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub cluster_role_selectors:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
 }
 /// ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding or ClusterRoleBinding.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -19,9 +18,7 @@ pub struct ClusterRole {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Rules holds all the PolicyRules for this ClusterRole
     /// +optional
     /// +listType=atomic
@@ -42,9 +39,7 @@ pub struct ClusterRoleBinding {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Subjects holds references to the objects the role applies to.
     /// +optional
     /// +listType=atomic
@@ -63,9 +58,7 @@ pub struct ClusterRoleBindingList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of ClusterRoleBindings
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterRoleBinding>,
@@ -77,9 +70,7 @@ pub struct ClusterRoleList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of ClusterRoles
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterRole>,
@@ -124,9 +115,7 @@ pub struct Role {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Rules holds all the PolicyRules for this Role
     /// +optional
     /// +listType=atomic
@@ -142,9 +131,7 @@ pub struct RoleBinding {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Subjects holds references to the objects the role applies to.
     /// +optional
     /// +listType=atomic
@@ -163,9 +150,7 @@ pub struct RoleBindingList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of RoleBindings
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<RoleBinding>,
@@ -177,9 +162,7 @@ pub struct RoleList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of Roles
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Role>,
@@ -243,7 +226,6 @@ impl crate::HasMetadata for ClusterRole {
     }
 }
 
-
 impl crate::Resource for ClusterRoleBinding {
     const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
     const GROUP: &'static str = "rbac.authorization.k8s.io";
@@ -261,7 +243,6 @@ impl crate::HasMetadata for ClusterRoleBinding {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for Role {
     const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
@@ -281,7 +262,6 @@ impl crate::HasMetadata for Role {
     }
 }
 
-
 impl crate::Resource for RoleBinding {
     const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
     const GROUP: &'static str = "rbac.authorization.k8s.io";
@@ -299,4 +279,3 @@ impl crate::HasMetadata for RoleBinding {
         self.metadata.as_mut()
     }
 }
-

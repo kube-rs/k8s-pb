@@ -135,9 +135,8 @@ pub struct MatchResources {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub namespace_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub namespace_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// ObjectSelector decides whether to run the validation based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the cel validation, and
@@ -151,9 +150,8 @@ pub struct MatchResources {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub object_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub object_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// ResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy matches.
     /// The policy cares about an operation if it matches _any_ Rule.
     /// +listType=atomic
@@ -256,9 +254,8 @@ pub struct ParamRef {
     ///
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// `parameterNotFoundAction` controls the behavior of the binding when the resource
     /// exists, and name or selector is valid, but there are no parameters
     /// matched by the binding. If the value is set to `Allow`, then no
@@ -270,9 +267,7 @@ pub struct ParamRef {
     /// Default to `Deny`
     /// +optional
     #[prost(string, optional, tag = "4")]
-    pub parameter_not_found_action: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub parameter_not_found_action: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// TypeChecking contains results of type checking the expressions in the
 /// ValidatingAdmissionPolicy
@@ -292,9 +287,7 @@ pub struct ValidatingAdmissionPolicy {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the ValidatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicySpec>,
@@ -323,9 +316,7 @@ pub struct ValidatingAdmissionPolicyBinding {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the ValidatingAdmissionPolicyBinding.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicyBindingSpec>,
@@ -338,9 +329,7 @@ pub struct ValidatingAdmissionPolicyBindingList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of PolicyBinding.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingAdmissionPolicyBinding>,
@@ -420,9 +409,7 @@ pub struct ValidatingAdmissionPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of ValidatingAdmissionPolicy.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingAdmissionPolicy>,
@@ -531,9 +518,8 @@ pub struct ValidatingAdmissionPolicyStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "3")]
-    pub conditions: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
-    >,
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 /// Validation specifies the CEL expression which is used to apply the validation.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -671,12 +657,9 @@ impl crate::HasConditions for ValidatingAdmissionPolicy {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for ValidatingAdmissionPolicyBinding {
     const API_VERSION: &'static str = "admissionregistration.k8s.io/v1alpha1";
@@ -704,4 +687,3 @@ impl crate::HasSpec for ValidatingAdmissionPolicyBinding {
         self.spec.as_mut()
     }
 }
-

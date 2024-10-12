@@ -170,9 +170,7 @@ pub struct Binding {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The target object that you want to bind to the standard object.
     #[prost(message, optional, tag = "2")]
     pub target: ::core::option::Option<ObjectReference>,
@@ -203,10 +201,8 @@ pub struct CsiPersistentVolumeSource {
     /// volumeAttributes of the volume to publish.
     /// +optional
     #[prost(map = "string, string", tag = "5")]
-    pub volume_attributes: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub volume_attributes:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// controllerPublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// ControllerPublishVolume and ControllerUnpublishVolume calls.
@@ -271,10 +267,8 @@ pub struct CsiVolumeSource {
     /// driver. Consult your driver's documentation for supported values.
     /// +optional
     #[prost(map = "string, string", tag = "4")]
-    pub volume_attributes: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub volume_attributes:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// nodePublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// NodePublishVolume and NodeUnpublishVolume calls.
@@ -455,9 +449,7 @@ pub struct ClaimSource {
     /// corresponding ResourceClaim by the control plane after creating the
     /// ResourceClaim.
     #[prost(string, optional, tag = "2")]
-    pub resource_claim_template_name: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ClientIPConfig represents the configurations of Client IP based session affinity.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -493,9 +485,8 @@ pub struct ClusterTrustBundleProjection {
     /// everything".
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub label_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub label_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// If true, don't block pod startup if the referenced ClusterTrustBundle(s)
     /// aren't available.  If using name, then the named ClusterTrustBundle is
     /// allowed not to exist.  If using signerName, then the combination of
@@ -540,9 +531,7 @@ pub struct ComponentStatus {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// List of component conditions observed
     /// +optional
     /// +patchMergeKey=type
@@ -561,9 +550,7 @@ pub struct ComponentStatusList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of ComponentStatus objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ComponentStatus>,
@@ -576,9 +563,7 @@ pub struct ConfigMap {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Immutable, if set to true, ensures that data stored in the ConfigMap cannot
     /// be updated (only object metadata can be modified).
     /// If not set to true, the field can be modified at any time.
@@ -593,10 +578,7 @@ pub struct ConfigMap {
     /// the BinaryData field, this is enforced during validation process.
     /// +optional
     #[prost(map = "string, string", tag = "2")]
-    pub data: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub data: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// BinaryData contains the binary data.
     /// Each key must consist of alphanumeric characters, '-', '_' or '.'.
     /// BinaryData can contain byte sequences that are not in the UTF-8 range.
@@ -606,10 +588,8 @@ pub struct ConfigMap {
     /// kubelet.
     /// +optional
     #[prost(map = "string, bytes", tag = "3")]
-    pub binary_data: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::vec::Vec<u8>,
-    >,
+    pub binary_data:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::vec::Vec<u8>>,
 }
 /// ConfigMapEnvSource selects a ConfigMap to populate the environment
 /// variables with.
@@ -650,9 +630,7 @@ pub struct ConfigMapList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of ConfigMaps.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ConfigMap>,
@@ -927,9 +905,7 @@ pub struct Container {
     /// Cannot be updated.
     /// +optional
     #[prost(string, optional, tag = "20")]
-    pub termination_message_policy: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub termination_message_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// Image pull policy.
     /// One of Always, Never, IfNotPresent.
     /// Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
@@ -1052,9 +1028,7 @@ pub struct ContainerStateRunning {
     /// Time at which the container was last (re-)started
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub started_at: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub started_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// ContainerStateTerminated is a terminated state of a container.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1078,15 +1052,11 @@ pub struct ContainerStateTerminated {
     /// Time at which previous execution of the container started
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub started_at: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub started_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Time at which the container last terminated
     /// +optional
     #[prost(message, optional, tag = "6")]
-    pub finished_at: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub finished_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Container's ID in the format '<type>://<container_id>'
     /// +optional
     #[prost(string, optional, tag = "7")]
@@ -1281,9 +1251,7 @@ pub struct EmptyDirVolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#emptydir>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub size_limit: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub size_limit: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// EndpointAddress is a tuple that describes single IP address.
 /// +structType=atomic
@@ -1403,9 +1371,7 @@ pub struct Endpoints {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The set of all endpoints is the union of all subsets. Addresses are placed into
     /// subsets according to the IPs they share. A single address with multiple ports,
     /// some of which are ready and some of which are not (because they come from
@@ -1426,9 +1392,7 @@ pub struct EndpointsList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of endpoints.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Endpoints>,
@@ -1669,9 +1633,7 @@ pub struct EphemeralContainerCommon {
     /// Cannot be updated.
     /// +optional
     #[prost(string, optional, tag = "20")]
-    pub termination_message_policy: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub termination_message_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// Image pull policy.
     /// One of Always, Never, IfNotPresent.
     /// Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
@@ -1747,9 +1709,7 @@ pub struct Event {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The object that this event is about.
     #[prost(message, optional, tag = "2")]
     pub involved_object: ::core::option::Option<ObjectReference>,
@@ -1771,15 +1731,11 @@ pub struct Event {
     /// The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
     /// +optional
     #[prost(message, optional, tag = "6")]
-    pub first_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub first_timestamp: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The time at which the most recent occurrence of this event was recorded.
     /// +optional
     #[prost(message, optional, tag = "7")]
-    pub last_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_timestamp: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The number of times this event has occurred.
     /// +optional
     #[prost(int32, optional, tag = "8")]
@@ -1791,9 +1747,7 @@ pub struct Event {
     /// Time when this Event was first observed.
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub event_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub event_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
     /// Data about the Event series this event represents or nil if it's a singleton Event.
     /// +optional
     #[prost(message, optional, tag = "11")]
@@ -1823,9 +1777,7 @@ pub struct EventList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of events
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Event>,
@@ -1840,9 +1792,8 @@ pub struct EventSeries {
     pub count: ::core::option::Option<i32>,
     /// Time of the last occurrence observed
     #[prost(message, optional, tag = "2")]
-    pub last_observed_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub last_observed_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
 }
 /// EventSource contains information for an event.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1935,10 +1886,7 @@ pub struct FlexPersistentVolumeSource {
     /// options is Optional: this field holds extra command options if any.
     /// +optional
     #[prost(map = "string, string", tag = "5")]
-    pub options: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub options: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
 /// FlexVolume represents a generic volume resource that is
 /// provisioned/attached using an exec based plugin.
@@ -1970,10 +1918,7 @@ pub struct FlexVolumeSource {
     /// options is Optional: this field holds extra command options if any.
     /// +optional
     #[prost(map = "string, string", tag = "5")]
-    pub options: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub options: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
 /// Represents a Flocker volume mounted by the Flocker agent.
 /// One and only one of datasetName and datasetUUID should be set.
@@ -2125,9 +2070,7 @@ pub struct HttpGetAction {
     /// Number must be in the range 1 to 65535.
     /// Name must be an IANA_SVC_NAME.
     #[prost(message, optional, tag = "2")]
-    pub port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// Host name to connect to, defaults to the pod IP. You probably want to set
     /// "Host" in httpHeaders instead.
     /// +optional
@@ -2395,9 +2338,7 @@ pub struct LimitRange {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the limits enforced.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -2455,9 +2396,7 @@ pub struct LimitRangeList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of LimitRange objects.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/>
     #[prost(message, repeated, tag = "2")]
@@ -2480,14 +2419,10 @@ pub struct List {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of objects
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub items: ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::runtime::RawExtension>,
 }
 /// LoadBalancerIngress represents the status of a load-balancer ingress point:
 /// traffic intended for the service should be sent to an ingress point.
@@ -2572,9 +2507,7 @@ pub struct LocalVolumeSource {
 pub struct ModifyVolumeStatus {
     /// targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
     #[prost(string, optional, tag = "1")]
-    pub target_volume_attributes_class_name: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub target_volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// status is the status of the ControllerModifyVolume operation. It can be in any of following states:
     ///   - Pending
     ///     Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
@@ -2617,9 +2550,7 @@ pub struct Namespace {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the behavior of the Namespace.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -2643,9 +2574,8 @@ pub struct NamespaceCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -2661,9 +2591,7 @@ pub struct NamespaceList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of Namespace objects in the list.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/>
     #[prost(message, repeated, tag = "2")]
@@ -2707,9 +2635,7 @@ pub struct Node {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the behavior of a node.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -2745,9 +2671,7 @@ pub struct NodeAffinity {
     /// may or may not try to eventually evict the pod from its node.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub required_during_scheduling_ignored_during_execution: ::core::option::Option<
-        NodeSelector,
-    >,
+    pub required_during_scheduling_ignored_during_execution: ::core::option::Option<NodeSelector>,
     /// The scheduler will prefer to schedule pods to nodes that satisfy
     /// the affinity expressions specified by this field, but it may choose
     /// a node that violates one or more of the expressions. The node that is
@@ -2760,9 +2684,8 @@ pub struct NodeAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub preferred_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
-        PreferredSchedulingTerm,
-    >,
+    pub preferred_during_scheduling_ignored_during_execution:
+        ::prost::alloc::vec::Vec<PreferredSchedulingTerm>,
 }
 /// NodeCondition contains condition information for a node.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2777,15 +2700,13 @@ pub struct NodeCondition {
     /// Last time we got an update on a given condition.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_heartbeat_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_heartbeat_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transit from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// (brief) reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
@@ -2873,9 +2794,7 @@ pub struct NodeList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of nodes
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Node>,
@@ -3117,9 +3036,7 @@ pub struct NodeSystemInfo {
     pub os_image: ::core::option::Option<::prost::alloc::string::String>,
     /// ContainerRuntime Version reported by the node through runtime remote API (e.g. containerd://1.4.2).
     #[prost(string, optional, tag = "6")]
-    pub container_runtime_version: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub container_runtime_version: ::core::option::Option<::prost::alloc::string::String>,
     /// Kubelet Version reported by the node.
     #[prost(string, optional, tag = "7")]
     pub kubelet_version: ::core::option::Option<::prost::alloc::string::String>,
@@ -3218,9 +3135,7 @@ pub struct PersistentVolume {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec defines a specification of a persistent volume owned by the cluster.
     /// Provisioned by an administrator.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes>
@@ -3243,9 +3158,7 @@ pub struct PersistentVolumeClaim {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec defines the desired characteristics of a volume requested by a pod author.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims>
     /// +optional
@@ -3269,15 +3182,12 @@ pub struct PersistentVolumeClaimCondition {
     /// lastProbeTime is the time we probed the condition.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_probe_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_probe_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// lastTransitionTime is the time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// reason is a unique, this should be a short, machine understandable string that gives the reason
     /// for condition's last transition. If it reports "Resizing" that means the underlying
     /// persistent volume is being resized.
@@ -3297,9 +3207,7 @@ pub struct PersistentVolumeClaimList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a list of persistent volume claims.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims>
     #[prost(message, repeated, tag = "2")]
@@ -3319,9 +3227,8 @@ pub struct PersistentVolumeClaimSpec {
     /// selector is a label query over volumes to consider for binding.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// resources represents the minimum resources the volume should have.
     /// If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements
     /// that are lower than previous value but must still be higher than capacity recorded in the
@@ -3396,9 +3303,7 @@ pub struct PersistentVolumeClaimSpec {
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "9")]
-    pub volume_attributes_class_name: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3498,19 +3403,15 @@ pub struct PersistentVolumeClaimStatus {
     /// +mapType=granular
     /// +optional
     #[prost(map = "string, string", tag = "7")]
-    pub allocated_resource_statuses: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub allocated_resource_statuses:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
     /// When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
     /// This is an alpha field and requires enabling VolumeAttributesClass feature.
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "8")]
-    pub current_volume_attributes_class_name: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub current_volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
     /// When this is unset, there is no ModifyVolume operation being attempted.
     /// This is an alpha field and requires enabling VolumeAttributesClass feature.
@@ -3530,9 +3431,7 @@ pub struct PersistentVolumeClaimTemplate {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The specification for the PersistentVolumeClaim. The entire content is
     /// copied unchanged into the PVC that gets created from this
     /// template. The same fields as in a PersistentVolumeClaim
@@ -3565,9 +3464,7 @@ pub struct PersistentVolumeList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a list of persistent volumes.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes>
     #[prost(message, repeated, tag = "2")]
@@ -3589,9 +3486,7 @@ pub struct PersistentVolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub aws_elastic_block_store: ::core::option::Option<
-        AwsElasticBlockStoreVolumeSource,
-    >,
+    pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
     /// hostPath represents a directory on the host.
     /// Provisioned by a developer or tester.
     /// This is useful for single-node development and testing only!
@@ -3720,9 +3615,7 @@ pub struct PersistentVolumeSpec {
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming>
     /// +optional
     #[prost(string, optional, tag = "5")]
-    pub persistent_volume_reclaim_policy: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub persistent_volume_reclaim_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// storageClassName is the name of StorageClass to which this persistent volume belongs. Empty value
     /// means that this volume does not belong to any StorageClass.
     /// +optional
@@ -3755,9 +3648,7 @@ pub struct PersistentVolumeSpec {
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "10")]
-    pub volume_attributes_class_name: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PersistentVolumeStatus is the current status of a persistent volume.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3783,9 +3674,8 @@ pub struct PersistentVolumeStatus {
     /// +featureGate=PersistentVolumeLastPhaseTransitionTime
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_phase_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_phase_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// Represents a Photon Controller persistent disk resource.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3809,9 +3699,7 @@ pub struct Pod {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the pod.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -3840,9 +3728,7 @@ pub struct PodAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
-        PodAffinityTerm,
-    >,
+    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<PodAffinityTerm>,
     /// The scheduler will prefer to schedule pods to nodes that satisfy
     /// the affinity expressions specified by this field, but it may choose
     /// a node that violates one or more of the expressions. The node that is
@@ -3855,9 +3741,8 @@ pub struct PodAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub preferred_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
-        WeightedPodAffinityTerm,
-    >,
+    pub preferred_during_scheduling_ignored_during_execution:
+        ::prost::alloc::vec::Vec<WeightedPodAffinityTerm>,
 }
 /// Defines a set of pods (namely those matching the labelSelector
 /// relative to the given namespace(s)) that this pod should be
@@ -3872,9 +3757,8 @@ pub struct PodAffinityTerm {
     /// If it's null, this PodAffinityTerm matches with no Pods.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub label_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub label_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// namespaces specifies a static list of namespace names that the term applies to.
     /// The term is applied to the union of the namespaces listed in this field
     /// and the ones selected by namespaceSelector.
@@ -3897,9 +3781,8 @@ pub struct PodAffinityTerm {
     /// An empty selector ({}) matches all namespaces.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub namespace_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub namespace_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// MatchLabelKeys is a set of pod label keys to select which pods will
     /// be taken into consideration. The keys are used to lookup values from the
     /// incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
@@ -3941,9 +3824,7 @@ pub struct PodAntiAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
-        PodAffinityTerm,
-    >,
+    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<PodAffinityTerm>,
     /// The scheduler will prefer to schedule pods to nodes that satisfy
     /// the anti-affinity expressions specified by this field, but it may choose
     /// a node that violates one or more of the expressions. The node that is
@@ -3956,9 +3837,8 @@ pub struct PodAntiAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub preferred_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
-        WeightedPodAffinityTerm,
-    >,
+    pub preferred_during_scheduling_ignored_during_execution:
+        ::prost::alloc::vec::Vec<WeightedPodAffinityTerm>,
 }
 /// PodAttachOptions is the query options to a Pod's remote attach call.
 /// ---
@@ -4011,15 +3891,12 @@ pub struct PodCondition {
     /// Last time we probed the condition.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_probe_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_probe_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Unique, one-word, CamelCase reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
@@ -4119,9 +3996,7 @@ pub struct PodList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of pods.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md>
     #[prost(message, repeated, tag = "2")]
@@ -4156,9 +4031,7 @@ pub struct PodLogOptions {
     /// Only one of sinceSeconds or sinceTime may be specified.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub since_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub since_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line
     /// of log output. Defaults to false.
     /// +optional
@@ -4381,9 +4254,8 @@ pub struct PodSignature {
     /// Reference to controller whose pods should avoid this node.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub pod_controller: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::OwnerReference,
-    >,
+    pub pod_controller:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::OwnerReference>,
 }
 /// PodSpec is a description of a pod.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -4477,10 +4349,8 @@ pub struct PodSpec {
     /// +optional
     /// +mapType=atomic
     #[prost(map = "string, string", tag = "7")]
-    pub node_selector: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub node_selector:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// ServiceAccountName is the name of the ServiceAccount to use to run this pod.
     /// More info: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/>
     /// +optional
@@ -4829,9 +4699,7 @@ pub struct PodStatus {
     /// This is before the Kubelet pulled the container image(s) for the pod.
     /// +optional
     #[prost(message, optional, tag = "7")]
-    pub start_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub start_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The list has one entry per init container in the manifest. The most recent successful
     /// init container will have ready = true, the most recently started container will have
     /// startTime set.
@@ -4881,9 +4749,7 @@ pub struct PodStatusResult {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Most recently observed status of the pod.
     /// This data may not be up to date.
     /// Populated by the system.
@@ -4901,9 +4767,7 @@ pub struct PodTemplate {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Template defines the pods that will be created from this pod template.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -4918,9 +4782,7 @@ pub struct PodTemplateList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of pod templates
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodTemplate>,
@@ -4933,9 +4795,7 @@ pub struct PodTemplateSpec {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the pod.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5005,9 +4865,7 @@ pub struct PreferAvoidPodsEntry {
     /// Time at which this entry was added to the list.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub eviction_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub eviction_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// (brief) reason why this entry was added to the list.
     /// +optional
     #[prost(string, optional, tag = "3")]
@@ -5268,9 +5126,7 @@ pub struct RangeAllocation {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Range is string that identifies the range represented by 'data'.
     #[prost(string, optional, tag = "2")]
     pub range: ::core::option::Option<::prost::alloc::string::String>,
@@ -5287,9 +5143,7 @@ pub struct ReplicationController {
     /// Standard object's metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the specification of the desired behavior of the replication controller.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5317,9 +5171,8 @@ pub struct ReplicationControllerCondition {
     /// The last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -5337,9 +5190,7 @@ pub struct ReplicationControllerList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of replication controllers.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller>
     #[prost(message, repeated, tag = "2")]
@@ -5370,10 +5221,7 @@ pub struct ReplicationControllerSpec {
     /// +optional
     /// +mapType=atomic
     #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. This takes precedence over a TemplateRef.
     /// The only allowed template.spec.restartPolicy value is "Always".
@@ -5441,9 +5289,7 @@ pub struct ResourceFieldSelector {
     /// Specifies the output format of the exposed resources, defaults to "1"
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub divisor: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub divisor: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ResourceQuota sets aggregate quota restrictions enforced per namespace
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -5453,9 +5299,7 @@ pub struct ResourceQuota {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the desired quota.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5475,9 +5319,7 @@ pub struct ResourceQuotaList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of ResourceQuota objects.
     /// More info: <https://kubernetes.io/docs/concepts/policy/resource-quotas/>
     #[prost(message, repeated, tag = "2")]
@@ -5747,9 +5589,7 @@ pub struct Secret {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Immutable, if set to true, ensures that data stored in the Secret cannot
     /// be updated (only object metadata can be modified).
     /// If not set to true, the field can be modified at any time.
@@ -5763,10 +5603,7 @@ pub struct Secret {
     /// data value here. Described in <https://tools.ietf.org/html/rfc4648#section-4>
     /// +optional
     #[prost(map = "string, bytes", tag = "2")]
-    pub data: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::vec::Vec<u8>,
-    >,
+    pub data: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::vec::Vec<u8>>,
     /// stringData allows specifying non-binary secret data in string form.
     /// It is provided as a write-only input field for convenience.
     /// All keys and values are merged into the data field on write, overwriting any existing values.
@@ -5774,10 +5611,8 @@ pub struct Secret {
     /// +k8s:conversion-gen=false
     /// +optional
     #[prost(map = "string, string", tag = "4")]
-    pub string_data: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub string_data:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Used to facilitate programmatic handling of secret data.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/secret/#secret-types>
     /// +optional
@@ -5824,9 +5659,7 @@ pub struct SecretList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is a list of secret objects.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/secret>
     #[prost(message, repeated, tag = "2")]
@@ -6029,9 +5862,7 @@ pub struct Service {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the behavior of a service.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -6056,9 +5887,7 @@ pub struct ServiceAccount {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Secrets is a list of the secrets in the same namespace that pods running using this ServiceAccount are allowed to use.
     /// Pods are only limited to this list if this service account has a "kubernetes.io/enforce-mountable-secrets" annotation set to "true".
     /// This field should not be used to find auto-generated service account token secrets for use outside of pods.
@@ -6093,9 +5922,7 @@ pub struct ServiceAccountList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of ServiceAccounts.
     /// More info: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/>
     #[prost(message, repeated, tag = "2")]
@@ -6137,9 +5964,7 @@ pub struct ServiceList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of services
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Service>,
@@ -6193,9 +6018,8 @@ pub struct ServicePort {
     /// More info: <https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service>
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub target_port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub target_port:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// The port on each node on which this service is exposed when type is
     /// NodePort or LoadBalancer.  Usually assigned by the system. If a value is
     /// specified, in-range, and not in use it will be used, otherwise the
@@ -6244,10 +6068,7 @@ pub struct ServiceSpec {
     /// +optional
     /// +mapType=atomic
     #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// clusterIP is the IP address of the service and is usually assigned
     /// randomly. If an address is specified manually, is in-range (as per
     /// system configuration), and is not in use, it will be allocated to the
@@ -6346,9 +6167,7 @@ pub struct ServiceSpec {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "9")]
-    pub load_balancer_source_ranges: ::prost::alloc::vec::Vec<
-        ::prost::alloc::string::String,
-    >,
+    pub load_balancer_source_ranges: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// externalName is the external reference that discovery mechanisms will
     /// return as an alias for this service (e.g. a DNS CNAME record). No
     /// proxying will be involved.  Must be a lowercase RFC-1123 hostname
@@ -6491,9 +6310,8 @@ pub struct ServiceStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "2")]
-    pub conditions: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
-    >,
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 /// SessionAffinityConfig represents the configurations of session affinity.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -6599,9 +6417,7 @@ pub struct TcpSocketAction {
     /// Number must be in the range 1 to 65535.
     /// Name must be an IANA_SVC_NAME.
     #[prost(message, optional, tag = "1")]
-    pub port: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// Optional: Host name to connect to, defaults to the pod IP.
     /// +optional
     #[prost(string, optional, tag = "2")]
@@ -6628,9 +6444,7 @@ pub struct Taint {
     /// It is only written for NoExecute taints.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub time_added: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub time_added: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// The pod this Toleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
@@ -6694,9 +6508,7 @@ pub struct TopologySelectorTerm {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub match_label_expressions: ::prost::alloc::vec::Vec<
-        TopologySelectorLabelRequirement,
-    >,
+    pub match_label_expressions: ::prost::alloc::vec::Vec<TopologySelectorLabelRequirement>,
 }
 /// TopologySpreadConstraint specifies how to spread matching pods among the given topology.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -6764,9 +6576,8 @@ pub struct TopologySpreadConstraint {
     /// in their corresponding topology domain.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub label_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub label_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// MinDomains indicates a minimum number of eligible domains.
     /// When the number of eligible domains with matching topology keys is less than minDomains,
     /// Pod Topology Spread treats "global minimum" as 0, and then the calculation of Skew is performed.
@@ -7079,9 +6890,7 @@ pub struct VolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore>
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub aws_elastic_block_store: ::core::option::Option<
-        AwsElasticBlockStoreVolumeSource,
-    >,
+    pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
     /// gitRepo represents a git repository at a particular revision.
     /// DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an
     /// EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
@@ -7115,9 +6924,7 @@ pub struct VolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims>
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub persistent_volume_claim: ::core::option::Option<
-        PersistentVolumeClaimVolumeSource,
-    >,
+    pub persistent_volume_claim: ::core::option::Option<PersistentVolumeClaimVolumeSource>,
     /// rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md>
     /// +optional
@@ -7261,9 +7068,7 @@ pub struct WindowsSecurityContextOptions {
     /// GMSACredentialSpecName is the name of the GMSA credential spec to use.
     /// +optional
     #[prost(string, optional, tag = "1")]
-    pub gmsa_credential_spec_name: ::core::option::Option<
-        ::prost::alloc::string::String,
-    >,
+    pub gmsa_credential_spec_name: ::core::option::Option<::prost::alloc::string::String>,
     /// GMSACredentialSpec is where the GMSA admission webhook
     /// (<https://github.com/kubernetes-sigs/windows-gmsa>) inlines the contents of the
     /// GMSA credential spec named by the GMSACredentialSpecName field.
@@ -7304,7 +7109,6 @@ impl crate::HasMetadata for Binding {
     }
 }
 
-
 impl crate::Resource for ComponentStatus {
     const API_VERSION: &'static str = "v1";
     const GROUP: &'static str = "";
@@ -7322,7 +7126,6 @@ impl crate::HasMetadata for ComponentStatus {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for ConfigMap {
     const API_VERSION: &'static str = "v1";
@@ -7342,7 +7145,6 @@ impl crate::HasMetadata for ConfigMap {
     }
 }
 
-
 impl crate::Resource for Endpoints {
     const API_VERSION: &'static str = "v1";
     const GROUP: &'static str = "";
@@ -7361,7 +7163,6 @@ impl crate::HasMetadata for Endpoints {
     }
 }
 
-
 impl crate::Resource for Event {
     const API_VERSION: &'static str = "v1";
     const GROUP: &'static str = "";
@@ -7379,7 +7180,6 @@ impl crate::HasMetadata for Event {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for LimitRange {
     const API_VERSION: &'static str = "v1";
@@ -7407,7 +7207,6 @@ impl crate::HasSpec for LimitRange {
         self.spec.as_mut()
     }
 }
-
 
 impl crate::Resource for Namespace {
     const API_VERSION: &'static str = "v1";
@@ -7450,12 +7249,9 @@ impl crate::HasConditions for Namespace {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for Node {
     const API_VERSION: &'static str = "v1";
@@ -7498,12 +7294,9 @@ impl crate::HasConditions for Node {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for PersistentVolume {
     const API_VERSION: &'static str = "v1";
@@ -7540,7 +7333,6 @@ impl crate::HasStatus for PersistentVolume {
         self.status.as_mut()
     }
 }
-
 
 impl crate::Resource for PersistentVolumeClaim {
     const API_VERSION: &'static str = "v1";
@@ -7583,12 +7375,9 @@ impl crate::HasConditions for PersistentVolumeClaim {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for Pod {
     const API_VERSION: &'static str = "v1";
@@ -7631,12 +7420,9 @@ impl crate::HasConditions for Pod {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for PodTemplate {
     const API_VERSION: &'static str = "v1";
@@ -7655,7 +7441,6 @@ impl crate::HasMetadata for PodTemplate {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for ReplicationController {
     const API_VERSION: &'static str = "v1";
@@ -7698,12 +7483,9 @@ impl crate::HasConditions for ReplicationController {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for ResourceQuota {
     const API_VERSION: &'static str = "v1";
@@ -7741,7 +7523,6 @@ impl crate::HasStatus for ResourceQuota {
     }
 }
 
-
 impl crate::Resource for Secret {
     const API_VERSION: &'static str = "v1";
     const GROUP: &'static str = "";
@@ -7759,7 +7540,6 @@ impl crate::HasMetadata for Secret {
         self.metadata.as_mut()
     }
 }
-
 
 impl crate::Resource for Service {
     const API_VERSION: &'static str = "v1";
@@ -7802,12 +7582,9 @@ impl crate::HasConditions for Service {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
 
 impl crate::Resource for ServiceAccount {
     const API_VERSION: &'static str = "v1";
@@ -7826,4 +7603,3 @@ impl crate::HasMetadata for ServiceAccount {
         self.metadata.as_mut()
     }
 }
-
