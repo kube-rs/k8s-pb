@@ -1,7 +1,7 @@
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 KUBERNETES_VERSION := "1.30.1"
 
-export RUST_BACKTRACE := env_var_or_default("RUST_BACKTRACE", "short")
+export RUST_BACKTRACE := env_var_or_default("RUST_BACKTRACE", "full")
 
 default:
   @just --list
