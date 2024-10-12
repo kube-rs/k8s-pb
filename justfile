@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-KUBERNETES_VERSION := "1.30.1"
+KUBERNETES_VERSION := "1.31.1"
 
 default:
   @just --list
