@@ -7,7 +7,7 @@
   ],
   ignorePaths: ["k8s-pb*/**"],
   postUpgradeTasks: {
-    commands: ["just renovate"]
+    commands: ["just generate"]
   },
   prBodyNotes: [
     "{{#if isMinor}}:warning: Kubernetes Minor :warning:{{/if}}",

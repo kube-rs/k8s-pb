@@ -78,6 +78,3 @@ codegen:
 
 generate: swagger protos codegen
     cargo fmt
-
-[private]
-renovate: swagger protos codegen
