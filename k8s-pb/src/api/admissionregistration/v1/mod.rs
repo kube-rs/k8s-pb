@@ -560,11 +560,6 @@ pub struct TypeChecking {
     #[prost(message, repeated, tag = "1")]
     pub expression_warnings: ::prost::alloc::vec::Vec<ExpressionWarning>,
 }
-/// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-/// +genclient
-/// +genclient:nonNamespaced
-/// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-/// +k8s:prerelease-lifecycle-gen:introduced=1.30
 /// ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicy {
@@ -682,8 +677,6 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     #[prost(string, repeated, tag = "4")]
     pub validation_actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-/// +k8s:prerelease-lifecycle-gen:introduced=1.30
 /// ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyList {

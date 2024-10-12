@@ -101,20 +101,24 @@ pub struct AzureDiskVolumeSource {
     pub disk_uri: ::core::option::Option<::prost::alloc::string::String>,
     /// cachingMode is the Host Caching mode: None, Read Only, Read Write.
     /// +optional
+    /// +default=ref(AzureDataDiskCachingReadWrite)
     #[prost(string, optional, tag = "3")]
     pub caching_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// fsType is Filesystem type to mount.
     /// Must be a filesystem type supported by the host operating system.
     /// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
     /// +optional
+    /// +default="ext4"
     #[prost(string, optional, tag = "4")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
     /// readOnly Defaults to false (read/write). ReadOnly here will force
     /// the ReadOnly setting in VolumeMounts.
     /// +optional
+    /// +default=false
     #[prost(bool, optional, tag = "5")]
     pub read_only: ::core::option::Option<bool>,
     /// kind expected values are Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared
+    /// +default=ref(AzureSharedBlobDisk)
     #[prost(string, optional, tag = "6")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -408,31 +412,6 @@ pub struct CinderVolumeSource {
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub secret_ref: ::core::option::Option<LocalObjectReference>,
-}
-/// ClaimSource describes a reference to a ResourceClaim.
-///
-/// Exactly one of these fields should be set.  Consumers of this type must
-/// treat an empty object as if it has an unknown value.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ClaimSource {
-    /// ResourceClaimName is the name of a ResourceClaim object in the same
-    /// namespace as this pod.
-    #[prost(string, optional, tag = "1")]
-    pub resource_claim_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// ResourceClaimTemplateName is the name of a ResourceClaimTemplate
-    /// object in the same namespace as this pod.
-    ///
-    /// The template will be used to create a new ResourceClaim, which will
-    /// be bound to this pod. When this pod is deleted, the ResourceClaim
-    /// will also be deleted. The pod name and resource name, along with a
-    /// generated component, will be used to form a unique name for the
-    /// ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
-    ///
-    /// This field is immutable and no changes will be made to the
-    /// corresponding ResourceClaim by the control plane after creating the
-    /// ResourceClaim.
-    #[prost(string, optional, tag = "2")]
-    pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ClientIPConfig represents the configurations of Client IP based session affinity.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -1124,6 +1103,30 @@ pub struct ContainerStatus {
     /// +featureGate=RecursiveReadOnlyMounts
     #[prost(message, repeated, tag = "12")]
     pub volume_mounts: ::prost::alloc::vec::Vec<VolumeMountStatus>,
+    /// User represents user identity information initially attached to the first process of the container
+    /// +featureGate=SupplementalGroupsPolicy
+    /// +optional
+    #[prost(message, optional, tag = "13")]
+    pub user: ::core::option::Option<ContainerUser>,
+    /// AllocatedResourcesStatus represents the status of various resources
+    /// allocated for this Pod.
+    /// +featureGate=ResourceHealthStatus
+    /// +optional
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=name
+    #[prost(message, repeated, tag = "14")]
+    pub allocated_resources_status: ::prost::alloc::vec::Vec<ResourceStatus>,
+}
+/// ContainerUser represents user identity information
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ContainerUser {
+    /// Linux holds user identity information initially attached to the first process of the containers in Linux.
+    /// Note that the actual running identity can be changed if the process has enough privilege to do so.
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub linux: ::core::option::Option<LinuxContainerUser>,
 }
 /// DaemonEndpoint contains information about a single Daemon endpoint.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -2046,6 +2049,7 @@ pub struct HostAlias {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HostIp {
     /// IP is the IP address assigned to the host
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub ip: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -2083,6 +2087,7 @@ pub struct IscsiPersistentVolumeSource {
     /// iscsiInterface is the interface Name that uses an iSCSI transport.
     /// Defaults to 'default' (tcp).
     /// +optional
+    /// +default="default"
     #[prost(string, optional, tag = "4")]
     pub iscsi_interface: ::core::option::Option<::prost::alloc::string::String>,
     /// fsType is the filesystem type of the volume that you want to mount.
@@ -2141,6 +2146,7 @@ pub struct IscsiVolumeSource {
     /// iscsiInterface is the interface Name that uses an iSCSI transport.
     /// Defaults to 'default' (tcp).
     /// +optional
+    /// +default="default"
     #[prost(string, optional, tag = "4")]
     pub iscsi_interface: ::core::option::Option<::prost::alloc::string::String>,
     /// fsType is the filesystem type of the volume that you want to mount.
@@ -2180,6 +2186,27 @@ pub struct IscsiVolumeSource {
     /// +optional
     #[prost(string, optional, tag = "12")]
     pub initiator_name: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ImageVolumeSource represents a image volume resource.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImageVolumeSource {
+    /// Required: Image or artifact reference to be used.
+    /// Behaves in the same way as pod.spec.containers\[*\].image.
+    /// Pull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.
+    /// More info: <https://kubernetes.io/docs/concepts/containers/images>
+    /// This field is optional to allow higher level config management to default or override
+    /// container images in workload controllers like Deployments and StatefulSets.
+    /// +optional
+    #[prost(string, optional, tag = "1")]
+    pub reference: ::core::option::Option<::prost::alloc::string::String>,
+    /// Policy for pulling OCI objects. Possible values are:
+    /// Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+    /// Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+    /// IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+    /// Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
+    /// +optional
+    #[prost(string, optional, tag = "2")]
+    pub pull_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Maps a string key to a path within a volume.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2328,6 +2355,21 @@ pub struct LimitRangeSpec {
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
     pub limits: ::prost::alloc::vec::Vec<LimitRangeItem>,
+}
+/// LinuxContainerUser represents user identity information in Linux containers
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LinuxContainerUser {
+    /// UID is the primary uid initially attached to the first process in the container
+    #[prost(int64, optional, tag = "1")]
+    pub uid: ::core::option::Option<i64>,
+    /// GID is the primary gid initially attached to the first process in the container
+    #[prost(int64, optional, tag = "2")]
+    pub gid: ::core::option::Option<i64>,
+    /// SupplementalGroups are the supplemental groups initially attached to the first process in the container
+    /// +optional
+    /// +listType=atomic
+    #[prost(int64, repeated, packed = "false", tag = "3")]
+    pub supplemental_groups: ::prost::alloc::vec::Vec<i64>,
 }
 /// List holds a list of objects, which may not be known by the server.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2685,6 +2727,16 @@ pub struct NodeDaemonEndpoints {
     #[prost(message, optional, tag = "1")]
     pub kubelet_endpoint: ::core::option::Option<DaemonEndpoint>,
 }
+/// NodeFeatures describes the set of features implemented by the CRI implementation.
+/// The features contained in the NodeFeatures should depend only on the cri implementation
+/// independent of runtime handlers.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct NodeFeatures {
+    /// SupplementalGroupsPolicy is set to true if the runtime supports SupplementalGroupsPolicy and ContainerUser.
+    /// +optional
+    #[prost(bool, optional, tag = "1")]
+    pub supplemental_groups_policy: ::core::option::Option<bool>,
+}
 /// NodeList is the whole list of all Nodes which have been registered with master.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeList {
@@ -2718,7 +2770,7 @@ pub struct NodeRuntimeHandler {
     #[prost(message, optional, tag = "2")]
     pub features: ::core::option::Option<NodeRuntimeHandlerFeatures>,
 }
-/// NodeRuntimeHandlerFeatures is a set of runtime features.
+/// NodeRuntimeHandlerFeatures is a set of features implemented by the runtime handler.
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NodeRuntimeHandlerFeatures {
     /// RecursiveReadOnlyMounts is set to true if the runtime handler supports RecursiveReadOnlyMounts.
@@ -2726,6 +2778,11 @@ pub struct NodeRuntimeHandlerFeatures {
     /// +optional
     #[prost(bool, optional, tag = "1")]
     pub recursive_read_only_mounts: ::core::option::Option<bool>,
+    /// UserNamespaces is set to true if the runtime handler supports UserNamespaces, including for volumes.
+    /// +featureGate=UserNamespacesSupport
+    /// +optional
+    #[prost(bool, optional, tag = "2")]
+    pub user_namespaces: ::core::option::Option<bool>,
 }
 /// A node selector represents the union of the results of one or more label queries
 /// over a set of nodes; that is, it represents the OR of the selectors represented
@@ -2819,7 +2876,7 @@ pub struct NodeSpec {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeStatus {
     /// Capacity represents the total resources of a node.
-    /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity>
+    /// More info: <https://kubernetes.io/docs/reference/node/node-status/#capacity>
     /// +optional
     #[prost(map = "string, message", tag = "1")]
     pub capacity: ::std::collections::HashMap<
@@ -2896,10 +2953,16 @@ pub struct NodeStatus {
     pub config: ::core::option::Option<NodeConfigStatus>,
     /// The available runtime handlers.
     /// +featureGate=RecursiveReadOnlyMounts
+    /// +featureGate=UserNamespacesSupport
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "12")]
     pub runtime_handlers: ::prost::alloc::vec::Vec<NodeRuntimeHandler>,
+    /// Features describes the set of features implemented by the CRI implementation.
+    /// +featureGate=SupplementalGroupsPolicy
+    /// +optional
+    #[prost(message, optional, tag = "13")]
+    pub features: ::core::option::Option<NodeFeatures>,
 }
 /// NodeSystemInfo is a set of ids/uuids to uniquely identify the node.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2929,7 +2992,7 @@ pub struct NodeSystemInfo {
     /// Kubelet Version reported by the node.
     #[prost(string, optional, tag = "7")]
     pub kubelet_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// KubeProxy Version reported by the node.
+    /// Deprecated: KubeProxy Version reported by the node.
     #[prost(string, optional, tag = "8")]
     pub kube_proxy_version: ::core::option::Option<::prost::alloc::string::String>,
     /// The Operating System reported by the node
@@ -3181,7 +3244,7 @@ pub struct PersistentVolumeClaimSpec {
     /// set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
     /// exists.
     /// More info: <https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/>
-    /// (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+    /// (Beta) Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default).
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "9")]
@@ -3288,14 +3351,14 @@ pub struct PersistentVolumeClaimStatus {
         ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
     /// When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
-    /// This is an alpha field and requires enabling VolumeAttributesClass feature.
+    /// This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "8")]
     pub current_volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
     /// When this is unset, there is no ModifyVolume operation being attempted.
-    /// This is an alpha field and requires enabling VolumeAttributesClass feature.
+    /// This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(message, optional, tag = "9")]
@@ -3520,7 +3583,7 @@ pub struct PersistentVolumeSpec {
     /// after a volume has been updated successfully to a new class.
     /// For an unbound PersistentVolume, the volumeAttributesClassName will be matched with unbound
     /// PersistentVolumeClaims during the binding process.
-    /// This is an alpha field and requires enabling VolumeAttributesClass feature.
+    /// This is a beta field and requires enabling VolumeAttributesClass feature (off by default).
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "10")]
@@ -3545,8 +3608,6 @@ pub struct PersistentVolumeStatus {
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// lastPhaseTransitionTime is the time the phase transitioned from one to another
     /// and automatically resets to current time everytime a volume phase transitions.
-    /// This is a beta field and requires the PersistentVolumeLastPhaseTransitionTime feature to be enabled (enabled by default).
-    /// +featureGate=PersistentVolumeLastPhaseTransitionTime
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub last_phase_transition_time:
@@ -3662,7 +3723,8 @@ pub struct PodAffinityTerm {
     /// pod labels will be ignored. The default value is empty.
     /// The same key is forbidden to exist in both matchLabelKeys and labelSelector.
     /// Also, matchLabelKeys cannot be set when labelSelector isn't set.
-    /// This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+    /// This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+    ///
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "5")]
@@ -3675,7 +3737,8 @@ pub struct PodAffinityTerm {
     /// pod labels will be ignored. The default value is empty.
     /// The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
     /// Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-    /// This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+    /// This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
+    ///
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "6")]
@@ -3849,6 +3912,7 @@ pub struct PodExecOptions {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodIp {
     /// IP is the IP address assigned to the pod
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub ip: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -3960,7 +4024,10 @@ pub struct PodReadinessGate {
     #[prost(string, optional, tag = "1")]
     pub condition_type: ::core::option::Option<::prost::alloc::string::String>,
 }
-/// PodResourceClaim references exactly one ResourceClaim through a ClaimSource.
+/// PodResourceClaim references exactly one ResourceClaim, either directly
+/// or by naming a ResourceClaimTemplate which is then turned into a ResourceClaim
+/// for the pod.
+///
 /// It adds a name to it that uniquely identifies the ResourceClaim inside the Pod.
 /// Containers that need access to the ResourceClaim reference it with this name.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3969,9 +4036,30 @@ pub struct PodResourceClaim {
     /// This must be a DNS_LABEL.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Source describes where to find the ResourceClaim.
-    #[prost(message, optional, tag = "2")]
-    pub source: ::core::option::Option<ClaimSource>,
+    /// ResourceClaimName is the name of a ResourceClaim object in the same
+    /// namespace as this pod.
+    ///
+    /// Exactly one of ResourceClaimName and ResourceClaimTemplateName must
+    /// be set.
+    #[prost(string, optional, tag = "3")]
+    pub resource_claim_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// ResourceClaimTemplateName is the name of a ResourceClaimTemplate
+    /// object in the same namespace as this pod.
+    ///
+    /// The template will be used to create a new ResourceClaim, which will
+    /// be bound to this pod. When this pod is deleted, the ResourceClaim
+    /// will also be deleted. The pod name and resource name, along with a
+    /// generated component, will be used to form a unique name for the
+    /// ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
+    ///
+    /// This field is immutable and no changes will be made to the
+    /// corresponding ResourceClaim by the control plane after creating the
+    /// ResourceClaim.
+    ///
+    /// Exactly one of ResourceClaimName and ResourceClaimTemplateName must
+    /// be set.
+    #[prost(string, optional, tag = "4")]
+    pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim
 /// which references a ResourceClaimTemplate. It stores the generated name for
@@ -3984,7 +4072,7 @@ pub struct PodResourceClaimStatus {
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// ResourceClaimName is the name of the ResourceClaim that was
-    /// generated for the Pod in the namespace of the Pod. It this is
+    /// generated for the Pod in the namespace of the Pod. If this is
     /// unset, then generating a ResourceClaim was not necessary. The
     /// pod.spec.resourceClaims entry can be ignored in this case.
     ///
@@ -4048,17 +4136,29 @@ pub struct PodSecurityContext {
     /// +optional
     #[prost(bool, optional, tag = "3")]
     pub run_as_non_root: ::core::option::Option<bool>,
-    /// A list of groups applied to the first process run in each container, in addition
-    /// to the container's primary GID, the fsGroup (if specified), and group memberships
-    /// defined in the container image for the uid of the container process. If unspecified,
-    /// no additional groups are added to any container. Note that group memberships
-    /// defined in the container image for the uid of the container process are still effective,
-    /// even if they are not included in this list.
+    /// A list of groups applied to the first process run in each container, in
+    /// addition to the container's primary GID and fsGroup (if specified).  If
+    /// the SupplementalGroupsPolicy feature is enabled, the
+    /// supplementalGroupsPolicy field determines whether these are in addition
+    /// to or instead of any group memberships defined in the container image.
+    /// If unspecified, no additional groups are added, though group memberships
+    /// defined in the container image may still be used, depending on the
+    /// supplementalGroupsPolicy field.
     /// Note that this field cannot be set when spec.os.name is windows.
     /// +optional
     /// +listType=atomic
     #[prost(int64, repeated, packed = "false", tag = "4")]
     pub supplemental_groups: ::prost::alloc::vec::Vec<i64>,
+    /// Defines how supplemental groups of the first container processes are calculated.
+    /// Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+    /// (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+    /// and the container runtime must implement support for this feature.
+    /// Note that this field cannot be set when spec.os.name is windows.
+    /// TODO: update the default value to "Merge" when spec.os.name is not windows in v1.34
+    /// +featureGate=SupplementalGroupsPolicy
+    /// +optional
+    #[prost(string, optional, tag = "12")]
+    pub supplemental_groups_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// A special supplemental group that applies to all containers in a pod.
     /// Some volume types allow the Kubelet to change the ownership of that volume
     /// to be owned by the pod:
@@ -4218,9 +4318,11 @@ pub struct PodSpec {
     /// +optional
     #[prost(bool, optional, tag = "21")]
     pub automount_service_account_token: ::core::option::Option<bool>,
-    /// NodeName is a request to schedule this pod onto a specific node. If it is non-empty,
-    /// the scheduler simply schedules this pod onto that node, assuming that it fits resource
-    /// requirements.
+    /// NodeName indicates in which node this pod is scheduled.
+    /// If empty, this pod is a candidate for scheduling by the scheduler defined in schedulerName.
+    /// Once this field is set, the kubelet for this node becomes responsible for the lifecycle of this pod.
+    /// This field should not be used to express a desire for the pod to be scheduled on a specific node.
+    /// <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename>
     /// +optional
     #[prost(string, optional, tag = "10")]
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
@@ -4403,6 +4505,7 @@ pub struct PodSpec {
     /// - spec.securityContext.runAsUser
     /// - spec.securityContext.runAsGroup
     /// - spec.securityContext.supplementalGroups
+    /// - spec.securityContext.supplementalGroupsPolicy
     /// - spec.containers\[*\].securityContext.appArmorProfile
     /// - spec.containers\[*\].securityContext.seLinuxOptions
     /// - spec.containers\[*\].securityContext.seccompProfile
@@ -4800,7 +4903,8 @@ pub struct ProbeHandler {
 /// Represents a projected volume source
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectedVolumeSource {
-    /// sources is the list of volume projections
+    /// sources is the list of volume projections. Each entry in this list
+    /// handles one source.
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
@@ -4873,18 +4977,21 @@ pub struct RbdPersistentVolumeSource {
     /// Default is rbd.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it>
     /// +optional
+    /// +default="rbd"
     #[prost(string, optional, tag = "4")]
     pub pool: ::core::option::Option<::prost::alloc::string::String>,
     /// user is the rados user name.
     /// Default is admin.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it>
     /// +optional
+    /// +default="admin"
     #[prost(string, optional, tag = "5")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
     /// keyring is the path to key ring for RBDUser.
     /// Default is /etc/ceph/keyring.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it>
     /// +optional
+    /// +default="/etc/ceph/keyring"
     #[prost(string, optional, tag = "6")]
     pub keyring: ::core::option::Option<::prost::alloc::string::String>,
     /// secretRef is name of the authentication secret for RBDUser. If provided
@@ -4926,18 +5033,21 @@ pub struct RbdVolumeSource {
     /// Default is rbd.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it>
     /// +optional
+    /// +default="rbd"
     #[prost(string, optional, tag = "4")]
     pub pool: ::core::option::Option<::prost::alloc::string::String>,
     /// user is the rados user name.
     /// Default is admin.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it>
     /// +optional
+    /// +default="admin"
     #[prost(string, optional, tag = "5")]
     pub user: ::core::option::Option<::prost::alloc::string::String>,
     /// keyring is the path to key ring for RBDUser.
     /// Default is /etc/ceph/keyring.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it>
     /// +optional
+    /// +default="/etc/ceph/keyring"
     #[prost(string, optional, tag = "6")]
     pub keyring: ::core::option::Option<::prost::alloc::string::String>,
     /// secretRef is name of the authentication secret for RBDUser. If provided
@@ -5102,6 +5212,13 @@ pub struct ResourceClaim {
     /// inside a container.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Request is the name chosen for a request in the referenced claim.
+    /// If empty, everything from the claim is made available, otherwise
+    /// only the result of this request.
+    ///
+    /// +optional
+    #[prost(string, optional, tag = "2")]
+    pub request: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceFieldSelector represents container resources (cpu, memory) and their output format
 /// +structType=atomic
@@ -5118,6 +5235,26 @@ pub struct ResourceFieldSelector {
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub divisor: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+}
+/// ResourceHealth represents the health of a resource. It has the latest device health information.
+/// This is a part of KEP <https://kep.k8s.io/4680> and historical health changes are planned to be added in future iterations of a KEP.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResourceHealth {
+    /// ResourceID is the unique identifier of the resource. See the ResourceID type for more information.
+    #[prost(string, optional, tag = "1")]
+    pub resource_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// Health of the resource.
+    /// can be one of:
+    ///   - Healthy: operates as normal
+    ///   - Unhealthy: reported unhealthy. We consider this a temporary health issue
+    ///                since we do not have a mechanism today to distinguish
+    ///                temporary and permanent issues.
+    ///   - Unknown: The status cannot be determined.
+    ///              For example, Device Plugin got unregistered and hasn't been re-registered since.
+    ///
+    /// In future we may want to introduce the PermanentlyUnhealthy Status.
+    #[prost(string, optional, tag = "2")]
+    pub health: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceQuota sets aggregate quota restrictions enforced per namespace
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5230,6 +5367,21 @@ pub struct ResourceRequirements {
     #[prost(message, repeated, tag = "3")]
     pub claims: ::prost::alloc::vec::Vec<ResourceClaim>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResourceStatus {
+    /// Name of the resource. Must be unique within the pod and match one of the resources from the pod spec.
+    /// +required
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// List of unique Resources health. Each element in the list contains an unique resource ID and resource health.
+    /// At a minimum, ResourceID must uniquely identify the Resource
+    /// allocated to the Pod on the Node for the lifetime of a Pod.
+    /// See ResourceID type for it's definition.
+    /// +listType=map
+    /// +listMapKey=resourceID
+    #[prost(message, repeated, tag = "2")]
+    pub resources: ::prost::alloc::vec::Vec<ResourceHealth>,
+}
 /// SELinuxOptions are the labels to be applied to the container
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SeLinuxOptions {
@@ -5278,6 +5430,7 @@ pub struct ScaleIoPersistentVolumeSource {
     /// storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned.
     /// Default is ThinProvisioned.
     /// +optional
+    /// +default="ThinProvisioned"
     #[prost(string, optional, tag = "7")]
     pub storage_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// volumeName is the name of a volume already created in the ScaleIO system
@@ -5289,6 +5442,7 @@ pub struct ScaleIoPersistentVolumeSource {
     /// Ex. "ext4", "xfs", "ntfs".
     /// Default is "xfs"
     /// +optional
+    /// +default="xfs"
     #[prost(string, optional, tag = "9")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
     /// readOnly defaults to false (read/write). ReadOnly here will force
@@ -5325,6 +5479,7 @@ pub struct ScaleIoVolumeSource {
     /// storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned.
     /// Default is ThinProvisioned.
     /// +optional
+    /// +default="ThinProvisioned"
     #[prost(string, optional, tag = "7")]
     pub storage_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// volumeName is the name of a volume already created in the ScaleIO system
@@ -5336,6 +5491,7 @@ pub struct ScaleIoVolumeSource {
     /// Ex. "ext4", "xfs", "ntfs".
     /// Default is "xfs".
     /// +optional
+    /// +default="xfs"
     #[prost(string, optional, tag = "9")]
     pub fs_type: ::core::option::Option<::prost::alloc::string::String>,
     /// readOnly Defaults to false (read/write). ReadOnly here will force
@@ -5631,7 +5787,7 @@ pub struct SecurityContext {
     #[prost(bool, optional, tag = "7")]
     pub allow_privilege_escalation: ::core::option::Option<bool>,
     /// procMount denotes the type of proc mount to use for the containers.
-    /// The default is DefaultProcMount which uses the container runtime defaults for
+    /// The default value is Default which uses the container runtime defaults for
     /// readonly paths and masked paths.
     /// This requires the ProcMountType feature flag to be enabled.
     /// Note that this field cannot be set when spec.os.name is windows.
@@ -6577,7 +6733,8 @@ pub struct VolumeNodeAffinity {
     #[prost(message, optional, tag = "1")]
     pub required: ::core::option::Option<NodeSelector>,
 }
-/// Projection that may be projected along with other supported volume types
+/// Projection that may be projected along with other supported volume types.
+/// Exactly one of these fields must be set.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeProjection {
     /// secret information about the secret data to project
@@ -6804,6 +6961,24 @@ pub struct VolumeSource {
     /// +optional
     #[prost(message, optional, tag = "29")]
     pub ephemeral: ::core::option::Option<EphemeralVolumeSource>,
+    /// image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
+    /// The volume is resolved at pod startup depending on which PullPolicy value is provided:
+    ///
+    /// - Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+    /// - Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+    /// - IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+    ///
+    /// The volume gets re-resolved if the pod gets deleted and recreated, which means that new remote content will become available on pod recreation.
+    /// A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message.
+    /// The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
+    /// The OCI object gets mounted in a single directory (spec.containers\[*\].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
+    /// The volume will be mounted read-only (ro) and non-executable files (noexec).
+    /// Sub path mounts for containers are not supported (spec.containers\[*\].volumeMounts.subpath).
+    /// The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
+    /// +featureGate=ImageVolume
+    /// +optional
+    #[prost(message, optional, tag = "30")]
+    pub image: ::core::option::Option<ImageVolumeSource>,
 }
 /// Represents a vSphere volume resource.
 #[derive(Clone, PartialEq, ::prost::Message)]

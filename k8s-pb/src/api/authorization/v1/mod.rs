@@ -9,6 +9,66 @@ pub struct ExtraValue {
     #[prost(string, repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+/// FieldSelectorAttributes indicates a field limited access.
+/// Webhook authors are encouraged to
+/// * ensure rawSelector and requirements are not both set
+/// * consider the requirements field if set
+/// * not try to parse or consider the rawSelector field if set. This is to avoid another CVE-2022-2880 (i.e. getting different systems to agree on how exactly to parse a query is not something we want), see <https://www.oxeye.io/resources/golang-parameter-smuggling-attack> for more details.
+/// For the *SubjectAccessReview endpoints of the kube-apiserver:
+/// * If rawSelector is empty and requirements are empty, the request is not limited.
+/// * If rawSelector is present and requirements are empty, the rawSelector will be parsed and limited if the parsing succeeds.
+/// * If rawSelector is empty and requirements are present, the requirements should be honored
+/// * If rawSelector is present and requirements are present, the request is invalid.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FieldSelectorAttributes {
+    /// rawSelector is the serialization of a field selector that would be included in a query parameter.
+    /// Webhook implementations are encouraged to ignore rawSelector.
+    /// The kube-apiserver's *SubjectAccessReview will parse the rawSelector as long as the requirements are not present.
+    /// +optional
+    #[prost(string, optional, tag = "1")]
+    pub raw_selector: ::core::option::Option<::prost::alloc::string::String>,
+    /// requirements is the parsed interpretation of a field selector.
+    /// All requirements must be met for a resource instance to match the selector.
+    /// Webhook implementations should handle requirements, but how to handle them is up to the webhook.
+    /// Since requirements can only limit the request, it is safe to authorize as unlimited request if the requirements
+    /// are not understood.
+    /// +optional
+    /// +listType=atomic
+    #[prost(message, repeated, tag = "2")]
+    pub requirements: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::FieldSelectorRequirement,
+    >,
+}
+/// LabelSelectorAttributes indicates a label limited access.
+/// Webhook authors are encouraged to
+/// * ensure rawSelector and requirements are not both set
+/// * consider the requirements field if set
+/// * not try to parse or consider the rawSelector field if set. This is to avoid another CVE-2022-2880 (i.e. getting different systems to agree on how exactly to parse a query is not something we want), see <https://www.oxeye.io/resources/golang-parameter-smuggling-attack> for more details.
+/// For the *SubjectAccessReview endpoints of the kube-apiserver:
+/// * If rawSelector is empty and requirements are empty, the request is not limited.
+/// * If rawSelector is present and requirements are empty, the rawSelector will be parsed and limited if the parsing succeeds.
+/// * If rawSelector is empty and requirements are present, the requirements should be honored
+/// * If rawSelector is present and requirements are present, the request is invalid.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LabelSelectorAttributes {
+    /// rawSelector is the serialization of a field selector that would be included in a query parameter.
+    /// Webhook implementations are encouraged to ignore rawSelector.
+    /// The kube-apiserver's *SubjectAccessReview will parse the rawSelector as long as the requirements are not present.
+    /// +optional
+    #[prost(string, optional, tag = "1")]
+    pub raw_selector: ::core::option::Option<::prost::alloc::string::String>,
+    /// requirements is the parsed interpretation of a label selector.
+    /// All requirements must be met for a resource instance to match the selector.
+    /// Webhook implementations should handle requirements, but how to handle them is up to the webhook.
+    /// Since requirements can only limit the request, it is safe to authorize as unlimited request if the requirements
+    /// are not understood.
+    /// +optional
+    /// +listType=atomic
+    #[prost(message, repeated, tag = "2")]
+    pub requirements: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelectorRequirement,
+    >,
+}
 /// LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given namespace.
 /// Having a namespace scoped resource makes it much easier to grant namespace scoped policy that includes permissions
 /// checking.
@@ -88,6 +148,20 @@ pub struct ResourceAttributes {
     /// +optional
     #[prost(string, optional, tag = "7")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// fieldSelector describes the limitation on access based on field.  It can only limit access, not broaden it.
+    ///
+    /// This field  is alpha-level. To use this field, you must enable the
+    /// `AuthorizeWithSelectors` feature gate (disabled by default).
+    /// +optional
+    #[prost(message, optional, tag = "8")]
+    pub field_selector: ::core::option::Option<FieldSelectorAttributes>,
+    /// labelSelector describes the limitation on access based on labels.  It can only limit access, not broaden it.
+    ///
+    /// This field  is alpha-level. To use this field, you must enable the
+    /// `AuthorizeWithSelectors` feature gate (disabled by default).
+    /// +optional
+    #[prost(message, optional, tag = "9")]
+    pub label_selector: ::core::option::Option<LabelSelectorAttributes>,
 }
 /// ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant,
 /// may contain duplicates, and possibly be incomplete.

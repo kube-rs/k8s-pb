@@ -97,6 +97,9 @@ pub struct ServiceCidrList {
 pub struct ServiceCidrSpec {
     /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
     /// from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family.
+    /// The network address of each CIDR, the address that identifies the subnet of a host, is reserved
+    /// and will not be allocated. The broadcast address for IPv4 CIDRs is also reserved and will not be
+    /// allocated.
     /// This field is immutable.
     /// +optional
     /// +listType=atomic
@@ -116,76 +119,4 @@ pub struct ServiceCidrStatus {
     #[prost(message, repeated, tag = "1")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
-}
-
-impl crate::Resource for IpAddress {
-    const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";
-    const GROUP: &'static str = "networking.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "IPAddress";
-    const URL_PATH_SEGMENT: &'static str = "ipaddresses";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::HasMetadata for IpAddress {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for IpAddress {
-    type Spec = crate::api::networking::v1alpha1::IpAddressSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-
-impl crate::Resource for ServiceCidr {
-    const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";
-    const GROUP: &'static str = "networking.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "ServiceCIDR";
-    const URL_PATH_SEGMENT: &'static str = "servicecidrs";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::HasMetadata for ServiceCidr {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ServiceCidr {
-    type Spec = crate::api::networking::v1alpha1::ServiceCidrSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for ServiceCidr {
-    type Status = crate::api::networking::v1alpha1::ServiceCidrStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for ServiceCidr {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
 }

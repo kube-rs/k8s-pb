@@ -306,6 +306,26 @@ pub struct Duration {
     #[prost(int64, optional, tag = "1")]
     pub duration: ::core::option::Option<i64>,
 }
+/// FieldSelectorRequirement is a selector that contains values, a key, and an operator that
+/// relates the key and values.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FieldSelectorRequirement {
+    /// key is the field selector key that the requirement applies to.
+    #[prost(string, optional, tag = "1")]
+    pub key: ::core::option::Option<::prost::alloc::string::String>,
+    /// operator represents a key's relationship to a set of values.
+    /// Valid operators are In, NotIn, Exists, DoesNotExist.
+    /// The list of operators may grow in the future.
+    #[prost(string, optional, tag = "2")]
+    pub operator: ::core::option::Option<::prost::alloc::string::String>,
+    /// values is an array of string values.
+    /// If the operator is In or NotIn, the values array must be non-empty.
+    /// If the operator is Exists or DoesNotExist, the values array must be empty.
+    /// +optional
+    /// +listType=atomic
+    #[prost(string, repeated, tag = "3")]
+    pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// FieldsV1 stores a set of fields in a data structure like a Trie, in JSON format.
 ///
 /// Each key is either a '.' representing the field itself, and will always map to an empty set,

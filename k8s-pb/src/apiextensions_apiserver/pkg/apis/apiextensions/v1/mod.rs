@@ -570,7 +570,6 @@ pub struct JsonSchemaProps {
     #[prost(string, optional, tag = "43")]
     pub x_kubernetes_map_type: ::core::option::Option<::prost::alloc::string::String>,
     /// x-kubernetes-validations describes a list of validation rules written in the CEL expression language.
-    /// This field is an alpha-level. Using this field requires the feature gate `CustomResourceValidationExpressions` to be enabled.
     /// +patchMergeKey=rule
     /// +patchStrategy=merge
     /// +listType=map

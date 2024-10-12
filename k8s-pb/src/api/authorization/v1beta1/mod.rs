@@ -88,6 +88,14 @@ pub struct ResourceAttributes {
     /// +optional
     #[prost(string, optional, tag = "7")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// fieldSelector describes the limitation on access based on field.  It can only limit access, not broaden it.
+    /// +optional
+    #[prost(message, optional, tag = "8")]
+    pub field_selector: ::core::option::Option<super::v1::FieldSelectorAttributes>,
+    /// labelSelector describes the limitation on access based on labels.  It can only limit access, not broaden it.
+    /// +optional
+    #[prost(message, optional, tag = "9")]
+    pub label_selector: ::core::option::Option<super::v1::LabelSelectorAttributes>,
 }
 /// ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant,
 /// may contain duplicates, and possibly be incomplete.
