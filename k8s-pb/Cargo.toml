@@ -10,7 +10,7 @@ repository = "https://github.com/kube-rs/k8s-pb"
 description = "Bindings for the Kubernetes Client API"
 readme = "../README.md"
 keywords = ["kubernetes", "openapi", "protos"]
-categories = ["network-programming", "caching", "api-bindings", "configuration", "encoding"]
+categories = ["network-programming", "caching", "api-bindings", "encoding"]
 rust-version = "1.65.0"
 edition = "2021"
 
