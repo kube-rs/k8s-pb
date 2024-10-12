@@ -5,21 +5,16 @@
 /// with a given Reason reflecting a consistent underlying trigger, or the
 /// continued existence of events with that Reason.  Events should be
 /// treated as informative, best-effort, supplemental data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// eventTime is the time when this Event was first observed. It is required.
     #[prost(message, optional, tag = "2")]
-    pub event_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub event_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
     /// series is data about the Event series this event represents or nil if it's a singleton Event.
     /// +optional
     #[prost(message, optional, tag = "3")]
@@ -69,31 +64,26 @@ pub struct Event {
     /// deprecatedFirstTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
     /// +optional
     #[prost(message, optional, tag = "13")]
-    pub deprecated_first_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub deprecated_first_timestamp:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// deprecatedLastTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
     /// +optional
     #[prost(message, optional, tag = "14")]
-    pub deprecated_last_timestamp: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub deprecated_last_timestamp:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.
     /// +optional
     #[prost(int32, optional, tag = "15")]
     pub deprecated_count: ::core::option::Option<i32>,
 }
 /// EventList is a list of Event objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventList {
     /// Standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Event>,
@@ -102,7 +92,6 @@ pub struct EventList {
 /// continuously for some time. How often to update the EventSeries is up to the event reporters.
 /// The default event reporter in "k8s.io/client-go/tools/events/event_broadcaster.go" shows
 /// how this struct is updated on heartbeats and can guide customized reporter implementations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EventSeries {
     /// count is the number of occurrences in this series up to the last heartbeat time.
@@ -110,9 +99,8 @@ pub struct EventSeries {
     pub count: ::core::option::Option<i32>,
     /// lastObservedTime is the time when last Event from the series was seen before last heartbeat.
     #[prost(message, optional, tag = "2")]
-    pub last_observed_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
-    >,
+    pub last_observed_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
 }
 
 impl crate::Resource for Event {
@@ -132,4 +120,3 @@ impl crate::HasMetadata for Event {
         self.metadata.as_mut()
     }
 }
-

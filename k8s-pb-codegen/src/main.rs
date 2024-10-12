@@ -191,7 +191,6 @@ fn append_trait_def(lib_rs: &mut File) {
             fn conditions_mut(&mut self) -> Option<&mut Vec<Self::Condition>>;
         }
     };
-    let tokens = rustfmt(tokens).unwrap();
     writeln!(lib_rs).unwrap();
     writeln!(lib_rs, "{}", &tokens).unwrap();
 }
@@ -314,20 +313,6 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
         tokens
     };
 
-    let tokens = rustfmt(tokens).unwrap();
     writeln!(pkg_rs).unwrap();
     writeln!(pkg_rs, "{}", &tokens).unwrap();
-}
-
-// Run `rustfmt` on an in-memory string
-fn rustfmt(text: impl std::fmt::Display) -> Result<String, Box<dyn std::error::Error>> {
-    let mut rustfmt = std::process::Command::new("rustfmt");
-    rustfmt
-        .stdin(std::process::Stdio::piped())
-        .stdout(std::process::Stdio::piped());
-    let mut rustfmt = rustfmt.spawn()?;
-    write!(rustfmt.stdin.take().unwrap(), "{}", text)?;
-    let output = rustfmt.wait_with_output()?;
-    let stdout = String::from_utf8(output.stdout)?;
-    Ok(stdout)
 }

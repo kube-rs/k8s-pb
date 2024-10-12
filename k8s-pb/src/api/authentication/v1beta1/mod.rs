@@ -4,7 +4,6 @@
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExtraValue {
     #[prost(string, repeated, tag = "1")]
@@ -13,22 +12,18 @@ pub struct ExtraValue {
 /// SelfSubjectReview contains the user information that the kube-apiserver has about the user making this request.
 /// When using impersonation, users will receive the user info of the user being impersonated.  If impersonation or
 /// request header authentication is used, any extra keys will have their case ignored and returned as lowercase.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectReview {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Status is filled in by the server with the user attributes.
     #[prost(message, optional, tag = "2")]
     pub status: ::core::option::Option<SelfSubjectReviewStatus>,
 }
 /// SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectReviewStatus {
     /// User attributes of the user making this request.
@@ -39,16 +34,13 @@ pub struct SelfSubjectReviewStatus {
 /// TokenReview attempts to authenticate a token to a known user.
 /// Note: TokenReview requests may be cached by the webhook token authenticator
 /// plugin in the kube-apiserver.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenReview {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the request being evaluated
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<TokenReviewSpec>,
@@ -58,7 +50,6 @@ pub struct TokenReview {
     pub status: ::core::option::Option<TokenReviewStatus>,
 }
 /// TokenReviewSpec is a description of the token authentication request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenReviewSpec {
     /// Token is the opaque bearer token.
@@ -76,7 +67,6 @@ pub struct TokenReviewSpec {
     pub audiences: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// TokenReviewStatus is the result of the token authentication request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenReviewStatus {
     /// Authenticated indicates that the token was associated with a known user.
@@ -107,7 +97,6 @@ pub struct TokenReviewStatus {
 }
 /// UserInfo holds the information about the user needed to implement the
 /// user.Info interface.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInfo {
     /// The name that uniquely identifies this user among all active users.
@@ -157,4 +146,3 @@ impl crate::HasStatus for SelfSubjectReview {
         self.status.as_mut()
     }
 }
-

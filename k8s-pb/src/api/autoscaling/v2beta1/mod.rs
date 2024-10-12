@@ -6,7 +6,6 @@
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricSource {
     /// name is the name of the resource in question.
@@ -23,9 +22,8 @@ pub struct ContainerResourceMetricSource {
     /// a percentage of the request), similar to the "pods" metric source type.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub target_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub target_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// container is the name of the container in the pods of the scaling target
     #[prost(string, optional, tag = "4")]
     pub container: ::core::option::Option<::prost::alloc::string::String>,
@@ -35,7 +33,6 @@ pub struct ContainerResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
     /// name is the name of the resource in question.
@@ -54,15 +51,13 @@ pub struct ContainerResourceMetricStatus {
     /// a percentage of the request), similar to the "pods" metric source type.
     /// It will always be set, regardless of the corresponding metric specification.
     #[prost(message, optional, tag = "3")]
-    pub current_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub current_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// container is the name of the container in the pods of the scaling target
     #[prost(string, optional, tag = "4")]
     pub container: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// Kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
@@ -80,7 +75,6 @@ pub struct CrossVersionObjectReference {
 /// any Kubernetes object (for example length of queue in cloud
 /// messaging service, or QPS from loadbalancer running outside of cluster).
 /// Exactly one "target" type should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricSource {
     /// metricName is the name of the metric in question.
@@ -90,27 +84,22 @@ pub struct ExternalMetricSource {
     /// within a given metric.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub metric_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub metric_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// targetValue is the target value of the metric (as a quantity).
     /// Mutually exclusive with TargetAverageValue.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub target_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub target_value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// targetAverageValue is the target per-pod value of global metric (as a quantity).
     /// Mutually exclusive with TargetValue.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub target_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub target_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ExternalMetricStatus indicates the current value of a global metric
 /// not associated with any Kubernetes object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalMetricStatus {
     /// metricName is the name of a metric used for autoscaling in
@@ -121,34 +110,28 @@ pub struct ExternalMetricStatus {
     /// within a given metric.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub metric_selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub metric_selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// currentValue is the current value of the metric (as a quantity)
     #[prost(message, optional, tag = "3")]
-    pub current_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub current_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// currentAverageValue is the current value of metric averaged over autoscaled pods.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub current_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub current_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// HorizontalPodAutoscaler is the configuration for a horizontal pod
 /// autoscaler, which automatically manages the replica count of any resource
 /// implementing the scale subresource based on the metrics specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscaler {
     /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the specification for the behaviour of the autoscaler.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
     /// +optional
@@ -161,7 +144,6 @@ pub struct HorizontalPodAutoscaler {
 }
 /// HorizontalPodAutoscalerCondition describes the state of
 /// a HorizontalPodAutoscaler at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerCondition {
     /// type describes the current condition
@@ -174,9 +156,8 @@ pub struct HorizontalPodAutoscalerCondition {
     /// one status to another
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// reason is the reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -188,21 +169,17 @@ pub struct HorizontalPodAutoscalerCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// HorizontalPodAutoscaler is a list of horizontal pod autoscaler objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerList {
     /// metadata is the standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of horizontal pod autoscaler objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<HorizontalPodAutoscaler>,
 }
 /// HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerSpec {
     /// scaleTargetRef points to the target resource to scale, and is used to the pods for which metrics
@@ -234,7 +211,6 @@ pub struct HorizontalPodAutoscalerSpec {
     pub metrics: ::prost::alloc::vec::Vec<MetricSpec>,
 }
 /// HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscalerStatus {
     /// observedGeneration is the most recent generation observed by this autoscaler.
@@ -245,9 +221,7 @@ pub struct HorizontalPodAutoscalerStatus {
     /// used by the autoscaler to control how often the number of pods is changed.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub last_scale_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_scale_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// currentReplicas is current number of replicas of pods managed by this autoscaler,
     /// as last seen by the autoscaler.
     #[prost(int32, optional, tag = "3")]
@@ -270,7 +244,6 @@ pub struct HorizontalPodAutoscalerStatus {
 }
 /// MetricSpec specifies how to scale based on a single metric
 /// (only `type` and one other matching field should be set at once).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricSpec {
     /// type is the type of metric source.  It should be one of "ContainerResource",
@@ -317,7 +290,6 @@ pub struct MetricSpec {
     pub external: ::core::option::Option<ExternalMetricSource>,
 }
 /// MetricStatus describes the last-read state of a single metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricStatus {
     /// type is the type of metric source.  It will be one of "ContainerResource",
@@ -364,7 +336,6 @@ pub struct MetricStatus {
 }
 /// ObjectMetricSource indicates how to scale on a metric describing a
 /// kubernetes object (for example, hits-per-second on an Ingress object).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMetricSource {
     /// target is the described Kubernetes object.
@@ -375,28 +346,23 @@ pub struct ObjectMetricSource {
     pub metric_name: ::core::option::Option<::prost::alloc::string::String>,
     /// targetValue is the target value of the metric (as a quantity).
     #[prost(message, optional, tag = "3")]
-    pub target_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub target_value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// selector is the string-encoded form of a standard kubernetes label selector for the given metric
     /// When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping
     /// When unset, just the metricName will be used to gather metrics.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// averageValue is the target value of the average of the
     /// metric across all relevant pods (as a quantity)
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ObjectMetricStatus indicates the current value of a metric describing a
 /// kubernetes object (for example, hits-per-second on an Ingress object).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectMetricStatus {
     /// target is the described Kubernetes object.
@@ -407,30 +373,26 @@ pub struct ObjectMetricStatus {
     pub metric_name: ::core::option::Option<::prost::alloc::string::String>,
     /// currentValue is the current value of the metric (as a quantity).
     #[prost(message, optional, tag = "3")]
-    pub current_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub current_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// selector is the string-encoded form of a standard kubernetes label selector for the given metric
     /// When set in the ObjectMetricSource, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
     /// When unset, just the metricName will be used to gather metrics.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// averageValue is the current value of the average of the
     /// metric across all relevant pods (as a quantity)
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// PodsMetricSource indicates how to scale on a metric describing each pod in
 /// the current scale target (for example, transactions-processed-per-second).
 /// The values will be averaged together before being compared to the target
 /// value.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodsMetricSource {
     /// metricName is the name of the metric in question
@@ -439,21 +401,18 @@ pub struct PodsMetricSource {
     /// targetAverageValue is the target value of the average of the
     /// metric across all relevant pods (as a quantity)
     #[prost(message, optional, tag = "2")]
-    pub target_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub target_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// selector is the string-encoded form of a standard kubernetes label selector for the given metric
     /// When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping
     /// When unset, just the metricName will be used to gather metrics.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
 }
 /// PodsMetricStatus indicates the current value of a metric describing each pod in
 /// the current scale target (for example, transactions-processed-per-second).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodsMetricStatus {
     /// metricName is the name of the metric in question
@@ -462,17 +421,15 @@ pub struct PodsMetricStatus {
     /// currentAverageValue is the current value of the average of the
     /// metric across all relevant pods (as a quantity)
     #[prost(message, optional, tag = "2")]
-    pub current_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub current_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
     /// selector is the string-encoded form of a standard kubernetes label selector for the given metric
     /// When set in the PodsMetricSource, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
     /// When unset, just the metricName will be used to gather metrics.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
 }
 /// ResourceMetricSource indicates how to scale on a resource metric known to
 /// Kubernetes, as specified in requests and limits, describing each pod in the
@@ -481,7 +438,6 @@ pub struct PodsMetricStatus {
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricSource {
     /// name is the name of the resource in question.
@@ -498,16 +454,14 @@ pub struct ResourceMetricSource {
     /// a percentage of the request), similar to the "pods" metric source type.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub target_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub target_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ResourceMetricStatus indicates the current value of a resource metric known to
 /// Kubernetes, as specified in requests and limits, describing each pod in the
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceMetricStatus {
     /// name is the name of the resource in question.
@@ -526,7 +480,6 @@ pub struct ResourceMetricStatus {
     /// a percentage of the request), similar to the "pods" metric source type.
     /// It will always be set, regardless of the corresponding metric specification.
     #[prost(message, optional, tag = "3")]
-    pub current_average_value: ::core::option::Option<
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub current_average_value:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }

@@ -68,7 +68,6 @@
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen=true
 /// +k8s:openapi-gen=true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Quantity {
     #[prost(string, optional, tag = "1")]
@@ -82,7 +81,6 @@ pub struct Quantity {
 /// +protobuf.options.marshal=false
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen=true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuantityValue {
     #[prost(string, optional, tag = "1")]

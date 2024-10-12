@@ -10,35 +10,27 @@
 /// the DaemonSet and StatefulSet controllers for update and rollback, this object is beta. However,
 /// it may be subject to name and representation changes in future releases, and clients should not
 /// depend on its stability. It is primarily for internal use by controllers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ControllerRevision {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Data is the serialized representation of the state.
     #[prost(message, optional, tag = "2")]
-    pub data: ::core::option::Option<
-        super::super::super::apimachinery::pkg::runtime::RawExtension,
-    >,
+    pub data: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// Revision indicates the revision of the state represented by Data.
     #[prost(int64, optional, tag = "3")]
     pub revision: ::core::option::Option<i64>,
 }
 /// ControllerRevisionList is a resource containing a list of ControllerRevision objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ControllerRevisionList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of ControllerRevisions
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ControllerRevision>,
@@ -46,16 +38,13 @@ pub struct ControllerRevisionList {
 /// DEPRECATED - This group version of DaemonSet is deprecated by apps/v1/DaemonSet. See the release notes for
 /// more information.
 /// DaemonSet represents the configuration of a daemon set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSet {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The desired behavior of this daemon set.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -71,7 +60,6 @@ pub struct DaemonSet {
     pub status: ::core::option::Option<DaemonSetStatus>,
 }
 /// DaemonSetCondition describes the state of a DaemonSet at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetCondition {
     /// Type of DaemonSet condition.
@@ -83,9 +71,8 @@ pub struct DaemonSetCondition {
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -96,22 +83,18 @@ pub struct DaemonSetCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DaemonSetList is a collection of daemon sets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetList {
     /// Standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// A list of daemon sets.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<DaemonSet>,
 }
 /// DaemonSetSpec is the specification of a daemon set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetSpec {
     /// A label query over pods that are managed by the daemon set.
@@ -119,9 +102,8 @@ pub struct DaemonSetSpec {
     /// It must match the pod template's labels.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     #[prost(message, optional, tag = "1")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// An object that describes the pod that will be created.
     /// The DaemonSet will create exactly one copy of this pod on every node
     /// that matches the template's node selector (or on every node if no node
@@ -149,7 +131,6 @@ pub struct DaemonSetSpec {
     pub revision_history_limit: ::core::option::Option<i32>,
 }
 /// DaemonSetStatus represents the current status of a daemon set.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetStatus {
     /// The number of nodes that are running at least 1
@@ -207,7 +188,6 @@ pub struct DaemonSetStatus {
     pub conditions: ::prost::alloc::vec::Vec<DaemonSetCondition>,
 }
 /// DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DaemonSetUpdateStrategy {
     /// Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.
@@ -226,15 +206,12 @@ pub struct DaemonSetUpdateStrategy {
 /// DEPRECATED - This group version of Deployment is deprecated by apps/v1/Deployment. See the release notes for
 /// more information.
 /// Deployment enables declarative updates for Pods and ReplicaSets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Deployment {
     /// Standard object metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the Deployment.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -245,7 +222,6 @@ pub struct Deployment {
     pub status: ::core::option::Option<DeploymentStatus>,
 }
 /// DeploymentCondition describes the state of a deployment at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentCondition {
     /// Type of deployment condition.
@@ -256,14 +232,12 @@ pub struct DeploymentCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// The last time this condition was updated.
     #[prost(message, optional, tag = "6")]
-    pub last_update_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_update_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "7")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -272,21 +246,17 @@ pub struct DeploymentCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeploymentList is a list of Deployments.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// Items is the list of Deployments.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Deployment>,
 }
 /// DeploymentSpec is the specification of the desired behavior of the Deployment.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentSpec {
     /// Number of desired pods. This is a pointer to distinguish between explicit
@@ -298,9 +268,8 @@ pub struct DeploymentSpec {
     /// selected by this will be the ones affected by this deployment.
     /// It must match the pod template's labels.
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template describes the pods that will be created.
     /// The only allowed template.spec.restartPolicy value is "Always".
     #[prost(message, optional, tag = "3")]
@@ -335,7 +304,6 @@ pub struct DeploymentSpec {
     pub progress_deadline_seconds: ::core::option::Option<i32>,
 }
 /// DeploymentStatus is the most recently observed status of the Deployment.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentStatus {
     /// The generation observed by the deployment controller.
@@ -379,7 +347,6 @@ pub struct DeploymentStatus {
     pub collision_count: ::core::option::Option<i32>,
 }
 /// DeploymentStrategy describes how to replace existing pods with new ones.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentStrategy {
     /// Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
@@ -398,7 +365,6 @@ pub struct DeploymentStrategy {
 /// DEPRECATED - This group version of ReplicaSet is deprecated by apps/v1/ReplicaSet. See the release notes for
 /// more information.
 /// ReplicaSet ensures that a specified number of pod replicas are running at any given time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSet {
     /// If the Labels of a ReplicaSet are empty, they are defaulted to
@@ -406,9 +372,7 @@ pub struct ReplicaSet {
     /// Standard object's metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the specification of the desired behavior of the ReplicaSet.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -424,7 +388,6 @@ pub struct ReplicaSet {
     pub status: ::core::option::Option<ReplicaSetStatus>,
 }
 /// ReplicaSetCondition describes the state of a replica set at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetCondition {
     /// Type of replica set condition.
@@ -436,9 +399,8 @@ pub struct ReplicaSetCondition {
     /// The last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -449,23 +411,19 @@ pub struct ReplicaSetCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ReplicaSetList is a collection of ReplicaSets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetList {
     /// Standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of ReplicaSets.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller>
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ReplicaSet>,
 }
 /// ReplicaSetSpec is the specification of a ReplicaSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetSpec {
     /// Replicas is the number of desired replicas.
@@ -486,9 +444,8 @@ pub struct ReplicaSetSpec {
     /// It must match the pod template's labels.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template is the object that describes the pod that will be created if
     /// insufficient replicas are detected.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template>
@@ -497,7 +454,6 @@ pub struct ReplicaSetSpec {
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
 }
 /// ReplicaSetStatus represents the current status of a ReplicaSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetStatus {
     /// Replicas is the most recently observed number of replicas.
@@ -530,7 +486,6 @@ pub struct ReplicaSetStatus {
     pub conditions: ::prost::alloc::vec::Vec<ReplicaSetCondition>,
 }
 /// Spec to control the desired behavior of daemon set rolling update.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateDaemonSet {
     /// The maximum number of DaemonSet pods that can be unavailable during the
@@ -549,9 +504,8 @@ pub struct RollingUpdateDaemonSet {
     /// the update.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// The maximum number of nodes with an existing available DaemonSet pod that
     /// can have an updated DaemonSet pod during during an update.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -572,12 +526,9 @@ pub struct RollingUpdateDaemonSet {
     /// cause evictions during disruption.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_surge: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Spec to control the desired behavior of rolling update.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateDeployment {
     /// The maximum number of pods that can be unavailable during the update.
@@ -592,9 +543,8 @@ pub struct RollingUpdateDeployment {
     /// least 70% of desired pods.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
     /// The maximum number of pods that can be scheduled above the desired number of
     /// pods.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -608,12 +558,9 @@ pub struct RollingUpdateDeployment {
     /// at any time during the update is at most 130% of desired pods.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_surge: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollingUpdateStatefulSetStrategy {
     /// Partition indicates the ordinal at which the StatefulSet should be partitioned
@@ -632,20 +579,16 @@ pub struct RollingUpdateStatefulSetStrategy {
     /// will be counted towards MaxUnavailable.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max_unavailable: ::core::option::Option<
-        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
-    >,
+    pub max_unavailable:
+        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Scale represents a scaling request for a resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Scale {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// defines the behavior of the scale. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -656,7 +599,6 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// ScaleSpec describes the attributes of a scale subresource
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScaleSpec {
     /// desired number of instances for the scaled object.
@@ -665,7 +607,6 @@ pub struct ScaleSpec {
     pub replicas: ::core::option::Option<i32>,
 }
 /// ScaleStatus represents the current status of a scale subresource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleStatus {
     /// actual number of observed instances of the scaled object.
@@ -675,10 +616,7 @@ pub struct ScaleStatus {
     /// +optional
     /// +mapType=atomic
     #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// label selector for pods that should match the replicas count. This is a serializated
     /// version of both map-based and more expressive set-based selectors. This is done to
     /// avoid introspection in the clients. The string will be in the same format as the
@@ -698,14 +636,11 @@ pub struct ScaleStatus {
 ///
 /// The StatefulSet guarantees that a given network identity will always
 /// map to the same storage identity.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSet {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the desired identities of pods in this set.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -717,7 +652,6 @@ pub struct StatefulSet {
     pub status: ::core::option::Option<StatefulSetStatus>,
 }
 /// StatefulSetCondition describes the state of a statefulset at a certain point.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetCondition {
     /// Type of statefulset condition.
@@ -729,9 +663,8 @@ pub struct StatefulSetCondition {
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
-    >,
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -742,20 +675,16 @@ pub struct StatefulSetCondition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// StatefulSetList is a collection of StatefulSets.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetList {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<StatefulSet>,
 }
 /// StatefulSetOrdinals describes the policy used for replica ordinal assignment
 /// in this StatefulSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StatefulSetOrdinals {
     /// start is the number representing the first replica's index. It may be used
@@ -772,7 +701,6 @@ pub struct StatefulSetOrdinals {
 }
 /// StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs
 /// created from the StatefulSet VolumeClaimTemplates.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
     /// WhenDeleted specifies what happens to PVCs created from StatefulSet
@@ -790,7 +718,6 @@ pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
     pub when_scaled: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A StatefulSetSpec is the specification of a StatefulSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetSpec {
     /// replicas is the desired number of replicas of the given Template.
@@ -805,9 +732,8 @@ pub struct StatefulSetSpec {
     /// It must match the pod template's labels.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
     #[prost(message, optional, tag = "2")]
-    pub selector: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
-    >,
+    pub selector:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. Each pod stamped out by the StatefulSet
     /// will fulfill this Template, but have a unique identity from the rest
@@ -827,9 +753,7 @@ pub struct StatefulSetSpec {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub volume_claim_templates: ::prost::alloc::vec::Vec<
-        super::super::core::v1::PersistentVolumeClaim,
-    >,
+    pub volume_claim_templates: ::prost::alloc::vec::Vec<super::super::core::v1::PersistentVolumeClaim>,
     /// serviceName is the name of the service that governs this StatefulSet.
     /// This service must exist before the StatefulSet, and is responsible for
     /// the network identity of the set. Pods get DNS/hostnames that follow the
@@ -870,9 +794,8 @@ pub struct StatefulSetSpec {
     /// StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub persistent_volume_claim_retention_policy: ::core::option::Option<
-        StatefulSetPersistentVolumeClaimRetentionPolicy,
-    >,
+    pub persistent_volume_claim_retention_policy:
+        ::core::option::Option<StatefulSetPersistentVolumeClaimRetentionPolicy>,
     /// ordinals controls the numbering of replica indices in a StatefulSet. The
     /// default ordinals behavior assigns a "0" index to the first replica and
     /// increments the index by one for each additional replica requested. Using
@@ -883,7 +806,6 @@ pub struct StatefulSetSpec {
     pub ordinals: ::core::option::Option<StatefulSetOrdinals>,
 }
 /// StatefulSetStatus represents the current state of a StatefulSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetStatus {
     /// observedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the
@@ -935,7 +857,6 @@ pub struct StatefulSetStatus {
 /// StatefulSetUpdateStrategy indicates the strategy that the StatefulSet
 /// controller will use to perform updates. It includes any additional parameters
 /// necessary to perform the update for the indicated strategy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSetUpdateStrategy {
     /// Type indicates the type of the StatefulSetUpdateStrategy.

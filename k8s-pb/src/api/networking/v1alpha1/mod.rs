@@ -6,16 +6,13 @@
 /// by dots suppressing leading zeros for IPv4 and the representation defined by RFC 5952 for IPv6.
 /// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddress {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the IPAddress.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -23,22 +20,18 @@ pub struct IpAddress {
     pub spec: ::core::option::Option<IpAddressSpec>,
 }
 /// IPAddressList contains a list of IPAddress.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddressList {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IPAddresses.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<IpAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
@@ -48,7 +41,6 @@ pub struct IpAddressSpec {
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
 /// ParentReference describes a reference to a parent object.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParentReference {
     /// Group is the group of the object being referenced.
@@ -70,16 +62,13 @@ pub struct ParentReference {
 }
 /// ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
 /// This range is used to allocate ClusterIPs to Service objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidr {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the ServiceCIDR.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -92,22 +81,18 @@ pub struct ServiceCidr {
     pub status: ::core::option::Option<ServiceCidrStatus>,
 }
 /// ServiceCIDRList contains a list of ServiceCIDR objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidrList {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<
-        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
-    >,
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of ServiceCIDRs.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ServiceCidr>,
 }
 /// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidrSpec {
     /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
@@ -119,7 +104,6 @@ pub struct ServiceCidrSpec {
     pub cidrs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServiceCIDRStatus describes the current state of the ServiceCIDR.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCidrStatus {
     /// conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR.
@@ -130,9 +114,8 @@ pub struct ServiceCidrStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "1")]
-    pub conditions: ::prost::alloc::vec::Vec<
-        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
-    >,
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 
 impl crate::Resource for IpAddress {
@@ -161,7 +144,6 @@ impl crate::HasSpec for IpAddress {
         self.spec.as_mut()
     }
 }
-
 
 impl crate::Resource for ServiceCidr {
     const API_VERSION: &'static str = "networking.k8s.io/v1alpha1";
@@ -204,9 +186,6 @@ impl crate::HasConditions for ServiceCidr {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }
     fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status
-            .as_mut()
-            .and_then(|s| Some(s.conditions.as_mut()))
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }
-
