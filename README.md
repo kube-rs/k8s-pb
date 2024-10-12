@@ -17,6 +17,8 @@ The code generation process consists of 4 steps;
 3. `just codegen` - combine info and build with prost
 4. `cargo fmt`
 
+This can be run in one step with `just generate`.
+
 The [k8s-pb](https://github.com/kube-rs/k8s-pb/tree/main/k8s-pb) crate is generated as a result of this process and then published periodically.
 
 ### just protos
@@ -56,3 +58,4 @@ Runs [main.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/ma
 - [jq](https://stedolan.github.io/jq/)
 - [just](https://github.com/casey/just)
 - [sd](https://github.com/chmln/sd)
+- [protoc](https://github.com/protocolbuffers/protobuf)

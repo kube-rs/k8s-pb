@@ -76,6 +76,8 @@ codegen:
     rm -rf tmp/ && mkdir tmp
     cargo run
 
+generate: swagger protos codegen
+    cargo fmt
+
 [private]
 renovate: swagger protos codegen
-  cargo run rustfmt
