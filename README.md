@@ -46,9 +46,7 @@ Runs [main.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/ma
 
 - The protos are built with [prost](https://github.com/tokio-rs/prost) via `protoc` and provides a [`FileDescriptorSet`](https://docs.rs/prost-types/latest/prost_types/struct.FileDescriptorSet.html) via [`Config::file_descriptor_set_path`](https://docs.rs/prost-build/latest/prost_build/struct.Config.html#method.file_descriptor_set_path).
 - The transformed swagger result json is deserialized through [lib.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/lib.rs) into a `HashMap<String, Resource>` where the string is a GVK string.
-- We loop through all the generated modules and
-  * inject generics from this hashmap via `append_trait_impl`
-  * in memory `rustfmt` before finalising
+- inject generics for each modules in hashmap via `append_trait_impl`
 - Generate a module tree from the seen modules in the loop
 - Attach our implemented traits to the [generated lib.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb/src/lib.rs)
 
@@ -59,3 +57,4 @@ Runs [main.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/ma
 - [just](https://github.com/casey/just)
 - [sd](https://github.com/chmln/sd)
 - [protoc](https://github.com/protocolbuffers/protobuf)
+- [rustmft](https://github.com/rust-lang/rustfmt)
