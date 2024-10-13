@@ -4636,7 +4636,7 @@ pub struct PodStatus {
     /// +patchMergeKey=ip
     /// +listType=atomic
     #[prost(message, repeated, tag = "16")]
-    pub host_i_ps: ::prost::alloc::vec::Vec<HostIp>,
+    pub host_ips: ::prost::alloc::vec::Vec<HostIp>,
     /// podIP address allocated to the pod. Routable at least within the cluster.
     /// Empty if not yet allocated.
     /// +optional
@@ -4651,7 +4651,7 @@ pub struct PodStatus {
     /// +listType=map
     /// +listMapKey=ip
     #[prost(message, repeated, tag = "12")]
-    pub pod_i_ps: ::prost::alloc::vec::Vec<PodIp>,
+    pub pod_ips: ::prost::alloc::vec::Vec<PodIp>,
     /// RFC 3339 date and time at which the object was acknowledged by the Kubelet.
     /// This is before the Kubelet pulled the container image(s) for the pod.
     /// +optional
@@ -6075,7 +6075,7 @@ pub struct ServiceSpec {
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "18")]
-    pub cluster_i_ps: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub cluster_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// type determines how the Service is exposed. Defaults to ClusterIP. Valid
     /// options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
     /// "ClusterIP" allocates a cluster-internal IP address for load-balancing
@@ -6103,7 +6103,7 @@ pub struct ServiceSpec {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "5")]
-    pub external_i_ps: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub external_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Supports "ClientIP" and "None". Used to maintain session affinity.
     /// Enable client IP based session affinity.
     /// Must be ClientIP or None.

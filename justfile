@@ -87,6 +87,10 @@ names:
     rg 'IpAddress' k8s-pb -l | xargs sd 'IpAddress' 'IPAddress'
     rg 'ServiceCidr' k8s-pb -l | xargs sd 'ServiceCidr' 'ServiceCIDR'
     rg 'ClusterCidr' k8s-pb -l | xargs sd 'ClusterCidr' 'ClusterCIDR'
+    rg 'cluster_i_ps' k8s-pb -l | xargs sd 'cluster_i_ps' 'cluster_ips'
+    rg 'external_i_ps' k8s-pb -l | xargs sd 'external_i_ps' 'external_ips'
+    rg 'pod_i_ps' k8s-pb -l | xargs sd 'pod_i_ps' 'pod_ips'
+    rg 'host_i_ps' k8s-pb -l | xargs sd 'host_i_ps' 'host_ips'
     cargo fmt
 
 generate: swagger protos codegen names
