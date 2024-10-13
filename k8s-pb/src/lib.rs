@@ -45,10 +45,11 @@ pub trait Resource {
     #[doc = r" For example, `fn foo<T: k8s_openapi::Resource<Scope = k8s_openapi::ClusterResourceScope>>() { }` can only be called with cluster-scoped resources."]
     type Scope: ResourceScope;
 }
-pub trait HasMetadata {
-    type Metadata;
-    fn metadata(&self) -> Option<&Self::Metadata>;
-    fn metadata_mut(&mut self) -> Option<&mut Self::Metadata>;
+#[doc = r" A trait applied to all Kubernetes resources that have Metadata"]
+pub trait Metadata: Resource {
+    type Ty;
+    fn metadata(&self) -> Option<&Self::Ty>;
+    fn metadata_mut(&mut self) -> Option<&mut Self::Ty>;
 }
 pub trait HasSpec {
     type Spec;

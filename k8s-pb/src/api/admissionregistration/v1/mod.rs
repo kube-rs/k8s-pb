@@ -1124,12 +1124,12 @@ impl crate::Resource for MutatingWebhookConfiguration {
     const URL_PATH_SEGMENT: &'static str = "mutatingwebhookconfigurations";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for MutatingWebhookConfiguration {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for MutatingWebhookConfiguration {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -1142,12 +1142,12 @@ impl crate::Resource for ValidatingAdmissionPolicy {
     const URL_PATH_SEGMENT: &'static str = "validatingadmissionpolicies";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ValidatingAdmissionPolicy {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ValidatingAdmissionPolicy {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -1187,12 +1187,12 @@ impl crate::Resource for ValidatingAdmissionPolicyBinding {
     const URL_PATH_SEGMENT: &'static str = "validatingadmissionpolicybindings";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ValidatingAdmissionPolicyBinding {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ValidatingAdmissionPolicyBinding {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -1214,12 +1214,12 @@ impl crate::Resource for ValidatingWebhookConfiguration {
     const URL_PATH_SEGMENT: &'static str = "validatingwebhookconfigurations";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ValidatingWebhookConfiguration {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ValidatingWebhookConfiguration {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
