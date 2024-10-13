@@ -80,13 +80,13 @@ codegen:
 names:
     #!/usr/bin/env bash
     # Retain original names (prost doesn't let you bypass its renaming)
-    rg 'ApiService' k8s-pb --files-with-matches | xargs sd 'ApiService' 'APIService'
-    rg 'CsiDriver' k8s-pb --files-with-matches | xargs sd 'CsiDriver' 'CSIDriver'
-    rg 'CsiStorage' k8s-pb --files-with-matches | xargs sd 'CsiStorage' 'CSIStorage'
-    rg 'CsiNode' k8s-pb --files-with-matches | xargs sd 'CsiNode' 'CSINode'
-    rg 'IpAddress' k8s-pb --files-with-matches | xargs sd 'IpAddress' 'IPAddress'
-    rg 'ServiceCidr' k8s-pb --files-with-matches | xargs sd 'ServiceCidr' 'ServiceCIDR'
-    rg 'ClusterCidr' k8s-pb --files-with-matches | xargs sd 'ClusterCidr' 'ClusterCIDR'
+    rg 'ApiService' k8s-pb -l | xargs sd 'ApiService' 'APIService'
+    rg 'CsiDriver' k8s-pb -l | xargs sd 'CsiDriver' 'CSIDriver'
+    rg 'CsiStorage' k8s-pb -l | xargs sd 'CsiStorage' 'CSIStorage'
+    rg 'CsiNode' k8s-pb -l | xargs sd 'CsiNode' 'CSINode'
+    rg 'IpAddress' k8s-pb -l | xargs sd 'IpAddress' 'IPAddress'
+    rg 'ServiceCidr' k8s-pb -l | xargs sd 'ServiceCidr' 'ServiceCIDR'
+    rg 'ClusterCidr' k8s-pb -l | xargs sd 'ClusterCidr' 'ClusterCIDR'
     cargo fmt
 
 generate: swagger protos codegen names
