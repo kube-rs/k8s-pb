@@ -76,5 +76,17 @@ codegen:
     rm -rf tmp/ && mkdir tmp
     cargo run
 
-generate: swagger protos codegen
+# Align names and format
+names:
+    #!/usr/bin/env bash
+    # Retain original names (prost doesn't let you bypass its renaming)
+    rg 'ApiService' k8s-pb --files-with-matches | xargs sd 'ApiService' 'APIService'
+    rg 'CsiDriver' k8s-pb --files-with-matches | xargs sd 'CsiDriver' 'CSIDriver'
+    rg 'CsiStorage' k8s-pb --files-with-matches | xargs sd 'CsiStorage' 'CSIStorage'
+    rg 'CsiNode' k8s-pb --files-with-matches | xargs sd 'CsiNode' 'CSINode'
+    rg 'IpAddress' k8s-pb --files-with-matches | xargs sd 'IpAddress' 'IPAddress'
+    rg 'ServiceCidr' k8s-pb --files-with-matches | xargs sd 'ServiceCidr' 'ServiceCidr'
+    rg 'ClusterCidr' k8s-pb --files-with-matches | xargs sd 'ClusterCidr' 'ClusterCidr'
     cargo fmt
+
+generate: swagger protos codegen names

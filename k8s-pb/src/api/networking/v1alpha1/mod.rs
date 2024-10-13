@@ -7,7 +7,7 @@
 /// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IpAddress {
+pub struct IPAddress {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -17,11 +17,11 @@ pub struct IpAddress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<IpAddressSpec>,
+    pub spec: ::core::option::Option<IPAddressSpec>,
 }
 /// IPAddressList contains a list of IPAddress.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IpAddressList {
+pub struct IPAddressList {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -29,11 +29,11 @@ pub struct IpAddressList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IPAddresses.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<IpAddress>,
+    pub items: ::prost::alloc::vec::Vec<IPAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IpAddressSpec {
+pub struct IPAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
     /// +required

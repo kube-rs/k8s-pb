@@ -52,7 +52,7 @@ pub struct HttpIngressRuleValue {
 /// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IpAddress {
+pub struct IPAddress {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -62,11 +62,11 @@ pub struct IpAddress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<IpAddressSpec>,
+    pub spec: ::core::option::Option<IPAddressSpec>,
 }
 /// IPAddressList contains a list of IPAddress.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IpAddressList {
+pub struct IPAddressList {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -74,11 +74,11 @@ pub struct IpAddressList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IPAddresses.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<IpAddress>,
+    pub items: ::prost::alloc::vec::Vec<IPAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IpAddressSpec {
+pub struct IPAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
     /// +required
@@ -457,7 +457,7 @@ pub struct ServiceCidrStatus {
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
 }
 
-impl crate::Resource for IpAddress {
+impl crate::Resource for IPAddress {
     const API_VERSION: &'static str = "networking.k8s.io/v1beta1";
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1beta1";
@@ -465,7 +465,7 @@ impl crate::Resource for IpAddress {
     const URL_PATH_SEGMENT: &'static str = "ipaddresses";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::Metadata for IpAddress {
+impl crate::Metadata for IPAddress {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
     fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
@@ -474,7 +474,7 @@ impl crate::Metadata for IpAddress {
         self.metadata.as_mut()
     }
 }
-impl crate::HasSpec for IpAddress {
+impl crate::HasSpec for IPAddress {
     type Spec = crate::api::networking::v1beta1::IPAddressSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
@@ -484,7 +484,7 @@ impl crate::HasSpec for IpAddress {
     }
 }
 
-impl crate::Resource for ServiceCidr {
+impl crate::Resource for ServiceCIDR {
     const API_VERSION: &'static str = "networking.k8s.io/v1beta1";
     const GROUP: &'static str = "networking.k8s.io";
     const VERSION: &'static str = "v1beta1";
@@ -492,7 +492,7 @@ impl crate::Resource for ServiceCidr {
     const URL_PATH_SEGMENT: &'static str = "servicecidrs";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::Metadata for ServiceCidr {
+impl crate::Metadata for ServiceCIDR {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
     fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
@@ -501,7 +501,7 @@ impl crate::Metadata for ServiceCidr {
         self.metadata.as_mut()
     }
 }
-impl crate::HasSpec for ServiceCidr {
+impl crate::HasSpec for ServiceCIDR {
     type Spec = crate::api::networking::v1beta1::ServiceCIDRSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
@@ -510,7 +510,7 @@ impl crate::HasSpec for ServiceCidr {
         self.spec.as_mut()
     }
 }
-impl crate::HasStatus for ServiceCidr {
+impl crate::HasStatus for ServiceCIDR {
     type Status = crate::api::networking::v1beta1::ServiceCIDRStatus;
     fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
         self.status.as_ref()
@@ -519,7 +519,7 @@ impl crate::HasStatus for ServiceCidr {
         self.status.as_mut()
     }
 }
-impl crate::HasConditions for ServiceCidr {
+impl crate::HasConditions for ServiceCIDR {
     type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
     fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
         self.status.as_ref().map(|s| s.conditions.as_slice())

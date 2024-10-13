@@ -196,10 +196,8 @@ fn append_trait_def(lib_rs: &mut File) {
 }
 
 fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource) {
-    use heck::ToUpperCamelCase;
     // Convert to match prost
-    let type_name = message_name.to_upper_camel_case();
-    let type_name = format_ident!("{}", type_name);
+    let type_name = format_ident!("{}", message_name);
 
     let api_version = &resource.api_version;
     let group = &resource.group;

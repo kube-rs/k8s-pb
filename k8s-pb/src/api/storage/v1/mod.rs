@@ -5,7 +5,7 @@
 /// Kubelet uses this object to determine whether pod information needs to be passed on mount.
 /// CSIDriver objects are non-namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiDriver {
+pub struct CSIDriver {
     /// Standard object metadata.
     /// metadata.Name indicates the name of the CSI driver that this object
     /// refers to; it MUST be the same name returned by the CSI GetPluginName()
@@ -18,11 +18,11 @@ pub struct CsiDriver {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents the specification of the CSI Driver.
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<CsiDriverSpec>,
+    pub spec: ::core::option::Option<CSIDriverSpec>,
 }
 /// CSIDriverList is a collection of CSIDriver objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiDriverList {
+pub struct CSIDriverList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -30,11 +30,11 @@ pub struct CsiDriverList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSIDriver
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CsiDriver>,
+    pub items: ::prost::alloc::vec::Vec<CSIDriver>,
 }
 /// CSIDriverSpec is the specification of a CSIDriver.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiDriverSpec {
+pub struct CSIDriverSpec {
     /// attachRequired indicates this CSI volume driver requires an attach
     /// operation (because it implements the CSI ControllerPublishVolume()
     /// method), and that the Kubernetes attach detach controller should call
@@ -196,18 +196,18 @@ pub struct CsiDriverSpec {
 /// enough that it doesn't create this object.
 /// CSINode has an OwnerReference that points to the corresponding node object.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiNode {
+pub struct CSINode {
     /// Standard object's metadata.
     /// metadata.name must be the Kubernetes node name.
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the specification of CSINode
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<CsiNodeSpec>,
+    pub spec: ::core::option::Option<CSINodeSpec>,
 }
 /// CSINodeDriver holds information about the specification of one CSI driver installed on a node
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiNodeDriver {
+pub struct CSINodeDriver {
     /// name represents the name of the CSI driver that this object refers to.
     /// This MUST be the same name returned by the CSI GetPluginName() call for
     /// that driver.
@@ -246,7 +246,7 @@ pub struct CsiNodeDriver {
 }
 /// CSINodeList is a collection of CSINode objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiNodeList {
+pub struct CSINodeList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -254,11 +254,11 @@ pub struct CsiNodeList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSINode
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CsiNode>,
+    pub items: ::prost::alloc::vec::Vec<CSINode>,
 }
 /// CSINodeSpec holds information about the specification of all CSI drivers installed on a node
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiNodeSpec {
+pub struct CSINodeSpec {
     /// drivers is a list of information of all CSI Drivers existing on a node.
     /// If all drivers in the list are uninstalled, this can become empty.
     /// +patchMergeKey=name
@@ -266,7 +266,7 @@ pub struct CsiNodeSpec {
     /// +listType=map
     /// +listMapKey=name
     #[prost(message, repeated, tag = "1")]
-    pub drivers: ::prost::alloc::vec::Vec<CsiNodeDriver>,
+    pub drivers: ::prost::alloc::vec::Vec<CSINodeDriver>,
 }
 /// CSIStorageCapacity stores the result of one CSI GetCapacity call.
 /// For a given StorageClass, this describes the available capacity in a
@@ -293,7 +293,7 @@ pub struct CsiNodeSpec {
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiStorageCapacity {
+pub struct CSIStorageCapacity {
     /// Standard object's metadata.
     /// The name has no particular meaning. It must be a DNS subdomain (dots allowed, 253 characters).
     /// To ensure that there are no conflicts with other CSI drivers on the cluster,
@@ -354,7 +354,7 @@ pub struct CsiStorageCapacity {
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiStorageCapacityList {
+pub struct CSIStorageCapacityList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -362,7 +362,7 @@ pub struct CsiStorageCapacityList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSIStorageCapacity objects.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CsiStorageCapacity>,
+    pub items: ::prost::alloc::vec::Vec<CSIStorageCapacity>,
 }
 /// StorageClass describes the parameters for a class of storage for
 /// which PersistentVolumes can be dynamically provisioned.
@@ -566,7 +566,7 @@ pub struct VolumeNodeResources {
     pub count: ::core::option::Option<i32>,
 }
 
-impl crate::Resource for CsiDriver {
+impl crate::Resource for CSIDriver {
     const API_VERSION: &'static str = "storage.k8s.io/v1";
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
@@ -574,7 +574,7 @@ impl crate::Resource for CsiDriver {
     const URL_PATH_SEGMENT: &'static str = "csidrivers";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::Metadata for CsiDriver {
+impl crate::Metadata for CSIDriver {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
     fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
@@ -583,7 +583,7 @@ impl crate::Metadata for CsiDriver {
         self.metadata.as_mut()
     }
 }
-impl crate::HasSpec for CsiDriver {
+impl crate::HasSpec for CSIDriver {
     type Spec = crate::api::storage::v1::CSIDriverSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
@@ -593,7 +593,7 @@ impl crate::HasSpec for CsiDriver {
     }
 }
 
-impl crate::Resource for CsiNode {
+impl crate::Resource for CSINode {
     const API_VERSION: &'static str = "storage.k8s.io/v1";
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
@@ -601,7 +601,7 @@ impl crate::Resource for CsiNode {
     const URL_PATH_SEGMENT: &'static str = "csinodes";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::Metadata for CsiNode {
+impl crate::Metadata for CSINode {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
     fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
@@ -610,7 +610,7 @@ impl crate::Metadata for CsiNode {
         self.metadata.as_mut()
     }
 }
-impl crate::HasSpec for CsiNode {
+impl crate::HasSpec for CSINode {
     type Spec = crate::api::storage::v1::CSINodeSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
@@ -620,7 +620,7 @@ impl crate::HasSpec for CsiNode {
     }
 }
 
-impl crate::Resource for CsiStorageCapacity {
+impl crate::Resource for CSIStorageCapacity {
     const API_VERSION: &'static str = "storage.k8s.io/v1";
     const GROUP: &'static str = "storage.k8s.io";
     const VERSION: &'static str = "v1";
@@ -628,7 +628,7 @@ impl crate::Resource for CsiStorageCapacity {
     const URL_PATH_SEGMENT: &'static str = "csistoragecapacities";
     type Scope = crate::NamespaceResourceScope;
 }
-impl crate::Metadata for CsiStorageCapacity {
+impl crate::Metadata for CSIStorageCapacity {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
     fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
