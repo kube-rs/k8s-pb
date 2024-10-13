@@ -20,15 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        with:
-          override: true
-          toolchain: stable
-          profile: minimal
-      # Smart caching for Rust projects.
-      # Includes workaround for macos cache corruption.
-      # - https://github.com/rust-lang/cargo/issues/8603
-      # - https://github.com/actions/cache/issues/403
+      - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
 
       # Real CI work starts here
@@ -45,20 +37,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Dependencies
       - uses: extractions/setup-just@v2
-      - uses: dtolnay/rust-toolchain@stable
-      # Smart caching for Rust projects.
-      # Includes workaround for macos cache corruption.
-      # - https://github.com/rust-lang/cargo/issues/8603
-      # - https://github.com/actions/cache/issues/403
-      - uses: Swatinem/rust-cache@v2
-      - uses: extractions/setup-just@v2
-      - run: sudo apt-get install -y ripgrep
-      - run: |-
-          curl -sSL https://github.com/sharkdp/fd/releases/download/v8.7.1/fd-v8.7.1-i686-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
-      - run: |-
-          curl -sSL https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin --strip-components=1
       - uses: arduino/setup-protoc@v3
+      - name: install fd, sd, ripgrep
+        run: |
+          sudo apt-get install -y ripgrep
+          export FD_VER=10.2.0
+          export SD_VER=1.0.0
+          curl -sSL "https://github.com/sharkdp/fd/releases/download/v${FD_VER}/fd-v${FD_VER}-x86_64-unknown-linux-musl.tar.gz" \
+            | tar xz --strip-components=1 -C /usr/local/bin/
+          curl -sSL "https://github.com/chmln/sd/releases/download/v${SD_VER}/sd-v${SD_VER}-x86_64-unknown-linux-musl.tar.gz" \
+          | tar xz --strip-components=1 -C /usr/local/bin/
+      # Rust
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      # Run codegen step-by-step
       - run: just protos
       - run: just swagger
       - run: just codegen
