@@ -15,7 +15,7 @@ The code generation process consists of 4 steps;
 1. `just protos` - download and patch protobufs
 2. `just swagger` - download and transform openapi schema
 3. `just codegen` - combine info and build with prost
-4. `cargo fmt`
+4. `just names` - case alignment and `cargo fmt`
 
 This can be run in one step with `just generate`.
 
