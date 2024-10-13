@@ -150,7 +150,7 @@ impl crate::Metadata for ApiService {
     }
 }
 impl crate::HasSpec for ApiService {
-    type Spec = crate::kube_aggregator::pkg::apis::apiregistration::v1::ApiServiceSpec;
+    type Spec = crate::kube_aggregator::pkg::apis::apiregistration::v1::APIServiceSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -159,7 +159,7 @@ impl crate::HasSpec for ApiService {
     }
 }
 impl crate::HasStatus for ApiService {
-    type Status = crate::kube_aggregator::pkg::apis::apiregistration::v1::ApiServiceStatus;
+    type Status = crate::kube_aggregator::pkg::apis::apiregistration::v1::APIServiceStatus;
     fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
         self.status.as_ref()
     }
@@ -168,7 +168,7 @@ impl crate::HasStatus for ApiService {
     }
 }
 impl crate::HasConditions for ApiService {
-    type Condition = crate::kube_aggregator::pkg::apis::apiregistration::v1::ApiServiceCondition;
+    type Condition = crate::kube_aggregator::pkg::apis::apiregistration::v1::APIServiceCondition;
     fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
         self.status.as_ref().map(|s| s.conditions.as_slice())
     }

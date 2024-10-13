@@ -475,7 +475,7 @@ impl crate::Metadata for IpAddress {
     }
 }
 impl crate::HasSpec for IpAddress {
-    type Spec = crate::api::networking::v1beta1::IpAddressSpec;
+    type Spec = crate::api::networking::v1beta1::IPAddressSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -502,7 +502,7 @@ impl crate::Metadata for ServiceCidr {
     }
 }
 impl crate::HasSpec for ServiceCidr {
-    type Spec = crate::api::networking::v1beta1::ServiceCidrSpec;
+    type Spec = crate::api::networking::v1beta1::ServiceCIDRSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -511,7 +511,7 @@ impl crate::HasSpec for ServiceCidr {
     }
 }
 impl crate::HasStatus for ServiceCidr {
-    type Status = crate::api::networking::v1beta1::ServiceCidrStatus;
+    type Status = crate::api::networking::v1beta1::ServiceCIDRStatus;
     fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
         self.status.as_ref()
     }

@@ -584,7 +584,7 @@ impl crate::Metadata for CsiDriver {
     }
 }
 impl crate::HasSpec for CsiDriver {
-    type Spec = crate::api::storage::v1::CsiDriverSpec;
+    type Spec = crate::api::storage::v1::CSIDriverSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -611,7 +611,7 @@ impl crate::Metadata for CsiNode {
     }
 }
 impl crate::HasSpec for CsiNode {
-    type Spec = crate::api::storage::v1::CsiNodeSpec;
+    type Spec = crate::api::storage::v1::CSINodeSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
