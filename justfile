@@ -85,8 +85,8 @@ names:
     rg 'CsiStorage' k8s-pb --files-with-matches | xargs sd 'CsiStorage' 'CSIStorage'
     rg 'CsiNode' k8s-pb --files-with-matches | xargs sd 'CsiNode' 'CSINode'
     rg 'IpAddress' k8s-pb --files-with-matches | xargs sd 'IpAddress' 'IPAddress'
-    rg 'ServiceCidr' k8s-pb --files-with-matches | xargs sd 'ServiceCidr' 'ServiceCidr'
-    rg 'ClusterCidr' k8s-pb --files-with-matches | xargs sd 'ClusterCidr' 'ClusterCidr'
+    rg 'ServiceCidr' k8s-pb --files-with-matches | xargs sd 'ServiceCidr' 'ServiceCIDR'
+    rg 'ClusterCidr' k8s-pb --files-with-matches | xargs sd 'ClusterCidr' 'ClusterCIDR'
     cargo fmt
 
 generate: swagger protos codegen names
