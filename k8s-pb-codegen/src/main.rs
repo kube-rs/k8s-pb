@@ -196,10 +196,8 @@ fn append_trait_def(lib_rs: &mut File) {
 }
 
 fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource) {
-    use heck::ToUpperCamelCase;
     // Convert to match prost
-    let type_name = message_name.to_upper_camel_case();
-    let type_name = format_ident!("{}", type_name);
+    let type_name = format_ident!("{}", message_name);
 
     let api_version = &resource.api_version;
     let group = &resource.group;
@@ -241,14 +239,6 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
         tokens
     };
     let tokens = if let Some(spec) = &resource.spec {
-        // HACK Prost changes message name `APIService` to `ApiService`, and `transformed.json` uses the original name.
-        let spec = spec
-            .replace("APIService", "ApiService")
-            .replace("CSIDriver", "CsiDriver")
-            .replace("ClusterCIDR", "ClusterCidr")
-            .replace("ServiceCIDR", "ServiceCidr")
-            .replace("IPAddress", "IpAddress")
-            .replace("CSINode", "CsiNode");
         let spec = spec.split("::").map(|m| format_ident!("{}", m));
         quote! {
             #tokens
@@ -268,10 +258,6 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
         tokens
     };
     let tokens = if let Some(status) = &resource.status {
-        // HACK Prost changes message name `APIService` to `ApiService`, and `transformed.json` uses the original name.
-        let status = status
-            .replace("APIService", "ApiService")
-            .replace("ServiceCIDR", "ServiceCidr");
         let status = status.split("::").map(|m| format_ident!("{}", m));
         quote! {
             #tokens
@@ -292,8 +278,6 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
     };
 
     let tokens = if let Some(condition) = &resource.condition {
-        // HACK Prost changes message name `APIService` to `ApiService`, and `transformed.json` uses the original name.
-        let condition = condition.replace("APIService", "ApiService");
         let condition = condition.split("::").map(|m| format_ident!("{}", m));
         quote! {
             #tokens
