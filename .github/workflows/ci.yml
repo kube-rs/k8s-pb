@@ -61,6 +61,7 @@ jobs:
       - run: just protos
       - run: just swagger
       - run: just codegen
+      - run: just names
       - run: cargo fmt
       - name: Ensure generated output is committed
         run: |
