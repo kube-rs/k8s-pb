@@ -535,19 +535,20 @@ pub struct JsonSchemaProps {
     pub any_of: ::prost::alloc::vec::Vec<JsonSchemaProps>,
     #[prost(message, optional, boxed, tag = "28")]
     pub not: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaProps>>,
-    #[prost(map = "string, message", tag = "29")]
-    pub properties: ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaProps>,
+    #[prost(btree_map = "string, message", tag = "29")]
+    pub properties: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, JsonSchemaProps>,
     #[prost(message, optional, boxed, tag = "30")]
     pub additional_properties: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaPropsOrBool>>,
-    #[prost(map = "string, message", tag = "31")]
-    pub pattern_properties: ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaProps>,
-    #[prost(map = "string, message", tag = "32")]
+    #[prost(btree_map = "string, message", tag = "31")]
+    pub pattern_properties:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, JsonSchemaProps>,
+    #[prost(btree_map = "string, message", tag = "32")]
     pub dependencies:
-        ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaPropsOrStringArray>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, JsonSchemaPropsOrStringArray>,
     #[prost(message, optional, boxed, tag = "33")]
     pub additional_items: ::core::option::Option<::prost::alloc::boxed::Box<JsonSchemaPropsOrBool>>,
-    #[prost(map = "string, message", tag = "34")]
-    pub definitions: ::std::collections::HashMap<::prost::alloc::string::String, JsonSchemaProps>,
+    #[prost(btree_map = "string, message", tag = "34")]
+    pub definitions: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, JsonSchemaProps>,
     #[prost(message, optional, tag = "35")]
     pub external_docs: ::core::option::Option<ExternalDocumentation>,
     #[prost(message, optional, tag = "36")]

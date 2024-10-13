@@ -93,9 +93,9 @@ pub struct CarpSpec {
     /// Selector which must match a node's labels for the carp to be scheduled on that node.
     /// More info: <http://kubernetes.io/docs/user-guide/node-selection/README>
     /// +optional
-    #[prost(map = "string, string", tag = "7")]
+    #[prost(btree_map = "string, string", tag = "7")]
     pub node_selector:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// ServiceAccountName is the name of the ServiceAccount to use to run this carp.
     /// More info: <https://kubernetes.io/docs/concepts/security/service-accounts/>
     /// +optional

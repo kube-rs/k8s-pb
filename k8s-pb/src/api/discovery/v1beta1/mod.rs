@@ -41,8 +41,9 @@ pub struct Endpoint {
     ///    endpoint is located. This should match the corresponding node label.
     /// This field is deprecated and will be removed in future api versions.
     /// +optional
-    #[prost(map = "string, string", tag = "5")]
-    pub topology: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(btree_map = "string, string", tag = "5")]
+    pub topology:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// nodeName represents the name of the Node hosting this endpoint. This can
     /// be used to determine endpoints local to a Node.
     /// +optional

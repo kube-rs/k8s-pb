@@ -35,9 +35,9 @@ pub struct ImageReviewSpec {
     /// It only includes keys which match the pattern `*.image-policy.k8s.io/*`.
     /// It is up to each webhook backend to determine how to interpret these annotations, if at all.
     /// +optional
-    #[prost(map = "string, string", tag = "2")]
+    #[prost(btree_map = "string, string", tag = "2")]
     pub annotations:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Namespace is the namespace the pod is being created in.
     /// +optional
     #[prost(string, optional, tag = "3")]
@@ -60,7 +60,7 @@ pub struct ImageReviewStatus {
     /// be prefix-less (i.e., the admission controller will add an
     /// appropriate prefix).
     /// +optional
-    #[prost(map = "string, string", tag = "3")]
+    #[prost(btree_map = "string, string", tag = "3")]
     pub audit_annotations:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }

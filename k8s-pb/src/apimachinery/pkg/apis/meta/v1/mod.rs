@@ -436,9 +436,9 @@ pub struct LabelSelector {
     /// map is equivalent to an element of matchExpressions, whose key field is "key", the
     /// operator is "In", and the values array contains only "value". The requirements are ANDed.
     /// +optional
-    #[prost(map = "string, string", tag = "1")]
+    #[prost(btree_map = "string, string", tag = "1")]
     pub match_labels:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// matchExpressions is a list of label selector requirements. The requirements are ANDed.
     /// +optional
     /// +listType=atomic
@@ -804,16 +804,17 @@ pub struct ObjectMeta {
     /// and services.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels>
     /// +optional
-    #[prost(map = "string, string", tag = "11")]
-    pub labels: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(btree_map = "string, string", tag = "11")]
+    pub labels:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// Annotations is an unstructured key value map stored with a resource that may be
     /// set by external tools to store and retrieve arbitrary metadata. They are not
     /// queryable and should be preserved when modifying objects.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations>
     /// +optional
-    #[prost(map = "string, string", tag = "12")]
+    #[prost(btree_map = "string, string", tag = "12")]
     pub annotations:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// List of objects depended by this object. If ALL objects in the list have
     /// been deleted, this object will be garbage collected. If this object is managed by a controller,
     /// then an entry in this list will point to this controller, with the controller field set to true.

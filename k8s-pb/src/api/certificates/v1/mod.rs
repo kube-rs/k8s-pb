@@ -169,8 +169,8 @@ pub struct CertificateSigningRequestSpec {
     /// extra contains extra attributes of the user that created the CertificateSigningRequest.
     /// Populated by the API server on creation and immutable.
     /// +optional
-    #[prost(map = "string, message", tag = "6")]
-    pub extra: ::std::collections::HashMap<::prost::alloc::string::String, ExtraValue>,
+    #[prost(btree_map = "string, message", tag = "6")]
+    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
 }
 /// CertificateSigningRequestStatus contains conditions used to indicate
 /// approved/denied/failed status of the request, and the issued certificate.

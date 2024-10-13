@@ -615,8 +615,9 @@ pub struct ScaleStatus {
     /// selector is a label query over pods that should match the replicas count. More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
     /// +optional
     /// +mapType=atomic
-    #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(btree_map = "string, string", tag = "2")]
+    pub selector:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// label selector for pods that should match the replicas count. This is a serializated
     /// version of both map-based and more expressive set-based selectors. This is done to
     /// avoid introspection in the clients. The string will be in the same format as the

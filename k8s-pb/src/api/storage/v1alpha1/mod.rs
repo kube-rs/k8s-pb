@@ -177,9 +177,9 @@ pub struct VolumeAttachmentStatus {
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
     /// +optional
-    #[prost(map = "string, string", tag = "2")]
+    #[prost(btree_map = "string, string", tag = "2")]
     pub attachment_metadata:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// attachError represents the last error encountered during attach operation, if any.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
@@ -220,9 +220,9 @@ pub struct VolumeAttributesClass {
     /// a cumulative max size of 256K. If the CSI driver rejects invalid parameters,
     /// the target PersistentVolumeClaim will be set to an "Infeasible" state in the
     /// modifyVolumeStatus field.
-    #[prost(map = "string, string", tag = "3")]
+    #[prost(btree_map = "string, string", tag = "3")]
     pub parameters:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
 /// VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
 #[derive(Clone, PartialEq, ::prost::Message)]

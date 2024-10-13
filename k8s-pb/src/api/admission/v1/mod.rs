@@ -120,9 +120,9 @@ pub struct AdmissionResponse {
     /// admission webhook name (e.g. imagepolicy.example.com/error=image-blacklisted). AuditAnnotations will be provided by
     /// the admission webhook to add additional context to the audit log for this request.
     /// +optional
-    #[prost(map = "string, string", tag = "6")]
+    #[prost(btree_map = "string, string", tag = "6")]
     pub audit_annotations:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// warnings is a list of warning messages to return to the requesting API client.
     /// Warning messages describe a problem the client making the API request should correct or be aware of.
     /// Limit warnings to 120 characters if possible.
