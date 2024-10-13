@@ -121,8 +121,8 @@ pub struct PodDisruptionBudgetStatus {
     /// If everything goes smooth this map should be empty for the most of the time.
     /// Large number of entries in the map may indicate problems with pod deletions.
     /// +optional
-    #[prost(map = "string, message", tag = "2")]
-    pub disrupted_pods: ::std::collections::HashMap<
+    #[prost(btree_map = "string, message", tag = "2")]
+    pub disrupted_pods: ::prost::alloc::collections::BTreeMap<
         ::prost::alloc::string::String,
         super::super::super::apimachinery::pkg::apis::meta::v1::Time,
     >,

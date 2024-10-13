@@ -116,8 +116,8 @@ pub struct UserInfo {
     pub groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Any additional information provided by the authenticator.
     /// +optional
-    #[prost(map = "string, message", tag = "4")]
-    pub extra: ::std::collections::HashMap<::prost::alloc::string::String, ExtraValue>,
+    #[prost(btree_map = "string, message", tag = "4")]
+    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
 }
 
 impl crate::Resource for SelfSubjectReview {

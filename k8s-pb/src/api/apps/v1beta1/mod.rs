@@ -97,9 +97,9 @@ pub struct DeploymentRollback {
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// The annotations to be updated to a deployment
     /// +optional
-    #[prost(map = "string, string", tag = "2")]
+    #[prost(btree_map = "string, string", tag = "2")]
     pub updated_annotations:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// The config of this deployment rollback.
     #[prost(message, optional, tag = "3")]
     pub rollback_to: ::core::option::Option<RollbackConfig>,
@@ -309,8 +309,9 @@ pub struct ScaleStatus {
     pub replicas: ::core::option::Option<i32>,
     /// selector is a label query over pods that should match the replicas count. More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
     /// +optional
-    #[prost(map = "string, string", tag = "2")]
-    pub selector: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    #[prost(btree_map = "string, string", tag = "2")]
+    pub selector:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// targetSelector is the label selector for pods that should match the replicas count. This is a serializated
     /// version of both map-based and more expressive set-based selectors. This is done to
     /// avoid introspection in the clients. The string will be in the same format as the

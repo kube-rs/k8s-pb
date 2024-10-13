@@ -8,9 +8,9 @@ pub struct ExternalMetricValue {
     #[prost(string, optional, tag = "1")]
     pub metric_name: ::core::option::Option<::prost::alloc::string::String>,
     /// a set of labels that identify a single time series for the metric
-    #[prost(map = "string, string", tag = "2")]
+    #[prost(btree_map = "string, string", tag = "2")]
     pub metric_labels:
-        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// indicates the time at which the metrics were produced
     #[prost(message, optional, tag = "3")]
     pub timestamp:

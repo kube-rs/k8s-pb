@@ -289,8 +289,8 @@ pub struct SubjectAccessReviewSpec {
     /// Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer
     /// it needs a reflection here.
     /// +optional
-    #[prost(map = "string, message", tag = "5")]
-    pub extra: ::std::collections::HashMap<::prost::alloc::string::String, ExtraValue>,
+    #[prost(btree_map = "string, message", tag = "5")]
+    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
     /// UID information about the requesting user.
     /// +optional
     #[prost(string, optional, tag = "6")]

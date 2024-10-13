@@ -6,8 +6,8 @@ pub struct ContainerMetrics {
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// The memory usage is the memory working set.
-    #[prost(map = "string, message", tag = "2")]
-    pub usage: ::std::collections::HashMap<
+    #[prost(btree_map = "string, message", tag = "2")]
+    pub usage: ::prost::alloc::collections::BTreeMap<
         ::prost::alloc::string::String,
         super::super::super::super::super::apimachinery::pkg::api::resource::Quantity,
     >,
@@ -32,8 +32,8 @@ pub struct NodeMetrics {
         super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Duration,
     >,
     /// The memory usage is the memory working set.
-    #[prost(map = "string, message", tag = "4")]
-    pub usage: ::std::collections::HashMap<
+    #[prost(btree_map = "string, message", tag = "4")]
+    pub usage: ::prost::alloc::collections::BTreeMap<
         ::prost::alloc::string::String,
         super::super::super::super::super::apimachinery::pkg::api::resource::Quantity,
     >,

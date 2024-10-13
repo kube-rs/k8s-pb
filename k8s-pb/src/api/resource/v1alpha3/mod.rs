@@ -39,16 +39,16 @@ pub struct BasicDevice {
     /// The maximum number of attributes and capacities combined is 32.
     ///
     /// +optional
-    #[prost(map = "string, message", tag = "1")]
-    pub attributes: ::std::collections::HashMap<::prost::alloc::string::String, DeviceAttribute>,
+    #[prost(btree_map = "string, message", tag = "1")]
+    pub attributes: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceAttribute>,
     /// Capacity defines the set of capacities for this device.
     /// The name of each capacity must be unique in that set.
     ///
     /// The maximum number of attributes and capacities combined is 32.
     ///
     /// +optional
-    #[prost(map = "string, message", tag = "2")]
-    pub capacity: ::std::collections::HashMap<
+    #[prost(btree_map = "string, message", tag = "2")]
+    pub capacity: ::prost::alloc::collections::BTreeMap<
         ::prost::alloc::string::String,
         super::super::super::apimachinery::pkg::api::resource::Quantity,
     >,
