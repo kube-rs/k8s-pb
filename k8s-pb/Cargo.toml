@@ -1,6 +1,6 @@
 [package]
 name = "k8s-pb"
-version = "0.4.0"
+version = "0.5.0"
 authors = [
   "clux <sszynrae@gmail.com>",
   "kazk <kazk.dev@gmail.com>",
