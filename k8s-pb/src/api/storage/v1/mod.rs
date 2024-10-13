@@ -574,12 +574,12 @@ impl crate::Resource for CsiDriver {
     const URL_PATH_SEGMENT: &'static str = "csidrivers";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for CsiDriver {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for CsiDriver {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -601,12 +601,12 @@ impl crate::Resource for CsiNode {
     const URL_PATH_SEGMENT: &'static str = "csinodes";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for CsiNode {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for CsiNode {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -628,12 +628,12 @@ impl crate::Resource for CsiStorageCapacity {
     const URL_PATH_SEGMENT: &'static str = "csistoragecapacities";
     type Scope = crate::NamespaceResourceScope;
 }
-impl crate::HasMetadata for CsiStorageCapacity {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for CsiStorageCapacity {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -646,12 +646,12 @@ impl crate::Resource for StorageClass {
     const URL_PATH_SEGMENT: &'static str = "storageclasses";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for StorageClass {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for StorageClass {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -664,12 +664,12 @@ impl crate::Resource for VolumeAttachment {
     const URL_PATH_SEGMENT: &'static str = "volumeattachments";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for VolumeAttachment {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for VolumeAttachment {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }

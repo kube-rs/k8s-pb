@@ -140,12 +140,12 @@ impl crate::Resource for ApiService {
     const URL_PATH_SEGMENT: &'static str = "apiservices";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ApiService {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ApiService {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }

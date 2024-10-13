@@ -204,12 +204,12 @@ impl crate::Resource for ClusterRole {
     const URL_PATH_SEGMENT: &'static str = "clusterroles";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ClusterRole {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ClusterRole {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -222,12 +222,12 @@ impl crate::Resource for ClusterRoleBinding {
     const URL_PATH_SEGMENT: &'static str = "clusterrolebindings";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ClusterRoleBinding {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ClusterRoleBinding {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -240,12 +240,12 @@ impl crate::Resource for Role {
     const URL_PATH_SEGMENT: &'static str = "roles";
     type Scope = crate::NamespaceResourceScope;
 }
-impl crate::HasMetadata for Role {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for Role {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -258,12 +258,12 @@ impl crate::Resource for RoleBinding {
     const URL_PATH_SEGMENT: &'static str = "rolebindings";
     type Scope = crate::NamespaceResourceScope;
 }
-impl crate::HasMetadata for RoleBinding {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for RoleBinding {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }

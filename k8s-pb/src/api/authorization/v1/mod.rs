@@ -356,12 +356,12 @@ impl crate::Resource for LocalSubjectAccessReview {
     const URL_PATH_SEGMENT: &'static str = "localsubjectaccessreviews";
     type Scope = crate::NamespaceResourceScope;
 }
-impl crate::HasMetadata for LocalSubjectAccessReview {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for LocalSubjectAccessReview {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -392,12 +392,12 @@ impl crate::Resource for SelfSubjectAccessReview {
     const URL_PATH_SEGMENT: &'static str = "selfsubjectaccessreviews";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for SelfSubjectAccessReview {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for SelfSubjectAccessReview {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -428,12 +428,12 @@ impl crate::Resource for SelfSubjectRulesReview {
     const URL_PATH_SEGMENT: &'static str = "selfsubjectrulesreviews";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for SelfSubjectRulesReview {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for SelfSubjectRulesReview {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -464,12 +464,12 @@ impl crate::Resource for SubjectAccessReview {
     const URL_PATH_SEGMENT: &'static str = "subjectaccessreviews";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for SubjectAccessReview {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for SubjectAccessReview {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }

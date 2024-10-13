@@ -170,10 +170,11 @@ fn append_trait_def(lib_rs: &mut File) {
             type Scope: ResourceScope;
         }
 
-        pub trait HasMetadata {
-            type Metadata;
-            fn metadata(&self) -> Option<&Self::Metadata>;
-            fn metadata_mut(&mut self) -> Option<&mut Self::Metadata>;
+        /// A trait applied to all Kubernetes resources that have Metadata
+        pub trait Metadata: Resource {
+            type Ty;
+            fn metadata(&self) -> Option<&Self::Ty>;
+            fn metadata_mut(&mut self) -> Option<&mut Self::Ty>;
         }
         pub trait HasSpec {
             type Spec;
@@ -226,13 +227,13 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
         quote! {
             #tokens
 
-            impl crate::HasMetadata for #type_name {
-                type Metadata = crate::#(#metadata)::*;
+            impl crate::Metadata for #type_name {
+                type Ty = crate::#(#metadata)::*;
 
-                fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+                fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
                     self.metadata.as_ref()
                 }
-                fn metadata_mut(&mut self) -> Option<&mut<Self as crate::HasMetadata>::Metadata> {
+                fn metadata_mut(&mut self) -> Option<&mut<Self as crate::Metadata>::Ty> {
                     self.metadata.as_mut()
                 }
             }

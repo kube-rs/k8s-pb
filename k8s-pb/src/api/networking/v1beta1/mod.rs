@@ -465,12 +465,12 @@ impl crate::Resource for IpAddress {
     const URL_PATH_SEGMENT: &'static str = "ipaddresses";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for IpAddress {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for IpAddress {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
@@ -492,12 +492,12 @@ impl crate::Resource for ServiceCidr {
     const URL_PATH_SEGMENT: &'static str = "servicecidrs";
     type Scope = crate::ClusterResourceScope;
 }
-impl crate::HasMetadata for ServiceCidr {
-    type Metadata = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::HasMetadata>::Metadata> {
+impl crate::Metadata for ServiceCidr {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
         self.metadata.as_ref()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::HasMetadata>::Metadata> {
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
         self.metadata.as_mut()
     }
 }
