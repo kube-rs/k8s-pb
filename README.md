@@ -56,5 +56,6 @@ Runs [main.rs](https://github.com/kube-rs/k8s-pb/blob/main/k8s-pb-codegen/src/ma
 - [jq](https://stedolan.github.io/jq/)
 - [just](https://github.com/casey/just)
 - [sd](https://github.com/chmln/sd)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [protoc](https://github.com/protocolbuffers/protobuf)
 - [rustmft](https://github.com/rust-lang/rustfmt)
