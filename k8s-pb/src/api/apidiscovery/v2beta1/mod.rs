@@ -3,7 +3,7 @@
 /// It contains a list of APIVersionDiscovery that holds a list of APIResourceDiscovery types served for a version.
 /// Versions are in descending order of preference, with the first version being the preferred entry.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroupDiscovery {
+pub struct APIGroupDiscovery {
     /// Standard object's metadata.
     /// The only field completed will be name. For instance, resourceVersion will be empty.
     /// name is the name of the API group whose discovery information is presented here.
@@ -24,7 +24,7 @@ pub struct ApiGroupDiscovery {
 /// list of API resources (built-ins, Custom Resource Definitions, resources from aggregated servers)
 /// that a cluster supports.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroupDiscoveryList {
+pub struct APIGroupDiscoveryList {
     /// ResourceVersion will not be set, because this does not have a replayable ordering among multiple apiservers.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -32,7 +32,7 @@ pub struct ApiGroupDiscoveryList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of groups for discovery. The groups are listed in priority order.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<ApiGroupDiscovery>,
+    pub items: ::prost::alloc::vec::Vec<APIGroupDiscovery>,
 }
 /// APIResourceDiscovery provides information about an API resource for discovery.
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -2,7 +2,7 @@
 /// APIGroup contains the name, the supported versions, and the preferred version
 /// of a group.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroup {
+pub struct APIGroup {
     /// name is the name of the group.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -30,11 +30,11 @@ pub struct ApiGroup {
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroupList {
+pub struct APIGroupList {
     /// groups is a list of APIGroup.
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub groups: ::prost::alloc::vec::Vec<ApiGroup>,
+    pub groups: ::prost::alloc::vec::Vec<APIGroup>,
 }
 /// APIResource specifies the name of a resource and whether it is namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -103,7 +103,7 @@ pub struct APIResourceList {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiVersions {
+pub struct APIVersions {
     /// versions are the api versions that are available.
     /// +listType=atomic
     #[prost(string, repeated, tag = "1")]
