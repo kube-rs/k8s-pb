@@ -81,6 +81,7 @@ names:
     #!/usr/bin/env bash
     # Retain original names (prost doesn't let you bypass its renaming)
     rg 'ApiService' k8s-pb -l | xargs sd 'ApiService' 'APIService'
+    rg 'ApiResource' k8s-pb -l | xargs sd 'ApiResource' 'APIResource'
     rg 'CsiDriver' k8s-pb -l | xargs sd 'CsiDriver' 'CSIDriver'
     rg 'CsiStorage' k8s-pb -l | xargs sd 'CsiStorage' 'CSIStorage'
     rg 'CsiNode' k8s-pb -l | xargs sd 'CsiNode' 'CSINode'

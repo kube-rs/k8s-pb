@@ -38,7 +38,7 @@ pub struct ApiGroupList {
 }
 /// APIResource specifies the name of a resource and whether it is namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiResource {
+pub struct APIResource {
     /// name is the plural name of the resource.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -88,14 +88,14 @@ pub struct ApiResource {
 /// resources supported in a specific group and version, and if the resource
 /// is namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiResourceList {
+pub struct APIResourceList {
     /// groupVersion is the group and version this APIResourceList is for.
     #[prost(string, optional, tag = "1")]
     pub group_version: ::core::option::Option<::prost::alloc::string::String>,
     /// resources contains the name of the resources and if they are namespaced.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub resources: ::prost::alloc::vec::Vec<ApiResource>,
+    pub resources: ::prost::alloc::vec::Vec<APIResource>,
 }
 /// APIVersions lists the versions that are available, to allow clients to
 /// discover the API at /api, which is the root path of the legacy v1 API.

@@ -36,7 +36,7 @@ pub struct ApiGroupDiscoveryList {
 }
 /// APIResourceDiscovery provides information about an API resource for discovery.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiResourceDiscovery {
+pub struct APIResourceDiscovery {
     /// resource is the plural name of the resource.  This is used in the URL path and is the unique identifier
     /// for this resource across all versions in the API group.
     /// Resources with non-empty groups are located at /apis/<APIGroupDiscovery.objectMeta.name>/<APIVersionDiscovery.version>/<APIResourceDiscovery.Resource>
@@ -122,7 +122,7 @@ pub struct ApiVersionDiscovery {
     /// +listType=map
     /// +listMapKey=resource
     #[prost(message, repeated, tag = "2")]
-    pub resources: ::prost::alloc::vec::Vec<ApiResourceDiscovery>,
+    pub resources: ::prost::alloc::vec::Vec<APIResourceDiscovery>,
     /// freshness marks whether a group version's discovery document is up to date.
     /// "Current" indicates the discovery document was recently
     /// refreshed. "Stale" indicates the discovery document could not
