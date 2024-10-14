@@ -17,7 +17,7 @@ pub struct APIGroupDiscovery {
     /// +listType=map
     /// +listMapKey=version
     #[prost(message, repeated, tag = "2")]
-    pub versions: ::prost::alloc::vec::Vec<ApiVersionDiscovery>,
+    pub versions: ::prost::alloc::vec::Vec<APIVersionDiscovery>,
 }
 /// APIGroupDiscoveryList is a resource containing a list of APIGroupDiscovery.
 /// This is one of the types able to be returned from the /api and /apis endpoint and contains an aggregated
@@ -77,11 +77,11 @@ pub struct APIResourceDiscovery {
     /// +listType=map
     /// +listMapKey=subresource
     #[prost(message, repeated, tag = "8")]
-    pub subresources: ::prost::alloc::vec::Vec<ApiSubresourceDiscovery>,
+    pub subresources: ::prost::alloc::vec::Vec<APISubresourceDiscovery>,
 }
 /// APISubresourceDiscovery provides information about an API subresource for discovery.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiSubresourceDiscovery {
+pub struct APISubresourceDiscovery {
     /// subresource is the name of the subresource.  This is used in the URL path and is the unique identifier
     /// for this resource across all versions.
     #[prost(string, optional, tag = "1")]
@@ -114,7 +114,7 @@ pub struct ApiSubresourceDiscovery {
 }
 /// APIVersionDiscovery holds a list of APIResourceDiscovery types that are served for a particular version within an API Group.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiVersionDiscovery {
+pub struct APIVersionDiscovery {
     /// version is the name of the version within a group version.
     #[prost(string, optional, tag = "1")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,

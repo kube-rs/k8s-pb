@@ -25,7 +25,7 @@ pub struct APIGroup {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
 }
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
@@ -117,7 +117,7 @@ pub struct APIVersions {
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
 }
 /// ApplyOptions may be provided when applying an API object.
 /// FieldManager is required for apply requests.
@@ -993,7 +993,7 @@ pub struct RootPaths {
 }
 /// ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ServerAddressByClientCidr {
+pub struct ServerAddressByClientCIDR {
     /// The CIDR with which clients can match their IP to figure out the server address that they should use.
     #[prost(string, optional, tag = "1")]
     pub client_cidr: ::core::option::Option<::prost::alloc::string::String>,
