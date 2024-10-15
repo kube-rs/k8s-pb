@@ -206,11 +206,11 @@ impl crate::Resource for ClusterRole {
 }
 impl crate::Metadata for ClusterRole {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -224,11 +224,11 @@ impl crate::Resource for ClusterRoleBinding {
 }
 impl crate::Metadata for ClusterRoleBinding {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -242,11 +242,11 @@ impl crate::Resource for Role {
 }
 impl crate::Metadata for Role {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -260,10 +260,10 @@ impl crate::Resource for RoleBinding {
 }
 impl crate::Metadata for RoleBinding {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }

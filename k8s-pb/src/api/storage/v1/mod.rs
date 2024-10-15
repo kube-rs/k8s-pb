@@ -576,11 +576,11 @@ impl crate::Resource for CSIDriver {
 }
 impl crate::Metadata for CSIDriver {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for CSIDriver {
@@ -603,11 +603,11 @@ impl crate::Resource for CSINode {
 }
 impl crate::Metadata for CSINode {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for CSINode {
@@ -630,11 +630,11 @@ impl crate::Resource for CSIStorageCapacity {
 }
 impl crate::Metadata for CSIStorageCapacity {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -648,11 +648,11 @@ impl crate::Resource for StorageClass {
 }
 impl crate::Metadata for StorageClass {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -666,11 +666,11 @@ impl crate::Resource for VolumeAttachment {
 }
 impl crate::Metadata for VolumeAttachment {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for VolumeAttachment {

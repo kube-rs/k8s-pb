@@ -7057,11 +7057,11 @@ impl crate::Resource for Binding {
 }
 impl crate::Metadata for Binding {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7075,11 +7075,11 @@ impl crate::Resource for ComponentStatus {
 }
 impl crate::Metadata for ComponentStatus {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7093,11 +7093,11 @@ impl crate::Resource for ConfigMap {
 }
 impl crate::Metadata for ConfigMap {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7111,11 +7111,11 @@ impl crate::Resource for Endpoints {
 }
 impl crate::Metadata for Endpoints {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7129,11 +7129,11 @@ impl crate::Resource for Event {
 }
 impl crate::Metadata for Event {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7147,11 +7147,11 @@ impl crate::Resource for LimitRange {
 }
 impl crate::Metadata for LimitRange {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for LimitRange {
@@ -7174,11 +7174,11 @@ impl crate::Resource for Namespace {
 }
 impl crate::Metadata for Namespace {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for Namespace {
@@ -7219,11 +7219,11 @@ impl crate::Resource for Node {
 }
 impl crate::Metadata for Node {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for Node {
@@ -7264,11 +7264,11 @@ impl crate::Resource for PersistentVolume {
 }
 impl crate::Metadata for PersistentVolume {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for PersistentVolume {
@@ -7300,11 +7300,11 @@ impl crate::Resource for PersistentVolumeClaim {
 }
 impl crate::Metadata for PersistentVolumeClaim {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for PersistentVolumeClaim {
@@ -7345,11 +7345,11 @@ impl crate::Resource for Pod {
 }
 impl crate::Metadata for Pod {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for Pod {
@@ -7390,11 +7390,11 @@ impl crate::Resource for PodTemplate {
 }
 impl crate::Metadata for PodTemplate {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7408,11 +7408,11 @@ impl crate::Resource for ReplicationController {
 }
 impl crate::Metadata for ReplicationController {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for ReplicationController {
@@ -7453,11 +7453,11 @@ impl crate::Resource for ResourceQuota {
 }
 impl crate::Metadata for ResourceQuota {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for ResourceQuota {
@@ -7489,11 +7489,11 @@ impl crate::Resource for Secret {
 }
 impl crate::Metadata for Secret {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 
@@ -7507,11 +7507,11 @@ impl crate::Resource for Service {
 }
 impl crate::Metadata for Service {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for Service {
@@ -7552,10 +7552,10 @@ impl crate::Resource for ServiceAccount {
 }
 impl crate::Metadata for ServiceAccount {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }

@@ -358,11 +358,11 @@ impl crate::Resource for LocalSubjectAccessReview {
 }
 impl crate::Metadata for LocalSubjectAccessReview {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for LocalSubjectAccessReview {
@@ -394,11 +394,11 @@ impl crate::Resource for SelfSubjectAccessReview {
 }
 impl crate::Metadata for SelfSubjectAccessReview {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for SelfSubjectAccessReview {
@@ -430,11 +430,11 @@ impl crate::Resource for SelfSubjectRulesReview {
 }
 impl crate::Metadata for SelfSubjectRulesReview {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for SelfSubjectRulesReview {
@@ -466,11 +466,11 @@ impl crate::Resource for SubjectAccessReview {
 }
 impl crate::Metadata for SubjectAccessReview {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for SubjectAccessReview {

@@ -609,11 +609,11 @@ impl crate::Resource for ValidatingAdmissionPolicy {
 }
 impl crate::Metadata for ValidatingAdmissionPolicy {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for ValidatingAdmissionPolicy {
@@ -654,11 +654,11 @@ impl crate::Resource for ValidatingAdmissionPolicyBinding {
 }
 impl crate::Metadata for ValidatingAdmissionPolicyBinding {
     type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
+    fn metadata(&self) -> &<Self as crate::Metadata>::Ty {
+        self.metadata.as_ref().unwrap()
     }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
+    fn metadata_mut(&mut self) -> &mut <Self as crate::Metadata>::Ty {
+        self.metadata.as_mut().unwrap()
     }
 }
 impl crate::HasSpec for ValidatingAdmissionPolicyBinding {

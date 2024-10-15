@@ -48,8 +48,8 @@ pub trait Resource {
 #[doc = r" A trait applied to all Kubernetes resources that have Metadata"]
 pub trait Metadata: Resource {
     type Ty;
-    fn metadata(&self) -> Option<&Self::Ty>;
-    fn metadata_mut(&mut self) -> Option<&mut Self::Ty>;
+    fn metadata(&self) -> &Self::Ty;
+    fn metadata_mut(&mut self) -> &mut Self::Ty;
 }
 pub trait HasSpec {
     type Spec;
