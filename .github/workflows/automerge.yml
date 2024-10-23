@@ -6,13 +6,14 @@ permissions:
   pull-requests: write
 
 jobs:
-  dependabot:
+  automerge:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'sszynrae' || github.actor == 'dependabot[bot]' }}
     steps:
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v2
+        if: ${{ github.actor == 'dependabot[bot]' }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Approve a PR
@@ -20,7 +21,7 @@ jobs:
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Enable auto-merge for Dependency PRs
+      - name: Enable auto-merge for Dependency/Renovate PRs
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
