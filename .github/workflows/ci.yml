@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Dependencies
-      - uses: extractions/setup-just@v2
+      - uses: extractions/setup-just@v3
       - uses: arduino/setup-protoc@v3
       - name: install fd, sd, ripgrep
         run: |
