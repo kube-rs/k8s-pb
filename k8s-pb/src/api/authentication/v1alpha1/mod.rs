@@ -21,30 +21,3 @@ pub struct SelfSubjectReviewStatus {
     #[prost(message, optional, tag = "1")]
     pub user_info: ::core::option::Option<super::v1::UserInfo>,
 }
-
-impl crate::Resource for SelfSubjectReview {
-    const API_VERSION: &'static str = "authentication.k8s.io/v1alpha1";
-    const GROUP: &'static str = "authentication.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "SelfSubjectReview";
-    const URL_PATH_SEGMENT: &'static str = "selfsubjectreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for SelfSubjectReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasStatus for SelfSubjectReview {
-    type Status = crate::api::authentication::v1alpha1::SelfSubjectReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}

@@ -43,6 +43,47 @@ pub struct HttpIngressRuleValue {
     #[prost(message, repeated, tag = "1")]
     pub paths: ::prost::alloc::vec::Vec<HttpIngressPath>,
 }
+/// IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs
+/// that operate on IP addresses. The object is used by the Service core API for allocation of IP addresses.
+/// An IP address can be represented in different formats, to guarantee the uniqueness of the IP,
+/// the name of the object is the IP address in canonical format, four decimal digits separated
+/// by dots suppressing leading zeros for IPv4 and the representation defined by RFC 5952 for IPv6.
+/// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
+/// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IPAddress {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    /// spec is the desired state of the IPAddress.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
+    /// +optional
+    #[prost(message, optional, tag = "2")]
+    pub spec: ::core::option::Option<IPAddressSpec>,
+}
+/// IPAddressList contains a list of IPAddress.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IPAddressList {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    /// items is the list of IPAddresses.
+    #[prost(message, repeated, tag = "2")]
+    pub items: ::prost::alloc::vec::Vec<IPAddress>,
+}
+/// IPAddressSpec describe the attributes in an IP Address.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IPAddressSpec {
+    /// ParentRef references the resource that an IPAddress is attached to.
+    /// An IPAddress must reference a parent object.
+    /// +required
+    #[prost(message, optional, tag = "1")]
+    pub parent_ref: ::core::option::Option<ParentReference>,
+}
 /// IPBlock describes a particular CIDR (Ex. "192.168.1.0/24","2001:db8::/64") that is allowed
 /// to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs
 /// that should not be included within this rule.
@@ -538,6 +579,26 @@ pub struct NetworkPolicySpec {
     #[prost(string, repeated, tag = "4")]
     pub policy_types: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+/// ParentReference describes a reference to a parent object.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ParentReference {
+    /// Group is the group of the object being referenced.
+    /// +optional
+    #[prost(string, optional, tag = "1")]
+    pub group: ::core::option::Option<::prost::alloc::string::String>,
+    /// Resource is the resource of the object being referenced.
+    /// +required
+    #[prost(string, optional, tag = "2")]
+    pub resource: ::core::option::Option<::prost::alloc::string::String>,
+    /// Namespace is the namespace of the object being referenced.
+    /// +optional
+    #[prost(string, optional, tag = "3")]
+    pub namespace: ::core::option::Option<::prost::alloc::string::String>,
+    /// Name is the name of the object being referenced.
+    /// +required
+    #[prost(string, optional, tag = "4")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// ServiceBackendPort is the service port being referenced.
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -552,6 +613,90 @@ pub struct ServiceBackendPort {
     /// +optional
     #[prost(int32, optional, tag = "2")]
     pub number: ::core::option::Option<i32>,
+}
+/// ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
+/// This range is used to allocate ClusterIPs to Service objects.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCIDR {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    /// spec is the desired state of the ServiceCIDR.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
+    /// +optional
+    #[prost(message, optional, tag = "2")]
+    pub spec: ::core::option::Option<ServiceCIDRSpec>,
+    /// status represents the current state of the ServiceCIDR.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
+    /// +optional
+    #[prost(message, optional, tag = "3")]
+    pub status: ::core::option::Option<ServiceCIDRStatus>,
+}
+/// ServiceCIDRList contains a list of ServiceCIDR objects.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCIDRList {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    /// items is the list of ServiceCIDRs.
+    #[prost(message, repeated, tag = "2")]
+    pub items: ::prost::alloc::vec::Vec<ServiceCIDR>,
+}
+/// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCIDRSpec {
+    /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
+    /// from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family.
+    /// This field is immutable.
+    /// +optional
+    /// +listType=atomic
+    #[prost(string, repeated, tag = "1")]
+    pub cidrs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// ServiceCIDRStatus describes the current state of the ServiceCIDR.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServiceCIDRStatus {
+    /// conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR.
+    /// Current service state
+    /// +optional
+    /// +patchMergeKey=type
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=type
+    #[prost(message, repeated, tag = "1")]
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+}
+
+impl crate::Resource for IPAddress {
+    const API_VERSION: &'static str = "networking.k8s.io/v1";
+    const GROUP: &'static str = "networking.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "IPAddress";
+    const URL_PATH_SEGMENT: &'static str = "ipaddresses";
+    type Scope = crate::ClusterResourceScope;
+}
+impl crate::Metadata for IPAddress {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for IPAddress {
+    type Spec = crate::api::networking::v1::IPAddressSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
 }
 
 impl crate::Resource for Ingress {
@@ -641,5 +786,50 @@ impl crate::HasSpec for NetworkPolicy {
     }
     fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
         self.spec.as_mut()
+    }
+}
+
+impl crate::Resource for ServiceCIDR {
+    const API_VERSION: &'static str = "networking.k8s.io/v1";
+    const GROUP: &'static str = "networking.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "ServiceCIDR";
+    const URL_PATH_SEGMENT: &'static str = "servicecidrs";
+    type Scope = crate::ClusterResourceScope;
+}
+impl crate::Metadata for ServiceCIDR {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for ServiceCIDR {
+    type Spec = crate::api::networking::v1::ServiceCIDRSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for ServiceCIDR {
+    type Status = crate::api::networking::v1::ServiceCIDRStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for ServiceCIDR {
+    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }

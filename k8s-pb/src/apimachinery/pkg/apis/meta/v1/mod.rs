@@ -297,6 +297,21 @@ pub struct DeleteOptions {
     /// +listType=atomic
     #[prost(string, repeated, tag = "5")]
     pub dry_run: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// if set to true, it will trigger an unsafe deletion of the resource in
+    /// case the normal deletion flow fails with a corrupt object error.
+    /// A resource is considered corrupt if it can not be retrieved from
+    /// the underlying storage successfully because of a) its data can
+    /// not be transformed e.g. decryption failure, or b) it fails
+    /// to decode into an object.
+    /// NOTE: unsafe deletion ignores finalizer constraints, skips
+    /// precondition checks, and removes the object from the storage.
+    /// WARNING: This may potentially break the cluster if the workload
+    /// associated with the resource being unsafe-deleted relies on normal
+    /// deletion flow. Use only if you REALLY know what you are doing.
+    /// The default value is false, and the user must opt in to enable it
+    /// +optional
+    #[prost(bool, optional, tag = "6")]
+    pub ignore_store_read_error_with_cluster_breaking_potential: ::core::option::Option<bool>,
 }
 /// Duration is a wrapper around time.Duration which supports correct
 /// marshaling to YAML and JSON. In particular, it marshals into strings, which

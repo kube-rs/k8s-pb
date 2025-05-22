@@ -86,10 +86,7 @@ pub struct BasicDevice {
     ///
     /// +optional
     #[prost(btree_map = "string, message", tag = "2")]
-    pub capacity: ::prost::alloc::collections::BTreeMap<
-        ::prost::alloc::string::String,
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    pub capacity: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceCapacity>,
     /// ConsumesCounters defines a list of references to sharedCounters
     /// and the set of counters that the device will
     /// consume from those counter sets.
@@ -118,12 +115,13 @@ pub struct BasicDevice {
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
     /// NodeSelector defines the nodes where the device is available.
     ///
+    /// Must use exactly one term.
+    ///
     /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
     /// At most one of NodeName, NodeSelector and AllNodes can be set.
     ///
     /// +optional
     /// +oneOf=DeviceNodeSelection
-    /// +featureGate=DRAPartitionableDevices
     #[prost(message, optional, tag = "5")]
     pub node_selector: ::core::option::Option<super::super::core::v1::NodeSelector>,
     /// AllNodes indicates that all nodes have access to the device.
@@ -226,18 +224,14 @@ pub struct Counter {
 /// by other devices.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CounterSet {
-    /// CounterSet is the name of the set from which the
-    /// counters defined will be consumed.
+    /// Name defines the name of the counter set.
+    /// It must be a DNS label.
     ///
     /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Counters defines the counters that will be consumed by the device.
+    /// Counters defines the set of counters for this CounterSet
     /// The name of each counter must be unique in that set and must be a DNS label.
-    ///
-    /// To ensure this uniqueness, capacities defined by the vendor
-    /// must be listed without the driver name as domain prefix in
-    /// their name. All others must be listed with their domain prefix.
     ///
     /// The maximum number of counters is 32.
     ///
@@ -336,6 +330,15 @@ pub struct DeviceAttribute {
     /// +oneOf=ValueType
     #[prost(string, optional, tag = "5")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// DeviceCapacity describes a quantity associated with a device.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeviceCapacity {
+    /// Value defines how much of a certain device capacity is available.
+    ///
+    /// +required
+    #[prost(message, optional, tag = "1")]
+    pub value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// DeviceClaim defines how to request devices with a ResourceClaim.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -493,14 +496,13 @@ pub struct DeviceConstraint {
 /// a device will consume from a CounterSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceCounterConsumption {
-    /// CounterSet defines the set from which the
+    /// CounterSet is the name of the set from which the
     /// counters defined will be consumed.
     ///
     /// +required
     #[prost(string, optional, tag = "1")]
     pub counter_set: ::core::option::Option<::prost::alloc::string::String>,
-    /// Counters defines the Counter that will be consumed by
-    /// the device.
+    /// Counters defines the counters that will be consumed by the device.
     ///
     /// The maximum number counters in a device is 32.
     /// In addition, the maximum number of all counters
@@ -519,7 +521,8 @@ pub struct DeviceRequest {
     /// Name can be used to reference this request in a pod.spec.containers\[\].resources.claims
     /// entry and in a constraint of the claim.
     ///
-    /// Must be a DNS label.
+    /// Must be a DNS label and unique among all DeviceRequests in a
+    /// ResourceClaim.
     ///
     /// +required
     #[prost(string, optional, tag = "1")]
@@ -768,7 +771,7 @@ pub struct DeviceSubRequest {
     pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Selectors define criteria which must be satisfied by a specific
     /// device in order for that device to be considered for this
-    /// request. All selectors must be satisfied for a device to be
+    /// subrequest. All selectors must be satisfied for a device to be
     /// considered.
     ///
     /// +optional
@@ -776,19 +779,19 @@ pub struct DeviceSubRequest {
     #[prost(message, repeated, tag = "3")]
     pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
     /// AllocationMode and its related fields define how devices are allocated
-    /// to satisfy this request. Supported values are:
+    /// to satisfy this subrequest. Supported values are:
     ///
     /// - ExactCount: This request is for a specific number of devices.
     ///    This is the default. The exact number is provided in the
     ///    count field.
     ///
-    /// - All: This request is for all of the matching devices in a pool.
+    /// - All: This subrequest is for all of the matching devices in a pool.
     ///    Allocation will fail if some devices are already allocated,
     ///    unless adminAccess is requested.
     ///
     /// If AllocationMode is not specified, the default mode is ExactCount. If
     /// the mode is ExactCount and count is not specified, the default count is
-    /// one. Any other requests must specify this field.
+    /// one. Any other subrequests must specify this field.
     ///
     /// More modes may get added in the future. Clients must refuse to handle
     /// requests with unknown modes.
@@ -830,6 +833,8 @@ pub struct DeviceSubRequest {
 /// The device this taint is attached to has the "effect" on
 /// any claim which does not tolerate the taint and, through the claim,
 /// to pods using the claim.
+///
+/// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceTaint {
     /// The taint key to be applied to a device.
@@ -858,97 +863,6 @@ pub struct DeviceTaint {
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub time_added: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-}
-/// DeviceTaintRule adds one taint to all devices which match the selector.
-/// This has the same effect as if the taint was specified directly
-/// in the ResourceSlice by the DRA driver.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintRule {
-    /// Standard object metadata
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec specifies the selector and one taint.
-    ///
-    /// Changing the spec automatically increments the metadata.generation number.
-    #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<DeviceTaintRuleSpec>,
-}
-/// DeviceTaintRuleList is a collection of DeviceTaintRules.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintRuleList {
-    /// Standard list metadata
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is the list of DeviceTaintRules.
-    #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<DeviceTaintRule>,
-}
-/// DeviceTaintRuleSpec specifies the selector and one taint.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintRuleSpec {
-    /// DeviceSelector defines which device(s) the taint is applied to.
-    /// All selector criteria must be satified for a device to
-    /// match. The empty selector matches all devices. Without
-    /// a selector, no devices are matches.
-    ///
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub device_selector: ::core::option::Option<DeviceTaintSelector>,
-    /// The taint that gets applied to matching devices.
-    ///
-    /// +required
-    #[prost(message, optional, tag = "2")]
-    pub taint: ::core::option::Option<DeviceTaint>,
-}
-/// DeviceTaintSelector defines which device(s) a DeviceTaintRule applies to.
-/// The empty selector matches all devices. Without a selector, no devices
-/// are matched.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintSelector {
-    /// If DeviceClassName is set, the selectors defined there must be
-    /// satisfied by a device to be selected. This field corresponds
-    /// to class.metadata.name.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "1")]
-    pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// If driver is set, only devices from that driver are selected.
-    /// This fields corresponds to slice.spec.driver.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "2")]
-    pub driver: ::core::option::Option<::prost::alloc::string::String>,
-    /// If pool is set, only devices in that pool are selected.
-    ///
-    /// Also setting the driver name may be useful to avoid
-    /// ambiguity when different drivers use the same pool name,
-    /// but this is not required because selecting pools from
-    /// different drivers may also be useful, for example when
-    /// drivers with node-local devices use the node name as
-    /// their pool name.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "3")]
-    pub pool: ::core::option::Option<::prost::alloc::string::String>,
-    /// If device is set, only devices with that name are selected.
-    /// This field corresponds to slice.spec.devices\[\].name.
-    ///
-    /// Setting also driver and pool may be required to avoid ambiguity,
-    /// but is not required.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "4")]
-    pub device: ::core::option::Option<::prost::alloc::string::String>,
-    /// Selectors contains the same selection criteria as a ResourceClaim.
-    /// Currently, CEL expressions are supported. All of these selectors
-    /// must be satisfied.
-    ///
-    /// +optional
-    /// +listType=atomic
-    #[prost(message, repeated, tag = "5")]
-    pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
 }
 /// The ResourceClaim this DeviceToleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
@@ -1388,9 +1302,9 @@ pub struct ResourceSliceSpec {
 }
 
 impl crate::Resource for DeviceClass {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta1";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta1";
     const KIND: &'static str = "DeviceClass";
     const URL_PATH_SEGMENT: &'static str = "deviceclasses";
     type Scope = crate::ClusterResourceScope;
@@ -1405,34 +1319,7 @@ impl crate::Metadata for DeviceClass {
     }
 }
 impl crate::HasSpec for DeviceClass {
-    type Spec = crate::api::resource::v1alpha3::DeviceClassSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-
-impl crate::Resource for DeviceTaintRule {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
-    const KIND: &'static str = "DeviceTaintRule";
-    const URL_PATH_SEGMENT: &'static str = "devicetaintrules";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for DeviceTaintRule {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for DeviceTaintRule {
-    type Spec = crate::api::resource::v1alpha3::DeviceTaintRuleSpec;
+    type Spec = crate::api::resource::v1beta1::DeviceClassSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -1442,9 +1329,9 @@ impl crate::HasSpec for DeviceTaintRule {
 }
 
 impl crate::Resource for ResourceClaim {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta1";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta1";
     const KIND: &'static str = "ResourceClaim";
     const URL_PATH_SEGMENT: &'static str = "resourceclaims";
     type Scope = crate::NamespaceResourceScope;
@@ -1459,7 +1346,7 @@ impl crate::Metadata for ResourceClaim {
     }
 }
 impl crate::HasSpec for ResourceClaim {
-    type Spec = crate::api::resource::v1alpha3::ResourceClaimSpec;
+    type Spec = crate::api::resource::v1beta1::ResourceClaimSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -1468,7 +1355,7 @@ impl crate::HasSpec for ResourceClaim {
     }
 }
 impl crate::HasStatus for ResourceClaim {
-    type Status = crate::api::resource::v1alpha3::ResourceClaimStatus;
+    type Status = crate::api::resource::v1beta1::ResourceClaimStatus;
     fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
         self.status.as_ref()
     }
@@ -1478,9 +1365,9 @@ impl crate::HasStatus for ResourceClaim {
 }
 
 impl crate::Resource for ResourceClaimTemplate {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta1";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta1";
     const KIND: &'static str = "ResourceClaimTemplate";
     const URL_PATH_SEGMENT: &'static str = "resourceclaimtemplates";
     type Scope = crate::NamespaceResourceScope;
@@ -1495,7 +1382,7 @@ impl crate::Metadata for ResourceClaimTemplate {
     }
 }
 impl crate::HasSpec for ResourceClaimTemplate {
-    type Spec = crate::api::resource::v1alpha3::ResourceClaimTemplateSpec;
+    type Spec = crate::api::resource::v1beta1::ResourceClaimTemplateSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -1505,9 +1392,9 @@ impl crate::HasSpec for ResourceClaimTemplate {
 }
 
 impl crate::Resource for ResourceSlice {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta1";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta1";
     const KIND: &'static str = "ResourceSlice";
     const URL_PATH_SEGMENT: &'static str = "resourceslices";
     type Scope = crate::ClusterResourceScope;
@@ -1522,7 +1409,7 @@ impl crate::Metadata for ResourceSlice {
     }
 }
 impl crate::HasSpec for ResourceSlice {
-    type Spec = crate::api::resource::v1alpha3::ResourceSliceSpec;
+    type Spec = crate::api::resource::v1beta1::ResourceSliceSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
