@@ -51,8 +51,8 @@ pub struct LeaseCandidateSpec {
     #[prost(message, optional, tag = "3")]
     pub renew_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
     /// BinaryVersion is the binary version. It must be in a semver format without leading `v`.
-    /// This field is required when strategy is "OldestEmulationVersion"
-    /// +optional
+    /// This field is required.
+    /// +required
     #[prost(string, optional, tag = "4")]
     pub binary_version: ::core::option::Option<::prost::alloc::string::String>,
     /// EmulationVersion is the emulation version. It must be in a semver format without leading `v`.
@@ -61,26 +61,19 @@ pub struct LeaseCandidateSpec {
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub emulation_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// PreferredStrategies indicates the list of strategies for picking the leader for coordinated leader election.
-    /// The list is ordered, and the first strategy supersedes all other strategies. The list is used by coordinated
-    /// leader election to make a decision about the final election strategy. This follows as
-    /// - If all clients have strategy X as the first element in this list, strategy X will be used.
-    /// - If a candidate has strategy \[X\] and another candidate has strategy \[Y, X\], Y supersedes X and strategy Y
-    ///    will be used.
-    /// - If a candidate has strategy \[X, Y\] and another candidate has strategy \[Y, X\], this is a user error and leader
-    ///    election will not operate the Lease until resolved.
-    /// (Alpha) Using this field requires the CoordinatedLeaderElection feature gate to be enabled.
-    /// +featureGate=CoordinatedLeaderElection
-    /// +listType=atomic
+    /// Strategy is the strategy that coordinated leader election will use for picking the leader.
+    /// If multiple candidates for the same Lease return different strategies, the strategy provided
+    /// by the candidate with the latest BinaryVersion will be used. If there is still conflict,
+    /// this is a user error and coordinated leader election will not operate the Lease until resolved.
     /// +required
-    #[prost(string, repeated, tag = "6")]
-    pub preferred_strategies: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "6")]
+    pub strategy: ::core::option::Option<::prost::alloc::string::String>,
 }
 
 impl crate::Resource for LeaseCandidate {
-    const API_VERSION: &'static str = "coordination.k8s.io/v1alpha1";
+    const API_VERSION: &'static str = "coordination.k8s.io/v1alpha2";
     const GROUP: &'static str = "coordination.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
+    const VERSION: &'static str = "v1alpha2";
     const KIND: &'static str = "LeaseCandidate";
     const URL_PATH_SEGMENT: &'static str = "leasecandidates";
     type Scope = crate::NamespaceResourceScope;
@@ -95,7 +88,7 @@ impl crate::Metadata for LeaseCandidate {
     }
 }
 impl crate::HasSpec for LeaseCandidate {
-    type Spec = crate::api::coordination::v1alpha1::LeaseCandidateSpec;
+    type Spec = crate::api::coordination::v1alpha2::LeaseCandidateSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }

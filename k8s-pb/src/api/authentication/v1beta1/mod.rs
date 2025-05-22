@@ -119,30 +119,3 @@ pub struct UserInfo {
     #[prost(btree_map = "string, message", tag = "4")]
     pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
 }
-
-impl crate::Resource for SelfSubjectReview {
-    const API_VERSION: &'static str = "authentication.k8s.io/v1beta1";
-    const GROUP: &'static str = "authentication.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "SelfSubjectReview";
-    const URL_PATH_SEGMENT: &'static str = "selfsubjectreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for SelfSubjectReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasStatus for SelfSubjectReview {
-    type Status = crate::api::authentication::v1beta1::SelfSubjectReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}

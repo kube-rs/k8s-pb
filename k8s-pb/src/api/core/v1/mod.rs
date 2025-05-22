@@ -158,7 +158,6 @@ pub struct AzureFileVolumeSource {
     pub read_only: ::core::option::Option<bool>,
 }
 /// Binding ties one object to another; for example, a pod is bound to a node by a scheduler.
-/// Deprecated in 1.7, please use the bindings subresource of pods instead.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Binding {
     /// Standard object's metadata.
@@ -170,7 +169,7 @@ pub struct Binding {
     #[prost(message, optional, tag = "2")]
     pub target: ::core::option::Option<ObjectReference>,
 }
-/// Represents storage that is managed by an external CSI volume driver (Beta feature)
+/// Represents storage that is managed by an external CSI volume driver
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CSIPersistentVolumeSource {
     /// driver is the name of the driver to use for this volume.
@@ -1082,7 +1081,7 @@ pub struct ContainerStatus {
     /// AllocatedResources represents the compute resources allocated for this container by the
     /// node. Kubelet sets this value to Container.Resources.Requests upon successful pod admission
     /// and after successfully admitting desired pod resize.
-    /// +featureGate=InPlacePodVerticalScaling
+    /// +featureGate=InPlacePodVerticalScalingAllocatedStatus
     /// +optional
     #[prost(btree_map = "string, message", tag = "10")]
     pub allocated_resources: ::prost::alloc::collections::BTreeMap<
@@ -1119,6 +1118,11 @@ pub struct ContainerStatus {
     /// +listMapKey=name
     #[prost(message, repeated, tag = "14")]
     pub allocated_resources_status: ::prost::alloc::vec::Vec<ResourceStatus>,
+    /// StopSignal reports the effective stop signal for this container
+    /// +featureGate=ContainerStopSignals
+    /// +optional
+    #[prost(string, optional, tag = "15")]
+    pub stop_signal: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ContainerUser represents user identity information
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1215,6 +1219,7 @@ pub struct EmptyDirVolumeSource {
     pub size_limit: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// EndpointAddress is a tuple that describes single IP address.
+/// Deprecated: This API is deprecated in v1.33+.
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointAddress {
@@ -1237,6 +1242,7 @@ pub struct EndpointAddress {
     pub target_ref: ::core::option::Option<ObjectReference>,
 }
 /// EndpointPort is a tuple that describes a single port.
+/// Deprecated: This API is deprecated in v1.33+.
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointPort {
@@ -1288,6 +1294,8 @@ pub struct EndpointPort {
 ///
 /// 	a: \[ 10.10.1.1:8675, 10.10.2.2:8675 \],
 /// 	b: \[ 10.10.1.1:309, 10.10.2.2:309 \]
+///
+/// Deprecated: This API is deprecated in v1.33+.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointSubset {
     /// IP addresses which offer the related ports that are marked as ready. These endpoints
@@ -1322,6 +1330,11 @@ pub struct EndpointSubset {
 /// 	     Ports: \[{"name": "a", "port": 93}, {"name": "b", "port": 76}\]
 /// 	   },
 /// 	]
+///
+/// Endpoints is a legacy API and does not contain information about all Service features.
+/// Use discoveryv1.EndpointSlice for complete information about Service endpoints.
+///
+/// Deprecated: This API is deprecated in v1.33+. Use discoveryv1.EndpointSlice.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoints {
     /// Standard object's metadata.
@@ -1342,6 +1355,7 @@ pub struct Endpoints {
     pub subsets: ::prost::alloc::vec::Vec<EndpointSubset>,
 }
 /// EndpointsList is a list of endpoints.
+/// Deprecated: This API is deprecated in v1.33+.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointsList {
     /// Standard list metadata.
@@ -1353,10 +1367,10 @@ pub struct EndpointsList {
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Endpoints>,
 }
-/// EnvFromSource represents the source of a set of ConfigMaps
+/// EnvFromSource represents the source of a set of ConfigMaps or Secrets
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnvFromSource {
-    /// An optional identifier to prepend to each key in the ConfigMap. Must be a C_IDENTIFIER.
+    /// Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
     /// +optional
     #[prost(string, optional, tag = "1")]
     pub prefix: ::core::option::Option<::prost::alloc::string::String>,
@@ -1914,6 +1928,7 @@ pub struct GcePersistentDiskVolumeSource {
     #[prost(bool, optional, tag = "4")]
     pub read_only: ::core::option::Option<bool>,
 }
+/// GRPCAction specifies an action involving a GRPC service.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GrpcAction {
     /// Port number of the gRPC service. Number must be in the range 1 to 65535.
@@ -2257,26 +2272,32 @@ pub struct Lifecycle {
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub pre_stop: ::core::option::Option<LifecycleHandler>,
+    /// StopSignal defines which signal will be sent to a container when it is being stopped.
+    /// If not specified, the default is defined by the container runtime in use.
+    /// StopSignal can only be set for Pods with a non-empty .spec.os.name
+    /// +optional
+    #[prost(string, optional, tag = "3")]
+    pub stop_signal: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// LifecycleHandler defines a specific action that should be taken in a lifecycle
 /// hook. One and only one of the fields, except TCPSocket must be specified.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LifecycleHandler {
-    /// Exec specifies the action to take.
+    /// Exec specifies a command to execute in the container.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub exec: ::core::option::Option<ExecAction>,
-    /// HTTPGet specifies the http request to perform.
+    /// HTTPGet specifies an HTTP GET request to perform.
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub http_get: ::core::option::Option<HttpGetAction>,
     /// Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-    /// for the backward compatibility. There are no validation of this field and
-    /// lifecycle hooks will fail in runtime when tcp handler is specified.
+    /// for backward compatibility. There is no validation of this field and
+    /// lifecycle hooks will fail at runtime when it is specified.
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub tcp_socket: ::core::option::Option<TcpSocketAction>,
-    /// Sleep represents the duration that the container should sleep before being terminated.
+    /// Sleep represents a duration that the container should sleep.
     /// +featureGate=PodLifecycleSleepAction
     /// +optional
     #[prost(message, optional, tag = "4")]
@@ -2428,6 +2449,17 @@ pub struct LoadBalancerStatus {
 }
 /// LocalObjectReference contains enough information to let you locate the
 /// referenced object inside the same namespace.
+/// ---
+/// New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs.
+///   1. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular
+///      restrictions like, "must refer only to types A and B" or "UID not honored" or "name must be restricted".
+///      Those cannot be well described when embedded.
+///   2. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen.
+///   3. We cannot easily change it.  Because this type is embedded in many locations, updates to this type
+///      will affect numerous schemas.  Don't make new APIs embed an underspecified API type they do not control.
+///
+/// Instead of using this type, create a locally provided and used type that is well-focused on your reference.
+/// For example, ServiceReferences for admission registration: <https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533> .
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalObjectReference {
@@ -2435,7 +2467,6 @@ pub struct LocalObjectReference {
     /// This field is effectively required, but due to backwards compatibility is
     /// allowed to be empty. Instances of this type with an empty value here are
     /// almost certainly wrong.
-    /// TODO: Add other useful fields. apiVersion, kind, uid?
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names>
     /// +optional
     /// +default=""
@@ -2444,7 +2475,7 @@ pub struct LocalObjectReference {
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
-/// Local represents directly-attached storage with node affinity (Beta feature)
+/// Local represents directly-attached storage with node affinity
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalVolumeSource {
     /// path of the full path to the volume on the node.
@@ -2526,13 +2557,16 @@ pub struct NamespaceCondition {
     /// Status of the condition, one of True, False, Unknown.
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
+    /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub last_transition_time:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    /// Unique, one-word, CamelCase reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
+    /// Human-readable message indicating details about last transition.
     /// +optional
     #[prost(string, optional, tag = "6")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
@@ -2901,7 +2935,7 @@ pub struct NodeStatus {
     #[prost(string, optional, tag = "3")]
     pub phase: ::core::option::Option<::prost::alloc::string::String>,
     /// Conditions is an array of current observed node conditions.
-    /// More info: <https://kubernetes.io/docs/concepts/nodes/node/#condition>
+    /// More info: <https://kubernetes.io/docs/reference/node/node-status/#condition>
     /// +optional
     /// +patchMergeKey=type
     /// +patchStrategy=merge
@@ -2911,7 +2945,7 @@ pub struct NodeStatus {
     pub conditions: ::prost::alloc::vec::Vec<NodeCondition>,
     /// List of addresses reachable to the node.
     /// Queried from cloud provider, if available.
-    /// More info: <https://kubernetes.io/docs/concepts/nodes/node/#addresses>
+    /// More info: <https://kubernetes.io/docs/reference/node/node-status/#addresses>
     /// Note: This field is declared as mergeable, but the merge key is not sufficiently
     /// unique, which can cause data corruption when it is merged. Callers should instead
     /// use a full-replacement patch. See <https://pr.k8s.io/79391> for an example.
@@ -2931,7 +2965,7 @@ pub struct NodeStatus {
     #[prost(message, optional, tag = "6")]
     pub daemon_endpoints: ::core::option::Option<NodeDaemonEndpoints>,
     /// Set of ids/uuids to uniquely identify the node.
-    /// More info: <https://kubernetes.io/docs/concepts/nodes/node/#info>
+    /// More info: <https://kubernetes.io/docs/reference/node/node-status/#info>
     /// +optional
     #[prost(message, optional, tag = "7")]
     pub node_info: ::core::option::Option<NodeSystemInfo>,
@@ -2966,6 +3000,14 @@ pub struct NodeStatus {
     /// +optional
     #[prost(message, optional, tag = "13")]
     pub features: ::core::option::Option<NodeFeatures>,
+}
+/// NodeSwapStatus represents swap memory information.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct NodeSwapStatus {
+    /// Total amount of swap memory in bytes.
+    /// +optional
+    #[prost(int64, optional, tag = "1")]
+    pub capacity: ::core::option::Option<i64>,
 }
 /// NodeSystemInfo is a set of ids/uuids to uniquely identify the node.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3004,6 +3046,9 @@ pub struct NodeSystemInfo {
     /// The Architecture reported by the node
     #[prost(string, optional, tag = "10")]
     pub architecture: ::core::option::Option<::prost::alloc::string::String>,
+    /// Swap Info reported by the node.
+    #[prost(message, optional, tag = "11")]
+    pub swap: ::core::option::Option<NodeSwapStatus>,
 }
 /// ObjectFieldSelector selects an APIVersioned field of an object.
 /// +structType=atomic
@@ -3125,8 +3170,13 @@ pub struct PersistentVolumeClaim {
 /// PersistentVolumeClaimCondition contains details about state of pvc
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaimCondition {
+    /// Type is the type of the condition.
+    /// More info: <https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=set%20to%20%27ResizeStarted%27.-,PersistentVolumeClaimCondition,-contains%20details%20about>
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
+    /// Status is the status of the condition.
+    /// Can be True, False, Unknown.
+    /// More info: <https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/#:~:text=state%20of%20pvc-,conditions.status,-(string>)%2C%20required
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// lastProbeTime is the time we probed the condition.
@@ -3420,12 +3470,16 @@ pub struct PersistentVolumeList {
 pub struct PersistentVolumeSource {
     /// gcePersistentDisk represents a GCE Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod. Provisioned by an admin.
+    /// Deprecated: GCEPersistentDisk is deprecated. All operations for the in-tree
+    /// gcePersistentDisk type are redirected to the pd.csi.storage.gke.io CSI driver.
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub gce_persistent_disk: ::core::option::Option<GcePersistentDiskVolumeSource>,
     /// awsElasticBlockStore represents an AWS Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
+    /// Deprecated: AWSElasticBlockStore is deprecated. All operations for the in-tree
+    /// awsElasticBlockStore type are redirected to the ebs.csi.aws.com CSI driver.
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore>
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -3440,6 +3494,7 @@ pub struct PersistentVolumeSource {
     pub host_path: ::core::option::Option<HostPathVolumeSource>,
     /// glusterfs represents a Glusterfs volume that is attached to a host and
     /// exposed to the pod. Provisioned by an admin.
+    /// Deprecated: Glusterfs is deprecated and the in-tree glusterfs type is no longer supported.
     /// More info: <https://examples.k8s.io/volumes/glusterfs/README.md>
     /// +optional
     #[prost(message, optional, tag = "4")]
@@ -3450,6 +3505,7 @@ pub struct PersistentVolumeSource {
     #[prost(message, optional, tag = "5")]
     pub nfs: ::core::option::Option<NfsVolumeSource>,
     /// rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
+    /// Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md>
     /// +optional
     #[prost(message, optional, tag = "6")]
@@ -3460,11 +3516,14 @@ pub struct PersistentVolumeSource {
     #[prost(message, optional, tag = "7")]
     pub iscsi: ::core::option::Option<IscsiPersistentVolumeSource>,
     /// cinder represents a cinder volume attached and mounted on kubelets host machine.
+    /// Deprecated: Cinder is deprecated. All operations for the in-tree cinder type
+    /// are redirected to the cinder.csi.openstack.org CSI driver.
     /// More info: <https://examples.k8s.io/mysql-cinder-pd/README.md>
     /// +optional
     #[prost(message, optional, tag = "8")]
     pub cinder: ::core::option::Option<CinderPersistentVolumeSource>,
-    /// cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+    /// cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
+    /// Deprecated: CephFS is deprecated and the in-tree cephfs type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "9")]
     pub cephfs: ::core::option::Option<CephFsPersistentVolumeSource>,
@@ -3472,39 +3531,53 @@ pub struct PersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag = "10")]
     pub fc: ::core::option::Option<FcVolumeSource>,
-    /// flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running
+    /// flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running.
+    /// Deprecated: Flocker is deprecated and the in-tree flocker type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "11")]
     pub flocker: ::core::option::Option<FlockerVolumeSource>,
     /// flexVolume represents a generic volume resource that is
     /// provisioned/attached using an exec based plugin.
+    /// Deprecated: FlexVolume is deprecated. Consider using a CSIDriver instead.
     /// +optional
     #[prost(message, optional, tag = "12")]
     pub flex_volume: ::core::option::Option<FlexPersistentVolumeSource>,
     /// azureFile represents an Azure File Service mount on the host and bind mount to the pod.
+    /// Deprecated: AzureFile is deprecated. All operations for the in-tree azureFile type
+    /// are redirected to the file.csi.azure.com CSI driver.
     /// +optional
     #[prost(message, optional, tag = "13")]
     pub azure_file: ::core::option::Option<AzureFilePersistentVolumeSource>,
-    /// vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
+    /// vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
+    /// Deprecated: VsphereVolume is deprecated. All operations for the in-tree vsphereVolume type
+    /// are redirected to the csi.vsphere.vmware.com CSI driver.
     /// +optional
     #[prost(message, optional, tag = "14")]
     pub vsphere_volume: ::core::option::Option<VsphereVirtualDiskVolumeSource>,
-    /// quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+    /// quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
+    /// Deprecated: Quobyte is deprecated and the in-tree quobyte type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "15")]
     pub quobyte: ::core::option::Option<QuobyteVolumeSource>,
     /// azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+    /// Deprecated: AzureDisk is deprecated. All operations for the in-tree azureDisk type
+    /// are redirected to the disk.csi.azure.com CSI driver.
     /// +optional
     #[prost(message, optional, tag = "16")]
     pub azure_disk: ::core::option::Option<AzureDiskVolumeSource>,
-    /// photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
+    /// photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
+    /// Deprecated: PhotonPersistentDisk is deprecated and the in-tree photonPersistentDisk type is no longer supported.
     #[prost(message, optional, tag = "17")]
     pub photon_persistent_disk: ::core::option::Option<PhotonPersistentDiskVolumeSource>,
-    /// portworxVolume represents a portworx volume attached and mounted on kubelets host machine
+    /// portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
+    /// Deprecated: PortworxVolume is deprecated. All operations for the in-tree portworxVolume type
+    /// are redirected to the pxd.portworx.com CSI driver when the CSIMigrationPortworx feature-gate
+    /// is on.
     /// +optional
     #[prost(message, optional, tag = "18")]
     pub portworx_volume: ::core::option::Option<PortworxVolumeSource>,
     /// scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
+    /// Deprecated: ScaleIO is deprecated and the in-tree scaleIO type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "19")]
     pub scale_io: ::core::option::Option<ScaleIoPersistentVolumeSource>,
@@ -3512,12 +3585,13 @@ pub struct PersistentVolumeSource {
     /// +optional
     #[prost(message, optional, tag = "20")]
     pub local: ::core::option::Option<LocalVolumeSource>,
-    /// storageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod
+    /// storageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod.
+    /// Deprecated: StorageOS is deprecated and the in-tree storageos type is no longer supported.
     /// More info: <https://examples.k8s.io/volumes/storageos/README.md>
     /// +optional
     #[prost(message, optional, tag = "21")]
     pub storageos: ::core::option::Option<StorageOsPersistentVolumeSource>,
-    /// csi represents storage that is handled by an external CSI driver (Beta feature).
+    /// csi represents storage that is handled by an external CSI driver.
     /// +optional
     #[prost(message, optional, tag = "22")]
     pub csi: ::core::option::Option<CSIPersistentVolumeSource>,
@@ -3726,7 +3800,6 @@ pub struct PodAffinityTerm {
     /// pod labels will be ignored. The default value is empty.
     /// The same key is forbidden to exist in both matchLabelKeys and labelSelector.
     /// Also, matchLabelKeys cannot be set when labelSelector isn't set.
-    /// This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
     ///
     /// +listType=atomic
     /// +optional
@@ -3740,7 +3813,6 @@ pub struct PodAffinityTerm {
     /// pod labels will be ignored. The default value is empty.
     /// The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
     /// Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
-    /// This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
     ///
     /// +listType=atomic
     /// +optional
@@ -3817,6 +3889,12 @@ pub struct PodCondition {
     /// More info: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions>
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
+    /// If set, this represents the .metadata.generation that the pod condition was set based upon.
+    /// This is an alpha field. Enable PodObservedGenerationTracking to be able to use this field.
+    /// +featureGate=PodObservedGenerationTracking
+    /// +optional
+    #[prost(int64, optional, tag = "7")]
+    pub observed_generation: ::core::option::Option<i64>,
     /// Status is the status of the condition.
     /// Can be True, False, Unknown.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions>
@@ -3870,9 +3948,11 @@ pub struct PodDnsConfig {
 /// PodDNSConfigOption defines DNS resolver options of a pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodDnsConfigOption {
+    /// Name is this DNS resolver option's name.
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Value is this DNS resolver option's value.
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub value: ::core::option::Option<::prost::alloc::string::String>,
@@ -3967,7 +4047,8 @@ pub struct PodLogOptions {
     #[prost(bool, optional, tag = "6")]
     pub timestamps: ::core::option::Option<bool>,
     /// If set, the number of lines from the end of the logs to show. If not specified,
-    /// logs are shown from the creation of the container or sinceSeconds or sinceTime
+    /// logs are shown from the creation of the container or sinceSeconds or sinceTime.
+    /// Note that when "TailLines" is specified, "Stream" can only be set to nil or "All".
     /// +optional
     #[prost(int64, optional, tag = "7")]
     pub tail_lines: ::core::option::Option<i64>,
@@ -3986,6 +4067,14 @@ pub struct PodLogOptions {
     /// +optional
     #[prost(bool, optional, tag = "9")]
     pub insecure_skip_tls_verify_backend: ::core::option::Option<bool>,
+    /// Specify which container log stream to return to the client.
+    /// Acceptable values are "All", "Stdout" and "Stderr". If not specified, "All" is used, and both stdout and stderr
+    /// are returned interleaved.
+    /// Note that when "TailLines" is specified, "Stream" can only be set to nil or "All".
+    /// +featureGate=PodLogsQuerySplitStreams
+    /// +optional
+    #[prost(string, optional, tag = "10")]
+    pub stream: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// PodOS defines the OS parameters of a pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4202,6 +4291,33 @@ pub struct PodSecurityContext {
     /// +optional
     #[prost(message, optional, tag = "11")]
     pub app_armor_profile: ::core::option::Option<AppArmorProfile>,
+    /// seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+    /// It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+    /// Valid values are "MountOption" and "Recursive".
+    ///
+    /// "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+    /// This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+    ///
+    /// "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+    /// This requires all Pods that share the same volume to use the same SELinux label.
+    /// It is not possible to share the same volume among privileged and unprivileged Pods.
+    /// Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+    /// whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+    /// CSIDriver instance. Other volumes are always re-labelled recursively.
+    /// "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+    ///
+    /// If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+    /// If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+    /// and "Recursive" for all other volumes.
+    ///
+    /// This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+    ///
+    /// All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+    /// Note that this field cannot be set when spec.os.name is windows.
+    /// +featureGate=SELinuxChangePolicy
+    /// +optional
+    #[prost(string, optional, tag = "13")]
+    pub se_linux_change_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Describes the class of pods that should avoid this node.
 /// Exactly one field should be set.
@@ -4233,7 +4349,7 @@ pub struct PodSpec {
     /// Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes.
     /// The resourceRequirements of an init container are taken into account during scheduling
     /// by finding the highest request/limit for each resource type, and then using the max of
-    /// of that value or the sum of the normal containers. Limits are applied to init containers
+    /// that value or the sum of the normal containers. Limits are applied to init containers
     /// in a similar fashion.
     /// Init containers cannot currently be added or removed.
     /// Cannot be updated.
@@ -4566,12 +4682,33 @@ pub struct PodSpec {
     /// +optional
     #[prost(message, repeated, tag = "39")]
     pub resource_claims: ::prost::alloc::vec::Vec<PodResourceClaim>,
+    /// Resources is the total amount of CPU and Memory resources required by all
+    /// containers in the pod. It supports specifying Requests and Limits for
+    /// "cpu" and "memory" resource names only. ResourceClaims are not supported.
+    ///
+    /// This field enables fine-grained control over resource allocation for the
+    /// entire pod, allowing resource sharing among containers in a pod.
+    /// TODO: For beta graduation, expand this comment with a detailed explanation.
+    ///
+    /// This is an alpha field and requires enabling the PodLevelResources feature
+    /// gate.
+    ///
+    /// +featureGate=PodLevelResources
+    /// +optional
+    #[prost(message, optional, tag = "40")]
+    pub resources: ::core::option::Option<ResourceRequirements>,
 }
 /// PodStatus represents information about the status of a pod. Status may trail the actual
 /// state of a system, especially if the node that hosts the pod cannot contact the control
 /// plane.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodStatus {
+    /// If set, this represents the .metadata.generation that the pod status was set based upon.
+    /// This is an alpha field. Enable PodObservedGenerationTracking to be able to use this field.
+    /// +featureGate=PodObservedGenerationTracking
+    /// +optional
+    #[prost(int64, optional, tag = "17")]
+    pub observed_generation: ::core::option::Option<i64>,
     /// The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle.
     /// The conditions array, the reason and message fields, and the individual container status
     /// arrays contain more detail about the pod's status.
@@ -4657,14 +4794,26 @@ pub struct PodStatus {
     /// +optional
     #[prost(message, optional, tag = "7")]
     pub start_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-    /// The list has one entry per init container in the manifest. The most recent successful
+    /// Statuses of init containers in this pod. The most recent successful non-restartable
     /// init container will have ready = true, the most recently started container will have
     /// startTime set.
-    /// More info: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status>
+    /// Each init container in the pod should have at most one status in this list,
+    /// and all statuses should be for containers in the pod.
+    /// However this is not enforced.
+    /// If a status for a non-existent container is present in the list, or the list has duplicate names,
+    /// the behavior of various Kubernetes components is not defined and those statuses might be
+    /// ignored.
+    /// More info: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-and-container-status>
     /// +listType=atomic
     #[prost(message, repeated, tag = "10")]
     pub init_container_statuses: ::prost::alloc::vec::Vec<ContainerStatus>,
-    /// The list has one entry per container in the manifest.
+    /// Statuses of containers in this pod.
+    /// Each container in the pod should have at most one status in this list,
+    /// and all statuses should be for containers in the pod.
+    /// However this is not enforced.
+    /// If a status for a non-existent container is present in the list, or the list has duplicate names,
+    /// the behavior of various Kubernetes components is not defined and those statuses might be
+    /// ignored.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status>
     /// +optional
     /// +listType=atomic
@@ -4676,7 +4825,14 @@ pub struct PodStatus {
     /// +optional
     #[prost(string, optional, tag = "9")]
     pub qos_class: ::core::option::Option<::prost::alloc::string::String>,
-    /// Status for any ephemeral containers that have run in this pod.
+    /// Statuses for any ephemeral containers that have run in this pod.
+    /// Each ephemeral container in the pod should have at most one status in this list,
+    /// and all statuses should be for containers in the pod.
+    /// However this is not enforced.
+    /// If a status for a non-existent container is present in the list, or the list has duplicate names,
+    /// the behavior of various Kubernetes components is not defined and those statuses might be
+    /// ignored.
+    /// More info: <https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status>
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "13")]
@@ -4684,6 +4840,9 @@ pub struct PodStatus {
     /// Status of resources resize desired for pod's containers.
     /// It is empty if no resources resize is pending.
     /// Any changes to container resources will automatically set this to "Proposed"
+    /// Deprecated: Resize status is moved to two pod conditions PodResizePending and PodResizeInProgress.
+    /// PodResizePending will track states where the spec has been resized, but the Kubelet has not yet allocated the resources.
+    /// PodResizeInProgress will track in-progress resizes, and should be present whenever allocated resources != acknowledged resources.
     /// +featureGate=InPlacePodVerticalScaling
     /// +optional
     #[prost(string, optional, tag = "14")]
@@ -4755,6 +4914,7 @@ pub struct PodTemplateSpec {
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<PodSpec>,
 }
+/// PortStatus represents the error condition of a service port
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PortStatus {
     /// Port is the port number of the service port of which status is recorded here
@@ -4886,19 +5046,19 @@ pub struct Probe {
 /// One and only one of the fields must be specified.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProbeHandler {
-    /// Exec specifies the action to take.
+    /// Exec specifies a command to execute in the container.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub exec: ::core::option::Option<ExecAction>,
-    /// HTTPGet specifies the http request to perform.
+    /// HTTPGet specifies an HTTP GET request to perform.
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub http_get: ::core::option::Option<HttpGetAction>,
-    /// TCPSocket specifies an action involving a TCP port.
+    /// TCPSocket specifies a connection to a TCP port.
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub tcp_socket: ::core::option::Option<TcpSocketAction>,
-    /// GRPC specifies an action involving a GRPC port.
+    /// GRPC specifies a GRPC HealthCheckRequest.
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub grpc: ::core::option::Option<GrpcAction>,
@@ -5149,12 +5309,18 @@ pub struct ReplicationControllerSpec {
     /// Defaults to 1.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller>
     /// +optional
+    /// +k8s:optional
+    /// +default=1
+    /// +k8s:minimum=0
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
     /// Minimum number of seconds for which a newly created pod should be ready
     /// without any of its container crashing, for it to be considered available.
     /// Defaults to 0 (pod will be considered available as soon as it is ready)
     /// +optional
+    /// +k8s:optional
+    /// +default=0
+    /// +k8s:minimum=0
     #[prost(int32, optional, tag = "4")]
     pub min_ready_seconds: ::core::option::Option<i32>,
     /// Selector is a label query over pods that should match the Replicas count.
@@ -5241,7 +5407,7 @@ pub struct ResourceFieldSelector {
     pub divisor: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// ResourceHealth represents the health of a resource. It has the latest device health information.
-/// This is a part of KEP <https://kep.k8s.io/4680> and historical health changes are planned to be added in future iterations of a KEP.
+/// This is a part of KEP <https://kep.k8s.io/4680.>
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceHealth {
     /// ResourceID is the unique identifier of the resource. See the ResourceID type for more information.
@@ -5371,16 +5537,19 @@ pub struct ResourceRequirements {
     #[prost(message, repeated, tag = "3")]
     pub claims: ::prost::alloc::vec::Vec<ResourceClaim>,
 }
+/// ResourceStatus represents the status of a single resource allocated to a Pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceStatus {
-    /// Name of the resource. Must be unique within the pod and match one of the resources from the pod spec.
+    /// Name of the resource. Must be unique within the pod and in case of non-DRA resource, match one of the resources from the pod spec.
+    /// For DRA resources, the value must be "claim:<claim_name>/<request>".
+    /// When this status is reported about a container, the "claim_name" and "request" must match one of the claims of this container.
     /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// List of unique Resources health. Each element in the list contains an unique resource ID and resource health.
-    /// At a minimum, ResourceID must uniquely identify the Resource
-    /// allocated to the Pod on the Node for the lifetime of a Pod.
-    /// See ResourceID type for it's definition.
+    /// List of unique resources health. Each element in the list contains an unique resource ID and its health.
+    /// At a minimum, for the lifetime of a Pod, resource ID must uniquely identify the resource allocated to the Pod on the Node.
+    /// If other Pod on the same Node reports the status with the same resource ID, it must be the same resource they share.
+    /// See ResourceID type definition for a specific format it has in various use cases.
     /// +listType=map
     /// +listMapKey=resourceID
     #[prost(message, repeated, tag = "2")]
@@ -5857,6 +6026,8 @@ pub struct ServiceAccount {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Secrets is a list of the secrets in the same namespace that pods running using this ServiceAccount are allowed to use.
     /// Pods are only limited to this list if this service account has a "kubernetes.io/enforce-mountable-secrets" annotation set to "true".
+    /// The "kubernetes.io/enforce-mountable-secrets" annotation is deprecated since v1.32.
+    /// Prefer separate namespaces to isolate access to mounted secrets.
     /// This field should not be used to find auto-generated service account token secrets for use outside of pods.
     /// Instead, tokens can be requested directly using the TokenRequest API, or service account token secrets can be manually created.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/secret>
@@ -6244,13 +6415,12 @@ pub struct ServiceSpec {
     /// +optional
     #[prost(string, optional, tag = "22")]
     pub internal_traffic_policy: ::core::option::Option<::prost::alloc::string::String>,
-    /// TrafficDistribution offers a way to express preferences for how traffic is
-    /// distributed to Service endpoints. Implementations can use this field as a
-    /// hint, but are not required to guarantee strict adherence. If the field is
-    /// not set, the implementation will apply its default routing strategy. If set
-    /// to "PreferClose", implementations should prioritize endpoints that are
-    /// topologically close (e.g., same zone).
-    /// This is an alpha field and requires enabling ServiceTrafficDistribution feature.
+    /// TrafficDistribution offers a way to express preferences for how traffic
+    /// is distributed to Service endpoints. Implementations can use this field
+    /// as a hint, but are not required to guarantee strict adherence. If the
+    /// field is not set, the implementation will apply its default routing
+    /// strategy. If set to "PreferClose", implementations should prioritize
+    /// endpoints that are in the same zone.
     /// +featureGate=ServiceTrafficDistribution
     /// +optional
     #[prost(string, optional, tag = "23")]
@@ -6559,7 +6729,6 @@ pub struct TopologySpreadConstraint {
     /// - Ignore: nodeAffinity/nodeSelector are ignored. All nodes are included in the calculations.
     ///
     /// If this value is nil, the behavior is equivalent to the Honor policy.
-    /// This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
     /// +optional
     #[prost(string, optional, tag = "6")]
     pub node_affinity_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -6570,7 +6739,6 @@ pub struct TopologySpreadConstraint {
     /// - Ignore: node taints are ignored. All nodes are included.
     ///
     /// If this value is nil, the behavior is equivalent to the Ignore policy.
-    /// This is a beta-level feature default enabled by the NodeInclusionPolicyInPodTopologySpread feature flag.
     /// +optional
     #[prost(string, optional, tag = "7")]
     pub node_taints_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -6591,6 +6759,20 @@ pub struct TopologySpreadConstraint {
 }
 /// TypedLocalObjectReference contains enough information to let you locate the
 /// typed referenced object inside the same namespace.
+/// ---
+/// New uses of this type are discouraged because of difficulty describing its usage when embedded in APIs.
+///   1. Invalid usage help.  It is impossible to add specific help for individual usage.  In most embedded usages, there are particular
+///      restrictions like, "must refer only to types A and B" or "UID not honored" or "name must be restricted".
+///      Those cannot be well described when embedded.
+///   2. Inconsistent validation.  Because the usages are different, the validation rules are different by usage, which makes it hard for users to predict what will happen.
+///   3. The fields are both imprecise and overly precise.  Kind is not a precise mapping to a URL. This can produce ambiguity
+///      during interpretation and require a REST mapping.  In most cases, the dependency is on the group,resource tuple
+///      and the version of the actual struct is irrelevant.
+///   4. We cannot easily change it.  Because this type is embedded in many locations, updates to this type
+///      will affect numerous schemas.  Don't make new APIs embed an underspecified API type they do not control.
+///
+/// Instead of using this type, create a locally provided and used type that is well-focused on your reference.
+/// For example, ServiceReferences for admission registration: <https://github.com/kubernetes/api/blob/release-1.17/admissionregistration/v1/types.go#L533> .
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypedLocalObjectReference {
@@ -6607,6 +6789,7 @@ pub struct TypedLocalObjectReference {
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// TypedObjectReference contains enough information to let you locate the typed referenced object
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypedObjectReference {
     /// APIGroup is the group for the resource being referenced.
@@ -6822,18 +7005,22 @@ pub struct VolumeSource {
     pub empty_dir: ::core::option::Option<EmptyDirVolumeSource>,
     /// gcePersistentDisk represents a GCE Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
+    /// Deprecated: GCEPersistentDisk is deprecated. All operations for the in-tree
+    /// gcePersistentDisk type are redirected to the pd.csi.storage.gke.io CSI driver.
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk>
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub gce_persistent_disk: ::core::option::Option<GcePersistentDiskVolumeSource>,
     /// awsElasticBlockStore represents an AWS Disk resource that is attached to a
     /// kubelet's host machine and then exposed to the pod.
+    /// Deprecated: AWSElasticBlockStore is deprecated. All operations for the in-tree
+    /// awsElasticBlockStore type are redirected to the ebs.csi.aws.com CSI driver.
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore>
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
     /// gitRepo represents a git repository at a particular revision.
-    /// DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an
+    /// Deprecated: GitRepo is deprecated. To provision a container with a git repo, mount an
     /// EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
     /// into the Pod's container.
     /// +optional
@@ -6856,6 +7043,7 @@ pub struct VolumeSource {
     #[prost(message, optional, tag = "8")]
     pub iscsi: ::core::option::Option<IscsiVolumeSource>,
     /// glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
+    /// Deprecated: Glusterfs is deprecated and the in-tree glusterfs type is no longer supported.
     /// More info: <https://examples.k8s.io/volumes/glusterfs/README.md>
     /// +optional
     #[prost(message, optional, tag = "9")]
@@ -6867,25 +7055,31 @@ pub struct VolumeSource {
     #[prost(message, optional, tag = "10")]
     pub persistent_volume_claim: ::core::option::Option<PersistentVolumeClaimVolumeSource>,
     /// rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
+    /// Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
     /// More info: <https://examples.k8s.io/volumes/rbd/README.md>
     /// +optional
     #[prost(message, optional, tag = "11")]
     pub rbd: ::core::option::Option<RbdVolumeSource>,
     /// flexVolume represents a generic volume resource that is
     /// provisioned/attached using an exec based plugin.
+    /// Deprecated: FlexVolume is deprecated. Consider using a CSIDriver instead.
     /// +optional
     #[prost(message, optional, tag = "12")]
     pub flex_volume: ::core::option::Option<FlexVolumeSource>,
     /// cinder represents a cinder volume attached and mounted on kubelets host machine.
+    /// Deprecated: Cinder is deprecated. All operations for the in-tree cinder type
+    /// are redirected to the cinder.csi.openstack.org CSI driver.
     /// More info: <https://examples.k8s.io/mysql-cinder-pd/README.md>
     /// +optional
     #[prost(message, optional, tag = "13")]
     pub cinder: ::core::option::Option<CinderVolumeSource>,
-    /// cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+    /// cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
+    /// Deprecated: CephFS is deprecated and the in-tree cephfs type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "14")]
     pub cephfs: ::core::option::Option<CephFsVolumeSource>,
-    /// flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
+    /// flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
+    /// Deprecated: Flocker is deprecated and the in-tree flocker type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "15")]
     pub flocker: ::core::option::Option<FlockerVolumeSource>,
@@ -6898,6 +7092,8 @@ pub struct VolumeSource {
     #[prost(message, optional, tag = "17")]
     pub fc: ::core::option::Option<FcVolumeSource>,
     /// azureFile represents an Azure File Service mount on the host and bind mount to the pod.
+    /// Deprecated: AzureFile is deprecated. All operations for the in-tree azureFile type
+    /// are redirected to the file.csi.azure.com CSI driver.
     /// +optional
     #[prost(message, optional, tag = "18")]
     pub azure_file: ::core::option::Option<AzureFileVolumeSource>,
@@ -6905,37 +7101,48 @@ pub struct VolumeSource {
     /// +optional
     #[prost(message, optional, tag = "19")]
     pub config_map: ::core::option::Option<ConfigMapVolumeSource>,
-    /// vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine
+    /// vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
+    /// Deprecated: VsphereVolume is deprecated. All operations for the in-tree vsphereVolume type
+    /// are redirected to the csi.vsphere.vmware.com CSI driver.
     /// +optional
     #[prost(message, optional, tag = "20")]
     pub vsphere_volume: ::core::option::Option<VsphereVirtualDiskVolumeSource>,
-    /// quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+    /// quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
+    /// Deprecated: Quobyte is deprecated and the in-tree quobyte type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "21")]
     pub quobyte: ::core::option::Option<QuobyteVolumeSource>,
     /// azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
+    /// Deprecated: AzureDisk is deprecated. All operations for the in-tree azureDisk type
+    /// are redirected to the disk.csi.azure.com CSI driver.
     /// +optional
     #[prost(message, optional, tag = "22")]
     pub azure_disk: ::core::option::Option<AzureDiskVolumeSource>,
-    /// photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
+    /// photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
+    /// Deprecated: PhotonPersistentDisk is deprecated and the in-tree photonPersistentDisk type is no longer supported.
     #[prost(message, optional, tag = "23")]
     pub photon_persistent_disk: ::core::option::Option<PhotonPersistentDiskVolumeSource>,
     /// projected items for all in one resources secrets, configmaps, and downward API
     #[prost(message, optional, tag = "26")]
     pub projected: ::core::option::Option<ProjectedVolumeSource>,
-    /// portworxVolume represents a portworx volume attached and mounted on kubelets host machine
+    /// portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
+    /// Deprecated: PortworxVolume is deprecated. All operations for the in-tree portworxVolume type
+    /// are redirected to the pxd.portworx.com CSI driver when the CSIMigrationPortworx feature-gate
+    /// is on.
     /// +optional
     #[prost(message, optional, tag = "24")]
     pub portworx_volume: ::core::option::Option<PortworxVolumeSource>,
     /// scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
+    /// Deprecated: ScaleIO is deprecated and the in-tree scaleIO type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "25")]
     pub scale_io: ::core::option::Option<ScaleIoVolumeSource>,
     /// storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
+    /// Deprecated: StorageOS is deprecated and the in-tree storageos type is no longer supported.
     /// +optional
     #[prost(message, optional, tag = "27")]
     pub storageos: ::core::option::Option<StorageOsVolumeSource>,
-    /// csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature).
+    /// csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
     /// +optional
     #[prost(message, optional, tag = "28")]
     pub csi: ::core::option::Option<CSIVolumeSource>,
@@ -6979,7 +7186,7 @@ pub struct VolumeSource {
     /// The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
     /// The OCI object gets mounted in a single directory (spec.containers\[*\].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
     /// The volume will be mounted read-only (ro) and non-executable files (noexec).
-    /// Sub path mounts for containers are not supported (spec.containers\[*\].volumeMounts.subpath).
+    /// Sub path mounts for containers are not supported (spec.containers\[*\].volumeMounts.subpath) before 1.33.
     /// The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
     /// +featureGate=ImageVolume
     /// +optional

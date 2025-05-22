@@ -130,8 +130,8 @@ pub struct VolumeAttachmentList {
     pub items: ::prost::alloc::vec::Vec<VolumeAttachment>,
 }
 /// VolumeAttachmentSource represents a volume that should be attached.
-/// Right now only PersistenVolumes can be attached via external attacher,
-/// in future we may allow also inline volumes in pods.
+/// Right now only PersistentVolumes can be attached via external attacher,
+/// in the future we may allow also inline volumes in pods.
 /// Exactly one member can be set.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachmentSource {
@@ -249,6 +249,14 @@ pub struct VolumeError {
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
+    /// errorCode is a numeric gRPC code representing the error encountered during Attach or Detach operations.
+    ///
+    /// This is an optional, alpha field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.
+    ///
+    /// +featureGate=MutableCSINodeAllocatableCount
+    /// +optional
+    #[prost(int32, optional, tag = "3")]
+    pub error_code: ::core::option::Option<i32>,
 }
 
 impl crate::Resource for VolumeAttributesClass {

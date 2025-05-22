@@ -160,33 +160,40 @@ pub struct DeploymentSpec {
 /// DeploymentStatus is the most recently observed status of the Deployment.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentStatus {
-    /// observedGeneration is the generation observed by the deployment controller.
+    /// The generation observed by the deployment controller.
     /// +optional
     #[prost(int64, optional, tag = "1")]
     pub observed_generation: ::core::option::Option<i64>,
-    /// replicas is the total number of non-terminated pods targeted by this deployment (their labels match the selector).
+    /// Total number of non-terminating pods targeted by this deployment (their labels match the selector).
     /// +optional
     #[prost(int32, optional, tag = "2")]
     pub replicas: ::core::option::Option<i32>,
-    /// updatedReplicas is the total number of non-terminated pods targeted by this deployment that have the desired template spec.
+    /// Total number of non-terminating pods targeted by this deployment that have the desired template spec.
     /// +optional
     #[prost(int32, optional, tag = "3")]
     pub updated_replicas: ::core::option::Option<i32>,
-    /// readyReplicas is the number of pods targeted by this Deployment controller with a Ready Condition.
+    /// Total number of non-terminating pods targeted by this Deployment with a Ready Condition.
     /// +optional
     #[prost(int32, optional, tag = "7")]
     pub ready_replicas: ::core::option::Option<i32>,
-    /// Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.
+    /// Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.
     /// +optional
     #[prost(int32, optional, tag = "4")]
     pub available_replicas: ::core::option::Option<i32>,
-    /// unavailableReplicas is the total number of unavailable pods targeted by this deployment. This is the total number of
+    /// Total number of unavailable pods targeted by this deployment. This is the total number of
     /// pods that are still required for the deployment to have 100% available capacity. They may
     /// either be pods that are running but not yet available or pods that still have not been created.
     /// +optional
     #[prost(int32, optional, tag = "5")]
     pub unavailable_replicas: ::core::option::Option<i32>,
-    /// Conditions represent the latest available observations of a deployment's current state.
+    /// Total number of terminating pods targeted by this deployment. Terminating pods have a non-null
+    /// .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.
+    ///
+    /// This is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.
+    /// +optional
+    #[prost(int32, optional, tag = "9")]
+    pub terminating_replicas: ::core::option::Option<i32>,
+    /// Represents the latest available observations of a deployment's current state.
     /// +patchMergeKey=type
     /// +patchStrategy=merge
     /// +listType=map
@@ -454,6 +461,7 @@ pub struct StatefulSetSpec {
     /// the network identity of the set. Pods get DNS/hostnames that follow the
     /// pattern: pod-specific-string.serviceName.default.svc.cluster.local
     /// where "pod-specific-string" is managed by the StatefulSet controller.
+    /// +optional
     #[prost(string, optional, tag = "5")]
     pub service_name: ::core::option::Option<::prost::alloc::string::String>,
     /// podManagementPolicy controls how pods are created during initial scale up,
@@ -485,8 +493,7 @@ pub struct StatefulSetSpec {
     #[prost(int32, optional, tag = "9")]
     pub min_ready_seconds: ::core::option::Option<i32>,
     /// PersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from
-    /// the StatefulSet VolumeClaimTemplates. This requires the
-    /// StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.
+    /// the StatefulSet VolumeClaimTemplates.
     /// +optional
     #[prost(message, optional, tag = "10")]
     pub persistent_volume_claim_retention_policy:

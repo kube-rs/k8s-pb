@@ -89,6 +89,13 @@ pub struct EndpointHints {
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
     pub for_zones: ::prost::alloc::vec::Vec<ForZone>,
+    /// forNodes indicates the node(s) this endpoint should be consumed by when
+    /// using topology aware routing. May contain a maximum of 8 entries.
+    /// This is an Alpha feature and is only used when the PreferSameTrafficDistribution
+    /// feature gate is enabled.
+    /// +listType=atomic
+    #[prost(message, repeated, tag = "2")]
+    pub for_nodes: ::prost::alloc::vec::Vec<ForNode>,
 }
 /// EndpointPort represents a Port used by an EndpointSlice
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -165,6 +172,13 @@ pub struct EndpointSliceList {
     /// items is the list of endpoint slices
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<EndpointSlice>,
+}
+/// ForNode provides information about which nodes should consume this endpoint.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ForNode {
+    /// name represents the name of the node.
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ForZone provides information about which zones should consume this endpoint.
 #[derive(Clone, PartialEq, ::prost::Message)]

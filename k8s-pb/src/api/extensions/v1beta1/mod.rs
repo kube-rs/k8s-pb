@@ -307,19 +307,19 @@ pub struct DeploymentStatus {
     /// +optional
     #[prost(int64, optional, tag = "1")]
     pub observed_generation: ::core::option::Option<i64>,
-    /// Total number of non-terminated pods targeted by this deployment (their labels match the selector).
+    /// Total number of non-terminating pods targeted by this deployment (their labels match the selector).
     /// +optional
     #[prost(int32, optional, tag = "2")]
     pub replicas: ::core::option::Option<i32>,
-    /// Total number of non-terminated pods targeted by this deployment that have the desired template spec.
+    /// Total number of non-terminating pods targeted by this deployment that have the desired template spec.
     /// +optional
     #[prost(int32, optional, tag = "3")]
     pub updated_replicas: ::core::option::Option<i32>,
-    /// Total number of ready pods targeted by this deployment.
+    /// Total number of non-terminating pods targeted by this Deployment with a Ready Condition.
     /// +optional
     #[prost(int32, optional, tag = "7")]
     pub ready_replicas: ::core::option::Option<i32>,
-    /// Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.
+    /// Total number of available non-terminating pods (ready for at least minReadySeconds) targeted by this deployment.
     /// +optional
     #[prost(int32, optional, tag = "4")]
     pub available_replicas: ::core::option::Option<i32>,
@@ -329,6 +329,13 @@ pub struct DeploymentStatus {
     /// +optional
     #[prost(int32, optional, tag = "5")]
     pub unavailable_replicas: ::core::option::Option<i32>,
+    /// Total number of terminating pods targeted by this deployment. Terminating pods have a non-null
+    /// .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.
+    ///
+    /// This is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.
+    /// +optional
+    #[prost(int32, optional, tag = "9")]
+    pub terminating_replicas: ::core::option::Option<i32>,
     /// Represents the latest available observations of a deployment's current state.
     /// +patchMergeKey=type
     /// +patchStrategy=merge
@@ -880,17 +887,17 @@ pub struct ReplicaSetList {
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// List of ReplicaSets.
-    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller>
+    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicaset>
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ReplicaSet>,
 }
 /// ReplicaSetSpec is the specification of a ReplicaSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetSpec {
-    /// Replicas is the number of desired replicas.
+    /// Replicas is the number of desired pods.
     /// This is a pointer to distinguish between explicit zero and unspecified.
     /// Defaults to 1.
-    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller>
+    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicaset>
     /// +optional
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
@@ -910,7 +917,7 @@ pub struct ReplicaSetSpec {
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template is the object that describes the pod that will be created if
     /// insufficient replicas are detected.
-    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template>
+    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/#pod-template>
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
@@ -918,22 +925,29 @@ pub struct ReplicaSetSpec {
 /// ReplicaSetStatus represents the current status of a ReplicaSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaSetStatus {
-    /// Replicas is the most recently observed number of replicas.
-    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller>
+    /// Replicas is the most recently observed number of non-terminating pods.
+    /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicaset>
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
-    /// The number of pods that have labels matching the labels of the pod template of the replicaset.
+    /// The number of non-terminating pods that have labels matching the labels of the pod template of the replicaset.
     /// +optional
     #[prost(int32, optional, tag = "2")]
     pub fully_labeled_replicas: ::core::option::Option<i32>,
-    /// The number of ready replicas for this replica set.
+    /// The number of non-terminating pods targeted by this ReplicaSet with a Ready Condition.
     /// +optional
     #[prost(int32, optional, tag = "4")]
     pub ready_replicas: ::core::option::Option<i32>,
-    /// The number of available replicas (ready for at least minReadySeconds) for this replica set.
+    /// The number of available non-terminating pods (ready for at least minReadySeconds) for this replica set.
     /// +optional
     #[prost(int32, optional, tag = "5")]
     pub available_replicas: ::core::option::Option<i32>,
+    /// The number of terminating pods for this replica set. Terminating pods have a non-null .metadata.deletionTimestamp
+    /// and have not yet reached the Failed or Succeeded .status.phase.
+    ///
+    /// This is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.
+    /// +optional
+    #[prost(int32, optional, tag = "7")]
+    pub terminating_replicas: ::core::option::Option<i32>,
     /// ObservedGeneration reflects the generation of the most recently observed ReplicaSet.
     /// +optional
     #[prost(int64, optional, tag = "3")]

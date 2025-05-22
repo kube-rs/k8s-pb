@@ -68,87 +68,6 @@ pub struct AllocationResult {
     #[prost(message, optional, tag = "3")]
     pub node_selector: ::core::option::Option<super::super::core::v1::NodeSelector>,
 }
-/// BasicDevice defines one device instance.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct BasicDevice {
-    /// Attributes defines the set of attributes for this device.
-    /// The name of each attribute must be unique in that set.
-    ///
-    /// The maximum number of attributes and capacities combined is 32.
-    ///
-    /// +optional
-    #[prost(btree_map = "string, message", tag = "1")]
-    pub attributes: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceAttribute>,
-    /// Capacity defines the set of capacities for this device.
-    /// The name of each capacity must be unique in that set.
-    ///
-    /// The maximum number of attributes and capacities combined is 32.
-    ///
-    /// +optional
-    #[prost(btree_map = "string, message", tag = "2")]
-    pub capacity: ::prost::alloc::collections::BTreeMap<
-        ::prost::alloc::string::String,
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
-    /// ConsumesCounters defines a list of references to sharedCounters
-    /// and the set of counters that the device will
-    /// consume from those counter sets.
-    ///
-    /// There can only be a single entry per counterSet.
-    ///
-    /// The total number of device counter consumption entries
-    /// must be <= 32. In addition, the total number in the
-    /// entire ResourceSlice must be <= 1024 (for example,
-    /// 64 devices with 16 counters each).
-    ///
-    /// +optional
-    /// +listType=atomic
-    /// +featureGate=DRAPartitionableDevices
-    #[prost(message, repeated, tag = "3")]
-    pub consumes_counters: ::prost::alloc::vec::Vec<DeviceCounterConsumption>,
-    /// NodeName identifies the node where the device is available.
-    ///
-    /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
-    /// At most one of NodeName, NodeSelector and AllNodes can be set.
-    ///
-    /// +optional
-    /// +oneOf=DeviceNodeSelection
-    /// +featureGate=DRAPartitionableDevices
-    #[prost(string, optional, tag = "4")]
-    pub node_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// NodeSelector defines the nodes where the device is available.
-    ///
-    /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
-    /// At most one of NodeName, NodeSelector and AllNodes can be set.
-    ///
-    /// +optional
-    /// +oneOf=DeviceNodeSelection
-    /// +featureGate=DRAPartitionableDevices
-    #[prost(message, optional, tag = "5")]
-    pub node_selector: ::core::option::Option<super::super::core::v1::NodeSelector>,
-    /// AllNodes indicates that all nodes have access to the device.
-    ///
-    /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
-    /// At most one of NodeName, NodeSelector and AllNodes can be set.
-    ///
-    /// +optional
-    /// +oneOf=DeviceNodeSelection
-    /// +featureGate=DRAPartitionableDevices
-    #[prost(bool, optional, tag = "6")]
-    pub all_nodes: ::core::option::Option<bool>,
-    /// If specified, these are the driver-defined taints.
-    ///
-    /// The maximum number of taints is 4.
-    ///
-    /// This is an alpha field and requires enabling the DRADeviceTaints
-    /// feature gate.
-    ///
-    /// +optional
-    /// +listType=atomic
-    /// +featureGate=DRADeviceTaints
-    #[prost(message, repeated, tag = "7")]
-    pub taints: ::prost::alloc::vec::Vec<DeviceTaint>,
-}
 /// CELDeviceSelector contains a CEL expression for selecting a device.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CelDeviceSelector {
@@ -226,20 +145,16 @@ pub struct Counter {
 /// by other devices.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CounterSet {
-    /// CounterSet is the name of the set from which the
-    /// counters defined will be consumed.
+    /// Name defines the name of the counter set.
+    /// It must be a DNS label.
     ///
     /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Counters defines the counters that will be consumed by the device.
+    /// Counters defines the set of counters for this CounterSet
     /// The name of each counter must be unique in that set and must be a DNS label.
     ///
-    /// To ensure this uniqueness, capacities defined by the vendor
-    /// must be listed without the driver name as domain prefix in
-    /// their name. All others must be listed with their domain prefix.
-    ///
-    /// The maximum number of counters is 32.
+    /// The maximum number of counters in all sets is 32.
     ///
     /// +required
     #[prost(btree_map = "string, message", tag = "2")]
@@ -255,12 +170,82 @@ pub struct Device {
     /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Basic defines one device instance.
+    /// Attributes defines the set of attributes for this device.
+    /// The name of each attribute must be unique in that set.
+    ///
+    /// The maximum number of attributes and capacities combined is 32.
     ///
     /// +optional
-    /// +oneOf=deviceType
-    #[prost(message, optional, tag = "2")]
-    pub basic: ::core::option::Option<BasicDevice>,
+    #[prost(btree_map = "string, message", tag = "2")]
+    pub attributes: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceAttribute>,
+    /// Capacity defines the set of capacities for this device.
+    /// The name of each capacity must be unique in that set.
+    ///
+    /// The maximum number of attributes and capacities combined is 32.
+    ///
+    /// +optional
+    #[prost(btree_map = "string, message", tag = "3")]
+    pub capacity: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceCapacity>,
+    /// ConsumesCounters defines a list of references to sharedCounters
+    /// and the set of counters that the device will
+    /// consume from those counter sets.
+    ///
+    /// There can only be a single entry per counterSet.
+    ///
+    /// The total number of device counter consumption entries
+    /// must be <= 32. In addition, the total number in the
+    /// entire ResourceSlice must be <= 1024 (for example,
+    /// 64 devices with 16 counters each).
+    ///
+    /// +optional
+    /// +listType=atomic
+    /// +featureGate=DRAPartitionableDevices
+    #[prost(message, repeated, tag = "4")]
+    pub consumes_counters: ::prost::alloc::vec::Vec<DeviceCounterConsumption>,
+    /// NodeName identifies the node where the device is available.
+    ///
+    /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
+    /// At most one of NodeName, NodeSelector and AllNodes can be set.
+    ///
+    /// +optional
+    /// +oneOf=DeviceNodeSelection
+    /// +featureGate=DRAPartitionableDevices
+    #[prost(string, optional, tag = "5")]
+    pub node_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// NodeSelector defines the nodes where the device is available.
+    ///
+    /// Must use exactly one term.
+    ///
+    /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
+    /// At most one of NodeName, NodeSelector and AllNodes can be set.
+    ///
+    /// +optional
+    /// +oneOf=DeviceNodeSelection
+    /// +featureGate=DRAPartitionableDevices
+    #[prost(message, optional, tag = "6")]
+    pub node_selector: ::core::option::Option<super::super::core::v1::NodeSelector>,
+    /// AllNodes indicates that all nodes have access to the device.
+    ///
+    /// Must only be set if Spec.PerDeviceNodeSelection is set to true.
+    /// At most one of NodeName, NodeSelector and AllNodes can be set.
+    ///
+    /// +optional
+    /// +oneOf=DeviceNodeSelection
+    /// +featureGate=DRAPartitionableDevices
+    #[prost(bool, optional, tag = "7")]
+    pub all_nodes: ::core::option::Option<bool>,
+    /// If specified, these are the driver-defined taints.
+    ///
+    /// The maximum number of taints is 4.
+    ///
+    /// This is an alpha field and requires enabling the DRADeviceTaints
+    /// feature gate.
+    ///
+    /// +optional
+    /// +listType=atomic
+    /// +featureGate=DRADeviceTaints
+    #[prost(message, repeated, tag = "8")]
+    pub taints: ::prost::alloc::vec::Vec<DeviceTaint>,
 }
 /// DeviceAllocationConfiguration gets embedded in an AllocationResult.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -336,6 +321,15 @@ pub struct DeviceAttribute {
     /// +oneOf=ValueType
     #[prost(string, optional, tag = "5")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// DeviceCapacity describes a quantity associated with a device.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeviceCapacity {
+    /// Value defines how much of a certain device capacity is available.
+    ///
+    /// +required
+    #[prost(message, optional, tag = "1")]
+    pub value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// DeviceClaim defines how to request devices with a ResourceClaim.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -493,14 +487,13 @@ pub struct DeviceConstraint {
 /// a device will consume from a CounterSet.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceCounterConsumption {
-    /// CounterSet defines the set from which the
+    /// CounterSet is the name of the set from which the
     /// counters defined will be consumed.
     ///
     /// +required
     #[prost(string, optional, tag = "1")]
     pub counter_set: ::core::option::Option<::prost::alloc::string::String>,
-    /// Counters defines the Counter that will be consumed by
-    /// the device.
+    /// Counters defines the counters that will be consumed by the device.
     ///
     /// The maximum number counters in a device is 32.
     /// In addition, the maximum number of all counters
@@ -513,107 +506,38 @@ pub struct DeviceCounterConsumption {
 }
 /// DeviceRequest is a request for devices required for a claim.
 /// This is typically a request for a single resource like a device, but can
-/// also ask for several identical devices.
+/// also ask for several identical devices. With FirstAvailable it is also
+/// possible to provide a prioritized list of requests.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceRequest {
     /// Name can be used to reference this request in a pod.spec.containers\[\].resources.claims
     /// entry and in a constraint of the claim.
+    ///
+    /// References using the name in the DeviceRequest will uniquely
+    /// identify a request when the Exactly field is set. When the
+    /// FirstAvailable field is set, a reference to the name of the
+    /// DeviceRequest will match whatever subrequest is chosen by the
+    /// scheduler.
     ///
     /// Must be a DNS label.
     ///
     /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// DeviceClassName references a specific DeviceClass, which can define
-    /// additional configuration and selectors to be inherited by this
-    /// request.
+    /// Exactly specifies the details for a single request that must
+    /// be met exactly for the request to be satisfied.
     ///
-    /// A class is required if no subrequests are specified in the
-    /// firstAvailable list and no class can be set if subrequests
-    /// are specified in the firstAvailable list.
-    /// Which classes are available depends on the cluster.
-    ///
-    /// Administrators may use this to restrict which devices may get
-    /// requested by only installing classes with selectors for permitted
-    /// devices. If users are free to request anything without restrictions,
-    /// then administrators can create an empty DeviceClass for users
-    /// to reference.
+    /// One of Exactly or FirstAvailable must be set.
     ///
     /// +optional
     /// +oneOf=deviceRequestType
-    #[prost(string, optional, tag = "2")]
-    pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Selectors define criteria which must be satisfied by a specific
-    /// device in order for that device to be considered for this
-    /// request. All selectors must be satisfied for a device to be
-    /// considered.
-    ///
-    /// This field can only be set when deviceClassName is set and no subrequests
-    /// are specified in the firstAvailable list.
-    ///
-    /// +optional
-    /// +listType=atomic
-    #[prost(message, repeated, tag = "3")]
-    pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
-    /// AllocationMode and its related fields define how devices are allocated
-    /// to satisfy this request. Supported values are:
-    ///
-    /// - ExactCount: This request is for a specific number of devices.
-    ///    This is the default. The exact number is provided in the
-    ///    count field.
-    ///
-    /// - All: This request is for all of the matching devices in a pool.
-    ///    At least one device must exist on the node for the allocation to succeed.
-    ///    Allocation will fail if some devices are already allocated,
-    ///    unless adminAccess is requested.
-    ///
-    /// If AllocationMode is not specified, the default mode is ExactCount. If
-    /// the mode is ExactCount and count is not specified, the default count is
-    /// one. Any other requests must specify this field.
-    ///
-    /// This field can only be set when deviceClassName is set and no subrequests
-    /// are specified in the firstAvailable list.
-    ///
-    /// More modes may get added in the future. Clients must refuse to handle
-    /// requests with unknown modes.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "4")]
-    pub allocation_mode: ::core::option::Option<::prost::alloc::string::String>,
-    /// Count is used only when the count mode is "ExactCount". Must be greater than zero.
-    /// If AllocationMode is ExactCount and this field is not specified, the default is one.
-    ///
-    /// This field can only be set when deviceClassName is set and no subrequests
-    /// are specified in the firstAvailable list.
-    ///
-    /// +optional
-    /// +oneOf=AllocationMode
-    #[prost(int64, optional, tag = "5")]
-    pub count: ::core::option::Option<i64>,
-    /// AdminAccess indicates that this is a claim for administrative access
-    /// to the device(s). Claims with AdminAccess are expected to be used for
-    /// monitoring or other management services for a device.  They ignore
-    /// all ordinary claims to the device with respect to access modes and
-    /// any resource allocations.
-    ///
-    /// This field can only be set when deviceClassName is set and no subrequests
-    /// are specified in the firstAvailable list.
-    ///
-    /// This is an alpha field and requires enabling the DRAAdminAccess
-    /// feature gate. Admin access is disabled if this field is unset or
-    /// set to false, otherwise it is enabled.
-    ///
-    /// +optional
-    /// +featureGate=DRAAdminAccess
-    #[prost(bool, optional, tag = "6")]
-    pub admin_access: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "2")]
+    pub exactly: ::core::option::Option<ExactDeviceRequest>,
     /// FirstAvailable contains subrequests, of which exactly one will be
-    /// satisfied by the scheduler to satisfy this request. It tries to
+    /// selected by the scheduler. It tries to
     /// satisfy them in the order in which they are listed here. So if
     /// there are two entries in the list, the scheduler will only check
-    /// the second one if it determines that the first one cannot be used.
-    ///
-    /// This field may only be set in the entries of DeviceClaim.Requests.
+    /// the second one if it determines that the first one can not be used.
     ///
     /// DRA does not yet implement scoring, so the scheduler will
     /// select the first set of devices that satisfies all the
@@ -627,34 +551,8 @@ pub struct DeviceRequest {
     /// +oneOf=deviceRequestType
     /// +listType=atomic
     /// +featureGate=DRAPrioritizedList
-    #[prost(message, repeated, tag = "7")]
+    #[prost(message, repeated, tag = "3")]
     pub first_available: ::prost::alloc::vec::Vec<DeviceSubRequest>,
-    /// If specified, the request's tolerations.
-    ///
-    /// Tolerations for NoSchedule are required to allocate a
-    /// device which has a taint with that effect. The same applies
-    /// to NoExecute.
-    ///
-    /// In addition, should any of the allocated devices get tainted
-    /// with NoExecute after allocation and that effect is not tolerated,
-    /// then all pods consuming the ResourceClaim get deleted to evict
-    /// them. The scheduler will not let new pods reserve the claim while
-    /// it has these tainted devices. Once all pods are evicted, the
-    /// claim will get deallocated.
-    ///
-    /// The maximum number of tolerations is 16.
-    ///
-    /// This field can only be set when deviceClassName is set and no subrequests
-    /// are specified in the firstAvailable list.
-    ///
-    /// This is an alpha field and requires enabling the DRADeviceTaints
-    /// feature gate.
-    ///
-    /// +optional
-    /// +listType=atomic
-    /// +featureGate=DRADeviceTaints
-    #[prost(message, repeated, tag = "8")]
-    pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
 }
 /// DeviceRequestAllocationResult contains the allocation result for one request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -736,10 +634,9 @@ pub struct DeviceSelector {
 /// is typically a request for a single resource like a device, but can
 /// also ask for several identical devices.
 ///
-/// DeviceSubRequest is similar to Request, but doesn't expose the AdminAccess
-/// or FirstAvailable fields, as those can only be set on the top-level request.
-/// AdminAccess is not supported for requests with a prioritized list, and
-/// recursive FirstAvailable fields are not supported.
+/// DeviceSubRequest is similar to ExactDeviceRequest, but doesn't expose the
+/// AdminAccess field as that one is only supported when requesting a
+/// specific device.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceSubRequest {
     /// Name can be used to reference this subrequest in the list of constraints
@@ -768,7 +665,7 @@ pub struct DeviceSubRequest {
     pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Selectors define criteria which must be satisfied by a specific
     /// device in order for that device to be considered for this
-    /// request. All selectors must be satisfied for a device to be
+    /// subrequest. All selectors must be satisfied for a device to be
     /// considered.
     ///
     /// +optional
@@ -776,19 +673,19 @@ pub struct DeviceSubRequest {
     #[prost(message, repeated, tag = "3")]
     pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
     /// AllocationMode and its related fields define how devices are allocated
-    /// to satisfy this request. Supported values are:
+    /// to satisfy this subrequest. Supported values are:
     ///
     /// - ExactCount: This request is for a specific number of devices.
     ///    This is the default. The exact number is provided in the
     ///    count field.
     ///
-    /// - All: This request is for all of the matching devices in a pool.
+    /// - All: This subrequest is for all of the matching devices in a pool.
     ///    Allocation will fail if some devices are already allocated,
     ///    unless adminAccess is requested.
     ///
     /// If AllocationMode is not specified, the default mode is ExactCount. If
     /// the mode is ExactCount and count is not specified, the default count is
-    /// one. Any other requests must specify this field.
+    /// one. Any other subrequests must specify this field.
     ///
     /// More modes may get added in the future. Clients must refuse to handle
     /// requests with unknown modes.
@@ -824,12 +721,14 @@ pub struct DeviceSubRequest {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceTaints
-    #[prost(message, repeated, tag = "7")]
+    #[prost(message, repeated, tag = "6")]
     pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
 }
 /// The device this taint is attached to has the "effect" on
 /// any claim which does not tolerate the taint and, through the claim,
 /// to pods using the claim.
+///
+/// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceTaint {
     /// The taint key to be applied to a device.
@@ -858,97 +757,6 @@ pub struct DeviceTaint {
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub time_added: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-}
-/// DeviceTaintRule adds one taint to all devices which match the selector.
-/// This has the same effect as if the taint was specified directly
-/// in the ResourceSlice by the DRA driver.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintRule {
-    /// Standard object metadata
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec specifies the selector and one taint.
-    ///
-    /// Changing the spec automatically increments the metadata.generation number.
-    #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<DeviceTaintRuleSpec>,
-}
-/// DeviceTaintRuleList is a collection of DeviceTaintRules.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintRuleList {
-    /// Standard list metadata
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
-    /// Items is the list of DeviceTaintRules.
-    #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<DeviceTaintRule>,
-}
-/// DeviceTaintRuleSpec specifies the selector and one taint.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintRuleSpec {
-    /// DeviceSelector defines which device(s) the taint is applied to.
-    /// All selector criteria must be satified for a device to
-    /// match. The empty selector matches all devices. Without
-    /// a selector, no devices are matches.
-    ///
-    /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub device_selector: ::core::option::Option<DeviceTaintSelector>,
-    /// The taint that gets applied to matching devices.
-    ///
-    /// +required
-    #[prost(message, optional, tag = "2")]
-    pub taint: ::core::option::Option<DeviceTaint>,
-}
-/// DeviceTaintSelector defines which device(s) a DeviceTaintRule applies to.
-/// The empty selector matches all devices. Without a selector, no devices
-/// are matched.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeviceTaintSelector {
-    /// If DeviceClassName is set, the selectors defined there must be
-    /// satisfied by a device to be selected. This field corresponds
-    /// to class.metadata.name.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "1")]
-    pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// If driver is set, only devices from that driver are selected.
-    /// This fields corresponds to slice.spec.driver.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "2")]
-    pub driver: ::core::option::Option<::prost::alloc::string::String>,
-    /// If pool is set, only devices in that pool are selected.
-    ///
-    /// Also setting the driver name may be useful to avoid
-    /// ambiguity when different drivers use the same pool name,
-    /// but this is not required because selecting pools from
-    /// different drivers may also be useful, for example when
-    /// drivers with node-local devices use the node name as
-    /// their pool name.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "3")]
-    pub pool: ::core::option::Option<::prost::alloc::string::String>,
-    /// If device is set, only devices with that name are selected.
-    /// This field corresponds to slice.spec.devices\[\].name.
-    ///
-    /// Setting also driver and pool may be required to avoid ambiguity,
-    /// but is not required.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "4")]
-    pub device: ::core::option::Option<::prost::alloc::string::String>,
-    /// Selectors contains the same selection criteria as a ResourceClaim.
-    /// Currently, CEL expressions are supported. All of these selectors
-    /// must be satisfied.
-    ///
-    /// +optional
-    /// +listType=atomic
-    #[prost(message, repeated, tag = "5")]
-    pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
 }
 /// The ResourceClaim this DeviceToleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
@@ -994,6 +802,100 @@ pub struct DeviceToleration {
     #[prost(int64, optional, tag = "5")]
     pub toleration_seconds: ::core::option::Option<i64>,
 }
+/// ExactDeviceRequest is a request for one or more identical devices.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExactDeviceRequest {
+    /// DeviceClassName references a specific DeviceClass, which can define
+    /// additional configuration and selectors to be inherited by this
+    /// request.
+    ///
+    /// A DeviceClassName is required.
+    ///
+    /// Administrators may use this to restrict which devices may get
+    /// requested by only installing classes with selectors for permitted
+    /// devices. If users are free to request anything without restrictions,
+    /// then administrators can create an empty DeviceClass for users
+    /// to reference.
+    ///
+    /// +required
+    #[prost(string, optional, tag = "1")]
+    pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Selectors define criteria which must be satisfied by a specific
+    /// device in order for that device to be considered for this
+    /// request. All selectors must be satisfied for a device to be
+    /// considered.
+    ///
+    /// +optional
+    /// +listType=atomic
+    #[prost(message, repeated, tag = "2")]
+    pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
+    /// AllocationMode and its related fields define how devices are allocated
+    /// to satisfy this request. Supported values are:
+    ///
+    /// - ExactCount: This request is for a specific number of devices.
+    ///    This is the default. The exact number is provided in the
+    ///    count field.
+    ///
+    /// - All: This request is for all of the matching devices in a pool.
+    ///    At least one device must exist on the node for the allocation to succeed.
+    ///    Allocation will fail if some devices are already allocated,
+    ///    unless adminAccess is requested.
+    ///
+    /// If AllocationMode is not specified, the default mode is ExactCount. If
+    /// the mode is ExactCount and count is not specified, the default count is
+    /// one. Any other requests must specify this field.
+    ///
+    /// More modes may get added in the future. Clients must refuse to handle
+    /// requests with unknown modes.
+    ///
+    /// +optional
+    #[prost(string, optional, tag = "3")]
+    pub allocation_mode: ::core::option::Option<::prost::alloc::string::String>,
+    /// Count is used only when the count mode is "ExactCount". Must be greater than zero.
+    /// If AllocationMode is ExactCount and this field is not specified, the default is one.
+    ///
+    /// +optional
+    /// +oneOf=AllocationMode
+    #[prost(int64, optional, tag = "4")]
+    pub count: ::core::option::Option<i64>,
+    /// AdminAccess indicates that this is a claim for administrative access
+    /// to the device(s). Claims with AdminAccess are expected to be used for
+    /// monitoring or other management services for a device.  They ignore
+    /// all ordinary claims to the device with respect to access modes and
+    /// any resource allocations.
+    ///
+    /// This is an alpha field and requires enabling the DRAAdminAccess
+    /// feature gate. Admin access is disabled if this field is unset or
+    /// set to false, otherwise it is enabled.
+    ///
+    /// +optional
+    /// +featureGate=DRAAdminAccess
+    #[prost(bool, optional, tag = "5")]
+    pub admin_access: ::core::option::Option<bool>,
+    /// If specified, the request's tolerations.
+    ///
+    /// Tolerations for NoSchedule are required to allocate a
+    /// device which has a taint with that effect. The same applies
+    /// to NoExecute.
+    ///
+    /// In addition, should any of the allocated devices get tainted
+    /// with NoExecute after allocation and that effect is not tolerated,
+    /// then all pods consuming the ResourceClaim get deleted to evict
+    /// them. The scheduler will not let new pods reserve the claim while
+    /// it has these tainted devices. Once all pods are evicted, the
+    /// claim will get deallocated.
+    ///
+    /// The maximum number of tolerations is 16.
+    ///
+    /// This is an alpha field and requires enabling the DRADeviceTaints
+    /// feature gate.
+    ///
+    /// +optional
+    /// +listType=atomic
+    /// +featureGate=DRADeviceTaints
+    #[prost(message, repeated, tag = "6")]
+    pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
+}
 /// NetworkDeviceData provides network-related details for the allocated device.
 /// This information may be filled by drivers or other components to configure
 /// or identify the device within a network context.
@@ -1013,8 +915,6 @@ pub struct NetworkDeviceData {
     /// The IPs are in the CIDR notation, which includes both the address and the
     /// associated subnet mask.
     /// e.g.: "192.0.2.5/24" for IPv4 and "2001:db8::5/64" for IPv6.
-    ///
-    /// Must not contain more than 16 entries.
     ///
     /// +optional
     /// +listType=atomic
@@ -1378,7 +1278,7 @@ pub struct ResourceSliceSpec {
     ///
     /// The names of the SharedCounters must be unique in the ResourceSlice.
     ///
-    /// The maximum number of SharedCounters is 32.
+    /// The maximum number of counters in all sets is 32.
     ///
     /// +optional
     /// +listType=atomic
@@ -1388,9 +1288,9 @@ pub struct ResourceSliceSpec {
 }
 
 impl crate::Resource for DeviceClass {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta2";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta2";
     const KIND: &'static str = "DeviceClass";
     const URL_PATH_SEGMENT: &'static str = "deviceclasses";
     type Scope = crate::ClusterResourceScope;
@@ -1405,34 +1305,7 @@ impl crate::Metadata for DeviceClass {
     }
 }
 impl crate::HasSpec for DeviceClass {
-    type Spec = crate::api::resource::v1alpha3::DeviceClassSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-
-impl crate::Resource for DeviceTaintRule {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
-    const KIND: &'static str = "DeviceTaintRule";
-    const URL_PATH_SEGMENT: &'static str = "devicetaintrules";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for DeviceTaintRule {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for DeviceTaintRule {
-    type Spec = crate::api::resource::v1alpha3::DeviceTaintRuleSpec;
+    type Spec = crate::api::resource::v1beta2::DeviceClassSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -1442,9 +1315,9 @@ impl crate::HasSpec for DeviceTaintRule {
 }
 
 impl crate::Resource for ResourceClaim {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta2";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta2";
     const KIND: &'static str = "ResourceClaim";
     const URL_PATH_SEGMENT: &'static str = "resourceclaims";
     type Scope = crate::NamespaceResourceScope;
@@ -1459,7 +1332,7 @@ impl crate::Metadata for ResourceClaim {
     }
 }
 impl crate::HasSpec for ResourceClaim {
-    type Spec = crate::api::resource::v1alpha3::ResourceClaimSpec;
+    type Spec = crate::api::resource::v1beta2::ResourceClaimSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -1468,7 +1341,7 @@ impl crate::HasSpec for ResourceClaim {
     }
 }
 impl crate::HasStatus for ResourceClaim {
-    type Status = crate::api::resource::v1alpha3::ResourceClaimStatus;
+    type Status = crate::api::resource::v1beta2::ResourceClaimStatus;
     fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
         self.status.as_ref()
     }
@@ -1478,9 +1351,9 @@ impl crate::HasStatus for ResourceClaim {
 }
 
 impl crate::Resource for ResourceClaimTemplate {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta2";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta2";
     const KIND: &'static str = "ResourceClaimTemplate";
     const URL_PATH_SEGMENT: &'static str = "resourceclaimtemplates";
     type Scope = crate::NamespaceResourceScope;
@@ -1495,7 +1368,7 @@ impl crate::Metadata for ResourceClaimTemplate {
     }
 }
 impl crate::HasSpec for ResourceClaimTemplate {
-    type Spec = crate::api::resource::v1alpha3::ResourceClaimTemplateSpec;
+    type Spec = crate::api::resource::v1beta2::ResourceClaimTemplateSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
@@ -1505,9 +1378,9 @@ impl crate::HasSpec for ResourceClaimTemplate {
 }
 
 impl crate::Resource for ResourceSlice {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const API_VERSION: &'static str = "resource.k8s.io/v1beta2";
     const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
+    const VERSION: &'static str = "v1beta2";
     const KIND: &'static str = "ResourceSlice";
     const URL_PATH_SEGMENT: &'static str = "resourceslices";
     type Scope = crate::ClusterResourceScope;
@@ -1522,7 +1395,7 @@ impl crate::Metadata for ResourceSlice {
     }
 }
 impl crate::HasSpec for ResourceSlice {
-    type Spec = crate::api::resource::v1alpha3::ResourceSliceSpec;
+    type Spec = crate::api::resource::v1beta2::ResourceSliceSpec;
     fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
         self.spec.as_ref()
     }
