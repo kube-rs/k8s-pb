@@ -2,7 +2,7 @@
 /// APIService represents a server for a particular GroupVersion.
 /// Name must be "version.group".
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiService {
+pub struct APIService {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -12,14 +12,14 @@ pub struct ApiService {
     >,
     /// Spec contains information for locating and communicating with a server
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<ApiServiceSpec>,
+    pub spec: ::core::option::Option<APIServiceSpec>,
     /// Status contains derived information about an API server
     #[prost(message, optional, tag = "3")]
-    pub status: ::core::option::Option<ApiServiceStatus>,
+    pub status: ::core::option::Option<APIServiceStatus>,
 }
 /// APIServiceCondition describes the state of an APIService at a particular point
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ApiServiceCondition {
+pub struct APIServiceCondition {
     /// Type is the type of the condition.
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
@@ -43,7 +43,7 @@ pub struct ApiServiceCondition {
 }
 /// APIServiceList is a list of APIService objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiServiceList {
+pub struct APIServiceList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -53,12 +53,12 @@ pub struct ApiServiceList {
     >,
     /// Items is the list of APIService
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<ApiService>,
+    pub items: ::prost::alloc::vec::Vec<APIService>,
 }
 /// APIServiceSpec contains information for locating and communicating with a server.
 /// Only https is supported, though you are able to disable certificate verification.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ApiServiceSpec {
+pub struct APIServiceSpec {
     /// Service is a reference to the service for this API server.  It must communicate
     /// on port 443.
     /// If the Service is nil, that means the handling for the API groupversion is handled locally on this server.
@@ -105,7 +105,7 @@ pub struct ApiServiceSpec {
 }
 /// APIServiceStatus contains derived information about an API server
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiServiceStatus {
+pub struct APIServiceStatus {
     /// Current service state of apiService.
     /// +optional
     /// +patchMergeKey=type
@@ -113,7 +113,7 @@ pub struct ApiServiceStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "1")]
-    pub conditions: ::prost::alloc::vec::Vec<ApiServiceCondition>,
+    pub conditions: ::prost::alloc::vec::Vec<APIServiceCondition>,
 }
 /// ServiceReference holds a reference to Service.legacy.k8s.io
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]

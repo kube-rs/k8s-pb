@@ -2,7 +2,7 @@
 /// APIGroup contains the name, the supported versions, and the preferred version
 /// of a group.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroup {
+pub struct APIGroup {
     /// name is the name of the group.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -25,20 +25,20 @@ pub struct ApiGroup {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
 }
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroupList {
+pub struct APIGroupList {
     /// groups is a list of APIGroup.
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub groups: ::prost::alloc::vec::Vec<ApiGroup>,
+    pub groups: ::prost::alloc::vec::Vec<APIGroup>,
 }
 /// APIResource specifies the name of a resource and whether it is namespaced.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ApiResource {
+pub struct APIResource {
     /// name is the plural name of the resource.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -88,14 +88,14 @@ pub struct ApiResource {
 /// resources supported in a specific group and version, and if the resource
 /// is namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiResourceList {
+pub struct APIResourceList {
     /// groupVersion is the group and version this APIResourceList is for.
     #[prost(string, optional, tag = "1")]
     pub group_version: ::core::option::Option<::prost::alloc::string::String>,
     /// resources contains the name of the resources and if they are namespaced.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub resources: ::prost::alloc::vec::Vec<ApiResource>,
+    pub resources: ::prost::alloc::vec::Vec<APIResource>,
 }
 /// APIVersions lists the versions that are available, to allow clients to
 /// discover the API at /api, which is the root path of the legacy v1 API.
@@ -103,7 +103,7 @@ pub struct ApiResourceList {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiVersions {
+pub struct APIVersions {
     /// versions are the api versions that are available.
     /// +listType=atomic
     #[prost(string, repeated, tag = "1")]
@@ -117,7 +117,7 @@ pub struct ApiVersions {
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
 }
 /// ApplyOptions may be provided when applying an API object.
 /// FieldManager is required for apply requests.
@@ -1008,7 +1008,7 @@ pub struct RootPaths {
 }
 /// ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ServerAddressByClientCidr {
+pub struct ServerAddressByClientCIDR {
     /// The CIDR with which clients can match their IP to figure out the server address that they should use.
     #[prost(string, optional, tag = "1")]
     pub client_cidr: ::core::option::Option<::prost::alloc::string::String>,

@@ -171,7 +171,7 @@ pub struct Binding {
 }
 /// Represents storage that is managed by an external CSI volume driver
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiPersistentVolumeSource {
+pub struct CSIPersistentVolumeSource {
     /// driver is the name of the driver to use for this volume.
     /// Required.
     #[prost(string, optional, tag = "1")]
@@ -239,7 +239,7 @@ pub struct CsiPersistentVolumeSource {
 }
 /// Represents a source location of a volume to mount, managed by an external CSI driver
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CsiVolumeSource {
+pub struct CSIVolumeSource {
     /// driver is the name of the CSI driver that handles this volume.
     /// Consult with your admin for the correct name as registered in the cluster.
     #[prost(string, optional, tag = "1")]
@@ -1144,16 +1144,16 @@ pub struct DaemonEndpoint {
 /// Note that this is identical to a downwardAPI volume source without the default
 /// mode.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DownwardApiProjection {
+pub struct DownwardAPIProjection {
     /// Items is a list of DownwardAPIVolume file
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<DownwardApiVolumeFile>,
+    pub items: ::prost::alloc::vec::Vec<DownwardAPIVolumeFile>,
 }
 /// DownwardAPIVolumeFile represents information to create the file containing the pod field
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DownwardApiVolumeFile {
+pub struct DownwardAPIVolumeFile {
     /// Required: Path is  the relative path name of the file to be created. Must not be absolute or contain the '..' path. Must be utf-8 encoded. The first item of the relative path must not start with '..'
     #[prost(string, optional, tag = "1")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
@@ -1179,12 +1179,12 @@ pub struct DownwardApiVolumeFile {
 /// DownwardAPIVolumeSource represents a volume containing downward API info.
 /// Downward API volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DownwardApiVolumeSource {
+pub struct DownwardAPIVolumeSource {
     /// Items is a list of downward API volume file
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<DownwardApiVolumeFile>,
+    pub items: ::prost::alloc::vec::Vec<DownwardAPIVolumeFile>,
     /// Optional: mode bits to use on created files by default. Must be a
     /// Optional: mode bits used to set permissions on created files by default.
     /// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
@@ -3594,7 +3594,7 @@ pub struct PersistentVolumeSource {
     /// csi represents storage that is handled by an external CSI driver.
     /// +optional
     #[prost(message, optional, tag = "22")]
-    pub csi: ::core::option::Option<CsiPersistentVolumeSource>,
+    pub csi: ::core::option::Option<CSIPersistentVolumeSource>,
 }
 /// PersistentVolumeSpec is the specification of a persistent volume.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4773,7 +4773,7 @@ pub struct PodStatus {
     /// +patchMergeKey=ip
     /// +listType=atomic
     #[prost(message, repeated, tag = "16")]
-    pub host_i_ps: ::prost::alloc::vec::Vec<HostIp>,
+    pub host_ips: ::prost::alloc::vec::Vec<HostIp>,
     /// podIP address allocated to the pod. Routable at least within the cluster.
     /// Empty if not yet allocated.
     /// +optional
@@ -4788,7 +4788,7 @@ pub struct PodStatus {
     /// +listType=map
     /// +listMapKey=ip
     #[prost(message, repeated, tag = "12")]
-    pub pod_i_ps: ::prost::alloc::vec::Vec<PodIp>,
+    pub pod_ips: ::prost::alloc::vec::Vec<PodIp>,
     /// RFC 3339 date and time at which the object was acknowledged by the Kubelet.
     /// This is before the Kubelet pulled the container image(s) for the pod.
     /// +optional
@@ -6246,7 +6246,7 @@ pub struct ServiceSpec {
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "18")]
-    pub cluster_i_ps: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub cluster_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// type determines how the Service is exposed. Defaults to ClusterIP. Valid
     /// options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
     /// "ClusterIP" allocates a cluster-internal IP address for load-balancing
@@ -6274,7 +6274,7 @@ pub struct ServiceSpec {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "5")]
-    pub external_i_ps: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub external_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Supports "ClientIP" and "None". Used to maintain session affinity.
     /// Enable client IP based session affinity.
     /// Must be ClientIP or None.
@@ -6933,7 +6933,7 @@ pub struct VolumeProjection {
     /// downwardAPI information about the downwardAPI data to project
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub downward_api: ::core::option::Option<DownwardApiProjection>,
+    pub downward_api: ::core::option::Option<DownwardAPIProjection>,
     /// configMap information about the configMap data to project
     /// +optional
     #[prost(message, optional, tag = "3")]
@@ -7086,7 +7086,7 @@ pub struct VolumeSource {
     /// downwardAPI represents downward API about the pod that should populate this volume
     /// +optional
     #[prost(message, optional, tag = "16")]
-    pub downward_api: ::core::option::Option<DownwardApiVolumeSource>,
+    pub downward_api: ::core::option::Option<DownwardAPIVolumeSource>,
     /// fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
     /// +optional
     #[prost(message, optional, tag = "17")]
@@ -7145,7 +7145,7 @@ pub struct VolumeSource {
     /// csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
     /// +optional
     #[prost(message, optional, tag = "28")]
-    pub csi: ::core::option::Option<CsiVolumeSource>,
+    pub csi: ::core::option::Option<CSIVolumeSource>,
     /// ephemeral represents a volume that is handled by a cluster storage driver.
     /// The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,
     /// and deleted when the pod is removed.

@@ -3,7 +3,7 @@
 /// It contains a list of APIVersionDiscovery that holds a list of APIResourceDiscovery types served for a version.
 /// Versions are in descending order of preference, with the first version being the preferred entry.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroupDiscovery {
+pub struct APIGroupDiscovery {
     /// Standard object's metadata.
     /// The only field completed will be name. For instance, resourceVersion will be empty.
     /// name is the name of the API group whose discovery information is presented here.
@@ -17,14 +17,14 @@ pub struct ApiGroupDiscovery {
     /// +listType=map
     /// +listMapKey=version
     #[prost(message, repeated, tag = "2")]
-    pub versions: ::prost::alloc::vec::Vec<ApiVersionDiscovery>,
+    pub versions: ::prost::alloc::vec::Vec<APIVersionDiscovery>,
 }
 /// APIGroupDiscoveryList is a resource containing a list of APIGroupDiscovery.
 /// This is one of the types able to be returned from the /api and /apis endpoint and contains an aggregated
 /// list of API resources (built-ins, Custom Resource Definitions, resources from aggregated servers)
 /// that a cluster supports.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiGroupDiscoveryList {
+pub struct APIGroupDiscoveryList {
     /// ResourceVersion will not be set, because this does not have a replayable ordering among multiple apiservers.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -32,11 +32,11 @@ pub struct ApiGroupDiscoveryList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of groups for discovery. The groups are listed in priority order.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<ApiGroupDiscovery>,
+    pub items: ::prost::alloc::vec::Vec<APIGroupDiscovery>,
 }
 /// APIResourceDiscovery provides information about an API resource for discovery.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiResourceDiscovery {
+pub struct APIResourceDiscovery {
     /// resource is the plural name of the resource.  This is used in the URL path and is the unique identifier
     /// for this resource across all versions in the API group.
     /// Resources with non-empty groups are located at /apis/<APIGroupDiscovery.objectMeta.name>/<APIVersionDiscovery.version>/<APIResourceDiscovery.Resource>
@@ -77,11 +77,11 @@ pub struct ApiResourceDiscovery {
     /// +listType=map
     /// +listMapKey=subresource
     #[prost(message, repeated, tag = "8")]
-    pub subresources: ::prost::alloc::vec::Vec<ApiSubresourceDiscovery>,
+    pub subresources: ::prost::alloc::vec::Vec<APISubresourceDiscovery>,
 }
 /// APISubresourceDiscovery provides information about an API subresource for discovery.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiSubresourceDiscovery {
+pub struct APISubresourceDiscovery {
     /// subresource is the name of the subresource.  This is used in the URL path and is the unique identifier
     /// for this resource across all versions.
     #[prost(string, optional, tag = "1")]
@@ -114,7 +114,7 @@ pub struct ApiSubresourceDiscovery {
 }
 /// APIVersionDiscovery holds a list of APIResourceDiscovery types that are served for a particular version within an API Group.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApiVersionDiscovery {
+pub struct APIVersionDiscovery {
     /// version is the name of the version within a group version.
     #[prost(string, optional, tag = "1")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
@@ -122,7 +122,7 @@ pub struct ApiVersionDiscovery {
     /// +listType=map
     /// +listMapKey=resource
     #[prost(message, repeated, tag = "2")]
-    pub resources: ::prost::alloc::vec::Vec<ApiResourceDiscovery>,
+    pub resources: ::prost::alloc::vec::Vec<APIResourceDiscovery>,
     /// freshness marks whether a group version's discovery document is up to date.
     /// "Current" indicates the discovery document was recently
     /// refreshed. "Stale" indicates the discovery document could not
