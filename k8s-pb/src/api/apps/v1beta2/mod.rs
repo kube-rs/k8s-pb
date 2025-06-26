@@ -60,7 +60,7 @@ pub struct DaemonSet {
     pub status: ::core::option::Option<DaemonSetStatus>,
 }
 /// DaemonSetCondition describes the state of a DaemonSet at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DaemonSetCondition {
     /// Type of DaemonSet condition.
     #[prost(string, optional, tag = "1")]
@@ -188,7 +188,7 @@ pub struct DaemonSetStatus {
     pub conditions: ::prost::alloc::vec::Vec<DaemonSetCondition>,
 }
 /// DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DaemonSetUpdateStrategy {
     /// Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.
     /// +optional
@@ -222,7 +222,7 @@ pub struct Deployment {
     pub status: ::core::option::Option<DeploymentStatus>,
 }
 /// DeploymentCondition describes the state of a deployment at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentCondition {
     /// Type of deployment condition.
     #[prost(string, optional, tag = "1")]
@@ -354,7 +354,7 @@ pub struct DeploymentStatus {
     pub collision_count: ::core::option::Option<i32>,
 }
 /// DeploymentStrategy describes how to replace existing pods with new ones.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentStrategy {
     /// Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
     /// +optional
@@ -395,7 +395,7 @@ pub struct ReplicaSet {
     pub status: ::core::option::Option<ReplicaSetStatus>,
 }
 /// ReplicaSetCondition describes the state of a replica set at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ReplicaSetCondition {
     /// Type of replica set condition.
     #[prost(string, optional, tag = "1")]
@@ -500,7 +500,7 @@ pub struct ReplicaSetStatus {
     pub conditions: ::prost::alloc::vec::Vec<ReplicaSetCondition>,
 }
 /// Spec to control the desired behavior of daemon set rolling update.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateDaemonSet {
     /// The maximum number of DaemonSet pods that can be unavailable during the
     /// update. Value can be an absolute number (ex: 5) or a percentage of total
@@ -543,7 +543,7 @@ pub struct RollingUpdateDaemonSet {
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Spec to control the desired behavior of rolling update.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateDeployment {
     /// The maximum number of pods that can be unavailable during the update.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -575,7 +575,7 @@ pub struct RollingUpdateDeployment {
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateStatefulSetStrategy {
     /// Partition indicates the ordinal at which the StatefulSet should be partitioned
     /// for updates. During a rolling update, all pods from ordinal Replicas-1 to
@@ -613,7 +613,7 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// ScaleSpec describes the attributes of a scale subresource
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ScaleSpec {
     /// desired number of instances for the scaled object.
     /// +optional
@@ -667,7 +667,7 @@ pub struct StatefulSet {
     pub status: ::core::option::Option<StatefulSetStatus>,
 }
 /// StatefulSetCondition describes the state of a statefulset at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetCondition {
     /// Type of statefulset condition.
     #[prost(string, optional, tag = "1")]
@@ -700,7 +700,7 @@ pub struct StatefulSetList {
 }
 /// StatefulSetOrdinals describes the policy used for replica ordinal assignment
 /// in this StatefulSet.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetOrdinals {
     /// start is the number representing the first replica's index. It may be used
     /// to number replicas from an alternate index (eg: 1-indexed) over the default
@@ -716,7 +716,7 @@ pub struct StatefulSetOrdinals {
 }
 /// StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs
 /// created from the StatefulSet VolumeClaimTemplates.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
     /// WhenDeleted specifies what happens to PVCs created from StatefulSet
     /// VolumeClaimTemplates when the StatefulSet is deleted. The default policy
@@ -870,7 +870,7 @@ pub struct StatefulSetStatus {
 /// StatefulSetUpdateStrategy indicates the strategy that the StatefulSet
 /// controller will use to perform updates. It includes any additional parameters
 /// necessary to perform the update for the indicated strategy.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetUpdateStrategy {
     /// Type indicates the type of the StatefulSetUpdateStrategy.
     /// Default is RollingUpdate.

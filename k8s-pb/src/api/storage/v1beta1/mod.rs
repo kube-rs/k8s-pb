@@ -223,7 +223,7 @@ pub struct CSINode {
     pub spec: ::core::option::Option<CSINodeSpec>,
 }
 /// CSINodeDriver holds information about the specification of one CSI driver installed on a node
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CSINodeDriver {
     /// name represents the name of the CSI driver that this object refers to.
     /// This MUST be the same name returned by the CSI GetPluginName() call for
@@ -445,7 +445,7 @@ pub struct StorageClassList {
     pub items: ::prost::alloc::vec::Vec<StorageClass>,
 }
 /// TokenRequest contains parameters of a service account token.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TokenRequest {
     /// audience is the intended audience of the token in "TokenRequestSpec".
     /// It will default to the audiences of kube apiserver.
@@ -600,7 +600,7 @@ pub struct VolumeAttributesClassList {
     pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
 }
 /// VolumeError captures an error encountered during a volume operation.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional
@@ -622,7 +622,7 @@ pub struct VolumeError {
     pub error_code: ::core::option::Option<i32>,
 }
 /// VolumeNodeResources is a set of resource limits for scheduling of volumes.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeNodeResources {
     /// count indicates the maximum number of unique volumes managed by the CSI driver that can be used on a node.
     /// A volume that is both attached and mounted on a node is considered to be used once, not twice.

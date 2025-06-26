@@ -24,7 +24,7 @@ pub struct DaemonSet {
     pub status: ::core::option::Option<DaemonSetStatus>,
 }
 /// DaemonSetCondition describes the state of a DaemonSet at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DaemonSetCondition {
     /// Type of DaemonSet condition.
     #[prost(string, optional, tag = "1")]
@@ -160,7 +160,7 @@ pub struct DaemonSetStatus {
 /// DaemonSetUpdateStrategy indicates the strategy that the DaemonSet
 /// controller will use to perform updates. It includes any additional parameters
 /// necessary to perform the update for the indicated strategy.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DaemonSetUpdateStrategy {
     /// Type of daemon set update. Can be "RollingUpdate" or "OnDelete".
     /// Default is OnDelete.
@@ -195,7 +195,7 @@ pub struct Deployment {
     pub status: ::core::option::Option<DeploymentStatus>,
 }
 /// DeploymentCondition describes the state of a deployment at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentCondition {
     /// Type of deployment condition.
     #[prost(string, optional, tag = "1")]
@@ -351,7 +351,7 @@ pub struct DeploymentStatus {
     pub collision_count: ::core::option::Option<i32>,
 }
 /// DeploymentStrategy describes how to replace existing pods with new ones.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentStrategy {
     /// Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
     /// +optional
@@ -368,7 +368,7 @@ pub struct DeploymentStrategy {
 }
 /// HTTPIngressPath associates a path with a backend. Incoming urls matching the
 /// path are forwarded to the backend.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HttpIngressPath {
     /// Path is matched against the path of an incoming request. Currently it can
     /// contain characters disallowed from the conventional "path" part of a URL
@@ -415,7 +415,7 @@ pub struct HttpIngressRuleValue {
 /// IPBlock describes a particular CIDR (Ex. "192.168.1.0/24","2001:db8::/64") that is allowed
 /// to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs
 /// that should not be included within this rule.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct IpBlock {
     /// CIDR is a string representing the IP Block
     /// Valid examples are "192.168.1.0/24" or "2001:db8::/64"
@@ -453,7 +453,7 @@ pub struct Ingress {
     pub status: ::core::option::Option<IngressStatus>,
 }
 /// IngressBackend describes all endpoints for a given service and port.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct IngressBackend {
     /// Specifies the name of the referenced service.
     /// +optional
@@ -510,7 +510,7 @@ pub struct IngressLoadBalancerStatus {
     pub ingress: ::prost::alloc::vec::Vec<IngressLoadBalancerIngress>,
 }
 /// IngressPortStatus represents the error condition of a service port
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct IngressPortStatus {
     /// Port is the port number of the ingress port.
     #[prost(int32, optional, tag = "1")]
@@ -636,7 +636,7 @@ pub struct IngressStatus {
     pub load_balancer: ::core::option::Option<IngressLoadBalancerStatus>,
 }
 /// IngressTLS describes the transport layer security associated with an Ingress.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct IngressTls {
     /// Hosts are a list of hosts included in the TLS certificate. The values in
     /// this list must match the name/s used in the tlsSecret. Defaults to the
@@ -760,7 +760,7 @@ pub struct NetworkPolicyPeer {
     pub ip_block: ::core::option::Option<IpBlock>,
 }
 /// DEPRECATED 1.9 - This group version of NetworkPolicyPort is deprecated by networking/v1/NetworkPolicyPort.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NetworkPolicyPort {
     /// Optional.  The protocol (TCP, UDP, or SCTP) which traffic must match.
     /// If not specified, this field defaults to TCP.
@@ -856,7 +856,7 @@ pub struct ReplicaSet {
     pub status: ::core::option::Option<ReplicaSetStatus>,
 }
 /// ReplicaSetCondition describes the state of a replica set at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ReplicaSetCondition {
     /// Type of replica set condition.
     #[prost(string, optional, tag = "1")]
@@ -962,7 +962,7 @@ pub struct ReplicaSetStatus {
     pub conditions: ::prost::alloc::vec::Vec<ReplicaSetCondition>,
 }
 /// DEPRECATED.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollbackConfig {
     /// The revision to rollback to. If set to 0, rollback to the last revision.
     /// +optional
@@ -970,7 +970,7 @@ pub struct RollbackConfig {
     pub revision: ::core::option::Option<i64>,
 }
 /// Spec to control the desired behavior of daemon set rolling update.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateDaemonSet {
     /// The maximum number of DaemonSet pods that can be unavailable during the
     /// update. Value can be an absolute number (ex: 5) or a percentage of total
@@ -1014,7 +1014,7 @@ pub struct RollingUpdateDaemonSet {
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// Spec to control the desired behavior of rolling update.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateDeployment {
     /// The maximum number of pods that can be unavailable during the update.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -1062,7 +1062,7 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// describes the attributes of a scale subresource
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ScaleSpec {
     /// desired number of instances for the scaled object.
     /// +optional

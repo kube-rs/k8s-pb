@@ -94,7 +94,7 @@ pub struct EventList {
 }
 /// EventSeries contain information on series of events, i.e. thing that was/is happening
 /// continuously for some time.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct EventSeries {
     /// count is the number of occurrences in this series up to the last heartbeat time.
     #[prost(int32, optional, tag = "1")]

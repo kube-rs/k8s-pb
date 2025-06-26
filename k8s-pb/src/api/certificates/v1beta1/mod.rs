@@ -15,7 +15,7 @@ pub struct CertificateSigningRequest {
     #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<CertificateSigningRequestStatus>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CertificateSigningRequestCondition {
     /// type of the condition. Known conditions include "Approved", "Denied", and "Failed".
     #[prost(string, optional, tag = "1")]
@@ -205,7 +205,7 @@ pub struct ClusterTrustBundleList {
     pub items: ::prost::alloc::vec::Vec<ClusterTrustBundle>,
 }
 /// ClusterTrustBundleSpec contains the signer and trust anchors.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ClusterTrustBundleSpec {
     /// signerName indicates the associated signer, if any.
     ///
@@ -248,7 +248,7 @@ pub struct ClusterTrustBundleSpec {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExtraValue {
     #[prost(string, repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,

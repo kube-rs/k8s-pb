@@ -54,7 +54,7 @@ pub struct Deployment {
     pub status: ::core::option::Option<DeploymentStatus>,
 }
 /// DeploymentCondition describes the state of a deployment at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentCondition {
     /// Type of deployment condition.
     #[prost(string, optional, tag = "1")]
@@ -208,7 +208,7 @@ pub struct DeploymentStatus {
     pub collision_count: ::core::option::Option<i32>,
 }
 /// DeploymentStrategy describes how to replace existing pods with new ones.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentStrategy {
     /// Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
     /// +optional
@@ -224,7 +224,7 @@ pub struct DeploymentStrategy {
     pub rolling_update: ::core::option::Option<RollingUpdateDeployment>,
 }
 /// DEPRECATED.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollbackConfig {
     /// The revision to rollback to. If set to 0, rollback to the last revision.
     /// +optional
@@ -232,7 +232,7 @@ pub struct RollbackConfig {
     pub revision: ::core::option::Option<i64>,
 }
 /// Spec to control the desired behavior of rolling update.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateDeployment {
     /// The maximum number of pods that can be unavailable during the update.
     /// Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%).
@@ -264,7 +264,7 @@ pub struct RollingUpdateDeployment {
     pub max_surge: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
 }
 /// RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RollingUpdateStatefulSetStrategy {
     /// Partition indicates the ordinal at which the StatefulSet should be partitioned
     /// for updates. During a rolling update, all pods from ordinal Replicas-1 to
@@ -301,7 +301,7 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// ScaleSpec describes the attributes of a scale subresource
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ScaleSpec {
     /// replicas is the number of observed instances of the scaled object.
     /// +optional
@@ -354,7 +354,7 @@ pub struct StatefulSet {
     pub status: ::core::option::Option<StatefulSetStatus>,
 }
 /// StatefulSetCondition describes the state of a statefulset at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetCondition {
     /// Type of statefulset condition.
     #[prost(string, optional, tag = "1")]
@@ -387,7 +387,7 @@ pub struct StatefulSetList {
 }
 /// StatefulSetOrdinals describes the policy used for replica ordinal assignment
 /// in this StatefulSet.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetOrdinals {
     /// start is the number representing the first replica's index. It may be used
     /// to number replicas from an alternate index (eg: 1-indexed) over the default
@@ -403,7 +403,7 @@ pub struct StatefulSetOrdinals {
 }
 /// StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs
 /// created from the StatefulSet VolumeClaimTemplates.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
     /// whenDeleted specifies what happens to PVCs created from StatefulSet
     /// VolumeClaimTemplates when the StatefulSet is deleted. The default policy
@@ -557,7 +557,7 @@ pub struct StatefulSetStatus {
 /// StatefulSetUpdateStrategy indicates the strategy that the StatefulSet
 /// controller will use to perform updates. It includes any additional parameters
 /// necessary to perform the update for the indicated strategy.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetUpdateStrategy {
     /// Type indicates the type of the StatefulSetUpdateStrategy.
     #[prost(string, optional, tag = "1")]

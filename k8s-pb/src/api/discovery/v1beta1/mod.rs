@@ -57,7 +57,7 @@ pub struct Endpoint {
     pub hints: ::core::option::Option<EndpointHints>,
 }
 /// EndpointConditions represents the current condition of an endpoint.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct EndpointConditions {
     /// ready indicates that this endpoint is prepared to receive traffic,
     /// according to whatever system is managing the endpoint. A nil value
@@ -98,7 +98,7 @@ pub struct EndpointHints {
     pub for_nodes: ::prost::alloc::vec::Vec<ForNode>,
 }
 /// EndpointPort represents a Port used by an EndpointSlice
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct EndpointPort {
     /// name represents the name of this port. All ports in an EndpointSlice must have a unique name.
     /// If the EndpointSlice is derived from a Kubernetes service, this corresponds to the Service.ports\[\].name.
@@ -174,14 +174,14 @@ pub struct EndpointSliceList {
     pub items: ::prost::alloc::vec::Vec<EndpointSlice>,
 }
 /// ForNode provides information about which nodes should consume this endpoint.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ForNode {
     /// name represents the name of the node.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ForZone provides information about which zones should consume this endpoint.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ForZone {
     /// name represents the name of the zone.
     #[prost(string, optional, tag = "1")]

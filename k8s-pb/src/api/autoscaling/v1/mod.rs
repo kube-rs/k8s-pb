@@ -6,7 +6,7 @@
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source. Only one "target" type
 /// should be set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ContainerResourceMetricSource {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -33,7 +33,7 @@ pub struct ContainerResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -59,7 +59,7 @@ pub struct ContainerResourceMetricStatus {
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
 /// +structType=atomic
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// kind is the kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     #[prost(string, optional, tag = "1")]
@@ -140,7 +140,7 @@ pub struct HorizontalPodAutoscaler {
 }
 /// HorizontalPodAutoscalerCondition describes the state of
 /// a HorizontalPodAutoscaler at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HorizontalPodAutoscalerCondition {
     /// type describes the current condition
     #[prost(string, optional, tag = "1")]
@@ -176,7 +176,7 @@ pub struct HorizontalPodAutoscalerList {
     pub items: ::prost::alloc::vec::Vec<HorizontalPodAutoscaler>,
 }
 /// specification of a horizontal pod autoscaler.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HorizontalPodAutoscalerSpec {
     /// reference to scaled resource; horizontal pod autoscaler will learn the current resource consumption
     /// and will set the desired number of pods by using its Scale subresource.
@@ -200,7 +200,7 @@ pub struct HorizontalPodAutoscalerSpec {
     pub target_cpu_utilization_percentage: ::core::option::Option<i32>,
 }
 /// current status of a horizontal pod autoscaler
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HorizontalPodAutoscalerStatus {
     /// observedGeneration is the most recent generation observed by this autoscaler.
     /// +optional
@@ -414,7 +414,7 @@ pub struct PodsMetricStatus {
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceMetricSource {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -438,7 +438,7 @@ pub struct ResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceMetricStatus {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -476,7 +476,7 @@ pub struct Scale {
     pub status: ::core::option::Option<ScaleStatus>,
 }
 /// ScaleSpec describes the attributes of a scale subresource.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ScaleSpec {
     /// replicas is the desired number of instances for the scaled object.
     /// +optional
@@ -484,7 +484,7 @@ pub struct ScaleSpec {
     pub replicas: ::core::option::Option<i32>,
 }
 /// ScaleStatus represents the current status of a scale subresource.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ScaleStatus {
     /// replicas is the actual number of observed instances of the scaled object.
     #[prost(int32, optional, tag = "1")]

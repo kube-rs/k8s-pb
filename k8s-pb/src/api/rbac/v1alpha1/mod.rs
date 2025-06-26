@@ -75,7 +75,7 @@ pub struct ClusterRoleList {
 }
 /// PolicyRule holds information that describes a policy rule, but does not contain information
 /// about who the rule applies to or which namespace the rule applies to.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PolicyRule {
     /// Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '*' represents all verbs.
     /// +listType=atomic
@@ -164,7 +164,7 @@ pub struct RoleList {
     pub items: ::prost::alloc::vec::Vec<Role>,
 }
 /// RoleRef contains information that points to the role being used
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RoleRef {
     /// APIGroup is the group for the resource being referenced
     #[prost(string, optional, tag = "1")]
@@ -178,7 +178,7 @@ pub struct RoleRef {
 }
 /// Subject contains a reference to the object or user identities a role binding applies to.  This can either hold a direct API object reference,
 /// or a value for non-objects such as user and group names.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Subject {
     /// Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount".
     /// If the Authorizer does not recognized the kind value, the Authorizer should report an error.

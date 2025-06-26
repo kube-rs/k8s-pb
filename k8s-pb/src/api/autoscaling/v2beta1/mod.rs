@@ -6,7 +6,7 @@
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ContainerResourceMetricSource {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -33,7 +33,7 @@ pub struct ContainerResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -58,7 +58,7 @@ pub struct ContainerResourceMetricStatus {
     pub container: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// Kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     #[prost(string, optional, tag = "1")]
@@ -144,7 +144,7 @@ pub struct HorizontalPodAutoscaler {
 }
 /// HorizontalPodAutoscalerCondition describes the state of
 /// a HorizontalPodAutoscaler at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HorizontalPodAutoscalerCondition {
     /// type describes the current condition
     #[prost(string, optional, tag = "1")]
@@ -433,7 +433,7 @@ pub struct PodsMetricStatus {
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceMetricSource {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -457,7 +457,7 @@ pub struct ResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceMetricStatus {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]

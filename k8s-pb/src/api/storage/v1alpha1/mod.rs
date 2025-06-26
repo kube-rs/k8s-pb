@@ -237,7 +237,7 @@ pub struct VolumeAttributesClassList {
     pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
 }
 /// VolumeError captures an error encountered during a volume operation.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional

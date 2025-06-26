@@ -18,7 +18,7 @@ pub struct APIService {
     pub status: ::core::option::Option<APIServiceStatus>,
 }
 /// APIServiceCondition describes the state of an APIService at a particular point
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct APIServiceCondition {
     /// Type is the type of the condition.
     #[prost(string, optional, tag = "1")]
@@ -57,7 +57,7 @@ pub struct APIServiceList {
 }
 /// APIServiceSpec contains information for locating and communicating with a server.
 /// Only https is supported, though you are able to disable certificate verification.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct APIServiceSpec {
     /// Service is a reference to the service for this API server.  It must communicate
     /// on port 443.
@@ -116,7 +116,7 @@ pub struct APIServiceStatus {
     pub conditions: ::prost::alloc::vec::Vec<APIServiceCondition>,
 }
 /// ServiceReference holds a reference to Service.legacy.k8s.io
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServiceReference {
     /// Namespace is the namespace of the service
     #[prost(string, optional, tag = "1")]

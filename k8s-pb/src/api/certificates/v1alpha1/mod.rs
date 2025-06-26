@@ -37,7 +37,7 @@ pub struct ClusterTrustBundleList {
     pub items: ::prost::alloc::vec::Vec<ClusterTrustBundle>,
 }
 /// ClusterTrustBundleSpec contains the signer and trust anchors.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ClusterTrustBundleSpec {
     /// signerName indicates the associated signer, if any.
     ///

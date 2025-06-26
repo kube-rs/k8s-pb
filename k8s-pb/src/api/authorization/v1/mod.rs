@@ -4,7 +4,7 @@
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExtraValue {
     #[prost(string, repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -89,7 +89,7 @@ pub struct LocalSubjectAccessReview {
     pub status: ::core::option::Option<SubjectAccessReviewStatus>,
 }
 /// NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NonResourceAttributes {
     /// Path is the URL path of the request
     /// +optional
@@ -101,7 +101,7 @@ pub struct NonResourceAttributes {
     pub verb: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// NonResourceRule holds information that describes a rule for the non-resource
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NonResourceRule {
     /// Verb is a list of kubernetes non-resource API verbs, like: get, post, put, delete, patch, head, options.  "*" means all.
     /// +listType=atomic
@@ -165,7 +165,7 @@ pub struct ResourceAttributes {
 }
 /// ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant,
 /// may contain duplicates, and possibly be incomplete.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceRule {
     /// Verb is a list of kubernetes resource API verbs, like: get, list, watch, create, update, delete, proxy.  "*" means all.
     /// +listType=atomic
@@ -242,7 +242,7 @@ pub struct SelfSubjectRulesReview {
     pub status: ::core::option::Option<SubjectRulesReviewStatus>,
 }
 /// SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SelfSubjectRulesReviewSpec {
     /// Namespace to evaluate rules for. Required.
     #[prost(string, optional, tag = "1")]
@@ -297,7 +297,7 @@ pub struct SubjectAccessReviewSpec {
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// SubjectAccessReviewStatus
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SubjectAccessReviewStatus {
     /// Allowed is required. True if the action would be allowed, false otherwise.
     #[prost(bool, optional, tag = "1")]

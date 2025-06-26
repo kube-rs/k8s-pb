@@ -92,7 +92,7 @@ pub struct EventList {
 /// continuously for some time. How often to update the EventSeries is up to the event reporters.
 /// The default event reporter in "k8s.io/client-go/tools/events/event_broadcaster.go" shows
 /// how this struct is updated on heartbeats and can guide customized reporter implementations.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct EventSeries {
     /// count is the number of occurrences in this series up to the last heartbeat time.
     #[prost(int32, optional, tag = "1")]

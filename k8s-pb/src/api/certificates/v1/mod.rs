@@ -26,7 +26,7 @@ pub struct CertificateSigningRequest {
     pub status: ::core::option::Option<CertificateSigningRequestStatus>,
 }
 /// CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CertificateSigningRequestCondition {
     /// type of the condition. Known conditions are "Approved", "Denied", and "Failed".
     ///
@@ -219,7 +219,7 @@ pub struct CertificateSigningRequestStatus {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExtraValue {
     #[prost(string, repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,

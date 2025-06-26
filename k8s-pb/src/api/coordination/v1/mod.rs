@@ -25,7 +25,7 @@ pub struct LeaseList {
     pub items: ::prost::alloc::vec::Vec<Lease>,
 }
 /// LeaseSpec is a specification of a Lease.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LeaseSpec {
     /// holderIdentity contains the identity of the holder of a current lease.
     /// If Coordinated Leader Election is used, the holder identity must be

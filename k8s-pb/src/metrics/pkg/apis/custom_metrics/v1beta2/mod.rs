@@ -16,7 +16,7 @@ pub struct MetricIdentifier {
     >,
 }
 /// MetricListOptions is used to select metrics by their label selectors
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MetricListOptions {
     /// A selector to restrict the list of returned objects by their labels.
     /// Defaults to everything.

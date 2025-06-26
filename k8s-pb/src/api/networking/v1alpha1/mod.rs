@@ -32,7 +32,7 @@ pub struct IPAddressList {
     pub items: ::prost::alloc::vec::Vec<IPAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct IPAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
@@ -41,7 +41,7 @@ pub struct IPAddressSpec {
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
 /// ParentReference describes a reference to a parent object.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ParentReference {
     /// Group is the group of the object being referenced.
     /// +optional
@@ -93,7 +93,7 @@ pub struct ServiceCIDRList {
     pub items: ::prost::alloc::vec::Vec<ServiceCIDR>,
 }
 /// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServiceCIDRSpec {
     /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
     /// from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family.
