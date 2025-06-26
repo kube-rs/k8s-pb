@@ -7,7 +7,7 @@
 /// Valid: 192.168.1.5 or 2001:db8::1 or 2001:db8:aaaa:bbbb:cccc:dddd:eeee:1
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IPAddress {
+pub struct IpAddress {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -17,11 +17,11 @@ pub struct IPAddress {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<IPAddressSpec>,
+    pub spec: ::core::option::Option<IpAddressSpec>,
 }
 /// IPAddressList contains a list of IPAddress.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IPAddressList {
+pub struct IpAddressList {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -29,11 +29,11 @@ pub struct IPAddressList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of IPAddresses.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<IPAddress>,
+    pub items: ::prost::alloc::vec::Vec<IpAddress>,
 }
 /// IPAddressSpec describe the attributes in an IP Address.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct IPAddressSpec {
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct IpAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
     /// +required
@@ -41,7 +41,7 @@ pub struct IPAddressSpec {
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
 /// ParentReference describes a reference to a parent object.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ParentReference {
     /// Group is the group of the object being referenced.
     /// +optional
@@ -63,7 +63,7 @@ pub struct ParentReference {
 /// ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
 /// This range is used to allocate ClusterIPs to Service objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ServiceCIDR {
+pub struct ServiceCidr {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -73,16 +73,16 @@ pub struct ServiceCIDR {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<ServiceCIDRSpec>,
+    pub spec: ::core::option::Option<ServiceCidrSpec>,
     /// status represents the current state of the ServiceCIDR.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub status: ::core::option::Option<ServiceCIDRStatus>,
+    pub status: ::core::option::Option<ServiceCidrStatus>,
 }
 /// ServiceCIDRList contains a list of ServiceCIDR objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ServiceCIDRList {
+pub struct ServiceCidrList {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -90,11 +90,11 @@ pub struct ServiceCIDRList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of ServiceCIDRs.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<ServiceCIDR>,
+    pub items: ::prost::alloc::vec::Vec<ServiceCidr>,
 }
 /// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ServiceCIDRSpec {
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ServiceCidrSpec {
     /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
     /// from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family.
     /// The network address of each CIDR, the address that identifies the subnet of a host, is reserved
@@ -108,7 +108,7 @@ pub struct ServiceCIDRSpec {
 }
 /// ServiceCIDRStatus describes the current state of the ServiceCIDR.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ServiceCIDRStatus {
+pub struct ServiceCidrStatus {
     /// conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR.
     /// Current service state
     /// +optional

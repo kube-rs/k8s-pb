@@ -16,7 +16,7 @@ pub struct ImageReview {
     pub status: ::core::option::Option<ImageReviewStatus>,
 }
 /// ImageReviewContainerSpec is a description of a container within the pod creation request.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ImageReviewContainerSpec {
     /// This can be in the form image:tag or image@SHA:012345679abcdef.
     /// +optional

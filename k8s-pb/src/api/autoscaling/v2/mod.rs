@@ -6,7 +6,7 @@
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ContainerResourceMetricSource {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -23,7 +23,7 @@ pub struct ContainerResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ContainerResourceMetricStatus {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -36,7 +36,7 @@ pub struct ContainerResourceMetricStatus {
     pub container: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CrossVersionObjectReference contains enough information to let you identify the referred resource.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// kind is the kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     #[prost(string, optional, tag = "1")]
@@ -73,7 +73,7 @@ pub struct ExternalMetricStatus {
     pub current: ::core::option::Option<MetricValueStatus>,
 }
 /// HPAScalingPolicy is a single policy which must hold true for a specified past interval.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HpaScalingPolicy {
     /// type is used to specify the scaling policy.
     #[prost(string, optional, tag = "1")]
@@ -182,7 +182,7 @@ pub struct HorizontalPodAutoscalerBehavior {
 }
 /// HorizontalPodAutoscalerCondition describes the state of
 /// a HorizontalPodAutoscaler at a certain point.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HorizontalPodAutoscalerCondition {
     /// type describes the current condition
     #[prost(string, optional, tag = "1")]
@@ -393,7 +393,7 @@ pub struct MetricStatus {
     pub external: ::core::option::Option<ExternalMetricStatus>,
 }
 /// MetricTarget defines the target value, average value, or average utilization of a specific metric
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MetricTarget {
     /// type represents whether the metric type is Utilization, Value, or AverageValue
     #[prost(string, optional, tag = "1")]
@@ -417,7 +417,7 @@ pub struct MetricTarget {
     pub average_utilization: ::core::option::Option<i32>,
 }
 /// MetricValueStatus holds the current value for a metric
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MetricValueStatus {
     /// value is the current value of the metric (as a quantity).
     /// +optional
@@ -495,7 +495,7 @@ pub struct PodsMetricStatus {
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.  Only one "target" type
 /// should be set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceMetricSource {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]
@@ -509,7 +509,7 @@ pub struct ResourceMetricSource {
 /// current scale target (e.g. CPU or memory).  Such metrics are built in to
 /// Kubernetes, and have special scaling options on top of those available to
 /// normal per-pod metrics using the "pods" source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceMetricStatus {
     /// name is the name of the resource in question.
     #[prost(string, optional, tag = "1")]

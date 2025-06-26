@@ -21,7 +21,7 @@ pub struct Carp {
     #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<CarpStatus>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CarpCondition {
     /// Type is the type of the condition.
     /// Currently only Ready.

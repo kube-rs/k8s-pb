@@ -54,7 +54,7 @@ pub struct ConversionReview {
     pub response: ::core::option::Option<ConversionResponse>,
 }
 /// CustomResourceColumnDefinition specifies a column for server side printing.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceColumnDefinition {
     /// name is a human readable name for the column.
     #[prost(string, optional, tag = "1")]
@@ -85,7 +85,7 @@ pub struct CustomResourceColumnDefinition {
     pub json_path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CustomResourceConversion describes how to convert different versions of a CR.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceConversion {
     /// strategy specifies how custom resources are converted between versions. Allowed values are:
     /// - `None`: The converter only change the apiVersion and would not touch any other field in the custom resource.
@@ -131,7 +131,7 @@ pub struct CustomResourceDefinition {
     pub status: ::core::option::Option<CustomResourceDefinitionStatus>,
 }
 /// CustomResourceDefinitionCondition contains details for the current condition of this pod.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceDefinitionCondition {
     /// type is the type of the condition. Types include Established, NamesAccepted and Terminating.
     #[prost(string, optional, tag = "1")]
@@ -169,7 +169,7 @@ pub struct CustomResourceDefinitionList {
     pub items: ::prost::alloc::vec::Vec<CustomResourceDefinition>,
 }
 /// CustomResourceDefinitionNames indicates the names to serve this CustomResourceDefinition
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceDefinitionNames {
     /// plural is the plural name of the resource to serve.
     /// The custom resources are served under `/apis/<group>/<version>/.../<plural>`.
@@ -369,7 +369,7 @@ pub struct CustomResourceDefinitionVersion {
     pub selectable_fields: ::prost::alloc::vec::Vec<SelectableField>,
 }
 /// CustomResourceSubresourceScale defines how to serve the scale subresource for CustomResources.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceSubresourceScale {
     /// specReplicasPath defines the JSON path inside of a custom resource that corresponds to Scale `spec.replicas`.
     /// Only JSON paths without the array notation are allowed.
@@ -402,10 +402,10 @@ pub struct CustomResourceSubresourceScale {
 /// * exposes a /status subresource for the custom resource
 /// * PUT requests to the /status subresource take a custom resource object, and ignore changes to anything except the status stanza
 /// * PUT/POST/PATCH requests to the custom resource ignore changes to the status stanza
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceSubresourceStatus {}
 /// CustomResourceSubresources defines the status and scale subresources for CustomResources.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CustomResourceSubresources {
     /// status indicates the custom resource should serve a `/status` subresource.
     /// When enabled:
@@ -428,7 +428,7 @@ pub struct CustomResourceValidation {
     pub open_apiv3_schema: ::core::option::Option<JsonSchemaProps>,
 }
 /// ExternalDocumentation allows referencing an external resource for extended documentation.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExternalDocumentation {
     #[prost(string, optional, tag = "1")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
@@ -437,7 +437,7 @@ pub struct ExternalDocumentation {
 }
 /// JSON represents any valid JSON value.
 /// These types are supported: bool, int64, float64, string, \[\]interface{}, map\[string\]interface{} and nil.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Json {
     #[prost(bytes = "vec", optional, tag = "1")]
     pub raw: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
@@ -668,7 +668,7 @@ pub struct JsonSchemaPropsOrStringArray {
     pub property: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// SelectableField specifies the JSON path of a field that may be used with field selectors.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SelectableField {
     /// jsonPath is a simple JSON path which is evaluated against each custom resource to produce a
     /// field selector value.
@@ -682,7 +682,7 @@ pub struct SelectableField {
     pub json_path: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ServiceReference holds a reference to Service.legacy.k8s.io
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServiceReference {
     /// namespace is the namespace of the service.
     /// Required
@@ -704,7 +704,7 @@ pub struct ServiceReference {
     pub port: ::core::option::Option<i32>,
 }
 /// ValidationRule describes a validation rule written in the CEL expression language.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ValidationRule {
     /// Rule represents the expression which will be evaluated by CEL.
     /// ref: <https://github.com/google/cel-spec>
@@ -832,7 +832,7 @@ pub struct ValidationRule {
     pub optional_old_self: ::core::option::Option<bool>,
 }
 /// WebhookClientConfig contains the information to make a TLS connection with the webhook.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct WebhookClientConfig {
     /// url gives the location of the webhook, in standard URL form
     /// (`scheme://host:port/path`). Exactly one of `url` or `service`

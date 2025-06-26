@@ -120,7 +120,7 @@ pub struct Job {
     pub status: ::core::option::Option<JobStatus>,
 }
 /// JobCondition describes current state of a job.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct JobCondition {
     /// Type of job condition, Complete or Failed.
     #[prost(string, optional, tag = "1")]
@@ -477,7 +477,7 @@ pub struct PodFailurePolicy {
 /// represented by the .status.containerStatuses and .status.initContainerStatuses
 /// fields in the Pod status, respectively. Containers completed with success
 /// (exit code 0) are excluded from the requirement check.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PodFailurePolicyOnExitCodesRequirement {
     /// Restricts the check for exit codes to the container with the
     /// specified name. When null, the rule applies to all containers.
@@ -511,7 +511,7 @@ pub struct PodFailurePolicyOnExitCodesRequirement {
 }
 /// PodFailurePolicyOnPodConditionsPattern describes a pattern for matching
 /// an actual pod condition type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PodFailurePolicyOnPodConditionsPattern {
     /// Specifies the required Pod condition type. To match a pod condition
     /// it is required that specified type equals the pod condition type.
@@ -569,7 +569,7 @@ pub struct SuccessPolicy {
 }
 /// SuccessPolicyRule describes rule for declaring a Job as succeeded.
 /// Each rule must have at least one of the "succeededIndexes" or "succeededCount" specified.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SuccessPolicyRule {
     /// succeededIndexes specifies the set of indexes
     /// which need to be contained in the actual set of the succeeded indexes for the Job.
@@ -603,7 +603,7 @@ pub struct SuccessPolicyRule {
 }
 /// UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't
 /// been accounted in Job status counters.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct UncountedTerminatedPods {
     /// succeeded holds UIDs of succeeded Pods.
     /// +listType=set

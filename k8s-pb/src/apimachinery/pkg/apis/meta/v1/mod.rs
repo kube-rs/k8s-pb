@@ -2,7 +2,7 @@
 /// APIGroup contains the name, the supported versions, and the preferred version
 /// of a group.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIGroup {
+pub struct ApiGroup {
     /// name is the name of the group.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -25,20 +25,20 @@ pub struct APIGroup {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
 }
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIGroupList {
+pub struct ApiGroupList {
     /// groups is a list of APIGroup.
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub groups: ::prost::alloc::vec::Vec<APIGroup>,
+    pub groups: ::prost::alloc::vec::Vec<ApiGroup>,
 }
 /// APIResource specifies the name of a resource and whether it is namespaced.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIResource {
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ApiResource {
     /// name is the plural name of the resource.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -88,14 +88,14 @@ pub struct APIResource {
 /// resources supported in a specific group and version, and if the resource
 /// is namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIResourceList {
+pub struct ApiResourceList {
     /// groupVersion is the group and version this APIResourceList is for.
     #[prost(string, optional, tag = "1")]
     pub group_version: ::core::option::Option<::prost::alloc::string::String>,
     /// resources contains the name of the resources and if they are namespaced.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub resources: ::prost::alloc::vec::Vec<APIResource>,
+    pub resources: ::prost::alloc::vec::Vec<ApiResource>,
 }
 /// APIVersions lists the versions that are available, to allow clients to
 /// discover the API at /api, which is the root path of the legacy v1 API.
@@ -103,7 +103,7 @@ pub struct APIResourceList {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIVersions {
+pub struct ApiVersions {
     /// versions are the api versions that are available.
     /// +listType=atomic
     #[prost(string, repeated, tag = "1")]
@@ -117,13 +117,13 @@ pub struct APIVersions {
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCidr>,
 }
 /// ApplyOptions may be provided when applying an API object.
 /// FieldManager is required for apply requests.
 /// ApplyOptions is equivalent to PatchOptions. It is provided as a convenience with documentation
 /// that speaks specifically to how the options fields relate to apply.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ApplyOptions {
     /// When present, indicates that modifications should not be
     /// persisted. An invalid or unrecognized dryRun directive will
@@ -161,7 +161,7 @@ pub struct ApplyOptions {
 ///
 /// 	    // other fields
 /// 	}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Condition {
     /// type of condition in CamelCase or in foo.example.com/CamelCase.
     /// ---
@@ -216,7 +216,7 @@ pub struct Condition {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CreateOptions may be provided when creating an API object.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CreateOptions {
     /// When present, indicates that modifications should not be
     /// persisted. An invalid or unrecognized dryRun directive will
@@ -255,7 +255,7 @@ pub struct CreateOptions {
     pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeleteOptions may be provided when deleting an API object.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeleteOptions {
     /// The duration in seconds before the object should be deleted. Value must be non-negative integer.
     /// The value zero indicates delete immediately. If this value is nil, the default grace period for the
@@ -316,14 +316,14 @@ pub struct DeleteOptions {
 /// Duration is a wrapper around time.Duration which supports correct
 /// marshaling to YAML and JSON. In particular, it marshals into strings, which
 /// can be used as map keys in json.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Duration {
     #[prost(int64, optional, tag = "1")]
     pub duration: ::core::option::Option<i64>,
 }
 /// FieldSelectorRequirement is a selector that contains values, a key, and an operator that
 /// relates the key and values.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FieldSelectorRequirement {
     /// key is the field selector key that the requirement applies to.
     #[prost(string, optional, tag = "1")]
@@ -353,14 +353,14 @@ pub struct FieldSelectorRequirement {
 ///
 /// The exact format is defined in sigs.k8s.io/structured-merge-diff
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FieldsV1 {
     /// Raw is the underlying serialization of this object.
     #[prost(bytes = "vec", optional, tag = "1")]
     pub raw: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// GetOptions is the standard query options to the standard REST get call.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetOptions {
     /// resourceVersion sets a constraint on what resource versions a request may be served from.
     /// See <https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions> for
@@ -375,7 +375,7 @@ pub struct GetOptions {
 /// concepts during lookup stages without having partially valid types
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupKind {
     #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
@@ -386,7 +386,7 @@ pub struct GroupKind {
 /// concepts during lookup stages without having partially valid types
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupResource {
     #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
@@ -396,7 +396,7 @@ pub struct GroupResource {
 /// GroupVersion contains the "group" and the "version", which uniquely identifies the API.
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupVersion {
     #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
@@ -405,7 +405,7 @@ pub struct GroupVersion {
 }
 /// GroupVersion contains the "group/version" and "version" string of a version.
 /// It is made a struct to keep extensibility.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupVersionForDiscovery {
     /// groupVersion specifies the API group and version in the form "group/version"
     #[prost(string, optional, tag = "1")]
@@ -419,7 +419,7 @@ pub struct GroupVersionForDiscovery {
 /// to avoid automatic coercion.  It doesn't use a GroupVersion to avoid custom marshalling
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupVersionKind {
     #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
@@ -432,7 +432,7 @@ pub struct GroupVersionKind {
 /// to avoid automatic coercion.  It doesn't use a GroupVersion to avoid custom marshalling
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupVersionResource {
     #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
@@ -462,7 +462,7 @@ pub struct LabelSelector {
 }
 /// A label selector requirement is a selector that contains values, a key, and an operator that
 /// relates the key and values.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LabelSelectorRequirement {
     /// key is the label key that the selector applies to.
     #[prost(string, optional, tag = "1")]
@@ -494,7 +494,7 @@ pub struct List {
 }
 /// ListMeta describes metadata that synthetic resources must have, including lists and
 /// various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ListMeta {
     /// Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
     /// +optional
@@ -532,7 +532,7 @@ pub struct ListMeta {
     pub remaining_item_count: ::core::option::Option<i64>,
 }
 /// ListOptions is the query options to a standard REST list call.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ListOptions {
     /// A selector to restrict the list of returned objects by their labels.
     /// Defaults to everything.
@@ -644,7 +644,7 @@ pub struct ListOptions {
 }
 /// ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource
 /// that the fieldset applies to.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ManagedFieldsEntry {
     /// Manager is an identifier of the workflow managing these fields.
     #[prost(string, optional, tag = "1")]
@@ -690,7 +690,7 @@ pub struct ManagedFieldsEntry {
 /// +protobuf.options.marshal=false
 /// +protobuf.as=Timestamp
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MicroTime {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -876,7 +876,7 @@ pub struct ObjectMeta {
 /// object. An owning object must be in the same namespace as the dependent, or
 /// be cluster-scoped, so there is no namespace field.
 /// +structType=atomic
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct OwnerReference {
     /// API version of the referent.
     #[prost(string, optional, tag = "5")]
@@ -934,11 +934,11 @@ pub struct PartialObjectMetadataList {
     pub items: ::prost::alloc::vec::Vec<PartialObjectMetadata>,
 }
 /// Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Patch {}
 /// PatchOptions may be provided when patching an API object.
 /// PatchOptions is meant to be a superset of UpdateOptions.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PatchOptions {
     /// When present, indicates that modifications should not be
     /// persisted. An invalid or unrecognized dryRun directive will
@@ -986,7 +986,7 @@ pub struct PatchOptions {
     pub field_validation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Preconditions {
     /// Specifies the target UID.
     /// +optional
@@ -999,7 +999,7 @@ pub struct Preconditions {
 }
 /// RootPaths lists the paths available at root.
 /// For example: "/healthz", "/apis".
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RootPaths {
     /// paths are the paths available at root.
     /// +listType=atomic
@@ -1007,8 +1007,8 @@ pub struct RootPaths {
     pub paths: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ServerAddressByClientCIDR {
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ServerAddressByClientCidr {
     /// The CIDR with which clients can match their IP to figure out the server address that they should use.
     #[prost(string, optional, tag = "1")]
     pub client_cidr: ::core::option::Option<::prost::alloc::string::String>,
@@ -1057,7 +1057,7 @@ pub struct Status {
 }
 /// StatusCause provides more information about an api.Status failure, including
 /// cases when multiple errors are encountered.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatusCause {
     /// A machine-readable description of the cause of the error. If this value is
     /// empty there is no information available.
@@ -1126,7 +1126,7 @@ pub struct StatusDetails {
 }
 /// TableOptions are used when a Table is requested by the caller.
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TableOptions {
     /// includeObject decides whether to include each object along with its columnar information.
     /// Specifying "None" will return no object, specifying "Object" will return the full object contents, and
@@ -1142,7 +1142,7 @@ pub struct TableOptions {
 /// +protobuf.options.marshal=false
 /// +protobuf.as=Timestamp
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Time {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -1159,7 +1159,7 @@ pub struct Time {
 /// Timestamp is a struct that is equivalent to Time, but intended for
 /// protobuf marshalling/unmarshalling. It is generated into a serialization
 /// that matches Time. Do not use in Go structs.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Timestamp {
     /// Represents seconds of UTC time since Unix epoch
     /// 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -1178,7 +1178,7 @@ pub struct Timestamp {
 /// Structures that are versioned or persisted should inline TypeMeta.
 ///
 /// +k8s:deepcopy-gen=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TypeMeta {
     /// Kind is a string value representing the REST resource this object represents.
     /// Servers may infer this from the endpoint the client submits requests to.
@@ -1198,7 +1198,7 @@ pub struct TypeMeta {
 }
 /// UpdateOptions may be provided when updating an API object.
 /// All fields in UpdateOptions should also be present in PatchOptions.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct UpdateOptions {
     /// When present, indicates that modifications should not be
     /// persisted. An invalid or unrecognized dryRun directive will
@@ -1242,7 +1242,7 @@ pub struct UpdateOptions {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 ///
 /// items, if empty, will result in an empty slice
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Verbs {
     #[prost(string, repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -1252,7 +1252,7 @@ pub struct Verbs {
 /// +protobuf=true
 /// +k8s:deepcopy-gen=true
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct WatchEvent {
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,

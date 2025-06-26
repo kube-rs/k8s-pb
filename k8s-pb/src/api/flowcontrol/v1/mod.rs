@@ -3,7 +3,7 @@
 /// of the handling of exempt requests.
 /// In the mandatory exempt configuration object the values in the fields
 /// here can be modified by authorized users, unlike the rest of the `spec`.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExemptPriorityLevelConfiguration {
     /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
     /// NominalConcurrencyLimit (NominalCL) of this level.
@@ -35,7 +35,7 @@ pub struct ExemptPriorityLevelConfiguration {
     pub lendable_percent: ::core::option::Option<i32>,
 }
 /// FlowDistinguisherMethod specifies the method of a flow distinguisher.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FlowDistinguisherMethod {
     /// `type` is the type of flow distinguisher method
     /// The supported types are "ByUser" and "ByNamespace".
@@ -64,7 +64,7 @@ pub struct FlowSchema {
     pub status: ::core::option::Option<FlowSchemaStatus>,
 }
 /// FlowSchemaCondition describes conditions for a FlowSchema.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FlowSchemaCondition {
     /// `type` is the type of the condition.
     /// Required.
@@ -139,7 +139,7 @@ pub struct FlowSchemaStatus {
     pub conditions: ::prost::alloc::vec::Vec<FlowSchemaCondition>,
 }
 /// GroupSubject holds detailed information for group-kind subject.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GroupSubject {
     /// name is the user group that matches, or "*" to match all user groups.
     /// See <https://github.com/kubernetes/apiserver/blob/master/pkg/authentication/user/user.go> for some
@@ -150,7 +150,7 @@ pub struct GroupSubject {
 }
 /// LimitResponse defines how to handle requests that can not be executed right now.
 /// +union
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LimitResponse {
     /// `type` is "Queue" or "Reject".
     /// "Queue" means that requests that can not be executed upon arrival
@@ -172,7 +172,7 @@ pub struct LimitResponse {
 /// It addresses two issues:
 ///    - How are requests for this priority level limited?
 ///    - What should be done with requests that exceed the limit?
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LimitedPriorityLevelConfiguration {
     /// `nominalConcurrencyShares` (NCS) contributes to the computation of the
     /// NominalConcurrencyLimit (NominalCL) of this level.
@@ -233,7 +233,7 @@ pub struct LimitedPriorityLevelConfiguration {
 /// NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and the
 /// target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at least one member
 /// of verbs matches the request and (b) at least one member of nonResourceURLs matches the request.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NonResourcePolicyRule {
     /// `verbs` is a list of matching verbs and may not be empty.
     /// "*" matches all verbs. If it is present, it must be the only entry.
@@ -301,7 +301,7 @@ pub struct PriorityLevelConfiguration {
     pub status: ::core::option::Option<PriorityLevelConfigurationStatus>,
 }
 /// PriorityLevelConfigurationCondition defines the condition of priority level.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PriorityLevelConfigurationCondition {
     /// `type` is the type of the condition.
     /// Required.
@@ -336,7 +336,7 @@ pub struct PriorityLevelConfigurationList {
     pub items: ::prost::alloc::vec::Vec<PriorityLevelConfiguration>,
 }
 /// PriorityLevelConfigurationReference contains information that points to the "request-priority" being used.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PriorityLevelConfigurationReference {
     /// `name` is the name of the priority level configuration being referenced
     /// Required.
@@ -345,7 +345,7 @@ pub struct PriorityLevelConfigurationReference {
 }
 /// PriorityLevelConfigurationSpec specifies the configuration of a priority level.
 /// +union
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PriorityLevelConfigurationSpec {
     /// `type` indicates whether this priority level is subject to
     /// limitation on request execution.  A value of `"Exempt"` means
@@ -386,7 +386,7 @@ pub struct PriorityLevelConfigurationStatus {
     pub conditions: ::prost::alloc::vec::Vec<PriorityLevelConfigurationCondition>,
 }
 /// QueuingConfiguration holds the configuration parameters for queuing
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct QueuingConfiguration {
     /// `queues` is the number of queues for this priority level. The
     /// queues exist independently at each apiserver. The value must be
@@ -428,7 +428,7 @@ pub struct QueuingConfiguration {
 /// not specify a namespace (i.e., `Namespace==""`) and clusterScope is
 /// true or (d2) the request specifies a namespace and least one member
 /// of namespaces matches the request's namespace.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourcePolicyRule {
     /// `verbs` is a list of matching verbs and may not be empty.
     /// "*" matches all verbs and, if present, must be the only entry.
@@ -472,7 +472,7 @@ pub struct ResourcePolicyRule {
     pub namespaces: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ServiceAccountSubject holds detailed information for service-account-kind subject.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServiceAccountSubject {
     /// `namespace` is the namespace of matching ServiceAccount objects.
     /// Required.
@@ -486,7 +486,7 @@ pub struct ServiceAccountSubject {
 /// Subject matches the originator of a request, as identified by the request authentication system. There are three
 /// ways of matching an originator; by user, group, or service account.
 /// +union
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Subject {
     /// `kind` indicates which one of the other fields is non-empty.
     /// Required
@@ -507,7 +507,7 @@ pub struct Subject {
     pub service_account: ::core::option::Option<ServiceAccountSubject>,
 }
 /// UserSubject holds detailed information for user-kind subject.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct UserSubject {
     /// `name` is the username that matches, or "*" to match all usernames.
     /// Required.

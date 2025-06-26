@@ -24,7 +24,7 @@
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIStorageCapacity {
+pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
     /// be a DNS subdomain (dots allowed, 253 characters). To ensure that
     /// there are no conflicts with other CSI drivers on the cluster, the recommendation
@@ -85,7 +85,7 @@ pub struct CSIStorageCapacity {
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIStorageCapacityList {
+pub struct CsiStorageCapacityList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -93,7 +93,7 @@ pub struct CSIStorageCapacityList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSIStorageCapacity objects.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CSIStorageCapacity>,
+    pub items: ::prost::alloc::vec::Vec<CsiStorageCapacity>,
 }
 /// VolumeAttachment captures the intent to attach or detach the specified volume
 /// to/from the specified node.
@@ -237,7 +237,7 @@ pub struct VolumeAttributesClassList {
     pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
 }
 /// VolumeError captures an error encountered during a volume operation.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional

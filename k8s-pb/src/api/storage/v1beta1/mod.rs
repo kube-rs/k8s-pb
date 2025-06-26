@@ -8,7 +8,7 @@
 /// Kubelet uses this object to determine whether pod information needs to be passed on mount.
 /// CSIDriver objects are non-namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIDriver {
+pub struct CsiDriver {
     /// Standard object metadata.
     /// metadata.Name indicates the name of the CSI driver that this object
     /// refers to; it MUST be the same name returned by the CSI GetPluginName()
@@ -21,11 +21,11 @@ pub struct CSIDriver {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents the specification of the CSI Driver.
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<CSIDriverSpec>,
+    pub spec: ::core::option::Option<CsiDriverSpec>,
 }
 /// CSIDriverList is a collection of CSIDriver objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIDriverList {
+pub struct CsiDriverList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -33,11 +33,11 @@ pub struct CSIDriverList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSIDriver
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CSIDriver>,
+    pub items: ::prost::alloc::vec::Vec<CsiDriver>,
 }
 /// CSIDriverSpec is the specification of a CSIDriver.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIDriverSpec {
+pub struct CsiDriverSpec {
     /// attachRequired indicates this CSI volume driver requires an attach
     /// operation (because it implements the CSI ControllerPublishVolume()
     /// method), and that the Kubernetes attach detach controller should call
@@ -214,17 +214,17 @@ pub struct CSIDriverSpec {
 /// enough that it doesn't create this object.
 /// CSINode has an OwnerReference that points to the corresponding node object.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSINode {
+pub struct CsiNode {
     /// metadata.name must be the Kubernetes node name.
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the specification of CSINode
     #[prost(message, optional, tag = "2")]
-    pub spec: ::core::option::Option<CSINodeSpec>,
+    pub spec: ::core::option::Option<CsiNodeSpec>,
 }
 /// CSINodeDriver holds information about the specification of one CSI driver installed on a node
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSINodeDriver {
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct CsiNodeDriver {
     /// name represents the name of the CSI driver that this object refers to.
     /// This MUST be the same name returned by the CSI GetPluginName() call for
     /// that driver.
@@ -262,7 +262,7 @@ pub struct CSINodeDriver {
 }
 /// CSINodeList is a collection of CSINode objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSINodeList {
+pub struct CsiNodeList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -270,11 +270,11 @@ pub struct CSINodeList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSINode
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CSINode>,
+    pub items: ::prost::alloc::vec::Vec<CsiNode>,
 }
 /// CSINodeSpec holds information about the specification of all CSI drivers installed on a node
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSINodeSpec {
+pub struct CsiNodeSpec {
     /// drivers is a list of information of all CSI Drivers existing on a node.
     /// If all drivers in the list are uninstalled, this can become empty.
     /// +patchMergeKey=name
@@ -282,7 +282,7 @@ pub struct CSINodeSpec {
     /// +listType=map
     /// +listMapKey=name
     #[prost(message, repeated, tag = "1")]
-    pub drivers: ::prost::alloc::vec::Vec<CSINodeDriver>,
+    pub drivers: ::prost::alloc::vec::Vec<CsiNodeDriver>,
 }
 /// CSIStorageCapacity stores the result of one CSI GetCapacity call.
 /// For a given StorageClass, this describes the available capacity in a
@@ -309,7 +309,7 @@ pub struct CSINodeSpec {
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIStorageCapacity {
+pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
     /// be a DNS subdomain (dots allowed, 253 characters). To ensure that
     /// there are no conflicts with other CSI drivers on the cluster, the recommendation
@@ -370,7 +370,7 @@ pub struct CSIStorageCapacity {
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIStorageCapacityList {
+pub struct CsiStorageCapacityList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
@@ -378,7 +378,7 @@ pub struct CSIStorageCapacityList {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of CSIStorageCapacity objects.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CSIStorageCapacity>,
+    pub items: ::prost::alloc::vec::Vec<CsiStorageCapacity>,
 }
 /// StorageClass describes the parameters for a class of storage for
 /// which PersistentVolumes can be dynamically provisioned.
@@ -445,7 +445,7 @@ pub struct StorageClassList {
     pub items: ::prost::alloc::vec::Vec<StorageClass>,
 }
 /// TokenRequest contains parameters of a service account token.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TokenRequest {
     /// audience is the intended audience of the token in "TokenRequestSpec".
     /// It will default to the audiences of kube apiserver.
@@ -600,7 +600,7 @@ pub struct VolumeAttributesClassList {
     pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
 }
 /// VolumeError captures an error encountered during a volume operation.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional
@@ -622,7 +622,7 @@ pub struct VolumeError {
     pub error_code: ::core::option::Option<i32>,
 }
 /// VolumeNodeResources is a set of resource limits for scheduling of volumes.
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeNodeResources {
     /// count indicates the maximum number of unique volumes managed by the CSI driver that can be used on a node.
     /// A volume that is both attached and mounted on a node is considered to be used once, not twice.

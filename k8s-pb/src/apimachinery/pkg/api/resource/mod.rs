@@ -68,7 +68,7 @@
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen=true
 /// +k8s:openapi-gen=true
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Quantity {
     #[prost(string, optional, tag = "1")]
     pub string: ::core::option::Option<::prost::alloc::string::String>,
@@ -81,7 +81,7 @@ pub struct Quantity {
 /// +protobuf.options.marshal=false
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen=true
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct QuantityValue {
     #[prost(string, optional, tag = "1")]
     pub string: ::core::option::Option<::prost::alloc::string::String>,

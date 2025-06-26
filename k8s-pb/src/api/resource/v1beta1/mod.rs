@@ -148,7 +148,7 @@ pub struct BasicDevice {
     pub taints: ::prost::alloc::vec::Vec<DeviceTaint>,
 }
 /// CELDeviceSelector contains a CEL expression for selecting a device.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CelDeviceSelector {
     /// Expression is a CEL expression which evaluates a single device. It
     /// must evaluate to true when the device under consideration satisfies
@@ -206,7 +206,7 @@ pub struct CelDeviceSelector {
     pub expression: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Counter describes a quantity associated with a device.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Counter {
     /// Value defines how much of a certain device counter is available.
     ///
@@ -257,7 +257,7 @@ pub struct Device {
     pub basic: ::core::option::Option<BasicDevice>,
 }
 /// DeviceAllocationConfiguration gets embedded in an AllocationResult.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceAllocationConfiguration {
     /// Source records whether the configuration comes from a class and thus
     /// is not something that a normal user would have been able to set
@@ -303,7 +303,7 @@ pub struct DeviceAllocationResult {
     pub config: ::prost::alloc::vec::Vec<DeviceAllocationConfiguration>,
 }
 /// DeviceAttribute must have exactly one field set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceAttribute {
     /// IntValue is a number.
     ///
@@ -332,7 +332,7 @@ pub struct DeviceAttribute {
     pub version: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeviceCapacity describes a quantity associated with a device.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceCapacity {
     /// Value defines how much of a certain device capacity is available.
     ///
@@ -367,7 +367,7 @@ pub struct DeviceClaim {
     pub config: ::prost::alloc::vec::Vec<DeviceClaimConfiguration>,
 }
 /// DeviceClaimConfiguration is used for configuration parameters in DeviceClaim.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceClaimConfiguration {
     /// Requests lists the names of requests where the configuration applies.
     /// If empty, it applies to all requests.
@@ -408,7 +408,7 @@ pub struct DeviceClass {
     pub spec: ::core::option::Option<DeviceClassSpec>,
 }
 /// DeviceClassConfiguration is used in DeviceClass.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceClassConfiguration {
     #[prost(message, optional, tag = "1")]
     pub device_configuration: ::core::option::Option<DeviceConfiguration>,
@@ -448,7 +448,7 @@ pub struct DeviceClassSpec {
 /// DeviceConfiguration must have exactly one field set. It gets embedded
 /// inline in some other structs which have other fields, so field names must
 /// not conflict with those.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceConfiguration {
     /// Opaque provides driver-specific configuration parameters.
     ///
@@ -458,7 +458,7 @@ pub struct DeviceConfiguration {
     pub opaque: ::core::option::Option<OpaqueDeviceConfiguration>,
 }
 /// DeviceConstraint must have exactly one field set besides Requests.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceConstraint {
     /// Requests is a list of the one or more requests in this claim which
     /// must co-satisfy this constraint. If a request is fulfilled by
@@ -725,7 +725,7 @@ pub struct DeviceRequestAllocationResult {
     pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
 }
 /// DeviceSelector must have exactly one field set.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceSelector {
     /// CEL contains a CEL expression for selecting a device.
     ///
@@ -835,7 +835,7 @@ pub struct DeviceSubRequest {
 /// to pods using the claim.
 ///
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceTaint {
     /// The taint key to be applied to a device.
     /// Must be a label name.
@@ -866,7 +866,7 @@ pub struct DeviceTaint {
 }
 /// The ResourceClaim this DeviceToleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceToleration {
     /// Key is the taint key that the toleration applies to. Empty means match all taint keys.
     /// If the key is empty, operator must be Exists; this combination means to match all values and all keys.
@@ -911,7 +911,7 @@ pub struct DeviceToleration {
 /// NetworkDeviceData provides network-related details for the allocated device.
 /// This information may be filled by drivers or other components to configure
 /// or identify the device within a network context.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NetworkDeviceData {
     /// InterfaceName specifies the name of the network interface associated with
     /// the allocated device. This might be the name of a physical or virtual
@@ -944,7 +944,7 @@ pub struct NetworkDeviceData {
 }
 /// OpaqueDeviceConfiguration contains configuration parameters for a driver
 /// in a format defined by the driver vendor.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct OpaqueDeviceConfiguration {
     /// Driver is used to determine which kubelet plugin needs
     /// to be passed these configuration parameters.
@@ -995,7 +995,7 @@ pub struct ResourceClaim {
 /// ResourceClaimConsumerReference contains enough information to let you
 /// locate the consumer of a ResourceClaim. The user must be a resource in the same
 /// namespace as the ResourceClaim.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourceClaimConsumerReference {
     /// APIGroup is the group for the resource being referenced. It is
     /// empty for the core API. This matches the group in the APIVersion
@@ -1130,7 +1130,7 @@ pub struct ResourceClaimTemplateSpec {
     pub spec: ::core::option::Option<ResourceClaimSpec>,
 }
 /// ResourcePool describes the pool that ResourceSlices belong to.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ResourcePool {
     /// Name is used to identify the pool. For node-local devices, this
     /// is often the node name, but this is not required.
