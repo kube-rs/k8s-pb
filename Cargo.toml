@@ -5,3 +5,14 @@ members = [
   "k8s-pb"
 ]
 resolver = "2"
+
+[workspace.dependencies]
+anyhow = "1.0.44"
+env_logger = "0.11.0"
+log = "0.4.14"
+prost = "0.12.3"
+prost-build = "0.12.3"
+prost-types = "0.12.3"
+quote = "1.0"
+serde = "1.0.130"
+serde_json = "1.0.67"

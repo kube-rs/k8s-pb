@@ -6,12 +6,12 @@ license = "Apache-2.0"
 publish = false
 
 [dependencies]
-prost = "0.13.1"
-prost-build = "0.13.1"
-prost-types = "0.13.1"
-serde_json = "1.0.67"
-serde = { version = "1.0.130", features = ["derive"] }
-log = "0.4.14"
-anyhow = "1.0.44"
-env_logger = "0.11.0"
-quote = "1.0"
+prost = { workspace = true }
+prost-build = { workspace = true }
+prost-types = { workspace = true }
+serde_json = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+log = { workspace = true }
+anyhow = { workspace = true }
+env_logger = { workspace = true }
+quote = { workspace = true }

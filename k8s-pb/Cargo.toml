@@ -15,4 +15,4 @@ rust-version = "1.65.0"
 edition = "2021"
 
 [dependencies]
-prost = "0.13.1"
+prost = { workspace = true }
