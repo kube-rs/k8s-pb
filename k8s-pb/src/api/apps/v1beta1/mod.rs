@@ -305,6 +305,9 @@ pub struct Scale {
 pub struct ScaleSpec {
     /// replicas is the number of observed instances of the scaled object.
     /// +optional
+    /// +k8s:optional
+    /// +default=0
+    /// +k8s:minimum=0
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
 }
