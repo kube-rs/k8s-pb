@@ -207,7 +207,8 @@ pub struct JobSpec {
     #[prost(message, optional, tag = "16")]
     pub success_policy: ::core::option::Option<SuccessPolicy>,
     /// Specifies the number of retries before marking this job failed.
-    /// Defaults to 6
+    /// Defaults to 6, unless backoffLimitPerIndex (only Indexed Job) is specified.
+    /// When backoffLimitPerIndex is specified, backoffLimit defaults to 2147483647.
     /// +optional
     #[prost(int32, optional, tag = "7")]
     pub backoff_limit: ::core::option::Option<i32>,
@@ -311,8 +312,6 @@ pub struct JobSpec {
     ///
     /// When using podFailurePolicy, Failed is the the only allowed value.
     /// TerminatingOrFailed and Failed are allowed values when podFailurePolicy is not in use.
-    /// This is an beta field. To use this, enable the JobPodReplacementPolicy feature toggle.
-    /// This is on by default.
     /// +optional
     #[prost(string, optional, tag = "14")]
     pub pod_replacement_policy: ::core::option::Option<::prost::alloc::string::String>,
@@ -559,7 +558,7 @@ pub struct PodFailurePolicyRule {
 pub struct SuccessPolicy {
     /// rules represents the list of alternative rules for the declaring the Jobs
     /// as successful before `.status.succeeded >= .spec.completions`. Once any of the rules are met,
-    /// the "SucceededCriteriaMet" condition is added, and the lingering pods are removed.
+    /// the "SuccessCriteriaMet" condition is added, and the lingering pods are removed.
     /// The terminal state for such a Job has the "Complete" condition.
     /// Additionally, these rules are evaluated in order; Once the Job meets one of the rules,
     /// other rules are ignored. At most 20 elements are allowed.

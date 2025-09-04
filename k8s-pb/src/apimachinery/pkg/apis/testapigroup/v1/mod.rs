@@ -50,6 +50,24 @@ pub struct CarpCondition {
     #[prost(string, optional, tag = "6")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct CarpInfo {
+    /// A is the first map key.
+    /// +required
+    #[prost(int64, optional, tag = "1")]
+    pub a: ::core::option::Option<i64>,
+    /// B is the second map key.
+    /// +required
+    #[prost(string, optional, tag = "2")]
+    pub b: ::core::option::Option<::prost::alloc::string::String>,
+    /// C is the third, optional map key
+    /// +optional
+    #[prost(string, optional, tag = "4")]
+    pub c: ::core::option::Option<::prost::alloc::string::String>,
+    /// Some data for each pair of A and B.
+    #[prost(string, optional, tag = "3")]
+    pub data: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// CarpList is a list of Carps.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CarpList {
@@ -106,7 +124,7 @@ pub struct CarpSpec {
     /// +k8s:conversion-gen=false
     /// +optional
     #[prost(string, optional, tag = "9")]
-    pub service_account: ::core::option::Option<::prost::alloc::string::String>,
+    pub deprecated_service_account: ::core::option::Option<::prost::alloc::string::String>,
     /// NodeName is a request to schedule this carp onto a specific node. If it is non-empty,
     /// the scheduler simply schedules this carp onto that node, assuming that it fits resource
     /// requirements.
@@ -114,7 +132,6 @@ pub struct CarpSpec {
     #[prost(string, optional, tag = "10")]
     pub node_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Host networking requested for this carp. Use the host's network namespace.
-    /// If this option is set, the ports that will be used must be specified.
     /// Default to false.
     /// +k8s:conversion-gen=false
     /// +optional
@@ -146,7 +163,7 @@ pub struct CarpSpec {
     /// If not specified, the carp will be dispatched by default scheduler.
     /// +optional
     #[prost(string, optional, tag = "19")]
-    pub schedulername: ::core::option::Option<::prost::alloc::string::String>,
+    pub scheduler_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// CarpStatus represents information about the status of a carp. Status may trail the actual
 /// state of a system.
@@ -159,6 +176,10 @@ pub struct CarpStatus {
     pub phase: ::core::option::Option<::prost::alloc::string::String>,
     /// Current service state of carp.
     /// More info: <http://kubernetes.io/docs/user-guide/carp-states#carp-conditions>
+    /// +patchStrategy=merge
+    /// +patchMergeKey=type
+    /// +listType=map
+    /// +listMapKey=type
     /// +optional
     #[prost(message, repeated, tag = "2")]
     pub conditions: ::prost::alloc::vec::Vec<CarpCondition>,
@@ -185,4 +206,12 @@ pub struct CarpStatus {
     /// +optional
     #[prost(message, optional, tag = "7")]
     pub start_time: ::core::option::Option<super::super::meta::v1::Time>,
+    /// Carp infos are provided by different clients, hence the map type.
+    ///
+    /// +listType=map
+    /// +listMapKey=a
+    /// +listMapKey=b
+    /// +listMapKey=c
+    #[prost(message, repeated, tag = "8")]
+    pub infos: ::prost::alloc::vec::Vec<CarpInfo>,
 }

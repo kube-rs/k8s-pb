@@ -46,7 +46,6 @@ protos/apimachinery/pkg/apis/testapigroup/v1/generated.proto
 protos/apimachinery/pkg/runtime/generated.proto
 protos/apimachinery/pkg/runtime/schema/generated.proto
 protos/apimachinery/pkg/util/intstr/generated.proto
-protos/api/networking/v1alpha1/generated.proto
 protos/api/networking/v1beta1/generated.proto
 protos/api/networking/v1/generated.proto
 protos/api/node/v1alpha1/generated.proto
@@ -60,6 +59,7 @@ protos/api/rbac/v1/generated.proto
 protos/api/resource/v1alpha3/generated.proto
 protos/api/resource/v1beta1/generated.proto
 protos/api/resource/v1beta2/generated.proto
+protos/api/resource/v1/generated.proto
 protos/api/scheduling/v1alpha1/generated.proto
 protos/api/scheduling/v1beta1/generated.proto
 protos/api/scheduling/v1/generated.proto

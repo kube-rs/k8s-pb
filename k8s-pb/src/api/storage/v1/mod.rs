@@ -42,8 +42,7 @@ pub struct CSIDriverSpec {
     /// and waits until the volume is attached before proceeding to mounting.
     /// The CSI external-attacher coordinates with CSI volume driver and updates
     /// the volumeattachment status when the attach operation is complete.
-    /// If the CSIDriverRegistry feature gate is enabled and the value is
-    /// specified to false, the attach operation will be skipped.
+    /// If the value is specified to false, the attach operation will be skipped.
     /// Otherwise the attach operation will be called.
     ///
     /// This field is immutable.
@@ -191,7 +190,7 @@ pub struct CSIDriverSpec {
     /// occur (neither periodic nor upon detecting capacity-related failures), and the
     /// allocatable.count remains static. The minimum allowed value for this field is 10 seconds.
     ///
-    /// This is an alpha feature and requires the MutableCSINodeAllocatableCount feature gate to be enabled.
+    /// This is a beta feature and requires the MutableCSINodeAllocatableCount feature gate to be enabled.
     ///
     /// This field is mutable.
     ///
@@ -554,6 +553,49 @@ pub struct VolumeAttachmentStatus {
     #[prost(message, optional, tag = "4")]
     pub detach_error: ::core::option::Option<VolumeError>,
 }
+/// VolumeAttributesClass represents a specification of mutable volume attributes
+/// defined by the CSI driver. The class can be specified during dynamic provisioning
+/// of PersistentVolumeClaims, and changed in the PersistentVolumeClaim spec after provisioning.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VolumeAttributesClass {
+    /// Standard object's metadata.
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    /// Name of the CSI driver
+    /// This field is immutable.
+    #[prost(string, optional, tag = "2")]
+    pub driver_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// parameters hold volume attributes defined by the CSI driver. These values
+    /// are opaque to the Kubernetes and are passed directly to the CSI driver.
+    /// The underlying storage provider supports changing these attributes on an
+    /// existing volume, however the parameters field itself is immutable. To
+    /// invoke a volume update, a new VolumeAttributesClass should be created with
+    /// new parameters, and the PersistentVolumeClaim should be updated to reference
+    /// the new VolumeAttributesClass.
+    ///
+    /// This field is required and must contain at least one key/value pair.
+    /// The keys cannot be empty, and the maximum number of parameters is 512, with
+    /// a cumulative max size of 256K. If the CSI driver rejects invalid parameters,
+    /// the target PersistentVolumeClaim will be set to an "Infeasible" state in the
+    /// modifyVolumeStatus field.
+    #[prost(btree_map = "string, string", tag = "3")]
+    pub parameters:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+}
+/// VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VolumeAttributesClassList {
+    /// Standard list metadata
+    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    /// items is the list of VolumeAttributesClass objects.
+    #[prost(message, repeated, tag = "2")]
+    pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
+}
 /// VolumeError captures an error encountered during a volume operation.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeError {
@@ -569,7 +611,7 @@ pub struct VolumeError {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
     /// errorCode is a numeric gRPC code representing the error encountered during Attach or Detach operations.
     ///
-    /// This is an optional, alpha field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.
+    /// This is an optional, beta field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.
     ///
     /// +featureGate=MutableCSINodeAllocatableCount
     /// +optional
@@ -711,5 +753,23 @@ impl crate::HasStatus for VolumeAttachment {
     }
     fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
         self.status.as_mut()
+    }
+}
+
+impl crate::Resource for VolumeAttributesClass {
+    const API_VERSION: &'static str = "storage.k8s.io/v1";
+    const GROUP: &'static str = "storage.k8s.io";
+    const VERSION: &'static str = "v1";
+    const KIND: &'static str = "VolumeAttributesClass";
+    const URL_PATH_SEGMENT: &'static str = "volumeattributesclasses";
+    type Scope = crate::ClusterResourceScope;
+}
+impl crate::Metadata for VolumeAttributesClass {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
+        self.metadata.as_mut()
     }
 }
