@@ -87,7 +87,6 @@ pub struct CertificateSigningRequestList {
 pub struct CertificateSigningRequestSpec {
     /// request contains an x509 certificate signing request encoded in a "CERTIFICATE REQUEST" PEM block.
     /// When serialized as JSON or YAML, the data is additionally base64-encoded.
-    /// +listType=atomic
     #[prost(bytes = "vec", optional, tag = "1")]
     pub request: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
     /// signerName indicates the requested signer, and is a qualified name.
@@ -184,6 +183,7 @@ pub struct CertificateSigningRequestStatus {
     /// +optional
     /// +k8s:listType=map
     /// +k8s:listMapKey=type
+    /// +k8s:customUnique
     /// +k8s:optional
     /// +k8s:item(type: "Approved")=+k8s:zeroOrOneOfMember
     /// +k8s:item(type: "Denied")=+k8s:zeroOrOneOfMember
@@ -216,7 +216,6 @@ pub struct CertificateSigningRequestStatus {
     ///      -----END CERTIFICATE-----
     ///      )
     ///
-    /// +listType=atomic
     /// +optional
     #[prost(bytes = "vec", optional, tag = "2")]
     pub certificate: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,

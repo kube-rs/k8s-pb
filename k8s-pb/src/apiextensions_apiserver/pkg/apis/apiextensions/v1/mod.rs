@@ -140,6 +140,13 @@ pub struct CustomResourceDefinitionCondition {
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
+    /// observedGeneration represents the .metadata.generation that the condition was set based upon.
+    /// For instance, if .metadata.generation is currently 12, but the .status.conditions\[x\].observedGeneration is 9, the condition is out of date
+    /// with respect to the current state of the instance.
+    /// +featureGate=CRDObservedGenerationTracking
+    /// +optional
+    #[prost(int64, optional, tag = "6")]
+    pub observed_generation: ::core::option::Option<i64>,
 }
 /// CustomResourceDefinitionList is a list of CustomResourceDefinition objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -254,6 +261,11 @@ pub struct CustomResourceDefinitionStatus {
     /// +listType=atomic
     #[prost(string, repeated, tag = "3")]
     pub stored_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// The generation observed by the CRD controller.
+    /// +featureGate=CRDObservedGenerationTracking
+    /// +optional
+    #[prost(int64, optional, tag = "4")]
+    pub observed_generation: ::core::option::Option<i64>,
 }
 /// CustomResourceDefinitionVersion describes a version for CRD.
 #[derive(Clone, PartialEq, ::prost::Message)]

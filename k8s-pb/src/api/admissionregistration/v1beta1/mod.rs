@@ -811,7 +811,6 @@ pub struct TypeChecking {
     #[prost(message, repeated, tag = "1")]
     pub expression_warnings: ::prost::alloc::vec::Vec<ExpressionWarning>,
 }
-/// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 /// +genclient
 /// +genclient:nonNamespaced
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

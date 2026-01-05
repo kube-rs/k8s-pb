@@ -332,7 +332,7 @@ pub struct DeploymentStatus {
     /// Total number of terminating pods targeted by this deployment. Terminating pods have a non-null
     /// .metadata.deletionTimestamp and have not yet reached the Failed or Succeeded .status.phase.
     ///
-    /// This is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.
+    /// This is a beta field and requires enabling DeploymentReplicaSetTerminatingReplicas feature (enabled by default).
     /// +optional
     #[prost(int32, optional, tag = "9")]
     pub terminating_replicas: ::core::option::Option<i32>,
@@ -944,7 +944,7 @@ pub struct ReplicaSetStatus {
     /// The number of terminating pods for this replica set. Terminating pods have a non-null .metadata.deletionTimestamp
     /// and have not yet reached the Failed or Succeeded .status.phase.
     ///
-    /// This is an alpha field. Enable DeploymentReplicaSetTerminatingReplicas to be able to use this field.
+    /// This is a beta field and requires enabling DeploymentReplicaSetTerminatingReplicas feature (enabled by default).
     /// +optional
     #[prost(int32, optional, tag = "7")]
     pub terminating_replicas: ::core::option::Option<i32>,
