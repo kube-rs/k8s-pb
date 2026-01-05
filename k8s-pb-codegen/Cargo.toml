@@ -1,9 +1,13 @@
 [package]
 name = "k8s-pb-codegen"
-version = "0.3.0"
-edition = "2021"
-license = "Apache-2.0"
 publish = false
+version.workspace = true
+authors.workspace = true
+repository.workspace = true
+readme.workspace = true
+license.workspace = true
+edition.workspace = true
+rust-version.workspace = true
 
 [dependencies]
 prost = { workspace = true }

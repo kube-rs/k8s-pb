@@ -6,6 +6,18 @@ members = [
 ]
 resolver = "2"
 
+[workspace.package]
+version = "2.0.1"
+authors = [
+  "clux <sszynrae@gmail.com>",
+  "kazk <kazk.dev@gmail.com>",
+]
+repository = "https://github.com/kube-rs/k8s-pb"
+readme = "README.md"
+license = "Apache-2.0"
+edition = "2024"
+rust-version = "1.88.0"
+
 [workspace.dependencies]
 anyhow = "1.0.98"
 env_logger = "0.11.8"
