@@ -19,7 +19,10 @@ fn read_file<P: AsRef<Path>>(path: P) -> Result<String> {
 }
 
 fn main() -> Result<()> {
-    std::env::set_var("RUST_LOG", "k8s_pb_codegen=info");
+    unsafe {
+        // only doing this locally at build time
+        std::env::set_var("RUST_LOG", "k8s_pb_codegen=info");
+    }
     env_logger::init();
     let root = Path::new(env!("CARGO_MANIFEST_DIR"));
     info!("parsing protos.list in {}", root.display());
