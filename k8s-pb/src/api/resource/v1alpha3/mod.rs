@@ -88,8 +88,10 @@ pub struct DeviceTaint {
     pub value: ::core::option::Option<::prost::alloc::string::String>,
     /// The effect of the taint on claims that do not tolerate the taint
     /// and through such claims on the pods using them.
-    /// Valid effects are NoSchedule and NoExecute. PreferNoSchedule as used for
-    /// nodes is not valid here.
+    ///
+    /// Valid effects are None, NoSchedule and NoExecute. PreferNoSchedule as used for
+    /// nodes is not valid here. More effects may get added in the future.
+    /// Consumers must treat unknown effects like None.
     ///
     /// +required
     #[prost(string, optional, tag = "3")]
@@ -115,6 +117,11 @@ pub struct DeviceTaintRule {
     /// Changing the spec automatically increments the metadata.generation number.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<DeviceTaintRuleSpec>,
+    /// Status provides information about what was requested in the spec.
+    ///
+    /// +optional
+    #[prost(message, optional, tag = "3")]
+    pub status: ::core::option::Option<DeviceTaintRuleStatus>,
 }
 /// DeviceTaintRuleList is a collection of DeviceTaintRules.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -128,10 +135,10 @@ pub struct DeviceTaintRuleList {
     pub items: ::prost::alloc::vec::Vec<DeviceTaintRule>,
 }
 /// DeviceTaintRuleSpec specifies the selector and one taint.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceTaintRuleSpec {
     /// DeviceSelector defines which device(s) the taint is applied to.
-    /// All selector criteria must be satified for a device to
+    /// All selector criteria must be satisfied for a device to
     /// match. The empty selector matches all devices. Without
     /// a selector, no devices are matches.
     ///
@@ -144,18 +151,44 @@ pub struct DeviceTaintRuleSpec {
     #[prost(message, optional, tag = "2")]
     pub taint: ::core::option::Option<DeviceTaint>,
 }
+/// DeviceTaintRuleStatus provides information about an on-going pod eviction.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeviceTaintRuleStatus {
+    /// Conditions provide information about the state of the DeviceTaintRule
+    /// and the cluster at some point in time,
+    /// in a machine-readable and human-readable format.
+    ///
+    /// The following condition is currently defined as part of this API, more may
+    /// get added:
+    /// - Type: EvictionInProgress
+    /// - Status: True if there are currently pods which need to be evicted, False otherwise
+    ///    (includes the effects which don't cause eviction).
+    /// - Reason: not specified, may change
+    /// - Message: includes information about number of pending pods and already evicted pods
+    ///    in a human-readable format, updated periodically, may change
+    ///
+    /// For `effect: None`, the condition above gets set once for each change to
+    /// the spec, with the message containing information about what would happen
+    /// if the effect was `NoExecute`. This feedback can be used to decide whether
+    /// changing the effect to `NoExecute` will work as intended. It only gets
+    /// set once to avoid having to constantly update the status.
+    ///
+    /// Must have 8 or fewer entries.
+    ///
+    /// +optional
+    /// +listType=map
+    /// +listMapKey=type
+    /// +patchStrategy=merge
+    /// +patchMergeKey=type
+    #[prost(message, repeated, tag = "1")]
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+}
 /// DeviceTaintSelector defines which device(s) a DeviceTaintRule applies to.
 /// The empty selector matches all devices. Without a selector, no devices
 /// are matched.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeviceTaintSelector {
-    /// If DeviceClassName is set, the selectors defined there must be
-    /// satisfied by a device to be selected. This field corresponds
-    /// to class.metadata.name.
-    ///
-    /// +optional
-    #[prost(string, optional, tag = "1")]
-    pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// If driver is set, only devices from that driver are selected.
     /// This fields corresponds to slice.spec.driver.
     ///
@@ -183,14 +216,6 @@ pub struct DeviceTaintSelector {
     /// +optional
     #[prost(string, optional, tag = "4")]
     pub device: ::core::option::Option<::prost::alloc::string::String>,
-    /// Selectors contains the same selection criteria as a ResourceClaim.
-    /// Currently, CEL expressions are supported. All of these selectors
-    /// must be satisfied.
-    ///
-    /// +optional
-    /// +listType=atomic
-    #[prost(message, repeated, tag = "5")]
-    pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
 }
 
 impl crate::Resource for DeviceTaintRule {
@@ -217,5 +242,23 @@ impl crate::HasSpec for DeviceTaintRule {
     }
     fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
         self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for DeviceTaintRule {
+    type Status = crate::api::resource::v1alpha3::DeviceTaintRuleStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for DeviceTaintRule {
+    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
     }
 }

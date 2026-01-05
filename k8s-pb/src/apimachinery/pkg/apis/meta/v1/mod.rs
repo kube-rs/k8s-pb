@@ -1047,7 +1047,6 @@ pub struct Status {
     /// is not guaranteed to conform to any schema except that defined by
     /// the reason type.
     /// +optional
-    /// +listType=atomic
     #[prost(message, optional, tag = "5")]
     pub details: ::core::option::Option<StatusDetails>,
     /// Suggested HTTP return code for this status, 0 if not set.
@@ -1125,6 +1124,7 @@ pub struct StatusDetails {
     pub retry_after_seconds: ::core::option::Option<i32>,
 }
 /// TableOptions are used when a Table is requested by the caller.
+/// +k8s:conversion-gen:explicit-from=net/url.Values
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TableOptions {

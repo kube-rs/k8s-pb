@@ -168,6 +168,8 @@ pub struct RoleRef {
     #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of resource being referenced
+    /// +required
+    /// +k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -187,6 +189,8 @@ pub struct Subject {
     #[prost(string, optional, tag = "2")]
     pub api_group: ::core::option::Option<::prost::alloc::string::String>,
     /// Name of the object being referenced.
+    /// +required
+    /// +k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty

@@ -63,7 +63,7 @@ protos/api/resource/v1/generated.proto
 protos/api/scheduling/v1alpha1/generated.proto
 protos/api/scheduling/v1beta1/generated.proto
 protos/api/scheduling/v1/generated.proto
-protos/api/storagemigration/v1alpha1/generated.proto
+protos/api/storagemigration/v1beta1/generated.proto
 protos/api/storage/v1alpha1/generated.proto
 protos/api/storage/v1beta1/generated.proto
 protos/api/storage/v1/generated.proto

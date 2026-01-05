@@ -91,8 +91,6 @@ pub struct EndpointHints {
     pub for_zones: ::prost::alloc::vec::Vec<ForZone>,
     /// forNodes indicates the node(s) this endpoint should be consumed by when
     /// using topology aware routing. May contain a maximum of 8 entries.
-    /// This is an Alpha feature and is only used when the PreferSameTrafficDistribution
-    /// feature gate is enabled.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
     pub for_nodes: ::prost::alloc::vec::Vec<ForNode>,
