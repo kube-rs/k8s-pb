@@ -15,8 +15,6 @@ protos/api/authentication/v1/generated.proto
 protos/api/authorization/v1beta1/generated.proto
 protos/api/authorization/v1/generated.proto
 protos/api/autoscaling/v1/generated.proto
-protos/api/autoscaling/v2beta1/generated.proto
-protos/api/autoscaling/v2beta2/generated.proto
 protos/api/autoscaling/v2/generated.proto
 protos/api/batch/v1beta1/generated.proto
 protos/api/batch/v1/generated.proto
@@ -60,7 +58,7 @@ protos/api/resource/v1alpha3/generated.proto
 protos/api/resource/v1beta1/generated.proto
 protos/api/resource/v1beta2/generated.proto
 protos/api/resource/v1/generated.proto
-protos/api/scheduling/v1alpha1/generated.proto
+protos/api/scheduling/v1alpha2/generated.proto
 protos/api/scheduling/v1beta1/generated.proto
 protos/api/scheduling/v1/generated.proto
 protos/api/storagemigration/v1beta1/generated.proto

@@ -8,6 +8,7 @@ pub struct ImageReview {
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec holds information about the pod being evaluated
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ImageReviewSpec>,
     /// Status is filled in by the backend and indicates whether the pod should be allowed.
@@ -47,6 +48,7 @@ pub struct ImageReviewSpec {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageReviewStatus {
     /// Allowed indicates that all images were allowed to be run.
+    /// +optional
     #[prost(bool, optional, tag = "1")]
     pub allowed: ::core::option::Option<bool>,
     /// Reason should be empty unless Allowed is false in which case it

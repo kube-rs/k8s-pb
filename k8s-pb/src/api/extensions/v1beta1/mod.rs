@@ -419,6 +419,8 @@ pub struct HttpIngressRuleValue {
 pub struct IpBlock {
     /// CIDR is a string representing the IP Block
     /// Valid examples are "192.168.1.0/24" or "2001:db8::/64"
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub cidr: ::core::option::Option<::prost::alloc::string::String>,
     /// Except is a slice of CIDRs that should not be included within an IP Block
@@ -691,6 +693,7 @@ pub struct NetworkPolicyEgressRule {
     /// allows traffic only if the traffic matches at least one item in the to list.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub to: ::prost::alloc::vec::Vec<NetworkPolicyPeer>,
 }
@@ -714,6 +717,7 @@ pub struct NetworkPolicyIngressRule {
     /// traffic matches at least one item in the from list.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub from: ::prost::alloc::vec::Vec<NetworkPolicyPeer>,
 }
@@ -756,6 +760,7 @@ pub struct NetworkPolicyPeer {
     /// IPBlock defines policy on a particular IPBlock. If this field is set then
     /// neither of the other fields can be.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, optional, tag = "3")]
     pub ip_block: ::core::option::Option<IpBlock>,
 }
@@ -802,6 +807,7 @@ pub struct NetworkPolicySpec {
     /// (and serves solely to ensure that the pods it selects are isolated by default).
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub ingress: ::prost::alloc::vec::Vec<NetworkPolicyIngressRule>,
     /// List of egress rules to be applied to the selected pods. Outgoing traffic is
@@ -813,6 +819,7 @@ pub struct NetworkPolicySpec {
     /// This field is beta-level in 1.8
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "3")]
     pub egress: ::prost::alloc::vec::Vec<NetworkPolicyEgressRule>,
     /// List of rule types that the NetworkPolicy relates to.
@@ -1066,9 +1073,9 @@ pub struct Scale {
 pub struct ScaleSpec {
     /// desired number of instances for the scaled object.
     /// +optional
-    /// +k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     /// +default=0
-    /// +k8s:minimum=0
+    /// +k8s:alpha(since: "1.36")=+k8s:minimum=0
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
 }

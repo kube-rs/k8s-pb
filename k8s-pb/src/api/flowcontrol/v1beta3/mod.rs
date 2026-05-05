@@ -160,11 +160,16 @@ pub struct LimitResponse {
     /// are rejected.
     /// Required.
     /// +unionDiscriminator
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:discriminator
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// `queuing` holds the configuration parameters for queuing.
     /// This field may be non-empty only if `type` is `"Queue"`.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:member("Queue")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:member("Reject")=+k8s:forbidden
     #[prost(message, optional, tag = "2")]
     pub queuing: ::core::option::Option<QueuingConfiguration>,
 }
@@ -352,11 +357,16 @@ pub struct PriorityLevelConfigurationSpec {
     /// capacity is made available exclusively to this priority level.
     /// Required.
     /// +unionDiscriminator
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:discriminator
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// `limited` specifies how requests are handled for a Limited priority level.
     /// This field must be non-empty if and only if `type` is `"Limited"`.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:member("Limited")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:member("Exempt")=+k8s:forbidden
     #[prost(message, optional, tag = "2")]
     pub limited: ::core::option::Option<LimitedPriorityLevelConfiguration>,
     /// `exempt` specifies how requests are handled for an exempt priority level.
@@ -365,6 +375,9 @@ pub struct PriorityLevelConfigurationSpec {
     /// If empty and `type` is `"Exempt"` then the default values
     /// for `ExemptPriorityLevelConfiguration` apply.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:member("Exempt")=+k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:member("Limited")=+k8s:forbidden
     #[prost(message, optional, tag = "3")]
     pub exempt: ::core::option::Option<ExemptPriorityLevelConfiguration>,
 }

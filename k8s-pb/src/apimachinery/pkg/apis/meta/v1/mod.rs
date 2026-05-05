@@ -352,10 +352,14 @@ pub struct FieldSelectorRequirement {
 /// If a key maps to an empty Fields value, the field that key represents is part of the set.
 ///
 /// The exact format is defined in sigs.k8s.io/structured-merge-diff
+/// +k8s:deepcopy-gen=false
+/// +protobuf.options.marshal=false
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FieldsV1 {
     /// Raw is the underlying serialization of this object.
+    ///
+    /// Deprecated: Direct access to this field is deprecated. Use GetRawBytes, GetRawString, SetRawBytes, SetRawString, GetRawReader, NewFieldsV1 instead.
     #[prost(bytes = "vec", optional, tag = "1")]
     pub raw: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
@@ -530,6 +534,17 @@ pub struct ListMeta {
     /// +optional
     #[prost(int64, optional, tag = "4")]
     pub remaining_item_count: ::core::option::Option<i64>,
+    /// shardInfo is set when the list is a filtered subset of the full collection,
+    /// as selected by a shard selector on the request. It echoes back the selector
+    /// so clients can verify which shard they received and merge sharded responses.
+    /// Clients should not cache sharded list responses as a full representation
+    /// of the collection.
+    ///
+    /// This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
+    /// +featureGate=ShardedListAndWatch
+    /// +optional
+    #[prost(message, optional, tag = "5")]
+    pub shard_info: ::core::option::Option<ShardInfo>,
 }
 /// ListOptions is the query options to a standard REST list call.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -641,6 +656,38 @@ pub struct ListOptions {
     /// +optional
     #[prost(bool, optional, tag = "11")]
     pub send_initial_events: ::core::option::Option<bool>,
+    /// shardSelector restricts the list of returned objects using a CEL-based
+    /// shard selector expression. The format uses the shardRange() function
+    /// combined with || (logical OR) to specify one or more hash ranges:
+    ///
+    ///    shardRange(object.metadata.uid, '0x0', '0x8000000000000000')
+    ///    shardRange(object.metadata.uid, '0x0', '0x8000000000000000') || shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')
+    ///
+    /// Field paths use CEL-style object-rooted syntax (e.g. "object.metadata.uid"),
+    /// NOT the fieldSelector format ("metadata.uid"). Currently supported paths:
+    ///    - object.metadata.uid
+    ///    - object.metadata.namespace
+    ///
+    /// hexStart and hexEnd are single-quoted CEL string literals with a '0x' prefix,
+    /// defining the inclusive lower and exclusive upper bounds over the 64-bit FNV-1a
+    /// hash space. The full range is [0x0, 0x10000000000000000), where the exclusive
+    /// upper bound equals 2^64.
+    ///
+    /// Examples:
+    ///    2-shard split:
+    ///      shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x8000000000000000')
+    ///      shard 1: shardRange(object.metadata.uid, '0x8000000000000000', '0x10000000000000000')
+    ///    4-shard split:
+    ///      shard 0: shardRange(object.metadata.uid, '0x0000000000000000', '0x4000000000000000')
+    ///      shard 1: shardRange(object.metadata.uid, '0x4000000000000000', '0x8000000000000000')
+    ///      shard 2: shardRange(object.metadata.uid, '0x8000000000000000', '0xc000000000000000')
+    ///      shard 3: shardRange(object.metadata.uid, '0xc000000000000000', '0x10000000000000000')
+    ///
+    /// This is an alpha field and requires enabling the ShardedListAndWatch feature gate.
+    /// +featureGate=ShardedListAndWatch
+    /// +optional
+    #[prost(string, optional, tag = "15")]
+    pub shard_selector: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource
 /// that the fieldset applies to.
@@ -1016,6 +1063,16 @@ pub struct ServerAddressByClientCIDR {
     /// This can be a hostname, hostname:port, IP or IP:port.
     #[prost(string, optional, tag = "2")]
     pub server_address: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ShardInfo describes the shard selector that was applied to produce a list response.
+/// Its presence on a list response indicates the list is a filtered subset.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ShardInfo {
+    /// selector is the shard selector string from the request, echoed back so clients
+    /// can verify which shard they received and merge responses from multiple shards.
+    /// +required
+    #[prost(string, optional, tag = "1")]
+    pub selector: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Status is a return value for calls that don't return other objects.
 #[derive(Clone, PartialEq, ::prost::Message)]

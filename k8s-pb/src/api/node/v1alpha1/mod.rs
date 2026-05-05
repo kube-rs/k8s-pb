@@ -25,6 +25,7 @@ pub struct RuntimeClass {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents specification of the RuntimeClass
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<RuntimeClassSpec>,
 }
@@ -56,6 +57,10 @@ pub struct RuntimeClassSpec {
     /// in a pod.
     /// The runtimeHandler must be lowercase, conform to the DNS Label (RFC 1123)
     /// requirements, and is immutable.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-short-name"
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub runtime_handler: ::core::option::Option<::prost::alloc::string::String>,
     /// overhead represents the resource overhead associated with running a pod for a

@@ -86,12 +86,12 @@ pub struct AuditAnnotation {
 /// ExpressionWarning is a warning information that targets a specific expression.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExpressionWarning {
-    /// The path to the field that refers the expression.
+    /// fieldRef is the path to the field that refers to the expression.
     /// For example, the reference to the expression of the first item of
     /// validations is "spec.validations\[0\].expression"
     #[prost(string, optional, tag = "2")]
     pub field_ref: ::core::option::Option<::prost::alloc::string::String>,
-    /// The content of type checking information in a human-readable form.
+    /// warning contains the content of type checking information in a human-readable form.
     /// Each line of the warning contains the type that the expression is checked
     /// against, followed by the type check error from the compiler.
     #[prost(string, optional, tag = "3")]
@@ -170,7 +170,7 @@ pub struct JsonPatch {
 /// MatchCondition represents a condition which must be fulfilled for a request to be sent to a webhook.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MatchCondition {
-    /// Name is an identifier for this match condition, used for strategic merging of MatchConditions,
+    /// name is an identifier for this match condition, used for strategic merging of MatchConditions,
     /// as well as providing an identifier for logging purposes. A good name should be descriptive of
     /// the associated expression.
     /// Name must be a qualified name consisting of alphanumeric characters, '-', '_' or '.', and
@@ -181,7 +181,7 @@ pub struct MatchCondition {
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
+    /// expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
     /// CEL expressions have access to the contents of the AdmissionRequest and Authorizer, organized into CEL variables:
     ///
     /// 'object' - The object from the incoming request. The value is null for DELETE requests.
@@ -203,7 +203,7 @@ pub struct MatchCondition {
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchResources {
-    /// NamespaceSelector decides whether to run the admission control policy on an object based
+    /// namespaceSelector decides whether to run the admission control policy on an object based
     /// on whether the namespace for that object matches the selector. If the
     /// object itself is a namespace, the matching is performed on
     /// object.metadata.labels. If the object is another cluster scoped resource,
@@ -250,7 +250,7 @@ pub struct MatchResources {
     #[prost(message, optional, tag = "1")]
     pub namespace_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// ObjectSelector decides whether to run the validation based on if the
+    /// objectSelector decides whether to run the validation based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the cel validation, and
     /// is considered to match if either object matches the selector. A null
@@ -265,13 +265,13 @@ pub struct MatchResources {
     #[prost(message, optional, tag = "2")]
     pub object_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// ResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy matches.
+    /// resourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy matches.
     /// The policy cares about an operation if it matches _any_ Rule.
     /// +listType=atomic
     /// +optional
     #[prost(message, repeated, tag = "3")]
     pub resource_rules: ::prost::alloc::vec::Vec<NamedRuleWithOperations>,
-    /// ExcludeResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy should not care about.
+    /// excludeResourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy should not care about.
     /// The exclude rules take precedence over include rules (if a resource matches both, it is excluded)
     /// +listType=atomic
     /// +optional
@@ -298,11 +298,11 @@ pub struct MatchResources {
 /// MutatingAdmissionPolicy describes the definition of an admission mutation policy that mutates the object coming into admission chain.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicy {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the MutatingAdmissionPolicy.
+    /// spec defines the desired behavior of the MutatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicySpec>,
 }
@@ -319,18 +319,18 @@ pub struct MutatingAdmissionPolicy {
 /// given (policy, binding, param) combination is within its own CEL budget.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicyBinding {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the MutatingAdmissionPolicyBinding.
+    /// spec defines the desired behavior of the MutatingAdmissionPolicyBinding.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicyBindingSpec>,
 }
 /// MutatingAdmissionPolicyBindingList is a list of MutatingAdmissionPolicyBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicyBindingList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -370,7 +370,7 @@ pub struct MutatingAdmissionPolicyBindingSpec {
 /// MutatingAdmissionPolicyList is a list of MutatingAdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicyList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -471,18 +471,18 @@ pub struct MutatingAdmissionPolicySpec {
 /// MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhook {
-    /// The name of the admission webhook.
+    /// name is the name of the admission webhook.
     /// Name should be fully qualified, e.g., imagepolicy.kubernetes.io, where
     /// "imagepolicy" is the name of the webhook, and kubernetes.io is the name
     /// of the organization.
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// ClientConfig defines how to communicate with the hook.
+    /// clientConfig defines how to communicate with the hook.
     /// Required
     #[prost(message, optional, tag = "2")]
     pub client_config: ::core::option::Option<WebhookClientConfig>,
-    /// Rules describes what operations on what resources/subresources the webhook cares about.
+    /// rules describes what operations on what resources/subresources the webhook cares about.
     /// The webhook cares about an operation if it matches _any_ Rule.
     /// However, in order to prevent ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks
     /// from putting the cluster in a state which cannot be recovered from without completely
@@ -491,7 +491,7 @@ pub struct MutatingWebhook {
     /// +listType=atomic
     #[prost(message, repeated, tag = "3")]
     pub rules: ::prost::alloc::vec::Vec<super::v1::RuleWithOperations>,
-    /// FailurePolicy defines how unrecognized errors from the admission endpoint are handled -
+    /// failurePolicy defines how unrecognized errors from the admission endpoint are handled -
     /// allowed values are Ignore or Fail. Defaults to Ignore.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -513,7 +513,7 @@ pub struct MutatingWebhook {
     /// +optional
     #[prost(string, optional, tag = "9")]
     pub match_policy: ::core::option::Option<::prost::alloc::string::String>,
-    /// NamespaceSelector decides whether to run the webhook on an object based
+    /// namespaceSelector decides whether to run the webhook on an object based
     /// on whether the namespace for that object matches the selector. If the
     /// object itself is a namespace, the matching is performed on
     /// object.metadata.labels. If the object is another cluster scoped resource,
@@ -560,7 +560,7 @@ pub struct MutatingWebhook {
     #[prost(message, optional, tag = "5")]
     pub namespace_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// ObjectSelector decides whether to run the webhook based on if the
+    /// objectSelector decides whether to run the webhook based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the webhook, and
     /// is considered to match if either object matches the selector. A null
@@ -575,7 +575,7 @@ pub struct MutatingWebhook {
     #[prost(message, optional, tag = "11")]
     pub object_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// SideEffects states whether this webhook has side effects.
+    /// sideEffects states whether this webhook has side effects.
     /// Acceptable values are: Unknown, None, Some, NoneOnDryRun
     /// Webhooks with side effects MUST implement a reconciliation system, since a request may be
     /// rejected by a future step in the admission chain and the side effects therefore need to be undone.
@@ -584,7 +584,7 @@ pub struct MutatingWebhook {
     /// +optional
     #[prost(string, optional, tag = "6")]
     pub side_effects: ::core::option::Option<::prost::alloc::string::String>,
-    /// TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
+    /// timeoutSeconds specifies the timeout for this webhook. After the timeout passes,
     /// the webhook call will be ignored or the API call will fail based on the
     /// failure policy.
     /// The timeout value must be between 1 and 30 seconds.
@@ -592,7 +592,7 @@ pub struct MutatingWebhook {
     /// +optional
     #[prost(int32, optional, tag = "7")]
     pub timeout_seconds: ::core::option::Option<i32>,
-    /// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
+    /// admissionReviewVersions is an ordered list of preferred `AdmissionReview`
     /// versions the Webhook expects. API server will try to use first version in
     /// the list which it supports. If none of the versions specified in this list
     /// supported by API server, validation will fail for this object.
@@ -622,7 +622,7 @@ pub struct MutatingWebhook {
     /// +optional
     #[prost(string, optional, tag = "10")]
     pub reinvocation_policy: ::core::option::Option<::prost::alloc::string::String>,
-    /// MatchConditions is a list of conditions that must be met for a request to be sent to this
+    /// matchConditions is a list of conditions that must be met for a request to be sent to this
     /// webhook. Match conditions filter requests that have already been matched by the rules,
     /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
     /// There are a maximum of 64 match conditions allowed.
@@ -646,11 +646,11 @@ pub struct MutatingWebhook {
 /// Deprecated in v1.16, planned for removal in v1.19. Use admissionregistration.k8s.io/v1 MutatingWebhookConfiguration instead.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhookConfiguration {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Webhooks is a list of webhooks and the affected resources and operations.
+    /// webhooks is a list of webhooks and the affected resources and operations.
     /// +optional
     /// +patchMergeKey=name
     /// +patchStrategy=merge
@@ -662,7 +662,7 @@ pub struct MutatingWebhookConfiguration {
 /// MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingWebhookConfigurationList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -696,7 +696,7 @@ pub struct Mutation {
 /// +structType=atomic
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NamedRuleWithOperations {
-    /// ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.
+    /// resourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "1")]
@@ -709,12 +709,12 @@ pub struct NamedRuleWithOperations {
 /// +structType=atomic
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ParamKind {
-    /// APIVersion is the API group version the resources belong to.
+    /// apiVersion is the API group version the resources belong to.
     /// In format of "group/version".
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// Kind is the API kind the resources belong to.
+    /// kind is the API kind the resources belong to.
     /// Required.
     #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
@@ -765,7 +765,7 @@ pub struct ParamRef {
     #[prost(message, optional, tag = "3")]
     pub selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// `parameterNotFoundAction` controls the behavior of the binding when the resource
+    /// parameterNotFoundAction controls the behavior of the binding when the resource
     /// exists, and name or selector is valid, but there are no parameters
     /// matched by the binding. If the value is set to `Allow`, then no
     /// matched parameters will be treated as successful validation by the binding.
@@ -781,22 +781,22 @@ pub struct ParamRef {
 /// ServiceReference holds a reference to Service.legacy.k8s.io
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServiceReference {
-    /// `namespace` is the namespace of the service.
+    /// namespace is the namespace of the service.
     /// Required
     #[prost(string, optional, tag = "1")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
-    /// `name` is the name of the service.
+    /// name is the name of the service.
     /// Required
     #[prost(string, optional, tag = "2")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// `path` is an optional URL path which will be sent in any request to
+    /// path is an optional URL path which will be sent in any request to
     /// this service.
     /// +optional
     #[prost(string, optional, tag = "3")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
-    /// If specified, the port on the service that hosting webhook.
+    /// port is the port on the service that hosts the webhook.
     /// Default to 443 for backward compatibility.
-    /// `port` should be a valid port number (1-65535, inclusive).
+    /// port should be a valid port number (1-65535, inclusive).
     /// +optional
     #[prost(int32, optional, tag = "4")]
     pub port: ::core::option::Option<i32>,
@@ -805,7 +805,7 @@ pub struct ServiceReference {
 /// ValidatingAdmissionPolicy
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypeChecking {
-    /// The type checking warnings for each expression.
+    /// expressionWarnings contains the type checking warnings for each expression.
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
@@ -818,14 +818,14 @@ pub struct TypeChecking {
 /// ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicy {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the ValidatingAdmissionPolicy.
+    /// spec defines the desired behavior of the ValidatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicySpec>,
-    /// The status of the ValidatingAdmissionPolicy, including warnings that are useful to determine if the policy
+    /// status represents the current status of the ValidatingAdmissionPolicy, including warnings that are useful to determine if the policy
     /// behaves in the expected way.
     /// Populated by the system.
     /// Read-only.
@@ -846,18 +846,19 @@ pub struct ValidatingAdmissionPolicy {
 /// given (policy, binding, param) combination is within its own CEL budget.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyBinding {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the ValidatingAdmissionPolicyBinding.
+    /// spec defines the desired behavior of the ValidatingAdmissionPolicyBinding.
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicyBindingSpec>,
 }
 /// ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyBindingList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -869,9 +870,11 @@ pub struct ValidatingAdmissionPolicyBindingList {
 /// ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyBindingSpec {
-    /// PolicyName references a ValidatingAdmissionPolicy name which the ValidatingAdmissionPolicyBinding binds to.
+    /// policyName references a ValidatingAdmissionPolicy name which the ValidatingAdmissionPolicyBinding binds to.
     /// If the referenced resource does not exist, this binding is considered invalid and will be ignored
     /// Required.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub policy_name: ::core::option::Option<::prost::alloc::string::String>,
     /// paramRef specifies the parameter resource used to configure the admission control policy.
@@ -881,7 +884,7 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub param_ref: ::core::option::Option<ParamRef>,
-    /// MatchResources declares what resources match this binding and will be validated by it.
+    /// matchResources declares what resources match this binding and will be validated by it.
     /// Note that this is intersected with the policy's matchConstraints, so only requests that are matched by the policy can be selected by this.
     /// If this is unset, all resources matched by the policy are validated by this binding
     /// When resourceRules is unset, it does not constrain resource matching. If a resource is matched by the other fields of this object, it will be validated.
@@ -929,6 +932,8 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     ///
     /// Required.
     /// +listType=set
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, repeated, tag = "4")]
     pub validation_actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -937,7 +942,7 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
 /// ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -949,21 +954,21 @@ pub struct ValidatingAdmissionPolicyList {
 /// ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicySpec {
-    /// ParamKind specifies the kind of resources used to parameterize this policy.
+    /// paramKind specifies the kind of resources used to parameterize this policy.
     /// If absent, there are no parameters for this policy and the param CEL variable will not be provided to validation expressions.
     /// If ParamKind refers to a non-existent kind, this policy definition is mis-configured and the FailurePolicy is applied.
     /// If paramKind is specified but paramRef is unset in ValidatingAdmissionPolicyBinding, the params variable will be null.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub param_kind: ::core::option::Option<ParamKind>,
-    /// MatchConstraints specifies what resources this policy is designed to validate.
+    /// matchConstraints specifies what resources this policy is designed to validate.
     /// The AdmissionPolicy cares about a request if it matches _all_ Constraints.
     /// However, in order to prevent clusters from being put into an unstable state that cannot be recovered from via the API
     /// ValidatingAdmissionPolicy cannot match ValidatingAdmissionPolicy and ValidatingAdmissionPolicyBinding.
     /// Required.
     #[prost(message, optional, tag = "2")]
     pub match_constraints: ::core::option::Option<MatchResources>,
-    /// Validations contain CEL expressions which is used to apply the validation.
+    /// validations contain CEL expressions which is used to apply the validation.
     /// Validations and AuditAnnotations may not both be empty; a minimum of one Validations or AuditAnnotations is
     /// required.
     /// +listType=atomic
@@ -994,7 +999,7 @@ pub struct ValidatingAdmissionPolicySpec {
     /// +optional
     #[prost(message, repeated, tag = "5")]
     pub audit_annotations: ::prost::alloc::vec::Vec<AuditAnnotation>,
-    /// MatchConditions is a list of conditions that must be met for a request to be validated.
+    /// matchConditions is a list of conditions that must be met for a request to be validated.
     /// Match conditions filter requests that have already been matched by the rules,
     /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
     /// There are a maximum of 64 match conditions allowed.
@@ -1016,7 +1021,7 @@ pub struct ValidatingAdmissionPolicySpec {
     /// +optional
     #[prost(message, repeated, tag = "6")]
     pub match_conditions: ::prost::alloc::vec::Vec<MatchCondition>,
-    /// Variables contain definitions of variables that can be used in composition of other expressions.
+    /// variables contain definitions of variables that can be used in composition of other expressions.
     /// Each variable is defined as a named CEL expression.
     /// The variables defined here will be available under `variables` in other expressions of the policy
     /// except MatchConditions because MatchConditions are evaluated before the rest of the policy.
@@ -1034,16 +1039,16 @@ pub struct ValidatingAdmissionPolicySpec {
 /// ValidatingAdmissionPolicyStatus represents the status of an admission validation policy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyStatus {
-    /// The generation observed by the controller.
+    /// observedGeneration is the generation observed by the controller.
     /// +optional
     #[prost(int64, optional, tag = "1")]
     pub observed_generation: ::core::option::Option<i64>,
-    /// The results of type checking for each expression.
+    /// typeChecking contains the results of type checking for each expression.
     /// Presence of this field indicates the completion of the type checking.
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub type_checking: ::core::option::Option<TypeChecking>,
-    /// The conditions represent the latest available observations of a policy's current state.
+    /// conditions represent the latest available observations of a policy's current state.
     /// +optional
     /// +listType=map
     /// +listMapKey=type
@@ -1054,18 +1059,18 @@ pub struct ValidatingAdmissionPolicyStatus {
 /// ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingWebhook {
-    /// The name of the admission webhook.
+    /// name is the name of the admission webhook.
     /// Name should be fully qualified, e.g., imagepolicy.kubernetes.io, where
     /// "imagepolicy" is the name of the webhook, and kubernetes.io is the name
     /// of the organization.
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// ClientConfig defines how to communicate with the hook.
+    /// clientConfig defines how to communicate with the hook.
     /// Required
     #[prost(message, optional, tag = "2")]
     pub client_config: ::core::option::Option<WebhookClientConfig>,
-    /// Rules describes what operations on what resources/subresources the webhook cares about.
+    /// rules describes what operations on what resources/subresources the webhook cares about.
     /// The webhook cares about an operation if it matches _any_ Rule.
     /// However, in order to prevent ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks
     /// from putting the cluster in a state which cannot be recovered from without completely
@@ -1074,7 +1079,7 @@ pub struct ValidatingWebhook {
     /// +listType=atomic
     #[prost(message, repeated, tag = "3")]
     pub rules: ::prost::alloc::vec::Vec<super::v1::RuleWithOperations>,
-    /// FailurePolicy defines how unrecognized errors from the admission endpoint are handled -
+    /// failurePolicy defines how unrecognized errors from the admission endpoint are handled -
     /// allowed values are Ignore or Fail. Defaults to Ignore.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -1096,7 +1101,7 @@ pub struct ValidatingWebhook {
     /// +optional
     #[prost(string, optional, tag = "9")]
     pub match_policy: ::core::option::Option<::prost::alloc::string::String>,
-    /// NamespaceSelector decides whether to run the webhook on an object based
+    /// namespaceSelector decides whether to run the webhook on an object based
     /// on whether the namespace for that object matches the selector. If the
     /// object itself is a namespace, the matching is performed on
     /// object.metadata.labels. If the object is another cluster scoped resource,
@@ -1143,7 +1148,7 @@ pub struct ValidatingWebhook {
     #[prost(message, optional, tag = "5")]
     pub namespace_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// ObjectSelector decides whether to run the webhook based on if the
+    /// objectSelector decides whether to run the webhook based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the webhook, and
     /// is considered to match if either object matches the selector. A null
@@ -1158,7 +1163,7 @@ pub struct ValidatingWebhook {
     #[prost(message, optional, tag = "10")]
     pub object_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// SideEffects states whether this webhook has side effects.
+    /// sideEffects states whether this webhook has side effects.
     /// Acceptable values are: Unknown, None, Some, NoneOnDryRun
     /// Webhooks with side effects MUST implement a reconciliation system, since a request may be
     /// rejected by a future step in the admission chain and the side effects therefore need to be undone.
@@ -1168,7 +1173,7 @@ pub struct ValidatingWebhook {
     /// +listType=atomic
     #[prost(string, optional, tag = "6")]
     pub side_effects: ::core::option::Option<::prost::alloc::string::String>,
-    /// TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
+    /// timeoutSeconds specifies the timeout for this webhook. After the timeout passes,
     /// the webhook call will be ignored or the API call will fail based on the
     /// failure policy.
     /// The timeout value must be between 1 and 30 seconds.
@@ -1176,7 +1181,7 @@ pub struct ValidatingWebhook {
     /// +optional
     #[prost(int32, optional, tag = "7")]
     pub timeout_seconds: ::core::option::Option<i32>,
-    /// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
+    /// admissionReviewVersions is an ordered list of preferred `AdmissionReview`
     /// versions the Webhook expects. API server will try to use first version in
     /// the list which it supports. If none of the versions specified in this list
     /// supported by API server, validation will fail for this object.
@@ -1188,7 +1193,7 @@ pub struct ValidatingWebhook {
     /// +listType=atomic
     #[prost(string, repeated, tag = "8")]
     pub admission_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// MatchConditions is a list of conditions that must be met for a request to be sent to this
+    /// matchConditions is a list of conditions that must be met for a request to be sent to this
     /// webhook. Match conditions filter requests that have already been matched by the rules,
     /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
     /// There are a maximum of 64 match conditions allowed.
@@ -1212,11 +1217,11 @@ pub struct ValidatingWebhook {
 /// Deprecated in v1.16, planned for removal in v1.19. Use admissionregistration.k8s.io/v1 ValidatingWebhookConfiguration instead.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingWebhookConfiguration {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Webhooks is a list of webhooks and the affected resources and operations.
+    /// webhooks is a list of webhooks and the affected resources and operations.
     /// +optional
     /// +patchMergeKey=name
     /// +patchStrategy=merge
@@ -1228,7 +1233,7 @@ pub struct ValidatingWebhookConfiguration {
 /// ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingWebhookConfigurationList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -1240,7 +1245,7 @@ pub struct ValidatingWebhookConfigurationList {
 /// Validation specifies the CEL expression which is used to apply the validation.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Validation {
-    /// Expression represents the expression which will be evaluated by CEL.
+    /// expression represents the expression which will be evaluated by CEL.
     /// ref: <https://github.com/google/cel-spec>
     /// CEL expressions have access to the contents of the API request/response, organized into CEL variables as well as some other useful variables:
     ///
@@ -1283,7 +1288,7 @@ pub struct Validation {
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub expression: ::core::option::Option<::prost::alloc::string::String>,
-    /// Message represents the message displayed when validation fails. The message is required if the Expression contains
+    /// message represents the message displayed when validation fails. The message is required if the Expression contains
     /// line breaks. The message must not contain line breaks.
     /// If unset, the message is "failed rule: {Rule}".
     /// e.g. "must be a URL with the host matching spec.host"
@@ -1293,7 +1298,7 @@ pub struct Validation {
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
-    /// Reason represents a machine-readable description of why this validation failed.
+    /// reason represents a machine-readable description of why this validation failed.
     /// If this is the first validation in the list to fail, this reason, as well as the
     /// corresponding HTTP response code, are used in the
     /// HTTP response to the client.
@@ -1320,12 +1325,12 @@ pub struct Validation {
 /// +structType=atomic
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Variable {
-    /// Name is the name of the variable. The name must be a valid CEL identifier and unique among all variables.
+    /// name is the name of the variable. The name must be a valid CEL identifier and unique among all variables.
     /// The variable can be accessed in other expressions through `variables`
     /// For example, if name is "foo", the variable will be available as `variables.foo`
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Expression is the expression that will be evaluated as the value of the variable.
+    /// expression is the expression that will be evaluated as the value of the variable.
     /// The CEL expression has access to the same identifiers as the CEL expressions in Validation.
     #[prost(string, optional, tag = "2")]
     pub expression: ::core::option::Option<::prost::alloc::string::String>,
@@ -1334,7 +1339,7 @@ pub struct Variable {
 /// connection with the webhook
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct WebhookClientConfig {
-    /// `url` gives the location of the webhook, in standard URL form
+    /// url gives the location of the webhook, in standard URL form
     /// (`scheme://host:port/path`). Exactly one of `url` or `service`
     /// must be specified.
     ///
@@ -1363,7 +1368,7 @@ pub struct WebhookClientConfig {
     /// +optional
     #[prost(string, optional, tag = "3")]
     pub url: ::core::option::Option<::prost::alloc::string::String>,
-    /// `service` is a reference to the service for this webhook. Either
+    /// service is a reference to the service for this webhook. Either
     /// `service` or `url` must be specified.
     ///
     /// If the webhook is running within the cluster, then you should use `service`.
@@ -1371,7 +1376,7 @@ pub struct WebhookClientConfig {
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub service: ::core::option::Option<ServiceReference>,
-    /// `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server certificate.
+    /// caBundle is a PEM encoded CA bundle which will be used to validate the webhook's server certificate.
     /// If unspecified, system trust roots on the apiserver are used.
     /// +optional
     #[prost(bytes = "vec", optional, tag = "2")]

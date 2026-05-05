@@ -33,6 +33,10 @@ pub struct RuntimeClass {
     /// in a pod.
     /// The handler must be lowercase, conform to the DNS Label (RFC 1123) requirements,
     /// and is immutable.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-short-name"
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub handler: ::core::option::Option<::prost::alloc::string::String>,
     /// overhead represents the resource overhead associated with running a pod for a

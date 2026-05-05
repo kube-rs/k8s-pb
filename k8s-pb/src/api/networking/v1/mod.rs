@@ -59,7 +59,7 @@ pub struct IPAddress {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the desired state of the IPAddress.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<IPAddressSpec>,
 }
@@ -81,6 +81,8 @@ pub struct IPAddressSpec {
     /// ParentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
     /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
     #[prost(message, optional, tag = "1")]
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
@@ -91,6 +93,8 @@ pub struct IPAddressSpec {
 pub struct IpBlock {
     /// cidr is a string representing the IPBlock
     /// Valid examples are "192.168.1.0/24" or "2001:db8::/64"
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub cidr: ::core::option::Option<::prost::alloc::string::String>,
     /// except is a slice of CIDRs that should not be included within an IPBlock
@@ -179,9 +183,13 @@ pub struct IngressClassParametersReference {
     #[prost(string, optional, tag = "1")]
     pub a_pi_group: ::core::option::Option<::prost::alloc::string::String>,
     /// kind is the type of resource being referenced.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// name is the name of resource being referenced.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// scope represents if this refers to a cluster or namespace scoped resource.
@@ -211,6 +219,7 @@ pub struct IngressClassSpec {
     /// configuration for the controller. This is optional if the controller does
     /// not require extra parameters.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, optional, tag = "2")]
     pub parameters: ::core::option::Option<IngressClassParametersReference>,
 }
@@ -439,6 +448,7 @@ pub struct NetworkPolicyEgressRule {
     /// allows traffic only if the traffic matches at least one item in the to list.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub to: ::prost::alloc::vec::Vec<NetworkPolicyPeer>,
 }
@@ -462,6 +472,7 @@ pub struct NetworkPolicyIngressRule {
     /// allows traffic only if the traffic matches at least one item in the from list.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub from: ::prost::alloc::vec::Vec<NetworkPolicyPeer>,
 }
@@ -504,6 +515,7 @@ pub struct NetworkPolicyPeer {
     /// ipBlock defines policy on a particular IPBlock. If this field is set then
     /// neither of the other fields can be.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, optional, tag = "3")]
     pub ip_block: ::core::option::Option<IpBlock>,
 }
@@ -552,6 +564,7 @@ pub struct NetworkPolicySpec {
     /// solely to ensure that the pods it selects are isolated by default)
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub ingress: ::prost::alloc::vec::Vec<NetworkPolicyIngressRule>,
     /// egress is a list of egress rules to be applied to the selected pods. Outgoing traffic
@@ -563,6 +576,7 @@ pub struct NetworkPolicySpec {
     /// This field is beta-level in 1.8
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "3")]
     pub egress: ::prost::alloc::vec::Vec<NetworkPolicyEgressRule>,
     /// policyTypes is a list of rule types that the NetworkPolicy relates to.
@@ -589,6 +603,7 @@ pub struct ParentReference {
     pub group: ::core::option::Option<::prost::alloc::string::String>,
     /// Resource is the resource of the object being referenced.
     /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
     /// Namespace is the namespace of the object being referenced.
@@ -597,6 +612,7 @@ pub struct ParentReference {
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of the object being referenced.
     /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "4")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }

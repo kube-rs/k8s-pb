@@ -9,7 +9,7 @@ pub struct CronJob {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of a cron job, including the schedule.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<CronJobSpec>,
     /// Current status of a cron job.
@@ -34,6 +34,8 @@ pub struct CronJobList {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CronJobSpec {
     /// The schedule in Cron format, see <https://en.wikipedia.org/wiki/Cron.>
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub schedule: ::core::option::Option<::prost::alloc::string::String>,
     /// The time zone name for the given schedule, see <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.>

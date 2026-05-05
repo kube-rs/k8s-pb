@@ -6,13 +6,16 @@ pub struct AdmissionRequest {
     /// otherwise identical (parallel requests, requests when earlier requests did not modify etc)
     /// The UID is meant to track the round trip (request/response) between the KAS and the WebHook, not the user request.
     /// It is suitable for correlating log entries between the webhook and apiserver, for either auditing or debugging.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// kind is the fully-qualified type of object being submitted (for example, v1.Pod or autoscaling.v1.Scale)
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub kind:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind>,
     /// resource is the fully-qualified resource being requested (for example, v1.pods)
+    /// +optional
     #[prost(message, optional, tag = "3")]
     pub resource:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionResource>,
@@ -65,9 +68,11 @@ pub struct AdmissionRequest {
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
     /// operation is the operation being performed. This may be different than the operation
     /// requested. e.g. a patch can result in either a CREATE or UPDATE Operation.
+    /// +optional
     #[prost(string, optional, tag = "7")]
     pub operation: ::core::option::Option<::prost::alloc::string::String>,
     /// userInfo is information about the requesting user
+    /// +optional
     #[prost(message, optional, tag = "8")]
     pub user_info: ::core::option::Option<super::super::authentication::v1::UserInfo>,
     /// object is the object from the incoming request.
@@ -97,9 +102,11 @@ pub struct AdmissionRequest {
 pub struct AdmissionResponse {
     /// uid is an identifier for the individual request/response.
     /// This must be copied over from the corresponding AdmissionRequest.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// allowed indicates whether or not the admission request was permitted.
+    /// +optional
     #[prost(bool, optional, tag = "2")]
     pub allowed: ::core::option::Option<bool>,
     /// status is the result contains extra details into why an admission request was denied.
