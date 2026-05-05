@@ -152,7 +152,7 @@ pub struct HorizontalPodAutoscaler {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the specification for the behaviour of the autoscaler.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<HorizontalPodAutoscalerSpec>,
     /// status is the current information about the autoscaler.
@@ -230,10 +230,16 @@ pub struct HorizontalPodAutoscalerSpec {
     /// metric is configured.  Scaling is active as long as at least one metric value is
     /// available.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:ifEnabled(HPAScaleToZero)=+k8s:minimum=0
+    /// +k8s:alpha(since: "1.36")=+k8s:ifDisabled(HPAScaleToZero)=+k8s:minimum=1
     #[prost(int32, optional, tag = "2")]
     pub min_replicas: ::core::option::Option<i32>,
     /// maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up.
     /// It cannot be less that minReplicas.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:minimum=1
     #[prost(int32, optional, tag = "3")]
     pub max_replicas: ::core::option::Option<i32>,
     /// metrics contains the specifications for which to use to calculate the

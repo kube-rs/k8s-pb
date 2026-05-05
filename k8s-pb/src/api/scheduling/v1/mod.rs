@@ -10,6 +10,7 @@ pub struct PriorityClass {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// value represents the integer value of this priority class. This is the actual priority that pods
     /// receive when they have the name of this class in their pod spec.
+    /// +optional
     #[prost(int32, optional, tag = "2")]
     pub value: ::core::option::Option<i32>,
     /// globalDefault specifies whether this PriorityClass should be considered as

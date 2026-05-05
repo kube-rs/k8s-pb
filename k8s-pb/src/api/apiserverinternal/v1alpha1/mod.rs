@@ -3,62 +3,72 @@
 /// encodes objects to when persisting objects in the backend.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerStorageVersion {
-    /// The ID of the reporting API server.
+    /// apiServerID is the ID of the reporting API server.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub api_server_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// The API server encodes the object to this version when persisting it in
+    /// encodingVersion the API server encodes the object to when persisting it in
     /// the backend (e.g., etcd).
+    /// +required
     #[prost(string, optional, tag = "2")]
     pub encoding_version: ::core::option::Option<::prost::alloc::string::String>,
+    /// decodableVersions are the encoding versions the API server can handle to decode.
     /// The API server can decode objects encoded in these versions.
     /// The encodingVersion must be included in the decodableVersions.
     /// +listType=set
+    /// +required
     #[prost(string, repeated, tag = "3")]
     pub decodable_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// The API server can serve these versions.
+    /// servedVersions lists all versions the API server can serve.
     /// DecodableVersions must include all ServedVersions.
     /// +listType=set
+    /// +optional
     #[prost(string, repeated, tag = "4")]
     pub served_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Storage version of a specific resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageVersion {
+    /// metadata is the standard object metadata.
     /// The name is <group>.<resource>.
+    /// +required
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec is an empty spec. It is here to comply with Kubernetes API style.
+    /// spec is an empty spec. It is here to comply with Kubernetes API style.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<StorageVersionSpec>,
-    /// API server instances report the version they can decode and the version they
+    /// status on the version the API server instance can decode from and
     /// encode objects to when persisting objects in the backend.
+    /// +optional
     #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<StorageVersionStatus>,
 }
 /// Describes the state of the storageVersion at a certain point.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StorageVersionCondition {
-    /// Type of the condition.
+    /// type of the condition.
     /// +required
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
-    /// Status of the condition, one of True, False, Unknown.
+    /// status of the condition, one of True, False, Unknown.
     /// +required
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
-    /// If set, this represents the .metadata.generation that the condition was set based upon.
+    /// observedGeneration represents the .metadata.generation that the condition was set based upon, if field is set.
     /// +optional
     #[prost(int64, optional, tag = "3")]
     pub observed_generation: ::core::option::Option<i64>,
-    /// Last time the condition transitioned from one status to another.
+    /// lastTransitionTime is the last time the condition transitioned from one status to another.
+    /// +optional
     #[prost(message, optional, tag = "4")]
     pub last_transition_time:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
-    /// The reason for the condition's last transition.
+    /// reason for the condition's last transition.
     /// +required
     #[prost(string, optional, tag = "5")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
-    /// A human readable message indicating details about the transition.
+    /// message is a human readable string indicating details about the transition.
     /// +required
     #[prost(string, optional, tag = "6")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
@@ -82,20 +92,21 @@ pub struct StorageVersionSpec {}
 /// encode objects to when persisting objects in the backend.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageVersionStatus {
-    /// The reported versions per API server instance.
+    /// storageVersions lists the reported versions per API server instance.
     /// +optional
     /// +listType=map
     /// +listMapKey=apiServerID
     #[prost(message, repeated, tag = "1")]
     pub storage_versions: ::prost::alloc::vec::Vec<ServerStorageVersion>,
-    /// If all API server instances agree on the same encoding storage version,
-    /// then this field is set to that version. Otherwise this field is left empty.
+    /// commonEncodingVersion is set to an encoding storage version if all API server
+    /// instances share that same version. If they don't share one storage version, this
+    /// field is left empty.
     /// API servers should finish updating its storageVersionStatus entry before
     /// serving write operations, so that this field will be in sync with the reality.
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub common_encoding_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// The latest available observations of the storageVersion's state.
+    /// conditions lists the latest available observations of the storageVersion's state.
     /// +optional
     /// +listType=map
     /// +listMapKey=type

@@ -94,10 +94,20 @@ pub struct DeviceTaint {
     /// Consumers must treat unknown effects like None.
     ///
     /// +required
+    /// +k8s:required
     #[prost(string, optional, tag = "3")]
     pub effect: ::core::option::Option<::prost::alloc::string::String>,
-    /// TimeAdded represents the time at which the taint was added.
+    /// TimeAdded represents the time at which the taint was added or
+    /// (only in a DeviceTaintRule) the effect was modified.
     /// Added automatically during create or update if not set.
+    ///
+    /// In addition, in a DeviceTaintRule a value provided during
+    /// an update gets replaced with the current time if the provided
+    /// value is the same as the old one and the new effect is different.
+    /// Changing the key and/or value while keeping the effect unchanged
+    /// is possible and does not update the time stamp because the eviction
+    /// which uses it is either already started (NoExecute) or
+    /// not started yet (NoEffect, NoSchedule).
     ///
     /// +optional
     #[prost(message, optional, tag = "4")]
@@ -115,6 +125,7 @@ pub struct DeviceTaintRule {
     /// Spec specifies the selector and one taint.
     ///
     /// Changing the spec automatically increments the metadata.generation number.
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<DeviceTaintRuleSpec>,
     /// Status provides information about what was requested in the spec.
@@ -217,6 +228,219 @@ pub struct DeviceTaintSelector {
     #[prost(string, optional, tag = "4")]
     pub device: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// PoolStatus contains status information for a single resource pool.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct PoolStatus {
+    /// Driver is the DRA driver name for this pool.
+    /// Must be a DNS subdomain (e.g., "gpu.example.com").
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:format=k8s-long-name-caseless
+    #[prost(string, optional, tag = "1")]
+    pub driver: ::core::option::Option<::prost::alloc::string::String>,
+    /// PoolName is the name of the pool.
+    /// Must be a valid resource pool name (DNS subdomains separated by "/").
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:format=k8s-resource-pool-name
+    #[prost(string, optional, tag = "2")]
+    pub pool_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Generation is the pool generation observed across all ResourceSlices
+    /// in this pool. Only the latest generation is reported. During a generation
+    /// rollout, if not all slices at the latest generation have been published,
+    /// the pool is included with a validationError and device counts unset.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    #[prost(int64, optional, tag = "9")]
+    pub generation: ::core::option::Option<i64>,
+    /// ResourceSliceCount is the number of ResourceSlices that make up this pool.
+    /// May be unset when validationError is set.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:minimum=1
+    #[prost(int32, optional, tag = "8")]
+    pub resource_slice_count: ::core::option::Option<i32>,
+    /// TotalDevices is the total number of devices in the pool across all slices.
+    /// A value of 0 means the pool has no devices.
+    /// May be unset when validationError is set.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "4")]
+    pub total_devices: ::core::option::Option<i32>,
+    /// AllocatedDevices is the number of devices currently allocated to claims.
+    /// A value of 0 means no devices are allocated.
+    /// May be unset when validationError is set.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "5")]
+    pub allocated_devices: ::core::option::Option<i32>,
+    /// AvailableDevices is the number of devices available for allocation.
+    /// This equals TotalDevices - AllocatedDevices - UnavailableDevices.
+    /// A value of 0 means no devices are currently available.
+    /// May be unset when validationError is set.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "6")]
+    pub available_devices: ::core::option::Option<i32>,
+    /// UnavailableDevices is the number of devices that are not available
+    /// due to taints or other conditions, but are not allocated.
+    /// A value of 0 means all unallocated devices are available.
+    /// May be unset when validationError is set.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "7")]
+    pub unavailable_devices: ::core::option::Option<i32>,
+    /// NodeName is the node this pool is associated with.
+    /// When omitted, the pool is not associated with a specific node.
+    /// Must be a valid DNS subdomain name (RFC1123).
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:format=k8s-long-name
+    #[prost(string, optional, tag = "3")]
+    pub node_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// ValidationError is set when the pool's data could not be fully
+    /// validated (e.g., incomplete slice publication). When set, device
+    /// count fields and ResourceSliceCount may be unset.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:maxBytes=256
+    #[prost(string, optional, tag = "10")]
+    pub validation_error: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// ResourcePoolStatusRequest triggers a one-time calculation of resource pool status
+/// based on the provided filters. Once status is set, the request is considered complete and will not be reprocessed.
+/// Users should delete and recreate requests to get updated information.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResourcePoolStatusRequest {
+    /// Standard object metadata
+    /// +required
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    /// Spec defines the filters for which pools to include in the status.
+    /// The spec is immutable once created.
+    ///
+    /// +required
+    /// +k8s:immutable
+    #[prost(message, optional, tag = "2")]
+    pub spec: ::core::option::Option<ResourcePoolStatusRequestSpec>,
+    /// Status is populated by the controller with the calculated pool status.
+    /// When status is non-nil, the request is considered complete and the
+    /// entire object becomes immutable.
+    ///
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "3")]
+    pub status: ::core::option::Option<ResourcePoolStatusRequestStatus>,
+}
+/// ResourcePoolStatusRequestList is a collection of ResourcePoolStatusRequests.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResourcePoolStatusRequestList {
+    /// Standard list metadata
+    /// +optional
+    #[prost(message, optional, tag = "1")]
+    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    /// Items is the list of ResourcePoolStatusRequests.
+    #[prost(message, repeated, tag = "2")]
+    pub items: ::prost::alloc::vec::Vec<ResourcePoolStatusRequest>,
+}
+/// ResourcePoolStatusRequestSpec defines the filters for the pool status request.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ResourcePoolStatusRequestSpec {
+    /// Driver specifies the DRA driver name to filter pools.
+    /// Only pools from ResourceSlices with this driver will be included.
+    /// Must be a DNS subdomain (e.g., "gpu.example.com").
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:format=k8s-long-name-caseless
+    #[prost(string, optional, tag = "1")]
+    pub driver: ::core::option::Option<::prost::alloc::string::String>,
+    /// PoolName optionally filters to a specific pool name.
+    /// If not specified, all pools from the specified driver are included.
+    /// When specified, must be a non-empty valid resource pool name
+    /// (DNS subdomains separated by "/").
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:format=k8s-resource-pool-name
+    #[prost(string, optional, tag = "2")]
+    pub pool_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Limit optionally specifies the maximum number of pools to return in the status.
+    /// If more pools match the filter criteria, the response will be truncated
+    /// (i.e., len(status.pools) < status.poolCount).
+    ///
+    /// Default: 100
+    /// Minimum: 1
+    /// Maximum: 1000
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +default=100
+    /// +k8s:minimum=1
+    /// +k8s:maximum=1000
+    #[prost(int32, optional, tag = "3")]
+    pub limit: ::core::option::Option<i32>,
+}
+/// ResourcePoolStatusRequestStatus contains the calculated pool status information.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResourcePoolStatusRequestStatus {
+    /// PoolCount is the total number of pools that matched the filter criteria,
+    /// regardless of truncation. This helps users understand how many pools exist
+    /// even when the response is truncated. A value of 0 means no pools matched
+    /// the filter criteria.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "6")]
+    pub pool_count: ::core::option::Option<i32>,
+    /// Pools contains the first `spec.limit` matching pools, sorted by driver
+    /// then pool name. If `len(pools) < poolCount`, the list was truncated.
+    /// When omitted, no pools matched the request filters.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +listType=atomic
+    /// +k8s:listType=atomic
+    /// +k8s:maxItems=1000
+    #[prost(message, repeated, tag = "2")]
+    pub pools: ::prost::alloc::vec::Vec<PoolStatus>,
+    /// Conditions provide information about the state of the request.
+    /// A condition with type=Complete or type=Failed will always be set
+    /// when the status is populated.
+    ///
+    /// Known condition types:
+    /// - "Complete": True when the request has been processed successfully
+    /// - "Failed": True when the request could not be processed
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +listType=map
+    /// +k8s:listType=map
+    /// +listMapKey=type
+    /// +k8s:listMapKey=type
+    /// +patchStrategy=merge
+    /// +patchMergeKey=type
+    /// +k8s:maxItems=10
+    #[prost(message, repeated, tag = "3")]
+    pub conditions:
+        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+}
 
 impl crate::Resource for DeviceTaintRule {
     const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
@@ -254,6 +478,51 @@ impl crate::HasStatus for DeviceTaintRule {
     }
 }
 impl crate::HasConditions for DeviceTaintRule {
+    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
+    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
+        self.status.as_ref().map(|s| s.conditions.as_slice())
+    }
+    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
+        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
+    }
+}
+
+impl crate::Resource for ResourcePoolStatusRequest {
+    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
+    const GROUP: &'static str = "resource.k8s.io";
+    const VERSION: &'static str = "v1alpha3";
+    const KIND: &'static str = "ResourcePoolStatusRequest";
+    const URL_PATH_SEGMENT: &'static str = "resourcepoolstatusrequests";
+    type Scope = crate::ClusterResourceScope;
+}
+impl crate::Metadata for ResourcePoolStatusRequest {
+    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
+    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
+        self.metadata.as_ref()
+    }
+    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
+        self.metadata.as_mut()
+    }
+}
+impl crate::HasSpec for ResourcePoolStatusRequest {
+    type Spec = crate::api::resource::v1alpha3::ResourcePoolStatusRequestSpec;
+    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
+        self.spec.as_ref()
+    }
+    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
+        self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for ResourcePoolStatusRequest {
+    type Status = crate::api::resource::v1alpha3::ResourcePoolStatusRequestStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
+    }
+}
+impl crate::HasConditions for ResourcePoolStatusRequest {
     type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
     fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
         self.status.as_ref().map(|s| s.conditions.as_slice())

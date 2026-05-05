@@ -190,7 +190,7 @@ pub struct CSIDriverSpec {
     /// occur (neither periodic nor upon detecting capacity-related failures), and the
     /// allocatable.count remains static. The minimum allowed value for this field is 10 seconds.
     ///
-    /// This is a beta feature and requires the MutableCSINodeAllocatableCount feature gate to be enabled.
+    /// This feature requires the MutableCSINodeAllocatableCount feature gate to be enabled.
     ///
     /// This field is mutable.
     ///
@@ -222,6 +222,27 @@ pub struct CSIDriverSpec {
     /// +optional
     #[prost(bool, optional, tag = "10")]
     pub service_account_token_in_secrets: ::core::option::Option<bool>,
+    /// PreventPodSchedulingIfMissing indicates that the CSI driver wants to prevent pod
+    /// scheduling if the CSI driver on the node is missing.
+    ///
+    /// Enabling this option will prevent the scheduler (or any other
+    /// component which embeds default scheduler such as cluster-autoscaler) from
+    /// scheduling pods to nodes where CSI driver is not installed.
+    ///
+    /// For components(such as cluster-autoscaler) that embed the scheduler and run
+    /// pod placement simulations using scheduler plugins, they MUST be aware of
+    /// CSI driver registration information via CSINode object. They must create simulated
+    /// CSINode objects in addition to Node objects during scheduling simulation, otherwise
+    /// if PreventPodSchedulingIfMissing is enabled globally for CSIDriver object, any
+    /// newly created node may be rejected by the scheduler because of missing CSI driver
+    /// information from the node.
+    ///
+    /// This is an alpha feature and requires the VolumeLimitScaling feature gate to be enabled.
+    /// Default is "false".
+    /// +featureGate=VolumeLimitScaling
+    /// +optional
+    #[prost(bool, optional, tag = "11")]
+    pub prevent_pod_scheduling_if_missing: ::core::option::Option<bool>,
 }
 /// CSINode holds information about all CSI drivers installed on a node.
 /// CSI drivers do not need to create the CSINode object directly. As long as
@@ -415,18 +436,23 @@ pub struct StorageClass {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// provisioner indicates the type of the provisioner.
     /// +required
-    /// +k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
     #[prost(string, optional, tag = "2")]
     pub provisioner: ::core::option::Option<::prost::alloc::string::String>,
     /// parameters holds the parameters for the provisioner that should
     /// create volumes of this storage class.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(btree_map = "string, string", tag = "3")]
     pub parameters:
         ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// reclaimPolicy controls the reclaimPolicy for dynamically provisioned PersistentVolumes of this storage class.
     /// Defaults to Delete.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(string, optional, tag = "4")]
     pub reclaim_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// mountOptions controls the mountOptions for dynamically provisioned PersistentVolumes of this storage class.
@@ -444,6 +470,8 @@ pub struct StorageClass {
     /// provisioned and bound.  When unset, VolumeBindingImmediate is used.
     /// This field is only honored by servers that enable the VolumeScheduling feature.
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(string, optional, tag = "7")]
     pub volume_binding_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// allowedTopologies restrict the node topologies where volumes can be dynamically provisioned.
@@ -494,6 +522,8 @@ pub struct VolumeAttachment {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
     /// status represents status of the VolumeAttachment request.
@@ -540,6 +570,10 @@ pub struct VolumeAttachmentSource {
 pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-long-name-caseless"
+    /// +k8s:alpha(since: "1.36")=+k8s:maxLength=63
     #[prost(string, optional, tag = "1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
     /// source represents the volume that should be attached.
@@ -637,7 +671,7 @@ pub struct VolumeError {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
     /// errorCode is a numeric gRPC code representing the error encountered during Attach or Detach operations.
     ///
-    /// This is an optional, beta field that requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.
+    /// This field requires the MutableCSINodeAllocatableCount feature gate being enabled to be set.
     ///
     /// +featureGate=MutableCSINodeAllocatableCount
     /// +optional

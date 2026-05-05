@@ -108,6 +108,8 @@ pub struct VolumeAttachment {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
+    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
     /// status represents status of the VolumeAttachment request.
@@ -154,6 +156,10 @@ pub struct VolumeAttachmentSource {
 pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-long-name-caseless"
+    /// +k8s:alpha(since: "1.36")=+k8s:maxLength=63
     #[prost(string, optional, tag = "1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
     /// source represents the volume that should be attached.

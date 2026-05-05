@@ -4,7 +4,7 @@
 /// Versions are in descending order of preference, with the first version being the preferred entry.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct APIGroupDiscovery {
-    /// Standard object's metadata.
+    /// metadata is standard object's metadata.
     /// The only field completed will be name. For instance, resourceVersion will be empty.
     /// name is the name of the API group whose discovery information is presented here.
     /// name is allowed to be "" to represent the legacy, ungroupified resources.

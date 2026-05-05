@@ -21,6 +21,7 @@ pub struct ClusterRole {
     /// Rules holds all the PolicyRules for this ClusterRole
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub rules: ::prost::alloc::vec::Vec<PolicyRule>,
     /// AggregationRule is an optional field that describes how to build the Rules for this ClusterRole.
@@ -42,10 +43,12 @@ pub struct ClusterRoleBinding {
     /// Subjects holds references to the objects the role applies to.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub subjects: ::prost::alloc::vec::Vec<Subject>,
     /// RoleRef can only reference a ClusterRole in the global namespace.
     /// If the RoleRef cannot be resolved, the Authorizer must return an error.
+    /// +required
     #[prost(message, optional, tag = "3")]
     pub role_ref: ::core::option::Option<RoleRef>,
 }
@@ -79,6 +82,8 @@ pub struct ClusterRoleList {
 pub struct PolicyRule {
     /// Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '*' represents all verbs.
     /// +listType=atomic
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, repeated, tag = "1")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of
@@ -116,6 +121,7 @@ pub struct Role {
     /// Rules holds all the PolicyRules for this Role
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub rules: ::prost::alloc::vec::Vec<PolicyRule>,
 }
@@ -132,10 +138,12 @@ pub struct RoleBinding {
     /// Subjects holds references to the objects the role applies to.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub subjects: ::prost::alloc::vec::Vec<Subject>,
     /// RoleRef can reference a Role in the current namespace or a ClusterRole in the global namespace.
     /// If the RoleRef cannot be resolved, the Authorizer must return an error.
+    /// +required
     #[prost(message, optional, tag = "3")]
     pub role_ref: ::core::option::Option<RoleRef>,
 }
@@ -167,14 +175,16 @@ pub struct RoleList {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RoleRef {
     /// APIGroup is the group for the resource being referenced
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub api_group: ::core::option::Option<::prost::alloc::string::String>,
     /// Kind is the type of resource being referenced
+    /// +required
     #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name is the name of resource being referenced
     /// +required
-    /// +k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -184,6 +194,7 @@ pub struct RoleRef {
 pub struct Subject {
     /// Kind of object being referenced. Values defined by this API group are "User", "Group", and "ServiceAccount".
     /// If the Authorizer does not recognized the kind value, the Authorizer should report an error.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// APIVersion holds the API group and version of the referenced subject.
@@ -195,7 +206,7 @@ pub struct Subject {
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
     /// Name of the object being referenced.
     /// +required
-    /// +k8s:required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// Namespace of the referenced object.  If the object kind is non-namespace, such as "User" or "Group", and this value is not empty

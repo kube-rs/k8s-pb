@@ -86,12 +86,12 @@ pub struct AuditAnnotation {
 /// ExpressionWarning is a warning information that targets a specific expression.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExpressionWarning {
-    /// The path to the field that refers the expression.
+    /// fieldRef is the path to the field that refers to the expression.
     /// For example, the reference to the expression of the first item of
     /// validations is "spec.validations\[0\].expression"
     #[prost(string, optional, tag = "2")]
     pub field_ref: ::core::option::Option<::prost::alloc::string::String>,
-    /// The content of type checking information in a human-readable form.
+    /// warning contains the content of type checking information in a human-readable form.
     /// Each line of the warning contains the type that the expression is checked
     /// against, followed by the type check error from the compiler.
     #[prost(string, optional, tag = "3")]
@@ -169,7 +169,7 @@ pub struct JsonPatch {
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MatchCondition {
-    /// Name is an identifier for this match condition, used for strategic merging of MatchConditions,
+    /// name is an identifier for this match condition, used for strategic merging of MatchConditions,
     /// as well as providing an identifier for logging purposes. A good name should be descriptive of
     /// the associated expression.
     /// Name must be a qualified name consisting of alphanumeric characters, '-', '_' or '.', and
@@ -180,7 +180,7 @@ pub struct MatchCondition {
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
+    /// expression represents the expression which will be evaluated by CEL. Must evaluate to bool.
     /// CEL expressions have access to the contents of the AdmissionRequest and Authorizer, organized into CEL variables:
     ///
     /// 'object' - The object from the incoming request. The value is null for DELETE requests.
@@ -202,7 +202,7 @@ pub struct MatchCondition {
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchResources {
-    /// NamespaceSelector decides whether to run the admission control policy on an object based
+    /// namespaceSelector decides whether to run the admission control policy on an object based
     /// on whether the namespace for that object matches the selector. If the
     /// object itself is a namespace, the matching is performed on
     /// object.metadata.labels. If the object is another cluster scoped resource,
@@ -249,7 +249,7 @@ pub struct MatchResources {
     #[prost(message, optional, tag = "1")]
     pub namespace_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// ObjectSelector decides whether to run the policy based on if the
+    /// objectSelector decides whether to run the policy based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the policy's expression (CEL), and
     /// is considered to match if either object matches the selector. A null
@@ -264,13 +264,13 @@ pub struct MatchResources {
     #[prost(message, optional, tag = "2")]
     pub object_selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// ResourceRules describes what operations on what resources/subresources the admission policy matches.
+    /// resourceRules describes what operations on what resources/subresources the admission policy matches.
     /// The policy cares about an operation if it matches _any_ Rule.
     /// +listType=atomic
     /// +optional
     #[prost(message, repeated, tag = "3")]
     pub resource_rules: ::prost::alloc::vec::Vec<NamedRuleWithOperations>,
-    /// ExcludeResourceRules describes what operations on what resources/subresources the policy should not care about.
+    /// excludeResourceRules describes what operations on what resources/subresources the policy should not care about.
     /// The exclude rules take precedence over include rules (if a resource matches both, it is excluded)
     /// +listType=atomic
     /// +optional
@@ -298,11 +298,11 @@ pub struct MatchResources {
 /// MutatingAdmissionPolicy describes the definition of an admission mutation policy that mutates the object coming into admission chain.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicy {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the MutatingAdmissionPolicy.
+    /// spec defines the desired behavior of the MutatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicySpec>,
 }
@@ -319,18 +319,18 @@ pub struct MutatingAdmissionPolicy {
 /// given (policy, binding, param) combination is within its own CEL budget.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicyBinding {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the MutatingAdmissionPolicyBinding.
+    /// spec defines the desired behavior of the MutatingAdmissionPolicyBinding.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicyBindingSpec>,
 }
 /// MutatingAdmissionPolicyBindingList is a list of MutatingAdmissionPolicyBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicyBindingList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -370,7 +370,7 @@ pub struct MutatingAdmissionPolicyBindingSpec {
 /// MutatingAdmissionPolicyList is a list of MutatingAdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutatingAdmissionPolicyList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -493,7 +493,7 @@ pub struct Mutation {
 /// +structType=atomic
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NamedRuleWithOperations {
-    /// ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.
+    /// resourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "1")]
@@ -506,12 +506,12 @@ pub struct NamedRuleWithOperations {
 /// +structType=atomic
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ParamKind {
-    /// APIVersion is the API group version the resources belong to.
+    /// apiVersion is the API group version the resources belong to.
     /// In format of "group/version".
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// Kind is the API kind the resources belong to.
+    /// kind is the API kind the resources belong to.
     /// Required.
     #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
@@ -521,7 +521,7 @@ pub struct ParamKind {
 /// +structType=atomic
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParamRef {
-    /// `name` is the name of the resource being referenced.
+    /// name is the name of the resource being referenced.
     ///
     /// `name` and `selector` are mutually exclusive properties. If one is set,
     /// the other must be unset.
@@ -560,7 +560,7 @@ pub struct ParamRef {
     #[prost(message, optional, tag = "3")]
     pub selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
-    /// `parameterNotFoundAction` controls the behavior of the binding when the resource
+    /// parameterNotFoundAction controls the behavior of the binding when the resource
     /// exists, and name or selector is valid, but there are no parameters
     /// matched by the binding. If the value is set to `Allow`, then no
     /// matched parameters will be treated as successful validation by the binding.
@@ -577,7 +577,7 @@ pub struct ParamRef {
 /// ValidatingAdmissionPolicy
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypeChecking {
-    /// The type checking warnings for each expression.
+    /// expressionWarnings contains the type checking warnings for each expression.
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
@@ -586,14 +586,14 @@ pub struct TypeChecking {
 /// ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicy {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the ValidatingAdmissionPolicy.
+    /// spec defines the desired behavior of the ValidatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicySpec>,
-    /// The status of the ValidatingAdmissionPolicy, including warnings that are useful to determine if the policy
+    /// status represents the current status of the ValidatingAdmissionPolicy, including warnings that are useful to determine if the policy
     /// behaves in the expected way.
     /// Populated by the system.
     /// Read-only.
@@ -614,18 +614,19 @@ pub struct ValidatingAdmissionPolicy {
 /// given (policy, binding, param) combination is within its own CEL budget.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyBinding {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Specification of the desired behavior of the ValidatingAdmissionPolicyBinding.
+    /// spec defines the desired behavior of the ValidatingAdmissionPolicyBinding.
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicyBindingSpec>,
 }
 /// ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyBindingList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -637,9 +638,11 @@ pub struct ValidatingAdmissionPolicyBindingList {
 /// ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyBindingSpec {
-    /// PolicyName references a ValidatingAdmissionPolicy name which the ValidatingAdmissionPolicyBinding binds to.
+    /// policyName references a ValidatingAdmissionPolicy name which the ValidatingAdmissionPolicyBinding binds to.
     /// If the referenced resource does not exist, this binding is considered invalid and will be ignored
     /// Required.
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub policy_name: ::core::option::Option<::prost::alloc::string::String>,
     /// paramRef specifies the parameter resource used to configure the admission control policy.
@@ -649,7 +652,7 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub param_ref: ::core::option::Option<ParamRef>,
-    /// MatchResources declares what resources match this binding and will be validated by it.
+    /// matchResources declares what resources match this binding and will be validated by it.
     /// Note that this is intersected with the policy's matchConstraints, so only requests that are matched by the policy can be selected by this.
     /// If this is unset, all resources matched by the policy are validated by this binding
     /// When resourceRules is unset, it does not constrain resource matching. If a resource is matched by the other fields of this object, it will be validated.
@@ -697,13 +700,15 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     ///
     /// Required.
     /// +listType=set
+    /// +required
+    /// +k8s:alpha(since: "1.36")=+k8s:required
     #[prost(string, repeated, tag = "4")]
     pub validation_actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -715,21 +720,21 @@ pub struct ValidatingAdmissionPolicyList {
 /// ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicySpec {
-    /// ParamKind specifies the kind of resources used to parameterize this policy.
+    /// paramKind specifies the kind of resources used to parameterize this policy.
     /// If absent, there are no parameters for this policy and the param CEL variable will not be provided to validation expressions.
     /// If ParamKind refers to a non-existent kind, this policy definition is mis-configured and the FailurePolicy is applied.
     /// If paramKind is specified but paramRef is unset in ValidatingAdmissionPolicyBinding, the params variable will be null.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub param_kind: ::core::option::Option<ParamKind>,
-    /// MatchConstraints specifies what resources this policy is designed to validate.
+    /// matchConstraints specifies what resources this policy is designed to validate.
     /// The AdmissionPolicy cares about a request if it matches _all_ Constraints.
     /// However, in order to prevent clusters from being put into an unstable state that cannot be recovered from via the API
     /// ValidatingAdmissionPolicy cannot match ValidatingAdmissionPolicy and ValidatingAdmissionPolicyBinding.
     /// Required.
     #[prost(message, optional, tag = "2")]
     pub match_constraints: ::core::option::Option<MatchResources>,
-    /// Validations contain CEL expressions which is used to apply the validation.
+    /// validations contain CEL expressions which is used to apply the validation.
     /// Validations and AuditAnnotations may not both be empty; a minimum of one Validations or AuditAnnotations is
     /// required.
     /// +listType=atomic
@@ -760,7 +765,7 @@ pub struct ValidatingAdmissionPolicySpec {
     /// +optional
     #[prost(message, repeated, tag = "5")]
     pub audit_annotations: ::prost::alloc::vec::Vec<AuditAnnotation>,
-    /// MatchConditions is a list of conditions that must be met for a request to be validated.
+    /// matchConditions is a list of conditions that must be met for a request to be validated.
     /// Match conditions filter requests that have already been matched by the rules,
     /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
     /// There are a maximum of 64 match conditions allowed.
@@ -782,7 +787,7 @@ pub struct ValidatingAdmissionPolicySpec {
     /// +optional
     #[prost(message, repeated, tag = "6")]
     pub match_conditions: ::prost::alloc::vec::Vec<MatchCondition>,
-    /// Variables contain definitions of variables that can be used in composition of other expressions.
+    /// variables contain definitions of variables that can be used in composition of other expressions.
     /// Each variable is defined as a named CEL expression.
     /// The variables defined here will be available under `variables` in other expressions of the policy
     /// except MatchConditions because MatchConditions are evaluated before the rest of the policy.
@@ -800,16 +805,16 @@ pub struct ValidatingAdmissionPolicySpec {
 /// ValidatingAdmissionPolicyStatus represents the status of a ValidatingAdmissionPolicy.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicyStatus {
-    /// The generation observed by the controller.
+    /// observedGeneration is the generation observed by the controller.
     /// +optional
     #[prost(int64, optional, tag = "1")]
     pub observed_generation: ::core::option::Option<i64>,
-    /// The results of type checking for each expression.
+    /// typeChecking contains the results of type checking for each expression.
     /// Presence of this field indicates the completion of the type checking.
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub type_checking: ::core::option::Option<TypeChecking>,
-    /// The conditions represent the latest available observations of a policy's current state.
+    /// conditions represent the latest available observations of a policy's current state.
     /// +optional
     /// +listType=map
     /// +listMapKey=type
@@ -820,7 +825,7 @@ pub struct ValidatingAdmissionPolicyStatus {
 /// Validation specifies the CEL expression which is used to apply the validation.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Validation {
-    /// Expression represents the expression which will be evaluated by CEL.
+    /// expression represents the expression which will be evaluated by CEL.
     /// ref: <https://github.com/google/cel-spec>
     /// CEL expressions have access to the contents of the API request/response, organized into CEL variables as well as some other useful variables:
     ///
@@ -863,7 +868,7 @@ pub struct Validation {
     /// Required.
     #[prost(string, optional, tag = "1")]
     pub expression: ::core::option::Option<::prost::alloc::string::String>,
-    /// Message represents the message displayed when validation fails. The message is required if the Expression contains
+    /// message represents the message displayed when validation fails. The message is required if the Expression contains
     /// line breaks. The message must not contain line breaks.
     /// If unset, the message is "failed rule: {Rule}".
     /// e.g. "must be a URL with the host matching spec.host"
@@ -873,7 +878,7 @@ pub struct Validation {
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
-    /// Reason represents a machine-readable description of why this validation failed.
+    /// reason represents a machine-readable description of why this validation failed.
     /// If this is the first validation in the list to fail, this reason, as well as the
     /// corresponding HTTP response code, are used in the
     /// HTTP response to the client.
@@ -899,12 +904,12 @@ pub struct Validation {
 /// Variable is the definition of a variable that is used for composition.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Variable {
-    /// Name is the name of the variable. The name must be a valid CEL identifier and unique among all variables.
+    /// name is the name of the variable. The name must be a valid CEL identifier and unique among all variables.
     /// The variable can be accessed in other expressions through `variables`
     /// For example, if name is "foo", the variable will be available as `variables.foo`
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// Expression is the expression that will be evaluated as the value of the variable.
+    /// expression is the expression that will be evaluated as the value of the variable.
     /// The CEL expression has access to the same identifiers as the CEL expressions in Validation.
     #[prost(string, optional, tag = "2")]
     pub expression: ::core::option::Option<::prost::alloc::string::String>,

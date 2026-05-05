@@ -4,19 +4,20 @@
 /// request header authentication is used, any extra keys will have their case ignored and returned as lowercase.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectReview {
-    /// Standard object's metadata.
+    /// metadata is the standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Status is filled in by the server with the user attributes.
+    /// status is filled in by the server with the user attributes.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub status: ::core::option::Option<SelfSubjectReviewStatus>,
 }
 /// SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectReviewStatus {
-    /// User attributes of the user making this request.
+    /// userInfo is a set of attributes belonging to the user making this request.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub user_info: ::core::option::Option<super::v1::UserInfo>,

@@ -14,19 +14,20 @@ pub struct ExtraValue {
 /// request header authentication is used, any extra keys will have their case ignored and returned as lowercase.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectReview {
-    /// Standard object's metadata.
+    /// metadata is the standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Status is filled in by the server with the user attributes.
+    /// status is filled in by the server with the user attributes.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub status: ::core::option::Option<SelfSubjectReviewStatus>,
 }
 /// SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectReviewStatus {
-    /// User attributes of the user making this request.
+    /// userInfo is a set of attributes belonging to the user making this request.
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub user_info: ::core::option::Option<super::v1::UserInfo>,
@@ -36,15 +37,16 @@ pub struct SelfSubjectReviewStatus {
 /// plugin in the kube-apiserver.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenReview {
-    /// Standard object's metadata.
+    /// metadata is the standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Spec holds information about the request being evaluated
+    /// spec holds information about the request being evaluated
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<TokenReviewSpec>,
-    /// Status is filled in by the server and indicates whether the token can be authenticated.
+    /// status is filled in by the server and indicates whether the token can be authenticated.
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub status: ::core::option::Option<TokenReviewStatus>,
@@ -52,11 +54,11 @@ pub struct TokenReview {
 /// TokenReviewSpec is a description of the token authentication request.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TokenReviewSpec {
-    /// Token is the opaque bearer token.
-    /// +optional
+    /// token is the opaque bearer token.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub token: ::core::option::Option<::prost::alloc::string::String>,
-    /// Audiences is a list of the identifiers that the resource server presented
+    /// audiences is a list of the identifiers that the resource server presented
     /// with the token identifies as. Audience-aware token authenticators will
     /// verify that the token was intended for at least one of the audiences in
     /// this list. If no audiences are provided, the audience will default to the
@@ -69,15 +71,15 @@ pub struct TokenReviewSpec {
 /// TokenReviewStatus is the result of the token authentication request.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TokenReviewStatus {
-    /// Authenticated indicates that the token was associated with a known user.
+    /// authenticated indicates that the token was associated with a known user.
     /// +optional
     #[prost(bool, optional, tag = "1")]
     pub authenticated: ::core::option::Option<bool>,
-    /// User is the UserInfo associated with the provided token.
+    /// user is the UserInfo associated with the provided token.
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub user: ::core::option::Option<UserInfo>,
-    /// Audiences are audience identifiers chosen by the authenticator that are
+    /// audiences are audience identifiers chosen by the authenticator that are
     /// compatible with both the TokenReview and token. An identifier is any
     /// identifier in the intersection of the TokenReviewSpec audiences and the
     /// token's audiences. A client of the TokenReview API that sets the
@@ -90,7 +92,7 @@ pub struct TokenReviewStatus {
     /// +listType=atomic
     #[prost(string, repeated, tag = "4")]
     pub audiences: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Error indicates that the token couldn't be checked
+    /// error indicates that the token couldn't be checked
     /// +optional
     #[prost(string, optional, tag = "3")]
     pub error: ::core::option::Option<::prost::alloc::string::String>,
@@ -99,22 +101,22 @@ pub struct TokenReviewStatus {
 /// user.Info interface.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInfo {
-    /// The name that uniquely identifies this user among all active users.
+    /// username is the name that uniquely identifies this user among all active users.
     /// +optional
     #[prost(string, optional, tag = "1")]
     pub username: ::core::option::Option<::prost::alloc::string::String>,
-    /// A unique value that identifies this user across time. If this user is
+    /// uid is a unique value that identifies this user across time. If this user is
     /// deleted and another user by the same name is added, they will have
     /// different UIDs.
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
-    /// The names of groups this user is a part of.
+    /// groups is the names of groups this user is a part of.
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "3")]
     pub groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Any additional information provided by the authenticator.
+    /// extra is any additional information provided by the authenticator.
     /// +optional
     #[prost(btree_map = "string, message", tag = "4")]
     pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,

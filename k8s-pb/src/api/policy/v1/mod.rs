@@ -124,15 +124,19 @@ pub struct PodDisruptionBudgetStatus {
         super::super::super::apimachinery::pkg::apis::meta::v1::Time,
     >,
     /// Number of pod disruptions that are currently allowed.
+    /// +optional
     #[prost(int32, optional, tag = "3")]
     pub disruptions_allowed: ::core::option::Option<i32>,
     /// current number of healthy pods
+    /// +optional
     #[prost(int32, optional, tag = "4")]
     pub current_healthy: ::core::option::Option<i32>,
     /// minimum desired number of healthy pods
+    /// +optional
     #[prost(int32, optional, tag = "5")]
     pub desired_healthy: ::core::option::Option<i32>,
     /// total number of pods counted by this disruption budget
+    /// +optional
     #[prost(int32, optional, tag = "6")]
     pub expected_pods: ::core::option::Option<i32>,
     /// Conditions contain conditions for PDB. The disruption controller sets the

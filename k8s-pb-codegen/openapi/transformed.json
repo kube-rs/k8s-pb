@@ -1,4 +1,64 @@
 {
+  "api.admissionregistration.v1.MutatingAdmissionPolicy": {
+    "name": "mutatingadmissionpolicies",
+    "namespaced": false,
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "group": "admissionregistration.k8s.io",
+    "version": "v1",
+    "kind": "MutatingAdmissionPolicy",
+    "proto": "api.admissionregistration.v1.MutatingAdmissionPolicy",
+    "rust": "api::admissionregistration::v1::MutatingAdmissionPolicy",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::admissionregistration::v1::MutatingAdmissionPolicySpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/admissionregistration.k8s.io/v1/mutatingadmissionpolicies",
+      "/apis/admissionregistration.k8s.io/v1/mutatingadmissionpolicies/{name}"
+    ],
+    "subresources": []
+  },
+  "api.admissionregistration.v1.MutatingAdmissionPolicyBinding": {
+    "name": "mutatingadmissionpolicybindings",
+    "namespaced": false,
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "group": "admissionregistration.k8s.io",
+    "version": "v1",
+    "kind": "MutatingAdmissionPolicyBinding",
+    "proto": "api.admissionregistration.v1.MutatingAdmissionPolicyBinding",
+    "rust": "api::admissionregistration::v1::MutatingAdmissionPolicyBinding",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::admissionregistration::v1::MutatingAdmissionPolicyBindingSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/admissionregistration.k8s.io/v1/mutatingadmissionpolicybindings",
+      "/apis/admissionregistration.k8s.io/v1/mutatingadmissionpolicybindings/{name}"
+    ],
+    "subresources": []
+  },
   "api.admissionregistration.v1.MutatingWebhookConfiguration": {
     "name": "mutatingwebhookconfigurations",
     "namespaced": false,
@@ -2788,6 +2848,50 @@
       }
     ]
   },
+  "api.resource.v1alpha3.ResourcePoolStatusRequest": {
+    "name": "resourcepoolstatusrequests",
+    "namespaced": false,
+    "apiVersion": "resource.k8s.io/v1alpha3",
+    "group": "resource.k8s.io",
+    "version": "v1alpha3",
+    "kind": "ResourcePoolStatusRequest",
+    "proto": "api.resource.v1alpha3.ResourcePoolStatusRequest",
+    "rust": "api::resource::v1alpha3::ResourcePoolStatusRequest",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::resource::v1alpha3::ResourcePoolStatusRequestSpec",
+    "status": "api::resource::v1alpha3::ResourcePoolStatusRequestStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/resource.k8s.io/v1alpha3/resourcepoolstatusrequests",
+      "/apis/resource.k8s.io/v1alpha3/resourcepoolstatusrequests/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/resource.k8s.io/v1alpha3/resourcepoolstatusrequests/{name}/status"
+        ]
+      }
+    ]
+  },
   "api.resource.v1beta1.DeviceClass": {
     "name": "deviceclasses",
     "namespaced": false,
@@ -2960,6 +3064,50 @@
     ],
     "subresources": []
   },
+  "api.resource.v1beta2.DeviceTaintRule": {
+    "name": "devicetaintrules",
+    "namespaced": false,
+    "apiVersion": "resource.k8s.io/v1beta2",
+    "group": "resource.k8s.io",
+    "version": "v1beta2",
+    "kind": "DeviceTaintRule",
+    "proto": "api.resource.v1beta2.DeviceTaintRule",
+    "rust": "api::resource::v1beta2::DeviceTaintRule",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::resource::v1beta2::DeviceTaintRuleSpec",
+    "status": "api::resource::v1beta2::DeviceTaintRuleStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/resource.k8s.io/v1beta2/devicetaintrules",
+      "/apis/resource.k8s.io/v1beta2/devicetaintrules/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/resource.k8s.io/v1beta2/devicetaintrules/{name}/status"
+        ]
+      }
+    ]
+  },
   "api.resource.v1beta2.ResourceClaim": {
     "name": "resourceclaims",
     "namespaced": true,
@@ -3102,17 +3250,65 @@
     ],
     "subresources": []
   },
-  "api.scheduling.v1alpha1.Workload": {
+  "api.scheduling.v1alpha2.PodGroup": {
+    "name": "podgroups",
+    "namespaced": true,
+    "apiVersion": "scheduling.k8s.io/v1alpha2",
+    "group": "scheduling.k8s.io",
+    "version": "v1alpha2",
+    "kind": "PodGroup",
+    "proto": "api.scheduling.v1alpha2.PodGroup",
+    "rust": "api::scheduling::v1alpha2::PodGroup",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::scheduling::v1alpha2::PodGroupSpec",
+    "status": "api::scheduling::v1alpha2::PodGroupStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/scheduling.k8s.io/v1alpha2/podgroups",
+      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/podgroups",
+      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/podgroups/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/podgroups/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.scheduling.v1alpha2.Workload": {
     "name": "workloads",
     "namespaced": true,
-    "apiVersion": "scheduling.k8s.io/v1alpha1",
+    "apiVersion": "scheduling.k8s.io/v1alpha2",
     "group": "scheduling.k8s.io",
-    "version": "v1alpha1",
+    "version": "v1alpha2",
     "kind": "Workload",
-    "proto": "api.scheduling.v1alpha1.Workload",
-    "rust": "api::scheduling::v1alpha1::Workload",
+    "proto": "api.scheduling.v1alpha2.Workload",
+    "rust": "api::scheduling::v1alpha2::Workload",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::scheduling::v1alpha1::WorkloadSpec",
+    "spec": "api::scheduling::v1alpha2::WorkloadSpec",
     "status": null,
     "condition": null,
     "scopedVerbs": {
@@ -3130,9 +3326,9 @@
       ]
     },
     "paths": [
-      "/apis/scheduling.k8s.io/v1alpha1/workloads",
-      "/apis/scheduling.k8s.io/v1alpha1/namespaces/{namespace}/workloads",
-      "/apis/scheduling.k8s.io/v1alpha1/namespaces/{namespace}/workloads/{name}"
+      "/apis/scheduling.k8s.io/v1alpha2/workloads",
+      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/workloads",
+      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/workloads/{name}"
     ],
     "subresources": []
   },
