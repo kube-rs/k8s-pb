@@ -47,7 +47,8 @@ fn main() -> Result<()> {
         serde_json::from_str(&apif).with_context(|| "parse transformed.json".to_string())?;
 
     let buf = std::fs::read(descriptor_file).with_context(|| "read protos.fds".to_string())?;
-    let fds = FileDescriptorSet::decode(&*buf).unwrap(); // pulls in proto::Message
+    let fds = FileDescriptorSet::decode(&*buf)
+        .with_context(|| "failed to decode FileDescriptorSet from protobuf descriptor file")?; // pulls in proto::Message
 
     // Map of module path to the names of child modules.
     let mut module_tree: HashMap<String, BTreeSet<String>> = HashMap::new();
@@ -61,10 +62,11 @@ fn main() -> Result<()> {
             if package_name.contains(".schema") {
                 continue;
             }
+            let pkg_path = tmp_dir.join(format!("{}.rs", package_name));
             let mut pkg_rs = OpenOptions::new()
                 .append(true)
-                .open(tmp_dir.join(format!("{}.rs", package_name)))
-                .unwrap();
+                .open(&pkg_path)
+                .with_context(|| format!("failed to open or create package file: {}", pkg_path.display()))?;
 
             for msg in f.message_type {
                 let message_name = match msg.name {
@@ -73,13 +75,12 @@ fn main() -> Result<()> {
                 };
                 let path = format!("{}.{}", package_name, message_name);
                 if let Some(resource) = resources.get(&path) {
-                    append_trait_impl(&mut pkg_rs, message_name, resource);
+                    append_trait_impl(&mut pkg_rs, message_name, resource)?;
                 }
             }
 
             let mut parts = package_name.split('.').collect::<Vec<_>>();
-            while !parts.is_empty() {
-                let module = parts.pop().unwrap();
+            while let Some(module) = parts.pop() {
                 let parent = parts.join("/");
                 module_tree
                     .entry(parent)
@@ -96,31 +97,44 @@ fn main() -> Result<()> {
         } else {
             format!("{}/mod.rs", k)
         });
-        std::fs::create_dir_all(dst.parent().unwrap())?;
+        let parent_dir = dst.parent()
+            .with_context(|| format!("Failed to get parent directory for path: {}", dst.display()))?;
+        std::fs::create_dir_all(parent_dir)
+            .with_context(|| format!("Failed to create directory structure: {}", parent_dir.display()))?;
+
         let lines = mods
             .into_iter()
             .map(|m| format!("pub mod {};", m))
             .collect::<Vec<_>>();
-        std::fs::write(dst, lines.join("\n") + "\n")?;
+        std::fs::write(&dst, lines.join("\n") + "\n")
+            .with_context(|| format!("Failed to write module file: {}", dst.display()))?;
     }
 
     for pkg in pkgs {
         let src = tmp_dir.join(format!("{}.rs", &pkg));
         let dst = target_dir.join(format!("{}/mod.rs", pkg.replace('.', "/")));
-        std::fs::create_dir_all(dst.parent().unwrap())?;
-        std::fs::rename(src, dst)?;
+        
+        let parent_dir = dst.parent()
+            .with_context(|| format!("Failed to get parent directory for path: {}", dst.display()))?;
+        std::fs::create_dir_all(parent_dir)
+            .with_context(|| format!("Failed to create directory structure: {}", parent_dir.display()))?;
+            
+        std::fs::rename(&src, &dst)
+            .with_context(|| format!("Failed to rename generated package file from {} to {}", src.display(), dst.display()))?;
     }
 
+    let lib_path = target_dir.join("lib.rs");
     let mut lib_rs = OpenOptions::new()
         .append(true)
-        .open(target_dir.join("lib.rs"))
-        .unwrap();
-    append_trait_def(&mut lib_rs);
+        .open(&lib_path)
+        .with_context(|| format!("Failed to open generated lib.rs file at: {}", lib_path.display()))?;
+        
+    append_trait_def(&mut lib_rs)?;
 
     Ok(())
 }
 
-fn append_trait_def(lib_rs: &mut File) {
+fn append_trait_def(lib_rs: &mut File) -> Result<()> {
     let tokens = quote! {
         /// The scope of a [`Resource`].
         pub trait ResourceScope {}
@@ -194,11 +208,13 @@ fn append_trait_def(lib_rs: &mut File) {
             fn conditions_mut(&mut self) -> Option<&mut Vec<Self::Condition>>;
         }
     };
-    writeln!(lib_rs).unwrap();
-    writeln!(lib_rs, "{}", &tokens).unwrap();
+    writeln!(lib_rs).with_context(|| "Failed to write newline to lib.rs")?;
+    writeln!(lib_rs, "{}", &tokens).with_context(|| "Failed to write trait definitions to lib.rs")?;
+
+    Ok(())
 }
 
-fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource) {
+fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource) -> Result<()> {
     // Convert to match prost
     let type_name = format_ident!("{}", message_name);
 
@@ -300,6 +316,8 @@ fn append_trait_impl(pkg_rs: &mut File, message_name: &str, resource: &Resource)
         tokens
     };
 
-    writeln!(pkg_rs).unwrap();
-    writeln!(pkg_rs, "{}", &tokens).unwrap();
+    writeln!(pkg_rs).with_context(|| "Failed to write newline to package file")?;
+    writeln!(pkg_rs, "{}", &tokens).with_context(|| "Failed to write trait implementations to package file")?;
+
+    Ok(())
 }
