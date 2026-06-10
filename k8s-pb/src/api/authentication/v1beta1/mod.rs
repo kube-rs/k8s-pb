@@ -18,7 +18,9 @@ pub struct SelfSubjectReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// status is filled in by the server with the user attributes.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -41,7 +43,9 @@ pub struct TokenReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated
     /// +required
     #[prost(message, optional, tag = "2")]
@@ -119,5 +123,8 @@ pub struct UserInfo {
     /// extra is any additional information provided by the authenticator.
     /// +optional
     #[prost(btree_map = "string, message", tag = "4")]
-    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
+    pub extra: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ExtraValue,
+    >,
 }

@@ -6,7 +6,9 @@ pub struct LeaseCandidate {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the specification of the Lease.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +required
@@ -20,7 +22,9 @@ pub struct LeaseCandidateList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<LeaseCandidate>,
@@ -39,7 +43,9 @@ pub struct LeaseCandidateSpec {
     /// LeaseCandidate will respond by updating RenewTime.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub ping_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
+    pub ping_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
+    >,
     /// RenewTime is the time that the LeaseCandidate was last updated.
     /// Any time a Lease needs to do leader election, the PingTime field
     /// is updated to signal to the LeaseCandidate that they should update
@@ -49,7 +55,9 @@ pub struct LeaseCandidateSpec {
     /// garbage collection for still active LeaseCandidates.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub renew_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
+    pub renew_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
+    >,
     /// BinaryVersion is the binary version. It must be in a semver format without leading `v`.
     /// This field is required.
     /// +required
@@ -70,29 +78,4 @@ pub struct LeaseCandidateSpec {
     pub strategy: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for LeaseCandidate {
-    const API_VERSION: &'static str = "coordination.k8s.io/v1alpha2";
-    const GROUP: &'static str = "coordination.k8s.io";
-    const VERSION: &'static str = "v1alpha2";
-    const KIND: &'static str = "LeaseCandidate";
-    const URL_PATH_SEGMENT: &'static str = "leasecandidates";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for LeaseCandidate {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for LeaseCandidate {
-    type Spec = crate::api::coordination::v1alpha2::LeaseCandidateSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for LeaseCandidate { const API_VERSION : & 'static str = "coordination.k8s.io/v1alpha2" ; const GROUP : & 'static str = "coordination.k8s.io" ; const VERSION : & 'static str = "v1alpha2" ; const KIND : & 'static str = "LeaseCandidate" ; const URL_PATH_SEGMENT : & 'static str = "leasecandidates" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for LeaseCandidate { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for LeaseCandidate { type Spec = crate :: api :: coordination :: v1alpha2 :: LeaseCandidateSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

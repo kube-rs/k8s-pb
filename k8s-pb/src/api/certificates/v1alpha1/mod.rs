@@ -19,7 +19,9 @@ pub struct ClusterTrustBundle {
     /// metadata contains the object metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the signer (if any) and trust anchors.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ClusterTrustBundleSpec>,
@@ -31,7 +33,9 @@ pub struct ClusterTrustBundleList {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a collection of ClusterTrustBundle objects
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterTrustBundle>,
@@ -76,29 +80,4 @@ pub struct ClusterTrustBundleSpec {
     pub trust_bundle: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for ClusterTrustBundle {
-    const API_VERSION: &'static str = "certificates.k8s.io/v1alpha1";
-    const GROUP: &'static str = "certificates.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "ClusterTrustBundle";
-    const URL_PATH_SEGMENT: &'static str = "clustertrustbundles";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ClusterTrustBundle {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ClusterTrustBundle {
-    type Spec = crate::api::certificates::v1alpha1::ClusterTrustBundleSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for ClusterTrustBundle { const API_VERSION : & 'static str = "certificates.k8s.io/v1alpha1" ; const GROUP : & 'static str = "certificates.k8s.io" ; const VERSION : & 'static str = "v1alpha1" ; const KIND : & 'static str = "ClusterTrustBundle" ; const URL_PATH_SEGMENT : & 'static str = "clustertrustbundles" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ClusterTrustBundle { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ClusterTrustBundle { type Spec = crate :: api :: certificates :: v1alpha1 :: ClusterTrustBundleSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

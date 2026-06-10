@@ -22,7 +22,9 @@ pub struct RuntimeClass {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// handler specifies the underlying runtime and configuration that the CRI
     /// implementation will use to handle pods of this class. The possible values
     /// are specific to the node & CRI configuration.  It is assumed that all
@@ -60,7 +62,9 @@ pub struct RuntimeClassList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<RuntimeClass>,
@@ -77,8 +81,10 @@ pub struct Scheduling {
     /// +optional
     /// +mapType=atomic
     #[prost(btree_map = "string, string", tag = "1")]
-    pub node_selector:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub node_selector: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// tolerations are appended (excluding duplicates) to pods running with this
     /// RuntimeClass during admission, effectively unioning the set of nodes
     /// tolerated by the pod and the RuntimeClass.

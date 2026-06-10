@@ -2,7 +2,7 @@
 /// APIGroup contains the name, the supported versions, and the preferred version
 /// of a group.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIGroup {
+pub struct ApiGroup {
     /// name is the name of the group.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -25,20 +25,22 @@ pub struct APIGroup {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "4")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<
+        ServerAddressByClientCidr,
+    >,
 }
 /// APIGroupList is a list of APIGroup, to allow clients to discover the API at
 /// /apis.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIGroupList {
+pub struct ApiGroupList {
     /// groups is a list of APIGroup.
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub groups: ::prost::alloc::vec::Vec<APIGroup>,
+    pub groups: ::prost::alloc::vec::Vec<ApiGroup>,
 }
 /// APIResource specifies the name of a resource and whether it is namespaced.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct APIResource {
+pub struct ApiResource {
     /// name is the plural name of the resource.
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -88,14 +90,14 @@ pub struct APIResource {
 /// resources supported in a specific group and version, and if the resource
 /// is namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIResourceList {
+pub struct ApiResourceList {
     /// groupVersion is the group and version this APIResourceList is for.
     #[prost(string, optional, tag = "1")]
     pub group_version: ::core::option::Option<::prost::alloc::string::String>,
     /// resources contains the name of the resources and if they are namespaced.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub resources: ::prost::alloc::vec::Vec<APIResource>,
+    pub resources: ::prost::alloc::vec::Vec<ApiResource>,
 }
 /// APIVersions lists the versions that are available, to allow clients to
 /// discover the API at /api, which is the root path of the legacy v1 API.
@@ -103,7 +105,7 @@ pub struct APIResourceList {
 /// +protobuf.options.(gogoproto.goproto_stringer)=false
 /// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct APIVersions {
+pub struct ApiVersions {
     /// versions are the api versions that are available.
     /// +listType=atomic
     #[prost(string, repeated, tag = "1")]
@@ -117,7 +119,9 @@ pub struct APIVersions {
     /// Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<ServerAddressByClientCIDR>,
+    pub server_address_by_client_cid_rs: ::prost::alloc::vec::Vec<
+        ServerAddressByClientCidr,
+    >,
 }
 /// ApplyOptions may be provided when applying an API object.
 /// FieldManager is required for apply requests.
@@ -311,7 +315,9 @@ pub struct DeleteOptions {
     /// The default value is false, and the user must opt in to enable it
     /// +optional
     #[prost(bool, optional, tag = "6")]
-    pub ignore_store_read_error_with_cluster_breaking_potential: ::core::option::Option<bool>,
+    pub ignore_store_read_error_with_cluster_breaking_potential: ::core::option::Option<
+        bool,
+    >,
 }
 /// Duration is a wrapper around time.Duration which supports correct
 /// marshaling to YAML and JSON. In particular, it marshals into strings, which
@@ -456,8 +462,10 @@ pub struct LabelSelector {
     /// operator is "In", and the values array contains only "value". The requirements are ANDed.
     /// +optional
     #[prost(btree_map = "string, string", tag = "1")]
-    pub match_labels:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub match_labels: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// matchExpressions is a list of label selector requirements. The requirements are ANDed.
     /// +optional
     /// +listType=atomic
@@ -867,16 +875,20 @@ pub struct ObjectMeta {
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels>
     /// +optional
     #[prost(btree_map = "string, string", tag = "11")]
-    pub labels:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub labels: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// Annotations is an unstructured key value map stored with a resource that may be
     /// set by external tools to store and retrieve arbitrary metadata. They are not
     /// queryable and should be preserved when modifying objects.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations>
     /// +optional
     #[prost(btree_map = "string, string", tag = "12")]
-    pub annotations:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub annotations: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// List of objects depended by this object. If ALL objects in the list have
     /// been deleted, this object will be garbage collected. If this object is managed by a controller,
     /// then an entry in this list will point to this controller, with the controller field set to true.
@@ -1055,7 +1067,7 @@ pub struct RootPaths {
 }
 /// ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ServerAddressByClientCIDR {
+pub struct ServerAddressByClientCidr {
     /// The CIDR with which clients can match their IP to figure out the server address that they should use.
     #[prost(string, optional, tag = "1")]
     pub client_cidr: ::core::option::Option<::prost::alloc::string::String>,

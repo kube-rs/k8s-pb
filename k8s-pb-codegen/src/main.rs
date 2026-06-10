@@ -80,7 +80,8 @@ fn main() -> Result<()> {
             }
 
             let mut parts = package_name.split('.').collect::<Vec<_>>();
-            while let Some(module) = parts.pop() {
+            while !parts.is_empty() {
+                let module = parts.pop().with_context(|| "Failed to pop module from package parts")?;
                 let parent = parts.join("/");
                 module_tree
                     .entry(parent)

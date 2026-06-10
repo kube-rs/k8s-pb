@@ -15,7 +15,9 @@
 pub struct CertificateSigningRequest {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the certificate request, and is immutable after creation.
     /// Only the request, signerName, expirationSeconds, and usages fields can be set on creation.
     /// Other fields are derived by Kubernetes and cannot be modified by users.
@@ -62,22 +64,26 @@ pub struct CertificateSigningRequestCondition {
     /// lastUpdateTime is the time of the last update to this condition
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_update_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_update_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// lastTransitionTime is the time the condition last transitioned from one status to another.
     /// If unset, when a new condition type is added or an existing condition's status is changed,
     /// the server defaults this to the current time.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// CertificateSigningRequestList is a collection of CertificateSigningRequest objects
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateSigningRequestList {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a collection of CertificateSigningRequest objects
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CertificateSigningRequest>,
@@ -171,7 +177,10 @@ pub struct CertificateSigningRequestSpec {
     /// Populated by the API server on creation and immutable.
     /// +optional
     #[prost(btree_map = "string, message", tag = "6")]
-    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
+    pub extra: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ExtraValue,
+    >,
 }
 /// CertificateSigningRequestStatus contains conditions used to indicate
 /// approved/denied/failed status of the request, and the issued certificate.
@@ -231,47 +240,4 @@ pub struct ExtraValue {
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for CertificateSigningRequest {
-    const API_VERSION: &'static str = "certificates.k8s.io/v1";
-    const GROUP: &'static str = "certificates.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "CertificateSigningRequest";
-    const URL_PATH_SEGMENT: &'static str = "certificatesigningrequests";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for CertificateSigningRequest {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for CertificateSigningRequest {
-    type Spec = crate::api::certificates::v1::CertificateSigningRequestSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for CertificateSigningRequest {
-    type Status = crate::api::certificates::v1::CertificateSigningRequestStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for CertificateSigningRequest {
-    type Condition = crate::api::certificates::v1::CertificateSigningRequestCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for CertificateSigningRequest { const API_VERSION : & 'static str = "certificates.k8s.io/v1" ; const GROUP : & 'static str = "certificates.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "CertificateSigningRequest" ; const URL_PATH_SEGMENT : & 'static str = "certificatesigningrequests" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for CertificateSigningRequest { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for CertificateSigningRequest { type Spec = crate :: api :: certificates :: v1 :: CertificateSigningRequestSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for CertificateSigningRequest { type Status = crate :: api :: certificates :: v1 :: CertificateSigningRequestStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for CertificateSigningRequest { type Condition = crate :: api :: certificates :: v1 :: CertificateSigningRequestCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }

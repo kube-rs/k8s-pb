@@ -27,7 +27,9 @@ pub struct PodGroup {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the desired state of the PodGroup.
     ///
     /// +required
@@ -46,7 +48,9 @@ pub struct PodGroupList {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of PodGroups.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodGroup>,
@@ -103,7 +107,9 @@ pub struct PodGroupResourceClaim {
     /// +k8s:unionMember
     /// +k8s:format=k8s-long-name
     #[prost(string, optional, tag = "3")]
-    pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub resource_claim_template_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// PodGroupResourceClaimStatus is stored in the PodGroupStatus for each
 /// PodGroupResourceClaim which references a ResourceClaimTemplate. It stores the
@@ -296,8 +302,9 @@ pub struct PodGroupStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "1")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
     /// Status of resource claims.
     /// +optional
     /// +patchMergeKey=name
@@ -472,7 +479,9 @@ pub struct Workload {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the desired behavior of a Workload.
     ///
     /// +required
@@ -486,7 +495,9 @@ pub struct WorkloadList {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of Workloads.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Workload>,
@@ -537,74 +548,6 @@ pub struct WorkloadSpec {
     pub pod_group_templates: ::prost::alloc::vec::Vec<PodGroupTemplate>,
 }
 
-impl crate::Resource for PodGroup {
-    const API_VERSION: &'static str = "scheduling.k8s.io/v1alpha2";
-    const GROUP: &'static str = "scheduling.k8s.io";
-    const VERSION: &'static str = "v1alpha2";
-    const KIND: &'static str = "PodGroup";
-    const URL_PATH_SEGMENT: &'static str = "podgroups";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for PodGroup {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PodGroup {
-    type Spec = crate::api::scheduling::v1alpha2::PodGroupSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for PodGroup {
-    type Status = crate::api::scheduling::v1alpha2::PodGroupStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for PodGroup {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for PodGroup { const API_VERSION : & 'static str = "scheduling.k8s.io/v1alpha2" ; const GROUP : & 'static str = "scheduling.k8s.io" ; const VERSION : & 'static str = "v1alpha2" ; const KIND : & 'static str = "PodGroup" ; const URL_PATH_SEGMENT : & 'static str = "podgroups" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for PodGroup { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for PodGroup { type Spec = crate :: api :: scheduling :: v1alpha2 :: PodGroupSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for PodGroup { type Status = crate :: api :: scheduling :: v1alpha2 :: PodGroupStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for PodGroup { type Condition = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: Condition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for Workload {
-    const API_VERSION: &'static str = "scheduling.k8s.io/v1alpha2";
-    const GROUP: &'static str = "scheduling.k8s.io";
-    const VERSION: &'static str = "v1alpha2";
-    const KIND: &'static str = "Workload";
-    const URL_PATH_SEGMENT: &'static str = "workloads";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Workload {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for Workload {
-    type Spec = crate::api::scheduling::v1alpha2::WorkloadSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for Workload { const API_VERSION : & 'static str = "scheduling.k8s.io/v1alpha2" ; const GROUP : & 'static str = "scheduling.k8s.io" ; const VERSION : & 'static str = "v1alpha2" ; const KIND : & 'static str = "Workload" ; const URL_PATH_SEGMENT : & 'static str = "workloads" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Workload { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for Workload { type Spec = crate :: api :: scheduling :: v1alpha2 :: WorkloadSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

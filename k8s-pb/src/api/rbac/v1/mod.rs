@@ -7,8 +7,9 @@ pub struct AggregationRule {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub cluster_role_selectors:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub cluster_role_selectors: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
 }
 /// ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding or ClusterRoleBinding.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -16,7 +17,9 @@ pub struct ClusterRole {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Rules holds all the PolicyRules for this ClusterRole
     /// +optional
     /// +listType=atomic
@@ -37,7 +40,9 @@ pub struct ClusterRoleBinding {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Subjects holds references to the objects the role applies to.
     /// +optional
     /// +listType=atomic
@@ -57,7 +62,9 @@ pub struct ClusterRoleBindingList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of ClusterRoleBindings
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterRoleBinding>,
@@ -68,7 +75,9 @@ pub struct ClusterRoleList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of ClusterRoles
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterRole>,
@@ -113,7 +122,9 @@ pub struct Role {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Rules holds all the PolicyRules for this Role
     /// +optional
     /// +listType=atomic
@@ -129,7 +140,9 @@ pub struct RoleBinding {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Subjects holds references to the objects the role applies to.
     /// +optional
     /// +listType=atomic
@@ -149,7 +162,9 @@ pub struct RoleBindingList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of RoleBindings
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<RoleBinding>,
@@ -160,7 +175,9 @@ pub struct RoleList {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of Roles
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Role>,
@@ -211,74 +228,10 @@ pub struct Subject {
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for ClusterRole {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ClusterRole";
-    const URL_PATH_SEGMENT: &'static str = "clusterroles";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ClusterRole {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for ClusterRole { const API_VERSION : & 'static str = "rbac.authorization.k8s.io/v1" ; const GROUP : & 'static str = "rbac.authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ClusterRole" ; const URL_PATH_SEGMENT : & 'static str = "clusterroles" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ClusterRole { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for ClusterRoleBinding {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ClusterRoleBinding";
-    const URL_PATH_SEGMENT: &'static str = "clusterrolebindings";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ClusterRoleBinding {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for ClusterRoleBinding { const API_VERSION : & 'static str = "rbac.authorization.k8s.io/v1" ; const GROUP : & 'static str = "rbac.authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ClusterRoleBinding" ; const URL_PATH_SEGMENT : & 'static str = "clusterrolebindings" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ClusterRoleBinding { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for Role {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Role";
-    const URL_PATH_SEGMENT: &'static str = "roles";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Role {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for Role { const API_VERSION : & 'static str = "rbac.authorization.k8s.io/v1" ; const GROUP : & 'static str = "rbac.authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Role" ; const URL_PATH_SEGMENT : & 'static str = "roles" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Role { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for RoleBinding {
-    const API_VERSION: &'static str = "rbac.authorization.k8s.io/v1";
-    const GROUP: &'static str = "rbac.authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "RoleBinding";
-    const URL_PATH_SEGMENT: &'static str = "rolebindings";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for RoleBinding {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for RoleBinding { const API_VERSION : & 'static str = "rbac.authorization.k8s.io/v1" ; const GROUP : & 'static str = "rbac.authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "RoleBinding" ; const URL_PATH_SEGMENT : & 'static str = "rolebindings" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for RoleBinding { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }

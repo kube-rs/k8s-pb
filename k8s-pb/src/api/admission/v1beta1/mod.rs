@@ -12,13 +12,15 @@ pub struct AdmissionRequest {
     /// kind is the fully-qualified type of object being submitted (for example, v1.Pod or autoscaling.v1.Scale)
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub kind:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind>,
+    pub kind: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind,
+    >,
     /// resource is the fully-qualified resource being requested (for example, v1.pods)
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub resource:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionResource>,
+    pub resource: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionResource,
+    >,
     /// subResource is the subresource being requested, if any (for example, "status" or "scale")
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -35,8 +37,9 @@ pub struct AdmissionRequest {
     /// See documentation for the "matchPolicy" field in the webhook configuration type for more details.
     /// +optional
     #[prost(message, optional, tag = "13")]
-    pub request_kind:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind>,
+    pub request_kind: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind,
+    >,
     /// requestResource is the fully-qualified resource of the original API request (for example, v1.pods).
     /// If this is specified and differs from the value in "resource", an equivalent match and conversion was performed.
     ///
@@ -49,8 +52,9 @@ pub struct AdmissionRequest {
     /// See documentation for the "matchPolicy" field in the webhook configuration type.
     /// +optional
     #[prost(message, optional, tag = "14")]
-    pub request_resource:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionResource>,
+    pub request_resource: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionResource,
+    >,
     /// requestSubResource is the name of the subresource of the original API request, if any (for example, "status" or "scale")
     /// If this is specified and differs from the value in "subResource", an equivalent match and conversion was performed.
     /// See documentation for the "matchPolicy" field in the webhook configuration type.
@@ -78,11 +82,15 @@ pub struct AdmissionRequest {
     /// object is the object from the incoming request.
     /// +optional
     #[prost(message, optional, tag = "9")]
-    pub object: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
+    pub object: ::core::option::Option<
+        super::super::super::apimachinery::pkg::runtime::RawExtension,
+    >,
     /// oldObject is the existing object. Only populated for DELETE and UPDATE requests.
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub old_object: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
+    pub old_object: ::core::option::Option<
+        super::super::super::apimachinery::pkg::runtime::RawExtension,
+    >,
     /// dryRun indicates that modifications will definitely not be persisted for this request.
     /// Defaults to false.
     /// +optional
@@ -95,7 +103,9 @@ pub struct AdmissionRequest {
     /// `meta.k8s.io/v1.CreateOptions` even though the caller provided `meta.k8s.io/v1.PatchOptions`.
     /// +optional
     #[prost(message, optional, tag = "12")]
-    pub options: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
+    pub options: ::core::option::Option<
+        super::super::super::apimachinery::pkg::runtime::RawExtension,
+    >,
 }
 /// AdmissionResponse describes an admission response.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -113,7 +123,9 @@ pub struct AdmissionResponse {
     /// This field IS NOT consulted in any way if "Allowed" is "true".
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub status: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Status>,
+    pub status: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Status,
+    >,
     /// patch is the patch body. Currently we only support "JSONPatch" which implements RFC 6902.
     /// +optional
     #[prost(bytes = "vec", optional, tag = "4")]
@@ -128,8 +140,10 @@ pub struct AdmissionResponse {
     /// the admission webhook to add additional context to the audit log for this request.
     /// +optional
     #[prost(btree_map = "string, string", tag = "6")]
-    pub audit_annotations:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub audit_annotations: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// warnings is a list of warning messages to return to the requesting API client.
     /// Warning messages describe a problem the client making the API request should correct or be aware of.
     /// Limit warnings to 120 characters if possible.

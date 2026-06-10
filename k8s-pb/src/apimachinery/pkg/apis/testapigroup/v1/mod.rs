@@ -112,8 +112,10 @@ pub struct CarpSpec {
     /// More info: <http://kubernetes.io/docs/user-guide/node-selection/README>
     /// +optional
     #[prost(btree_map = "string, string", tag = "7")]
-    pub node_selector:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub node_selector: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// ServiceAccountName is the name of the ServiceAccount to use to run this carp.
     /// More info: <https://kubernetes.io/docs/concepts/security/service-accounts/>
     /// +optional
@@ -124,7 +126,9 @@ pub struct CarpSpec {
     /// +k8s:conversion-gen=false
     /// +optional
     #[prost(string, optional, tag = "9")]
-    pub deprecated_service_account: ::core::option::Option<::prost::alloc::string::String>,
+    pub deprecated_service_account: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// NodeName is a request to schedule this carp onto a specific node. If it is non-empty,
     /// the scheduler simply schedules this carp onto that node, assuming that it fits resource
     /// requirements.

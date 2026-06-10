@@ -7,7 +7,9 @@ pub struct StorageVersionMigration {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Specification of the migration.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -24,7 +26,9 @@ pub struct StorageVersionMigrationList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of StorageVersionMigration
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<StorageVersionMigration>,
@@ -36,8 +40,9 @@ pub struct StorageVersionMigrationSpec {
     /// the endpoint serving the resource.
     /// Immutable.
     #[prost(message, optional, tag = "1")]
-    pub resource:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupResource>,
+    pub resource: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::GroupResource,
+    >,
 }
 /// Status of the storage version migration.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -49,8 +54,9 @@ pub struct StorageVersionMigrationStatus {
     /// +listMapKey=type
     /// +optional
     #[prost(message, repeated, tag = "1")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
     /// ResourceVersion to compare with the GC cache for performing the migration.
     /// This is the current resource version of given group, version and resource when
     /// kube-controller-manager first observes this StorageVersionMigration resource.
@@ -58,47 +64,4 @@ pub struct StorageVersionMigrationStatus {
     pub resource_version: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for StorageVersionMigration {
-    const API_VERSION: &'static str = "storagemigration.k8s.io/v1beta1";
-    const GROUP: &'static str = "storagemigration.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "StorageVersionMigration";
-    const URL_PATH_SEGMENT: &'static str = "storageversionmigrations";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for StorageVersionMigration {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for StorageVersionMigration {
-    type Spec = crate::api::storagemigration::v1beta1::StorageVersionMigrationSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for StorageVersionMigration {
-    type Status = crate::api::storagemigration::v1beta1::StorageVersionMigrationStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for StorageVersionMigration {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for StorageVersionMigration { const API_VERSION : & 'static str = "storagemigration.k8s.io/v1beta1" ; const GROUP : & 'static str = "storagemigration.k8s.io" ; const VERSION : & 'static str = "v1beta1" ; const KIND : & 'static str = "StorageVersionMigration" ; const URL_PATH_SEGMENT : & 'static str = "storageversionmigrations" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for StorageVersionMigration { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for StorageVersionMigration { type Spec = crate :: api :: storagemigration :: v1beta1 :: StorageVersionMigrationSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for StorageVersionMigration { type Status = crate :: api :: storagemigration :: v1beta1 :: StorageVersionMigrationStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for StorageVersionMigration { type Condition = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: Condition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }

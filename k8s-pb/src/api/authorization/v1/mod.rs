@@ -78,7 +78,9 @@ pub struct LocalSubjectAccessReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated.  spec.namespace must be equal to the namespace
     /// you made the request against.  If empty, it is defaulted.
     #[prost(message, optional, tag = "2")]
@@ -192,7 +194,9 @@ pub struct SelfSubjectAccessReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated.  user and groups must be empty
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<SelfSubjectAccessReviewSpec>,
@@ -226,7 +230,9 @@ pub struct SelfSubjectRulesReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<SelfSubjectRulesReviewSpec>,
@@ -249,7 +255,9 @@ pub struct SubjectAccessReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<SubjectAccessReviewSpec>,
@@ -284,7 +292,10 @@ pub struct SubjectAccessReviewSpec {
     /// it needs a reflection here.
     /// +optional
     #[prost(btree_map = "string, message", tag = "5")]
-    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
+    pub extra: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ExtraValue,
+    >,
     /// uid information about the requesting user.
     /// +optional
     #[prost(string, optional, tag = "6")]
@@ -342,146 +353,10 @@ pub struct SubjectRulesReviewStatus {
     pub evaluation_error: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for LocalSubjectAccessReview {
-    const API_VERSION: &'static str = "authorization.k8s.io/v1";
-    const GROUP: &'static str = "authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "LocalSubjectAccessReview";
-    const URL_PATH_SEGMENT: &'static str = "localsubjectaccessreviews";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for LocalSubjectAccessReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for LocalSubjectAccessReview {
-    type Spec = crate::api::authorization::v1::SubjectAccessReviewSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for LocalSubjectAccessReview {
-    type Status = crate::api::authorization::v1::SubjectAccessReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for LocalSubjectAccessReview { const API_VERSION : & 'static str = "authorization.k8s.io/v1" ; const GROUP : & 'static str = "authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "LocalSubjectAccessReview" ; const URL_PATH_SEGMENT : & 'static str = "localsubjectaccessreviews" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for LocalSubjectAccessReview { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for LocalSubjectAccessReview { type Spec = crate :: api :: authorization :: v1 :: SubjectAccessReviewSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for LocalSubjectAccessReview { type Status = crate :: api :: authorization :: v1 :: SubjectAccessReviewStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for SelfSubjectAccessReview {
-    const API_VERSION: &'static str = "authorization.k8s.io/v1";
-    const GROUP: &'static str = "authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "SelfSubjectAccessReview";
-    const URL_PATH_SEGMENT: &'static str = "selfsubjectaccessreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for SelfSubjectAccessReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for SelfSubjectAccessReview {
-    type Spec = crate::api::authorization::v1::SelfSubjectAccessReviewSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for SelfSubjectAccessReview {
-    type Status = crate::api::authorization::v1::SubjectAccessReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for SelfSubjectAccessReview { const API_VERSION : & 'static str = "authorization.k8s.io/v1" ; const GROUP : & 'static str = "authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "SelfSubjectAccessReview" ; const URL_PATH_SEGMENT : & 'static str = "selfsubjectaccessreviews" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for SelfSubjectAccessReview { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for SelfSubjectAccessReview { type Spec = crate :: api :: authorization :: v1 :: SelfSubjectAccessReviewSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for SelfSubjectAccessReview { type Status = crate :: api :: authorization :: v1 :: SubjectAccessReviewStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for SelfSubjectRulesReview {
-    const API_VERSION: &'static str = "authorization.k8s.io/v1";
-    const GROUP: &'static str = "authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "SelfSubjectRulesReview";
-    const URL_PATH_SEGMENT: &'static str = "selfsubjectrulesreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for SelfSubjectRulesReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for SelfSubjectRulesReview {
-    type Spec = crate::api::authorization::v1::SelfSubjectRulesReviewSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for SelfSubjectRulesReview {
-    type Status = crate::api::authorization::v1::SubjectRulesReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for SelfSubjectRulesReview { const API_VERSION : & 'static str = "authorization.k8s.io/v1" ; const GROUP : & 'static str = "authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "SelfSubjectRulesReview" ; const URL_PATH_SEGMENT : & 'static str = "selfsubjectrulesreviews" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for SelfSubjectRulesReview { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for SelfSubjectRulesReview { type Spec = crate :: api :: authorization :: v1 :: SelfSubjectRulesReviewSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for SelfSubjectRulesReview { type Status = crate :: api :: authorization :: v1 :: SubjectRulesReviewStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for SubjectAccessReview {
-    const API_VERSION: &'static str = "authorization.k8s.io/v1";
-    const GROUP: &'static str = "authorization.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "SubjectAccessReview";
-    const URL_PATH_SEGMENT: &'static str = "subjectaccessreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for SubjectAccessReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for SubjectAccessReview {
-    type Spec = crate::api::authorization::v1::SubjectAccessReviewSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for SubjectAccessReview {
-    type Status = crate::api::authorization::v1::SubjectAccessReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for SubjectAccessReview { const API_VERSION : & 'static str = "authorization.k8s.io/v1" ; const GROUP : & 'static str = "authorization.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "SubjectAccessReview" ; const URL_PATH_SEGMENT : & 'static str = "subjectaccessreviews" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for SubjectAccessReview { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for SubjectAccessReview { type Spec = crate :: api :: authorization :: v1 :: SubjectAccessReviewSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for SubjectAccessReview { type Status = crate :: api :: authorization :: v1 :: SubjectAccessReviewStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }

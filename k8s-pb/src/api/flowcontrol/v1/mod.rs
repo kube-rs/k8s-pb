@@ -51,7 +51,9 @@ pub struct FlowSchema {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// `spec` is the specification of the desired behavior of a FlowSchema.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -77,8 +79,9 @@ pub struct FlowSchemaCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// `lastTransitionTime` is the last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -93,7 +96,9 @@ pub struct FlowSchemaList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// `items` is a list of FlowSchemas.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<FlowSchema>,
@@ -105,7 +110,9 @@ pub struct FlowSchemaSpec {
     /// be resolved, the FlowSchema will be ignored and marked as invalid in its status.
     /// Required.
     #[prost(message, optional, tag = "1")]
-    pub priority_level_configuration: ::core::option::Option<PriorityLevelConfigurationReference>,
+    pub priority_level_configuration: ::core::option::Option<
+        PriorityLevelConfigurationReference,
+    >,
     /// `matchingPrecedence` is used to choose among the FlowSchemas that match a given request. The chosen
     /// FlowSchema is among those with the numerically lowest (which we take to be logically highest)
     /// MatchingPrecedence.  Each MatchingPrecedence value must be ranged in \[1,10000\].
@@ -293,7 +300,9 @@ pub struct PriorityLevelConfiguration {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// `spec` is the specification of the desired behavior of a "request-priority".
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -319,8 +328,9 @@ pub struct PriorityLevelConfigurationCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// `lastTransitionTime` is the last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -335,7 +345,9 @@ pub struct PriorityLevelConfigurationList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// `items` is a list of request-priorities.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PriorityLevelConfiguration>,
@@ -528,92 +540,6 @@ pub struct UserSubject {
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for FlowSchema {
-    const API_VERSION: &'static str = "flowcontrol.apiserver.k8s.io/v1";
-    const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "FlowSchema";
-    const URL_PATH_SEGMENT: &'static str = "flowschemas";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for FlowSchema {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for FlowSchema {
-    type Spec = crate::api::flowcontrol::v1::FlowSchemaSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for FlowSchema {
-    type Status = crate::api::flowcontrol::v1::FlowSchemaStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for FlowSchema {
-    type Condition = crate::api::flowcontrol::v1::FlowSchemaCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for FlowSchema { const API_VERSION : & 'static str = "flowcontrol.apiserver.k8s.io/v1" ; const GROUP : & 'static str = "flowcontrol.apiserver.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "FlowSchema" ; const URL_PATH_SEGMENT : & 'static str = "flowschemas" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for FlowSchema { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for FlowSchema { type Spec = crate :: api :: flowcontrol :: v1 :: FlowSchemaSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for FlowSchema { type Status = crate :: api :: flowcontrol :: v1 :: FlowSchemaStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for FlowSchema { type Condition = crate :: api :: flowcontrol :: v1 :: FlowSchemaCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for PriorityLevelConfiguration {
-    const API_VERSION: &'static str = "flowcontrol.apiserver.k8s.io/v1";
-    const GROUP: &'static str = "flowcontrol.apiserver.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "PriorityLevelConfiguration";
-    const URL_PATH_SEGMENT: &'static str = "prioritylevelconfigurations";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for PriorityLevelConfiguration {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PriorityLevelConfiguration {
-    type Spec = crate::api::flowcontrol::v1::PriorityLevelConfigurationSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for PriorityLevelConfiguration {
-    type Status = crate::api::flowcontrol::v1::PriorityLevelConfigurationStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for PriorityLevelConfiguration {
-    type Condition = crate::api::flowcontrol::v1::PriorityLevelConfigurationCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for PriorityLevelConfiguration { const API_VERSION : & 'static str = "flowcontrol.apiserver.k8s.io/v1" ; const GROUP : & 'static str = "flowcontrol.apiserver.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "PriorityLevelConfiguration" ; const URL_PATH_SEGMENT : & 'static str = "prioritylevelconfigurations" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for PriorityLevelConfiguration { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for PriorityLevelConfiguration { type Spec = crate :: api :: flowcontrol :: v1 :: PriorityLevelConfigurationSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for PriorityLevelConfiguration { type Status = crate :: api :: flowcontrol :: v1 :: PriorityLevelConfigurationStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for PriorityLevelConfiguration { type Condition = crate :: api :: flowcontrol :: v1 :: PriorityLevelConfigurationCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }

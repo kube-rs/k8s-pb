@@ -111,7 +111,9 @@ pub struct DeviceTaint {
     ///
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub time_added: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub time_added: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// DeviceTaintRule adds one taint to all devices which match the selector.
 /// This has the same effect as if the taint was specified directly
@@ -121,7 +123,9 @@ pub struct DeviceTaintRule {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec specifies the selector and one taint.
     ///
     /// Changing the spec automatically increments the metadata.generation number.
@@ -140,7 +144,9 @@ pub struct DeviceTaintRuleList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of DeviceTaintRules.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<DeviceTaintRule>,
@@ -192,8 +198,9 @@ pub struct DeviceTaintRuleStatus {
     /// +patchStrategy=merge
     /// +patchMergeKey=type
     #[prost(message, repeated, tag = "1")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
 }
 /// DeviceTaintSelector defines which device(s) a DeviceTaintRule applies to.
 /// The empty selector matches all devices. Without a selector, no devices
@@ -330,7 +337,9 @@ pub struct ResourcePoolStatusRequest {
     /// Standard object metadata
     /// +required
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the filters for which pools to include in the status.
     /// The spec is immutable once created.
     ///
@@ -353,7 +362,9 @@ pub struct ResourcePoolStatusRequestList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of ResourcePoolStatusRequests.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourcePoolStatusRequest>,
@@ -438,96 +449,11 @@ pub struct ResourcePoolStatusRequestStatus {
     /// +patchMergeKey=type
     /// +k8s:maxItems=10
     #[prost(message, repeated, tag = "3")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
 }
 
-impl crate::Resource for DeviceTaintRule {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
-    const KIND: &'static str = "DeviceTaintRule";
-    const URL_PATH_SEGMENT: &'static str = "devicetaintrules";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for DeviceTaintRule {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for DeviceTaintRule {
-    type Spec = crate::api::resource::v1alpha3::DeviceTaintRuleSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for DeviceTaintRule {
-    type Status = crate::api::resource::v1alpha3::DeviceTaintRuleStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for DeviceTaintRule {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for DeviceTaintRule { const API_VERSION : & 'static str = "resource.k8s.io/v1alpha3" ; const GROUP : & 'static str = "resource.k8s.io" ; const VERSION : & 'static str = "v1alpha3" ; const KIND : & 'static str = "DeviceTaintRule" ; const URL_PATH_SEGMENT : & 'static str = "devicetaintrules" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for DeviceTaintRule { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for DeviceTaintRule { type Spec = crate :: api :: resource :: v1alpha3 :: DeviceTaintRuleSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for DeviceTaintRule { type Status = crate :: api :: resource :: v1alpha3 :: DeviceTaintRuleStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for DeviceTaintRule { type Condition = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: Condition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for ResourcePoolStatusRequest {
-    const API_VERSION: &'static str = "resource.k8s.io/v1alpha3";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1alpha3";
-    const KIND: &'static str = "ResourcePoolStatusRequest";
-    const URL_PATH_SEGMENT: &'static str = "resourcepoolstatusrequests";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ResourcePoolStatusRequest {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ResourcePoolStatusRequest {
-    type Spec = crate::api::resource::v1alpha3::ResourcePoolStatusRequestSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for ResourcePoolStatusRequest {
-    type Status = crate::api::resource::v1alpha3::ResourcePoolStatusRequestStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for ResourcePoolStatusRequest {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for ResourcePoolStatusRequest { const API_VERSION : & 'static str = "resource.k8s.io/v1alpha3" ; const GROUP : & 'static str = "resource.k8s.io" ; const VERSION : & 'static str = "v1alpha3" ; const KIND : & 'static str = "ResourcePoolStatusRequest" ; const URL_PATH_SEGMENT : & 'static str = "resourcepoolstatusrequests" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ResourcePoolStatusRequest { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ResourcePoolStatusRequest { type Spec = crate :: api :: resource :: v1alpha3 :: ResourcePoolStatusRequestSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for ResourcePoolStatusRequest { type Status = crate :: api :: resource :: v1alpha3 :: ResourcePoolStatusRequestStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for ResourcePoolStatusRequest { type Condition = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: Condition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
