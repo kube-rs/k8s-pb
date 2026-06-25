@@ -164,14 +164,16 @@ pub struct Binding {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// The target object that you want to bind to the standard object.
     #[prost(message, optional, tag = "2")]
     pub target: ::core::option::Option<ObjectReference>,
 }
 /// Represents storage that is managed by an external CSI volume driver
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIPersistentVolumeSource {
+pub struct CsiPersistentVolumeSource {
     /// driver is the name of the driver to use for this volume.
     /// Required.
     #[prost(string, optional, tag = "1")]
@@ -194,8 +196,10 @@ pub struct CSIPersistentVolumeSource {
     /// volumeAttributes of the volume to publish.
     /// +optional
     #[prost(btree_map = "string, string", tag = "5")]
-    pub volume_attributes:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub volume_attributes: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// controllerPublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// ControllerPublishVolume and ControllerUnpublishVolume calls.
@@ -239,7 +243,7 @@ pub struct CSIPersistentVolumeSource {
 }
 /// Represents a source location of a volume to mount, managed by an external CSI driver
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIVolumeSource {
+pub struct CsiVolumeSource {
     /// driver is the name of the CSI driver that handles this volume.
     /// Consult with your admin for the correct name as registered in the cluster.
     #[prost(string, optional, tag = "1")]
@@ -259,8 +263,10 @@ pub struct CSIVolumeSource {
     /// driver. Consult your driver's documentation for supported values.
     /// +optional
     #[prost(btree_map = "string, string", tag = "4")]
-    pub volume_attributes:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub volume_attributes: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// nodePublishSecretRef is a reference to the secret object containing
     /// sensitive information to pass to the CSI driver to complete the CSI
     /// NodePublishVolume and NodeUnpublishVolume calls.
@@ -444,8 +450,9 @@ pub struct ClusterTrustBundleProjection {
     /// everything".
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub label_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub label_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// If true, don't block pod startup if the referenced ClusterTrustBundle(s)
     /// aren't available.  If using name, then the named ClusterTrustBundle is
     /// allowed not to exist.  If using signerName, then the combination of
@@ -488,7 +495,9 @@ pub struct ComponentStatus {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// List of component conditions observed
     /// +optional
     /// +patchMergeKey=type
@@ -506,7 +515,9 @@ pub struct ComponentStatusList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ComponentStatus objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ComponentStatus>,
@@ -518,7 +529,9 @@ pub struct ConfigMap {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Immutable, if set to true, ensures that data stored in the ConfigMap cannot
     /// be updated (only object metadata can be modified).
     /// If not set to true, the field can be modified at any time.
@@ -533,8 +546,10 @@ pub struct ConfigMap {
     /// the BinaryData field, this is enforced during validation process.
     /// +optional
     #[prost(btree_map = "string, string", tag = "2")]
-    pub data:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub data: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// BinaryData contains the binary data.
     /// Each key must consist of alphanumeric characters, '-', '_' or '.'.
     /// BinaryData can contain byte sequences that are not in the UTF-8 range.
@@ -544,8 +559,10 @@ pub struct ConfigMap {
     /// kubelet.
     /// +optional
     #[prost(btree_map = "string, bytes", tag = "3")]
-    pub binary_data:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::vec::Vec<u8>>,
+    pub binary_data: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::vec::Vec<u8>,
+    >,
 }
 /// ConfigMapEnvSource selects a ConfigMap to populate the environment
 /// variables with.
@@ -583,7 +600,9 @@ pub struct ConfigMapList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of ConfigMaps.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ConfigMap>,
@@ -870,7 +889,9 @@ pub struct Container {
     /// Cannot be updated.
     /// +optional
     #[prost(string, optional, tag = "20")]
-    pub termination_message_policy: ::core::option::Option<::prost::alloc::string::String>,
+    pub termination_message_policy: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// Image pull policy.
     /// One of Always, Never, IfNotPresent.
     /// Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
@@ -1037,7 +1058,9 @@ pub struct ContainerStateRunning {
     /// Time at which the container was last (re-)started
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub started_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub started_at: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// ContainerStateTerminated is a terminated state of a container.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1060,11 +1083,15 @@ pub struct ContainerStateTerminated {
     /// Time at which previous execution of the container started
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub started_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub started_at: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Time at which the container last terminated
     /// +optional
     #[prost(message, optional, tag = "6")]
-    pub finished_at: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub finished_at: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Container's ID in the format '<type>://<container_id>'
     /// +optional
     #[prost(string, optional, tag = "7")]
@@ -1207,16 +1234,16 @@ pub struct DaemonEndpoint {
 /// Note that this is identical to a downwardAPI volume source without the default
 /// mode.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DownwardAPIProjection {
+pub struct DownwardApiProjection {
     /// Items is a list of DownwardAPIVolume file
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<DownwardAPIVolumeFile>,
+    pub items: ::prost::alloc::vec::Vec<DownwardApiVolumeFile>,
 }
 /// DownwardAPIVolumeFile represents information to create the file containing the pod field
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DownwardAPIVolumeFile {
+pub struct DownwardApiVolumeFile {
     /// Required: Path is  the relative path name of the file to be created. Must not be absolute or contain the '..' path. Must be utf-8 encoded. The first item of the relative path must not start with '..'
     #[prost(string, optional, tag = "1")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
@@ -1242,12 +1269,12 @@ pub struct DownwardAPIVolumeFile {
 /// DownwardAPIVolumeSource represents a volume containing downward API info.
 /// Downward API volumes support ownership management and SELinux relabeling.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DownwardAPIVolumeSource {
+pub struct DownwardApiVolumeSource {
     /// Items is a list of downward API volume file
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<DownwardAPIVolumeFile>,
+    pub items: ::prost::alloc::vec::Vec<DownwardApiVolumeFile>,
     /// Optional: mode bits to use on created files by default. Must be a
     /// Optional: mode bits used to set permissions on created files by default.
     /// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
@@ -1279,7 +1306,9 @@ pub struct EmptyDirVolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#emptydir>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub size_limit: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub size_limit: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// EndpointAddress is a tuple that describes single IP address.
 /// Deprecated: This API is deprecated in v1.33+.
@@ -1404,7 +1433,9 @@ pub struct Endpoints {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// The set of all endpoints is the union of all subsets. Addresses are placed into
     /// subsets according to the IPs they share. A single address with multiple ports,
     /// some of which are ready and some of which are not (because they come from
@@ -1425,7 +1456,9 @@ pub struct EndpointsList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of endpoints.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Endpoints>,
@@ -1676,7 +1709,9 @@ pub struct EphemeralContainerCommon {
     /// Cannot be updated.
     /// +optional
     #[prost(string, optional, tag = "20")]
-    pub termination_message_policy: ::core::option::Option<::prost::alloc::string::String>,
+    pub termination_message_policy: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// Image pull policy.
     /// One of Always, Never, IfNotPresent.
     /// Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
@@ -1750,7 +1785,9 @@ pub struct Event {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// The object that this event is about.
     #[prost(message, optional, tag = "2")]
     pub involved_object: ::core::option::Option<ObjectReference>,
@@ -1772,11 +1809,15 @@ pub struct Event {
     /// The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
     /// +optional
     #[prost(message, optional, tag = "6")]
-    pub first_timestamp: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub first_timestamp: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// The time at which the most recent occurrence of this event was recorded.
     /// +optional
     #[prost(message, optional, tag = "7")]
-    pub last_timestamp: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_timestamp: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// The number of times this event has occurred.
     /// +optional
     #[prost(int32, optional, tag = "8")]
@@ -1788,7 +1829,9 @@ pub struct Event {
     /// Time when this Event was first observed.
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub event_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
+    pub event_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
+    >,
     /// Data about the Event series this event represents or nil if it's a singleton Event.
     /// +optional
     #[prost(message, optional, tag = "11")]
@@ -1817,7 +1860,9 @@ pub struct EventList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of events
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Event>,
@@ -1831,8 +1876,9 @@ pub struct EventSeries {
     pub count: ::core::option::Option<i32>,
     /// Time of the last occurrence observed
     #[prost(message, optional, tag = "2")]
-    pub last_observed_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
+    pub last_observed_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
+    >,
 }
 /// EventSource contains information for an event.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1952,8 +1998,10 @@ pub struct FlexPersistentVolumeSource {
     /// options is Optional: this field holds extra command options if any.
     /// +optional
     #[prost(btree_map = "string, string", tag = "5")]
-    pub options:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub options: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 /// FlexVolume represents a generic volume resource that is
 /// provisioned/attached using an exec based plugin.
@@ -1984,8 +2032,10 @@ pub struct FlexVolumeSource {
     /// options is Optional: this field holds extra command options if any.
     /// +optional
     #[prost(btree_map = "string, string", tag = "5")]
-    pub options:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub options: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 /// Represents a Flocker volume mounted by the Flocker agent.
 /// One and only one of datasetName and datasetUUID should be set.
@@ -2130,7 +2180,9 @@ pub struct HttpGetAction {
     /// Number must be in the range 1 to 65535.
     /// Name must be an IANA_SVC_NAME.
     #[prost(message, optional, tag = "2")]
-    pub port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
+    pub port: ::core::option::Option<
+        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
+    >,
     /// Host name to connect to, defaults to the pod IP. You probably want to set
     /// "Host" in httpHeaders instead.
     /// +optional
@@ -2428,7 +2480,9 @@ pub struct LimitRange {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the limits enforced.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -2484,7 +2538,9 @@ pub struct LimitRangeList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of LimitRange objects.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/>
     #[prost(message, repeated, tag = "2")]
@@ -2520,10 +2576,14 @@ pub struct List {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of objects
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::runtime::RawExtension>,
+    pub items: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::runtime::RawExtension,
+    >,
 }
 /// LoadBalancerIngress represents the status of a load-balancer ingress point:
 /// traffic intended for the service should be sent to an ingress point.
@@ -2613,7 +2673,9 @@ pub struct LocalVolumeSource {
 pub struct ModifyVolumeStatus {
     /// targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
     #[prost(string, optional, tag = "1")]
-    pub target_volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub target_volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// status is the status of the ControllerModifyVolume operation. It can be in any of following states:
     ///   - Pending
     ///     Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
@@ -2654,7 +2716,9 @@ pub struct Namespace {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the behavior of the Namespace.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -2678,8 +2742,9 @@ pub struct NamespaceCondition {
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Unique, one-word, CamelCase reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
@@ -2696,7 +2761,9 @@ pub struct NamespaceList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of Namespace objects in the list.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/>
     #[prost(message, repeated, tag = "2")]
@@ -2737,7 +2804,9 @@ pub struct Node {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the behavior of a node.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -2771,7 +2840,9 @@ pub struct NodeAffinity {
     /// may or may not try to eventually evict the pod from its node.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub required_during_scheduling_ignored_during_execution: ::core::option::Option<NodeSelector>,
+    pub required_during_scheduling_ignored_during_execution: ::core::option::Option<
+        NodeSelector,
+    >,
     /// The scheduler will prefer to schedule pods to nodes that satisfy
     /// the affinity expressions specified by this field, but it may choose
     /// a node that violates one or more of the expressions. The node that is
@@ -2784,8 +2855,9 @@ pub struct NodeAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub preferred_during_scheduling_ignored_during_execution:
-        ::prost::alloc::vec::Vec<PreferredSchedulingTerm>,
+    pub preferred_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
+        PreferredSchedulingTerm,
+    >,
 }
 /// NodeAllocatableResourceClaimStatus describes the status of node allocatable resources allocated via DRA.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2819,13 +2891,15 @@ pub struct NodeCondition {
     /// Last time we got an update on a given condition.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_heartbeat_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_heartbeat_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Last time the condition transit from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// (brief) reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
@@ -2919,7 +2993,9 @@ pub struct NodeList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of nodes
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Node>,
@@ -3173,7 +3249,9 @@ pub struct NodeSystemInfo {
     pub os_image: ::core::option::Option<::prost::alloc::string::String>,
     /// ContainerRuntime Version reported by the node through runtime remote API (e.g. containerd://1.4.2).
     #[prost(string, optional, tag = "6")]
-    pub container_runtime_version: ::core::option::Option<::prost::alloc::string::String>,
+    pub container_runtime_version: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// Kubelet Version reported by the node.
     #[prost(string, optional, tag = "7")]
     pub kubelet_version: ::core::option::Option<::prost::alloc::string::String>,
@@ -3272,7 +3350,9 @@ pub struct PersistentVolume {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines a specification of a persistent volume owned by the cluster.
     /// Provisioned by an administrator.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes>
@@ -3294,7 +3374,9 @@ pub struct PersistentVolumeClaim {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired characteristics of a volume requested by a pod author.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims>
     /// +optional
@@ -3322,12 +3404,15 @@ pub struct PersistentVolumeClaimCondition {
     /// lastProbeTime is the time we probed the condition.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_probe_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_probe_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// lastTransitionTime is the time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// reason is a unique, this should be a short, machine understandable string that gives the reason
     /// for condition's last transition. If it reports "Resizing" that means the underlying
     /// persistent volume is being resized.
@@ -3346,7 +3431,9 @@ pub struct PersistentVolumeClaimList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a list of persistent volume claims.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims>
     #[prost(message, repeated, tag = "2")]
@@ -3365,8 +3452,9 @@ pub struct PersistentVolumeClaimSpec {
     /// selector is a label query over volumes to consider for binding.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// resources represents the minimum resources the volume should have.
     /// Users are allowed to specify resource requirements
     /// that are lower than previous value but must still be higher than capacity recorded in the
@@ -3439,7 +3527,9 @@ pub struct PersistentVolumeClaimSpec {
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "9")]
-    pub volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3532,14 +3622,18 @@ pub struct PersistentVolumeClaimStatus {
     /// +mapType=granular
     /// +optional
     #[prost(btree_map = "string, string", tag = "7")]
-    pub allocated_resource_statuses:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub allocated_resource_statuses: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
     /// When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "8")]
-    pub current_volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub current_volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
     /// When this is unset, there is no ModifyVolume operation being attempted.
     /// +featureGate=VolumeAttributesClass
@@ -3557,7 +3651,9 @@ pub struct PersistentVolumeClaimTemplate {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// The specification for the PersistentVolumeClaim. The entire content is
     /// copied unchanged into the PVC that gets created from this
     /// template. The same fields as in a PersistentVolumeClaim
@@ -3588,7 +3684,9 @@ pub struct PersistentVolumeList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a list of persistent volumes.
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes>
     #[prost(message, repeated, tag = "2")]
@@ -3613,7 +3711,9 @@ pub struct PersistentVolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore>
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
+    pub aws_elastic_block_store: ::core::option::Option<
+        AwsElasticBlockStoreVolumeSource,
+    >,
     /// hostPath represents a directory on the host.
     /// Provisioned by a developer or tester.
     /// This is useful for single-node development and testing only!
@@ -3723,7 +3823,7 @@ pub struct PersistentVolumeSource {
     /// csi represents storage that is handled by an external CSI driver.
     /// +optional
     #[prost(message, optional, tag = "22")]
-    pub csi: ::core::option::Option<CSIPersistentVolumeSource>,
+    pub csi: ::core::option::Option<CsiPersistentVolumeSource>,
 }
 /// PersistentVolumeSpec is the specification of a persistent volume.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3760,7 +3860,9 @@ pub struct PersistentVolumeSpec {
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming>
     /// +optional
     #[prost(string, optional, tag = "5")]
-    pub persistent_volume_reclaim_policy: ::core::option::Option<::prost::alloc::string::String>,
+    pub persistent_volume_reclaim_policy: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// storageClassName is the name of StorageClass to which this persistent volume belongs. Empty value
     /// means that this volume does not belong to any StorageClass.
     /// +optional
@@ -3793,7 +3895,9 @@ pub struct PersistentVolumeSpec {
     /// +featureGate=VolumeAttributesClass
     /// +optional
     #[prost(string, optional, tag = "10")]
-    pub volume_attributes_class_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub volume_attributes_class_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// PersistentVolumeStatus is the current status of a persistent volume.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3816,8 +3920,9 @@ pub struct PersistentVolumeStatus {
     /// and automatically resets to current time everytime a volume phase transitions.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_phase_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_phase_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// Represents a Photon Controller persistent disk resource.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3839,7 +3944,9 @@ pub struct Pod {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Specification of the desired behavior of the pod.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -3867,7 +3974,9 @@ pub struct PodAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<PodAffinityTerm>,
+    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
+        PodAffinityTerm,
+    >,
     /// The scheduler will prefer to schedule pods to nodes that satisfy
     /// the affinity expressions specified by this field, but it may choose
     /// a node that violates one or more of the expressions. The node that is
@@ -3880,8 +3989,9 @@ pub struct PodAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub preferred_during_scheduling_ignored_during_execution:
-        ::prost::alloc::vec::Vec<WeightedPodAffinityTerm>,
+    pub preferred_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
+        WeightedPodAffinityTerm,
+    >,
 }
 /// Defines a set of pods (namely those matching the labelSelector
 /// relative to the given namespace(s)) that this pod should be
@@ -3895,8 +4005,9 @@ pub struct PodAffinityTerm {
     /// If it's null, this PodAffinityTerm matches with no Pods.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub label_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub label_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// namespaces specifies a static list of namespace names that the term applies to.
     /// The term is applied to the union of the namespaces listed in this field
     /// and the ones selected by namespaceSelector.
@@ -3919,8 +4030,9 @@ pub struct PodAffinityTerm {
     /// An empty selector ({}) matches all namespaces.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub namespace_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// MatchLabelKeys is a set of pod label keys to select which pods will
     /// be taken into consideration. The keys are used to lookup values from the
     /// incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
@@ -3961,7 +4073,9 @@ pub struct PodAntiAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<PodAffinityTerm>,
+    pub required_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
+        PodAffinityTerm,
+    >,
     /// The scheduler will prefer to schedule pods to nodes that satisfy
     /// the anti-affinity expressions specified by this field, but it may choose
     /// a node that violates one or more of the expressions. The node that is
@@ -3974,8 +4088,9 @@ pub struct PodAntiAffinity {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "2")]
-    pub preferred_during_scheduling_ignored_during_execution:
-        ::prost::alloc::vec::Vec<WeightedPodAffinityTerm>,
+    pub preferred_during_scheduling_ignored_during_execution: ::prost::alloc::vec::Vec<
+        WeightedPodAffinityTerm,
+    >,
 }
 /// PodAttachOptions is the query options to a Pod's remote attach call.
 /// ---
@@ -4098,8 +4213,10 @@ pub struct PodCertificateProjection {
     /// Signers should document the keys and values they support. Signers should
     /// deny requests that contain keys they do not recognize.
     #[prost(btree_map = "string, string", tag = "7")]
-    pub user_annotations:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub user_annotations: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 /// PodCondition contains details for the current condition of this pod.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4120,12 +4237,15 @@ pub struct PodCondition {
     /// Last time we probed the condition.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_probe_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_probe_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Unique, one-word, CamelCase reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "5")]
@@ -4238,7 +4358,9 @@ pub struct PodList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of pods.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md>
     #[prost(message, repeated, tag = "2")]
@@ -4272,7 +4394,9 @@ pub struct PodLogOptions {
     /// Only one of sinceSeconds or sinceTime may be specified.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub since_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub since_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line
     /// of log output. Defaults to false.
     /// +optional
@@ -4401,7 +4525,9 @@ pub struct PodResourceClaim {
     /// Exactly one of ResourceClaimName and ResourceClaimTemplateName must
     /// be set.
     #[prost(string, optional, tag = "4")]
-    pub resource_claim_template_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub resource_claim_template_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim
 /// which references a ResourceClaimTemplate. It stores the generated name for
@@ -4522,7 +4648,9 @@ pub struct PodSecurityContext {
     /// +featureGate=SupplementalGroupsPolicy
     /// +optional
     #[prost(string, optional, tag = "12")]
-    pub supplemental_groups_policy: ::core::option::Option<::prost::alloc::string::String>,
+    pub supplemental_groups_policy: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// A special supplemental group that applies to all containers in a pod.
     /// Some volume types allow the Kubelet to change the ownership of that volume
     /// to be owned by the pod:
@@ -4598,8 +4726,9 @@ pub struct PodSignature {
     /// Reference to controller whose pods should avoid this node.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub pod_controller:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::OwnerReference>,
+    pub pod_controller: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::OwnerReference,
+    >,
 }
 /// PodSpec is a description of a pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4692,8 +4821,10 @@ pub struct PodSpec {
     /// +optional
     /// +mapType=atomic
     #[prost(btree_map = "string, string", tag = "7")]
-    pub node_selector:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub node_selector: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// ServiceAccountName is the name of the ServiceAccount to use to run this pod.
     /// More info: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/>
     /// +optional
@@ -5078,7 +5209,7 @@ pub struct PodStatus {
     /// +patchMergeKey=ip
     /// +listType=atomic
     #[prost(message, repeated, tag = "16")]
-    pub host_ips: ::prost::alloc::vec::Vec<HostIp>,
+    pub host_i_ps: ::prost::alloc::vec::Vec<HostIp>,
     /// podIP address allocated to the pod. Routable at least within the cluster.
     /// Empty if not yet allocated.
     /// +optional
@@ -5093,12 +5224,14 @@ pub struct PodStatus {
     /// +listType=map
     /// +listMapKey=ip
     #[prost(message, repeated, tag = "12")]
-    pub pod_ips: ::prost::alloc::vec::Vec<PodIp>,
+    pub pod_i_ps: ::prost::alloc::vec::Vec<PodIp>,
     /// RFC 3339 date and time at which the object was acknowledged by the Kubelet.
     /// This is before the Kubelet pulled the container image(s) for the pod.
     /// +optional
     #[prost(message, optional, tag = "7")]
-    pub start_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub start_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Statuses of init containers in this pod. The most recent successful non-restartable
     /// init container will have ready = true, the most recently started container will have
     /// startTime set.
@@ -5165,7 +5298,9 @@ pub struct PodStatus {
     /// +featureGate=DRAExtendedResource
     /// +optional
     #[prost(message, optional, tag = "18")]
-    pub extended_resource_claim_status: ::core::option::Option<PodExtendedResourceClaimStatus>,
+    pub extended_resource_claim_status: ::core::option::Option<
+        PodExtendedResourceClaimStatus,
+    >,
     /// AllocatedResources is the total requests allocated for this pod by the node.
     /// If pod-level requests are not set, this will be the total requests aggregated
     /// across containers in the pod.
@@ -5192,8 +5327,9 @@ pub struct PodStatus {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "21")]
-    pub node_allocatable_resource_claim_statuses:
-        ::prost::alloc::vec::Vec<NodeAllocatableResourceClaimStatus>,
+    pub node_allocatable_resource_claim_statuses: ::prost::alloc::vec::Vec<
+        NodeAllocatableResourceClaimStatus,
+    >,
 }
 /// PodStatusResult is a wrapper for PodStatus returned by kubelet that can be encode/decoded
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5202,7 +5338,9 @@ pub struct PodStatusResult {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Most recently observed status of the pod.
     /// This data may not be up to date.
     /// Populated by the system.
@@ -5219,7 +5357,9 @@ pub struct PodTemplate {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Template defines the pods that will be created from this pod template.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5233,7 +5373,9 @@ pub struct PodTemplateList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of pod templates
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodTemplate>,
@@ -5245,7 +5387,9 @@ pub struct PodTemplateSpec {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Specification of the desired behavior of the pod.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5312,7 +5456,9 @@ pub struct PreferAvoidPodsEntry {
     /// Time at which this entry was added to the list.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub eviction_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub eviction_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// (brief) reason why this entry was added to the list.
     /// +optional
     #[prost(string, optional, tag = "3")]
@@ -5572,7 +5718,9 @@ pub struct RangeAllocation {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Range is string that identifies the range represented by 'data'.
     #[prost(string, optional, tag = "2")]
     pub range: ::core::option::Option<::prost::alloc::string::String>,
@@ -5590,7 +5738,9 @@ pub struct ReplicationController {
     /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:optional
     /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:format=k8s-long-name
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the specification of the desired behavior of the replication controller.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5617,8 +5767,9 @@ pub struct ReplicationControllerCondition {
     /// The last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// The reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -5635,7 +5786,9 @@ pub struct ReplicationControllerList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of replication controllers.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller>
     #[prost(message, repeated, tag = "2")]
@@ -5671,8 +5824,10 @@ pub struct ReplicationControllerSpec {
     /// +optional
     /// +mapType=atomic
     #[prost(btree_map = "string, string", tag = "2")]
-    pub selector:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub selector: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// Template is the object that describes the pod that will be created if
     /// insufficient replicas are detected. This takes precedence over a TemplateRef.
     /// The only allowed template.spec.restartPolicy value is "Always".
@@ -5744,7 +5899,9 @@ pub struct ResourceFieldSelector {
     /// Specifies the output format of the exposed resources, defaults to "1"
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub divisor: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub divisor: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// ResourceHealth represents the health of a resource. It has the latest device health information.
 /// This is a part of KEP <https://kep.k8s.io/4680.>
@@ -5779,7 +5936,9 @@ pub struct ResourceQuota {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the desired quota.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -5798,7 +5957,9 @@ pub struct ResourceQuotaList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of ResourceQuota objects.
     /// More info: <https://kubernetes.io/docs/concepts/policy/resource-quotas/>
     #[prost(message, repeated, tag = "2")]
@@ -6080,7 +6241,9 @@ pub struct Secret {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Immutable, if set to true, ensures that data stored in the Secret cannot
     /// be updated (only object metadata can be modified).
     /// If not set to true, the field can be modified at any time.
@@ -6094,8 +6257,10 @@ pub struct Secret {
     /// data value here. Described in <https://tools.ietf.org/html/rfc4648#section-4>
     /// +optional
     #[prost(btree_map = "string, bytes", tag = "2")]
-    pub data:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::vec::Vec<u8>>,
+    pub data: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::vec::Vec<u8>,
+    >,
     /// stringData allows specifying non-binary secret data in string form.
     /// It is provided as a write-only input field for convenience.
     /// All keys and values are merged into the data field on write, overwriting any existing values.
@@ -6103,8 +6268,10 @@ pub struct Secret {
     /// +k8s:conversion-gen=false
     /// +optional
     #[prost(btree_map = "string, string", tag = "4")]
-    pub string_data:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub string_data: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// Used to facilitate programmatic handling of secret data.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/secret/#secret-types>
     /// +optional
@@ -6148,7 +6315,9 @@ pub struct SecretList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is a list of secret objects.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/secret>
     #[prost(message, repeated, tag = "2")]
@@ -6344,7 +6513,9 @@ pub struct Service {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines the behavior of a service.
     /// <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -6368,7 +6539,9 @@ pub struct ServiceAccount {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Secrets is a list of the secrets in the same namespace that pods running using this ServiceAccount are allowed to use.
     /// Pods are only limited to this list if this service account has a "kubernetes.io/enforce-mountable-secrets" annotation set to "true".
     /// The "kubernetes.io/enforce-mountable-secrets" annotation is deprecated since v1.32.
@@ -6404,7 +6577,9 @@ pub struct ServiceAccountList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ServiceAccounts.
     /// More info: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/>
     #[prost(message, repeated, tag = "2")]
@@ -6444,7 +6619,9 @@ pub struct ServiceList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of services
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Service>,
@@ -6497,8 +6674,9 @@ pub struct ServicePort {
     /// More info: <https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service>
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub target_port:
-        ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
+    pub target_port: ::core::option::Option<
+        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
+    >,
     /// The port on each node on which this service is exposed when type is
     /// NodePort or LoadBalancer.  Usually assigned by the system. If a value is
     /// specified, in-range, and not in use it will be used, otherwise the
@@ -6545,8 +6723,10 @@ pub struct ServiceSpec {
     /// +optional
     /// +mapType=atomic
     #[prost(btree_map = "string, string", tag = "2")]
-    pub selector:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub selector: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// clusterIP is the IP address of the service and is usually assigned
     /// randomly. If an address is specified manually, is in-range (as per
     /// system configuration), and is not in use, it will be allocated to the
@@ -6591,7 +6771,7 @@ pub struct ServiceSpec {
     /// +listType=atomic
     /// +optional
     #[prost(string, repeated, tag = "18")]
-    pub cluster_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub cluster_i_ps: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// type determines how the Service is exposed. Defaults to ClusterIP. Valid
     /// options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
     /// "ClusterIP" allocates a cluster-internal IP address for load-balancing
@@ -6619,7 +6799,7 @@ pub struct ServiceSpec {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "5")]
-    pub external_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub external_i_ps: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Supports "ClientIP" and "None". Used to maintain session affinity.
     /// Enable client IP based session affinity.
     /// Must be ClientIP or None.
@@ -6645,7 +6825,9 @@ pub struct ServiceSpec {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "9")]
-    pub load_balancer_source_ranges: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub load_balancer_source_ranges: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// externalName is the external reference that discovery mechanisms will
     /// return as an alias for this service (e.g. a DNS CNAME record). No
     /// proxying will be involved.  Must be a lowercase RFC-1123 hostname
@@ -6785,8 +6967,9 @@ pub struct ServiceStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "2")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
 }
 /// SessionAffinityConfig represents the configurations of session affinity.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -6886,7 +7069,9 @@ pub struct TcpSocketAction {
     /// Number must be in the range 1 to 65535.
     /// Name must be an IANA_SVC_NAME.
     #[prost(message, optional, tag = "1")]
-    pub port: ::core::option::Option<super::super::super::apimachinery::pkg::util::intstr::IntOrString>,
+    pub port: ::core::option::Option<
+        super::super::super::apimachinery::pkg::util::intstr::IntOrString,
+    >,
     /// Optional: Host name to connect to, defaults to the pod IP.
     /// +optional
     #[prost(string, optional, tag = "2")]
@@ -6911,7 +7096,9 @@ pub struct Taint {
     /// TimeAdded represents the time at which the taint was added.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub time_added: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub time_added: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// The pod this Toleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
@@ -6973,7 +7160,9 @@ pub struct TopologySelectorTerm {
     /// +optional
     /// +listType=atomic
     #[prost(message, repeated, tag = "1")]
-    pub match_label_expressions: ::prost::alloc::vec::Vec<TopologySelectorLabelRequirement>,
+    pub match_label_expressions: ::prost::alloc::vec::Vec<
+        TopologySelectorLabelRequirement,
+    >,
 }
 /// TopologySpreadConstraint specifies how to spread matching pods among the given topology.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -7040,8 +7229,9 @@ pub struct TopologySpreadConstraint {
     /// in their corresponding topology domain.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub label_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub label_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// MinDomains indicates a minimum number of eligible domains.
     /// When the number of eligible domains with matching topology keys is less than minDomains,
     /// Pod Topology Spread treats "global minimum" as 0, and then the calculation of Skew is performed.
@@ -7279,7 +7469,7 @@ pub struct VolumeProjection {
     /// downwardAPI information about the downwardAPI data to project
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub downward_api: ::core::option::Option<DownwardAPIProjection>,
+    pub downward_api: ::core::option::Option<DownwardApiProjection>,
     /// configMap information about the configMap data to project
     /// +optional
     #[prost(message, optional, tag = "3")]
@@ -7403,7 +7593,9 @@ pub struct VolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore>
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub aws_elastic_block_store: ::core::option::Option<AwsElasticBlockStoreVolumeSource>,
+    pub aws_elastic_block_store: ::core::option::Option<
+        AwsElasticBlockStoreVolumeSource,
+    >,
     /// gitRepo represents a git repository at a particular revision.
     /// Deprecated: GitRepo is deprecated. To provision a container with a git repo, mount an
     /// EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir
@@ -7437,7 +7629,9 @@ pub struct VolumeSource {
     /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims>
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub persistent_volume_claim: ::core::option::Option<PersistentVolumeClaimVolumeSource>,
+    pub persistent_volume_claim: ::core::option::Option<
+        PersistentVolumeClaimVolumeSource,
+    >,
     /// rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
     /// Deprecated: RBD is deprecated and the in-tree rbd type is no longer supported.
     /// +optional
@@ -7469,7 +7663,7 @@ pub struct VolumeSource {
     /// downwardAPI represents downward API about the pod that should populate this volume
     /// +optional
     #[prost(message, optional, tag = "16")]
-    pub downward_api: ::core::option::Option<DownwardAPIVolumeSource>,
+    pub downward_api: ::core::option::Option<DownwardApiVolumeSource>,
     /// fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
     /// +optional
     #[prost(message, optional, tag = "17")]
@@ -7527,7 +7721,7 @@ pub struct VolumeSource {
     /// csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
     /// +optional
     #[prost(message, optional, tag = "28")]
-    pub csi: ::core::option::Option<CSIVolumeSource>,
+    pub csi: ::core::option::Option<CsiVolumeSource>,
     /// ephemeral represents a volume that is handled by a cluster storage driver.
     /// The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts,
     /// and deleted when the pod is removed.
@@ -7622,7 +7816,9 @@ pub struct WindowsSecurityContextOptions {
     /// GMSACredentialSpecName is the name of the GMSA credential spec to use.
     /// +optional
     #[prost(string, optional, tag = "1")]
-    pub gmsa_credential_spec_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub gmsa_credential_spec_name: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
     /// GMSACredentialSpec is where the GMSA admission webhook
     /// (<https://github.com/kubernetes-sigs/windows-gmsa>) inlines the contents of the
     /// GMSA credential spec named by the GMSACredentialSpecName field.
@@ -7645,515 +7841,36 @@ pub struct WindowsSecurityContextOptions {
     pub host_process: ::core::option::Option<bool>,
 }
 
-impl crate::Resource for Binding {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Binding";
-    const URL_PATH_SEGMENT: &'static str = "bindings";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Binding {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for Binding { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Binding" ; const URL_PATH_SEGMENT : & 'static str = "bindings" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Binding { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for ComponentStatus {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ComponentStatus";
-    const URL_PATH_SEGMENT: &'static str = "componentstatuses";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ComponentStatus {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for ComponentStatus { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ComponentStatus" ; const URL_PATH_SEGMENT : & 'static str = "componentstatuses" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ComponentStatus { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for ConfigMap {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ConfigMap";
-    const URL_PATH_SEGMENT: &'static str = "configmaps";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for ConfigMap {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for ConfigMap { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ConfigMap" ; const URL_PATH_SEGMENT : & 'static str = "configmaps" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for ConfigMap { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for Endpoints {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Endpoints";
-    const URL_PATH_SEGMENT: &'static str = "endpoints";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Endpoints {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for Endpoints { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Endpoints" ; const URL_PATH_SEGMENT : & 'static str = "endpoints" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Endpoints { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for Event {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Event";
-    const URL_PATH_SEGMENT: &'static str = "events";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Event {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for Event { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Event" ; const URL_PATH_SEGMENT : & 'static str = "events" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Event { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for LimitRange {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "LimitRange";
-    const URL_PATH_SEGMENT: &'static str = "limitranges";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for LimitRange {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for LimitRange {
-    type Spec = crate::api::core::v1::LimitRangeSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for LimitRange { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "LimitRange" ; const URL_PATH_SEGMENT : & 'static str = "limitranges" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for LimitRange { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for LimitRange { type Spec = crate :: api :: core :: v1 :: LimitRangeSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }
 
-impl crate::Resource for Namespace {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Namespace";
-    const URL_PATH_SEGMENT: &'static str = "namespaces";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for Namespace {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for Namespace {
-    type Spec = crate::api::core::v1::NamespaceSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for Namespace {
-    type Status = crate::api::core::v1::NamespaceStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for Namespace {
-    type Condition = crate::api::core::v1::NamespaceCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for Namespace { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Namespace" ; const URL_PATH_SEGMENT : & 'static str = "namespaces" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for Namespace { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for Namespace { type Spec = crate :: api :: core :: v1 :: NamespaceSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for Namespace { type Status = crate :: api :: core :: v1 :: NamespaceStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for Namespace { type Condition = crate :: api :: core :: v1 :: NamespaceCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for Node {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Node";
-    const URL_PATH_SEGMENT: &'static str = "nodes";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for Node {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for Node {
-    type Spec = crate::api::core::v1::NodeSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for Node {
-    type Status = crate::api::core::v1::NodeStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for Node {
-    type Condition = crate::api::core::v1::NodeCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for Node { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Node" ; const URL_PATH_SEGMENT : & 'static str = "nodes" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for Node { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for Node { type Spec = crate :: api :: core :: v1 :: NodeSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for Node { type Status = crate :: api :: core :: v1 :: NodeStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for Node { type Condition = crate :: api :: core :: v1 :: NodeCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for PersistentVolume {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "PersistentVolume";
-    const URL_PATH_SEGMENT: &'static str = "persistentvolumes";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for PersistentVolume {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PersistentVolume {
-    type Spec = crate::api::core::v1::PersistentVolumeSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for PersistentVolume {
-    type Status = crate::api::core::v1::PersistentVolumeStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for PersistentVolume { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "PersistentVolume" ; const URL_PATH_SEGMENT : & 'static str = "persistentvolumes" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for PersistentVolume { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for PersistentVolume { type Spec = crate :: api :: core :: v1 :: PersistentVolumeSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for PersistentVolume { type Status = crate :: api :: core :: v1 :: PersistentVolumeStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for PersistentVolumeClaim {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "PersistentVolumeClaim";
-    const URL_PATH_SEGMENT: &'static str = "persistentvolumeclaims";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for PersistentVolumeClaim {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PersistentVolumeClaim {
-    type Spec = crate::api::core::v1::PersistentVolumeClaimSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for PersistentVolumeClaim {
-    type Status = crate::api::core::v1::PersistentVolumeClaimStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for PersistentVolumeClaim {
-    type Condition = crate::api::core::v1::PersistentVolumeClaimCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for PersistentVolumeClaim { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "PersistentVolumeClaim" ; const URL_PATH_SEGMENT : & 'static str = "persistentvolumeclaims" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for PersistentVolumeClaim { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for PersistentVolumeClaim { type Spec = crate :: api :: core :: v1 :: PersistentVolumeClaimSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for PersistentVolumeClaim { type Status = crate :: api :: core :: v1 :: PersistentVolumeClaimStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for PersistentVolumeClaim { type Condition = crate :: api :: core :: v1 :: PersistentVolumeClaimCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for Pod {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Pod";
-    const URL_PATH_SEGMENT: &'static str = "pods";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Pod {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for Pod {
-    type Spec = crate::api::core::v1::PodSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for Pod {
-    type Status = crate::api::core::v1::PodStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for Pod {
-    type Condition = crate::api::core::v1::PodCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for Pod { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Pod" ; const URL_PATH_SEGMENT : & 'static str = "pods" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Pod { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for Pod { type Spec = crate :: api :: core :: v1 :: PodSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for Pod { type Status = crate :: api :: core :: v1 :: PodStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for Pod { type Condition = crate :: api :: core :: v1 :: PodCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for PodTemplate {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "PodTemplate";
-    const URL_PATH_SEGMENT: &'static str = "podtemplates";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for PodTemplate {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for PodTemplate { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "PodTemplate" ; const URL_PATH_SEGMENT : & 'static str = "podtemplates" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for PodTemplate { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for ReplicationController {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ReplicationController";
-    const URL_PATH_SEGMENT: &'static str = "replicationcontrollers";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for ReplicationController {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ReplicationController {
-    type Spec = crate::api::core::v1::ReplicationControllerSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for ReplicationController {
-    type Status = crate::api::core::v1::ReplicationControllerStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for ReplicationController {
-    type Condition = crate::api::core::v1::ReplicationControllerCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for ReplicationController { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ReplicationController" ; const URL_PATH_SEGMENT : & 'static str = "replicationcontrollers" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for ReplicationController { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ReplicationController { type Spec = crate :: api :: core :: v1 :: ReplicationControllerSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for ReplicationController { type Status = crate :: api :: core :: v1 :: ReplicationControllerStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for ReplicationController { type Condition = crate :: api :: core :: v1 :: ReplicationControllerCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for ResourceQuota {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ResourceQuota";
-    const URL_PATH_SEGMENT: &'static str = "resourcequotas";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for ResourceQuota {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ResourceQuota {
-    type Spec = crate::api::core::v1::ResourceQuotaSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for ResourceQuota {
-    type Status = crate::api::core::v1::ResourceQuotaStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for ResourceQuota { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ResourceQuota" ; const URL_PATH_SEGMENT : & 'static str = "resourcequotas" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for ResourceQuota { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ResourceQuota { type Spec = crate :: api :: core :: v1 :: ResourceQuotaSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for ResourceQuota { type Status = crate :: api :: core :: v1 :: ResourceQuotaStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for Secret {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Secret";
-    const URL_PATH_SEGMENT: &'static str = "secrets";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Secret {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for Secret { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Secret" ; const URL_PATH_SEGMENT : & 'static str = "secrets" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Secret { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }
 
-impl crate::Resource for Service {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Service";
-    const URL_PATH_SEGMENT: &'static str = "services";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Service {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for Service {
-    type Spec = crate::api::core::v1::ServiceSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for Service {
-    type Status = crate::api::core::v1::ServiceStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for Service {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for Service { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Service" ; const URL_PATH_SEGMENT : & 'static str = "services" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Service { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for Service { type Spec = crate :: api :: core :: v1 :: ServiceSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for Service { type Status = crate :: api :: core :: v1 :: ServiceStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for Service { type Condition = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: Condition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }
 
-impl crate::Resource for ServiceAccount {
-    const API_VERSION: &'static str = "v1";
-    const GROUP: &'static str = "";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ServiceAccount";
-    const URL_PATH_SEGMENT: &'static str = "serviceaccounts";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for ServiceAccount {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for ServiceAccount { const API_VERSION : & 'static str = "v1" ; const GROUP : & 'static str = "" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ServiceAccount" ; const URL_PATH_SEGMENT : & 'static str = "serviceaccounts" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for ServiceAccount { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }

@@ -6,7 +6,9 @@ pub struct CronJob {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Specification of the desired behavior of a cron job, including the schedule.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +required
@@ -25,7 +27,9 @@ pub struct CronJobList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of CronJobs.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CronJob>,
@@ -96,13 +100,15 @@ pub struct CronJobStatus {
     /// Information when was the last time the job was successfully scheduled.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_schedule_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_schedule_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// Information when was the last time the job successfully completed.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub last_successful_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_successful_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// JobTemplateSpec describes the data a Job should have when created from a template
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -111,7 +117,9 @@ pub struct JobTemplateSpec {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Specification of the desired behavior of the job.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional

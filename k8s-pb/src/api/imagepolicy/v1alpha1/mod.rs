@@ -6,7 +6,9 @@ pub struct ImageReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec holds information about the pod being evaluated
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -37,8 +39,10 @@ pub struct ImageReviewSpec {
     /// It is up to each webhook backend to determine how to interpret these annotations, if at all.
     /// +optional
     #[prost(btree_map = "string, string", tag = "2")]
-    pub annotations:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub annotations: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// Namespace is the namespace the pod is being created in.
     /// +optional
     #[prost(string, optional, tag = "3")]
@@ -63,6 +67,8 @@ pub struct ImageReviewStatus {
     /// appropriate prefix).
     /// +optional
     #[prost(btree_map = "string, string", tag = "3")]
-    pub audit_annotations:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub audit_annotations: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }

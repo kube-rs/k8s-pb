@@ -38,8 +38,10 @@ pub struct Endpoint {
     /// in the zone and nodeName fields instead.
     /// +optional
     #[prost(btree_map = "string, string", tag = "5")]
-    pub deprecated_topology:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub deprecated_topology: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// nodeName represents the name of the Node hosting this endpoint. This can
     /// be used to determine endpoints local to a Node.
     /// +optional
@@ -149,7 +151,9 @@ pub struct EndpointSlice {
     /// Standard object's metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// addressType specifies the type of address carried by this EndpointSlice.
     /// All addresses in this slice must be the same type. This field is
     /// immutable after creation. The following address types are currently
@@ -189,7 +193,9 @@ pub struct EndpointSliceList {
     /// Standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of endpoint slices
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<EndpointSlice>,
@@ -209,20 +215,4 @@ pub struct ForZone {
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for EndpointSlice {
-    const API_VERSION: &'static str = "discovery.k8s.io/v1";
-    const GROUP: &'static str = "discovery.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "EndpointSlice";
-    const URL_PATH_SEGMENT: &'static str = "endpointslices";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for EndpointSlice {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
+impl crate :: Resource for EndpointSlice { const API_VERSION : & 'static str = "discovery.k8s.io/v1" ; const GROUP : & 'static str = "discovery.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "EndpointSlice" ; const URL_PATH_SEGMENT : & 'static str = "endpointslices" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for EndpointSlice { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } }

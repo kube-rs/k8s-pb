@@ -25,8 +25,9 @@ pub struct NodeMetrics {
     /// The following fields define time interval from which metrics were
     /// collected from the interval \[Timestamp-Window, Timestamp\].
     #[prost(message, optional, tag = "2")]
-    pub timestamp:
-        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub timestamp: ::core::option::Option<
+        super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     #[prost(message, optional, tag = "3")]
     pub window: ::core::option::Option<
         super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Duration,
@@ -64,8 +65,9 @@ pub struct PodMetrics {
     /// The following fields define time interval from which metrics were
     /// collected from the interval \[Timestamp-Window, Timestamp\].
     #[prost(message, optional, tag = "2")]
-    pub timestamp:
-        ::core::option::Option<super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub timestamp: ::core::option::Option<
+        super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     #[prost(message, optional, tag = "3")]
     pub window: ::core::option::Option<
         super::super::super::super::super::apimachinery::pkg::apis::meta::v1::Duration,

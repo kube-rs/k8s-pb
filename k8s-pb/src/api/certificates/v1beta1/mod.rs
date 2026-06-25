@@ -6,7 +6,9 @@
 pub struct CertificateSigningRequest {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the certificate request, and is immutable after creation.
     /// Only the request, signerName, expirationSeconds, and usages fields can be set on creation.
     /// Other fields are derived by Kubernetes and cannot be modified by users.
@@ -40,21 +42,25 @@ pub struct CertificateSigningRequestCondition {
     /// timestamp for the last update to this condition
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_update_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_update_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// lastTransitionTime is the time the condition last transitioned from one status to another.
     /// If unset, when a new condition type is added or an existing condition's status is changed,
     /// the server defaults this to the current time.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateSigningRequestList {
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CertificateSigningRequest>,
 }
@@ -152,7 +158,10 @@ pub struct CertificateSigningRequestSpec {
     /// See user.Info interface for details.
     /// +optional
     #[prost(btree_map = "string, message", tag = "6")]
-    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
+    pub extra: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ExtraValue,
+    >,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateSigningRequestStatus {
@@ -193,7 +202,9 @@ pub struct ClusterTrustBundle {
     /// metadata contains the object metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the signer (if any) and trust anchors.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ClusterTrustBundleSpec>,
@@ -205,7 +216,9 @@ pub struct ClusterTrustBundleList {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a collection of ClusterTrustBundle objects
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ClusterTrustBundle>,
@@ -269,7 +282,9 @@ pub struct PodCertificateRequest {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the details about the certificate being requested.
     /// +required
     #[prost(message, optional, tag = "2")]
@@ -286,7 +301,9 @@ pub struct PodCertificateRequestList {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a collection of PodCertificateRequest objects
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PodCertificateRequest>,
@@ -432,8 +449,10 @@ pub struct PodCertificateRequestSpec {
     /// Signers should document the keys and values they support.  Signers should
     /// deny requests that contain keys they do not recognize.
     #[prost(btree_map = "string, string", tag = "11")]
-    pub unverified_user_annotations:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub unverified_user_annotations: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 /// PodCertificateRequestStatus describes the status of the request, and holds
 /// the certificate data if the request is issued.
@@ -454,8 +473,9 @@ pub struct PodCertificateRequestStatus {
     /// +listMapKey=type
     /// +optional
     #[prost(message, repeated, tag = "1")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
     /// certificateChain is populated with an issued certificate by the signer.
     /// This field is set via the /status subresource. Once populated, this field
     /// is immutable.
@@ -488,7 +508,9 @@ pub struct PodCertificateRequestStatus {
     ///
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub not_before: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub not_before: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// beginRefreshAt is the time at which the kubelet should begin trying to
     /// refresh the certificate.  This field is set via the /status subresource,
     /// and must be set at the same time as certificateChain.  Once populated,
@@ -499,8 +521,9 @@ pub struct PodCertificateRequestStatus {
     ///
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub begin_refresh_at:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub begin_refresh_at: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// notAfter is the time at which the certificate expires.  The value must be
     /// the same as the notAfter value in the leaf certificate in
     /// certificateChain.  This field is set via the /status subresource.  Once
@@ -509,77 +532,11 @@ pub struct PodCertificateRequestStatus {
     ///
     /// +optional
     #[prost(message, optional, tag = "6")]
-    pub not_after: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub not_after: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 
-impl crate::Resource for ClusterTrustBundle {
-    const API_VERSION: &'static str = "certificates.k8s.io/v1beta1";
-    const GROUP: &'static str = "certificates.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "ClusterTrustBundle";
-    const URL_PATH_SEGMENT: &'static str = "clustertrustbundles";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ClusterTrustBundle {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ClusterTrustBundle {
-    type Spec = crate::api::certificates::v1beta1::ClusterTrustBundleSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for ClusterTrustBundle { const API_VERSION : & 'static str = "certificates.k8s.io/v1beta1" ; const GROUP : & 'static str = "certificates.k8s.io" ; const VERSION : & 'static str = "v1beta1" ; const KIND : & 'static str = "ClusterTrustBundle" ; const URL_PATH_SEGMENT : & 'static str = "clustertrustbundles" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ClusterTrustBundle { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ClusterTrustBundle { type Spec = crate :: api :: certificates :: v1beta1 :: ClusterTrustBundleSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }
 
-impl crate::Resource for PodCertificateRequest {
-    const API_VERSION: &'static str = "certificates.k8s.io/v1beta1";
-    const GROUP: &'static str = "certificates.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "PodCertificateRequest";
-    const URL_PATH_SEGMENT: &'static str = "podcertificaterequests";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for PodCertificateRequest {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for PodCertificateRequest {
-    type Spec = crate::api::certificates::v1beta1::PodCertificateRequestSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for PodCertificateRequest {
-    type Status = crate::api::certificates::v1beta1::PodCertificateRequestStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for PodCertificateRequest {
-    type Condition = crate::apimachinery::pkg::apis::meta::v1::Condition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for PodCertificateRequest { const API_VERSION : & 'static str = "certificates.k8s.io/v1beta1" ; const GROUP : & 'static str = "certificates.k8s.io" ; const VERSION : & 'static str = "v1beta1" ; const KIND : & 'static str = "PodCertificateRequest" ; const URL_PATH_SEGMENT : & 'static str = "podcertificaterequests" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for PodCertificateRequest { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for PodCertificateRequest { type Spec = crate :: api :: certificates :: v1beta1 :: PodCertificateRequestSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for PodCertificateRequest { type Status = crate :: api :: certificates :: v1beta1 :: PodCertificateRequestStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for PodCertificateRequest { type Condition = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: Condition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }

@@ -51,7 +51,9 @@ pub struct FlowSchema {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// `spec` is the specification of the desired behavior of a FlowSchema.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -77,8 +79,9 @@ pub struct FlowSchemaCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// `lastTransitionTime` is the last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -93,7 +96,9 @@ pub struct FlowSchemaList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// `items` is a list of FlowSchemas.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<FlowSchema>,
@@ -105,7 +110,9 @@ pub struct FlowSchemaSpec {
     /// be resolved, the FlowSchema will be ignored and marked as invalid in its status.
     /// Required.
     #[prost(message, optional, tag = "1")]
-    pub priority_level_configuration: ::core::option::Option<PriorityLevelConfigurationReference>,
+    pub priority_level_configuration: ::core::option::Option<
+        PriorityLevelConfigurationReference,
+    >,
     /// `matchingPrecedence` is used to choose among the FlowSchemas that match a given request. The chosen
     /// FlowSchema is among those with the numerically lowest (which we take to be logically highest)
     /// MatchingPrecedence.  Each MatchingPrecedence value must be ranged in \[1,10000\].
@@ -286,7 +293,9 @@ pub struct PriorityLevelConfiguration {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// `spec` is the specification of the desired behavior of a "request-priority".
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -312,8 +321,9 @@ pub struct PriorityLevelConfigurationCondition {
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// `lastTransitionTime` is the last time the condition transitioned from one status to another.
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
@@ -328,7 +338,9 @@ pub struct PriorityLevelConfigurationList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// `items` is a list of request-priorities.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<PriorityLevelConfiguration>,

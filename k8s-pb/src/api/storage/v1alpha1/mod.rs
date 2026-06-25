@@ -24,7 +24,7 @@
 /// the scheduler assumes that capacity is insufficient and tries some other
 /// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIStorageCapacity {
+pub struct CsiStorageCapacity {
     /// Standard object's metadata. The name has no particular meaning. It must be
     /// be a DNS subdomain (dots allowed, 253 characters). To ensure that
     /// there are no conflicts with other CSI drivers on the cluster, the recommendation
@@ -36,7 +36,9 @@ pub struct CSIStorageCapacity {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// nodeTopology defines which nodes have access to the storage
     /// for which capacity was reported. If not set, the storage is
     /// not accessible from any node in the cluster. If empty, the
@@ -45,8 +47,9 @@ pub struct CSIStorageCapacity {
     ///
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub node_topology:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub node_topology: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// storageClassName represents the name of the StorageClass that the reported capacity applies to.
     /// It must meet the same requirements as the name of a StorageClass
     /// object (non-empty, DNS subdomain). If that object no longer exists,
@@ -66,7 +69,9 @@ pub struct CSIStorageCapacity {
     ///
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub capacity: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub capacity: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// maximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse
     /// for a GetCapacityRequest with topology and parameters that match the
     /// previous fields.
@@ -80,20 +85,23 @@ pub struct CSIStorageCapacity {
     ///
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub maximum_volume_size:
-        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub maximum_volume_size: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CSIStorageCapacityList {
+pub struct CsiStorageCapacityList {
     /// Standard list metadata
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of CSIStorageCapacity objects.
     #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<CSIStorageCapacity>,
+    pub items: ::prost::alloc::vec::Vec<CsiStorageCapacity>,
 }
 /// VolumeAttachment captures the intent to attach or detach the specified volume
 /// to/from the specified node.
@@ -105,7 +113,9 @@ pub struct VolumeAttachment {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
     /// +k8s:alpha(since: "1.36")=+k8s:immutable
@@ -126,7 +136,9 @@ pub struct VolumeAttachmentList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of VolumeAttachments
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<VolumeAttachment>,
@@ -149,7 +161,9 @@ pub struct VolumeAttachmentSource {
     /// honored by servers that enabled the CSIMigration feature.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub inline_volume_spec: ::core::option::Option<super::super::core::v1::PersistentVolumeSpec>,
+    pub inline_volume_spec: ::core::option::Option<
+        super::super::core::v1::PersistentVolumeSpec,
+    >,
 }
 /// VolumeAttachmentSpec is the specification of a VolumeAttachment request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -184,8 +198,10 @@ pub struct VolumeAttachmentStatus {
     /// operation, i.e. the external-attacher.
     /// +optional
     #[prost(btree_map = "string, string", tag = "2")]
-    pub attachment_metadata:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub attachment_metadata: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
     /// attachError represents the last error encountered during attach operation, if any.
     /// This field must only be set by the entity completing the attach
     /// operation, i.e. the external-attacher.
@@ -208,7 +224,9 @@ pub struct VolumeAttributesClass {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Name of the CSI driver
     /// This field is immutable.
     #[prost(string, optional, tag = "2")]
@@ -227,8 +245,10 @@ pub struct VolumeAttributesClass {
     /// the target PersistentVolumeClaim will be set to an "Infeasible" state in the
     /// modifyVolumeStatus field.
     #[prost(btree_map = "string, string", tag = "3")]
-    pub parameters:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    pub parameters: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 /// VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -237,7 +257,9 @@ pub struct VolumeAttributesClassList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of VolumeAttributesClass objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<VolumeAttributesClass>,
@@ -248,7 +270,9 @@ pub struct VolumeError {
     /// time represents the time the error was encountered.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// message represents the error encountered during Attach or Detach operation.
     /// This string maybe logged, so it should not contain sensitive
     /// information.

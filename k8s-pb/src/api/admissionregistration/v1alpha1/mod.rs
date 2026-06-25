@@ -247,8 +247,9 @@ pub struct MatchResources {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub namespace_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// objectSelector decides whether to run the policy based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the policy's expression (CEL), and
@@ -262,8 +263,9 @@ pub struct MatchResources {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub object_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub object_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// resourceRules describes what operations on what resources/subresources the admission policy matches.
     /// The policy cares about an operation if it matches _any_ Rule.
     /// +listType=atomic
@@ -301,7 +303,9 @@ pub struct MutatingAdmissionPolicy {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the MutatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicySpec>,
@@ -322,7 +326,9 @@ pub struct MutatingAdmissionPolicyBinding {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the MutatingAdmissionPolicyBinding.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicyBindingSpec>,
@@ -334,7 +340,9 @@ pub struct MutatingAdmissionPolicyBindingList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of PolicyBinding.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<MutatingAdmissionPolicyBinding>,
@@ -374,7 +382,9 @@ pub struct MutatingAdmissionPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ValidatingAdmissionPolicy.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<MutatingAdmissionPolicy>,
@@ -558,8 +568,9 @@ pub struct ParamRef {
     ///
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// parameterNotFoundAction controls the behavior of the binding when the resource
     /// exists, and name or selector is valid, but there are no parameters
     /// matched by the binding. If the value is set to `Allow`, then no
@@ -571,7 +582,9 @@ pub struct ParamRef {
     /// Default to `Deny`
     /// +optional
     #[prost(string, optional, tag = "4")]
-    pub parameter_not_found_action: ::core::option::Option<::prost::alloc::string::String>,
+    pub parameter_not_found_action: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// TypeChecking contains results of type checking the expressions in the
 /// ValidatingAdmissionPolicy
@@ -589,7 +602,9 @@ pub struct ValidatingAdmissionPolicy {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the ValidatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicySpec>,
@@ -617,7 +632,9 @@ pub struct ValidatingAdmissionPolicyBinding {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the ValidatingAdmissionPolicyBinding.
     /// +required
     #[prost(message, optional, tag = "2")]
@@ -630,7 +647,9 @@ pub struct ValidatingAdmissionPolicyBindingList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of PolicyBinding.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingAdmissionPolicyBinding>,
@@ -712,7 +731,9 @@ pub struct ValidatingAdmissionPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ValidatingAdmissionPolicy.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingAdmissionPolicy>,
@@ -819,8 +840,9 @@ pub struct ValidatingAdmissionPolicyStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "3")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
 }
 /// Validation specifies the CEL expression which is used to apply the validation.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -915,56 +937,6 @@ pub struct Variable {
     pub expression: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for MutatingAdmissionPolicy {
-    const API_VERSION: &'static str = "admissionregistration.k8s.io/v1alpha1";
-    const GROUP: &'static str = "admissionregistration.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "MutatingAdmissionPolicy";
-    const URL_PATH_SEGMENT: &'static str = "mutatingadmissionpolicies";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for MutatingAdmissionPolicy {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for MutatingAdmissionPolicy {
-    type Spec = crate::api::admissionregistration::v1alpha1::MutatingAdmissionPolicySpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for MutatingAdmissionPolicy { const API_VERSION : & 'static str = "admissionregistration.k8s.io/v1alpha1" ; const GROUP : & 'static str = "admissionregistration.k8s.io" ; const VERSION : & 'static str = "v1alpha1" ; const KIND : & 'static str = "MutatingAdmissionPolicy" ; const URL_PATH_SEGMENT : & 'static str = "mutatingadmissionpolicies" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for MutatingAdmissionPolicy { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for MutatingAdmissionPolicy { type Spec = crate :: api :: admissionregistration :: v1alpha1 :: MutatingAdmissionPolicySpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }
 
-impl crate::Resource for MutatingAdmissionPolicyBinding {
-    const API_VERSION: &'static str = "admissionregistration.k8s.io/v1alpha1";
-    const GROUP: &'static str = "admissionregistration.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "MutatingAdmissionPolicyBinding";
-    const URL_PATH_SEGMENT: &'static str = "mutatingadmissionpolicybindings";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for MutatingAdmissionPolicyBinding {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for MutatingAdmissionPolicyBinding {
-    type Spec = crate::api::admissionregistration::v1alpha1::MutatingAdmissionPolicyBindingSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for MutatingAdmissionPolicyBinding { const API_VERSION : & 'static str = "admissionregistration.k8s.io/v1alpha1" ; const GROUP : & 'static str = "admissionregistration.k8s.io" ; const VERSION : & 'static str = "v1alpha1" ; const KIND : & 'static str = "MutatingAdmissionPolicyBinding" ; const URL_PATH_SEGMENT : & 'static str = "mutatingadmissionpolicybindings" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for MutatingAdmissionPolicyBinding { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for MutatingAdmissionPolicyBinding { type Spec = crate :: api :: admissionregistration :: v1alpha1 :: MutatingAdmissionPolicyBindingSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

@@ -33,7 +33,9 @@ pub struct StorageVersion {
     /// The name is <group>.<resource>.
     /// +required
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is an empty spec. It is here to comply with Kubernetes API style.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -62,8 +64,9 @@ pub struct StorageVersionCondition {
     /// lastTransitionTime is the last time the condition transitioned from one status to another.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// reason for the condition's last transition.
     /// +required
     #[prost(string, optional, tag = "5")]
@@ -80,7 +83,9 @@ pub struct StorageVersionList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items holds a list of StorageVersion
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<StorageVersion>,
@@ -114,47 +119,4 @@ pub struct StorageVersionStatus {
     pub conditions: ::prost::alloc::vec::Vec<StorageVersionCondition>,
 }
 
-impl crate::Resource for StorageVersion {
-    const API_VERSION: &'static str = "internal.apiserver.k8s.io/v1alpha1";
-    const GROUP: &'static str = "internal.apiserver.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "StorageVersion";
-    const URL_PATH_SEGMENT: &'static str = "storageversions";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for StorageVersion {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for StorageVersion {
-    type Spec = crate::api::apiserverinternal::v1alpha1::StorageVersionSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for StorageVersion {
-    type Status = crate::api::apiserverinternal::v1alpha1::StorageVersionStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for StorageVersion {
-    type Condition = crate::api::apiserverinternal::v1alpha1::StorageVersionCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for StorageVersion { const API_VERSION : & 'static str = "internal.apiserver.k8s.io/v1alpha1" ; const GROUP : & 'static str = "internal.apiserver.k8s.io" ; const VERSION : & 'static str = "v1alpha1" ; const KIND : & 'static str = "StorageVersion" ; const URL_PATH_SEGMENT : & 'static str = "storageversions" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for StorageVersion { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for StorageVersion { type Spec = crate :: api :: apiserverinternal :: v1alpha1 :: StorageVersionSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for StorageVersion { type Status = crate :: api :: apiserverinternal :: v1alpha1 :: StorageVersionStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for StorageVersion { type Condition = crate :: api :: apiserverinternal :: v1alpha1 :: StorageVersionCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }

@@ -138,7 +138,9 @@ pub struct HpaScalingRules {
     /// +featureGate=HPAConfigurableTolerance
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub tolerance: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub tolerance: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// HorizontalPodAutoscaler is the configuration for a horizontal pod
 /// autoscaler, which automatically manages the replica count of any resource
@@ -149,7 +151,9 @@ pub struct HorizontalPodAutoscaler {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec is the specification for the behaviour of the autoscaler.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
     /// +required
@@ -194,8 +198,9 @@ pub struct HorizontalPodAutoscalerCondition {
     /// one status to another
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub last_transition_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_transition_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// reason is the reason for the condition's last transition.
     /// +optional
     #[prost(string, optional, tag = "4")]
@@ -212,7 +217,9 @@ pub struct HorizontalPodAutoscalerList {
     /// metadata is the standard list metadata.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is the list of horizontal pod autoscaler objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<HorizontalPodAutoscaler>,
@@ -272,7 +279,9 @@ pub struct HorizontalPodAutoscalerStatus {
     /// used by the autoscaler to control how often the number of pods is changed.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub last_scale_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub last_scale_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
     /// currentReplicas is current number of replicas of pods managed by this autoscaler,
     /// as last seen by the autoscaler.
     /// +optional
@@ -308,8 +317,9 @@ pub struct MetricIdentifier {
     /// When unset, just the metricName will be used to gather metrics.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
 }
 /// MetricSpec specifies how to scale based on a single metric
 /// (only `type` and one other matching field should be set at once).
@@ -407,13 +417,16 @@ pub struct MetricTarget {
     /// value is the target value of the metric (as a quantity).
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub value: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// averageValue is the target value of the average of the
     /// metric across all relevant pods (as a quantity)
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub average_value:
-        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub average_value: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// averageUtilization is the target value of the average of the
     /// resource metric across all relevant pods, represented as a percentage of
     /// the requested value of the resource for the pods.
@@ -428,13 +441,16 @@ pub struct MetricValueStatus {
     /// value is the current value of the metric (as a quantity).
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub value: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// averageValue is the current value of the average of the
     /// metric across all relevant pods (as a quantity)
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub average_value:
-        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub average_value: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// currentAverageUtilization is the current value of the average of the
     /// resource metric across all relevant pods, represented as a percentage of
     /// the requested value of the resource for the pods.
@@ -525,47 +541,4 @@ pub struct ResourceMetricStatus {
     pub current: ::core::option::Option<MetricValueStatus>,
 }
 
-impl crate::Resource for HorizontalPodAutoscaler {
-    const API_VERSION: &'static str = "autoscaling/v2";
-    const GROUP: &'static str = "autoscaling";
-    const VERSION: &'static str = "v2";
-    const KIND: &'static str = "HorizontalPodAutoscaler";
-    const URL_PATH_SEGMENT: &'static str = "horizontalpodautoscalers";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for HorizontalPodAutoscaler {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for HorizontalPodAutoscaler {
-    type Spec = crate::api::autoscaling::v2::HorizontalPodAutoscalerSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for HorizontalPodAutoscaler {
-    type Status = crate::api::autoscaling::v2::HorizontalPodAutoscalerStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
-impl crate::HasConditions for HorizontalPodAutoscaler {
-    type Condition = crate::api::autoscaling::v2::HorizontalPodAutoscalerCondition;
-    fn conditions(&self) -> Option<&[<Self as crate::HasConditions>::Condition]> {
-        self.status.as_ref().map(|s| s.conditions.as_slice())
-    }
-    fn conditions_mut(&mut self) -> Option<&mut Vec<<Self as crate::HasConditions>::Condition>> {
-        self.status.as_mut().and_then(|s| Some(s.conditions.as_mut()))
-    }
-}
+impl crate :: Resource for HorizontalPodAutoscaler { const API_VERSION : & 'static str = "autoscaling/v2" ; const GROUP : & 'static str = "autoscaling" ; const VERSION : & 'static str = "v2" ; const KIND : & 'static str = "HorizontalPodAutoscaler" ; const URL_PATH_SEGMENT : & 'static str = "horizontalpodautoscalers" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for HorizontalPodAutoscaler { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for HorizontalPodAutoscaler { type Spec = crate :: api :: autoscaling :: v2 :: HorizontalPodAutoscalerSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for HorizontalPodAutoscaler { type Status = crate :: api :: autoscaling :: v2 :: HorizontalPodAutoscalerStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } } impl crate :: HasConditions for HorizontalPodAutoscaler { type Condition = crate :: api :: autoscaling :: v2 :: HorizontalPodAutoscalerCondition ; fn conditions (& self) -> Option < & [< Self as crate :: HasConditions > :: Condition] > { self . status . as_ref () . map (| s | s . conditions . as_slice ()) } fn conditions_mut (& mut self) -> Option < & mut Vec << Self as crate :: HasConditions > :: Condition >> { self . status . as_mut () . and_then (| s | Some (s . conditions . as_mut ())) } }

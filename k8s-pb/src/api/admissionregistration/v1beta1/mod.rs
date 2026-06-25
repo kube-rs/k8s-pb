@@ -248,8 +248,9 @@ pub struct MatchResources {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub namespace_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// objectSelector decides whether to run the validation based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the cel validation, and
@@ -263,8 +264,9 @@ pub struct MatchResources {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub object_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub object_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// resourceRules describes what operations on what resources/subresources the ValidatingAdmissionPolicy matches.
     /// The policy cares about an operation if it matches _any_ Rule.
     /// +listType=atomic
@@ -301,7 +303,9 @@ pub struct MutatingAdmissionPolicy {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the MutatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicySpec>,
@@ -322,7 +326,9 @@ pub struct MutatingAdmissionPolicyBinding {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the MutatingAdmissionPolicyBinding.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<MutatingAdmissionPolicyBindingSpec>,
@@ -334,7 +340,9 @@ pub struct MutatingAdmissionPolicyBindingList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of PolicyBinding.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<MutatingAdmissionPolicyBinding>,
@@ -374,7 +382,9 @@ pub struct MutatingAdmissionPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ValidatingAdmissionPolicy.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<MutatingAdmissionPolicy>,
@@ -558,8 +568,9 @@ pub struct MutatingWebhook {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub namespace_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// objectSelector decides whether to run the webhook based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the webhook, and
@@ -573,8 +584,9 @@ pub struct MutatingWebhook {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "11")]
-    pub object_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub object_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// sideEffects states whether this webhook has side effects.
     /// Acceptable values are: Unknown, None, Some, NoneOnDryRun
     /// Webhooks with side effects MUST implement a reconciliation system, since a request may be
@@ -603,7 +615,9 @@ pub struct MutatingWebhook {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "8")]
-    pub admission_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub admission_review_versions: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation.
     /// Allowed values are "Never" and "IfNeeded".
     ///
@@ -649,7 +663,9 @@ pub struct MutatingWebhookConfiguration {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// webhooks is a list of webhooks and the affected resources and operations.
     /// +optional
     /// +patchMergeKey=name
@@ -666,7 +682,9 @@ pub struct MutatingWebhookConfigurationList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of MutatingWebhookConfiguration.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<MutatingWebhookConfiguration>,
@@ -763,8 +781,9 @@ pub struct ParamRef {
     ///
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// parameterNotFoundAction controls the behavior of the binding when the resource
     /// exists, and name or selector is valid, but there are no parameters
     /// matched by the binding. If the value is set to `Allow`, then no
@@ -776,7 +795,9 @@ pub struct ParamRef {
     ///
     /// Required
     #[prost(string, optional, tag = "4")]
-    pub parameter_not_found_action: ::core::option::Option<::prost::alloc::string::String>,
+    pub parameter_not_found_action: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// ServiceReference holds a reference to Service.legacy.k8s.io
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -821,7 +842,9 @@ pub struct ValidatingAdmissionPolicy {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the ValidatingAdmissionPolicy.
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ValidatingAdmissionPolicySpec>,
@@ -849,7 +872,9 @@ pub struct ValidatingAdmissionPolicyBinding {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec defines the desired behavior of the ValidatingAdmissionPolicyBinding.
     /// +required
     #[prost(message, optional, tag = "2")]
@@ -862,7 +887,9 @@ pub struct ValidatingAdmissionPolicyBindingList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of PolicyBinding.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingAdmissionPolicyBinding>,
@@ -946,7 +973,9 @@ pub struct ValidatingAdmissionPolicyList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ValidatingAdmissionPolicy.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingAdmissionPolicy>,
@@ -1053,8 +1082,9 @@ pub struct ValidatingAdmissionPolicyStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "3")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
 }
 /// ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1146,8 +1176,9 @@ pub struct ValidatingWebhook {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub namespace_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub namespace_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// objectSelector decides whether to run the webhook based on if the
     /// object has matching labels. objectSelector is evaluated against both
     /// the oldObject and newObject that would be sent to the webhook, and
@@ -1161,8 +1192,9 @@ pub struct ValidatingWebhook {
     /// Default to the empty LabelSelector, which matches everything.
     /// +optional
     #[prost(message, optional, tag = "10")]
-    pub object_selector:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
+    pub object_selector: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector,
+    >,
     /// sideEffects states whether this webhook has side effects.
     /// Acceptable values are: Unknown, None, Some, NoneOnDryRun
     /// Webhooks with side effects MUST implement a reconciliation system, since a request may be
@@ -1192,7 +1224,9 @@ pub struct ValidatingWebhook {
     /// +optional
     /// +listType=atomic
     #[prost(string, repeated, tag = "8")]
-    pub admission_review_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub admission_review_versions: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// matchConditions is a list of conditions that must be met for a request to be sent to this
     /// webhook. Match conditions filter requests that have already been matched by the rules,
     /// namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests.
@@ -1220,7 +1254,9 @@ pub struct ValidatingWebhookConfiguration {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// webhooks is a list of webhooks and the affected resources and operations.
     /// +optional
     /// +patchMergeKey=name
@@ -1237,7 +1273,9 @@ pub struct ValidatingWebhookConfigurationList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// List of ValidatingWebhookConfiguration.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ValidatingWebhookConfiguration>,
@@ -1383,56 +1421,6 @@ pub struct WebhookClientConfig {
     pub ca_bundle: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 
-impl crate::Resource for MutatingAdmissionPolicy {
-    const API_VERSION: &'static str = "admissionregistration.k8s.io/v1beta1";
-    const GROUP: &'static str = "admissionregistration.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "MutatingAdmissionPolicy";
-    const URL_PATH_SEGMENT: &'static str = "mutatingadmissionpolicies";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for MutatingAdmissionPolicy {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for MutatingAdmissionPolicy {
-    type Spec = crate::api::admissionregistration::v1beta1::MutatingAdmissionPolicySpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for MutatingAdmissionPolicy { const API_VERSION : & 'static str = "admissionregistration.k8s.io/v1beta1" ; const GROUP : & 'static str = "admissionregistration.k8s.io" ; const VERSION : & 'static str = "v1beta1" ; const KIND : & 'static str = "MutatingAdmissionPolicy" ; const URL_PATH_SEGMENT : & 'static str = "mutatingadmissionpolicies" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for MutatingAdmissionPolicy { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for MutatingAdmissionPolicy { type Spec = crate :: api :: admissionregistration :: v1beta1 :: MutatingAdmissionPolicySpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }
 
-impl crate::Resource for MutatingAdmissionPolicyBinding {
-    const API_VERSION: &'static str = "admissionregistration.k8s.io/v1beta1";
-    const GROUP: &'static str = "admissionregistration.k8s.io";
-    const VERSION: &'static str = "v1beta1";
-    const KIND: &'static str = "MutatingAdmissionPolicyBinding";
-    const URL_PATH_SEGMENT: &'static str = "mutatingadmissionpolicybindings";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for MutatingAdmissionPolicyBinding {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for MutatingAdmissionPolicyBinding {
-    type Spec = crate::api::admissionregistration::v1beta1::MutatingAdmissionPolicyBindingSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for MutatingAdmissionPolicyBinding { const API_VERSION : & 'static str = "admissionregistration.k8s.io/v1beta1" ; const GROUP : & 'static str = "admissionregistration.k8s.io" ; const VERSION : & 'static str = "v1beta1" ; const KIND : & 'static str = "MutatingAdmissionPolicyBinding" ; const URL_PATH_SEGMENT : & 'static str = "mutatingadmissionpolicybindings" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for MutatingAdmissionPolicyBinding { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for MutatingAdmissionPolicyBinding { type Spec = crate :: api :: admissionregistration :: v1beta1 :: MutatingAdmissionPolicyBindingSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

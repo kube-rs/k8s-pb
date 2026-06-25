@@ -5,7 +5,9 @@ pub struct Lease {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec contains the specification of the Lease.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
     /// +optional
@@ -19,7 +21,9 @@ pub struct LeaseList {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// items is a list of schema objects.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Lease>,
@@ -42,13 +46,16 @@ pub struct LeaseSpec {
     /// acquireTime is a time when the current lease was acquired.
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub acquire_time:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
+    pub acquire_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
+    >,
     /// renewTime is a time when the current holder of a lease has last
     /// updated the lease.
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub renew_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
+    pub renew_time: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime,
+    >,
     /// leaseTransitions is the number of transitions of a lease between
     /// holders.
     /// +optional
@@ -70,29 +77,4 @@ pub struct LeaseSpec {
     pub preferred_holder: ::core::option::Option<::prost::alloc::string::String>,
 }
 
-impl crate::Resource for Lease {
-    const API_VERSION: &'static str = "coordination.k8s.io/v1";
-    const GROUP: &'static str = "coordination.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "Lease";
-    const URL_PATH_SEGMENT: &'static str = "leases";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for Lease {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for Lease {
-    type Spec = crate::api::coordination::v1::LeaseSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for Lease { const API_VERSION : & 'static str = "coordination.k8s.io/v1" ; const GROUP : & 'static str = "coordination.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "Lease" ; const URL_PATH_SEGMENT : & 'static str = "leases" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for Lease { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for Lease { type Spec = crate :: api :: coordination :: v1 :: LeaseSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

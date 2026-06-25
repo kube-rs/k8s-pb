@@ -49,15 +49,18 @@ pub struct AllocatedDeviceStatus {
     /// +listType=map
     /// +listMapKey=type
     #[prost(message, repeated, tag = "4")]
-    pub conditions:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+    pub conditions: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Condition,
+    >,
     /// Data contains arbitrary driver-specific data.
     ///
     /// The length of the raw data must be smaller or equal to 10 Ki.
     ///
     /// +optional
     #[prost(message, optional, tag = "5")]
-    pub data: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
+    pub data: ::core::option::Option<
+        super::super::super::apimachinery::pkg::runtime::RawExtension,
+    >,
     /// NetworkData contains network-related information specific to the device.
     ///
     /// +optional
@@ -88,8 +91,9 @@ pub struct AllocationResult {
     /// +optional
     /// +featureGate=DRADeviceBindingConditions,DRAResourceClaimDeviceStatus
     #[prost(message, optional, tag = "5")]
-    pub allocation_timestamp:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub allocation_timestamp: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// CELDeviceSelector contains a CEL expression for selecting a device.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -169,7 +173,9 @@ pub struct CapacityRequestPolicy {
     ///
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub default: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub default: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// ValidValues defines a set of acceptable quantity values in consuming requests.
     ///
     /// Must not contain more than 10 entries.
@@ -189,8 +195,9 @@ pub struct CapacityRequestPolicy {
     /// +listType=atomic
     /// +oneOf=ValidRequestValues
     #[prost(message, repeated, tag = "3")]
-    pub valid_values:
-        ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub valid_values: ::prost::alloc::vec::Vec<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// ValidRange defines an acceptable quantity value range in consuming requests.
     ///
     /// If this field is set,
@@ -224,7 +231,9 @@ pub struct CapacityRequestPolicyRange {
     ///
     /// +required
     #[prost(message, optional, tag = "1")]
-    pub min: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub min: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// Max defines the upper limit for capacity that can be requested.
     ///
     /// Max must be less than or equal to the capacity value.
@@ -232,7 +241,9 @@ pub struct CapacityRequestPolicyRange {
     ///
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub max: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub max: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// Step defines the step size between valid capacity amounts within the range.
     ///
     /// Max (if set) and requestPolicy.default must be a multiple of Step.
@@ -240,7 +251,9 @@ pub struct CapacityRequestPolicyRange {
     ///
     /// +optional
     #[prost(message, optional, tag = "3")]
-    pub step: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub step: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// CapacityRequirements defines the capacity requirements for a specific device request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -282,7 +295,9 @@ pub struct Counter {
     ///
     /// +required
     #[prost(message, optional, tag = "1")]
-    pub value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub value: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// CounterSet defines a named set of counters
 /// that are available to be used by devices defined in the
@@ -311,7 +326,10 @@ pub struct CounterSet {
     /// +k8s:alpha(since: "1.36")=+k8s:required
     /// +k8s:alpha(since: "1.36")=+k8s:eachKey=+k8s:format=k8s-short-name
     #[prost(btree_map = "string, message", tag = "2")]
-    pub counters: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, Counter>,
+    pub counters: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        Counter,
+    >,
 }
 /// Device represents one individual hardware instance that can be selected based
 /// on its attributes. Besides the name, exactly one field must be set.
@@ -331,7 +349,10 @@ pub struct Device {
     /// +optional
     /// +k8s:alpha(since: "1.36")=+k8s:optional
     #[prost(btree_map = "string, message", tag = "2")]
-    pub attributes: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceAttribute>,
+    pub attributes: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        DeviceAttribute,
+    >,
     /// Capacity defines the set of capacities for this device.
     /// The name of each capacity must be unique in that set.
     ///
@@ -339,7 +360,10 @@ pub struct Device {
     ///
     /// +optional
     #[prost(btree_map = "string, message", tag = "3")]
-    pub capacity: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceCapacity>,
+    pub capacity: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        DeviceCapacity,
+    >,
     /// ConsumesCounters defines a list of references to sharedCounters
     /// and the set of counters that the device will
     /// consume from those counter sets.
@@ -454,7 +478,9 @@ pub struct Device {
     /// +k8s:alpha(since: "1.36")=+k8s:optional
     /// +k8s:alpha(since: "1.36")=+k8s:maxItems=4
     #[prost(string, repeated, tag = "11")]
-    pub binding_failure_conditions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub binding_failure_conditions: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// AllowMultipleAllocations marks whether the device is allowed to be allocated to multiple DeviceRequests.
     ///
     /// If AllowMultipleAllocations is set to true, the device can be allocated more than once,
@@ -478,8 +504,10 @@ pub struct Device {
     /// +optional
     /// +featureGate=DRANodeAllocatableResources
     #[prost(btree_map = "string, message", tag = "13")]
-    pub node_allocatable_resource_mappings:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, NodeAllocatableResourceMapping>,
+    pub node_allocatable_resource_mappings: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        NodeAllocatableResourceMapping,
+    >,
 }
 /// DeviceAllocationConfiguration gets embedded in an AllocationResult.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -628,7 +656,9 @@ pub struct DeviceCapacity {
     ///
     /// +required
     #[prost(message, optional, tag = "1")]
-    pub value: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub value: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
     /// RequestPolicy defines how this DeviceCapacity must be consumed
     /// when the device is allowed to be shared by multiple allocations.
     ///
@@ -711,7 +741,9 @@ pub struct DeviceClass {
     /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:optional
     /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:format=k8s-long-name
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec defines what can be allocated and how to configure it.
     ///
     /// This is mutable. Consumers have to be prepared for classes changing
@@ -735,7 +767,9 @@ pub struct DeviceClassList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource classes.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<DeviceClass>,
@@ -881,7 +915,10 @@ pub struct DeviceCounterConsumption {
     /// +k8s:alpha(since: "1.36")=+k8s:required
     /// +k8s:alpha(since: "1.36")=+k8s:eachKey=+k8s:format=k8s-short-name
     #[prost(btree_map = "string, message", tag = "2")]
-    pub counters: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, Counter>,
+    pub counters: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        Counter,
+    >,
 }
 /// DeviceRequest is a request for devices required for a claim.
 /// This is typically a request for a single resource like a device, but can
@@ -1033,7 +1070,9 @@ pub struct DeviceRequestAllocationResult {
     /// +k8s:alpha(since: "1.36")=+k8s:optional
     /// +k8s:alpha(since: "1.36")=+k8s:maxItems=4
     #[prost(string, repeated, tag = "8")]
-    pub binding_failure_conditions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub binding_failure_conditions: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
     /// ShareID uniquely identifies an individual allocation share of the device,
     /// used when the device supports multiple simultaneous allocations.
     /// It serves as an additional map key to differentiate concurrent shares
@@ -1234,7 +1273,9 @@ pub struct DeviceTaint {
     ///
     /// +optional
     #[prost(message, optional, tag = "4")]
-    pub time_added: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub time_added: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// The ResourceClaim this DeviceToleration is attached to tolerates any taint that matches
 /// the triple <key,value,effect> using the matching operator <operator>.
@@ -1475,8 +1516,9 @@ pub struct NodeAllocatableResourceMapping {
     ///      If a claim consumes 8 "dra.example.com/cores", the CPU footprint is 8 * 2 = 16.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub allocation_multiplier:
-        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    pub allocation_multiplier: ::core::option::Option<
+        super::super::super::apimachinery::pkg::api::resource::Quantity,
+    >,
 }
 /// OpaqueDeviceConfiguration contains configuration parameters for a driver
 /// in a format defined by the driver vendor.
@@ -1506,7 +1548,9 @@ pub struct OpaqueDeviceConfiguration {
     ///
     /// +required
     #[prost(message, optional, tag = "2")]
-    pub parameters: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
+    pub parameters: ::core::option::Option<
+        super::super::super::apimachinery::pkg::runtime::RawExtension,
+    >,
 }
 /// ResourceClaim describes a request for access to resources in the cluster,
 /// for use by workloads. For example, if a workload needs an accelerator device
@@ -1518,7 +1562,9 @@ pub struct ResourceClaim {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec describes what is being requested and how to configure it.
     /// The spec is immutable.
     /// +k8s:alpha(since: "1.36")=+k8s:immutable
@@ -1559,7 +1605,9 @@ pub struct ResourceClaimList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource claims.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaim>,
@@ -1641,7 +1689,9 @@ pub struct ResourceClaimTemplate {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Describes the ResourceClaim that is to be generated.
     ///
     /// This field is immutable. A ResourceClaim will get created by the
@@ -1656,7 +1706,9 @@ pub struct ResourceClaimTemplateList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource claim templates.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceClaimTemplate>,
@@ -1669,7 +1721,9 @@ pub struct ResourceClaimTemplateSpec {
     /// validation.
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Spec for the ResourceClaim. The entire content is copied unchanged
     /// into the ResourceClaim that gets created from this template. The
     /// same fields as in a ResourceClaim are also valid here.
@@ -1740,7 +1794,9 @@ pub struct ResourceSlice {
     /// Standard object metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// Contains the information published by the driver.
     ///
     /// Changing the spec automatically increments the metadata.generation number.
@@ -1754,7 +1810,9 @@ pub struct ResourceSliceList {
     /// Standard list metadata
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta,
+    >,
     /// Items is the list of resource ResourceSlices.
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<ResourceSlice>,
@@ -1859,119 +1917,10 @@ pub struct ResourceSliceSpec {
     pub shared_counters: ::prost::alloc::vec::Vec<CounterSet>,
 }
 
-impl crate::Resource for DeviceClass {
-    const API_VERSION: &'static str = "resource.k8s.io/v1";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "DeviceClass";
-    const URL_PATH_SEGMENT: &'static str = "deviceclasses";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for DeviceClass {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for DeviceClass {
-    type Spec = crate::api::resource::v1::DeviceClassSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for DeviceClass { const API_VERSION : & 'static str = "resource.k8s.io/v1" ; const GROUP : & 'static str = "resource.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "DeviceClass" ; const URL_PATH_SEGMENT : & 'static str = "deviceclasses" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for DeviceClass { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for DeviceClass { type Spec = crate :: api :: resource :: v1 :: DeviceClassSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }
 
-impl crate::Resource for ResourceClaim {
-    const API_VERSION: &'static str = "resource.k8s.io/v1";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ResourceClaim";
-    const URL_PATH_SEGMENT: &'static str = "resourceclaims";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for ResourceClaim {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ResourceClaim {
-    type Spec = crate::api::resource::v1::ResourceClaimSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for ResourceClaim {
-    type Status = crate::api::resource::v1::ResourceClaimStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for ResourceClaim { const API_VERSION : & 'static str = "resource.k8s.io/v1" ; const GROUP : & 'static str = "resource.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ResourceClaim" ; const URL_PATH_SEGMENT : & 'static str = "resourceclaims" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for ResourceClaim { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ResourceClaim { type Spec = crate :: api :: resource :: v1 :: ResourceClaimSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for ResourceClaim { type Status = crate :: api :: resource :: v1 :: ResourceClaimStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for ResourceClaimTemplate {
-    const API_VERSION: &'static str = "resource.k8s.io/v1";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ResourceClaimTemplate";
-    const URL_PATH_SEGMENT: &'static str = "resourceclaimtemplates";
-    type Scope = crate::NamespaceResourceScope;
-}
-impl crate::Metadata for ResourceClaimTemplate {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ResourceClaimTemplate {
-    type Spec = crate::api::resource::v1::ResourceClaimTemplateSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for ResourceClaimTemplate { const API_VERSION : & 'static str = "resource.k8s.io/v1" ; const GROUP : & 'static str = "resource.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ResourceClaimTemplate" ; const URL_PATH_SEGMENT : & 'static str = "resourceclaimtemplates" ; type Scope = crate :: NamespaceResourceScope ; } impl crate :: Metadata for ResourceClaimTemplate { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ResourceClaimTemplate { type Spec = crate :: api :: resource :: v1 :: ResourceClaimTemplateSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }
 
-impl crate::Resource for ResourceSlice {
-    const API_VERSION: &'static str = "resource.k8s.io/v1";
-    const GROUP: &'static str = "resource.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "ResourceSlice";
-    const URL_PATH_SEGMENT: &'static str = "resourceslices";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ResourceSlice {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ResourceSlice {
-    type Spec = crate::api::resource::v1::ResourceSliceSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
+impl crate :: Resource for ResourceSlice { const API_VERSION : & 'static str = "resource.k8s.io/v1" ; const GROUP : & 'static str = "resource.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "ResourceSlice" ; const URL_PATH_SEGMENT : & 'static str = "resourceslices" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for ResourceSlice { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for ResourceSlice { type Spec = crate :: api :: resource :: v1 :: ResourceSliceSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } }

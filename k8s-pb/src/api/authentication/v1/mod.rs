@@ -38,7 +38,9 @@ pub struct SelfSubjectReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// status is filled in by the server with the user attributes.
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -59,7 +61,9 @@ pub struct TokenRequest {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated
     /// +optional
     #[prost(message, optional, tag = "2")]
@@ -107,8 +111,9 @@ pub struct TokenRequestStatus {
     /// expirationTimestamp is the time of expiration of the returned token.
     /// +optional
     #[prost(message, optional, tag = "2")]
-    pub expiration_timestamp:
-        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+    pub expiration_timestamp: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::Time,
+    >,
 }
 /// TokenReview attempts to authenticate a token to a known user.
 /// Note: TokenReview requests may be cached by the webhook token authenticator
@@ -119,7 +124,9 @@ pub struct TokenReview {
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
+    pub metadata: ::core::option::Option<
+        super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta,
+    >,
     /// spec holds information about the request being evaluated
     /// +required
     #[prost(message, optional, tag = "2")]
@@ -197,68 +204,12 @@ pub struct UserInfo {
     /// extra is any additional information provided by the authenticator.
     /// +optional
     #[prost(btree_map = "string, message", tag = "4")]
-    pub extra: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ExtraValue>,
+    pub extra: ::prost::alloc::collections::BTreeMap<
+        ::prost::alloc::string::String,
+        ExtraValue,
+    >,
 }
 
-impl crate::Resource for SelfSubjectReview {
-    const API_VERSION: &'static str = "authentication.k8s.io/v1";
-    const GROUP: &'static str = "authentication.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "SelfSubjectReview";
-    const URL_PATH_SEGMENT: &'static str = "selfsubjectreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for SelfSubjectReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasStatus for SelfSubjectReview {
-    type Status = crate::api::authentication::v1::SelfSubjectReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for SelfSubjectReview { const API_VERSION : & 'static str = "authentication.k8s.io/v1" ; const GROUP : & 'static str = "authentication.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "SelfSubjectReview" ; const URL_PATH_SEGMENT : & 'static str = "selfsubjectreviews" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for SelfSubjectReview { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasStatus for SelfSubjectReview { type Status = crate :: api :: authentication :: v1 :: SelfSubjectReviewStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
 
-impl crate::Resource for TokenReview {
-    const API_VERSION: &'static str = "authentication.k8s.io/v1";
-    const GROUP: &'static str = "authentication.k8s.io";
-    const VERSION: &'static str = "v1";
-    const KIND: &'static str = "TokenReview";
-    const URL_PATH_SEGMENT: &'static str = "tokenreviews";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for TokenReview {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for TokenReview {
-    type Spec = crate::api::authentication::v1::TokenReviewSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
-}
-impl crate::HasStatus for TokenReview {
-    type Status = crate::api::authentication::v1::TokenReviewStatus;
-    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
-        self.status.as_ref()
-    }
-    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
-        self.status.as_mut()
-    }
-}
+impl crate :: Resource for TokenReview { const API_VERSION : & 'static str = "authentication.k8s.io/v1" ; const GROUP : & 'static str = "authentication.k8s.io" ; const VERSION : & 'static str = "v1" ; const KIND : & 'static str = "TokenReview" ; const URL_PATH_SEGMENT : & 'static str = "tokenreviews" ; type Scope = crate :: ClusterResourceScope ; } impl crate :: Metadata for TokenReview { type Ty = crate :: apimachinery :: pkg :: apis :: meta :: v1 :: ObjectMeta ; fn metadata (& self) -> Option < & < Self as crate :: Metadata > :: Ty > { self . metadata . as_ref () } fn metadata_mut (& mut self) -> Option < & mut < Self as crate :: Metadata > :: Ty > { self . metadata . as_mut () } } impl crate :: HasSpec for TokenReview { type Spec = crate :: api :: authentication :: v1 :: TokenReviewSpec ; fn spec (& self) -> Option < & < Self as crate :: HasSpec > :: Spec > { self . spec . as_ref () } fn spec_mut (& mut self) -> Option < & mut < Self as crate :: HasSpec > :: Spec > { self . spec . as_mut () } } impl crate :: HasStatus for TokenReview { type Status = crate :: api :: authentication :: v1 :: TokenReviewStatus ; fn status (& self) -> Option < & < Self as crate :: HasStatus > :: Status > { self . status . as_ref () } fn status_mut (& mut self) -> Option < & mut < Self as crate :: HasStatus > :: Status > { self . status . as_mut () } }
