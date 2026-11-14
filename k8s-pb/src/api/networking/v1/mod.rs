@@ -52,7 +52,7 @@ pub struct HttpIngressRuleValue {
 /// Invalid: 10.01.2.3 or 2001:db8:0:0:0::1
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IPAddress {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -78,11 +78,11 @@ pub struct IPAddressList {
 /// IPAddressSpec describe the attributes in an IP Address.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct IPAddressSpec {
-    /// ParentRef references the resource that an IPAddress is attached to.
+    /// parentRef references the resource that an IPAddress is attached to.
     /// An IPAddress must reference a parent object.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
     #[prost(message, optional, tag = "1")]
     pub parent_ref: ::core::option::Option<ParentReference>,
 }
@@ -94,7 +94,7 @@ pub struct IpBlock {
     /// cidr is a string representing the IPBlock
     /// Valid examples are "192.168.1.0/24" or "2001:db8::/64"
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub cidr: ::core::option::Option<::prost::alloc::string::String>,
     /// except is a slice of CIDRs that should not be included within an IPBlock
@@ -109,9 +109,10 @@ pub struct IpBlock {
 /// endpoints defined by a backend. An Ingress can be configured to give services
 /// externally-reachable urls, load balance traffic, terminate SSL, offer name
 /// based virtual hosting etc.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Ingress {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -150,7 +151,7 @@ pub struct IngressBackend {
 /// resources without a class specified will be assigned this default class.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressClass {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -184,12 +185,12 @@ pub struct IngressClassParametersReference {
     pub a_pi_group: ::core::option::Option<::prost::alloc::string::String>,
     /// kind is the type of resource being referenced.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// name is the name of resource being referenced.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// scope represents if this refers to a cluster or namespace scoped resource.
@@ -219,7 +220,7 @@ pub struct IngressClassSpec {
     /// configuration for the controller. This is optional if the controller does
     /// not require extra parameters.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "2")]
     pub parameters: ::core::option::Option<IngressClassParametersReference>,
 }
@@ -331,6 +332,7 @@ pub struct IngressRule {
 /// one of the following must be set.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IngressRuleValue {
+    /// http is a HTTP IngressRuleValue, which contains a list of http selectors
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub http: ::core::option::Option<HttpIngressRuleValue>,
@@ -417,7 +419,7 @@ pub struct IngressTls {
 /// NetworkPolicy describes what network traffic is allowed for a set of Pods
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkPolicy {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -448,7 +450,7 @@ pub struct NetworkPolicyEgressRule {
     /// allows traffic only if the traffic matches at least one item in the to list.
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub to: ::prost::alloc::vec::Vec<NetworkPolicyPeer>,
 }
@@ -472,7 +474,7 @@ pub struct NetworkPolicyIngressRule {
     /// allows traffic only if the traffic matches at least one item in the from list.
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub from: ::prost::alloc::vec::Vec<NetworkPolicyPeer>,
 }
@@ -515,7 +517,7 @@ pub struct NetworkPolicyPeer {
     /// ipBlock defines policy on a particular IPBlock. If this field is set then
     /// neither of the other fields can be.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "3")]
     pub ip_block: ::core::option::Option<IpBlock>,
 }
@@ -564,7 +566,7 @@ pub struct NetworkPolicySpec {
     /// solely to ensure that the pods it selects are isolated by default)
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub ingress: ::prost::alloc::vec::Vec<NetworkPolicyIngressRule>,
     /// egress is a list of egress rules to be applied to the selected pods. Outgoing traffic
@@ -576,7 +578,7 @@ pub struct NetworkPolicySpec {
     /// This field is beta-level in 1.8
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "3")]
     pub egress: ::prost::alloc::vec::Vec<NetworkPolicyEgressRule>,
     /// policyTypes is a list of rule types that the NetworkPolicy relates to.
@@ -597,22 +599,22 @@ pub struct NetworkPolicySpec {
 /// ParentReference describes a reference to a parent object.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ParentReference {
-    /// Group is the group of the object being referenced.
+    /// group is the group of the object being referenced.
     /// +optional
     #[prost(string, optional, tag = "1")]
     pub group: ::core::option::Option<::prost::alloc::string::String>,
-    /// Resource is the resource of the object being referenced.
+    /// resource is the resource of the object being referenced.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
-    /// Namespace is the namespace of the object being referenced.
+    /// namespace is the namespace of the object being referenced.
     /// +optional
     #[prost(string, optional, tag = "3")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
-    /// Name is the name of the object being referenced.
+    /// name is the name of the object being referenced.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "4")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -633,9 +635,10 @@ pub struct ServiceBackendPort {
 }
 /// ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
 /// This range is used to allocate ClusterIPs to Service objects.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceCIDR {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -666,7 +669,7 @@ pub struct ServiceCIDRList {
 /// ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServiceCIDRSpec {
-    /// CIDRs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
+    /// cidrs defines the IP blocks in CIDR notation (e.g. "192.168.0.0/24" or "2001:db8::/64")
     /// from which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family.
     /// This field is immutable.
     /// +optional
@@ -684,6 +687,7 @@ pub struct ServiceCIDRStatus {
     /// +patchStrategy=merge
     /// +listType=map
     /// +listMapKey=type
+    /// +k8s:alpha(since: "1.37")=+k8s:eachVal=+k8s:opaqueType
     #[prost(message, repeated, tag = "1")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,

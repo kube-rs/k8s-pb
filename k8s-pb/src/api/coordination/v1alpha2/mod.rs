@@ -3,6 +3,7 @@
 /// Candidates are created such that coordinated leader election will pick the best leader from the list of candidates.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LeaseCandidate {
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -28,19 +29,19 @@ pub struct LeaseCandidateList {
 /// LeaseCandidateSpec is a specification of a Lease.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LeaseCandidateSpec {
-    /// LeaseName is the name of the lease for which this candidate is contending.
+    /// leaseName is the name of the lease for which this candidate is contending.
     /// This field is immutable.
     /// +required
     #[prost(string, optional, tag = "1")]
     pub lease_name: ::core::option::Option<::prost::alloc::string::String>,
-    /// PingTime is the last time that the server has requested the LeaseCandidate
+    /// pingTime is the last time that the server has requested the LeaseCandidate
     /// to renew. It is only done during leader election to check if any
     /// LeaseCandidates have become ineligible. When PingTime is updated, the
     /// LeaseCandidate will respond by updating RenewTime.
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub ping_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
-    /// RenewTime is the time that the LeaseCandidate was last updated.
+    /// renewTime is the time that the LeaseCandidate was last updated.
     /// Any time a Lease needs to do leader election, the PingTime field
     /// is updated to signal to the LeaseCandidate that they should update
     /// the RenewTime.
@@ -50,18 +51,18 @@ pub struct LeaseCandidateSpec {
     /// +optional
     #[prost(message, optional, tag = "3")]
     pub renew_time: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::MicroTime>,
-    /// BinaryVersion is the binary version. It must be in a semver format without leading `v`.
+    /// binaryVersion is the binary version. It must be in a semver format without leading `v`.
     /// This field is required.
     /// +required
     #[prost(string, optional, tag = "4")]
     pub binary_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// EmulationVersion is the emulation version. It must be in a semver format without leading `v`.
+    /// emulationVersion is the emulation version. It must be in a semver format without leading `v`.
     /// EmulationVersion must be less than or equal to BinaryVersion.
     /// This field is required when strategy is "OldestEmulationVersion"
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub emulation_version: ::core::option::Option<::prost::alloc::string::String>,
-    /// Strategy is the strategy that coordinated leader election will use for picking the leader.
+    /// strategy is the strategy that coordinated leader election will use for picking the leader.
     /// If multiple candidates for the same Lease return different strategies, the strategy provided
     /// by the candidate with the latest BinaryVersion will be used. If there is still conflict,
     /// this is a user error and coordinated leader election will not operate the Lease until resolved.

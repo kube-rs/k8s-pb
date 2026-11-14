@@ -6,7 +6,7 @@
 /// CSIDriver objects are non-namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CSIDriver {
-    /// Standard object metadata.
+    /// metadata is the standard object metadata.
     /// metadata.Name indicates the name of the CSI driver that this object
     /// refers to; it MUST be the same name returned by the CSI GetPluginName()
     /// call for that driver.
@@ -96,6 +96,8 @@ pub struct CSIDriverSpec {
     ///
     /// +optional
     /// +listType=set
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(string, repeated, tag = "3")]
     pub volume_lifecycle_modes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// storageCapacity indicates that the CSI volume driver wants pod scheduling to consider the storage
@@ -222,7 +224,7 @@ pub struct CSIDriverSpec {
     /// +optional
     #[prost(bool, optional, tag = "10")]
     pub service_account_token_in_secrets: ::core::option::Option<bool>,
-    /// PreventPodSchedulingIfMissing indicates that the CSI driver wants to prevent pod
+    /// preventPodSchedulingIfMissing indicates that the CSI driver wants to prevent pod
     /// scheduling if the CSI driver on the node is missing.
     ///
     /// Enabling this option will prevent the scheduler (or any other
@@ -237,7 +239,7 @@ pub struct CSIDriverSpec {
     /// newly created node may be rejected by the scheduler because of missing CSI driver
     /// information from the node.
     ///
-    /// This is an alpha feature and requires the VolumeLimitScaling feature gate to be enabled.
+    /// This is a beta feature and requires the VolumeLimitScaling feature gate to be enabled.
     /// Default is "false".
     /// +featureGate=VolumeLimitScaling
     /// +optional
@@ -255,13 +257,17 @@ pub struct CSIDriverSpec {
 /// CSINode has an OwnerReference that points to the corresponding node object.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CSINode {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// metadata.name must be the Kubernetes node name.
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec is the specification of CSINode
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<CSINodeSpec>,
+    /// status contains health and status information for the node's storage.
+    /// +optional
+    #[prost(message, optional, tag = "3")]
+    pub status: ::core::option::Option<CSINodeStatus>,
 }
 /// CSINodeDriver holds information about the specification of one CSI driver installed on a node
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -326,6 +332,19 @@ pub struct CSINodeSpec {
     #[prost(message, repeated, tag = "1")]
     pub drivers: ::prost::alloc::vec::Vec<CSINodeDriver>,
 }
+/// CSINodeStatus contains health and status information for storage on a node.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CSINodeStatus {
+    /// storageHealth contains backend health reports for CSI drivers registered on the node.
+    /// +optional
+    /// +listType=map
+    /// +listMapKey=name
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge
+    /// +featureGate=CSIVolumeHealth
+    #[prost(message, repeated, tag = "1")]
+    pub storage_health: ::prost::alloc::vec::Vec<StorageHealth>,
+}
 /// CSIStorageCapacity stores the result of one CSI GetCapacity call.
 /// For a given StorageClass, this describes the available capacity in a
 /// particular topology segment.  This can be used when considering where to
@@ -352,7 +371,7 @@ pub struct CSINodeSpec {
 /// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CSIStorageCapacity {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// The name has no particular meaning. It must be a DNS subdomain (dots allowed, 253 characters).
     /// To ensure that there are no conflicts with other CSI drivers on the cluster,
     /// the recommendation is to use csisc-<uuid>, a generated name, or a reverse-domain name
@@ -429,30 +448,30 @@ pub struct CSIStorageCapacityList {
 /// according to etcd is in ObjectMeta.Name.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageClass {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// provisioner indicates the type of the provisioner.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
     #[prost(string, optional, tag = "2")]
     pub provisioner: ::core::option::Option<::prost::alloc::string::String>,
     /// parameters holds the parameters for the provisioner that should
     /// create volumes of this storage class.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(btree_map = "string, string", tag = "3")]
     pub parameters:
         ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// reclaimPolicy controls the reclaimPolicy for dynamically provisioned PersistentVolumes of this storage class.
     /// Defaults to Delete.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "4")]
     pub reclaim_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// mountOptions controls the mountOptions for dynamically provisioned PersistentVolumes of this storage class.
@@ -470,8 +489,8 @@ pub struct StorageClass {
     /// provisioned and bound.  When unset, VolumeBindingImmediate is used.
     /// This field is only honored by servers that enable the VolumeScheduling feature.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "7")]
     pub volume_binding_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// allowedTopologies restrict the node topologies where volumes can be dynamically provisioned.
@@ -495,6 +514,53 @@ pub struct StorageClassList {
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<StorageClass>,
 }
+/// StorageHealth contains storage backend health reported by a CSI driver on a node.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StorageHealth {
+    /// name is the CSI driver name, matching CSINodeDriver.name.
+    /// +required
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// healthConditions are the adverse storage backend conditions reported by the CSI driver.
+    /// At most 16 conditions may be reported.
+    /// +optional
+    /// +listType=atomic
+    #[prost(message, repeated, tag = "2")]
+    pub health_conditions: ::prost::alloc::vec::Vec<StorageHealthCondition>,
+}
+/// StorageHealthCondition represents an adverse health condition reported
+/// by a CSI driver for its storage backend on a node.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct StorageHealthCondition {
+    /// status is the health status category.
+    /// One of "StorageUnreachable", "StorageDegraded".
+    /// +required
+    #[prost(string, optional, tag = "1")]
+    pub status: ::core::option::Option<::prost::alloc::string::String>,
+    /// reason is a brief CamelCase machine-parseable reason.
+    /// Maximum permitted length of a reason is 256 characters.
+    /// +required
+    #[prost(string, optional, tag = "2")]
+    pub reason: ::core::option::Option<::prost::alloc::string::String>,
+    /// message is a human-readable description.
+    /// +optional
+    /// Maximum permitted length of a message is 1024 characters.
+    #[prost(string, optional, tag = "3")]
+    pub message: ::core::option::Option<::prost::alloc::string::String>,
+    /// accessMode is the access mode affected. Nil means all access modes are affected.
+    /// +optional
+    #[prost(string, optional, tag = "4")]
+    pub access_mode: ::core::option::Option<::prost::alloc::string::String>,
+    /// volumeMode is the volume mode affected. Nil means both are affected.
+    /// +optional
+    #[prost(string, optional, tag = "5")]
+    pub volume_mode: ::core::option::Option<::prost::alloc::string::String>,
+    /// lastTransitionTime is when this condition first appeared at its current state.
+    /// +optional
+    #[prost(message, optional, tag = "6")]
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+}
 /// TokenRequest contains parameters of a service account token.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct TokenRequest {
@@ -515,14 +581,14 @@ pub struct TokenRequest {
 /// VolumeAttachment objects are non-namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachment {
-    /// Standard object metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
     /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
@@ -571,9 +637,9 @@ pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-long-name-caseless"
-    /// +k8s:alpha(since: "1.36")=+k8s:maxLength=63
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format="k8s-long-name-caseless"
+    /// +k8s:beta(since: "1.37")=+k8s:maxLength=63
     #[prost(string, optional, tag = "1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
     /// source represents the volume that should be attached.
@@ -618,12 +684,12 @@ pub struct VolumeAttachmentStatus {
 /// of PersistentVolumeClaims, and changed in the PersistentVolumeClaim spec after provisioning.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttributesClass {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Name of the CSI driver
+    /// driverName is the name of the CSI driver
     /// This field is immutable.
     #[prost(string, optional, tag = "2")]
     pub driver_name: ::core::option::Option<::prost::alloc::string::String>,
@@ -741,6 +807,15 @@ impl crate::HasSpec for CSINode {
     }
     fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
         self.spec.as_mut()
+    }
+}
+impl crate::HasStatus for CSINode {
+    type Status = crate::api::storage::v1::CSINodeStatus;
+    fn status(&self) -> Option<&<Self as crate::HasStatus>::Status> {
+        self.status.as_ref()
+    }
+    fn status_mut(&mut self) -> Option<&mut <Self as crate::HasStatus>::Status> {
+        self.status.as_mut()
     }
 }
 

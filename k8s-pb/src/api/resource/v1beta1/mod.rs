@@ -35,8 +35,8 @@ pub struct AllocatedDeviceStatus {
     ///
     /// +optional
     /// +featureGate=DRAConsumableCapacity
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-uuid
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-uuid
     #[prost(string, optional, tag = "7")]
     pub share_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Conditions contains the latest observation of the device's state.
@@ -48,6 +48,9 @@ pub struct AllocatedDeviceStatus {
     /// +optional
     /// +listType=map
     /// +listMapKey=type
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:listType=map
+    /// +k8s:alpha(since: "1.37")=+k8s:listMapKey=type
     #[prost(message, repeated, tag = "4")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
@@ -61,7 +64,7 @@ pub struct AllocatedDeviceStatus {
     /// NetworkData contains network-related information specific to the device.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "6")]
     pub network_data: ::core::option::Option<NetworkDeviceData>,
 }
@@ -100,7 +103,7 @@ pub struct BasicDevice {
     /// The maximum number of attributes and capacities combined is 32.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(btree_map = "string, message", tag = "1")]
     pub attributes: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, DeviceAttribute>,
     /// Capacity defines the set of capacities for this device.
@@ -121,13 +124,13 @@ pub struct BasicDevice {
     /// device is 2.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +listType=atomic
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=counterSet
+    /// +k8s:beta(since: "1.37")=+k8s:unique=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=counterSet
     /// +featureGate=DRAPartitionableDevices
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=2
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=2
     #[prost(message, repeated, tag = "3")]
     pub consumes_counters: ::prost::alloc::vec::Vec<DeviceCounterConsumption>,
     /// NodeName identifies the node where the device is available.
@@ -173,7 +176,7 @@ pub struct BasicDevice {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceTaints
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "7")]
     pub taints: ::prost::alloc::vec::Vec<DeviceTaint>,
     /// BindsToNode indicates if the usage of an allocation involving this device
@@ -203,8 +206,8 @@ pub struct BasicDevice {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceBindingConditions,DRAResourceClaimDeviceStatus
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=4
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=4
     #[prost(string, repeated, tag = "9")]
     pub binding_conditions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// BindingFailureConditions defines the conditions for binding failure.
@@ -221,8 +224,8 @@ pub struct BasicDevice {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceBindingConditions,DRAResourceClaimDeviceStatus
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=4
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=4
     #[prost(string, repeated, tag = "10")]
     pub binding_failure_conditions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// AllowMultipleAllocations marks whether the device is allowed to be allocated to multiple DeviceRequests.
@@ -234,7 +237,7 @@ pub struct BasicDevice {
     /// +featureGate=DRAConsumableCapacity
     #[prost(bool, optional, tag = "11")]
     pub allow_multiple_allocations: ::core::option::Option<bool>,
-    /// NodeAllocatableResourceMappings defines the mapping of node resources
+    /// NodeAllocatableResources defines the mapping of node resources
     /// that are managed by the DRA driver exposing this device. This includes resources currently
     /// reported in v1.Node `status.allocatable` that are not extended resources
     /// (see <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#extended-resources>).
@@ -246,10 +249,11 @@ pub struct BasicDevice {
     /// The keys of this map are the node-allocatable resource names (e.g., "cpu", "memory").
     /// Extended resource names are not permitted as keys.
     /// +optional
+    /// +k8s:optional
     /// +featureGate=DRANodeAllocatableResources
-    #[prost(btree_map = "string, message", tag = "12")]
-    pub node_allocatable_resource_mappings:
-        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, NodeAllocatableResourceMapping>,
+    #[prost(btree_map = "string, message", tag = "14")]
+    pub node_allocatable_resources:
+        ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, NodeAllocatableResource>,
 }
 /// CELDeviceSelector contains a CEL expression for selecting a device.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -264,7 +268,7 @@ pub struct CelDeviceSelector {
     ///   - driver (string): the name of the driver which defines this device.
     ///   - attributes (map\[string\]object): the device's attributes, grouped by prefix
     ///     (e.g. device.attributes\["dra.example.com"\] evaluates to an object with all
-    ///     of the attributes which were prefixed by "dra.example.com".
+    ///     of the attributes which were prefixed by "dra.example.com").
     ///   - capacity (map\[string\]object): the device's capacities, grouped by prefix.
     ///   - allowMultipleAllocations (bool): the allowMultipleAllocations property of the device
     ///     (v1.34+ with the DRAConsumableCapacity feature enabled).
@@ -296,6 +300,15 @@ pub struct CelDeviceSelector {
     ///
     /// A robust expression should check for the existence of attributes
     /// before referencing them.
+    ///
+    /// Common errors:
+    /// - "no such key": Use optional chaining (.? followed by orValue())
+    ///    or guarding the check with has() for optional fields.
+    ///    See CEL Optional Types for details:
+    ///    <https://pkg.go.dev/github.com/google/cel-go@v0.17.4/cel#OptionalTypes>
+    ///
+    /// For more CEL expression syntax and examples, see:
+    /// <https://kubernetes.io/docs/reference/using-api/cel/>
     ///
     /// For ease of use, the cel.bind() function is enabled, and can be used
     /// to simplify expressions that access multiple attributes with the
@@ -367,6 +380,13 @@ pub struct CapacityRequestPolicy {
     pub valid_range: ::core::option::Option<CapacityRequestPolicyRange>,
 }
 /// CapacityRequestPolicyRange defines a valid range for consumable capacity values.
+///
+/// If the DRAFractionalCapacityRange feature gate is
+/// enabled and at least one of Min, Max, or Step is a fractional quantity (i.e.
+/// its value is not an integer), milli-unit arithmetic is used instead,
+/// supporting values with up to 3 decimal places (e.g. 100m = 0.1).
+/// The largest supported value then is 1000 times smaller compared to using 64-bit integers.
+/// Otherwise, all comparisons use 64-bit integer arithmetic via resource.Quantity.Value().
 ///
 ///    - If the requested amount is less than Min, it is rounded up to the Min value.
 ///    - If Step is set and the requested amount is between Min and Max but not aligned with Step,
@@ -458,8 +478,8 @@ pub struct CounterSet {
     /// It must be a DNS label.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-short-name
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-short-name
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// Counters defines the set of counters for this CounterSet
@@ -468,8 +488,8 @@ pub struct CounterSet {
     /// The maximum number of counters is 32.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:eachKey=+k8s:format=k8s-short-name
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:eachKey=+k8s:format=k8s-short-name
     #[prost(btree_map = "string, message", tag = "2")]
     pub counters: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, Counter>,
 }
@@ -487,7 +507,7 @@ pub struct Device {
     ///
     /// +optional
     /// +oneOf=deviceType
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "2")]
     pub basic: ::core::option::Option<BasicDevice>,
 }
@@ -499,7 +519,7 @@ pub struct DeviceAllocationConfiguration {
     /// or from a claim.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub source: ::core::option::Option<::prost::alloc::string::String>,
     /// Requests lists the names of requests where the configuration applies.
@@ -511,10 +531,10 @@ pub struct DeviceAllocationConfiguration {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=set
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:unique=set
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(string, repeated, tag = "2")]
     pub requests: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "3")]
@@ -527,8 +547,8 @@ pub struct DeviceAllocationResult {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "1")]
     pub results: ::prost::alloc::vec::Vec<DeviceRequestAllocationResult>,
     /// This field is a combination of all the claim and class configuration parameters.
@@ -541,8 +561,8 @@ pub struct DeviceAllocationResult {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=64
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=64
     #[prost(message, repeated, tag = "2")]
     pub config: ::prost::alloc::vec::Vec<DeviceAllocationConfiguration>,
 }
@@ -552,30 +572,30 @@ pub struct DeviceAttribute {
     /// IntValue is a number.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     #[prost(int64, optional, tag = "2")]
     pub int: ::core::option::Option<i64>,
     /// BoolValue is a true/false value.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     #[prost(bool, optional, tag = "3")]
     pub bool: ::core::option::Option<bool>,
     /// StringValue is a string. Must not be longer than 64 characters.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     #[prost(string, optional, tag = "4")]
     pub string: ::core::option::Option<::prost::alloc::string::String>,
     /// VersionValue is a semantic version according to semver.org spec 2.0.0.
     /// Must not be longer than 64 characters.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     #[prost(string, optional, tag = "5")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
     /// IntValues is a non-empty list of numbers.
@@ -584,8 +604,8 @@ pub struct DeviceAttribute {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     /// +featureGate=DRAListTypeAttributes
     #[prost(int64, repeated, packed = "false", tag = "6")]
     pub ints: ::prost::alloc::vec::Vec<i64>,
@@ -593,8 +613,8 @@ pub struct DeviceAttribute {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     /// +featureGate=DRAListTypeAttributes
     #[prost(bool, repeated, packed = "false", tag = "7")]
     pub bools: ::prost::alloc::vec::Vec<bool>,
@@ -605,8 +625,9 @@ pub struct DeviceAttribute {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
+    /// +k8s:alpha(since: "1.37")=+k8s:eachVal=+k8s:maxBytes=64
     /// +featureGate=DRAListTypeAttributes
     #[prost(string, repeated, tag = "8")]
     pub strings: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -617,8 +638,8 @@ pub struct DeviceAttribute {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:unionMember
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:unionMember
     /// +featureGate=DRAListTypeAttributes
     #[prost(string, repeated, tag = "9")]
     pub versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
@@ -658,11 +679,11 @@ pub struct DeviceClaim {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=name
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:unique=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=name
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "1")]
     pub requests: ::prost::alloc::vec::Vec<DeviceRequest>,
     /// These constraints must be satisfied by the set of devices that get
@@ -670,8 +691,8 @@ pub struct DeviceClaim {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "2")]
     pub constraints: ::prost::alloc::vec::Vec<DeviceConstraint>,
     /// This field holds configuration for multiple potential drivers which
@@ -680,8 +701,8 @@ pub struct DeviceClaim {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "3")]
     pub config: ::prost::alloc::vec::Vec<DeviceClaimConfiguration>,
 }
@@ -697,10 +718,10 @@ pub struct DeviceClaimConfiguration {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=set
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:unique=set
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(string, repeated, tag = "1")]
     pub requests: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "2")]
@@ -717,8 +738,8 @@ pub struct DeviceClaimConfiguration {
 pub struct DeviceClass {
     /// Standard object metadata
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:format=k8s-long-name
+    /// +k8s:beta(since: "1.37")=+k8s:subfield(name)=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:subfield(name)=+k8s:format=k8s-long-name
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines what can be allocated and how to configure it.
@@ -729,6 +750,7 @@ pub struct DeviceClass {
     /// the time of allocation.
     ///
     /// Changing the spec automatically increments the metadata.generation number.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<DeviceClassSpec>,
 }
@@ -757,8 +779,8 @@ pub struct DeviceClassSpec {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "1")]
     pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
     /// Config defines configuration parameters that apply to each device that is claimed via this class.
@@ -769,8 +791,8 @@ pub struct DeviceClassSpec {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "2")]
     pub config: ::prost::alloc::vec::Vec<DeviceClassConfiguration>,
     /// ExtendedResourceName is the extended resource name for the devices of this class.
@@ -782,11 +804,10 @@ pub struct DeviceClassSpec {
     /// If two classes are created at the same time, then the name of the class
     /// lexicographically sorted first is picked.
     ///
-    /// This is a beta field.
     /// +optional
     /// +featureGate=DRAExtendedResource
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-extended-resource-name
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-extended-resource-name
     #[prost(string, optional, tag = "4")]
     pub extended_resource_name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -799,7 +820,7 @@ pub struct DeviceConfiguration {
     ///
     /// +optional
     /// +oneOf=ConfigurationType
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "1")]
     pub opaque: ::core::option::Option<OpaqueDeviceConfiguration>,
 }
@@ -818,10 +839,10 @@ pub struct DeviceConstraint {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=set
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:unique=set
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(string, repeated, tag = "1")]
     pub requests: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// MatchAttribute requires that all devices in question have this
@@ -844,8 +865,8 @@ pub struct DeviceConstraint {
     ///
     /// +optional
     /// +oneOf=ConstraintType
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-resource-fully-qualified-name
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-resource-fully-qualified-name
     #[prost(string, optional, tag = "2")]
     pub match_attribute: ::core::option::Option<::prost::alloc::string::String>,
     /// DistinctAttribute requires that all devices in question have this
@@ -867,6 +888,8 @@ pub struct DeviceConstraint {
     /// +optional
     /// +oneOf=ConstraintType
     /// +featureGate=DRAConsumableCapacity
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-resource-fully-qualified-name
     #[prost(string, optional, tag = "3")]
     pub distinct_attribute: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -878,8 +901,8 @@ pub struct DeviceCounterConsumption {
     /// counters defined will be consumed.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-short-name
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-short-name
     #[prost(string, optional, tag = "1")]
     pub counter_set: ::core::option::Option<::prost::alloc::string::String>,
     /// Counters defines the counters that will be consumed by the device.
@@ -887,10 +910,96 @@ pub struct DeviceCounterConsumption {
     /// The maximum number of counters is 32.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:eachKey=+k8s:format=k8s-short-name
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:eachKey=+k8s:format=k8s-short-name
     #[prost(btree_map = "string, message", tag = "2")]
     pub counters: ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, Counter>,
+    /// CompatibilityGroups is a list of opaque group names for
+    /// this counter set consumption.
+    ///
+    /// Devices that consume counters from the same counter set may only be
+    /// allocated at the same time ("co-allocated") if they all share at least
+    /// one common group: the intersection of the CompatibilityGroups of all
+    /// co-allocated devices on that counter set must be non-empty. Devices
+    /// that consume from different counter sets are never compared via this
+    /// field.
+    ///
+    /// An unset field, an explicit nil, and an empty list are equivalent and
+    /// mean "no groups": such a device is only co-allocatable with sibling
+    /// devices on the same counter set that also have no groups, and is never
+    /// co-allocatable with a device that declares one or more groups.
+    ///
+    /// Group names are opaque and meaningful only within the
+    /// publishing driver's pool.
+    ///
+    /// The maximum number of groups is 2, and the names must be unique.
+    ///
+    /// +optional
+    /// +listType=atomic
+    /// +featureGate=DRADeviceCompatibilityGroups
+    /// +k8s:listType=atomic
+    /// +k8s:optional
+    /// +k8s:maxItems=2
+    /// +k8s:unique=set
+    /// +k8s:eachVal=+k8s:format=k8s-short-name
+    #[prost(string, repeated, tag = "3")]
+    pub compatibility_groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// DeviceDerivedAttribute defines a derived attribute computed via CEL.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct DeviceDerivedAttribute {
+    /// Name is the identifier for this derived attribute, used in constraints.
+    ///
+    /// It must be a DNS subdomain followed by a slash ("/") followed by a C identifier
+    /// (e.g. "example.com/numaNode" or "derived/numaNode").
+    ///
+    /// If the chosen name matches an existing physical attribute from a driver,
+    /// the derived attribute's expression will shadow the physical attribute,
+    /// and its evaluated value will be used in constraints instead. When the goal
+    /// is to define a derived attribute that is only used within the ResourceClaim
+    /// and not meant to shadow an existing attribute, use a domain prefix that
+    /// no DRA driver should be using (e.g. "derived/myAttribute").
+    ///
+    /// It is not valid to define a derived attribute that isn't used in at least
+    /// one constraint.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:format=k8s-resource-fully-qualified-name
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Expression is a CEL expression evaluated against each candidate device.
+    /// The expression must evaluate to a primitive scalar (string, integer,
+    /// boolean, or semver) or a list of these scalars (\[\]string, \[\]int64,
+    /// \[\]bool, \[\]semver) to act as a virtual grouping key. Any other return type
+    /// is an error and causes CEL evaluation for the device to fail.
+    ///
+    /// The expression's input is an object named "device", which carries the
+    /// same properties as in a CELDeviceSelector.
+    ///
+    /// When pod scheduling encounters CEL runtime errors (such as looking
+    /// up an attribute that isn't defined) for some devices, it will abort
+    /// allocation and fail scheduling for the Pod. Surfacing evaluation
+    /// errors immediately prevents silent topology matching failures that are
+    /// extremely hard to detect. A robust expression should, for example, check
+    /// for the existence of attributes before referencing them to avoid
+    /// runtime evaluation errors.
+    ///
+    /// The expression gets evaluated after a device has passed the other
+    /// selector expressions for the request in which this expression is used.
+    /// This allows writing expressions that are tailored towards the specific
+    /// devices being requested (for example, by assuming the device is from a
+    /// certain vendor and skipping those checks).
+    ///
+    /// The length of the expression must be smaller or equal to 10 Ki. The
+    /// cost of evaluating it is also limited based on the estimated number
+    /// of logical steps; the combined cost of all derived attributes in a
+    /// claim is capped by a shared CEL cost budget.
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "2")]
+    pub expression: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// DeviceRequest is a request for devices required for a claim.
 /// This is typically a request for a single resource like a device, but can
@@ -935,8 +1044,8 @@ pub struct DeviceRequest {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
     #[prost(message, repeated, tag = "3")]
     pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
     /// AllocationMode and its related fields define how devices are allocated
@@ -962,7 +1071,7 @@ pub struct DeviceRequest {
     /// requests with unknown modes.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "4")]
     pub allocation_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// Count is used only when the count mode is "ExactCount". Must be greater than zero.
@@ -1012,11 +1121,11 @@ pub struct DeviceRequest {
     /// +oneOf=deviceRequestType
     /// +listType=atomic
     /// +featureGate=DRAPrioritizedList
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=name
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=8
+    /// +k8s:beta(since: "1.37")=+k8s:unique=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=name
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=8
     #[prost(message, repeated, tag = "7")]
     pub first_available: ::prost::alloc::vec::Vec<DeviceSubRequest>,
     /// If specified, the request's tolerations.
@@ -1043,7 +1152,7 @@ pub struct DeviceRequest {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceTaints
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "8")]
     pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
     /// Capacity define resource requirements against each capacity.
@@ -1063,6 +1172,34 @@ pub struct DeviceRequest {
     /// +featureGate=DRAConsumableCapacity
     #[prost(message, optional, tag = "9")]
     pub capacity: ::core::option::Option<CapacityRequirements>,
+    /// DerivedAttributes defines a set of virtual attributes computed via CEL expressions
+    /// for each candidate device. These virtual attributes can be referenced in
+    /// `.devices.constraints` to align and match different devices (e.g., co-allocating
+    /// a GPU and a NIC on the same NUMA node) even if their drivers publish different
+    /// attributes. Derived attributes are not available via `device.attributes`
+    /// in the CEL environment when evaluating selector expressions.
+    ///
+    /// Derived attributes allow you to extract, transform, or normalize topology
+    /// information (such as extracting a NUMA index from a complex topology string or
+    /// renaming a vendor-specific attribute) into a common virtual attribute name at
+    /// scheduling time. The scheduler then evaluates these virtual attributes exactly
+    /// like static attributes when matching constraints.
+    ///
+    /// Every derived attribute defined in this list must be referenced by at least one
+    /// MatchAttribute or DistinctAttribute constraint in the `.devices.constraints` list.
+    ///
+    /// The maximum number of derived attributes is 32.
+    ///
+    /// This is an alpha field and requires enabling the DRADerivedAttributes
+    /// feature gate.
+    ///
+    /// +optional
+    /// +listType=atomic
+    /// +featureGate=DRADerivedAttributes
+    /// +k8s:optional
+    /// +k8s:maxItems=32
+    #[prost(message, repeated, tag = "10")]
+    pub derived_attributes: ::prost::alloc::vec::Vec<DeviceDerivedAttribute>,
 }
 /// DeviceRequestAllocationResult contains the allocation result for one request.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1086,9 +1223,9 @@ pub struct DeviceRequestAllocationResult {
     /// vendor of the driver. It should use only lower case characters.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-long-name-caseless
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:maxLength=63
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-long-name-caseless
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:maxLength=63
     #[prost(string, optional, tag = "2")]
     pub driver: ::core::option::Option<::prost::alloc::string::String>,
     /// This name together with the driver name and the device name field
@@ -1098,8 +1235,8 @@ pub struct DeviceRequestAllocationResult {
     /// DNS sub-domains separated by slashes.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-resource-pool-name
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-resource-pool-name
     #[prost(string, optional, tag = "3")]
     pub pool: ::core::option::Option<::prost::alloc::string::String>,
     /// Device references one device instance via its name in the driver's
@@ -1131,8 +1268,7 @@ pub struct DeviceRequestAllocationResult {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceTaints
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=16
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "6")]
     pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
     /// BindingConditions contains a copy of the BindingConditions
@@ -1144,8 +1280,8 @@ pub struct DeviceRequestAllocationResult {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceBindingConditions,DRAResourceClaimDeviceStatus
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=4
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=4
     #[prost(string, repeated, tag = "7")]
     pub binding_conditions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// BindingFailureConditions contains a copy of the BindingFailureConditions
@@ -1157,8 +1293,8 @@ pub struct DeviceRequestAllocationResult {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceBindingConditions,DRAResourceClaimDeviceStatus
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=4
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=4
     #[prost(string, repeated, tag = "8")]
     pub binding_failure_conditions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// ShareID uniquely identifies an individual allocation share of the device,
@@ -1168,8 +1304,8 @@ pub struct DeviceRequestAllocationResult {
     ///
     /// +optional
     /// +featureGate=DRAConsumableCapacity
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-uuid
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-uuid
     #[prost(string, optional, tag = "9")]
     pub share_id: ::core::option::Option<::prost::alloc::string::String>,
     /// ConsumedCapacity tracks the amount of capacity consumed per device as part of the claim request.
@@ -1188,6 +1324,19 @@ pub struct DeviceRequestAllocationResult {
         ::prost::alloc::string::String,
         super::super::super::apimachinery::pkg::api::resource::Quantity,
     >,
+    /// SkipNodeOperations lists node-local resource operations (gRPC calls)
+    /// that will be skipped for this allocated device when determining whether
+    /// operations are necessary on the node. If all allocated devices for a driver in
+    /// a claim skip an operation, that gRPC call will be skipped. It is a copy of
+    /// the ResourceSlice.spec.skipNodeOperations value at the time when the device was allocated.
+    ///
+    /// +optional
+    /// +listType=set
+    /// +k8s:listType=set
+    /// +featureGate=DRAOptionalNodeOperations
+    /// +k8s:optional
+    #[prost(string, repeated, tag = "11")]
+    pub skip_node_operations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// DeviceSelector must have exactly one field set.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1232,8 +1381,8 @@ pub struct DeviceSubRequest {
     /// to reference.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-long-name
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-long-name
     #[prost(string, optional, tag = "2")]
     pub device_class_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Selectors define criteria which must be satisfied by a specific
@@ -1243,8 +1392,8 @@ pub struct DeviceSubRequest {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=32
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=32
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "3")]
     pub selectors: ::prost::alloc::vec::Vec<DeviceSelector>,
     /// AllocationMode and its related fields define how devices are allocated
@@ -1266,7 +1415,7 @@ pub struct DeviceSubRequest {
     /// requests with unknown modes.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "4")]
     pub allocation_mode: ::core::option::Option<::prost::alloc::string::String>,
     /// Count is used only when the count mode is "ExactCount". Must be greater than zero.
@@ -1297,7 +1446,7 @@ pub struct DeviceSubRequest {
     /// +optional
     /// +listType=atomic
     /// +featureGate=DRADeviceTaints
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "7")]
     pub tolerations: ::prost::alloc::vec::Vec<DeviceToleration>,
     /// Capacity define resource requirements against each capacity.
@@ -1317,6 +1466,34 @@ pub struct DeviceSubRequest {
     /// +featureGate=DRAConsumableCapacity
     #[prost(message, optional, tag = "8")]
     pub capacity: ::core::option::Option<CapacityRequirements>,
+    /// DerivedAttributes defines a set of virtual attributes computed via CEL expressions
+    /// for each candidate device. These virtual attributes can be referenced in
+    /// `.devices.constraints` to align and match different devices (e.g., co-allocating
+    /// a GPU and a NIC on the same NUMA node) even if their drivers publish different
+    /// attributes. Derived attributes are not available via `device.attributes`
+    /// in the CEL environment when evaluating selector expressions.
+    ///
+    /// Derived attributes allow you to extract, transform, or normalize topology
+    /// information (such as extracting a NUMA index from a complex topology string or
+    /// renaming a vendor-specific attribute) into a common virtual attribute name at
+    /// scheduling time. The scheduler then evaluates these virtual attributes exactly
+    /// like static attributes when matching constraints.
+    ///
+    /// Every derived attribute defined in this list must be referenced by at least one
+    /// MatchAttribute or DistinctAttribute constraint in the `.devices.constraints` list.
+    ///
+    /// The maximum number of derived attributes is 32.
+    ///
+    /// This is an alpha field and requires enabling the DRADerivedAttributes
+    /// feature gate.
+    ///
+    /// +optional
+    /// +listType=atomic
+    /// +featureGate=DRADerivedAttributes
+    /// +k8s:optional
+    /// +k8s:maxItems=32
+    #[prost(message, repeated, tag = "9")]
+    pub derived_attributes: ::prost::alloc::vec::Vec<DeviceDerivedAttribute>,
 }
 /// The device this taint is attached to has the "effect" on
 /// any claim which does not tolerate the taint and, through the claim,
@@ -1345,7 +1522,7 @@ pub struct DeviceTaint {
     /// Consumers must treat unknown effects like None.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub effect: ::core::option::Option<::prost::alloc::string::String>,
     /// TimeAdded represents the time at which the taint was added or
@@ -1373,8 +1550,8 @@ pub struct DeviceToleration {
     /// Must be a label name.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-label-key
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-label-key
     #[prost(string, optional, tag = "1")]
     pub key: ::core::option::Option<::prost::alloc::string::String>,
     /// Operator represents a key's relationship to the value.
@@ -1384,7 +1561,7 @@ pub struct DeviceToleration {
     ///
     /// +optional
     /// +default="Equal"
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "2")]
     pub operator: ::core::option::Option<::prost::alloc::string::String>,
     /// Value is the taint value the toleration matches to.
@@ -1398,7 +1575,7 @@ pub struct DeviceToleration {
     /// When specified, allowed values are NoSchedule and NoExecute.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "4")]
     pub effect: ::core::option::Option<::prost::alloc::string::String>,
     /// TolerationSeconds represents the period of time the toleration (which must be
@@ -1424,8 +1601,8 @@ pub struct NetworkDeviceData {
     /// Must not be longer than 256 bytes.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxBytes=256
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxBytes=256
     #[prost(string, optional, tag = "1")]
     pub interface_name: ::core::option::Option<::prost::alloc::string::String>,
     /// IPs lists the network addresses assigned to the device's network interface.
@@ -1438,10 +1615,10 @@ pub struct NetworkDeviceData {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=set
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=16
+    /// +k8s:beta(since: "1.37")=+k8s:unique=set
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=16
     #[prost(string, repeated, tag = "2")]
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// HardwareAddress represents the hardware address (e.g. MAC Address) of the device's network interface.
@@ -1449,50 +1626,111 @@ pub struct NetworkDeviceData {
     /// Must not be longer than 128 bytes.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:maxBytes=128
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:maxBytes=128
     #[prost(string, optional, tag = "3")]
     pub hardware_address: ::core::option::Option<::prost::alloc::string::String>,
 }
-/// NodeAllocatableResourceMapping defines the translation between the DRA device/capacity
-/// units requested to the corresponding quantity of the node allocatable resource.
+/// NodeAllocatableMapping defines how a DRA allocation directly translates into a node allocatable resource quantity.
+/// The mapping can be derived from either the count of allocated devices or the specific capacity consumed. These options are mutually exclusive.
+/// Kubelet adds this mapped resource quantity from claim to both requests and limits at the pod-level cgroup, and to limits at the container-level cgroup for each container referencing the claim.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct NodeAllocatableResourceMapping {
+pub struct NodeAllocatableMapping {
     /// CapacityKey references a capacity name defined as a key in the
     /// `spec.devices\[*\].capacity` map. When this field is set, the value associated with
     /// this key in the `status.allocation.devices.results\[*\].consumedCapacity` map
     /// (for a specific claim allocation) determines the base quantity for
-    /// the node allocatable resource. If `allocationMultiplier` is also set, it is
+    /// the node allocatable resource. `capacityMultiplier` must also be set and is
     /// multiplied with the base quantity.
     /// For example, if `spec.devices\[*\].capacity` has an entry "dra.example.com/memory": "128Gi",
     /// and this field is set to "dra.example.com/memory", then for a claim allocation
     /// that consumes { "dra.example.com/memory": "4Gi" } the base quantity for the
-    /// node allocatable resource mapping will be "4Gi", and `allocationMultiplier` should
-    /// be omitted or set to "1".
+    /// node allocatable resource mapping will be "4Gi".
+    /// The final node allocatable resource amount is `consumedCapacity\[capacityKey\]` * `capacityMultiplier`.
     /// +optional
+    /// +k8s:optional
+    /// +k8s:unionMember
+    /// +k8s:alpha(since: "1.37")=+k8s:dependentRequired("capacityMultiplier")
     #[prost(string, optional, tag = "1")]
     pub capacity_key: ::core::option::Option<::prost::alloc::string::String>,
-    /// AllocationMultiplier is used as a multiplier for the allocated device count or the allocated capacity in the claim.
-    /// It defaults to 1 if not specified. How the field is used also depends on whether `capacityKey` is set.
-    /// 1.  If `capacityKey` is NOT set: `allocationMultiplier` multiplies the device count allocated to the claim.
-    /// 	   a. A DRA driver representing each CPU core as a device would have
-    ///         {ResourceName: "cpu", allocationMultiplier: "2"} in its
-    ///         `nodeAllocatableResourceMappings`. If 4 devices are allocated to the claim,
-    /// 		  4 * 2 CPUs would be considered as allocated and subtracted from the node's capacity.
-    ///      b. A GPU device that needs additional node memory per GPU allocation would
-    ///         have {ResourceName: "memory", allocationMultiplier: "2Gi"}.  Each allocated
-    /// 		  GPU device instance of this type will account for 2Gi of memory.
-    ///
-    /// 2.  If `capacityKey` IS set: `allocationMultiplier` is multiplied by the amount of that capacity consumed.
-    /// 	   The final node allocatable resource amount is `consumedCapacity\[capacityKey\]` * `allocationMultiplier`.
-    ///      For example, if a Device's capacity "dra.example.com/cores" is consumed,
-    ///      and each "core" provides 2 "cpu"s, the mapping would be:
-    ///      {ResourceName: "cpu", capacityKey: "dra.example.com/cores", allocationMultiplier: "2"}.
-    ///      If a claim consumes 8 "dra.example.com/cores", the CPU footprint is 8 * 2 = 16.
+    /// CapacityMultiplier is used as a multiplier for the allocated capacity consumed.
+    /// It is only valid if `capacityKey` is set.
+    /// The final node allocatable resource amount is `consumedCapacity\[capacityKey\]` * `capacityMultiplier`.
+    /// For example, if a Device's capacity "dra.example.com/cores" is consumed,
+    /// and each "core" provides 2 "cpu"s, the mapping would be:
+    /// {ResourceName: "cpu", capacityKey: "dra.example.com/cores", capacityMultiplier: "2"}.
+    /// If a claim consumes 8 "dra.example.com/cores", the CPU footprint is 8 * 2 = 16.
     /// +optional
+    /// +k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:dependentRequired("capacityKey")
     #[prost(message, optional, tag = "2")]
-    pub allocation_multiplier:
+    pub capacity_multiplier:
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// DeviceMultiplier is used as a multiplier for the allocated device count in the claim.
+    /// The final node allocatable resource amount is `deviceCount` * `deviceMultiplier`.
+    /// For example, a DRA driver representing each cache complex (CCX) as a device would have
+    /// {ResourceName: "cpu", deviceMultiplier: "8"} in its `nodeAllocatableResources`.
+    /// If 2 devices (CCX) are allocated to the claim, 2 * 8 = 16 CPUs would be considered as allocated.
+    /// It is only valid when `capacityKey` and `capacityMultiplier` are not set.
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:unionMember
+    #[prost(message, optional, tag = "3")]
+    pub device_multiplier:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+}
+/// NodeAllocatableOverhead defines auxiliary resource overheads incurred when allocating a device.
+/// Overheads can be specified as a fixed cost per pod referencing the claim, a variable cost per container reference, or both.
+/// Kubelet accounts for this overhead by adding it to both the pod-level and container-level cgroups of referencing containers.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct NodeAllocatableOverhead {
+    /// PerPod is overhead applied once per pod referencing the claim on this node.
+    /// This is a flat overhead incurred for every pod referencing the claim.
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "1")]
+    pub per_pod: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// PerContainer is applied per container reference to the claim.
+    /// This models overhead scaling linearly with the number of containers actively using the device.
+    /// When both PerPod and PerContainer are specified, the total overhead allocated for each pod referencing
+    /// the claim is computed as:
+    /// Quantity = PerPod + (PerContainer * NumReferences)
+    /// Kubelet accounts for this overhead in cgroups:
+    /// - Pod-level cgroup (requests and limits): Kubelet adds PerPod + (PerContainer * NumReferences).
+    /// - Container-level cgroup (limits only): Kubelet adds PerPod + PerContainer for each referencing container.
+    /// This allows any single container to access the pod-level overhead, while the parent cgroup caps the total usage to account for PerPod exactly once.
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "2")]
+    pub per_container:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+}
+/// NodeAllocatableResource defines the translation between the DRA device/capacity
+/// units requested to the corresponding quantity of the node allocatable resource.
+/// At least one of Mapping or Overhead must be specified. Not specifying either is an invalid configuration.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct NodeAllocatableResource {
+    /// Mapping is used when the device directly models a node allocatable resource like standard CPU or memory
+    /// (e.g., with a CPU DRA driver). The calculated quantity is accounted for exactly once per claim instance
+    /// on the node. To prevent node cgroup isolation friction, the scheduler explicitly
+    /// blocks sharing mapped device claims across multiple pods.
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "3")]
+    pub mapping: ::core::option::Option<NodeAllocatableMapping>,
+    /// Overhead contains fields for modeling auxiliary overhead incurred on node allocatable resources
+    /// when allocating devices that are not themselves modeling a node allocatable resource (e.g., host memory overhead for GPUs).
+    /// Sharing overhead-mapped claims across multiple pods is allowed. The node allocatable overhead is accounted
+    /// for individually for each pod referencing the claim.
+    /// Overhead is always subtracted from the node's allocatable capacity for the resource, even when mapping
+    /// is specified for the same resource.
+    /// Eg: If a device models memory capacity per socket as a consumable capacity pool via Mapping (with CapacityKey),
+    /// any overhead specified for the same resource will be subtracted from the node's general allocatable capacity
+    /// and not from the per-socket capacity pool in Mapping.
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "4")]
+    pub overhead: ::core::option::Option<NodeAllocatableOverhead>,
 }
 /// OpaqueDeviceConfiguration contains configuration parameters for a driver
 /// in a format defined by the driver vendor.
@@ -1508,9 +1746,9 @@ pub struct OpaqueDeviceConfiguration {
     /// vendor of the driver. It should use only lower case characters.
     ///
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:maxLength=63
-    /// +k8s:alpha(since: "1.36")=+k8s:format=k8s-long-name-caseless
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:maxLength=63
+    /// +k8s:beta(since: "1.37")=+k8s:format=k8s-long-name-caseless
     #[prost(string, optional, tag = "1")]
     pub driver: ::core::option::Option<::prost::alloc::string::String>,
     /// Parameters can contain arbitrary data. It is the responsibility of
@@ -1540,7 +1778,8 @@ pub struct ResourceClaim {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec describes what is being requested and how to configure it.
     /// The spec is immutable.
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ResourceClaimSpec>,
     /// Status describes whether the claim is ready to use and what has been allocated.
@@ -1599,8 +1838,8 @@ pub struct ResourceClaimStatus {
     /// Allocation is set once the claim has been allocated successfully.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:update=NoModify
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:update=NoModify
     #[prost(message, optional, tag = "1")]
     pub allocation: ::core::option::Option<AllocationResult>,
     /// ReservedFor indicates which entities are currently allowed to use
@@ -1628,10 +1867,10 @@ pub struct ResourceClaimStatus {
     /// +listMapKey=uid
     /// +patchStrategy=merge
     /// +patchMergeKey=uid
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:listType=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=uid
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=256
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:listType=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=uid
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=256
     #[prost(message, repeated, tag = "2")]
     pub reserved_for: ::prost::alloc::vec::Vec<ResourceClaimConsumerReference>,
     /// Devices contains the status of each device allocated for this
@@ -1639,18 +1878,18 @@ pub struct ResourceClaimStatus {
     /// information. Entries are owned by their respective drivers.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +listType=map
     /// +listMapKey=driver
     /// +listMapKey=device
     /// +listMapKey=pool
     /// +listMapKey=shareID
     /// +featureGate=DRAResourceClaimDeviceStatus
-    /// +k8s:alpha(since: "1.36")=+k8s:listType=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=driver
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=device
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=pool
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=shareID
+    /// +k8s:beta(since: "1.37")=+k8s:listType=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=driver
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=device
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=pool
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=shareID
     #[prost(message, repeated, tag = "4")]
     pub devices: ::prost::alloc::vec::Vec<AllocatedDeviceStatus>,
 }
@@ -1669,6 +1908,7 @@ pub struct ResourceClaimTemplate {
     /// This field is immutable. A ResourceClaim will get created by the
     /// control plane for a Pod when needed and then not get updated
     /// anymore.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ResourceClaimTemplateSpec>,
 }
@@ -1690,11 +1930,13 @@ pub struct ResourceClaimTemplateSpec {
     /// when creating it. No other fields are allowed and will be rejected during
     /// validation.
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec for the ResourceClaim. The entire content is copied unchanged
     /// into the ResourceClaim that gets created from this template. The
     /// same fields as in a ResourceClaim are also valid here.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<ResourceClaimSpec>,
 }
@@ -1703,6 +1945,8 @@ pub struct ResourceClaimTemplateSpec {
 pub struct ResourcePool {
     /// Name is used to identify the pool. For node-local devices, this
     /// is often the node name, but this is not required.
+    /// A field selector can be used to list only ResourceSlice objects
+    /// belonging to a certain pool.
     ///
     /// It must not be longer than 253 characters and must consist of one or more DNS sub-domains
     /// separated by slashes. This field is immutable.
@@ -1846,7 +2090,7 @@ pub struct ResourceSliceSpec {
     ///
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +zeroOrOneOf=ResourceSliceType
     #[prost(message, repeated, tag = "6")]
     pub devices: ::prost::alloc::vec::Vec<Device>,
@@ -1872,16 +2116,52 @@ pub struct ResourceSliceSpec {
     /// The maximum number of counter sets is 8.
     ///
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +listType=atomic
     /// +k8s:listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:unique=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=name
+    /// +k8s:beta(since: "1.37")=+k8s:unique=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=name
     /// +featureGate=DRAPartitionableDevices
     /// +zeroOrOneOf=ResourceSliceType
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=8
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=8
     #[prost(message, repeated, tag = "8")]
     pub shared_counters: ::prost::alloc::vec::Vec<CounterSet>,
+    /// PartitionTypeAttribute names a string device attribute (by fully
+    /// qualified name, e.g. "gpu.example.com/profile") whose value labels
+    /// each device with its partition type, such as "Full" or "Half" for a
+    /// MIG-style GPU.
+    ///
+    /// When set, every partitionable device in the slice must carry the attribute
+    /// and devices sharing a value must share the same ConsumesCounters cost.
+    ///
+    /// +optional
+    /// +featureGate=DRAPartitionableDevicesType
+    /// +k8s:ifDisabled(DRAPartitionableDevicesType)=+k8s:forbidden
+    /// +k8s:ifEnabled(DRAPartitionableDevicesType)=+k8s:optional
+    /// +k8s:ifEnabled(DRAPartitionableDevicesType)=+k8s:format=k8s-resource-fully-qualified-name
+    #[prost(string, optional, tag = "9")]
+    pub partition_type_attribute: ::core::option::Option<::prost::alloc::string::String>,
+    /// SkipNodeOperations lists node-local resource operations (gRPC calls)
+    /// that will be skipped for the devices in this slice when determining whether
+    /// operations are necessary on the node. If all allocated devices for a driver in
+    /// a claim skip an operation, that gRPC call will be skipped. Valid values are:
+    ///
+    /// - "NodePrepareResources": NodePrepareResources gRPC calls are skipped. This
+    ///    value cannot be specified unless "NodeUnprepareResources" is also listed
+    ///    (or "*" is specified).
+    /// - "NodeUnprepareResources": NodeUnprepareResources gRPC calls are skipped.
+    /// - "*": All node-local resource operations are skipped.
+    ///
+    /// Other values may be added in the future. The kubelet must ignore unknown
+    /// values.
+    ///
+    /// +optional
+    /// +listType=set
+    /// +k8s:listType=set
+    /// +featureGate=DRAOptionalNodeOperations
+    /// +k8s:optional
+    #[prost(string, repeated, tag = "10")]
+    pub skip_node_operations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 
 impl crate::Resource for DeviceClass {

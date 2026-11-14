@@ -9,7 +9,7 @@
 /// to a cluster can read ClusterTrustBundles by impersonating a serviceaccount
 /// that they have access to.
 ///
-/// It can be optionally associated with a particular assigner, in which case it
+/// It can be optionally associated with a particular signer, in which case it
 /// contains one valid set of trust anchors for that signer. Signers may have
 /// multiple associated ClusterTrustBundles; each is an independent set of trust
 /// anchors for that signer. Admission control is used to enforce that only users
@@ -59,6 +59,8 @@ pub struct ClusterTrustBundleSpec {
     /// using a `spec.signerName=NAME` field selector.
     ///
     /// +optional
+    /// +k8s:alpha(since:"1.37")=+k8s:optional
+    /// +k8s:alpha(since:"1.37")=+k8s:immutable
     #[prost(string, optional, tag = "1")]
     pub signer_name: ::core::option::Option<::prost::alloc::string::String>,
     /// trustBundle contains the individual X.509 trust anchors for this
@@ -74,31 +76,4 @@ pub struct ClusterTrustBundleSpec {
     /// as well as to drop PEM block headers and inter-block data.
     #[prost(string, optional, tag = "2")]
     pub trust_bundle: ::core::option::Option<::prost::alloc::string::String>,
-}
-
-impl crate::Resource for ClusterTrustBundle {
-    const API_VERSION: &'static str = "certificates.k8s.io/v1alpha1";
-    const GROUP: &'static str = "certificates.k8s.io";
-    const VERSION: &'static str = "v1alpha1";
-    const KIND: &'static str = "ClusterTrustBundle";
-    const URL_PATH_SEGMENT: &'static str = "clustertrustbundles";
-    type Scope = crate::ClusterResourceScope;
-}
-impl crate::Metadata for ClusterTrustBundle {
-    type Ty = crate::apimachinery::pkg::apis::meta::v1::ObjectMeta;
-    fn metadata(&self) -> Option<&<Self as crate::Metadata>::Ty> {
-        self.metadata.as_ref()
-    }
-    fn metadata_mut(&mut self) -> Option<&mut <Self as crate::Metadata>::Ty> {
-        self.metadata.as_mut()
-    }
-}
-impl crate::HasSpec for ClusterTrustBundle {
-    type Spec = crate::api::certificates::v1alpha1::ClusterTrustBundleSpec;
-    fn spec(&self) -> Option<&<Self as crate::HasSpec>::Spec> {
-        self.spec.as_ref()
-    }
-    fn spec_mut(&mut self) -> Option<&mut <Self as crate::HasSpec>::Spec> {
-        self.spec.as_mut()
-    }
 }

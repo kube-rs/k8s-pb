@@ -10,12 +10,14 @@ pub struct APIGroupDiscovery {
     /// name is allowed to be "" to represent the legacy, ungroupified resources.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// versions are the versions supported in this group. They are sorted in descending order of preference,
     /// with the preferred version being the first entry.
     /// +listType=map
     /// +listMapKey=version
+    /// +optional
     #[prost(message, repeated, tag = "2")]
     pub versions: ::prost::alloc::vec::Vec<APIVersionDiscovery>,
 }
@@ -31,6 +33,7 @@ pub struct APIGroupDiscoveryList {
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ListMeta>,
     /// items is the list of groups for discovery. The groups are listed in priority order.
+    /// +optional
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<APIGroupDiscovery>,
 }
@@ -41,41 +44,49 @@ pub struct APIResourceDiscovery {
     /// for this resource across all versions in the API group.
     /// Resources with non-empty groups are located at /apis/<APIGroupDiscovery.objectMeta.name>/<APIVersionDiscovery.version>/<APIResourceDiscovery.Resource>
     /// Resources with empty groups are located at /api/v1/<APIResourceDiscovery.Resource>
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub resource: ::core::option::Option<::prost::alloc::string::String>,
     /// responseKind describes the group, version, and kind of the serialization schema for the object type this endpoint typically returns.
     /// APIs may return other objects types at their discretion, such as error conditions, requests for alternate representations, or other operation specific behavior.
     /// This value will be null or empty if an APIService reports subresources but supports no operations on the parent resource
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub response_kind:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind>,
     /// scope indicates the scope of a resource, either Cluster or Namespaced
+    /// +optional
     #[prost(string, optional, tag = "3")]
     pub scope: ::core::option::Option<::prost::alloc::string::String>,
     /// singularResource is the singular name of the resource.  This allows clients to handle plural and singular opaquely.
     /// For many clients the singular form of the resource will be more understandable to users reading messages and should be used when integrating the name of the resource into a sentence.
     /// The command line tool kubectl, for example, allows use of the singular resource name in place of plurals.
     /// The singular form of a resource should always be an optional element - when in doubt use the canonical resource name.
+    /// +optional
     #[prost(string, optional, tag = "4")]
     pub singular_resource: ::core::option::Option<::prost::alloc::string::String>,
     /// verbs is a list of supported API operation types (this includes
     /// but is not limited to get, list, watch, create, update, patch,
     /// delete, deletecollection, and proxy).
     /// +listType=set
+    /// +optional
     #[prost(string, repeated, tag = "5")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// shortNames is a list of suggested short names of the resource.
     /// +listType=set
+    /// +optional
     #[prost(string, repeated, tag = "6")]
     pub short_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// categories is a list of the grouped resources this resource belongs to (e.g. 'all').
     /// Clients may use this to simplify acting on multiple resource types at once.
     /// +listType=set
+    /// +optional
     #[prost(string, repeated, tag = "7")]
     pub categories: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// subresources is a list of subresources provided by this resource. Subresources are located at /apis/<APIGroupDiscovery.objectMeta.name>/<APIVersionDiscovery.version>/<APIResourceDiscovery.Resource>/name-of-instance/<APIResourceDiscovery.subresources\[i\].subresource>
     /// +listType=map
     /// +listMapKey=subresource
+    /// +optional
     #[prost(message, repeated, tag = "8")]
     pub subresources: ::prost::alloc::vec::Vec<APISubresourceDiscovery>,
 }
@@ -84,10 +95,12 @@ pub struct APIResourceDiscovery {
 pub struct APISubresourceDiscovery {
     /// subresource is the name of the subresource.  This is used in the URL path and is the unique identifier
     /// for this resource across all versions.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub subresource: ::core::option::Option<::prost::alloc::string::String>,
     /// responseKind describes the group, version, and kind of the serialization schema for the object type this endpoint typically returns.
     /// Some subresources do not return normal resources, these will have null or empty return types.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub response_kind:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind>,
@@ -99,6 +112,7 @@ pub struct APISubresourceDiscovery {
     /// +listMapKey=group
     /// +listMapKey=version
     /// +listMapKey=kind
+    /// +optional
     #[prost(message, repeated, tag = "3")]
     pub accepted_types:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::GroupVersionKind>,
@@ -109,6 +123,7 @@ pub struct APISubresourceDiscovery {
     /// should expect the behavior of standard verbs to align with
     /// Kubernetes interaction conventions.
     /// +listType=set
+    /// +optional
     #[prost(string, repeated, tag = "4")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -116,11 +131,13 @@ pub struct APISubresourceDiscovery {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct APIVersionDiscovery {
     /// version is the name of the version within a group version.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub version: ::core::option::Option<::prost::alloc::string::String>,
     /// resources is a list of APIResourceDiscovery objects for the corresponding group version.
     /// +listType=map
     /// +listMapKey=resource
+    /// +optional
     #[prost(message, repeated, tag = "2")]
     pub resources: ::prost::alloc::vec::Vec<APIResourceDiscovery>,
     /// freshness marks whether a group version's discovery document is up to date.
@@ -130,6 +147,7 @@ pub struct APIVersionDiscovery {
     /// significantly out of date. Clients that require the latest
     /// version of the discovery information be retrieved before
     /// performing an operation should not use the aggregated document
+    /// +optional
     #[prost(string, optional, tag = "3")]
     pub freshness: ::core::option::Option<::prost::alloc::string::String>,
 }

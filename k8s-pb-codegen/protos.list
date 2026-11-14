@@ -37,6 +37,7 @@ protos/api/flowcontrol/v1beta2/generated.proto
 protos/api/flowcontrol/v1beta3/generated.proto
 protos/api/flowcontrol/v1/generated.proto
 protos/api/imagepolicy/v1alpha1/generated.proto
+protos/api/lifecycle/v1alpha1/generated.proto
 protos/apimachinery/pkg/api/resource/generated.proto
 protos/apimachinery/pkg/apis/meta/v1beta1/generated.proto
 protos/apimachinery/pkg/apis/meta/v1/generated.proto
@@ -58,10 +59,11 @@ protos/api/resource/v1alpha3/generated.proto
 protos/api/resource/v1beta1/generated.proto
 protos/api/resource/v1beta2/generated.proto
 protos/api/resource/v1/generated.proto
-protos/api/scheduling/v1alpha2/generated.proto
+protos/api/scheduling/v1alpha3/generated.proto
 protos/api/scheduling/v1beta1/generated.proto
 protos/api/scheduling/v1/generated.proto
 protos/api/storagemigration/v1beta1/generated.proto
+protos/api/storagemigration/v1/generated.proto
 protos/api/storage/v1alpha1/generated.proto
 protos/api/storage/v1beta1/generated.proto
 protos/api/storage/v1/generated.proto
@@ -72,3 +74,4 @@ protos/metrics/pkg/apis/custom_metrics/v1beta2/generated.proto
 protos/metrics/pkg/apis/external_metrics/v1beta1/generated.proto
 protos/metrics/pkg/apis/metrics/v1alpha1/generated.proto
 protos/metrics/pkg/apis/metrics/v1beta1/generated.proto
+protos/metrics/pkg/apis/metrics/v1/generated.proto

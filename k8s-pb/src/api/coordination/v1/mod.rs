@@ -2,6 +2,7 @@
 /// Lease defines a lease concept.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lease {
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -54,14 +55,14 @@ pub struct LeaseSpec {
     /// +optional
     #[prost(int32, optional, tag = "5")]
     pub lease_transitions: ::core::option::Option<i32>,
-    /// Strategy indicates the strategy for picking the leader for coordinated leader election.
+    /// strategy indicates the strategy for picking the leader for coordinated leader election.
     /// If the field is not specified, there is no active coordination for this lease.
     /// (Alpha) Using this field requires the CoordinatedLeaderElection feature gate to be enabled.
     /// +featureGate=CoordinatedLeaderElection
     /// +optional
     #[prost(string, optional, tag = "6")]
     pub strategy: ::core::option::Option<::prost::alloc::string::String>,
-    /// PreferredHolder signals to a lease holder that the lease has a
+    /// preferredHolder signals to a lease holder that the lease has a
     /// more optimal holder and should be given up.
     /// This field can only be set if Strategy is also set.
     /// +featureGate=CoordinatedLeaderElection

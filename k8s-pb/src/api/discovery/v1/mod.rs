@@ -10,8 +10,8 @@ pub struct Endpoint {
     /// additional addresses beyond the first, and kube-proxy does not look at them.
     /// +listType=set
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:maxItems=100
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:maxItems=100
     #[prost(string, repeated, tag = "1")]
     pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// conditions contains information about the current status of the endpoint.
@@ -161,15 +161,15 @@ pub struct EndpointSlice {
     /// slices of addressType "IPv4" and "IPv6". No semantics are defined for
     /// the "FQDN" type.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
     #[prost(string, optional, tag = "4")]
     pub address_type: ::core::option::Option<::prost::alloc::string::String>,
     /// endpoints is a list of unique endpoints in this slice. Each slice may
     /// include a maximum of 1000 endpoints.
     /// +optional
     /// +listType=atomic
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub endpoints: ::prost::alloc::vec::Vec<Endpoint>,
     /// ports specifies the list of network ports exposed by each endpoint in

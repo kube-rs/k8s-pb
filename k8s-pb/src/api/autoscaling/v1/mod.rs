@@ -62,9 +62,11 @@ pub struct ContainerResourceMetricStatus {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// kind is the kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// name is the name of the referent; More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names>
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// apiVersion is the API version of the referent
@@ -123,9 +125,10 @@ pub struct ExternalMetricStatus {
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
 }
 /// configuration of a horizontal pod autoscaler.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscaler {
-    /// Standard object metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// metadata is the standard object metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
@@ -163,6 +166,12 @@ pub struct HorizontalPodAutoscalerCondition {
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
+    /// observedGeneration represents the .metadata.generation that the condition was set based upon.
+    /// For instance, if .metadata.generation is currently 12, but the .status.conditions\[x\].observedGeneration is 9, the condition is out of date
+    /// with respect to the current state of the instance.
+    /// +optional
+    #[prost(int64, optional, tag = "6")]
+    pub observed_generation: ::core::option::Option<i64>,
 }
 /// list of horizontal pod autoscaler objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -178,7 +187,7 @@ pub struct HorizontalPodAutoscalerList {
 /// specification of a horizontal pod autoscaler.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HorizontalPodAutoscalerSpec {
-    /// reference to scaled resource; horizontal pod autoscaler will learn the current resource consumption
+    /// scaleTargetRef is the reference to scaled resource; horizontal pod autoscaler will learn the current resource consumption
     /// and will set the desired number of pods by using its Scale subresource.
     #[prost(message, optional, tag = "1")]
     pub scale_target_ref: ::core::option::Option<CrossVersionObjectReference>,
@@ -188,15 +197,15 @@ pub struct HorizontalPodAutoscalerSpec {
     /// metric is configured.  Scaling is active as long as at least one metric value is
     /// available.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:ifEnabled(HPAScaleToZero)=+k8s:minimum=0
-    /// +k8s:alpha(since: "1.36")=+k8s:ifDisabled(HPAScaleToZero)=+k8s:minimum=1
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:ifEnabled(HPAScaleToZero)=+k8s:minimum=0
+    /// +k8s:beta(since: "1.37")=+k8s:ifDisabled(HPAScaleToZero)=+k8s:minimum=1
     #[prost(int32, optional, tag = "2")]
     pub min_replicas: ::core::option::Option<i32>,
     /// maxReplicas is the upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than MinReplicas.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:minimum=1
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:minimum=1
     #[prost(int32, optional, tag = "3")]
     pub max_replicas: ::core::option::Option<i32>,
     /// targetCPUUtilizationPercentage is the target average CPU utilization (represented as a percentage of requested CPU) over all the pods;
@@ -468,8 +477,9 @@ pub struct ResourceMetricStatus {
 /// Scale represents a scaling request for a resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Scale {
-    /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
+    /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec defines the behavior of the scale. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
@@ -486,9 +496,9 @@ pub struct Scale {
 pub struct ScaleSpec {
     /// replicas is the desired number of instances for the scaled object.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +default=0
-    /// +k8s:alpha(since: "1.36")=+k8s:minimum=0
+    /// +k8s:beta(since: "1.37")=+k8s:minimum=0
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
 }

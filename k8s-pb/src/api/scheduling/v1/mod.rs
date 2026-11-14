@@ -3,7 +3,7 @@
 /// integer value. The value can be any valid integer.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityClass {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]

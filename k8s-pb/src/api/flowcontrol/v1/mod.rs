@@ -40,11 +40,13 @@ pub struct FlowDistinguisherMethod {
     /// `type` is the type of flow distinguisher method
     /// The supported types are "ByUser" and "ByNamespace".
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with
 /// similar attributes and is identified by a pair of strings: the name of the FlowSchema and a "flow distinguisher".
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlowSchema {
     /// `metadata` is the standard object's metadata.
@@ -54,7 +56,7 @@ pub struct FlowSchema {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// `spec` is the specification of the desired behavior of a FlowSchema.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<FlowSchemaSpec>,
     /// `status` is the current status of a FlowSchema.
@@ -68,21 +70,25 @@ pub struct FlowSchema {
 pub struct FlowSchemaCondition {
     /// `type` is the type of the condition.
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// `status` is the status of the condition.
-    /// Can be True, False, Unknown.
-    /// Required.
+    /// Should be specified and set to one of True, False, Unknown.
+    /// +optional
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// `lastTransitionTime` is the last time the condition transitioned from one status to another.
+    /// +optional
     #[prost(message, optional, tag = "3")]
     pub last_transition_time:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
+    /// +optional
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// `message` is a human-readable message indicating details about last transition.
+    /// +optional
     #[prost(string, optional, tag = "5")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -104,6 +110,7 @@ pub struct FlowSchemaSpec {
     /// `priorityLevelConfiguration` should reference a PriorityLevelConfiguration in the cluster. If the reference cannot
     /// be resolved, the FlowSchema will be ignored and marked as invalid in its status.
     /// Required.
+    /// +required
     #[prost(message, optional, tag = "1")]
     pub priority_level_configuration: ::core::option::Option<PriorityLevelConfigurationReference>,
     /// `matchingPrecedence` is used to choose among the FlowSchemas that match a given request. The chosen
@@ -145,6 +152,7 @@ pub struct GroupSubject {
     /// See <https://github.com/kubernetes/apiserver/blob/master/pkg/authentication/user/user.go> for some
     /// well-known group names.
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -159,17 +167,17 @@ pub struct LimitResponse {
     /// "Reject" means that requests that can not be executed upon arrival
     /// are rejected.
     /// Required.
+    /// +required
     /// +unionDiscriminator
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:discriminator
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:modeDiscriminator
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// `queuing` holds the configuration parameters for queuing.
     /// This field may be non-empty only if `type` is `"Queue"`.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:member("Queue")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:member("Reject")=+k8s:forbidden
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:ifMode("Queue")=+k8s:required
     #[prost(message, optional, tag = "2")]
     pub queuing: ::core::option::Option<QueuingConfiguration>,
 }
@@ -203,6 +211,7 @@ pub struct LimitedPriorityLevelConfiguration {
     #[prost(int32, optional, tag = "1")]
     pub nominal_concurrency_shares: ::core::option::Option<i32>,
     /// `limitResponse` indicates what to do with requests that can not be executed right now
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub limit_response: ::core::option::Option<LimitResponse>,
     /// `lendablePercent` prescribes the fraction of the level's NominalCL that
@@ -244,6 +253,7 @@ pub struct NonResourcePolicyRule {
     /// "*" matches all verbs. If it is present, it must be the only entry.
     /// +listType=set
     /// Required.
+    /// +required
     #[prost(string, repeated, tag = "1")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// `nonResourceURLs` is a set of url prefixes that a user should have access to and may not be empty.
@@ -256,6 +266,7 @@ pub struct NonResourcePolicyRule {
     /// "*" matches all non-resource urls. if it is present, it must be the only entry.
     /// +listType=set
     /// Required.
+    /// +required
     #[prost(string, repeated, tag = "6")]
     pub non_resource_ur_ls: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -270,6 +281,7 @@ pub struct PolicyRulesWithSubjects {
     /// A slice that includes both the system:authenticated and system:unauthenticated user groups matches every request.
     /// +listType=atomic
     /// Required.
+    /// +required
     #[prost(message, repeated, tag = "1")]
     pub subjects: ::prost::alloc::vec::Vec<Subject>,
     /// `resourceRules` is a slice of ResourcePolicyRules that identify matching requests according to their verb and the
@@ -287,6 +299,7 @@ pub struct PolicyRulesWithSubjects {
     pub non_resource_rules: ::prost::alloc::vec::Vec<NonResourcePolicyRule>,
 }
 /// PriorityLevelConfiguration represents the configuration of a priority level.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PriorityLevelConfiguration {
     /// `metadata` is the standard object's metadata.
@@ -296,7 +309,7 @@ pub struct PriorityLevelConfiguration {
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// `spec` is the specification of the desired behavior of a "request-priority".
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<PriorityLevelConfigurationSpec>,
     /// `status` is the current status of a "request-priority".
@@ -310,21 +323,25 @@ pub struct PriorityLevelConfiguration {
 pub struct PriorityLevelConfigurationCondition {
     /// `type` is the type of the condition.
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// `status` is the status of the condition.
-    /// Can be True, False, Unknown.
-    /// Required.
+    /// Should be specified and set to one of True, False, Unknown.
+    /// +optional
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// `lastTransitionTime` is the last time the condition transitioned from one status to another.
+    /// +optional
     #[prost(message, optional, tag = "3")]
     pub last_transition_time:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
+    /// +optional
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// `message` is a human-readable message indicating details about last transition.
+    /// +optional
     #[prost(string, optional, tag = "5")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -345,6 +362,7 @@ pub struct PriorityLevelConfigurationList {
 pub struct PriorityLevelConfigurationReference {
     /// `name` is the name of the priority level configuration being referenced
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -361,17 +379,17 @@ pub struct PriorityLevelConfigurationSpec {
     /// _are_ subject to limits and (b) some of the server's limited
     /// capacity is made available exclusively to this priority level.
     /// Required.
+    /// +required
     /// +unionDiscriminator
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:discriminator
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:modeDiscriminator
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// `limited` specifies how requests are handled for a Limited priority level.
     /// This field must be non-empty if and only if `type` is `"Limited"`.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:member("Limited")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:member("Exempt")=+k8s:forbidden
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:ifMode("Limited")=+k8s:required
     #[prost(message, optional, tag = "2")]
     pub limited: ::core::option::Option<LimitedPriorityLevelConfiguration>,
     /// `exempt` specifies how requests are handled for an exempt priority level.
@@ -380,9 +398,8 @@ pub struct PriorityLevelConfigurationSpec {
     /// If empty and `type` is `"Exempt"` then the default values
     /// for `ExemptPriorityLevelConfiguration` apply.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:member("Exempt")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:member("Limited")=+k8s:forbidden
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:ifMode("Exempt")=+k8s:optional
     #[prost(message, optional, tag = "3")]
     pub exempt: ::core::option::Option<ExemptPriorityLevelConfiguration>,
 }
@@ -447,12 +464,14 @@ pub struct ResourcePolicyRule {
     /// "*" matches all verbs and, if present, must be the only entry.
     /// +listType=set
     /// Required.
+    /// +required
     #[prost(string, repeated, tag = "1")]
     pub verbs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// `apiGroups` is a list of matching API groups and may not be empty.
     /// "*" matches all API groups and, if present, must be the only entry.
     /// +listType=set
     /// Required.
+    /// +required
     #[prost(string, repeated, tag = "2")]
     pub api_groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// `resources` is a list of matching resources (i.e., lowercase
@@ -461,6 +480,7 @@ pub struct ResourcePolicyRule {
     /// "*" matches all resources and, if present, must be the only entry.
     /// Required.
     /// +listType=set
+    /// +required
     #[prost(string, repeated, tag = "3")]
     pub resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// `clusterScope` indicates whether to match requests that do not
@@ -489,10 +509,12 @@ pub struct ResourcePolicyRule {
 pub struct ServiceAccountSubject {
     /// `namespace` is the namespace of matching ServiceAccount objects.
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
     /// `name` is the name of matching ServiceAccount objects, or "*" to match regardless of name.
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "2")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -503,6 +525,7 @@ pub struct ServiceAccountSubject {
 pub struct Subject {
     /// `kind` indicates which one of the other fields is non-empty.
     /// Required
+    /// +required
     /// +unionDiscriminator
     #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
@@ -524,6 +547,7 @@ pub struct Subject {
 pub struct UserSubject {
     /// `name` is the username that matches, or "*" to match all usernames.
     /// Required.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }

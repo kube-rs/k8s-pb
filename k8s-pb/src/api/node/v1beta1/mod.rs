@@ -19,6 +19,7 @@ pub struct Overhead {
 /// <https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class>
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RuntimeClass {
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -34,9 +35,9 @@ pub struct RuntimeClass {
     /// The handler must be lowercase, conform to the DNS Label (RFC 1123) requirements,
     /// and is immutable.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-short-name"
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format="k8s-short-name"
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub handler: ::core::option::Option<::prost::alloc::string::String>,
     /// overhead represents the resource overhead associated with running a pod for a
@@ -50,6 +51,7 @@ pub struct RuntimeClass {
     /// If scheduling is nil, this RuntimeClass is assumed to be supported by all
     /// nodes.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "4")]
     pub scheduling: ::core::option::Option<Scheduling>,
 }
@@ -84,6 +86,7 @@ pub struct Scheduling {
     /// tolerated by the pod and the RuntimeClass.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "2")]
     pub tolerations: ::prost::alloc::vec::Vec<super::super::core::v1::Toleration>,
 }
