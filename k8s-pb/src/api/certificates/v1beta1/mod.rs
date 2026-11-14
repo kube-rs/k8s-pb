@@ -160,12 +160,12 @@ pub struct CertificateSigningRequestStatus {
     /// +listType=map
     /// +listMapKey=type
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:listType=map
-    /// +k8s:alpha(since: "1.36")=+k8s:listMapKey=type
-    /// +k8s:alpha(since: "1.36")=+k8s:customUnique
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:item(type: "Approved")=+k8s:zeroOrOneOfMember
-    /// +k8s:alpha(since: "1.36")=+k8s:item(type: "Denied")=+k8s:zeroOrOneOfMember
+    /// +k8s:beta(since: "1.37")=+k8s:listType=map
+    /// +k8s:beta(since: "1.37")=+k8s:listMapKey=type
+    /// +k8s:beta(since: "1.37")=+k8s:customUnique
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:item(type: "Approved")=+k8s:zeroOrOneOfMember
+    /// +k8s:beta(since: "1.37")=+k8s:item(type: "Denied")=+k8s:zeroOrOneOfMember
     #[prost(message, repeated, tag = "1")]
     pub conditions: ::prost::alloc::vec::Vec<CertificateSigningRequestCondition>,
     /// If request was approved, the controller will place the issued certificate here.
@@ -183,7 +183,7 @@ pub struct CertificateSigningRequestStatus {
 /// to a cluster can read ClusterTrustBundles by impersonating a serviceaccount
 /// that they have access to.
 ///
-/// It can be optionally associated with a particular assigner, in which case it
+/// It can be optionally associated with a particular signer, in which case it
 /// contains one valid set of trust anchors for that signer. Signers may have
 /// multiple associated ClusterTrustBundles; each is an independent set of trust
 /// anchors for that signer. Admission control is used to enforce that only users
@@ -233,6 +233,8 @@ pub struct ClusterTrustBundleSpec {
     /// using a `spec.signerName=NAME` field selector.
     ///
     /// +optional
+    /// +k8s:alpha(since:"1.37")=+k8s:optional
+    /// +k8s:alpha(since:"1.37")=+k8s:immutable
     #[prost(string, optional, tag = "1")]
     pub signer_name: ::core::option::Option<::prost::alloc::string::String>,
     /// trustBundle contains the individual X.509 trust anchors for this
@@ -263,6 +265,7 @@ pub struct ExtraValue {
 /// signer.
 ///
 /// Kubelets use this API to implement podCertificate projected volumes
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PodCertificateRequest {
     /// metadata contains the object metadata.
@@ -453,6 +456,9 @@ pub struct PodCertificateRequestStatus {
     /// +listType=map
     /// +listMapKey=type
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:listType=map
+    /// +k8s:alpha(since: "1.37")=+k8s:listMapKey=type
     #[prost(message, repeated, tag = "1")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,

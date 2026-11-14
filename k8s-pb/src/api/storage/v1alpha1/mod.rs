@@ -25,7 +25,7 @@
 /// node.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CSIStorageCapacity {
-    /// Standard object's metadata. The name has no particular meaning. It must be
+    /// metadata is the standard object metadata. The name has no particular meaning. It must be
     /// be a DNS subdomain (dots allowed, 253 characters). To ensure that
     /// there are no conflicts with other CSI drivers on the cluster, the recommendation
     /// is to use csisc-<uuid>, a generated name, or a reverse-domain name which ends
@@ -101,14 +101,14 @@ pub struct CSIStorageCapacityList {
 /// VolumeAttachment objects are non-namespaced.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttachment {
-    /// Standard object metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec represents specification of the desired attach/detach volume behavior.
     /// Populated by the Kubernetes system.
-    /// +k8s:alpha(since: "1.36")=+k8s:immutable
+    /// +k8s:beta(since: "1.37")=+k8s:immutable
     /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<VolumeAttachmentSpec>,
@@ -157,9 +157,9 @@ pub struct VolumeAttachmentSpec {
     /// attacher indicates the name of the volume driver that MUST handle this
     /// request. This is the name returned by GetPluginName().
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:format="k8s-long-name-caseless"
-    /// +k8s:alpha(since: "1.36")=+k8s:maxLength=63
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:format="k8s-long-name-caseless"
+    /// +k8s:beta(since: "1.37")=+k8s:maxLength=63
     #[prost(string, optional, tag = "1")]
     pub attacher: ::core::option::Option<::prost::alloc::string::String>,
     /// source represents the volume that should be attached.
@@ -204,12 +204,12 @@ pub struct VolumeAttachmentStatus {
 /// of PersistentVolumeClaims, and changed in the PersistentVolumeClaim spec after provisioning.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeAttributesClass {
-    /// Standard object's metadata.
+    /// metadata is the standard object metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Name of the CSI driver
+    /// driverName is the name of the CSI driver
     /// This field is immutable.
     #[prost(string, optional, tag = "2")]
     pub driver_name: ::core::option::Option<::prost::alloc::string::String>,

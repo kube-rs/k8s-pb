@@ -39,9 +39,11 @@ pub struct ContainerResourceMetricStatus {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CrossVersionObjectReference {
     /// kind is the kind of the referent; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// name is the name of the referent; More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names>
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// apiVersion is the API version of the referent
@@ -97,8 +99,7 @@ pub struct HpaScalingPolicy {
 /// window is chosen.
 ///
 /// The tolerance is applied to the metric values and prevents scaling too
-/// eagerly for small metric variations. (Note that setting a tolerance requires
-/// the beta HPAConfigurableTolerance feature gate to be enabled.)
+/// eagerly for small metric variations.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HpaScalingRules {
     /// stabilizationWindowSeconds is the number of seconds for which past recommendations should be
@@ -132,9 +133,6 @@ pub struct HpaScalingRules {
     /// and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
     /// triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
     ///
-    /// This is an beta field and requires the HPAConfigurableTolerance feature
-    /// gate to be enabled.
-    ///
     /// +featureGate=HPAConfigurableTolerance
     /// +optional
     #[prost(message, optional, tag = "4")]
@@ -143,6 +141,7 @@ pub struct HpaScalingRules {
 /// HorizontalPodAutoscaler is the configuration for a horizontal pod
 /// autoscaler, which automatically manages the replica count of any resource
 /// implementing the scale subresource based on the metrics specified.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HorizontalPodAutoscaler {
     /// metadata is the standard object metadata.
@@ -205,6 +204,12 @@ pub struct HorizontalPodAutoscalerCondition {
     /// +optional
     #[prost(string, optional, tag = "5")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
+    /// observedGeneration represents the .metadata.generation that the condition was set based upon.
+    /// For instance, if .metadata.generation is currently 12, but the .status.conditions\[x\].observedGeneration is 9, the condition is out of date
+    /// with respect to the current state of the instance.
+    /// +optional
+    #[prost(int64, optional, tag = "6")]
+    pub observed_generation: ::core::option::Option<i64>,
 }
 /// HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -230,16 +235,16 @@ pub struct HorizontalPodAutoscalerSpec {
     /// metric is configured.  Scaling is active as long as at least one metric value is
     /// available.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:ifEnabled(HPAScaleToZero)=+k8s:minimum=0
-    /// +k8s:alpha(since: "1.36")=+k8s:ifDisabled(HPAScaleToZero)=+k8s:minimum=1
+    /// +k8s:beta(since: "1.37")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:ifEnabled(HPAScaleToZero)=+k8s:minimum=0
+    /// +k8s:beta(since: "1.37")=+k8s:ifDisabled(HPAScaleToZero)=+k8s:minimum=1
     #[prost(int32, optional, tag = "2")]
     pub min_replicas: ::core::option::Option<i32>,
     /// maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up.
     /// It cannot be less that minReplicas.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
-    /// +k8s:alpha(since: "1.36")=+k8s:minimum=1
+    /// +k8s:beta(since: "1.37")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:minimum=1
     #[prost(int32, optional, tag = "3")]
     pub max_replicas: ::core::option::Option<i32>,
     /// metrics contains the specifications for which to use to calculate the
@@ -252,6 +257,7 @@ pub struct HorizontalPodAutoscalerSpec {
     /// If not set, the default metric will be set to 80% average CPU utilization.
     /// +listType=atomic
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "4")]
     pub metrics: ::prost::alloc::vec::Vec<MetricSpec>,
     /// behavior configures the scaling behavior of the target
@@ -285,6 +291,7 @@ pub struct HorizontalPodAutoscalerStatus {
     /// currentMetrics is the last read state of the metrics used by this autoscaler.
     /// +listType=atomic
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "5")]
     pub current_metrics: ::prost::alloc::vec::Vec<MetricStatus>,
     /// conditions is the set of conditions required for this autoscaler to scale its target,
@@ -322,6 +329,8 @@ pub struct MetricSpec {
     /// object refers to a metric describing a single kubernetes object
     /// (for example, hits-per-second on an Ingress object).
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:opaqueType
     #[prost(message, optional, tag = "2")]
     pub object: ::core::option::Option<ObjectMetricSource>,
     /// pods refers to a metric describing each pod in the current scale target
@@ -365,6 +374,8 @@ pub struct MetricStatus {
     /// object refers to a metric describing a single kubernetes object
     /// (for example, hits-per-second on an Ingress object).
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:opaqueType
     #[prost(message, optional, tag = "2")]
     pub object: ::core::option::Option<ObjectMetricStatus>,
     /// pods refers to a metric describing each pod in the current scale target
@@ -381,7 +392,7 @@ pub struct MetricStatus {
     /// +optional
     #[prost(message, optional, tag = "4")]
     pub resource: ::core::option::Option<ResourceMetricStatus>,
-    /// container resource refers to a resource metric (such as those specified in
+    /// containerResource refers to a resource metric (such as those specified in
     /// requests and limits) known to Kubernetes describing a single container in each pod in the
     /// current scale target (e.g. CPU or memory). Such metrics are built in to
     /// Kubernetes, and have special scaling options on top of those available
@@ -435,7 +446,7 @@ pub struct MetricValueStatus {
     #[prost(message, optional, tag = "2")]
     pub average_value:
         ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
-    /// currentAverageUtilization is the current value of the average of the
+    /// averageUtilization is the current value of the average of the
     /// resource metric across all relevant pods, represented as a percentage of
     /// the requested value of the resource for the pods.
     /// +optional
@@ -466,7 +477,7 @@ pub struct ObjectMetricStatus {
     /// current contains the current value for the given metric
     #[prost(message, optional, tag = "2")]
     pub current: ::core::option::Option<MetricValueStatus>,
-    /// DescribedObject specifies the descriptions of a object,such as kind,name apiVersion
+    /// describedObject specifies the descriptions of a object,such as kind,name apiVersion
     #[prost(message, optional, tag = "3")]
     pub described_object: ::core::option::Option<CrossVersionObjectReference>,
 }

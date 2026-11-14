@@ -12,11 +12,13 @@ pub struct ExtraValue {
 /// LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given namespace.
 /// Having a namespace scoped resource makes it much easier to grant namespace scoped policy that includes permissions
 /// checking.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalSubjectAccessReview {
     /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec holds information about the request being evaluated.  spec.namespace must be equal to the namespace
@@ -126,11 +128,13 @@ pub struct ResourceRule {
 /// SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a
 /// spec.namespace means "in all namespaces".  Self is a special case, because users should always be able
 /// to check whether they can perform an action
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectAccessReview {
     /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec holds information about the request being evaluated.  user and groups must be empty
@@ -147,10 +151,14 @@ pub struct SelfSubjectAccessReview {
 pub struct SelfSubjectAccessReviewSpec {
     /// resourceAttributes describes information for a resource access request
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:unionMember
     #[prost(message, optional, tag = "1")]
     pub resource_attributes: ::core::option::Option<ResourceAttributes>,
     /// nonResourceAttributes describes information for a non-resource access request
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:unionMember
     #[prost(message, optional, tag = "2")]
     pub non_resource_attributes: ::core::option::Option<NonResourceAttributes>,
 }
@@ -160,11 +168,13 @@ pub struct SelfSubjectAccessReviewSpec {
 /// or to quickly let an end user reason about their permissions. It should NOT Be used by external systems to
 /// drive authorization decisions as this raises confused deputy, cache lifetime/revocation, and correctness concerns.
 /// SubjectAccessReview, and LocalAccessReview are the correct way to defer authorization decisions to the API server.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelfSubjectRulesReview {
     /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec holds information about the request being evaluated.
@@ -183,11 +193,13 @@ pub struct SelfSubjectRulesReviewSpec {
     pub namespace: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// SubjectAccessReview checks whether or not a user or group can perform an action.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectAccessReview {
     /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec holds information about the request being evaluated
@@ -204,10 +216,14 @@ pub struct SubjectAccessReview {
 pub struct SubjectAccessReviewSpec {
     /// resourceAttributes describes information for a resource access request
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:unionMember
     #[prost(message, optional, tag = "1")]
     pub resource_attributes: ::core::option::Option<ResourceAttributes>,
     /// nonResourceAttributes describes information for a non-resource access request
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:unionMember
     #[prost(message, optional, tag = "2")]
     pub non_resource_attributes: ::core::option::Option<NonResourceAttributes>,
     /// user is the user you're testing for.

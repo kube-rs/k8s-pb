@@ -7,7 +7,7 @@
 /// treated as informative, best-effort, supplemental data.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
-    /// Standard object's metadata.
+    /// metadata is the standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]
@@ -79,7 +79,7 @@ pub struct Event {
 /// EventList is a list of Event objects.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventList {
-    /// Standard list metadata.
+    /// metadata is the standard list metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
     #[prost(message, optional, tag = "1")]

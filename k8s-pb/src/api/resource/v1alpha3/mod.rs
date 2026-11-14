@@ -12,7 +12,7 @@ pub struct CelDeviceSelector {
     ///   - driver (string): the name of the driver which defines this device.
     ///   - attributes (map\[string\]object): the device's attributes, grouped by prefix
     ///     (e.g. device.attributes\["dra.example.com"\] evaluates to an object with all
-    ///     of the attributes which were prefixed by "dra.example.com".
+    ///     of the attributes which were prefixed by "dra.example.com").
     ///   - capacity (map\[string\]object): the device's capacities, grouped by prefix.
     ///
     /// Example: Consider a device with driver="dra.example.com", which exposes
@@ -42,6 +42,15 @@ pub struct CelDeviceSelector {
     ///
     /// A robust expression should check for the existence of attributes
     /// before referencing them.
+    ///
+    /// Common errors:
+    /// - "no such key": Use optional chaining (.? followed by orValue())
+    ///    or guarding the check with has() for optional fields.
+    ///    See CEL Optional Types for details:
+    ///    <https://pkg.go.dev/github.com/google/cel-go@v0.17.4/cel#OptionalTypes>
+    ///
+    /// For more CEL expression syntax and examples, see:
+    /// <https://kubernetes.io/docs/reference/using-api/cel/>
     ///
     /// For ease of use, the cel.bind() function is enabled, and can be used
     /// to simplify expressions that access multiple attributes with the
@@ -94,7 +103,7 @@ pub struct DeviceTaint {
     /// Consumers must treat unknown effects like None.
     ///
     /// +required
-    /// +k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub effect: ::core::option::Option<::prost::alloc::string::String>,
     /// TimeAdded represents the time at which the taint was added or
@@ -116,6 +125,7 @@ pub struct DeviceTaint {
 /// DeviceTaintRule adds one taint to all devices which match the selector.
 /// This has the same effect as if the taint was specified directly
 /// in the ResourceSlice by the DRA driver.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceTaintRule {
     /// Standard object metadata
@@ -191,6 +201,9 @@ pub struct DeviceTaintRuleStatus {
     /// +listMapKey=type
     /// +patchStrategy=merge
     /// +patchMergeKey=type
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:listType=map
+    /// +k8s:alpha(since: "1.37")=+k8s:listMapKey=type
     #[prost(message, repeated, tag = "1")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
@@ -228,8 +241,43 @@ pub struct DeviceTaintSelector {
     #[prost(string, optional, tag = "4")]
     pub device: ::core::option::Option<::prost::alloc::string::String>,
 }
-/// PoolStatus contains status information for a single resource pool.
+/// PartitionTypeStatus reports allocatability for a single partition type,
+/// identified by the value of a grouping attribute.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct PartitionTypeStatus {
+    /// Attribute is the fully qualified name of the device attribute whose value
+    /// groups this entry. It is the PartitionTypeAttribute declared by the
+    /// devices' own slice, or the default named in the request when their slice
+    /// declares none.
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "4")]
+    pub attribute: ::core::option::Option<::prost::alloc::string::String>,
+    /// Type is the partition type value (e.g. "Full" or "Half").
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "1")]
+    pub r#type: ::core::option::Option<::prost::alloc::string::String>,
+    /// Total is the number of devices of this partition type in the pool.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "2")]
+    pub total: ::core::option::Option<i32>,
+    /// Allocatable is the number of additional devices of this partition type
+    /// that could still be allocated given current shared-counter consumption.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "3")]
+    pub allocatable: ::core::option::Option<i32>,
+}
+/// PoolStatus contains status information for a single resource pool.
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PoolStatus {
     /// Driver is the DRA driver name for this pool.
     /// Must be a DNS subdomain (e.g., "gpu.example.com").
@@ -321,6 +369,33 @@ pub struct PoolStatus {
     /// +k8s:maxBytes=256
     #[prost(string, optional, tag = "10")]
     pub validation_error: ::core::option::Option<::prost::alloc::string::String>,
+    /// PartitionSummary reports allocatability per (attribute, partition type)
+    /// for a partitionable pool that publishes SharedCounters. Each entry names
+    /// the grouping attribute it was resolved from: the PartitionTypeAttribute
+    /// declared by a device's own slice, or for devices whose slice declares
+    /// none, the default named in the request. A pool that mixes partitions
+    /// declared under different attributes reports each independently. When no
+    /// slice declares an attribute and the request names no default, the pool
+    /// reports no partition summary.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +listType=atomic
+    /// +k8s:listType=atomic
+    /// +k8s:unique=map
+    /// +k8s:listMapKey=attribute
+    /// +k8s:listMapKey=type
+    /// +k8s:maxItems=32
+    #[prost(message, repeated, tag = "11")]
+    pub partition_summary: ::prost::alloc::vec::Vec<PartitionTypeStatus>,
+    /// ShareableSummary reports aggregate capacity for a pool that contains
+    /// devices with AllowMultipleAllocations. It is populated only when at
+    /// least one device in the pool is shareable.
+    ///
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "13")]
+    pub shareable_summary: ::core::option::Option<ShareableSummaryStatus>,
 }
 /// ResourcePoolStatusRequest triggers a one-time calculation of resource pool status
 /// based on the provided filters. Once status is set, the request is considered complete and will not be reprocessed.
@@ -395,6 +470,26 @@ pub struct ResourcePoolStatusRequestSpec {
     /// +k8s:maximum=1000
     #[prost(int32, optional, tag = "3")]
     pub limit: ::core::option::Option<i32>,
+    /// DefaultPartitionTypeAttribute optionally names a device attribute (by its
+    /// fully qualified name, e.g. "gpu.example.com/profile") to use as the default
+    /// grouping attribute for partitionable devices whose slice has not declared
+    /// one themselves.
+    ///
+    /// A slice's own PartitionTypeAttribute always takes precedence. This default
+    /// applies only to devices whose slice does not declare one, so that a request
+    /// can still get an accurate partitionSummary from a driver that has not
+    /// been updated to declare it. When neither the slice nor this default names
+    /// an attribute, a partitionable pool reports no partitionSummary.
+    ///
+    /// Must include the domain qualifier.
+    ///
+    /// +optional
+    /// +featureGate=DRAPartitionableDevicesType
+    /// +k8s:ifDisabled(DRAPartitionableDevicesType)=+k8s:forbidden
+    /// +k8s:ifEnabled(DRAPartitionableDevicesType)=+k8s:optional
+    /// +k8s:ifEnabled(DRAPartitionableDevicesType)=+k8s:format=k8s-resource-fully-qualified-name
+    #[prost(string, optional, tag = "4")]
+    pub default_partition_type_attribute: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourcePoolStatusRequestStatus contains the calculated pool status information.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -431,15 +526,74 @@ pub struct ResourcePoolStatusRequestStatus {
     /// +optional
     /// +k8s:optional
     /// +listType=map
-    /// +k8s:listType=map
     /// +listMapKey=type
-    /// +k8s:listMapKey=type
     /// +patchStrategy=merge
     /// +patchMergeKey=type
     /// +k8s:maxItems=10
+    /// +k8s:alpha(since: "1.37")=+k8s:listType=map
+    /// +k8s:alpha(since: "1.37")=+k8s:listMapKey=type
     #[prost(message, repeated, tag = "3")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
+}
+/// ShareableCapacityStatus reports aggregate amounts for a single shareable
+/// capacity key.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ShareableCapacityStatus {
+    /// Name is the capacity name.
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Total is the sum of this capacity across shareable devices in the pool.
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(message, optional, tag = "2")]
+    pub total: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// Consumed is the amount drawn by current allocations.
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(message, optional, tag = "3")]
+    pub consumed: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// Available is Total minus Consumed, never negative.
+    ///
+    /// +required
+    /// +k8s:required
+    #[prost(message, optional, tag = "4")]
+    pub available: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+}
+/// ShareableSummaryStatus reports aggregate capacity for a pool that contains
+/// devices with AllowMultipleAllocations.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ShareableSummaryStatus {
+    /// FullyAvailableDevices is the number of shareable devices with no
+    /// capacity consumed.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "1")]
+    pub fully_available_devices: ::core::option::Option<i32>,
+    /// PartiallyAvailableDevices is the number of shareable devices with some
+    /// but not all capacity consumed.
+    ///
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    #[prost(int32, optional, tag = "2")]
+    pub partially_available_devices: ::core::option::Option<i32>,
+    /// Capacity reports aggregate total, consumed, and available amounts per
+    /// shareable capacity key across the pool.
+    ///
+    /// +optional
+    /// +k8s:optional
+    /// +listType=atomic
+    /// +k8s:maxItems=32
+    #[prost(message, repeated, tag = "3")]
+    pub capacity: ::prost::alloc::vec::Vec<ShareableCapacityStatus>,
 }
 
 impl crate::Resource for DeviceTaintRule {

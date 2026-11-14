@@ -27,6 +27,7 @@ pub struct ServerStorageVersion {
     pub served_versions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Storage version of a specific resource.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageVersion {
     /// metadata is the standard object metadata.

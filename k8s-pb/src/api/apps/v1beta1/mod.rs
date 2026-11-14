@@ -18,9 +18,11 @@ pub struct ControllerRevision {
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// data is the serialized representation of the state.
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub data: ::core::option::Option<super::super::super::apimachinery::pkg::runtime::RawExtension>,
     /// revision indicates the revision of the state represented by Data.
+    /// +optional
     #[prost(int64, optional, tag = "3")]
     pub revision: ::core::option::Option<i64>,
 }
@@ -38,6 +40,8 @@ pub struct ControllerRevisionList {
 /// DEPRECATED - This group version of Deployment is deprecated by apps/v1beta2/Deployment. See the release notes for
 /// more information.
 /// Deployment enables declarative updates for Pods and ReplicaSets.
+/// +k8s:supportsSubresource="/scale"
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Deployment {
     /// Standard object metadata.
@@ -45,7 +49,7 @@ pub struct Deployment {
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the Deployment.
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<DeploymentSpec>,
     /// Most recently observed status of the Deployment.
@@ -57,23 +61,29 @@ pub struct Deployment {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct DeploymentCondition {
     /// Type of deployment condition.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// Status of the condition, one of True, False, Unknown.
+    /// +optional
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// The last time this condition was updated.
+    /// +optional
     #[prost(message, optional, tag = "6")]
     pub last_update_time:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// Last time the condition transitioned from one status to another.
+    /// +optional
     #[prost(message, optional, tag = "7")]
     pub last_transition_time:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
     /// The reason for the condition's last transition.
+    /// +optional
     #[prost(string, optional, tag = "4")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// A human readable message indicating details about the transition.
+    /// +optional
     #[prost(string, optional, tag = "5")]
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -93,6 +103,7 @@ pub struct DeploymentList {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentRollback {
     /// Required: This must match the Name of a deployment.
+    /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// The annotations to be updated to a deployment
@@ -101,6 +112,7 @@ pub struct DeploymentRollback {
     pub updated_annotations:
         ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// The config of this deployment rollback.
+    /// +optional
     #[prost(message, optional, tag = "3")]
     pub rollback_to: ::core::option::Option<RollbackConfig>,
 }
@@ -120,6 +132,7 @@ pub struct DeploymentSpec {
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
     /// Template describes the pods that will be created.
     /// The only allowed template.spec.restartPolicy value is "Always".
+    /// +required
     #[prost(message, optional, tag = "3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
     /// The deployment strategy to use to replace existing pods with new ones.
@@ -270,6 +283,7 @@ pub struct RollingUpdateStatefulSetStrategy {
     /// for updates. During a rolling update, all pods from ordinal Replicas-1 to
     /// Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched.
     /// This is helpful in being able to do a canary based deployment. The default value is 0.
+    /// +optional
     #[prost(int32, optional, tag = "1")]
     pub partition: ::core::option::Option<i32>,
     /// maxUnavailable is the maximum number of pods that can be unavailable during the update.
@@ -291,6 +305,7 @@ pub struct RollingUpdateStatefulSetStrategy {
 pub struct Scale {
     /// Standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// spec defines the behavior of the scale. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.>
@@ -307,9 +322,9 @@ pub struct Scale {
 pub struct ScaleSpec {
     /// replicas is the number of observed instances of the scaled object.
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +default=0
-    /// +k8s:alpha(since: "1.36")=+k8s:minimum=0
+    /// +k8s:beta(since: "1.37")=+k8s:minimum=0
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
 }
@@ -317,6 +332,7 @@ pub struct ScaleSpec {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScaleStatus {
     /// replias is the actual number of observed instances of the scaled object.
+    /// +optional
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
     /// selector is a label query over pods that should match the replicas count. More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
@@ -343,13 +359,15 @@ pub struct ScaleStatus {
 ///
 /// The StatefulSet guarantees that a given network identity will always
 /// map to the same storage identity.
+/// +k8s:supportsSubresource="/scale"
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatefulSet {
     /// +optional
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the desired identities of pods in this set.
-    /// +optional
+    /// +required
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<StatefulSetSpec>,
     /// Status is the current status of Pods in this StatefulSet. This data
@@ -362,9 +380,11 @@ pub struct StatefulSet {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetCondition {
     /// Type of statefulset condition.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// Status of the condition, one of True, False, Unknown.
+    /// +optional
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// Last time the condition transitioned from one status to another.
@@ -414,6 +434,7 @@ pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
     /// VolumeClaimTemplates when the StatefulSet is deleted. The default policy
     /// of `Retain` causes PVCs to not be affected by StatefulSet deletion. The
     /// `Delete` policy causes those PVCs to be deleted.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub when_deleted: ::core::option::Option<::prost::alloc::string::String>,
     /// whenScaled specifies what happens to PVCs created from StatefulSet
@@ -421,6 +442,7 @@ pub struct StatefulSetPersistentVolumeClaimRetentionPolicy {
     /// policy of `Retain` causes PVCs to not be affected by a scaledown. The
     /// `Delete` policy causes the associated PVCs for any excess pods above
     /// the replica count to be deleted.
+    /// +optional
     #[prost(string, optional, tag = "2")]
     pub when_scaled: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -436,9 +458,11 @@ pub struct StatefulSetSpec {
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
     /// selector is a label query over pods that should match the replica count.
-    /// If empty, defaulted to labels on the pod template.
+    /// It must match the pod template's labels.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors>
-    /// +optional
+    /// +required
+    /// +k8s:alpha(since: "1.37")=+k8s:required
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(message, optional, tag = "2")]
     pub selector:
         ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::LabelSelector>,
@@ -448,6 +472,7 @@ pub struct StatefulSetSpec {
     /// of the StatefulSet. Each pod will be named with the format
     /// <statefulsetname>-<podindex>. For example, a pod in a StatefulSet named
     /// "web" with index number "3" would be named "web-3".
+    /// +required
     #[prost(message, optional, tag = "3")]
     pub template: ::core::option::Option<super::super::core::v1::PodTemplateSpec>,
     /// volumeClaimTemplates is a list of claims that pods are allowed to reference.
@@ -458,7 +483,10 @@ pub struct StatefulSetSpec {
     /// any volumes in the template, with the same name.
     /// TODO: Define the behavior if a claim already exists with the same name.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.37")=+k8s:eachVal=+k8s:opaqueType
     #[prost(message, repeated, tag = "4")]
     pub volume_claim_templates: ::prost::alloc::vec::Vec<super::super::core::v1::PersistentVolumeClaim>,
     /// serviceName is the name of the service that governs this StatefulSet.
@@ -467,6 +495,8 @@ pub struct StatefulSetSpec {
     /// pattern: pod-specific-string.serviceName.default.svc.cluster.local
     /// where "pod-specific-string" is managed by the StatefulSet controller.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "5")]
     pub service_name: ::core::option::Option<::prost::alloc::string::String>,
     /// podManagementPolicy controls how pods are created during initial scale up,
@@ -478,17 +508,21 @@ pub struct StatefulSetSpec {
     /// to match the desired scale without waiting, and on scale down will delete
     /// all pods at once.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(string, optional, tag = "6")]
     pub pod_management_policy: ::core::option::Option<::prost::alloc::string::String>,
     /// updateStrategy indicates the StatefulSetUpdateStrategy that will be
     /// employed to update Pods in the StatefulSet when a revision is made to
     /// Template.
+    /// +optional
     #[prost(message, optional, tag = "7")]
     pub update_strategy: ::core::option::Option<StatefulSetUpdateStrategy>,
     /// revisionHistoryLimit is the maximum number of revisions that will
     /// be maintained in the StatefulSet's revision history. The revision history
     /// consists of all revisions not represented by a currently applied
     /// StatefulSetSpec version. The default value is 10.
+    /// +optional
     #[prost(int32, optional, tag = "8")]
     pub revision_history_limit: ::core::option::Option<i32>,
     /// minReadySeconds is the minimum number of seconds for which a newly created pod should be ready
@@ -569,9 +603,11 @@ pub struct StatefulSetStatus {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatefulSetUpdateStrategy {
     /// Type indicates the type of the StatefulSetUpdateStrategy.
+    /// +optional
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// RollingUpdate is used to communicate parameters when Type is RollingUpdateStatefulSetStrategyType.
+    /// +optional
     #[prost(message, optional, tag = "2")]
     pub rolling_update: ::core::option::Option<RollingUpdateStatefulSetStrategy>,
 }

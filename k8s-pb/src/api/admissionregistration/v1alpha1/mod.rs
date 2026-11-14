@@ -584,6 +584,7 @@ pub struct TypeChecking {
     pub expression_warnings: ::prost::alloc::vec::Vec<ExpressionWarning>,
 }
 /// ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatingAdmissionPolicy {
     /// metadata is the standard object metadata; More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.>
@@ -642,7 +643,7 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     /// If the referenced resource does not exist, this binding is considered invalid and will be ignored
     /// Required.
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub policy_name: ::core::option::Option<::prost::alloc::string::String>,
     /// paramRef specifies the parameter resource used to configure the admission control policy.
@@ -701,7 +702,7 @@ pub struct ValidatingAdmissionPolicyBindingSpec {
     /// Required.
     /// +listType=set
     /// +required
-    /// +k8s:alpha(since: "1.36")=+k8s:required
+    /// +k8s:beta(since: "1.37")=+k8s:required
     #[prost(string, repeated, tag = "4")]
     pub validation_actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -818,6 +819,9 @@ pub struct ValidatingAdmissionPolicyStatus {
     /// +optional
     /// +listType=map
     /// +listMapKey=type
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:listType=map
+    /// +k8s:alpha(since: "1.37")=+k8s:listMapKey=type
     #[prost(message, repeated, tag = "3")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,

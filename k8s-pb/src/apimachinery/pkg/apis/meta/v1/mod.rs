@@ -157,6 +157,9 @@ pub struct ApplyOptions {
 /// 	    // +patchStrategy=merge
 /// 	    // +listType=map
 /// 	    // +listMapKey=type
+/// 	    // +k8s:alpha(since: "1.37")=+k8s:optional
+/// 	    // +k8s:alpha(since: "1.37")=+k8s:listType=map
+/// 	    // +k8s:alpha(since: "1.37")=+k8s:listMapKey=type
 /// 	    Conditions \[\]metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
 ///
 /// 	    // other fields
@@ -172,12 +175,14 @@ pub struct Condition {
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:Pattern=`^([a-z0-9](\[-a-z0-9\]*[a-z0-9])?(\.[a-z0-9](\[-a-z0-9\]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?\[A-Za-z0-9\])$`
     /// +kubebuilder:validation:MaxLength=316
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
     /// status of the condition, one of True, False, Unknown.
     /// +required
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:Enum=True;False;Unknown
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// observedGeneration represents the .metadata.generation that the condition was set based upon.
@@ -185,6 +190,8 @@ pub struct Condition {
     /// with respect to the current state of the instance.
     /// +optional
     /// +kubebuilder:validation:Minimum=0
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:minimum=0
     #[prost(int64, optional, tag = "3")]
     pub observed_generation: ::core::option::Option<i64>,
     /// lastTransitionTime is the last time the condition transitioned from one status to another.
@@ -193,6 +200,7 @@ pub struct Condition {
     /// +kubebuilder:validation:Required
     /// +kubebuilder:validation:Type=string
     /// +kubebuilder:validation:Format=date-time
+    /// +k8s:alpha(since: "1.37")=+k8s:customValidation
     #[prost(message, optional, tag = "4")]
     pub last_transition_time: ::core::option::Option<Time>,
     /// reason contains a programmatic identifier indicating the reason for the condition's last transition.
@@ -205,6 +213,8 @@ pub struct Condition {
     /// +kubebuilder:validation:MaxLength=1024
     /// +kubebuilder:validation:MinLength=1
     /// +kubebuilder:validation:Pattern=`^[A-Za-z](\[A-Za-z0-9_,:\]*[A-Za-z0-9_])?$`
+    /// +k8s:alpha(since: "1.37")=+k8s:required
+    /// +k8s:alpha(since: "1.37")=+k8s:maxBytes=1024
     #[prost(string, optional, tag = "5")]
     pub reason: ::core::option::Option<::prost::alloc::string::String>,
     /// message is a human readable message indicating details about the transition.
@@ -698,6 +708,7 @@ pub struct ManagedFieldsEntry {
     pub manager: ::core::option::Option<::prost::alloc::string::String>,
     /// Operation is the type of operation which lead to this ManagedFieldsEntry being created.
     /// The only valid values for this field are 'Apply' and 'Update'.
+    /// +k8s:alpha(since: "1.37")=+k8s:required
     #[prost(string, optional, tag = "2")]
     pub operation: ::core::option::Option<::prost::alloc::string::String>,
     /// APIVersion defines the version of this resource that this field set
@@ -802,6 +813,8 @@ pub struct ObjectMeta {
     /// Read-only.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids>
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(string, optional, tag = "5")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// An opaque value that represents the internal version of this object that can
@@ -820,6 +833,8 @@ pub struct ObjectMeta {
     /// A sequence number representing a specific generation of the desired state.
     /// Populated by the system. Read-only.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:minimum=0
     #[prost(int64, optional, tag = "7")]
     pub generation: ::core::option::Option<i64>,
     /// CreationTimestamp is a timestamp representing the server time when this object was
@@ -831,6 +846,7 @@ pub struct ObjectMeta {
     /// Null for lists.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(message, optional, tag = "8")]
     pub creation_timestamp: ::core::option::Option<Time>,
     /// DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This
@@ -852,6 +868,8 @@ pub struct ObjectMeta {
     /// Read-only.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(message, optional, tag = "9")]
     pub deletion_timestamp: ::core::option::Option<Time>,
     /// Number of seconds allowed for this object to gracefully terminate before
@@ -859,6 +877,8 @@ pub struct ObjectMeta {
     /// May only be shortened.
     /// Read-only.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(int64, optional, tag = "10")]
     pub deletion_grace_period_seconds: ::core::option::Option<i64>,
     /// Map of string keys and values that can be used to organize and categorize
@@ -886,6 +906,7 @@ pub struct ObjectMeta {
     /// +patchStrategy=merge
     /// +listType=map
     /// +listMapKey=uid
+    /// +k8s:alpha(since:"1.37")=+k8s:optional
     #[prost(message, repeated, tag = "13")]
     pub owner_references: ::prost::alloc::vec::Vec<OwnerReference>,
     /// Must be empty before the object is deleted from the registry. Each entry
@@ -916,6 +937,7 @@ pub struct ObjectMeta {
     ///
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "17")]
     pub managed_fields: ::prost::alloc::vec::Vec<ManagedFieldsEntry>,
 }
@@ -926,18 +948,22 @@ pub struct ObjectMeta {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct OwnerReference {
     /// API version of the referent.
+    /// +k8s:alpha(since:"1.37")=+k8s:required
     #[prost(string, optional, tag = "5")]
     pub api_version: ::core::option::Option<::prost::alloc::string::String>,
     /// Kind of the referent.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds>
+    /// +k8s:alpha(since:"1.37")=+k8s:required
     #[prost(string, optional, tag = "1")]
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     /// Name of the referent.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names>
+    /// +k8s:alpha(since:"1.37")=+k8s:required
     #[prost(string, optional, tag = "3")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     /// UID of the referent.
     /// More info: <https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids>
+    /// +k8s:alpha(since:"1.37")=+k8s:required
     #[prost(string, optional, tag = "4")]
     pub uid: ::core::option::Option<::prost::alloc::string::String>,
     /// If true, this reference points to the managing controller.
@@ -964,6 +990,7 @@ pub struct PartialObjectMetadata {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<ObjectMeta>,
 }

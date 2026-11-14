@@ -15,6 +15,7 @@ pub mod events;
 pub mod extensions;
 pub mod flowcontrol;
 pub mod imagepolicy;
+pub mod lifecycle;
 pub mod networking;
 pub mod node;
 pub mod policy;

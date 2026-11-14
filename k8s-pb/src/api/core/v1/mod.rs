@@ -163,6 +163,7 @@ pub struct Binding {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The target object that you want to bind to the standard object.
@@ -457,6 +458,13 @@ pub struct ClusterTrustBundleProjection {
     /// Relative path from the volume root to write the bundle.
     #[prost(string, optional, tag = "4")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
+    /// user is Optional: The owner UID of the created file.
+    /// If specified, the item-level user field takes precedence over defaultUser.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "6")]
+    pub user: ::core::option::Option<i64>,
 }
 /// Information about the condition of a component.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -487,6 +495,7 @@ pub struct ComponentStatus {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// List of component conditions observed
@@ -542,6 +551,8 @@ pub struct ConfigMap {
     /// the Data field, this is enforced during validation process.
     /// Using this field will require 1.10+ apiserver and
     /// kubelet.
+    /// Note: BinaryData keys are not currently propagated to container env vars
+    /// via ConfigMapKeyRef or ConfigMapRef env sources; only Data keys are used.
     /// +optional
     #[prost(btree_map = "string, bytes", tag = "3")]
     pub binary_data:
@@ -552,6 +563,7 @@ pub struct ConfigMap {
 ///
 /// The contents of the target ConfigMap's Data field will represent the
 /// key-value pairs as environment variables.
+/// Keys in the BinaryData field are not currently propagated to container env vars.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ConfigMapEnvSource {
     /// The ConfigMap to select from.
@@ -569,7 +581,8 @@ pub struct ConfigMapKeySelector {
     /// The ConfigMap to select from.
     #[prost(message, optional, tag = "1")]
     pub local_object_reference: ::core::option::Option<LocalObjectReference>,
-    /// The key to select.
+    /// The key to select from the ConfigMap's Data field.
+    /// Keys in the BinaryData field are not currently propagated to container env vars.
     #[prost(string, optional, tag = "2")]
     pub key: ::core::option::Option<::prost::alloc::string::String>,
     /// Specify whether the ConfigMap or its key must be defined
@@ -677,6 +690,13 @@ pub struct ConfigMapVolumeSource {
     /// +optional
     #[prost(bool, optional, tag = "4")]
     pub optional: ::core::option::Option<bool>,
+    /// defaultUser is Optional: The owner UID of the created files by default.
+    /// The defaultUser field is only used as a fallback when the item-level user field is unset.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "5")]
+    pub default_user: ::core::option::Option<i64>,
 }
 /// A single application container that you want to run within a pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1238,6 +1258,13 @@ pub struct DownwardAPIVolumeFile {
     /// +optional
     #[prost(int32, optional, tag = "4")]
     pub mode: ::core::option::Option<i32>,
+    /// user is Optional: The owner UID of the created file.
+    /// If specified, the item-level user field takes precedence over defaultUser.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "5")]
+    pub user: ::core::option::Option<i64>,
 }
 /// DownwardAPIVolumeSource represents a volume containing downward API info.
 /// Downward API volumes support ownership management and SELinux relabeling.
@@ -1259,6 +1286,13 @@ pub struct DownwardAPIVolumeSource {
     /// +optional
     #[prost(int32, optional, tag = "2")]
     pub default_mode: ::core::option::Option<i32>,
+    /// defaultUser is Optional: The owner UID of the created files by default.
+    /// The defaultUser field is only used as a fallback when the item-level user field is unset.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "3")]
+    pub default_user: ::core::option::Option<i64>,
 }
 /// Represents an empty directory for a pod.
 /// Empty directory volumes support ownership management and SELinux relabeling.
@@ -1280,6 +1314,18 @@ pub struct EmptyDirVolumeSource {
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub size_limit: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// mode specifies the permission bits for the emptyDir directory, in numeric
+    /// notation (e.g., 0755, 01777). Must be a value between 0000 and 01777.
+    /// If not specified, defaults to 0777.
+    /// This might be in conflict with other options that affect the file
+    /// mode, like fsGroup. If fsGroup is specified, the fsGroup permissions
+    /// will override the mode specified here.
+    /// This field has no effect on Windows.
+    /// This field is alpha and requires EmptyDirVolumeMode featuregate to be enabled.
+    /// +featureGate=EmptyDirVolumeMode
+    /// +optional
+    #[prost(int32, optional, tag = "3")]
+    pub mode: ::core::option::Option<i32>,
 }
 /// EndpointAddress is a tuple that describes single IP address.
 /// Deprecated: This API is deprecated in v1.33+.
@@ -1846,6 +1892,44 @@ pub struct EventSource {
     #[prost(string, optional, tag = "2")]
     pub host: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// EvictionResponder allows you to specify the responder reacting to an Eviction.
+/// Responders should observe and communicate through the Eviction Resource API to help with
+/// the graceful eviction of a target (e.g. termination of a pod).
+/// +structType=atomic
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct EvictionResponder {
+    /// name allows you to identify the responder responding to the Eviction.
+    ///
+    /// It must be a valid domain-prefixed key (such as "acme.io/foo").
+    /// Domain names *.k8s.io and *.kubernetes.io are reserved.
+    /// This field must be unique for each responder.
+    /// This field is required.
+    /// +required
+    /// +k8s:required
+    /// +k8s:format=k8s-prefixed-label-key
+    /// +k8s:customValidation
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// priority for this responder. Higher priorities are selected first by the evictionrequest-controller.
+    /// If there are responders with the same priority, the responder whose domain name comes first in the
+    /// alphabetical higher domain order, will be picked. This means that the top domain labels are compared
+    /// alphabetically first, followed by the lower domain labels. The key is compared last.
+    ///
+    /// The responder that is the managing controller of the pod should set the value of
+    /// this field to 10000 to allow both for preemption or fallback registration by other
+    /// responders.
+    ///
+    /// The minimum value is 0 and the maximum value is 100000.
+    /// The interval 0-999 is reserved for responders with *.k8s.io suffix.
+    /// This field is required.
+    /// +required
+    /// +k8s:required
+    /// +k8s:minimum=0
+    /// +k8s:maximum=100000
+    /// +k8s:customValidation
+    #[prost(int32, optional, tag = "2")]
+    pub priority: ::core::option::Option<i32>,
+}
 /// ExecAction describes a "run in container" action.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ExecAction {
@@ -2051,6 +2135,14 @@ pub struct GrpcAction {
     /// +default=""
     #[prost(string, optional, tag = "2")]
     pub service: ::core::option::Option<::prost::alloc::string::String>,
+    /// mode specifies the connection mode for the gRPC health probe.
+    /// Set to "TLS" to use TLS without certificate verification.
+    /// Set to "Plaintext" to use a plaintext (insecure) connection explicitly.
+    /// If not specified, the probe uses a plaintext (insecure) connection.
+    /// +featureGate=GRPCContainerProbeTLS
+    /// +optional
+    #[prost(string, optional, tag = "3")]
+    pub mode: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Represents a volume that is populated with the contents of a git repository.
 /// Git repo volumes do not support ownership management.
@@ -2146,6 +2238,12 @@ pub struct HttpGetAction {
     /// +listType=atomic
     #[prost(message, repeated, tag = "5")]
     pub http_headers: ::prost::alloc::vec::Vec<HttpHeader>,
+    /// Protocol selects the wire protocol for the probe connection.
+    /// Nil defaults to HTTP/1.1.
+    /// +optional
+    /// +featureGate=H2CContainerProbe
+    #[prost(string, optional, tag = "6")]
+    pub protocol: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// HTTPHeader describes a custom header to be used in HTTP probes
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2366,6 +2464,13 @@ pub struct KeyToPath {
     /// +optional
     #[prost(int32, optional, tag = "3")]
     pub mode: ::core::option::Option<i32>,
+    /// user is Optional: The owner UID of the created file.
+    /// If specified, the item-level user field takes precedence over defaultUser.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "4")]
+    pub user: ::core::option::Option<i64>,
 }
 /// Lifecycle describes actions that the management system should take in response to container lifecycle
 /// events. For the PostStart and PreStop lifecycle handlers, management of the container blocks
@@ -2648,6 +2753,8 @@ pub struct NfsVolumeSource {
 }
 /// Namespace provides a scope for Names.
 /// Use of multiple namespaces is optional.
+/// +k8s:supportsSubresource="/status"
+/// +k8s:supportsSubresource="/finalize"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespace {
     /// Standard object's metadata.
@@ -2731,6 +2838,8 @@ pub struct NamespaceStatus {
 }
 /// Node is a worker node in Kubernetes.
 /// Each node will have a unique identifier in the cache (i.e. in etcd).
+/// +k8s:supportsSubresource="/status"
+/// +k8s:supportsSubresource="/proxy"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Node {
     /// Standard object's metadata.
@@ -2787,25 +2896,91 @@ pub struct NodeAffinity {
     pub preferred_during_scheduling_ignored_during_execution:
         ::prost::alloc::vec::Vec<PreferredSchedulingTerm>,
 }
+/// NodeAllocatableMappedResources describes mapped node allocatable resource allocations.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct NodeAllocatableMappedResources {
+    /// Name is the name of the resource (e.g., cpu, memory).
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Quantity is the total node allocatable resource capacity allocated for the claim.
+    /// This claim's allocated devices is shared by all the containers referencing the claim.
+    /// Kubelet adds this value to both requests and limits at the pod-level cgroup, and to limits at the container-level cgroup for each container referencing the claim.
+    /// +required
+    /// +k8s:required
+    #[prost(message, optional, tag = "2")]
+    pub quantity: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+}
+/// NodeAllocatableOverheadResources describes auxiliary overhead resource allocations.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct NodeAllocatableOverheadResources {
+    /// Name is the name of the resource (e.g., cpu, memory).
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// PerPod is the flat overhead quantity allocated per pod.
+    /// Adding to each container limit allows individual containers to utilize the overhead, while the parent pod-level cgroup limit caps the total usage at the pod boundary where the overhead is accounted for exactly once.
+    /// At least one of PerPod or PerContainer must be specified. Specifying neither is an invalid configuration.
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "2")]
+    pub per_pod: ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+    /// PerContainer is the variable overhead quantity applied for each container referencing the claim.
+    /// The container references are recorded in `nodeAllocatableResourceClaimStatuses.containers`.
+    /// The total overhead quantity allocated for the claim is computed as:
+    /// Quantity = PerPod + (PerContainer * NumReferences)
+    /// Kubelet accounts for this overhead in cgroups:
+    /// - Pod-level cgroup (requests and limits): Kubelet adds PerPod + (PerContainer * NumReferences).
+    /// - Container-level cgroup (limits only): Kubelet adds PerPod + PerContainer for each referencing container.
+    /// This allows any single container to access the pod-level overhead, while the parent cgroup caps the total usage to account for PerPod exactly once.
+    /// At least one of PerPod or PerContainer must be specified. Specifying neither is an invalid configuration.
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "3")]
+    pub per_container:
+        ::core::option::Option<super::super::super::apimachinery::pkg::api::resource::Quantity>,
+}
 /// NodeAllocatableResourceClaimStatus describes the status of node allocatable resources allocated via DRA.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeAllocatableResourceClaimStatus {
     /// ResourceClaimName is the resource claim referenced by the pod that resulted in this node allocatable resource allocation.
     /// +required
+    /// +k8s:required
     #[prost(string, optional, tag = "1")]
     pub resource_claim_name: ::core::option::Option<::prost::alloc::string::String>,
     /// Containers lists the names of all containers in this pod that reference the claim.
     /// +optional
     /// +listType=set
+    /// +k8s:optional
+    /// +k8s:listType=set
     #[prost(string, repeated, tag = "2")]
     pub containers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Resources is a map of the node-allocatable resource name to the aggregate quantity allocated to the claim.
-    /// +required
-    #[prost(btree_map = "string, message", tag = "3")]
-    pub resources: ::prost::alloc::collections::BTreeMap<
-        ::prost::alloc::string::String,
-        super::super::super::apimachinery::pkg::api::resource::Quantity,
-    >,
+    /// Mapping contains allocations through devices mapped in the device spec's `nodeAllocatableResources\[...\].mapping` field.
+    /// This is used by kubelet for pod level and container-level cgroup enforcement.
+    /// +optional
+    /// +patchStrategy=merge
+    /// +patchMergeKey=name
+    /// +listType=map
+    /// +listMapKey=name
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=name
+    #[prost(message, repeated, tag = "4")]
+    pub mapping: ::prost::alloc::vec::Vec<NodeAllocatableMappedResources>,
+    /// Overhead contains allocations through devices mapped in the device spec's `nodeAllocatableResources\[...\].overhead` field.
+    /// This is used by kubelet for pod level and container-level cgroup enforcement.
+    /// +optional
+    /// +patchStrategy=merge
+    /// +patchMergeKey=name
+    /// +listType=map
+    /// +listMapKey=name
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=name
+    #[prost(message, repeated, tag = "5")]
+    pub overhead: ::prost::alloc::vec::Vec<NodeAllocatableOverheadResources>,
 }
 /// NodeCondition contains condition information for a node.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2924,6 +3099,22 @@ pub struct NodeList {
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<Node>,
 }
+/// NodePodPreemptionPolicy defines the node-level policies governing preemption for pods on this node.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct NodePodPreemptionPolicy {
+    /// DisableResizePreemption lists the owners (e.g., autoscalers, operators, administrators)
+    /// that have requested to disable scheduler and Kubelet preemption for in-place pod resize on this node.
+    /// If this list is non-empty, resize-induced preemption is disabled on this node.
+    /// This is an alpha field and requires enabling the InPlacePodVerticalScalingSchedulerPreemption feature gate.
+    /// +listType=set
+    /// +k8s:listType=set
+    /// +optional
+    /// +k8s:maxItems=20
+    /// +k8s:optional
+    /// +k8s:eachVal=+k8s:format=k8s-label-key
+    #[prost(string, repeated, tag = "1")]
+    pub disable_resize_preemption: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// NodeProxyOptions is the query options to a Node's proxy call.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NodeProxyOptions {
@@ -3023,6 +3214,9 @@ pub struct NodeSpec {
     pub pod_cid_rs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// ID of the node assigned by the cloud provider in the format: <ProviderName>://<ProviderSpecificNodeID>
     /// +optional
+    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:alpha(since: "1.36")=+k8s:update=NoModify
+    /// +k8s:alpha(since: "1.36")=+k8s:update=NoUnset
     #[prost(string, optional, tag = "3")]
     pub provider_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Unschedulable controls node schedulability of new pods. By default, node is schedulable.
@@ -3044,6 +3238,14 @@ pub struct NodeSpec {
     /// +optional
     #[prost(string, optional, tag = "2")]
     pub external_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// PodPreemptionPolicy controls the node-level preemption behaviors for pods on this node.
+    /// This is an alpha field and requires enabling the InPlacePodVerticalScalingSchedulerPreemption feature gate.
+    /// +featureGate=InPlacePodVerticalScalingSchedulerPreemption
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:ifDisabled(InPlacePodVerticalScalingSchedulerPreemption)=+k8s:forbidden
+    #[prost(message, optional, tag = "8")]
+    pub pod_preemption_policy: ::core::option::Option<NodePodPreemptionPolicy>,
 }
 /// NodeStatus is information about the current status of a node.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3189,6 +3391,11 @@ pub struct NodeSystemInfo {
     /// Swap Info reported by the node.
     #[prost(message, optional, tag = "11")]
     pub swap: ::core::option::Option<NodeSwapStatus>,
+    /// Whether the node is running in a user namespace.
+    /// +featureGate=KubeletInUserNamespace
+    /// +optional
+    #[prost(bool, optional, tag = "12")]
+    pub running_in_user_namespace: ::core::option::Option<bool>,
 }
 /// ObjectFieldSelector selects an APIVersioned field of an object.
 /// +structType=atomic
@@ -3266,6 +3473,7 @@ pub struct ObjectReference {
 /// PersistentVolume (PV) is a storage resource provisioned by an administrator.
 /// It is analogous to a node.
 /// More info: <https://kubernetes.io/docs/concepts/storage/persistent-volumes>
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolume {
     /// Standard object's metadata.
@@ -3288,6 +3496,7 @@ pub struct PersistentVolume {
     pub status: ::core::option::Option<PersistentVolumeStatus>,
 }
 /// PersistentVolumeClaim is a user's request for and claim to a persistent volume
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentVolumeClaim {
     /// Standard object's metadata.
@@ -3394,8 +3603,8 @@ pub struct PersistentVolumeClaimSpec {
     /// * An existing PVC (PersistentVolumeClaim)
     /// If the provisioner or an external controller can support the specified data source,
     /// it will create a new volume based on the contents of the specified data source.
-    /// When the AnyVolumeDataSource feature gate is enabled, dataSource contents will be copied to dataSourceRef,
-    /// and dataSourceRef contents will be copied to dataSource when dataSourceRef.namespace is not specified.
+    /// dataSource contents will be copied to dataSourceRef, and dataSourceRef contents will be
+    /// copied to dataSource when dataSourceRef.namespace is not specified.
     /// If the namespace is specified, then dataSourceRef will not be copied to dataSource.
     /// +optional
     #[prost(message, optional, tag = "7")]
@@ -3421,7 +3630,6 @@ pub struct PersistentVolumeClaimSpec {
     ///    specified.
     /// * While dataSource only allows local objects, dataSourceRef allows objects
     ///    in any namespaces.
-    /// (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
     /// (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
     /// +optional
     #[prost(message, optional, tag = "8")]
@@ -3546,6 +3754,13 @@ pub struct PersistentVolumeClaimStatus {
     /// +optional
     #[prost(message, optional, tag = "9")]
     pub modify_volume_status: ::core::option::Option<ModifyVolumeStatus>,
+    /// healthStatus contains the latest controller-reported health information
+    /// for the volume bound to this claim.
+    /// +featureGate=CSIVolumeHealth
+    /// +optional
+    /// +k8s:optional
+    #[prost(message, optional, tag = "10")]
+    pub health_status: ::core::option::Option<VolumeHealthStatus>,
 }
 /// PersistentVolumeClaimTemplate is used to produce
 /// PersistentVolumeClaim objects as part of an EphemeralVolumeSource.
@@ -3556,6 +3771,7 @@ pub struct PersistentVolumeClaimTemplate {
     /// validation.
     ///
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// The specification for the PersistentVolumeClaim. The entire content is
@@ -3833,6 +4049,10 @@ pub struct PhotonPersistentDiskVolumeSource {
 }
 /// Pod is a collection of containers that can run on a host. This resource is created
 /// by clients and scheduled onto hosts.
+/// +k8s:supportsSubresource="/status"
+/// +k8s:supportsSubresource="/ephemeralcontainers"
+/// +k8s:supportsSubresource="/resize"
+/// +k8s:supportsSubresource="/eviction"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pod {
     /// Standard object's metadata.
@@ -4100,6 +4320,13 @@ pub struct PodCertificateProjection {
     #[prost(btree_map = "string, string", tag = "7")]
     pub user_annotations:
         ::prost::alloc::collections::BTreeMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+    /// user is Optional: The owner UID of the created file.
+    /// If specified, the item-level user field takes precedence over defaultUser.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "8")]
+    pub user: ::core::option::Option<i64>,
 }
 /// PodCondition contains details for the current condition of this pod.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4576,11 +4803,8 @@ pub struct PodSecurityContext {
     /// Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
     /// whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
     /// CSIDriver instance. Other volumes are always re-labelled recursively.
-    /// "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
     ///
-    /// If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
-    /// If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
-    /// and "Recursive" for all other volumes.
+    /// If not specified, "MountOption" is used.
     ///
     /// This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
     ///
@@ -4701,7 +4925,6 @@ pub struct PodSpec {
     pub service_account_name: ::core::option::Option<::prost::alloc::string::String>,
     /// DeprecatedServiceAccount is a deprecated alias for ServiceAccountName.
     /// Deprecated: Use serviceAccountName instead.
-    /// +k8s:conversion-gen=false
     /// +optional
     #[prost(string, optional, tag = "9")]
     pub service_account: ::core::option::Option<::prost::alloc::string::String>,
@@ -4722,19 +4945,16 @@ pub struct PodSpec {
     /// When `hostNetwork` is true, specified `hostPort` fields in port definitions must match `containerPort`,
     /// and unspecified `hostPort` fields in port definitions are defaulted to match `containerPort`.
     /// Default to false.
-    /// +k8s:conversion-gen=false
     /// +optional
     #[prost(bool, optional, tag = "11")]
     pub host_network: ::core::option::Option<bool>,
     /// Use the host's pid namespace.
     /// Optional: Default to false.
-    /// +k8s:conversion-gen=false
     /// +optional
     #[prost(bool, optional, tag = "12")]
     pub host_pid: ::core::option::Option<bool>,
     /// Use the host's ipc namespace.
     /// Optional: Default to false.
-    /// +k8s:conversion-gen=false
     /// +optional
     #[prost(bool, optional, tag = "13")]
     pub host_ipc: ::core::option::Option<bool>,
@@ -4743,7 +4963,6 @@ pub struct PodSpec {
     /// in the same pod, and the first process in each container will not be assigned PID 1.
     /// HostPID and ShareProcessNamespace cannot both be set.
     /// Optional: Default to false.
-    /// +k8s:conversion-gen=false
     /// +optional
     #[prost(bool, optional, tag = "27")]
     pub share_process_namespace: ::core::option::Option<bool>,
@@ -4784,6 +5003,7 @@ pub struct PodSpec {
     /// If specified, the pod's tolerations.
     /// +optional
     /// +listType=atomic
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, repeated, tag = "22")]
     pub tolerations: ::prost::alloc::vec::Vec<Toleration>,
     /// HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts
@@ -4842,6 +5062,8 @@ pub struct PodSpec {
     pub enable_service_links: ::core::option::Option<bool>,
     /// PreemptionPolicy is the Policy for preempting pods with lower priority.
     /// One of Never, PreemptLowerPriority.
+    /// When Priority Admission Controller is enabled, it prevents users from setting
+    /// this field. The admission controller populates this field from PriorityClassName.
     /// Defaults to PreemptLowerPriority if unset.
     /// +optional
     #[prost(string, optional, tag = "31")]
@@ -4921,7 +5143,6 @@ pub struct PodSpec {
     /// When set to false, a new userns is created for the pod. Setting false is useful for
     /// mitigating container breakout vulnerabilities even allowing users to run their
     /// containers as root without actually having root privileges on the host.
-    /// +k8s:conversion-gen=false
     /// +optional
     #[prost(bool, optional, tag = "37")]
     pub host_users: ::core::option::Option<bool>,
@@ -4980,7 +5201,6 @@ pub struct PodSpec {
     /// - `hostNetwork` must be set to false.
     ///
     /// This field must be a valid DNS subdomain as defined in RFC 1123 and contain at most 64 characters.
-    /// Requires the HostnameOverride feature gate to be enabled.
     ///
     /// +featureGate=HostnameOverride
     /// +optional
@@ -5003,6 +5223,34 @@ pub struct PodSpec {
     /// +optional
     #[prost(message, optional, tag = "43")]
     pub scheduling_group: ::core::option::Option<PodSchedulingGroup>,
+    /// evictionResponders reference responders that react to Evictions based on EvictionRequests.
+    /// Responders should observe and communicate through the Eviction Resource API to help with
+    /// the graceful termination of a pod. The responders are selected sequentially, according to
+    /// their specified priority.
+    ///
+    /// Responders should periodically report on an eviction progress by updating the
+    /// .status.responders\[\].heartbeatTime field of the Eviction object. If this field is not updated
+    /// within the heartbeat deadline defined by the Eviction API (currently 20 minutes), the eviction
+    /// is passed over to the next responder with a lower priority. If there is no other responder,
+    /// the last default imperative-eviction.k8s.io/evictor responder with a priority of 100 will
+    /// evict the pod using the imperative Eviction API (pods/<name>/eviction subresource).
+    ///
+    /// The maximum length of the responders list is 10.
+    /// Responders are not supported when the pod is part of a PodGroup (.spec.schedulingGroup is set).
+    /// This field can only be set on creation and is immutable afterwards.
+    /// +featureGate=EvictionRequestAPI
+    /// +optional
+    /// +patchMergeKey=name
+    /// +patchStrategy=merge
+    /// +listType=map
+    /// +listMapKey=name
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=name
+    /// +k8s:maxItems=10
+    /// +k8s:alpha(since: "1.37")=+k8s:dependentForbidden("schedulingGroup")
+    #[prost(message, repeated, tag = "44")]
+    pub eviction_responders: ::prost::alloc::vec::Vec<EvictionResponder>,
 }
 /// PodStatus represents information about the status of a pod. Status may trail the actual
 /// state of a system, especially if the node that hosts the pod cannot contact the control
@@ -5190,27 +5438,27 @@ pub struct PodStatus {
     /// Examples include "cpu", "memory", "ephemeral-storage", and hugepages.
     /// +featureGate=DRANodeAllocatableResources
     /// +optional
-    /// +listType=atomic
+    /// +patchStrategy=merge
+    /// +patchMergeKey=resourceClaimName
+    /// +listType=map
+    /// +listMapKey=resourceClaimName
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=resourceClaimName
     #[prost(message, repeated, tag = "21")]
     pub node_allocatable_resource_claim_statuses:
         ::prost::alloc::vec::Vec<NodeAllocatableResourceClaimStatus>,
-}
-/// PodStatusResult is a wrapper for PodStatus returned by kubelet that can be encode/decoded
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PodStatusResult {
-    /// Standard object's metadata.
-    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
+    /// volumeHealth contains node-reported health for each volume the pod is using.
+    /// Populated by the kubelet on the pod's node.
+    /// +featureGate=CSIVolumeHealth
     /// +optional
-    #[prost(message, optional, tag = "1")]
-    pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
-    /// Most recently observed status of the pod.
-    /// This data may not be up to date.
-    /// Populated by the system.
-    /// Read-only.
-    /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status>
-    /// +optional
-    #[prost(message, optional, tag = "2")]
-    pub status: ::core::option::Option<PodStatus>,
+    /// +listType=map
+    /// +listMapKey=name
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=name
+    #[prost(message, repeated, tag = "22")]
+    pub volume_health: ::prost::alloc::vec::Vec<PodVolumeHealth>,
 }
 /// PodTemplate describes a template for creating copies of a predefined pod.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -5244,6 +5492,7 @@ pub struct PodTemplateSpec {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Specification of the desired behavior of the pod.
@@ -5251,6 +5500,37 @@ pub struct PodTemplateSpec {
     /// +optional
     #[prost(message, optional, tag = "2")]
     pub spec: ::core::option::Option<PodSpec>,
+}
+/// PodVolumeHealth contains health information for a volume used by a pod,
+/// reported by the CSI node plugin via the kubelet.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PodVolumeHealth {
+    /// name matches an entry in pod.spec.volumes.
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "1")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// conditions is the set of adverse conditions reported by
+    /// the CSI node plugin for this volume on this node.
+    /// At most 16 conditions may be reported.
+    /// +optional
+    /// +listType=map
+    /// +listMapKey=status
+    /// +patchMergeKey=status
+    /// +patchStrategy=merge
+    /// +listMapKey=reason
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=status
+    /// +k8s:listMapKey=reason
+    /// +k8s:maxItems=16
+    #[prost(message, repeated, tag = "2")]
+    pub health_conditions: ::prost::alloc::vec::Vec<VolumeHealthCondition>,
+    /// lastTransitionTime is when the current set of conditions first appeared.
+    /// +optional
+    #[prost(message, optional, tag = "3")]
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
 }
 /// PortStatus represents the error condition of a service port
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -5419,6 +5699,13 @@ pub struct ProjectedVolumeSource {
     /// +optional
     #[prost(int32, optional, tag = "2")]
     pub default_mode: ::core::option::Option<i32>,
+    /// defaultUser is Optional: The owner UID of the created files by default.
+    /// The defaultUser field is only used as a fallback when the item-level user field is unset.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "3")]
+    pub default_user: ::core::option::Option<i64>,
 }
 /// Represents a Quobyte mount that lasts the lifetime of a pod.
 /// Quobyte volumes do not support ownership management or SELinux relabeling.
@@ -5571,6 +5858,7 @@ pub struct RangeAllocation {
     /// Standard object's metadata.
     /// More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
+    /// +k8s:opaqueType
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Range is string that identifies the range represented by 'data'.
@@ -5587,8 +5875,8 @@ pub struct ReplicationController {
     /// be the same as the Pod(s) that the replication controller manages.
     /// Standard object's metadata. More info: <https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata>
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:optional
-    /// +k8s:alpha(since: "1.36")=+k8s:subfield(name)=+k8s:format=k8s-long-name
+    /// +k8s:beta(since: "1.37")=+k8s:subfield(name)=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:subfield(name)=+k8s:format=k8s-long-name
     #[prost(message, optional, tag = "1")]
     pub metadata: ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::ObjectMeta>,
     /// Spec defines the specification of the desired behavior of the replication controller.
@@ -5649,18 +5937,18 @@ pub struct ReplicationControllerSpec {
     /// Defaults to 1.
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller>
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +default=1
-    /// +k8s:alpha(since: "1.36")=+k8s:minimum=0
+    /// +k8s:beta(since: "1.37")=+k8s:minimum=0
     #[prost(int32, optional, tag = "1")]
     pub replicas: ::core::option::Option<i32>,
     /// Minimum number of seconds for which a newly created pod should be ready
     /// without any of its container crashing, for it to be considered available.
     /// Defaults to 0 (pod will be considered available as soon as it is ready)
     /// +optional
-    /// +k8s:alpha(since: "1.36")=+k8s:optional
+    /// +k8s:beta(since: "1.37")=+k8s:optional
     /// +default=0
-    /// +k8s:alpha(since: "1.36")=+k8s:minimum=0
+    /// +k8s:beta(since: "1.37")=+k8s:minimum=0
     #[prost(int32, optional, tag = "4")]
     pub min_ready_seconds: ::core::option::Option<i32>,
     /// Selector is a label query over pods that should match the Replicas count.
@@ -5678,6 +5966,7 @@ pub struct ReplicationControllerSpec {
     /// The only allowed template.spec.restartPolicy value is "Always".
     /// More info: <https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template>
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
     #[prost(message, optional, tag = "3")]
     pub template: ::core::option::Option<PodTemplateSpec>,
 }
@@ -5773,6 +6062,7 @@ pub struct ResourceHealth {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ResourceQuota sets aggregate quota restrictions enforced per namespace
+/// +k8s:supportsSubresource="/status"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceQuota {
     /// Standard object's metadata.
@@ -5887,8 +6177,13 @@ pub struct ResourceRequirements {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceStatus {
     /// Name of the resource. Must be unique within the pod and in case of non-DRA resource, match one of the resources from the pod spec.
-    /// For DRA resources, the value must be "claim:<claim_name>/<request>".
-    /// When this status is reported about a container, the "claim_name" and "request" must match one of the claims of this container.
+    /// For DRA resources, the value must be "claim:<claim_name>/<request>" when
+    /// container.resources.claims\[*\].request is set or "claim:<claim_name>" when
+    /// container.resources.claims\[*\].request is empty.
+    /// For DRA-backed extended resources, "claim:<claim_name>/<request>" is used
+    /// when the claim name and request name are recorded in pod.status.extendedResourceClaimStatus.
+    /// When this status is reported about a container, the "claim_name" and "request"
+    /// must match one of the claims of this container.
     /// +required
     #[prost(string, optional, tag = "1")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
@@ -6108,6 +6403,8 @@ pub struct Secret {
     /// Used to facilitate programmatic handling of secret data.
     /// More info: <https://kubernetes.io/docs/concepts/configuration/secret/#secret-types>
     /// +optional
+    /// +k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:immutable
     #[prost(string, optional, tag = "3")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -6231,6 +6528,13 @@ pub struct SecretVolumeSource {
     /// +optional
     #[prost(bool, optional, tag = "4")]
     pub optional: ::core::option::Option<bool>,
+    /// defaultUser is Optional: The owner UID of the created files by default.
+    /// The defaultUser field is only used as a fallback when the item-level user field is unset.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "5")]
+    pub default_user: ::core::option::Option<i64>,
 }
 /// SecurityContext holds security configuration that will be applied to a container.
 /// Some fields are present in both SecurityContext and PodSecurityContext.  When both
@@ -6338,6 +6642,8 @@ pub struct SerializedReference {
 /// Service is a named abstraction of software service (for example, mysql) consisting of local port
 /// (for example 3306) that the proxy listens on, and the selector that determines which pods
 /// will answer requests sent through the proxy.
+/// +k8s:supportsSubresource="/status"
+/// +k8s:supportsSubresource="/proxy"
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
     /// Standard object's metadata.
@@ -6436,6 +6742,13 @@ pub struct ServiceAccountTokenProjection {
     /// token into.
     #[prost(string, optional, tag = "3")]
     pub path: ::core::option::Option<::prost::alloc::string::String>,
+    /// user is Optional: The owner UID of the created file.
+    /// If specified, the item-level user field takes precedence over defaultUser.
+    /// (Alpha) This field requires the AtomicWriteVolumeUserFields feature gate to be enabled.
+    /// +featureGate=AtomicWriteVolumeUserFields
+    /// +optional
+    #[prost(int64, optional, tag = "4")]
+    pub user: ::core::option::Option<i64>,
 }
 /// ServiceList holds a list of services.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -6784,6 +7097,7 @@ pub struct ServiceStatus {
     /// +patchStrategy=merge
     /// +listType=map
     /// +listMapKey=type
+    /// +k8s:alpha(since: "1.37")=+k8s:eachVal=+k8s:opaqueType
     #[prost(message, repeated, tag = "2")]
     pub conditions:
         ::prost::alloc::vec::Vec<super::super::super::apimachinery::pkg::apis::meta::v1::Condition>,
@@ -6920,6 +7234,8 @@ pub struct Toleration {
     /// Key is the taint key that the toleration applies to. Empty means match all taint keys.
     /// If the key is empty, operator must be Exists; this combination means to match all values and all keys.
     /// +optional
+    /// +k8s:alpha(since: "1.37")=+k8s:optional
+    /// +k8s:alpha(since: "1.37")=+k8s:format=k8s-label-key
     #[prost(string, optional, tag = "1")]
     pub key: ::core::option::Option<::prost::alloc::string::String>,
     /// Operator represents a key's relationship to the value.
@@ -7180,6 +7496,60 @@ pub struct VolumeDevice {
     #[prost(string, optional, tag = "2")]
     pub device_path: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// VolumeHealthCondition represents an adverse health condition reported for a volume.
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct VolumeHealthCondition {
+    /// status is the machine-parseable health category.
+    /// Possible values:
+    /// - "Inaccessible": the volume cannot be accessed.
+    /// - "DataLoss": data loss has been detected on the volume.
+    /// - "Degraded": the volume is functioning with reduced capability.
+    /// +required
+    /// +k8s:required
+    #[prost(string, optional, tag = "1")]
+    pub status: ::core::option::Option<::prost::alloc::string::String>,
+    /// reason is a brief CamelCase machine-parseable reason.
+    /// Together with status it forms the unique identity of a condition entry.
+    /// Maximum permitted length of a reason is 256 bytes.
+    /// +required
+    /// +k8s:required
+    /// +k8s:maxBytes=256
+    #[prost(string, optional, tag = "2")]
+    pub reason: ::core::option::Option<::prost::alloc::string::String>,
+    /// message is a human-readable description.
+    /// Maximum permitted length of a message is 1024 bytes.
+    /// +optional
+    /// +k8s:optional
+    /// +k8s:maxBytes=1024
+    #[prost(string, optional, tag = "3")]
+    pub message: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// VolumeHealthStatus contains health information for a volume reported
+/// by the CSI controller plugin.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VolumeHealthStatus {
+    /// conditions is the set of adverse conditions reported by
+    /// the CSI controller plugin. An empty list means no adverse condition.
+    /// At most 16 conditions may be reported.
+    /// +optional
+    /// +listType=map
+    /// +listMapKey=status
+    /// +patchMergeKey=status
+    /// +patchStrategy=merge
+    /// +listMapKey=reason
+    /// +k8s:optional
+    /// +k8s:listType=map
+    /// +k8s:listMapKey=status
+    /// +k8s:listMapKey=reason
+    /// +k8s:maxItems=16
+    #[prost(message, repeated, tag = "1")]
+    pub health_conditions: ::prost::alloc::vec::Vec<VolumeHealthCondition>,
+    /// lastTransitionTime is when the current set of conditions first appeared.
+    /// +optional
+    #[prost(message, optional, tag = "2")]
+    pub last_transition_time:
+        ::core::option::Option<super::super::super::apimachinery::pkg::apis::meta::v1::Time>,
+}
 /// VolumeMount describes a mounting of a Volume within a container.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct VolumeMount {
@@ -7210,8 +7580,7 @@ pub struct VolumeMount {
     /// +optional
     #[prost(string, optional, tag = "7")]
     pub recursive_read_only: ::core::option::Option<::prost::alloc::string::String>,
-    /// Path within the container at which the volume should be mounted.  Must
-    /// not contain ':'.
+    /// Path within the container at which the volume should be mounted.
     #[prost(string, optional, tag = "3")]
     pub mount_path: ::core::option::Option<::prost::alloc::string::String>,
     /// Path within the volume from which the container's volume should be mounted.
@@ -7235,6 +7604,17 @@ pub struct VolumeMount {
     /// +optional
     #[prost(string, optional, tag = "6")]
     pub sub_path_expr: ::core::option::Option<::prost::alloc::string::String>,
+    /// bindMountOptions is the list of additional bind mount options to apply when
+    /// mounting this volume into the container. Allowed values are noexec,
+    /// nodev, and nosuid. These are Linux mount options and have no effect on
+    /// Windows nodes.
+    /// This field is not supported with image volumes.
+    /// This is an alpha field and requires enabling the VolumeBindMountOptions feature gate.
+    /// +featureGate=VolumeBindMountOptions
+    /// +optional
+    /// +listType=set
+    #[prost(string, repeated, tag = "8")]
+    pub bind_mount_options: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// VolumeMountStatus shows status of volume mounts.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]

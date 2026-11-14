@@ -1009,17 +1009,17 @@
       }
     ]
   },
-  "api.certificates.v1alpha1.ClusterTrustBundle": {
+  "api.certificates.v1.ClusterTrustBundle": {
     "name": "clustertrustbundles",
     "namespaced": false,
-    "apiVersion": "certificates.k8s.io/v1alpha1",
+    "apiVersion": "certificates.k8s.io/v1",
     "group": "certificates.k8s.io",
-    "version": "v1alpha1",
+    "version": "v1",
     "kind": "ClusterTrustBundle",
-    "proto": "api.certificates.v1alpha1.ClusterTrustBundle",
-    "rust": "api::certificates::v1alpha1::ClusterTrustBundle",
+    "proto": "api.certificates.v1.ClusterTrustBundle",
+    "rust": "api::certificates::v1::ClusterTrustBundle",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::certificates::v1alpha1::ClusterTrustBundleSpec",
+    "spec": "api::certificates::v1::ClusterTrustBundleSpec",
     "status": null,
     "condition": null,
     "scopedVerbs": {
@@ -1034,10 +1034,58 @@
       ]
     },
     "paths": [
-      "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
-      "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}"
+      "/apis/certificates.k8s.io/v1/clustertrustbundles",
+      "/apis/certificates.k8s.io/v1/clustertrustbundles/{name}"
     ],
     "subresources": []
+  },
+  "api.certificates.v1.PodCertificateRequest": {
+    "name": "podcertificaterequests",
+    "namespaced": true,
+    "apiVersion": "certificates.k8s.io/v1",
+    "group": "certificates.k8s.io",
+    "version": "v1",
+    "kind": "PodCertificateRequest",
+    "proto": "api.certificates.v1.PodCertificateRequest",
+    "rust": "api::certificates::v1::PodCertificateRequest",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::certificates::v1::PodCertificateRequestSpec",
+    "status": "api::certificates::v1::PodCertificateRequestStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/certificates.k8s.io/v1/podcertificaterequests",
+      "/apis/certificates.k8s.io/v1/namespaces/{namespace}/podcertificaterequests",
+      "/apis/certificates.k8s.io/v1/namespaces/{namespace}/podcertificaterequests/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/certificates.k8s.io/v1/namespaces/{namespace}/podcertificaterequests/{name}/status"
+        ]
+      }
+    ]
   },
   "api.certificates.v1beta1.ClusterTrustBundle": {
     "name": "clustertrustbundles",
@@ -2196,6 +2244,102 @@
       }
     ]
   },
+  "api.lifecycle.v1alpha1.Eviction": {
+    "name": "evictions",
+    "namespaced": true,
+    "apiVersion": "lifecycle.k8s.io/v1alpha1",
+    "group": "lifecycle.k8s.io",
+    "version": "v1alpha1",
+    "kind": "Eviction",
+    "proto": "api.lifecycle.v1alpha1.Eviction",
+    "rust": "api::lifecycle::v1alpha1::Eviction",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::lifecycle::v1alpha1::EvictionSpec",
+    "status": "api::lifecycle::v1alpha1::EvictionStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/lifecycle.k8s.io/v1alpha1/evictions",
+      "/apis/lifecycle.k8s.io/v1alpha1/namespaces/{namespace}/evictions",
+      "/apis/lifecycle.k8s.io/v1alpha1/namespaces/{namespace}/evictions/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/lifecycle.k8s.io/v1alpha1/namespaces/{namespace}/evictions/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.lifecycle.v1alpha1.EvictionRequest": {
+    "name": "evictionrequests",
+    "namespaced": true,
+    "apiVersion": "lifecycle.k8s.io/v1alpha1",
+    "group": "lifecycle.k8s.io",
+    "version": "v1alpha1",
+    "kind": "EvictionRequest",
+    "proto": "api.lifecycle.v1alpha1.EvictionRequest",
+    "rust": "api::lifecycle::v1alpha1::EvictionRequest",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::lifecycle::v1alpha1::EvictionRequestSpec",
+    "status": "api::lifecycle::v1alpha1::EvictionRequestStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/lifecycle.k8s.io/v1alpha1/evictionrequests",
+      "/apis/lifecycle.k8s.io/v1alpha1/namespaces/{namespace}/evictionrequests",
+      "/apis/lifecycle.k8s.io/v1alpha1/namespaces/{namespace}/evictionrequests/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/lifecycle.k8s.io/v1alpha1/namespaces/{namespace}/evictionrequests/{name}/status"
+        ]
+      }
+    ]
+  },
   "api.networking.v1.IPAddress": {
     "name": "ipaddresses",
     "namespaced": false,
@@ -2378,80 +2522,6 @@
         },
         "paths": [
           "/apis/networking.k8s.io/v1/servicecidrs/{name}/status"
-        ]
-      }
-    ]
-  },
-  "api.networking.v1beta1.IPAddress": {
-    "name": "ipaddresses",
-    "namespaced": false,
-    "apiVersion": "networking.k8s.io/v1beta1",
-    "group": "networking.k8s.io",
-    "version": "v1beta1",
-    "kind": "IPAddress",
-    "proto": "api.networking.v1beta1.IPAddress",
-    "rust": "api::networking::v1beta1::IPAddress",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::networking::v1beta1::IPAddressSpec",
-    "status": null,
-    "condition": null,
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/networking.k8s.io/v1beta1/ipaddresses",
-      "/apis/networking.k8s.io/v1beta1/ipaddresses/{name}"
-    ],
-    "subresources": []
-  },
-  "api.networking.v1beta1.ServiceCIDR": {
-    "name": "servicecidrs",
-    "namespaced": false,
-    "apiVersion": "networking.k8s.io/v1beta1",
-    "group": "networking.k8s.io",
-    "version": "v1beta1",
-    "kind": "ServiceCIDR",
-    "proto": "api.networking.v1beta1.ServiceCIDR",
-    "rust": "api::networking::v1beta1::ServiceCIDR",
-    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::networking::v1beta1::ServiceCIDRSpec",
-    "status": "api::networking::v1beta1::ServiceCIDRStatus",
-    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
-    "scopedVerbs": {
-      "all": [
-        "create",
-        "delete",
-        "deletecollection",
-        "get",
-        "list",
-        "patch",
-        "update"
-      ]
-    },
-    "paths": [
-      "/apis/networking.k8s.io/v1beta1/servicecidrs",
-      "/apis/networking.k8s.io/v1beta1/servicecidrs/{name}"
-    ],
-    "subresources": [
-      {
-        "name": "status",
-        "scopedVerbs": {
-          "all": [
-            "get",
-            "patch",
-            "update"
-          ]
-        },
-        "paths": [
-          "/apis/networking.k8s.io/v1beta1/servicecidrs/{name}/status"
         ]
       }
     ]
@@ -2691,6 +2761,50 @@
       "/apis/resource.k8s.io/v1/deviceclasses/{name}"
     ],
     "subresources": []
+  },
+  "api.resource.v1.DeviceTaintRule": {
+    "name": "devicetaintrules",
+    "namespaced": false,
+    "apiVersion": "resource.k8s.io/v1",
+    "group": "resource.k8s.io",
+    "version": "v1",
+    "kind": "DeviceTaintRule",
+    "proto": "api.resource.v1.DeviceTaintRule",
+    "rust": "api::resource::v1::DeviceTaintRule",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::resource::v1::DeviceTaintRuleSpec",
+    "status": "api::resource::v1::DeviceTaintRuleStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/resource.k8s.io/v1/devicetaintrules",
+      "/apis/resource.k8s.io/v1/devicetaintrules/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/resource.k8s.io/v1/devicetaintrules/{name}/status"
+        ]
+      }
+    ]
   },
   "api.resource.v1.ResourceClaim": {
     "name": "resourceclaims",
@@ -3250,18 +3364,18 @@
     ],
     "subresources": []
   },
-  "api.scheduling.v1alpha2.PodGroup": {
-    "name": "podgroups",
+  "api.scheduling.v1alpha3.CompositePodGroup": {
+    "name": "compositepodgroups",
     "namespaced": true,
-    "apiVersion": "scheduling.k8s.io/v1alpha2",
+    "apiVersion": "scheduling.k8s.io/v1alpha3",
     "group": "scheduling.k8s.io",
-    "version": "v1alpha2",
-    "kind": "PodGroup",
-    "proto": "api.scheduling.v1alpha2.PodGroup",
-    "rust": "api::scheduling::v1alpha2::PodGroup",
+    "version": "v1alpha3",
+    "kind": "CompositePodGroup",
+    "proto": "api.scheduling.v1alpha3.CompositePodGroup",
+    "rust": "api::scheduling::v1alpha3::CompositePodGroup",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::scheduling::v1alpha2::PodGroupSpec",
-    "status": "api::scheduling::v1alpha2::PodGroupStatus",
+    "spec": "api::scheduling::v1alpha3::CompositePodGroupSpec",
+    "status": "api::scheduling::v1alpha3::CompositePodGroupStatus",
     "condition": "apimachinery::pkg::apis::meta::v1::Condition",
     "scopedVerbs": {
       "all": [
@@ -3278,9 +3392,9 @@
       ]
     },
     "paths": [
-      "/apis/scheduling.k8s.io/v1alpha2/podgroups",
-      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/podgroups",
-      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/podgroups/{name}"
+      "/apis/scheduling.k8s.io/v1alpha3/compositepodgroups",
+      "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/compositepodgroups",
+      "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/compositepodgroups/{name}"
     ],
     "subresources": [
       {
@@ -3293,22 +3407,70 @@
           ]
         },
         "paths": [
-          "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/podgroups/{name}/status"
+          "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/compositepodgroups/{name}/status"
         ]
       }
     ]
   },
-  "api.scheduling.v1alpha2.Workload": {
+  "api.scheduling.v1alpha3.PodGroup": {
+    "name": "podgroups",
+    "namespaced": true,
+    "apiVersion": "scheduling.k8s.io/v1alpha3",
+    "group": "scheduling.k8s.io",
+    "version": "v1alpha3",
+    "kind": "PodGroup",
+    "proto": "api.scheduling.v1alpha3.PodGroup",
+    "rust": "api::scheduling::v1alpha3::PodGroup",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::scheduling::v1alpha3::PodGroupSpec",
+    "status": "api::scheduling::v1alpha3::PodGroupStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/scheduling.k8s.io/v1alpha3/podgroups",
+      "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/podgroups",
+      "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/podgroups/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/podgroups/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.scheduling.v1alpha3.Workload": {
     "name": "workloads",
     "namespaced": true,
-    "apiVersion": "scheduling.k8s.io/v1alpha2",
+    "apiVersion": "scheduling.k8s.io/v1alpha3",
     "group": "scheduling.k8s.io",
-    "version": "v1alpha2",
+    "version": "v1alpha3",
     "kind": "Workload",
-    "proto": "api.scheduling.v1alpha2.Workload",
-    "rust": "api::scheduling::v1alpha2::Workload",
+    "proto": "api.scheduling.v1alpha3.Workload",
+    "rust": "api::scheduling::v1alpha3::Workload",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": "api::scheduling::v1alpha2::WorkloadSpec",
+    "spec": "api::scheduling::v1alpha3::WorkloadSpec",
     "status": null,
     "condition": null,
     "scopedVerbs": {
@@ -3326,9 +3488,91 @@
       ]
     },
     "paths": [
-      "/apis/scheduling.k8s.io/v1alpha2/workloads",
-      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/workloads",
-      "/apis/scheduling.k8s.io/v1alpha2/namespaces/{namespace}/workloads/{name}"
+      "/apis/scheduling.k8s.io/v1alpha3/workloads",
+      "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/workloads",
+      "/apis/scheduling.k8s.io/v1alpha3/namespaces/{namespace}/workloads/{name}"
+    ],
+    "subresources": []
+  },
+  "api.scheduling.v1beta1.PodGroup": {
+    "name": "podgroups",
+    "namespaced": true,
+    "apiVersion": "scheduling.k8s.io/v1beta1",
+    "group": "scheduling.k8s.io",
+    "version": "v1beta1",
+    "kind": "PodGroup",
+    "proto": "api.scheduling.v1beta1.PodGroup",
+    "rust": "api::scheduling::v1beta1::PodGroup",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::scheduling::v1beta1::PodGroupSpec",
+    "status": "api::scheduling::v1beta1::PodGroupStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/scheduling.k8s.io/v1beta1/podgroups",
+      "/apis/scheduling.k8s.io/v1beta1/namespaces/{namespace}/podgroups",
+      "/apis/scheduling.k8s.io/v1beta1/namespaces/{namespace}/podgroups/{name}"
+    ],
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "namespaced": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/scheduling.k8s.io/v1beta1/namespaces/{namespace}/podgroups/{name}/status"
+        ]
+      }
+    ]
+  },
+  "api.scheduling.v1beta1.Workload": {
+    "name": "workloads",
+    "namespaced": true,
+    "apiVersion": "scheduling.k8s.io/v1beta1",
+    "group": "scheduling.k8s.io",
+    "version": "v1beta1",
+    "kind": "Workload",
+    "proto": "api.scheduling.v1beta1.Workload",
+    "rust": "api::scheduling::v1beta1::Workload",
+    "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
+    "spec": "api::scheduling::v1beta1::WorkloadSpec",
+    "status": null,
+    "condition": null,
+    "scopedVerbs": {
+      "all": [
+        "list"
+      ],
+      "namespaced": [
+        "create",
+        "delete",
+        "deletecollection",
+        "get",
+        "list",
+        "patch",
+        "update"
+      ]
+    },
+    "paths": [
+      "/apis/scheduling.k8s.io/v1beta1/workloads",
+      "/apis/scheduling.k8s.io/v1beta1/namespaces/{namespace}/workloads",
+      "/apis/scheduling.k8s.io/v1beta1/namespaces/{namespace}/workloads/{name}"
     ],
     "subresources": []
   },
@@ -3373,7 +3617,7 @@
     "rust": "api::storage::v1::CSINode",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
     "spec": "api::storage::v1::CSINodeSpec",
-    "status": null,
+    "status": "api::storage::v1::CSINodeStatus",
     "condition": null,
     "scopedVerbs": {
       "all": [
@@ -3390,7 +3634,21 @@
       "/apis/storage.k8s.io/v1/csinodes",
       "/apis/storage.k8s.io/v1/csinodes/{name}"
     ],
-    "subresources": []
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/storage.k8s.io/v1/csinodes/{name}/status"
+        ]
+      }
+    ]
   },
   "api.storage.v1.CSIStorageCapacity": {
     "name": "csistoragecapacities",
@@ -3530,19 +3788,19 @@
     ],
     "subresources": []
   },
-  "api.storage.v1beta1.VolumeAttributesClass": {
-    "name": "volumeattributesclasses",
+  "api.storagemigration.v1.StorageVersionMigration": {
+    "name": "storageversionmigrations",
     "namespaced": false,
-    "apiVersion": "storage.k8s.io/v1beta1",
-    "group": "storage.k8s.io",
-    "version": "v1beta1",
-    "kind": "VolumeAttributesClass",
-    "proto": "api.storage.v1beta1.VolumeAttributesClass",
-    "rust": "api::storage::v1beta1::VolumeAttributesClass",
+    "apiVersion": "storagemigration.k8s.io/v1",
+    "group": "storagemigration.k8s.io",
+    "version": "v1",
+    "kind": "StorageVersionMigration",
+    "proto": "api.storagemigration.v1.StorageVersionMigration",
+    "rust": "api::storagemigration::v1::StorageVersionMigration",
     "metadata": "apimachinery::pkg::apis::meta::v1::ObjectMeta",
-    "spec": null,
-    "status": null,
-    "condition": null,
+    "spec": "api::storagemigration::v1::StorageVersionMigrationSpec",
+    "status": "api::storagemigration::v1::StorageVersionMigrationStatus",
+    "condition": "apimachinery::pkg::apis::meta::v1::Condition",
     "scopedVerbs": {
       "all": [
         "create",
@@ -3555,10 +3813,24 @@
       ]
     },
     "paths": [
-      "/apis/storage.k8s.io/v1beta1/volumeattributesclasses",
-      "/apis/storage.k8s.io/v1beta1/volumeattributesclasses/{name}"
+      "/apis/storagemigration.k8s.io/v1/storageversionmigrations",
+      "/apis/storagemigration.k8s.io/v1/storageversionmigrations/{name}"
     ],
-    "subresources": []
+    "subresources": [
+      {
+        "name": "status",
+        "scopedVerbs": {
+          "all": [
+            "get",
+            "patch",
+            "update"
+          ]
+        },
+        "paths": [
+          "/apis/storagemigration.k8s.io/v1/storageversionmigrations/{name}/status"
+        ]
+      }
+    ]
   },
   "api.storagemigration.v1beta1.StorageVersionMigration": {
     "name": "storageversionmigrations",
